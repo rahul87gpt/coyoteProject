@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/08/2020 01:40:44" ReportInfo.Modified="06/17/2022 16:52:00" ReportInfo.CreatorVersion="2022.1.2.0">
+  <Dictionary>
+    <TableDataSource Name="FinancialSummary" ReferenceName="Data.FinancialSummary" DataType="System.Int32" Enabled="true">
+      <Column Name="Number" DataType="System.Double"/>
+      <Column Name="Description" DataType="System.String"/>
+      <Column Name="PercentageTotal" DataType="System.Double"/>
+      <Column Name="SalesCost" DataType="System.Double"/>
+      <Column Name="Margin" DataType="System.Double"/>
+      <Column Name="GPPrecentage" DataType="System.Double"/>
+      <Column Name="SalesAmt" DataType="System.Double"/>
+      <Column Name="SalesAmtExGST" DataType="System.Double"/>
+    </TableDataSource>
+    <TableDataSource Name="FilterDataSet" ReferenceName="Data.FilterDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="startDate" DataType="System.String"/>
+      <Column Name="endDate" DataType="System.String"/>
+      <Column Name="contineous" DataType="System.Int32"/>
+      <Column Name="drillDown" DataType="System.Int32"/>
+      <Column Name="summary" DataType="System.Int32"/>
+      <Column Name="productStartId" DataType="System.Int32"/>
+      <Column Name="productEndId" DataType="System.Int32"/>
+      <Column Name="tillId" DataType="System.Int32"/>
+    </TableDataSource>
+    <Total Name="PromoSalesTotal" Expression="[FinancialSummary.PercentageTotal]" Evaluator="Data1"/>
+    <Total Name="DiscountTotal" Expression="[FinancialSummary.SalesCost]" Evaluator="Data1"/>
+    <Total Name="QtyTotal" Expression="[FinancialSummary.Margin]" Evaluator="Data1"/>
+    <Total Name="MarginTotal" Expression="[FinancialSummary.GPPrecentage]" Evaluator="Data1"/>
+    <Total Name="GPTotal" Expression="[FinancialSummary.SalesAmt]" Evaluator="Data1"/>
+    <Total Name="AmtTotal" Expression="[FinancialSummary.SalesAmtExGST]" Evaluator="Data1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" RawPaperSize="9" FirstPageSource="15" OtherPagesSource="15" LastPageSource="15" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="85.05" CanGrow="true">
+      <TextObject Name="Text1" Width="200" Height="18.9" Text="Printed on [Date]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text2" Left="638.15" Width="80.05" Height="18.9" Text="Page: [PAGE#] of [TOTALPAGES#]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text3" Width="718.2" Height="18.9" Text="NIGHTOWL COYOTE GROCERY SYSTEM" Format="Date" Format.Format="d" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text4" Top="18.9" Width="718.2" Height="18.9" Text="(Selected Outlets)" HorzAlign="Center" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text5" Top="37.8" Width="718.2" Height="18.9" Text="Financial Summary" HorzAlign="Center" Font="Arial, 11pt, style=Bold"/>
+      <TextObject Name="Text6" Top="56.7" Width="718.2" Height="18.9" HorzAlign="Center" Font="Arial, 9pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="89.35" Width="718.2" Height="20" Fill.Color="Plum">
+      <TextObject Name="Text7" Width="66.15" Height="20" Text="Number" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text8" Left="75.6" Width="141.75" Height="20" Text="Department" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text9" Left="226.8" Width="56.7" Height="20" Text="%Total" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text10" Left="292.95" Width="85.05" Height="20" Text="Sales Cost" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text11" Left="387.45" Width="75.6" Height="20" Text="$ Margin" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text12" Left="471.5" Width="47.25" Height="20" Text="GP%" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text13" Left="523.75" Width="85.05" Height="20" Text="Sales Amt" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text14" Left="619.25" Width="98.95" Height="20" Text="Sales-ExGst" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="113.65" Width="718.2" Height="20" Guides="0" DataSource="FinancialSummary">
+      <TextObject Name="Text15" Width="66.15" Height="18.9" Text="[FinancialSummary.Number]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text16" Left="75.6" Width="141.75" Height="18.9" Text="[FinancialSummary.Description]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text17" Left="226.8" Width="56.7" Height="18.9" Text="[FinancialSummary.PercentageTotal]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="1" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text18" Left="292.95" Width="85.05" Height="18.9" Text="[FinancialSummary.SalesCost]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text19" Left="387.45" Width="75.6" Height="18.9" Text="[FinancialSummary.Margin]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text20" Left="471.5" Width="47.25" Height="18.9" Text="[FinancialSummary.GPPrecentage]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="1" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text21" Left="523.75" Width="85.05" Height="18.9" Text="[FinancialSummary.SalesAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text22" Left="619.25" Width="98.95" Height="18.9" Text="[FinancialSummary.SalesAmtExGST]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+    </DataBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="137.95" Width="718.2" Height="540" Border.Lines="Top">
+      <TextObject Name="Text23" Width="151.2" Height="18.9" Text="SALES" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text24" Left="160.65" Width="85.05" Height="18.9" Text="Qty" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text25" Left="255.15" Width="75.6" Height="18.9" Text="Total" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text26" Top="20" Width="151.2" Height="18.9" Text="Total Sales: " VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalSalesQty" Left="160.65" Top="20" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalSalesAmt" Left="255.15" Top="20" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text27" Top="40" Width="151.2" Height="18.9" Text="Rounding:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="RoundingQty" Left="160.65" Top="40" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="RoundingAmt" Left="255.15" Top="40" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text28" Top="60" Width="151.2" Height="18.9" Text="TOTAL" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="SalesTotal" Left="255.15" Top="60" Width="75.6" Height="18.9" Border.Lines="Top" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text29" Left="359.1" Width="189" Height="18.9" Text="TOTALS" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text30" Left="628.7" Width="89.5" Height="18.9" Text="Total" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text31" Left="359.1" Top="20" Width="189" Height="18.9" Text="Sales Less Gst:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="SalesLessGstAmt" Left="628.7" Top="20" Width="89.5" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text32" Left="359.1" Top="40" Width="189" Height="18.9" Text="Total Gst Levied:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalGstLeviedAmt" Left="628.7" Top="40" Width="89.5" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text33" Left="359.1" Top="60" Width="189" Height="18.9" Text="Non-Gst Product Sales:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="NonGstProductSalesAmt" Left="628.7" Top="60" Width="89.5" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text34" Left="359.1" Top="80" Width="189" Height="18.9" Text="Gst Product Sales:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="GstProductSalesAmt" Left="628.7" Top="80" Width="89.5" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text35" Left="359.1" Top="120" Width="170.1" Height="18.9" Text="COUNTERS" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text66" Left="548.1" Top="120" Width="66.15" Height="18.9" Text="Qty" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text67" Left="628.7" Top="120" Width="89.5" Height="18.9" Text="Total" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text36" Left="359.1" Top="140" Width="170.1" Height="18.9" Text="Total Cancelled Sales:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalCancelledSalesQty" Left="548.1" Top="140" Width="66.15" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalCancelledSalesAmt" Left="628.7" Top="140" Width="89.5" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text37" Left="359.1" Top="160" Width="170.1" Height="18.9" Text="Total Void/Cancel Items:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalVoidQty" Left="548.1" Top="160" Width="66.15" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalVoidAmt" Left="628.7" Top="160" Width="89.5" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text38" Left="359.1" Top="180" Width="170.1" Height="18.9" Text="Total Refund Items:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalRefundQty" Left="548.1" Top="180" Width="66.15" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalRefundAmt" Left="628.7" Top="180" Width="89.5" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text39" Left="359.1" Top="200" Width="170.1" Height="18.9" Text="Total Promo Discounts:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalPromoQty" Left="548.1" Top="200" Width="66.15" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalPromoAmt" Left="628.7" Top="200" Width="89.5" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text40" Left="359.1" Top="220" Width="170.1" Height="18.9" Text="Total Pos Markdowns:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalPosQty" Left="548.1" Top="220" Width="66.15" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalPosAmt" Left="628.7" Top="220" Width="89.5" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text41" Left="359.1" Top="240" Width="170.1" Height="18.9" Text="Total Customers:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalCustomersQty" Left="548.1" Top="240" Width="66.15" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text42" Left="359.1" Top="260" Width="170.1" Height="18.9" Text="Avg Items Per Customer:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="AvgItemsAmt" Left="628.7" Top="260" Width="89.5" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text43" Left="359.1" Top="280" Width="170.1" Height="18.9" Text="Avg Spend Per Customer:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="AvgSpendAmt" Left="628.7" Top="280" Width="89.5" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text44" Left="359.1" Top="300" Width="170.1" Height="18.9" Text="Total No Sales:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalNoQty" Left="548.1" Top="300" Width="66.15" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text45" Left="359.1" Top="320" Width="170.1" Height="18.9" Text="Total Keyed Open Sales:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalKeyedQty" Left="548.1" Top="320" Width="66.15" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalKeyedAmt" Left="628.7" Top="320" Width="89.5" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text46" Top="90.55" Width="122.85" Height="18.9" Text="PAYMENT TYPES" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text47" Top="116.1" Width="151.2" Height="18.9" Text="Cash:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="CashQty" Left="160.65" Top="116.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="CashAmt" Left="255.15" Top="116.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text48" Top="136.1" Width="151.2" Height="18.9" Text="Eftpos:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="EftposQty" Left="160.65" Top="136.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="EftposAmt" Left="255.15" Top="136.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text49" Top="156.1" Width="151.2" Height="18.9" Text="Amex:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="AmexQty" Left="160.65" Top="156.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="AmexAmt" Left="255.15" Top="156.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text50" Top="176.1" Width="151.2" Height="18.9" Text="Diner:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="DinerQty" Left="160.65" Top="176.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="DinerAmt" Left="255.15" Top="176.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text51" Top="196.1" Width="151.2" Height="18.9" Text="App:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="AppQty" Left="160.65" Top="196.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="AppAmt" Left="255.15" Top="196.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text52" Top="216.1" Width="151.2" Height="18.9" Text="Fuel Card:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="FuelCardQty" Left="160.65" Top="216.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="FuelCardAmt" Left="255.15" Top="216.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text53" Top="236.1" Width="151.2" Height="18.9" Text="Fleet Card:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="FleetCardQty" Left="160.65" Top="236.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="FleetCardAmt" Left="255.15" Top="236.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text54" Top="256.1" Width="151.2" Height="18.9" Text="Motor Pass:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="MotorPassQty" Left="160.65" Top="256.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="MotorPassAmt" Left="255.15" Top="256.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text55" Top="276.1" Width="151.2" Height="18.9" Text="Motor Charge:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="MotorChargeQty" Left="160.65" Top="276.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="MotorChargeAmt" Left="255.15" Top="276.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text56" Top="296.1" Width="151.2" Height="18.9" Text="Uber Eats:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="UberEatsQty" Left="160.65" Top="296.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="UberEatsAmt" Left="255.15" Top="296.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text57" Top="316.1" Width="151.2" Height="18.9" Text="Deliveroo:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="DeliverooQty" Left="160.65" Top="316.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="DeliverooAmt" Left="255.15" Top="316.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text58" Top="336.1" Width="151.2" Height="18.9" Text="Other:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="OtherQty" Left="160.65" Top="336.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="OtherAmt" Left="255.15" Top="336.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text59" Top="356.1" Width="151.2" Height="18.9" Text="TOTAL:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TOTALAmt" Left="255.15" Top="356.1" Width="75.6" Height="18.9" Border.Lines="Top" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text60" Top="391.1" Width="151.2" Height="18.9" Text="CASH BALANCE" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text61" Top="416.1" Width="151.2" Height="18.9" Text="Cash Sales:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="CashSalesQty" Left="160.65" Top="416.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="CashSalesAmt" Left="255.15" Top="416.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text62" Top="436.1" Width="151.2" Height="18.9" Text="Less Eftpos Cashout:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="LessEftposQty" Left="160.65" Top="436.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="LessEftposAmt" Left="255.15" Top="436.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text63" Top="456.1" Width="151.2" Height="18.9" Text="Less Pickup Cash:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="LessPickupQty" Left="160.65" Top="456.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="LessPickupAmt" Left="255.15" Top="456.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text64" Top="476.1" Width="151.2" Height="18.9" Text="Less Paidout Cash:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="LessPaidoutQty" Left="160.65" Top="476.1" Width="85.05" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="LessPaidoutAmt" Left="255.15" Top="476.1" Width="75.6" Height="18.9" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text65" Top="496.1" Width="151.2" Height="18.9" Text="CASH NET:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="CASHNETAmt" Left="255.15" Top="496.1" Width="75.6" Height="18.9" Border.Lines="Top" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+    </ReportSummaryBand>
+    <PageFooterBand Name="PageFooter1" Top="682.25" Width="718.2" Height="28.35" Fill.Color="WhiteSmoke" CanGrow="true"/>
+  </ReportPage>
+</Report>

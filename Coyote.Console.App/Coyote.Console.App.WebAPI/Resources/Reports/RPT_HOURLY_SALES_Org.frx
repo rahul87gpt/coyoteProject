@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/08/2020 01:40:44" ReportInfo.Modified="06/17/2022 16:50:20" ReportInfo.CreatorVersion="2022.1.2.0">
+  <Dictionary>
+    <TableDataSource Name="DataSet" ReferenceName="Data.DataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="JNLH_YYYYMMDD" DataType="System.Int32"/>
+      <Column Name="JNLH_HHMMSS" DataType="System.Int32"/>
+      <Column Name="JNLH_TILL" DataType="System.Int32"/>
+      <Column Name="JNLH_TRX_NO" DataType="System.Int32"/>
+      <Column Name="JNLH_HOUR" DataType="System.Int32"/>
+      <Column Name="CUSTOMER_COUNT" DataType="System.Int32"/>
+      <Column Name="JNLD_TYPE" DataType="System.String"/>
+      <Column Name="JNLD_STATUS" DataType="System.Int16"/>
+      <Column Name="JNLH_TRADING_DATE" DataType="System.DateTime"/>
+      <Column Name="JNLD_MIXMATCH" DataType="System.String"/>
+      <Column Name="TIME_OF_DAY" DataType="System.String"/>
+      <Column Name="JNLD_OFFER" DataType="System.Double"/>
+      <Column Name="JNLD_PROM_SELL" DataType="System.Double"/>
+      <Column Name="JNLD_QTY" DataType="System.Double"/>
+      <Column Name="JNLD_AMT" DataType="System.Double"/>
+    </TableDataSource>
+    <TableDataSource Name="FilterDataSet" ReferenceName="Data.FilterDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="startDate" DataType="System.String"/>
+      <Column Name="endDate" DataType="System.String"/>
+      <Column Name="selectOutlets" DataType="System.Int32"/>
+      <Column Name="productStartId" DataType="System.Int32"/>
+      <Column Name="productEndId" DataType="System.Int32"/>
+      <Column Name="till" DataType="System.String"/>
+      <Column Name="contineous" DataType="System.Int32"/>
+      <Column Name="drillDown" DataType="System.Int32"/>
+      <Column Name="summary" DataType="System.Int32"/>
+      <Column Name="promoSales" DataType="System.Int32"/>
+      <Column Name="promoCode" DataType="System.Int32"/>
+      <Column Name="merge" DataType="System.Int32"/>
+      <Column Name="variance" DataType="System.Int32"/>
+      <Column Name="wastage" DataType="System.Int32"/>
+      <Column Name="reportName" DataType="System.Int32"/>
+      <Column Name="orderByQty" DataType="System.Int32"/>
+      <Column Name="orderByAmt" DataType="System.Int32"/>
+      <Column Name="orderByGP" DataType="System.Int32"/>
+      <Column Name="orderByMargin" DataType="System.Int32"/>
+      <Column Name="orderBySOH" DataType="System.Int32"/>
+      <Column Name="orderByAlph" DataType="System.Int32"/>
+      <Column Name="stockNegativeOH" DataType="System.Int32"/>
+      <Column Name="stockSOHLevel" DataType="System.Int32"/>
+      <Column Name="stockSOHButNoSales" DataType="System.Int32"/>
+      <Column Name="stockLowWarn" DataType="System.Int32"/>
+      <Column Name="stockNoOfDaysWarn" DataType="System.Int32"/>
+      <Column Name="salesAMT" DataType="System.Int32"/>
+      <Column Name="salesSOH" DataType="System.Int32"/>
+      <Column Name="salesAMTRange" DataType="System.Int32"/>
+      <Column Name="salesSOHRange" DataType="System.Int32"/>
+      <Column Name="ReportDuration" DataType="System.String"/>
+      <Column Name="Chart" DataType="System.Int32"/>
+      <Column Name="ChartReportTitle" DataType="System.String"/>
+      <Column Name="TotalAvgQty" DataType="System.Double"/>
+      <Column Name="TotalAvgAmount" DataType="System.Double"/>
+    </TableDataSource>
+    <TableDataSource Name="StoreDataSet" ReferenceName="Data.StoreDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Store" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="DeptDataSet" ReferenceName="Data.DeptDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Dept" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="CommodityDataSet" ReferenceName="Data.CommodityDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Commodity" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="CategoryDataSet" ReferenceName="Data.CategoryDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Category" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="GroupsDataSet" ReferenceName="Data.GroupsDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Groups" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="SupplierDataSet" ReferenceName="Data.SupplierDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Supplier" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="ManufacturerDataSet" ReferenceName="Data.ManufacturerDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Manufacturer" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="CashierDataSet" ReferenceName="Data.CashierDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Cashier" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="ZoneDataSet" ReferenceName="Data.ZoneDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Zones" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="DaysDataSet" ReferenceName="Data.DaysDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Item" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="PromotionDataSet" ReferenceName="Data.PromotionDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Promotion" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="NationalRangeDataSet" ReferenceName="Data.NationalRangeDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="NationalRange" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="MemberDataSet" ReferenceName="Data.MemberDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Member" DataType="System.String"/>
+    </TableDataSource>
+    <Total Name="TotalCustomer" Expression="[DataSet.CUSTOMER_COUNT]" Evaluator="Data1"/>
+    <Total Name="TotalSales" Expression="[DataSet.JNLD_AMT]" Evaluator="Data1"/>
+    <Total Name="TotalQty" TotalType="Avg" Expression="[FilterDataSet.TotalAvgQty]" Evaluator="Data1"/>
+    <Total Name="TotalAmount" TotalType="Avg" Expression="[FilterDataSet.TotalAvgAmount]" Evaluator="Data1"/>
+    <Total Name="TotalOffer" Expression="[DataSet.JNLD_OFFER]" Evaluator="Data1"/>
+    <Total Name="TotalPromo" Expression="[DataSet.JNLD_PROM_SELL]" Evaluator="Data1"/>
+    <Total Name="CustomerTotal" Expression="1" Evaluator="Data1"/>
+    <Total Name="SalesTotal" Expression="[DataSet.JNLD_AMT]" Evaluator="Data1"/>
+    <Total Name="QtyTotal" Expression="1" Evaluator="Data1"/>
+    <Total Name="AmountTotal" TotalType="Avg" Expression="[DataSet.JNLD_AMT]" Evaluator="Data1"/>
+    <Total Name="PercentageTotal" Expression="1" Evaluator="Data1"/>
+    <Total Name="OfferTotal" Expression="[DataSet.JNLD_OFFER]" Evaluator="Data1"/>
+    <Total Name="PromoTotal" Expression="[DataSet.JNLD_PROM_SELL]" Evaluator="Data1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" RawPaperSize="9" FirstPageSource="15" OtherPagesSource="15" LastPageSource="15" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="85.05" CanGrow="true">
+      <TextObject Name="Text1" Width="200" Height="18.9" Text="Printed on [Date]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text2" Left="900" Width="147.06" Height="18.9" Text="Page: [PAGE#] of [TOTALPAGES#]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text3" Width="1047.06" Height="18.9" Text="NIGHTOWL COYOTE GROCERY SYSTEM" Format="Date" Format.Format="d" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text4" Top="18.9" Width="1047.06" Height="18.9" Text="[FilterDataSet.selectOutlets]" HorzAlign="Center" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text5" Top="37.8" Width="1047.06" Height="18.9" Text="Hourly Sales Summary" HorzAlign="Center" Font="Arial, 11pt, style=Bold"/>
+      <TextObject Name="Text6" Top="56.7" Width="1047.06" Height="18.9" Text="For Trading Day [FilterDataSet.startDate] to [FilterDataSet.endDate]" HorzAlign="Center" Font="Arial, 9pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="89.35" Width="1047.06" Height="17.35" Fill.Color="Gainsboro">
+      <TextObject Name="Text7" Top="-1.55" Width="179.55" Height="18.9" Text="Time of Day" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text8" Left="255.15" Top="-1.55" Width="113.4" Height="18.9" Text="Customer Count" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text9" Left="387.45" Top="-1.55" Width="103.95" Height="18.9" Text="Total Sales" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text10" Left="510.3" Top="-1.55" Width="94.5" Height="18.9" Text="Avg. Item Qty" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text11" Left="614.25" Top="-1.55" Width="94.5" Height="18.9" Text="Avg. amount" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text12" Left="727.65" Top="-1.55" Width="85.05" Height="18.9" Text="%Total Sales" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text13" Left="830.6" Top="-1.55" Width="85.05" Height="18.9" Text="Offer Sales" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text14" Left="930.1" Top="-1.55" Width="113.4" Height="18.9" Text="Promo Sales" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="111" Width="1047.06" Height="20" VisibleExpression="[FilterDataSet.DrillDown]==0 &amp;&amp; [FilterDataSet.summary]==0" Guides="0" DataSource="DataSet">
+      <TextObject Name="Text16" Width="179.55" Height="18.9" Text="[DataSet.TIME_OF_DAY]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text18" Left="252.9" Width="113.4" Height="18.9" Text="[DataSet.CUSTOMER_COUNT]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text19" Left="387.45" Width="103.95" Height="18.9" Text="[DataSet.JNLD_AMT]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text20" Left="510.3" Width="94.5" Height="18.9" Text="[DataSet.AverageItemQTY]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text21" Left="614.25" Width="94.5" Height="18.9" Text="[DataSet.AverageAmount]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text22" Left="727.65" Width="85.05" Height="18.9" Text="[DataSet.TotalPerSales]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="1" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text23" Left="830.6" Width="85.05" Height="18.9" Text="[DataSet.JNLD_OFFER]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="2" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text24" Left="930.1" Width="113.4" Height="18.9" Text="[DataSet.JNLD_PROM_SELL]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="2" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+    </DataBand>
+    <GroupHeaderBand Name="GroupHeader13" Top="158.95" Width="1047.06" Height="18.9" VisibleExpression="[ManufacturerDataSet.Manufacturer]!=&quot;&quot; || [SupplierDataSet.Supplier]!=&quot;&quot; || [GroupsDataSet.Groups]!=&quot;&quot; || [CategoryDataSet.Category]!=&quot;&quot; || [CommodityDataSet.Commodity]!=&quot;&quot; || [DeptDataSet.Dept]!=&quot;&quot; || [StoreDataSet.Store]!=&quot;&quot; || [FilterDataSet.productStartId]!=0 ||  [FilterDataSet.productEndId]!=0 || [FilterDataSet.till]!=&quot;&quot;" Condition="[DataSet.JNLD_TYPE]!=&quot;&quot;">
+      <TextObject Name="Text34" Width="718.2" Height="18.9" Text="Report Selections:" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <DataHeaderBand Name="DataHeader1" Top="135.3" Width="1047.06" Height="19.35" Fill.Color="Gainsboro">
+        <TextObject Name="Text39" Left="255.15" Top="0.45" Width="113.4" Height="18.9" Text="[TotalCustomer]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text40" Left="387.45" Top="0.45" Width="103.95" Height="18.9" Text="[TotalSales]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text41" Left="510.3" Top="0.45" Width="94.5" Height="18.9" Text="[TotalQty]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text42" Left="614.25" Top="0.45" Width="94.5" Height="18.9" Text="[TotalAmount]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text43" Left="830.6" Top="0.45" Width="85.05" Height="18.9" Text="[TotalOffer]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text44" Left="931.1" Width="113.4" Height="18.9" Text="[TotalPromo]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      </DataHeaderBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader2" Top="205.81" Width="1047.06" Height="18.9" VisibleExpression="[ManufacturerDataSet.Manufacturer]!=&quot;&quot; || [SupplierDataSet.Supplier]!=&quot;&quot; || [GroupsDataSet.Groups]!=&quot;&quot; || [CategoryDataSet.Category]!=&quot;&quot; || [CommodityDataSet.Commodity]!=&quot;&quot; || [DeptDataSet.Dept]!=&quot;&quot; || [StoreDataSet.Store]!=&quot;&quot; || [FilterDataSet.productStartId]!=0 ||  [FilterDataSet.productEndId]!=0 || [FilterDataSet.till]!=&quot;&quot;" Condition="[DataSet.JNLD_TYPE]!=&quot;&quot;">
+      <TextObject Name="Text34" Width="718.2" Height="18.9" Text="Report Selections:" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <ChildBand Name="Child1" Top="229.01" Width="1047.06" Height="37.8" VisibleExpression="[FilterDataSet.productEndId]!=0">
+        <TextObject Name="Text35" Left="9.45" Width="699.3" Height="18.9" VisibleExpression="[FilterDataSet.productEndId]!=0" Text="Product Range" Font="Arial, 9.75pt, style=Bold"/>
+        <TextObject Name="Text36" Left="18.9" Top="18.9" Width="680.4" Height="18.9" VisibleExpression="[FilterDataSet.productEndId]!=0" Text="[FilterDataSet.productStartId] to [FilterDataSet.productEndId]" Font="Arial, 9.75pt, style=Bold"/>
+        <ChildBand Name="Child2" Top="271.11" Width="1047.06" Height="37.8" VisibleExpression="[FilterDataSet.till]!=&quot;&quot;">
+          <TextObject Name="Text37" Left="9.45" Width="699.3" Height="18.9" VisibleExpression="[FilterDataSet.till]!=&quot;&quot;" Text="TillRange" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+          <TextObject Name="Text38" Left="18.9" Top="18.9" Width="680.4" Height="18.9" VisibleExpression="[FilterDataSet.till]!=&quot;&quot;" Text="Only Till number: [FilterDataSet.till]" Font="Arial, 9.75pt, style=Bold"/>
+        </ChildBand>
+      </ChildBand>
+      <DataHeaderBand Name="DataHeader1" Top="182.16" Width="1047.06" Height="19.35" Fill.Color="Gainsboro">
+        <TextObject Name="Text39" Left="255.15" Top="0.45" Width="113.4" Height="18.9" Text="[TotalCustomer]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text40" Left="387.45" Top="0.45" Width="103.95" Height="18.9" Text="[TotalSales]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text41" Left="510.3" Top="0.45" Width="94.5" Height="18.9" Text="[TotalQty]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text42" Left="614.25" Top="0.45" Width="94.5" Height="18.9" Text="[TotalAmount]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text43" Left="830.6" Top="0.45" Width="85.05" Height="18.9" Text="[TotalOffer]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text44" Left="931.1" Width="113.4" Height="18.9" Text="[TotalPromo]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      </DataHeaderBand>
+      <DataBand Name="Data2" Top="336.41" Width="1047.06" Height="18.9" DataSource="StoreDataSet">
+        <TextObject Name="Text45" Left="18.9" Width="680.4" Height="18.9" Text="[StoreDataSet.Store]" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+        <DataHeaderBand Name="DataHeader2" Top="313.21" Width="1047.06" Height="18.9">
+          <TextObject Name="Text46" Left="9.45" Width="699.3" Height="18.9" VisibleExpression="[StoreDataSet.Store]!=&quot;&quot;" Text="Outlets" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+        </DataHeaderBand>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader4" Top="359.61" Width="1047.06" Height="18.9" VisibleExpression="[DeptDataSet.Dept]!=&quot;&quot;" Condition="[DeptDataSet.Dept]!=&quot;&quot;">
+      <TextObject Name="Text47" Left="9.45" Width="699.3" Height="18.9" VisibleExpression="[DeptDataSet.Dept]!=&quot;&quot;" Text="Departments" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data3" Top="382.81" Width="1047.06" Height="18.9" VisibleExpression="[DeptDataSet.Dept]!=&quot;&quot;" DataSource="DeptDataSet">
+        <TextObject Name="Text48" Left="18.9" Width="680.4" Height="18.9" VisibleExpression="[DeptDataSet.Dept]!=&quot;&quot;" Text="[DeptDataSet.Dept]" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader5" Top="406.01" Width="1047.06" Height="18.9" VisibleExpression="[CommodityDataSet.Commodity]!=&quot;&quot;" Condition="[CommodityDataSet.Commodity]!=&quot;&quot;">
+      <TextObject Name="Text49" Left="9.45" Width="699.3" Height="18.9" Text="Commodities" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data4" Top="429.22" Width="1047.06" Height="18.9" VisibleExpression="[CommodityDataSet.Commodity]!=&quot;&quot;" DataSource="CommodityDataSet">
+        <TextObject Name="Text50" Left="18.9" Width="680.4" Height="18.9" VisibleExpression="[CommodityDataSet.Commodity]!=&quot;&quot;" Text="[CommodityDataSet.Commodity]" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader6" Top="452.42" Width="1047.06" Height="18.9" VisibleExpression="[CategoryDataSet.Category]!=&quot;&quot;" Condition="[CategoryDataSet.Category]!=&quot;&quot;">
+      <TextObject Name="Text51" Left="9.45" Width="699.3" Height="18.9" Text="Categories" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data5" Top="475.62" Width="1047.06" Height="18.9" VisibleExpression="[CategoryDataSet.Category]!=&quot;&quot;" DataSource="CategoryDataSet">
+        <TextObject Name="Text52" Left="18.9" Width="680.4" Height="18.9" Text="[CategoryDataSet.Category]" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader7" Top="498.82" Width="1047.06" Height="18.9" VisibleExpression="[GroupsDataSet.Groups]!=&quot;&quot;" Condition="[GroupsDataSet.Groups]!=&quot;&quot;">
+      <TextObject Name="Text53" Left="9.45" Width="699.3" Height="18.9" VisibleExpression="[GroupsDataSet.Groups]!=&quot;&quot;" Text="Groups" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data6" Top="522.02" Width="1047.06" Height="18.9" VisibleExpression="[GroupsDataSet.Groups]!=&quot;&quot;" DataSource="GroupsDataSet">
+        <TextObject Name="Text54" Left="18.9" Width="680.4" Height="18.9" Text="[GroupsDataSet.Groups]" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader8" Top="545.22" Width="1047.06" Height="18.9" VisibleExpression="[SupplierDataSet.Supplier]!=&quot;&quot;" Condition="[SupplierDataSet.Supplier]!=&quot;&quot;">
+      <TextObject Name="Text55" Left="9.45" Width="699.3" Height="18.9" Text="Suppliers" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data7" Top="568.42" Width="1047.06" Height="18.9" VisibleExpression="[SupplierDataSet.Supplier]!=&quot;&quot;" DataSource="SupplierDataSet">
+        <TextObject Name="Text56" Left="18.9" Width="680.4" Height="18.9" Text="[SupplierDataSet.Supplier]" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader9" Top="591.62" Width="1047.06" Height="18.9" VisibleExpression="[ManufacturerDataSet.Manufacturer]!=&quot;&quot;" Condition="[ManufacturerDataSet.Manufacturer]!=&quot;&quot;">
+      <TextObject Name="Text57" Left="9.45" Width="699.3" Height="18.9" Text="Manufacturers" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data8" Top="614.82" Width="1047.06" Height="18.9" VisibleExpression="[ManufacturerDataSet.Manufacturer]!=&quot;&quot;" DataSource="ManufacturerDataSet">
+        <TextObject Name="Text58" Left="18.9" Width="680.4" Height="18.9" Text="[ManufacturerDataSet.Manufacturer]" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader10" Top="638.02" Width="1047.06" Height="15.12" VisibleExpression="[ZoneDataSet.Zones]!=&quot;&quot;" Condition="[ZoneDataSet.Zones]!=&quot;&quot;">
+      <TextObject Name="Text60" Left="9.45" Width="132.3" Height="15.12" Text="Zone" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data9" Top="657.45" Width="1047.06" Height="15.12" VisibleExpression="[ZoneDataSet.Zones]!=&quot;&quot;" DataSource="ZoneDataSet">
+        <TextObject Name="Text61" Left="18.9" Width="425.25" Height="15.12" Text="[ZoneDataSet.Zones]" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader11" Top="676.87" Width="1047.06" Height="15.12" VisibleExpression="[MemberDataSet.Member]!=&quot;&quot;" Condition="[MemberDataSet.Member]!=&quot;&quot;">
+      <TextObject Name="Text62" Left="9.45" Width="132.3" Height="15.12" Text="Members : " VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data10" Top="696.29" Width="1047.06" Height="15.12" VisibleExpression="[MemberDataSet.Member]!=&quot;&quot;" DataSource="MemberDataSet">
+        <TextObject Name="Text63" Left="18.9" Width="425.25" Height="15.12" Text="[MemberDataSet.Member]" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader12" Top="715.71" Width="1047.06" Height="15.12" VisibleExpression="[DaysDataSet.Item]!=&quot;&quot;" Condition="[DaysDataSet.Item]!=&quot;&quot;">
+      <TextObject Name="Text64" Left="9.45" Width="132.3" Height="15.12" Text="Days : " VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data11" Top="735.13" Width="1047.06" Height="15.12" VisibleExpression="[DaysDataSet.Item]!=&quot;&quot;" DataSource="DaysDataSet">
+        <TextObject Name="Text65" Left="18.9" Width="425.25" Height="15.12" Text="[DaysDataSet.Item]" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <PageFooterBand Name="PageFooter1" Top="754.55" Width="1047.06" Height="28.35" Fill.Color="WhiteSmoke" CanGrow="true"/>
+  </ReportPage>
+  <ReportPage Name="Page2" Landscape="true" PaperWidth="297" PaperHeight="210" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle2" Width="1047.06" Height="37.8"/>
+    <PageHeaderBand Name="PageHeader2" Top="41.8" Width="1047.06" Height="321.3">
+      <MSChartObject Name="MSChart1" Left="66.15" Width="831.6" Height="302.4" DataSource="DataSet" AutoSeriesColumn="" AutoSeriesColor="" ChartData="PENoYXJ0IFBhbGV0dGU9IlBhc3RlbCIgU2l6ZT0iMjg4LCAyMzIiIEJhY2tIYXRjaFN0eWxlPSJQZXJjZW50MDUiIEJhY2tHcmFkaWVudFN0eWxlPSJEaWFnb25hbExlZnQiIEJhY2tTZWNvbmRhcnlDb2xvcj0iR2hvc3RXaGl0ZSIgQm9yZGVybGluZUNvbG9yPSJMaWdodFNsYXRlR3JheSIgQm9yZGVybGluZURhc2hTdHlsZT0iU29saWQiPg0KICA8U2VyaWVzPg0KICAgIDxTZXJpZXMgTmFtZT0iVG90YWwgU2FsZXMiIExlZ2VuZD0iRGVmYXVsdCIgWFZhbHVlVHlwZT0iU3RyaW5nIiBZVmFsdWVUeXBlPSJEb3VibGUiIENoYXJ0QXJlYT0iRGVmYXVsdCIgQ29sb3I9Ik1lZGl1bUJsdWUiPg0KICAgICAgPFBvaW50cz4NCiAgICAgICAgPERhdGFQb2ludCBZVmFsdWVzPSIxIiBBeGlzTGFiZWw9IkEiIC8+DQogICAgICAgIDxEYXRhUG9pbnQgWVZhbHVlcz0iMyIgQXhpc0xhYmVsPSJCIiAvPg0KICAgICAgICA8RGF0YVBvaW50IFlWYWx1ZXM9IjIiIEF4aXNMYWJlbD0iQyIgLz4NCiAgICAgICAgPERhdGFQb2ludCBZVmFsdWVzPSI0IiBBeGlzTGFiZWw9IkQiIC8+DQogICAgICA8L1BvaW50cz4NCiAgICA8L1Nlcmllcz4NCiAgICA8U2VyaWVzIE5hbWU9Ik9mZmVyIFNhbGVzIiBMZWdlbmQ9IkRlZmF1bHQiIFhWYWx1ZVR5cGU9IlN0cmluZyIgWVZhbHVlVHlwZT0iRG91YmxlIiBDaGFydEFyZWE9IkRlZmF1bHQiIENvbG9yPSJZZWxsb3ciPg0KICAgICAgPFBvaW50cz4NCiAgICAgICAgPERhdGFQb2ludCBZVmFsdWVzPSIxIiBBeGlzTGFiZWw9IkEiIC8+DQogICAgICAgIDxEYXRhUG9pbnQgWVZhbHVlcz0iMyIgQXhpc0xhYmVsPSJCIiAvPg0KICAgICAgICA8RGF0YVBvaW50IFlWYWx1ZXM9IjIiIEF4aXNMYWJlbD0iQyIgLz4NCiAgICAgICAgPERhdGFQb2ludCBZVmFsdWVzPSI0IiBBeGlzTGFiZWw9IkQiIC8+DQogICAgICA8L1BvaW50cz4NCiAgICA8L1Nlcmllcz4NCiAgICA8U2VyaWVzIE5hbWU9IlByb21vIFNhbGVzIiBMZWdlbmQ9IkRlZmF1bHQiIFhWYWx1ZVR5cGU9IlN0cmluZyIgWVZhbHVlVHlwZT0iRG91YmxlIiBDaGFydEFyZWE9IkRlZmF1bHQiIENvbG9yPSJDeWFuIj4NCiAgICAgIDxQb2ludHM+DQogICAgICAgIDxEYXRhUG9pbnQgWVZhbHVlcz0iMSIgQXhpc0xhYmVsPSJBIiAvPg0KICAgICAgICA8RGF0YVBvaW50IFlWYWx1ZXM9IjMiIEF4aXNMYWJlbD0iQiIgLz4NCiAgICAgICAgPERhdGFQb2ludCBZVmFsdWVzPSIyIiBBeGlzTGFiZWw9IkMiIC8+DQogICAgICAgIDxEYXRhUG9pbnQgWVZhbHVlcz0iNCIgQXhpc0xhYmVsPSJEIiAvPg0KICAgICAgPC9Qb2ludHM+DQogICAgPC9TZXJpZXM+DQogIDwvU2VyaWVzPg0KICA8TGVnZW5kcz4NCiAgICA8TGVnZW5kIE5hbWU9IkRlZmF1bHQiIEFsaWdubWVudD0iQ2VudGVyIiBCYWNrQ29sb3I9IjE1MCwgMjU1LCAyNTUsIDI1NSIgQm9yZGVyQ29sb3I9IkxpZ2h0U2xhdGVHcmF5IiBEb2NraW5nPSJUb3AiPg0KICAgIDwvTGVnZW5kPg0KICA8L0xlZ2VuZHM+DQogIDxUaXRsZXM+DQogICAgPFRpdGxlIE5hbWU9IlRpdGxlMSIgVmlzaWJsZT0iRmFsc2UiPg0KICAgIDwvVGl0bGU+DQogIDwvVGl0bGVzPg0KICA8Q2hhcnRBcmVhcz4NCiAgICA8Q2hhcnRBcmVhIE5hbWU9IkRlZmF1bHQiIEJhY2tDb2xvcj0iV2hpdGUiIEJhY2tTZWNvbmRhcnlDb2xvcj0iV2hpdGUiIEJvcmRlckNvbG9yPSJMaWdodFNsYXRlR3JheSIgQm9yZGVyRGFzaFN0eWxlPSJTb2xpZCI+DQogICAgICA8QXhpc1kgSXNMYWJlbEF1dG9GaXQ9IkZhbHNlIj4NCiAgICAgICAgPE1ham9yR3JpZCBMaW5lQ29sb3I9IjY1LCAwLCAwLCAwIiAvPg0KICAgICAgICA8TWlub3JHcmlkIExpbmVDb2xvcj0iMzAsIDAsIDAsIDAiIC8+DQogICAgICAgIDxMYWJlbFN0eWxlIEZvbnQ9IlRhaG9tYSwgOHB0IiAvPg0KICAgICAgPC9BeGlzWT4NCiAgICAgIDxBeGlzWCBJc0xhYmVsQXV0b0ZpdD0iRmFsc2UiPg0KICAgICAgICA8TWFqb3JHcmlkIExpbmVDb2xvcj0iNjUsIDAsIDAsIDAiIC8+DQogICAgICAgIDxNaW5vckdyaWQgTGluZUNvbG9yPSIzMCwgMCwgMCwgMCIgLz4NCiAgICAgICAgPExhYmVsU3R5bGUgRm9udD0iVGFob21hLCA4cHQiIC8+DQogICAgICA8L0F4aXNYPg0KICAgICAgPEF4aXNYMiBJc0xhYmVsQXV0b0ZpdD0iRmFsc2UiPg0KICAgICAgPC9BeGlzWDI+DQogICAgICA8QXhpc1kyIElzTGFiZWxBdXRvRml0PSJGYWxzZSI+DQogICAgICA8L0F4aXNZMj4NCiAgICAgIDxBcmVhM0RTdHlsZSBQb2ludERlcHRoPSI4MiIgRW5hYmxlM0Q9IlRydWUiIElzQ2x1c3RlcmVkPSJUcnVlIiBMaWdodFN0eWxlPSJSZWFsaXN0aWMiIEluY2xpbmF0aW9uPSI2NiIgUm90YXRpb249IjE5IiBXYWxsV2lkdGg9IjIiIC8+DQogICAgPC9DaGFydEFyZWE+DQogIDwvQ2hhcnRBcmVhcz4NCiAgPEJvcmRlclNraW4gU2tpblN0eWxlPSJSYWlzZWQiIC8+DQo8L0NoYXJ0Pg==">
+        <MSChartSeries Name="Series2" XValue="[DataSet.TIME_OF_DAY]" YValue1="[DataSet.JNLD_AMT]"/>
+        <MSChartSeries Name="Series1" XValue="[DataSet.TIME_OF_DAY]" YValue1="[DataSet.JNLD_OFFER]"/>
+        <MSChartSeries Name="Series1" XValue="[DataSet.TIME_OF_DAY]" YValue1="[DataSet.JNLD_PROM_SELL]"/>
+      </MSChartObject>
+    </PageHeaderBand>
+    <PageFooterBand Name="PageFooter2" Top="446.7" Width="1047.06" Height="18.9"/>
+  </ReportPage>
+</Report>

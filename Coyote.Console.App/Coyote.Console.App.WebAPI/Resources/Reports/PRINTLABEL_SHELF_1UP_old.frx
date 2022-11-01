@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" TextQuality="ClearType" SmoothGraphics="true" ReportInfo.Description="This report demonstrates different barcode types:&#13;&#10;2/5 barcodes (Interleaved, Industrial, Matrix), Codabar, Code39 (Regular, Extended), Code93 (Regular, Extended), Code128 (A, B, C charsets with autoencoding feature), EAN8, EAN13, UPC-A, UPC-E (E0, E1 codes), MSI, PostNet, 2 or 5 digit supplement code for EAN/UPC barcodes, PDF417, Datamatrix, QR Code, Aztec, Plessey, GS1-128 (UCC/EAN-128), Pharmacode, Intelligent Mail (USPS), MaxiCode, Swiss QR Code." ReportInfo.Created="02/21/2008 20:44:59" ReportInfo.Modified="02/03/2021 01:48:59" ReportInfo.CreatorVersion="2020.3.0.0">
+  <Dictionary>
+    <TableDataSource Name="DataSet" ReferenceName="Data.DataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="OUTP_PRODUCT" DataType="System.Double"/>
+      <Column Name="OUTP_SHORT_LABEL_IND" DataType="System.String"/>
+      <Column Name="OUTP_MIN_REORDER_QTY" DataType="System.Double"/>
+      <Column Name="OUTP_SUPPLIER" DataType="System.String"/>
+      <Column Name="OUTP_LABEL_QTY" DataType="System.Double"/>
+      <Column Name="LBL_PRICE_1" DataType="System.Double"/>
+      <Column Name="LBL_PRICE_2" DataType="System.Double"/>
+      <Column Name="LBL_PRICE_3" DataType="System.Double"/>
+      <Column Name="LBL_PRICE_4" DataType="System.Double"/>
+      <Column Name="LBL_NORM_1" DataType="System.Double"/>
+      <Column Name="LBL_PROM_AMT_OFF" DataType="System.Int32"/>
+      <Column Name="PROD_DESC" DataType="System.String"/>
+      <Column Name="PROD_CARTON_QTY" DataType="System.Double"/>
+      <Column Name="PROD_DEPARTMENT" DataType="System.Double"/>
+      <Column Name="PROD_COMMODITY" DataType="System.Double"/>
+      <Column Name="PROD_TYPE" DataType="System.String"/>
+      <Column Name="PROD_POS_DESC" DataType="System.String"/>
+      <Column Name="PROD_LAST_APN_SOLD" DataType="System.Double"/>
+      <Column Name="APN_NUMBER" DataType="System.Double"/>
+      <Column Name="PROD_SIZE" DataType="System.String"/>
+      <Column Name="PROD_UNIT_MEASURE" DataType="System.String"/>
+      <Column Name="SQL_DATE_END" DataType="System.DateTime"/>
+      <Column Name="PROD_HOST_NUMBER" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="90" PaperHeight="25" PaperSize="256" LeftMargin="7" TopMargin="0" BottomMargin="0"  
+ Columns="1" ColumnWidth="240" ColumnPositions.Text="0" PrintOnPreviousPage="True" HGuides.Text="" VGuides.Text="">  
+  
+    <DataBand Name="Data1" Width="275.94" Height="94.5" CanGrow="true" DataSource="DataSet" Columns.Width="199.96">
+      <TextObject Name="ProductNumber" Left="11.34" Top="20" Width="79.38" Height="15.12" CanGrow="true" CanShrink="true" Text="[DataSet.OUTP_PRODUCT]" Font="Arial, 7pt"/>
+      <TextObject Name="Date" Left="94.5" Top="20" Width="52.92" Height="15.12" CanGrow="true" CanShrink="true" Text="[Date]" Format="Date" Format.Format="MM/dd/yy" WordWrap="false" Font="Arial, 7pt"/>
+      <TextObject Name="HostNumber" Left="192.78" Top="24.57" Width="120.96" Height="56.7" CanGrow="true" CanShrink="true" Text="[DataSet.LBL_NORM_1]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Center" VertAlign="Center" WordWrap="false" Font="Arial Narrow, 36pt, style=Bold"/>
+      <TextObject Name="Supplier" Left="251.37" Top="20" Width="54.81" Height="15.12" CanGrow="true" CanShrink="true" Text="[DataSet.OUTP_SUPPLIER]" WordWrap="false" Font="Arial, 7pt"/>
+	   <TextObject Name="MinReorderQty" Left="217.35" Top="20" Width="37.8" Height="15.12" CanGrow="true" CanShrink="true" Text="[DataSet.PROD_CARTON_QTY]/[DataSet.OUTP_MIN_REORDER_QTY]" WordWrap="false" Font="Arial, 7pt"/>
+      <TextObject Name="ProductDescription" Left="5.67" Width="302.4" Height="26.46" Text="[DataSet.PROD_DESC]" HorzAlign="Center" VertAlign="Center" Font="Arial, 20pt, style=Bold"/>
+      <BarcodeObject Name="Barcode27" Left="30.24" Top="37.8" Width="128.75" Height="41.58" Fill.Color="White" CanGrow="true" CanShrink="true" DataColumn="DataSet.APN_NUMBER" Text="1234567890123" AllowExpressions="true" Barcode="EAN13"/>
+      <TextObject Name="Text1" Left="186.32" Top="36.91" Width="26.46" Height="34.02" Text="$" Font="Arial Narrow, 20pt, style=Bold"/>
+    </DataBand>
+  </ReportPage>
+</Report>

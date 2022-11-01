@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/10/2020 18:10:00" ReportInfo.Modified="08/09/2021 22:13:30" ReportInfo.CreatorVersion="2020.3.0.0">
+	<Dictionary>
+		<TableDataSource Name="DataSet" ReferenceName="Data.DataSet" DataType="System.Int32" Enabled="true">
+			<Column Name="OUTP_PRODUCT" DataType="System.Int64"/>
+			<Column Name="OUTP_SHORT_LABEL_IND" DataType="System.Boolean" BindableControl="CheckBox"/>
+			<Column Name="OUTP_MIN_REORDER_QTY" DataType="System.Single"/>
+			<Column Name="SupplierId" DataType="System.Int32"/>
+			<Column Name="OUTP_SUPPLIER" DataType="System.String"/>
+			<Column Name="OUTP_LABEL_QTY" DataType="System.Single"/>
+			<Column Name="LBL_PRICE_1" DataType="System.Single"/>
+			<Column Name="LBL_PRICE_2" DataType="System.Single"/>
+			<Column Name="LBL_PRICE_3" DataType="System.Single"/>
+			<Column Name="LBL_PRICE_4" DataType="System.Single"/>
+			<Column Name="LBL_NORM_1" DataType="System.Single"/>
+			<Column Name="LBL_PROM_AMT_OFF" DataType="System.Int32"/>
+			<Column Name="Product_Number" DataType="System.Int64"/>
+			<Column Name="PROD_DESC" DataType="System.String"/>
+			<Column Name="PROD_CARTON_QTY" DataType="System.Int32"/>
+			<Column Name="PROD_DEPARTMENT" DataType="System.Int32"/>
+			<Column Name="CommodityId" DataType="System.Int32"/>
+			<Column Name="PROD_TYPE" DataType="System.Int32"/>
+			<Column Name="PROD_POS_DESC" DataType="System.String"/>
+			<Column Name="PROD_LAST_APN_SOLD" DataType="System.Int64"/>
+			<Column Name="APN_NUMBER" DataType="System.Int64"/>
+			<Column Name="PROD_SIZE" DataType="System.String"/>
+			<Column Name="PROD_UNIT_MEASURE" DataType="System.Int32"/>
+			<Column Name="SQL_DATE_END" DataType="System.DateTime"/>
+			<Column Name="PROD_HOST_NUMBER" DataType="System.String"/>
+			<Column Name="IsHostType" DataType="System.Int32"/>
+		</TableDataSource>
+	</Dictionary>
+	<ReportPage Name="Page1" PaperHeight="210" Columns.Count="3" Columns.Width="100" Columns.Positions="0,63.333332,126.666664" Guides="340.2" Watermark.Font="Arial, 60pt">
+		<DataBand Name="DataBand1" Width="378" Height="111.51" CanShrink="true" DataSource="DataSet" RowCount="8" Columns.Count="1" Columns.Width="378" ResetPageNumber="true">
+			<TextObject Name="Text1" Left="18.9" Top="5.67" Width="236.25" Height="26.46" CanShrink="true" Text="[DataSet.PROD_DESC]" WordWrap="false" Font="Arial, 12pt, style=Bold">
+				<Highlight>
+					<Condition Expression="[DataSet.OUTP_SHORT_LABEL_IND]== true" Font="Arial, 12pt, style=Bold" ApplyTextFill="false" ApplyFont="true"/>
+				</Highlight>
+			</TextObject>
+			<TextObject Name="Text6" Left="151.2" Top="54.81" Width="115.29" Height="47.25" CanBreak="false" Text="[DataSet.LBL_NORM_1]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" Font="Arial, 30pt, style=Bold"/>
+			<TextObject Name="Text7" Left="132.3" Top="28.35" Width="37.8" Height="15.12" Text="[DataSet.PROD_CARTON_QTY]/[DataSet.OUTP_MIN_REORDER_QTY]" Font="Arial, 10pt"/>
+			<TextObject Name="Text8" Left="217.35" Top="28.35" Width="49.14" Height="15.12" VisibleExpression="[DataSet.OUTP_SHORT_LABEL_IND]==false" CanShrink="true" Text="[DataSet.PROD_HOST_NUMBER]" Font="Arial, 10pt"/>
+			<BarcodeObject Name="Barcode1" Left="18.9" Top="56.7" Width="113.4" Height="45.36" VisibleExpression="[DataSet.IsHostType]==1" CanGrow="true" AutoSize="false" DataColumn="DataSet.APN_NUMBER" Text="[DataSet.APN_NUMBER]" AllowExpressions="true" Barcode="EAN13"/>
+			<TextObject Name="Text10" Left="170.1" Top="28.35" Width="47.25" Height="15.12" VisibleExpression="[DataSet.OUTP_SHORT_LABEL_IND]==false" Text="[DataSet.OUTP_SUPPLIER]" Font="Arial, 10pt"/>
+			<TextObject Name="Text11" Left="18.9" Top="28.35" Width="56.7" Height="15.12" Text="[DataSet.Product_Number]" Font="Arial, 10pt"/>
+			<TextObject Name="Text12" Left="75.6" Top="28.35" Width="60.48" Height="15.12" Text="[DataSet.SQL_DATE_END]" Font="Arial, 10pt"/>
+			<TextObject Name="Text13" Left="136.08" Top="54.81" Width="26.46" Height="34.02" Text="$" Font="Arial, 24pt, style=Bold"/>
+		</DataBand>
+	</ReportPage>
+</Report>

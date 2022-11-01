@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:InvoiceBatch xmlns:ns0="http://metcash.com/invoices/7.0.0">
+  <ns0:TransmissionHeader>
+    <ns0:TransmissionType>METCASH INVOICING</ns0:TransmissionType>
+    <ns0:SourceState>VIC</ns0:SourceState>
+    <ns0:Destination>IGA MACQUARIE PARK</ns0:Destination>
+    <ns0:CreationDate>2019-05-23T21:20:53</ns0:CreationDate>
+    <ns0:Version>7.1.1</ns0:Version>
+  </ns0:TransmissionHeader>
+  <ns0:Invoice InvoiceNumber="98918">
+    <ns0:Header>
+      <ns0:CustomerNumber>62999999</ns0:CustomerNumber>
+      <ns0:CustomerName>IGA MACQUARIE PARK PLUS LIQUOR</ns0:CustomerName>
+      <ns0:Street>1 THOMAS HOLT DRIVE</ns0:Street>
+      <ns0:Suburb>MACQUARIE PARK</ns0:Suburb>
+      <ns0:PostCode>2113</ns0:PostCode>
+      <ns0:OrderNumber>0000011557</ns0:OrderNumber>
+      <ns0:Message>DYERS DIST</ns0:Message>
+      <ns0:InvoiceDate>2019-05-23</ns0:InvoiceDate>
+      <ns0:BusinessPillar>IGA</ns0:BusinessPillar>
+    </ns0:Header>
+    <ns0:Detail LineNumber="101">
+      <ns0:Status>AVL</ns0:Status>
+      <ns0:Indicator>P</ns0:Indicator>
+      <ns0:ProductMLC>
+        <ns0:CompanyCode>1</ns0:CompanyCode>
+        <ns0:CommodityNumber>956</ns0:CommodityNumber>
+      </ns0:ProductMLC>
+      <ns0:ProductMSC>
+        <ns0:DepartmentNumber>17</ns0:DepartmentNumber>
+        <ns0:CategoryNumber>324</ns0:CategoryNumber>
+        <ns0:CommodityNumber>02</ns0:CommodityNumber>
+        <ns0:SubCommodityNumber>06</ns0:SubCommodityNumber>
+      </ns0:ProductMSC>
+      <ns0:SupplierCode>01240981</ns0:SupplierCode>
+      <ns0:ProductDescription>MIRABELLA ECO HAL DIC 35W  4PK</ns0:ProductDescription>
+      <ns0:ProductType>V</ns0:ProductType>
+      <ns0:InvoicedProductCode>00268881</ns0:InvoicedProductCode>
+      <ns0:OrderedProductCode>00268881</ns0:OrderedProductCode>
+      <ns0:PackQuantity>3.0</ns0:PackQuantity>
+      <ns0:PricingUnit>CASE</ns0:PricingUnit>
+      <ns0:UnitsOrdered>3</ns0:UnitsOrdered>
+      <ns0:UnitsInvoiced>3</ns0:UnitsInvoiced>
+      <ns0:GSTRate>10.0</ns0:GSTRate>
+      <ns0:WholesalePrice>14.54</ns0:WholesalePrice>
+      <ns0:MarginAmount>0.2</ns0:MarginAmount>
+      <ns0:GSTAmount>1.47</ns0:GSTAmount>
+      <ns0:CostTotal>16.21</ns0:CostTotal>
+      <ns0:ExtendedWholesaleTotal>14.54</ns0:ExtendedWholesaleTotal>
+      <ns0:ExtendedMarginTotal>0.2</ns0:ExtendedMarginTotal>
+      <ns0:ExtendedGSTTotal>1.47</ns0:ExtendedGSTTotal>
+      <ns0:ExtendedCostTotal>16.21</ns0:ExtendedCostTotal>
+      <ns0:LandedUnitCost>5.4</ns0:LandedUnitCost>
+      <ns0:RetailPrice>11.35</ns0:RetailPrice>
+      <ns0:MarginPercent>52.4</ns0:MarginPercent>
+      <ns0:GTINPLUS>
+        <ns0:GTINPLUUnit Multiple="1.0">
+          <ns0:GTINPLU Type="G">
+            <ns0:Number>9312527983218</ns0:Number>
+          </ns0:GTINPLU>
+        </ns0:GTINPLUUnit>
+      </ns0:GTINPLUS>
+    </ns0:Detail>
+    <ns0:Trailer>
+      <ns0:ExtendedWholesaleTotal>14.54</ns0:ExtendedWholesaleTotal>
+      <ns0:ExtendedMarginTotal>0.2</ns0:ExtendedMarginTotal>
+      <ns0:TotalFees>0.0</ns0:TotalFees>
+      <ns0:TotalExGST>14.74</ns0:TotalExGST>
+      <ns0:TotalGST>1.47</ns0:TotalGST>
+      <ns0:Total>16.21</ns0:Total>
+      <ns0:TotalWeight>0.58</ns0:TotalWeight>
+      <ns0:NumberOfCases>1.0</ns0:NumberOfCases>
+      <ns0:DamagedStockAllowance>0.0</ns0:DamagedStockAllowance>
+      <ns0:ServiceFee>0.0</ns0:ServiceFee>
+      <ns0:CategorySummary Category="V">
+        <ns0:StandardCost>14.54</ns0:StandardCost>
+        <ns0:Margin>0.2</ns0:Margin>
+        <ns0:GST>1.47</ns0:GST>
+        <ns0:TotalCost>16.21</ns0:TotalCost>
+        <ns0:Retail>34.05</ns0:Retail>
+        <ns0:GrossProfitPercent>52.4</ns0:GrossProfitPercent>
+      </ns0:CategorySummary>
+      <ns0:ServiceLevelItem Category="TCO">
+        <ns0:AllItems>1.0</ns0:AllItems>
+        <ns0:Promotions>1.0</ns0:Promotions>
+      </ns0:ServiceLevelItem>
+      <ns0:ServiceLevelItem Category="DEL">
+        <ns0:AllItems>0.0</ns0:AllItems>
+        <ns0:Promotions>0.0</ns0:Promotions>
+      </ns0:ServiceLevelItem>
+      <ns0:ServiceLevelItem Category="NIR">
+        <ns0:AllItems>0.0</ns0:AllItems>
+        <ns0:Promotions>0.0</ns0:Promotions>
+      </ns0:ServiceLevelItem>
+      <ns0:ServiceLevelItem Category="DIR">
+        <ns0:AllItems>0.0</ns0:AllItems>
+        <ns0:Promotions>0.0</ns0:Promotions>
+      </ns0:ServiceLevelItem>
+      <ns0:ServiceLevelItem Category="TPS">
+        <ns0:AllItems>1.0</ns0:AllItems>
+        <ns0:Promotions>1.0</ns0:Promotions>
+      </ns0:ServiceLevelItem>
+      <ns0:ServiceLevelItem Category="NCS">
+        <ns0:AllItems>1.0</ns0:AllItems>
+        <ns0:Promotions>1.0</ns0:Promotions>
+      </ns0:ServiceLevelItem>
+      <ns0:ServiceLevelItem Category="PER">
+        <ns0:AllItems>100.0</ns0:AllItems>
+        <ns0:Promotions>100.0</ns0:Promotions>
+      </ns0:ServiceLevelItem>
+    </ns0:Trailer>
+  </ns0:Invoice>
+</ns0:InvoiceBatch>

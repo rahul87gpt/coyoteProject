@@ -1,0 +1,31 @@
+--DBCC CHECKIDENT('WareHouse', RESEED, 0)
+BEGIN TRANSACTION
+BEGIN TRY 
+	--SELECT * FROm WareHouse
+	INSERT INTO WareHouse
+	SELECT 
+	   CODE_KEY_NUM
+	 , CODE_DESC
+	 , (SELECT ID FROM Supplier WHERE CODE =CODE_ALP_2 AND  IsDeleted=0) SupplierId
+	 , (SELECT ID FROM MasterListItems WHERE CODE=RTRIM(LTRIM(CODE_ALP_1)) AND LISTID=7 AND IsDeleted=0) HostFormatId
+	 , 1 [Status]
+	 , GETUTCDATE() CreatedAt
+	 , GETUTCDATE() UpdatedAt
+	 , 1 CreatedById
+	 , 1 UpdatedById
+	 , 0 IsDeleted
+	FROM [DBS99.COYOTEPOS.COM.AU].[AASandBox].[dbo].[CODETBL] 
+	WHERE [CODE_KEY_TYPE] = 'WAREHOUSE'
+	COMMIT TRANSACTION
+END TRY
+
+BEGIN CATCH
+	SELECT
+		ERROR_NUMBER() AS ErrorNumber,
+		ERROR_SEVERITY() AS ErrorSeverity,
+		ERROR_STATE() AS ErrorState,
+		ERROR_PROCEDURE() AS ErrorProcedure,
+		ERROR_LINE() AS ErrorLine,
+		ERROR_MESSAGE() AS ErrorMessage;
+	ROLLBACK TRANSACTION
+END CATCH

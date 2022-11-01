@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/30/2020 10:08:00" ReportInfo.Modified="06/17/2022 16:50:37" ReportInfo.CreatorVersion="2022.1.2.0">
+  <Dictionary>
+    <TableDataSource Name="DataSet" ReferenceName="Data.DataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Number" DataType="System.Int32"/>
+      <Column Name="Department" DataType="System.String"/>
+      <Column Name="PercentageTotal" DataType="System.Double"/>
+      <Column Name="SalesCost" DataType="System.Double"/>
+      <Column Name="Margin" DataType="System.Double"/>
+      <Column Name="GPPrecentage" DataType="System.Double"/>
+      <Column Name="SalesAmt" DataType="System.Double"/>
+      <Column Name="SalesAmtExGST" DataType="System.Double"/>
+      <Column Name="QTY" DataType="System.Double"/>
+    </TableDataSource>
+    <TableDataSource Name="FilterDataSet" ReferenceName="Data.FilterDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="startDate" DataType="System.String"/>
+      <Column Name="endDate" DataType="System.String"/>
+      <Column Name="selectOutlets" DataType="System.String"/>
+      <Column Name="productStartId" DataType="System.Int32"/>
+      <Column Name="productEndId" DataType="System.Int32"/>
+      <Column Name="till" DataType="System.String"/>
+      <Column Name="contineous" DataType="System.Int32"/>
+      <Column Name="drillDown" DataType="System.Int32"/>
+      <Column Name="summary" DataType="System.Int32"/>
+      <Column Name="promoSales" DataType="System.Int32"/>
+      <Column Name="promoCode" DataType="System.String"/>
+      <Column Name="merge" DataType="System.Int32"/>
+      <Column Name="variance" DataType="System.Int32"/>
+      <Column Name="wastage" DataType="System.Int32"/>
+      <Column Name="reportName" DataType="System.String"/>
+      <Column Name="CurrentDate" DataType="System.String"/>
+      <Column Name="TotalIncludingCustCount" DataType="System.Int32"/>
+      <Column Name="TotalIncludingCustAvgSpendPerCust" DataType="System.Double"/>
+      <Column Name="TotalIncludingCustAvgItemsPerCust" DataType="System.Double"/>
+      <Column Name="TotalAllSalesCustomerCount" DataType="System.Int32"/>
+      <Column Name="TotalAllSalesAvgSpendPerCust" DataType="System.Double"/>
+      <Column Name="TotalAllSalesAvgItemsPerCust" DataType="System.Double"/>
+      <Column Name="TotalFilterOnlyCustCount" DataType="System.Int32"/>
+      <Column Name="TotalFilterOnlyCustAvgSpendPerCust" DataType="System.Double"/>
+      <Column Name="TotalFilterOnlyCustAvgItemsPerCust" DataType="System.Double"/>
+      <Column Name="GrandTotalGPPer" DataType="System.Double"/>
+      <Column Name="ReplicateCode" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="StoreDataSet" ReferenceName="Data.StoreDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Store" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="DeptDataSet" ReferenceName="Data.DeptDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Dept" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="CommodityDataSet" ReferenceName="Data.CommodityDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Commodity" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="CategoryDataSet" ReferenceName="Data.CategoryDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Category" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="GroupsDataSet" ReferenceName="Data.GroupsDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Groups" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="SupplierDataSet" ReferenceName="Data.SupplierDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Supplier" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="ManufacturerDataSet" ReferenceName="Data.ManufacturerDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Manufacturer" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="CashierDataSet" ReferenceName="Data.CashierDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Cashier" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="ZoneDataSet" ReferenceName="Data.ZoneDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Zones" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="DaysDataSet" ReferenceName="Data.DaysDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Item" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="MemberDataSet" ReferenceName="Data.MemberDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Member" DataType="System.String"/>
+    </TableDataSource>
+    <Total Name="TotalSalesCost" Expression="[DataSet.SalesCost]" Evaluator="Data1" PrintOn="GroupFooter1"/>
+    <Total Name="TotalMargin" Expression="[DataSet.Margin]" Evaluator="Data1" PrintOn="GroupFooter1"/>
+    <Total Name="TotalSalesAmt" Expression="[DataSet.SalesAmt]" Evaluator="Data1" PrintOn="GroupFooter1"/>
+    <Total Name="TotalSalesExGst" Expression="[DataSet.SalesAmtExGST]" Evaluator="Data1" PrintOn="GroupFooter1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="298" PaperHeight="210" RawPaperSize="9" FirstPageSource="15" OtherPagesSource="15" LastPageSource="15" Guides="264.6,0" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="1050.84" Height="94.5">
+      <TextObject Name="Text1" Top="9.45" Width="1048.95" Height="28.35" Text="NIGHTOWL COYOTE GROCERY SYSTEM" HorzAlign="Center" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text2" Top="37.8" Width="1048.95" Height="18.9" Text="[FilterDataSet.selectOutlets]" HorzAlign="Center" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text3" Top="56.7" Width="1048.95" Height="18.9" Text="Basket Incidence" HorzAlign="Center" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text4" Top="75.6" Width="1048.95" Height="18.9" Text="For Trading Day [FilterDataSet.startDate] to [FilterDataSet.endDate]" HorzAlign="Center" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text5" Top="-79.6" Height="28.35" Text="Printed: [Date]" Font="Arial, 10pt"/>
+      <TextObject Name="Text6" Width="189" Height="18.9" Text="Printed on [Date]" Format="Date" Format.Format="d" Font="Arial, 8pt"/>
+      <TextObject Name="Text7" Left="954.45" Width="94.5" Height="18.9" Text="Page: [PAGE#] of [TOTALPAGES#]" Font="Arial, 8pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="98.8" Width="1050.84" Height="18.9" Fill.Color="LightCyan" Guides="18.9,18.9">
+      <TextObject Name="Text8" Width="66.15" Height="18.9" Text="Number" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text9" Left="66.15" Width="170.1" Height="18.9" Text="Department" VertAlign="Center" WordWrap="false" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text10" Left="236.25" Width="94.5" Height="18.9" Text="Qty" HorzAlign="Right" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text11" Left="330.75" Width="113.4" Height="18.9" Text="%Total" HorzAlign="Right" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text12" Left="444.15" Width="141.75" Height="18.9" Text="Sales Cost" HorzAlign="Right" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text13" Left="585.9" Width="122.85" Height="18.9" Text="Margin" HorzAlign="Right" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text14" Left="708.75" Width="66.15" Height="18.9" Text="GP%" HorzAlign="Right" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text15" Left="774.9" Width="132.3" Height="18.9" Text="Sales Amt" HorzAlign="Right" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text16" Left="907.2" Width="141.75" Height="18.9" Text="Sales-ExGst" HorzAlign="Right" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+    </PageHeaderBand>
+    <GroupHeaderBand Name="GroupHeader1" Top="122" Width="1050.84" Condition="[DataSet.Department]!=&quot;&quot;" SortOrder="None">
+      <DataBand Name="Data1" Top="126.3" Width="1050.84" Height="18.9" DataSource="DataSet">
+        <TextObject Name="txtDeptNo" Width="66.15" Height="18.9" Text="[DataSet.Number]" Duplicates="Hide" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" Font="Arial, 9pt"/>
+        <TextObject Name="txtDeptDesc" Left="66.15" Width="170.1" Height="18.9" Text="[DataSet.Department]" WordWrap="false" Font="Arial, 9pt"/>
+        <TextObject Name="txtQty" Left="236.25" Width="94.5" Height="18.9" VisibleExpression="[DataSet.QTY]%1&gt;0" Text="[DataSet.QTY]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt"/>
+        <TextObject Name="txtQty" Left="236.25" Width="94.5" Height="18.9" VisibleExpression="[DataSet.QTY]%1==0" Text="[DataSet.QTY]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt"/>
+        <TextObject Name="txtPcntTotal" Left="330.75" Width="113.4" Height="18.9" Text="[DataSet.PercentageTotal]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="1" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt"/>
+        <TextObject Name="txtSaleCost" Left="444.15" Width="141.75" Height="18.9" Text="[DataSet.SalesCost]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt"/>
+        <TextObject Name="txtMargin" Left="585.9" Width="122.85" Height="18.9" Text="[DataSet.Margin]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt"/>
+        <TextObject Name="txtGP" Left="708.75" Width="66.15" Height="18.9" Text="[DataSet.GPPrecentage]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt"/>
+        <TextObject Name="txtSaleAmt" Left="774.9" Width="132.3" Height="18.9" Text="[DataSet.SalesAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt"/>
+        <TextObject Name="txtSaleExGst" Left="907.2" Width="141.75" Height="18.9" Text="[DataSet.SalesAmtExGST]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt"/>
+      </DataBand>
+      <GroupFooterBand Name="GroupFooter1" Top="149.5" Width="1050.84" Height="37.8" Border.Lines="Bottom" Border.Color="DimGray">
+        <TextObject Name="Text31" Left="444.15" Width="141.75" Height="18.9" Text="[TotalSalesCost]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+        <TextObject Name="Text32" Left="585.9" Width="122.85" Height="18.9" Text="[TotalMargin]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+        <TextObject Name="Text33" Left="708.75" Width="66.15" Height="18.9" Text="[FilterDataSet.GrandTotalGPPer]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+        <TextObject Name="Text34" Left="774.9" Width="132.3" Height="18.9" Text="[TotalSalesAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+        <TextObject Name="Text35" Left="907.2" Width="141.75" Height="18.9" Text="[TotalSalesExGst]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      </GroupFooterBand>
+    </GroupHeaderBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="191.61" Width="1050.84" Height="283.5">
+      <TextObject Name="Text17" Left="614.25" Top="9.45" Width="179.55" Height="18.9" Text="Counters" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text18" Left="812.7" Top="9.45" Width="94.5" Height="18.9" Text="Qty" HorzAlign="Right" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text19" Left="916.65" Top="9.45" Width="122.85" Height="18.9" Text="Total" HorzAlign="Right" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text20" Left="614.25" Top="37.8" Width="179.55" Height="18.9" Text="Total Filter Only Sales:" Font="Arial, 10pt, style=Underline"/>
+      <TextObject Name="Text21" Left="614.25" Top="56.7" Width="170.1" Height="18.9" Text="Total Customers:" Font="Arial, 9pt"/>
+      <TextObject Name="txtFilterTotalCustomer" Left="822.15" Top="56.7" Width="85.05" Height="18.9" Text="[FilterDataSet.TotalFilterOnlyCustCount]" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text22" Left="614.25" Top="75.6" Width="170.1" Height="18.9" Text="Avg Items Per Customer:" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="txtAvgItemCustFilterSale" Left="935.55" Top="75.6" Width="103.95" Height="18.9" Text="[FilterDataSet.TotalFilterOnlyCustAvgItemsPerCust]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="txtSpendCustFilterSale" Left="935.55" Top="94.5" Width="103.95" Height="18.9" Text="[FilterDataSet.TotalFilterOnlyCustAvgSpendPerCust]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text23" Left="614.25" Top="94.5" Width="170.1" Height="18.9" Text="Avg Spend Per Customer:" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text24" Left="614.25" Top="122.85" Width="179.55" Height="18.9" Text="Total Including Filters:" Font="Arial, 9pt, style=Underline"/>
+      <TextObject Name="Text25" Left="614.25" Top="141.75" Width="170.1" Height="18.9" Text="Total Customers:" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="txtIncFilterCustomers" Left="822.15" Top="141.75" Width="85.05" Height="18.9" Text="[FilterDataSet.TotalIncludingCustCount]" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text26" Left="614.25" Top="160.65" Width="170.1" Height="18.9" Text="Avg Items Per Customer:" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="txtAvgItemCustIncFilter" Left="935.55" Top="160.65" Width="103.95" Height="18.9" Text="[FilterDataSet.TotalIncludingCustAvgItemsPerCust]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="txtSpendCustIncFilter" Left="935.55" Top="179.55" Width="103.95" Height="18.9" Text="[FilterDataSet.TotalIncludingCustAvgSpendPerCust]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="txt" Left="614.25" Top="179.55" Width="170.1" Height="18.9" Text="Avg Spend Per Customer: " VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text27" Left="614.25" Top="207.9" Width="179.55" Height="18.9" Text="Total All Sales:" HorzAlign="Justify" VertAlign="Center" Font="Arial, 9pt, style=Underline"/>
+      <TextObject Name="Text28" Left="614.25" Top="226.8" Width="170.1" Height="18.9" Text="Total Customers:" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="txtAllTotalCust" Left="822.15" Top="226.8" Width="85.05" Height="18.9" Text="[FilterDataSet.TotalAllSalesCustomerCount]" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="Text29" Left="614.25" Top="245.7" Width="170.1" Height="18.9" Text="Avg Items Per Customer:" VertAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="txtAllAvgItemPerCust" Left="935.55" Top="245.7" Width="103.95" Height="18.9" Text="[FilterDataSet.TotalAllSalesAvgItemsPerCust]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="txtAllSpendCust" Left="935.55" Top="264.6" Width="103.95" Height="18.9" Text="[FilterDataSet.TotalAllSalesAvgSpendPerCust]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text30" Left="614.25" Top="264.6" Width="170.1" Height="18.9" Text="Avg Spend Per Customer:" VertAlign="Center" Font="Arial, 9pt"/>
+      <SubreportObject Name="Subreport1" Top="7.56" Width="567" Height="274.05" ReportPage="Page2"/>
+    </ReportSummaryBand>
+    <PageFooterBand Name="PageFooter1" Top="479.41" Width="1050.84" Height="56.7">
+      <TextObject Name="Text15" Left="812.7" Width="236.25" Height="18.9" Text="Page: [PAGE#] of [TOTALPAGES#]" HorzAlign="Right" Font="Arial, 10pt"/>
+    </PageFooterBand>
+  </ReportPage>
+  <ReportPage Name="Page2" PaperWidth="150" Watermark.Font="Arial, 60pt">
+    <GroupHeaderBand Name="GroupHeader2" Width="491.4" Height="18.9" VisibleExpression="[ManufacturerDataSet.Manufacturer]!=&quot;&quot;|| [SupplierDataSet.Supplier]!=&quot;&quot; || [GroupsDataSet.Groups]!=&quot;&quot; || [CategoryDataSet.Category]!=&quot;&quot;||[CommodityDataSet.Commodity]!=&quot;&quot; || [DeptDataSet.Dept]!=&quot;&quot; || [StoreDataSet.Store]!=&quot;&quot; || [CashierDataSet.Cashier]!=&quot;&quot; || [FilterDataSet.till]!=&quot;&quot;" Condition="[DataSet.Number]!=0">
+      <TextObject Name="Text34" Width="567" Height="18.9" Text="Report Selections:" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <ChildBand Name="Child2" Top="22.9" Width="491.4" Height="37.8" VisibleExpression="[FilterDataSet.till]!=&quot;&quot;">
+        <TextObject Name="Text37" Left="9.45" Width="567" Height="18.9" VisibleExpression="[FilterDataSet.till]!=&quot;&quot;" Text="TillRange" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+        <TextObject Name="Text38" Left="18.9" Top="18.9" Width="567" Height="18.9" VisibleExpression="[FilterDataSet.till]!=&quot;&quot;" Text="Only Till number: [FilterDataSet.till]" Font="Arial, 9.75pt, style=Bold"/>
+      </ChildBand>
+      <DataBand Name="Data2" Top="87.6" Width="491.4" Height="18.9" DataSource="StoreDataSet">
+        <TextObject Name="Text45" Left="18.9" Width="567" Height="18.9" Text="[StoreDataSet.Store]" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+        <DataHeaderBand Name="DataHeader2" Top="64.7" Width="491.4" Height="18.9">
+          <TextObject Name="Text46" Left="9.45" Width="567" Height="18.9" VisibleExpression="[StoreDataSet.Store]!=&quot;&quot;" Text="Outlets" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+        </DataHeaderBand>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader14" Top="110.5" Width="491.4" Height="30.24" VisibleExpression="[FilterDataSet.productEndId]!=0" Guides="0" Condition="[FilterDataSet.productEndId]!=0">
+      <TextObject Name="Text67" Left="9.45" Width="236.25" Height="15.12" VisibleExpression="[FilterDataSet.productEndId]!=0" Text="Product Range" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text68" Left="18.9" Top="15.12" Width="425.25" Height="15.12" VisibleExpression="[FilterDataSet.productEndId]!=0" Text="[FilterDataSet.productStartId] to [FilterDataSet.productEndId]" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data11" Top="144.74" Width="491.4" VisibleExpression="[FilterDataSet.productEndId]!=0" DataSource="FilterDataSet"/>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader16" Top="148.74" Width="491.4" Height="15.12" VisibleExpression="[FilterDataSet.promoSales]&gt;0" Condition="[FilterDataSet.promoSales]&gt;0">
+      <TextObject Name="Text71" Left="9.45" Width="217.35" Height="15.12" Text="Promotions" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data13" Top="167.86" Width="491.4" Height="15.12" VisibleExpression="[FilterDataSet.promoSales]&gt;0" DataSource="FilterDataSet">
+        <TextObject Name="Text72" Left="18.9" Width="481.95" Height="15.12" Text="Only Promo Sales" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader4" Top="186.98" Width="491.4" Height="18.9" VisibleExpression="[DeptDataSet.Dept]!=&quot;&quot;" Condition="[DeptDataSet.Dept]!=&quot;&quot;">
+      <TextObject Name="Text47" Left="9.45" Width="567" Height="18.9" VisibleExpression="[DeptDataSet.Dept]!=&quot;&quot;" Text="Departments" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data3" Top="209.88" Width="491.4" Height="18.9" VisibleExpression="[DeptDataSet.Dept]!=&quot;&quot;" DataSource="DeptDataSet">
+        <TextObject Name="Text48" Left="18.9" Width="567" Height="18.9" VisibleExpression="[DeptDataSet.Dept]!=&quot;&quot;" Text="[DeptDataSet.Dept]" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader5" Top="232.78" Width="491.4" Height="18.9" VisibleExpression="[CommodityDataSet.Commodity]!=&quot;&quot;" Condition="[CommodityDataSet.Commodity]!=&quot;&quot;">
+      <TextObject Name="Text49" Left="9.45" Width="567" Height="18.9" Text="Commodities" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data4" Top="255.68" Width="491.4" Height="18.9" VisibleExpression="[CommodityDataSet.Commodity]!=&quot;&quot;" DataSource="CommodityDataSet">
+        <TextObject Name="Text50" Left="18.9" Width="567" Height="18.9" VisibleExpression="[CommodityDataSet.Commodity]!=&quot;&quot;" Text="[CommodityDataSet.Commodity]" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader6" Top="278.58" Width="491.4" Height="18.9" VisibleExpression="[CategoryDataSet.Category]!=&quot;&quot;" Condition="[CategoryDataSet.Category]!=&quot;&quot;">
+      <TextObject Name="Text51" Left="9.45" Width="699.3" Height="18.9" Text="Categories" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data5" Top="301.48" Width="491.4" Height="18.9" VisibleExpression="[CategoryDataSet.Category]!=&quot;&quot;" DataSource="CategoryDataSet">
+        <TextObject Name="Text52" Left="18.9" Width="567" Height="18.9" Text="[CategoryDataSet.Category]" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader7" Top="324.38" Width="491.4" Height="18.9" VisibleExpression="[GroupsDataSet.Groups]!=&quot;&quot;" Condition="[GroupsDataSet.Groups]!=&quot;&quot;">
+      <TextObject Name="Text53" Left="9.45" Width="567" Height="18.9" VisibleExpression="[GroupsDataSet.Groups]!=&quot;&quot;" Text="Groups" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data6" Top="347.28" Width="491.4" Height="18.9" VisibleExpression="[GroupsDataSet.Groups]!=&quot;&quot;" DataSource="GroupsDataSet">
+        <TextObject Name="Text54" Left="18.9" Width="567" Height="18.9" Text="[GroupsDataSet.Groups]" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader8" Top="370.18" Width="491.4" Height="18.9" VisibleExpression="[SupplierDataSet.Supplier]!=&quot;&quot;" Condition="[SupplierDataSet.Supplier]!=&quot;&quot;">
+      <TextObject Name="Text55" Left="9.45" Width="567" Height="18.9" Text="Suppliers" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data7" Top="393.08" Width="491.4" Height="18.9" VisibleExpression="[SupplierDataSet.Supplier]!=&quot;&quot;" DataSource="SupplierDataSet">
+        <TextObject Name="Text56" Left="18.9" Width="567" Height="18.9" Text="[SupplierDataSet.Supplier]" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader9" Top="415.98" Width="491.4" Height="18.9" VisibleExpression="[ManufacturerDataSet.Manufacturer]!=&quot;&quot;" Guides="0" Condition="[ManufacturerDataSet.Manufacturer]!=&quot;&quot;">
+      <TextObject Name="Text57" Left="9.45" Width="567" Height="18.9" Text="Manufacturers" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data8" Top="438.88" Width="491.4" Height="18.9" VisibleExpression="[ManufacturerDataSet.Manufacturer]!=&quot;&quot;" DataSource="ManufacturerDataSet">
+        <TextObject Name="Text58" Left="18.9" Width="567" Height="18.9" Text="[ManufacturerDataSet.Manufacturer]" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader17" Top="461.78" Width="491.4" Height="15.12" VisibleExpression="[FilterDataSet.promoCode]!=&quot;&quot;" Condition="[FilterDataSet.promoCode]!=&quot;&quot;">
+      <TextObject Name="Text73" Left="9.45" Width="217.35" Height="15.12" Text="Members" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data14" Top="480.9" Width="491.4" Height="15.12" VisibleExpression="[FilterDataSet.promoCode]!=&quot;&quot;" DataSource="FilterDataSet">
+        <TextObject Name="Text74" Left="18.9" Width="481.95" Height="15.12" Text="[FilterDataSet.promoCode]" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader10" Top="500.02" Width="491.4" Height="37.8" VisibleExpression="[CashierDataSet.Cashier]!=&quot;&quot;" Guides="0,18.9" Condition="[CashierDataSet.Cashier]!=&quot;&quot;">
+      <TextObject Name="Text59" Left="9.45" Width="567" Height="18.9" Text="Cashier" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text60" Left="18.9" Top="18.9" Width="567" Height="18.9" Text="[CashierDataSet.Cashier]" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data9" Top="541.82" Width="491.4" VisibleExpression="[CashierDataSet.Cashier]!=&quot;&quot;" Guides="0" DataSource="CashierDataSet"/>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader12" Top="545.82" Width="491.4" Height="15.12" VisibleExpression="[ZoneDataSet.Zones]!=&quot;&quot;" Condition="[ZoneDataSet.Zones]!=&quot;&quot;">
+      <TextObject Name="Text63" Left="9.45" Width="132.3" Height="15.12" Text="Zone" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data11" Top="564.94" Width="491.4" Height="15.12" VisibleExpression="[ZoneDataSet.Zones]!=&quot;&quot;" DataSource="ZoneDataSet">
+        <TextObject Name="Text64" Left="18.9" Width="425.25" Height="15.12" Text="[ZoneDataSet.Zones]" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader13" Top="584.06" Width="491.4" Height="15.12" VisibleExpression="[DaysDataSet.Item]!=&quot;&quot;" Condition="[DaysDataSet.Item]!=&quot;&quot;">
+      <TextObject Name="Text65" Left="9.45" Width="132.3" Height="15.12" Text="Day" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data12" Top="603.18" Width="491.4" Height="15.12" VisibleExpression="[DaysDataSet.Item]!=&quot;&quot;" DataSource="DaysDataSet">
+        <TextObject Name="Text66" Left="18.9" Width="425.25" Height="15.12" Text="[DaysDataSet.Item]" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader11" Top="622.3" Width="491.4" Height="37.8" VisibleExpression="[FilterDataSet.NillTransactionInterval]!=&quot;&quot;" Guides="0" Condition="[FilterDataSet.NillTransactionInterval]!=&quot;&quot;">
+      <TextObject Name="Text61" Left="9.45" Width="567" Height="18.9" Text="Nil Transaction Interval" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text62" Left="18.9" Top="18.9" Width="567" Height="18.9" Text="[FilterDataSet.NillTransactionInterval]" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data13" Top="664.1" Width="491.4" VisibleExpression="[FilterDataSet.NillTransactionInterval]!=&quot;&quot;" DataSource="FilterDataSet"/>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader15" Top="668.1" Width="491.4" Height="30.24" VisibleExpression="[MemberDataSet.Member]!=&quot;&quot;" Guides="0" Condition="[MemberDataSet.Member]!=&quot;&quot;">
+      <TextObject Name="Text69" Left="9.45" Width="236.25" Height="15.12" VisibleExpression="[MemberDataSet.Member]!=&quot;&quot;" Text="Member" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text70" Left="18.9" Top="15.12" Width="425.25" Height="15.12" VisibleExpression="[MemberDataSet.Member]!=&quot;&quot;" Text="[MemberDataSet.Member]" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data14" Top="702.34" Width="491.4" VisibleExpression="[MemberDataSet.Member]!=&quot;&quot;" Guides="18.9" DataSource="MemberDataSet"/>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader16" Top="712.1" Width="491.4" Height="30.24" VisibleExpression="[FilterDataSet.ReplicateCode]!=&quot;&quot;" Guides="0" Condition="[FilterDataSet.ReplicateCode]!=&quot;&quot;">
+      <TextObject Name="Text71" Left="9.45" Width="236.25" Height="15.12" VisibleExpression="[FilterDataSet.ReplicateCode]!=&quot;&quot;" Text="Replicate:" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text72" Left="18.9" Top="15.12" Width="425.25" Height="15.12" VisibleExpression="[FilterDataSet.ReplicateCode]!=&quot;&quot;" Text="[FilterDataSet.ReplicateCode]" Font="Arial, 9.75pt, style=Bold"/>
+      <DataBand Name="Data15" Top="740.34" Width="491.4" VisibleExpression="[FilterDataSet.ReplicateCode]!=&quot;&quot;" Guides="18.9" DataSource="FilterDataSet"/>
+    </GroupHeaderBand>
+  </ReportPage>
+</Report>

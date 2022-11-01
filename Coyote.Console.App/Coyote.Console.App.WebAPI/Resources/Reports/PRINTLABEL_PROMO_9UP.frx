@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/10/2020 18:10:00" ReportInfo.Modified="08/10/2021 18:55:22" ReportInfo.CreatorVersion="2020.3.0.0">
+	<Dictionary>
+		<TableDataSource Name="DataSet" ReferenceName="Data.DataSet" DataType="System.Int32" Enabled="true">
+			<Column Name="OUTP_PRODUCT" DataType="System.Int64"/>
+			<Column Name="OUTP_SHORT_LABEL_IND" DataType="System.Boolean" BindableControl="CheckBox"/>
+			<Column Name="OUTP_MIN_REORDER_QTY" DataType="System.Single"/>
+			<Column Name="SupplierId" DataType="System.Int32"/>
+			<Column Name="OUTP_SUPPLIER" DataType="System.String"/>
+			<Column Name="OUTP_LABEL_QTY" DataType="System.Single"/>
+			<Column Name="LBL_PRICE_1" DataType="System.Single"/>
+			<Column Name="LBL_PRICE_2" DataType="System.Single"/>
+			<Column Name="LBL_PRICE_3" DataType="System.Single"/>
+			<Column Name="LBL_PRICE_4" DataType="System.Single"/>
+			<Column Name="LBL_NORM_1" DataType="System.Single"/>
+			<Column Name="LBL_PROM_AMT_OFF" DataType="System.Int32"/>
+			<Column Name="Product_Number" DataType="System.Int64"/>
+			<Column Name="PROD_DESC" DataType="System.String"/>
+			<Column Name="PROD_CARTON_QTY" DataType="System.Int32"/>
+			<Column Name="PROD_DEPARTMENT" DataType="System.Int32"/>
+			<Column Name="CommodityId" DataType="System.Int32"/>
+			<Column Name="PROD_TYPE" DataType="System.Int32"/>
+			<Column Name="PROD_POS_DESC" DataType="System.String"/>
+			<Column Name="PROD_LAST_APN_SOLD" DataType="System.Int64"/>
+			<Column Name="APN_NUMBER" DataType="System.Int64"/>
+			<Column Name="PROD_SIZE" DataType="System.String"/>
+			<Column Name="PROD_UNIT_MEASURE" DataType="System.Int32"/>
+			<Column Name="SQL_DATE_END" DataType="System.DateTime"/>
+			<Column Name="PROD_HOST_NUMBER" DataType="System.String"/>
+			<Column Name="IsHostType" DataType="System.Int32"/>
+			<Column Name="IsDeletedAtNullable" DataType="System.Int32"/>
+		</TableDataSource>
+	</Dictionary>
+	<ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="260" Guides="396.9" Watermark.Font="Arial, 60pt">
+		<DataBand Name="DataBand1" Width="355.9" Height="302.4" DataSource="DataSet" RowCount="3" Columns.Count="3" Columns.Width="355.9" Columns.Layout="DownThenAcross" Columns.MinRowCount="10" ResetPageNumber="true">
+			<TextObject Name="Text1" Left="16.25" Top="7.56" Width="302.4" Height="56.7" CanBreak="false" Text="[DataSet.PROD_DESC]" HorzAlign="Center" VertAlign="Center" Font="Arial, 18pt">
+				<Highlight>
+					<Condition Expression="[DataSet.PROD_DESC]!=&quot;&quot;" Font="Microsoft Sans Serif, 14.25pt" ApplyTextFill="false" ApplyFont="true"/>
+				</Highlight>
+			</TextObject>
+			<TextObject Name="Text5" Left="17.01" Top="66.15" Width="90.72" Height="18.9" VisibleExpression="false" Text="Save Message" Font="Arial, 14pt, style=Bold"/>
+			<TextObject Name="Text6" Left="13.23" Top="88.83" Width="215.46" Height="79.38" CanShrink="true" CanBreak="false" Text="[DataSet.LBL_NORM_1]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" AutoWidth="true" HorzAlign="Right" Font="Arial, 48pt">
+				<Highlight>
+					<Condition Expression="[DataSet.LBL_NORM_1]!=0" Font="Microsoft Sans Serif, 48pt" ApplyTextFill="false" ApplyFont="true"/>
+				</Highlight>
+			</TextObject>
+			<TextObject Name="Text7" Left="15.12" Top="185.22" Width="94.5" Height="18.9" CanBreak="false" Text="[DataSet.APN_NUMBER]" AutoWidth="true" Font="Arial, 8pt"/>
+			<TextObject Name="Text8" Left="207.9" Top="185.22" Width="94.5" Height="18.9" VisibleExpression="[DataSet.IsDeletedAtNullable]==1" CanBreak="false" Text="Ends : 00:00:00" Format="Date" Format.Format="MM/dd/yy" AutoWidth="true" Font="Arial, 8pt, style=Bold"/>
+			<TextObject Name="Text9" Left="207.9" Top="185.22" Width="94.5" Height="18.9" VisibleExpression="[DataSet.IsDeletedAtNullable]==0" CanBreak="false" Text="Ends : [DataSet.SQL_DATE_END]" Format="Date" Format.Format="MM/dd/yy" AutoWidth="true" Font="Arial, 8pt, style=Bold"/>
+			<TextObject Name="Text10" Left="18.9" Top="217.35" Width="94.5" Height="18.9" VisibleExpression="false" Text="PROMO CODE" Font="Arial, 8pt"/>
+		</DataBand>
+	</ReportPage>
+</Report>

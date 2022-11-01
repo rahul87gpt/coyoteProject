@@ -1,0 +1,45 @@
+{
+"Level 1":{"1":{"id":1,"buttonIndex":1
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":""
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"2":{"id":2,"buttonIndex":2
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 5"
+		,"buttonLevelIndex": 5
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"Level 5"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		}}
+,"level_mapping": {
+"Level 1" : "Level 1"
+}}

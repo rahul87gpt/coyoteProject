@@ -1,0 +1,179 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="MigrationsOld\**" />
+    <EmbeddedResource Remove="MigrationsOld\**" />
+    <None Remove="MigrationsOld\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200519135234_UpdatedKeypadButton.cs" />
+    <Compile Remove="Migrations\20200519135234_UpdatedKeypadButton.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200519135234_UpdatedKeypadButton.cs" />
+    <Compile Remove="Migrations\20200519135234_UpdatedKeypadButton.Designer.cs" />
+    <Compile Remove="Migrations\20200519152305_UpdatedKeypadButton.cs" />
+    <Compile Remove="Migrations\20200519152305_UpdatedKeypadButton.Designer.cs" />
+    <Compile Remove="Migrations\20200525142302_Competition_StructureChange.cs" />
+    <Compile Remove="Migrations\20200525142302_Competition_StructureChange.Designer.cs" />
+    <Compile Remove="Migrations\20200525143314_Competition_StructureChanges.cs" />
+    <Compile Remove="Migrations\20200525143314_Competition_StructureChanges.Designer.cs" />
+    <Compile Remove="Migrations\20200525144515_Competition_Structure_Changed.cs" />
+    <Compile Remove="Migrations\20200525144515_Competition_Structure_Changed.Designer.cs" />
+    <Compile Remove="Migrations\20200525144717_Competition_Structure_Changes.cs" />
+    <Compile Remove="Migrations\20200525144717_Competition_Structure_Changes.Designer.cs" />
+    <Compile Remove="Migrations\20200525145824_Competition_Structure_Change.cs" />
+    <Compile Remove="Migrations\20200525145824_Competition_Structure_Change.Designer.cs" />
+    <Compile Remove="Migrations\20200526034431_Competition_Structure_update.cs" />
+    <Compile Remove="Migrations\20200526034431_Competition_Structure_update.Designer.cs" />
+    <Compile Remove="Migrations\20200526042058_Competition.cs" />
+    <Compile Remove="Migrations\20200526042058_Competition.Designer.cs" />
+    <Compile Remove="Migrations\20200526045956_CompetitionTables.cs" />
+    <Compile Remove="Migrations\20200526045956_CompetitionTables.Designer.cs" />
+    <Compile Remove="Migrations\20200527035943_Competition_SchemaBugs.cs" />
+    <Compile Remove="Migrations\20200527035943_Competition_SchemaBugs.Designer.cs" />
+    <Compile Remove="Migrations\20200528103816_AddedGLAccount.cs" />
+    <Compile Remove="Migrations\20200528103816_AddedGLAccount.Designer.cs" />
+    <Compile Remove="Migrations\20200529145423_JournalDetail.cs" />
+    <Compile Remove="Migrations\20200529145423_JournalDetail.Designer.cs" />
+    <Compile Remove="Migrations\20200601151622_Transaction.cs" />
+    <Compile Remove="Migrations\20200601151622_Transaction.Designer.cs" />
+    <Compile Remove="Migrations\20200604124427_AddedSupplierOrderScheduleTable.cs" />
+    <Compile Remove="Migrations\20200604124427_AddedSupplierOrderScheduleTable.Designer.cs" />
+    <Compile Remove="Migrations\20200604132641_AddedSupplierOrderScheduleTable.cs" />
+    <Compile Remove="Migrations\20200604132641_AddedSupplierOrderScheduleTable.Designer.cs" />
+    <Compile Remove="Migrations\20200605130937_AddedSupplierOrderScheduleTable.cs" />
+    <Compile Remove="Migrations\20200605130937_AddedSupplierOrderScheduleTable.Designer.cs" />
+    <Compile Remove="Migrations\20200608050022_Updated.cs" />
+    <Compile Remove="Migrations\20200608050022_Updated.Designer.cs" />
+    <Compile Remove="Migrations\20200621062517_OrderDetailDeleteUpdate.cs" />
+    <Compile Remove="Migrations\20200621062517_OrderDetailDeleteUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20200621064006_OrderDetailDeleteUpdate.cs" />
+    <Compile Remove="Migrations\20200621064006_OrderDetailDeleteUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20200706092029_UpdateGLAccount.cs" />
+    <Compile Remove="Migrations\20200706092029_UpdateGLAccount.Designer.cs" />
+    <Compile Remove="Migrations\20200706092413_UpdateSupplierOrderingSchedule.cs" />
+    <Compile Remove="Migrations\20200706092413_UpdateSupplierOrderingSchedule.Designer.cs" />
+    <Compile Remove="Migrations\20200730122304_OrderAudit.cs" />
+    <Compile Remove="Migrations\20200730122304_OrderAudit.Designer.cs" />
+    <Compile Remove="Migrations\20200730125212_OrderAudit.cs" />
+    <Compile Remove="Migrations\20200730125212_OrderAudit.Designer.cs" />
+    <Compile Remove="Migrations\20200810113601_BulkOrderFromTablet.cs" />
+    <Compile Remove="Migrations\20200810113601_BulkOrderFromTablet.Designer.cs" />
+    <Compile Remove="Migrations\20200828114524_AddDescFieldInJournalDetail.cs" />
+    <Compile Remove="Migrations\20200828114524_AddDescFieldInJournalDetail.Designer.cs" />
+    <Compile Remove="Migrations\20200922154356_AddOutletBudgetTable.cs" />
+    <Compile Remove="Migrations\20200922154356_AddOutletBudgetTable.Designer.cs" />
+    <Compile Remove="Migrations\20200924090844_RecipeTable.cs" />
+    <Compile Remove="Migrations\20200924090844_RecipeTable.Designer.cs" />
+    <Compile Remove="Migrations\20201103135628_AddEPayTable.cs" />
+    <Compile Remove="Migrations\20201103135628_AddEPayTable.Designer.cs" />    <Compile Remove="Migrations\20201104103153_updateKeyPadTBLButtonInformationInJson.cs" />
+    <Compile Remove="Migrations\20201104103153_updateKeyPadTBLButtonInformationInJson.Designer.cs" />
+    <Compile Remove="Migrations\20201104103739_updateKeyPadTBLButtonInformationInJson.cs" />
+    <Compile Remove="Migrations\20201104103739_updateKeyPadTBLButtonInformationInJson.Designer.cs" />
+    <Compile Remove="Migrations\20201119112141_AddHostSettingsTable.cs" />
+    <Compile Remove="Migrations\20201119112141_AddHostSettingsTable.Designer.cs" />
+    <Compile Remove="Migrations\20201119112645_AddHostSettingsTable.cs" />
+    <Compile Remove="Migrations\20201119112645_AddHostSettingsTable.Designer.cs" />
+    <Compile Remove="Migrations\20201119122410_AddHostSettingsTable.cs" />
+    <Compile Remove="Migrations\20201119122410_AddHostSettingsTable.Designer.cs" />
+    <Compile Remove="Migrations\20201119133829_addHostSettings.cs" />
+    <Compile Remove="Migrations\20201119133829_addHostSettings.Designer.cs" />
+    <Compile Remove="Migrations\20201119190939_AddHostingTable.cs" />
+    <Compile Remove="Migrations\20201119190939_AddHostingTable.Designer.cs" />
+    <Compile Remove="Migrations\20201119194700_AddHostingTable.cs" />
+    <Compile Remove="Migrations\20201119194700_AddHostingTable.Designer.cs" />
+    <Compile Remove="Migrations\20201121132149_UpdateUserLogRoleTable.cs" />
+    <Compile Remove="Migrations\20201121132149_UpdateUserLogRoleTable.Designer.cs" />
+    <Compile Remove="Migrations\20201121132910_UpdateUserLogRolesTable.cs" />
+    <Compile Remove="Migrations\20201121132910_UpdateUserLogRolesTable.Designer.cs" />
+    <Compile Remove="Migrations\20201124135321_UpdateHostSettingsHosFormatTable.cs" />
+    <Compile Remove="Migrations\20201124135321_UpdateHostSettingsHosFormatTable.Designer.cs" />
+    <Compile Remove="Migrations\20201124140118_UpdateHostSettingsMasterListItemsTable.cs" />
+    <Compile Remove="Migrations\20201124140118_UpdateHostSettingsMasterListItemsTable.Designer.cs" />
+    <Compile Remove="Migrations\20201130111012_AddAccountTransactionTable.cs" />
+    <Compile Remove="Migrations\20201130111012_AddAccountTransactionTable.Designer.cs" />
+    <Compile Remove="Migrations\20201130172219_AddAccountLoyaltyTable.cs" />
+    <Compile Remove="Migrations\20201130172219_AddAccountLoyaltyTable.Designer.cs" />
+    <Compile Remove="Migrations\20201201134715_AddUpdateSystemControlsTable.cs" />
+    <Compile Remove="Migrations\20201201134715_AddUpdateSystemControlsTable.Designer.cs" />
+    <Compile Remove="Migrations\20201201140026_AddModifySystemControlsTable.cs" />
+    <Compile Remove="Migrations\20201201140026_AddModifySystemControlsTable.Designer.cs" />
+    <Compile Remove="Migrations\20201223153417_UpdatedKeypadButtonProdCat.cs" />
+    <Compile Remove="Migrations\20201223153417_UpdatedKeypadButtonProdCat.Designer.cs" />
+    <Compile Remove="Migrations\20201223154608_UpdatedKeypadButtonProdCat.cs" />
+    <Compile Remove="Migrations\20201223154608_UpdatedKeypadButtonProdCat.Designer.cs" />
+    <Compile Remove="Migrations\20201223155245_UpdatedKeypadButtonProdCat.cs" />
+    <Compile Remove="Migrations\20201223155245_UpdatedKeypadButtonProdCat.Designer.cs" />
+    <Compile Remove="Migrations\20201228141621_UpdatedTransaction.cs" />
+    <Compile Remove="Migrations\20201228141621_UpdatedTransaction.Designer.cs" />
+    <Compile Remove="Migrations\20201228143201_UpdatedTransaction.cs" />
+    <Compile Remove="Migrations\20201228143201_UpdatedTransaction.Designer.cs" />
+    <Compile Remove="Migrations\20201228144308_UpdatedTransaction.cs" />
+    <Compile Remove="Migrations\20201228144308_UpdatedTransaction.Designer.cs" />
+    <Compile Remove="Migrations\20210115192247_PrintLabelChanged.cs" />
+    <Compile Remove="Migrations\20210115192247_PrintLabelChanged.Designer.cs" />
+    <Compile Remove="Migrations\20210119114818_KeypadDescUpdate.cs" />
+    <Compile Remove="Migrations\20210119114818_KeypadDescUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20210119115543_KeypadDescUpdate.cs" />
+    <Compile Remove="Migrations\20210119115543_KeypadDescUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20210121125200_StoreToStoreMap.cs" />
+    <Compile Remove="Migrations\20210121125200_StoreToStoreMap.Designer.cs" />
+    <Compile Remove="Migrations\20210125071458_CompetitionDetailCodeUpdate.cs" />
+    <Compile Remove="Migrations\20210125071458_CompetitionDetailCodeUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20210330123444_UpdatedTransactionDisc.cs" />
+    <Compile Remove="Migrations\20210330123444_UpdatedTransactionDisc.Designer.cs" />
+    <Compile Remove="Migrations\20210330123938_UpdatedTransactionDisc1.cs" />
+    <Compile Remove="Migrations\20210330123938_UpdatedTransactionDisc1.Designer.cs" />
+    <Compile Remove="Migrations\20210527063720_AddStoreAssupplierColumnInOrderHeaderTable.cs" />
+    <Compile Remove="Migrations\20210527063720_AddStoreAssupplierColumnInOrderHeaderTable.Designer.cs" />
+    <Compile Remove="Migrations\20210527064358_AddStoreAssupplierColumnInOrderHeaderTable.cs" />
+    <Compile Remove="Migrations\20210527064358_AddStoreAssupplierColumnInOrderHeaderTable.Designer.cs" />
+    <Compile Remove="Migrations\20220127075846_AccessDepartment.cs" />
+    <Compile Remove="Migrations\20220127075846_AccessDepartment.Designer.cs" />
+    <Compile Remove="Migrations\20220127082040_AccessDepartment.cs" />
+    <Compile Remove="Migrations\20220127082040_AccessDepartment.Designer.cs" />
+    <Compile Remove="Migrations\20220624062428_testtest.cs" />
+    <Compile Remove="Migrations\20220624062428_testtest.Designer.cs" />
+    <Compile Remove="Migrations\20220624111905_ConvertFloatToDecimalCommodity.cs" />
+    <Compile Remove="Migrations\20220624111905_ConvertFloatToDecimalCommodity.Designer.cs" />
+    <Compile Remove="Migrations\20220624113525_ConvertFloatToDecimalCommodity.cs" />
+    <Compile Remove="Migrations\20220624113525_ConvertFloatToDecimalCommodity.Designer.cs" />
+    <Compile Remove="Migrations\20220624113805_ConvertFloatToDecimalCommodity.cs" />
+    <Compile Remove="Migrations\20220624113805_ConvertFloatToDecimalCommodity.Designer.cs" />
+    <Compile Remove="Migrations\20220624120000_ConvertFloatToDecimal.cs" />
+    <Compile Remove="Migrations\20220624120000_ConvertFloatToDecimal.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Coyote.Console.App.Models\Coyote.Console.App.Models.csproj" />
+  </ItemGroup>
+
+</Project>

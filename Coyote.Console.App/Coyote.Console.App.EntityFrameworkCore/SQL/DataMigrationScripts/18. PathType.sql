@@ -1,0 +1,44 @@
+BEGIN TRANSACTION
+BEGIN TRY
+INSERt INTO MasterListItems(ListId
+,code
+,Name
+,Status
+,CreatedById
+,CreatedAt
+,UpdatedById
+,UpdatedAt
+,IsDeleted
+,AccessId)
+
+SELECT 
+  44
+, CODE_KEY_ALP
+, CODE_KEY_ALP
+, 1
+, 1
+, GETUTCDATE()
+, 1
+, GETUTCDATE()
+, 0
+, 1
+FROM (
+SELECT 
+DISTINCT CODE_KEY_ALP
+FROM
+[DBS99.COYOTEPOS.COM.AU].[AASandBox].[dbo].CODETBL 
+WHERE CODE_Key_Type='PATH'
+)X
+COMMIT TRANSACTION
+END TRY
+
+BEGIN CATCH
+	SELECT ERROR_NUMBER() AS ErrorNumber
+		,ERROR_SEVERITY() AS ErrorSeverity
+		,ERROR_STATE() AS ErrorState
+		,ERROR_PROCEDURE() AS ErrorProcedure
+		,ERROR_LINE() AS ErrorLine
+		,ERROR_MESSAGE() AS ErrorMessage;
+		
+	ROLLBACK TRANSACTION
+END CATCH

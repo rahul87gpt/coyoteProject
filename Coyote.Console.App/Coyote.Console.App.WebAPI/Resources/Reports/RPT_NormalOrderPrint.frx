@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" TextQuality="Regular" ReportInfo.Name="Simple List" ReportInfo.Author="Fast Reports Inc" ReportInfo.Description="Demonstrates a simple list report. To create it:&#13;&#10;- go to &quot;Data&quot; menu and select &quot;Choose Report Data...&quot; item to select a datasource;&#13;&#10;- go to &quot;Report|Configure Bands...&quot; menu to create the band structure;&#13;&#10;- return to the report page, doubleclick the data band to show its editor;&#13;&#10;- choose the datasource;&#13;&#10;- drag data from the Data Dictionary window to the band." ReportInfo.Created="01/17/2008 03:05:57" ReportInfo.Modified="06/17/2022 16:55:31" ReportInfo.CreatorVersion="2022.1.2.0">
+  <Dictionary>
+    <TableDataSource Name="DataSet" ReferenceName="Data.DataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="number" DataType="System.Double"/>
+      <Column Name="SupplierItem" DataType="System.String"/>
+      <Column Name="desc" DataType="System.String"/>
+      <Column Name="InvestBuy" DataType="System.String"/>
+      <Column Name="CartonQty" DataType="System.String"/>
+      <Column Name="MinOnHand" DataType="System.String"/>
+      <Column Name="ORDL_Promo_Units" DataType="System.String"/>
+      <Column Name="ORDL_SUGG_UNITS_ONHAND" DataType="System.String"/>
+      <Column Name="OnOrder" DataType="System.String"/>
+      <Column Name="SalePromoEndDate" DataType="System.String"/>
+      <Column Name="NonPromoAvgDaily" DataType="System.String"/>
+      <Column Name="TradingCoverDays" DataType="System.String"/>
+      <Column Name="Cartons" DataType="System.String"/>
+      <Column Name="Units" DataType="System.String"/>
+      <Column Name="LineTotal" DataType="System.Double"/>
+    </TableDataSource>
+    <TableDataSource Name="FilterDataSet" ReferenceName="Data.FilterDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Store" DataType="System.String"/>
+      <Column Name="Supplier" DataType="System.String"/>
+      <Column Name="OrderNo" DataType="System.String"/>
+      <Column Name="StoreAddress" DataType="System.String"/>
+      <Column Name="GstAmt" DataType="System.Double"/>
+      <Column Name="SubTotalFreight" DataType="System.Double"/>
+      <Column Name="SubTotalAdmin" DataType="System.Double"/>
+      <Column Name="SubTotalSubsidy" DataType="System.Double"/>
+      <Column Name="SubTotalDisc" DataType="System.Double"/>
+      <Column Name="Total" DataType="System.Double"/>
+      <Column Name="InvoiceDate" DataType="System.String"/>
+      <Column Name="InvoiceNo" DataType="System.String"/>
+      <Column Name="OrderDate" DataType="System.String"/>
+      <Column Name="orderDocType" DataType="System.String"/>
+    </TableDataSource>
+    <Total Name="SubTotal" Expression="[DataSet.LineTotal]" Evaluator="Data2"/>
+  </Dictionary>
+  <ReportPage Name="Page2" RawPaperSize="9" Watermark.Font="Arial, 60pt">
+    <PageHeaderBand Name="PageHeader1" Width="718.2" Height="75.6">
+      <TextObject Name="Text19" Left="9.45" Width="425.25" Height="18.9" Text="Printed: [Date]" Format="Date" Format.Format="d" Font="Arial, 9pt"/>
+      <TextObject Name="Text20" Left="614.25" Width="94.5" Height="18.9" Text="Page: [PAGE#] of [TOTALPAGES#]" Font="Arial, 9pt"/>
+      <TextObject Name="Text21" Left="9.45" Top="18.9" Width="699.3" Height="18.9" Text="[FilterDataSet.Store]" HorzAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text22" Left="9.45" Top="37.8" Width="699.3" Height="18.9" Text="[FilterDataSet.StoreAddress]" HorzAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text23" Left="9.45" Top="56.7" Width="699.3" Height="18.9" Text="Supplier: [FilterDataSet.Supplier]" HorzAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text24" Left="9.45" Top="56.7" Width="255.15" Height="18.9" Text="Order No: [FilterDataSet.OrderNo]" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text34" Left="614.25" Top="56.7" Width="94.5" Height="18.9" Text="[FilterDataSet.orderDocType]" HorzAlign="Right" Font="Arial, 9.75pt, style=Bold"/>
+      <ChildBand Name="Child3" Top="79.9" Width="718.2" Height="18.9" Border.Lines="Top, Bottom" Fill.Color="LightCyan">
+        <TextObject Name="Text25" Left="9.45" Width="66.15" Height="18.9" Text="Product" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text26" Left="75.6" Width="94.5" Height="18.9" Text="Supplier Item" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text27" Left="170.1" Width="264.6" Height="18.9" Text="Description" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text35" Left="434.7" Width="56.7" Height="18.9" Text="Ctn Qty" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text36" Left="491.4" Width="56.7" Height="18.9" Text="Cartons" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text37" Left="595.35" Width="113.4" Height="18.9" Text="Line Total" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text38" Left="548.1" Width="47.25" Height="18.9" Text="Units" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      </ChildBand>
+    </PageHeaderBand>
+    <DataBand Name="Data2" Top="103.1" Width="718.2" Height="18.9" DataSource="DataSet">
+      <TextObject Name="Product" Left="9.45" Width="66.15" Height="18.9" Text="[DataSet.number]" Font="Arial, 9pt"/>
+      <TextObject Name="SupplierItem" Left="75.6" Width="94.5" Height="18.9" Text="[DataSet.SupplierItem]" Font="Arial, 9pt"/>
+      <TextObject Name="description" Left="170.1" Width="264.6" Height="18.9" CanBreak="false" Text="[DataSet.desc]" WordWrap="false" Font="Arial, 9pt"/>
+      <TextObject Name="Text39" Left="434.7" Width="56.7" Height="18.9" Text="[DataSet.CartonQty]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" Font="Arial, 9pt"/>
+      <TextObject Name="Text40" Left="491.4" Width="56.7" Height="18.9" Text="[DataSet.Cartons]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" Font="Arial, 9pt"/>
+      <TextObject Name="Text41" Left="548.1" Width="47.25" Height="18.9" Text="[DataSet.Units]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" Font="Arial, 9pt"/>
+      <TextObject Name="Text42" Left="595.35" Width="113.4" Height="18.9" Text="[DataSet.LineTotal]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" Font="Arial, 9pt"/>
+      <DataFooterBand Name="DataFooter1" Top="126.3" Width="718.2" Height="151.2" Border.Lines="Top">
+        <TextObject Name="Text43" Left="9.45" Top="9.45" Width="94.5" Height="18.9" Text="Supplier:" Font="Arial, 10pt"/>
+        <TextObject Name="Text44" Left="9.45" Top="28.35" Width="94.5" Height="18.9" Text="Order No:" Font="Arial, 10pt"/>
+        <TextObject Name="Text45" Left="9.45" Top="47.25" Width="94.5" Height="18.9" Text="Order Date:" Font="Arial, 10pt"/>
+        <TextObject Name="Text46" Left="9.45" Top="103.95" Width="94.5" Height="18.9" Text="Invoice No:" Font="Arial, 10pt"/>
+        <TextObject Name="Text47" Left="9.45" Top="122.85" Width="94.5" Height="18.9" Text="Invoice Date:" Font="Arial, 10pt"/>
+        <TextObject Name="Text48" Left="113.4" Top="9.45" Width="302.4" Height="18.9" Text="[FilterDataSet.Supplier]" WordWrap="false" Font="Arial, 10pt"/>
+        <TextObject Name="Text49" Left="113.4" Top="28.35" Width="302.4" Height="18.9" Text="[FilterDataSet.OrderNo]" Font="Arial, 9.75pt"/>
+        <TextObject Name="Text50" Left="113.4" Top="47.25" Width="302.4" Height="18.9" Text="[FilterDataSet.OrderDate]" Font="Arial, 10pt"/>
+        <TextObject Name="Text51" Left="113.4" Top="103.95" Width="302.4" Height="18.9" Text="[FilterDataSet.InvoiceNo]" Font="Arial, 10pt"/>
+        <TextObject Name="Text52" Left="113.4" Top="122.85" Width="302.4" Height="18.9" Text="[FilterDataSet.InvoiceDate]" Font="Arial, 10pt"/>
+        <TextObject Name="Text53" Left="500.85" Top="9.45" Width="94.5" Height="18.9" Text="SubTotal:" HorzAlign="Right" Font="Arial, 10pt"/>
+        <TextObject Name="Text54" Left="500.85" Top="28.35" Width="94.5" Height="18.9" Text="Discount:" HorzAlign="Right" Font="Arial, 10pt"/>
+        <TextObject Name="Text55" Left="500.85" Top="47.25" Width="94.5" Height="18.9" Text="Subsidy:" HorzAlign="Right" Font="Arial, 10pt"/>
+        <TextObject Name="Text56" Left="500.85" Top="66.15" Width="94.5" Height="18.9" Text="Admin:" HorzAlign="Right" Font="Arial, 10pt"/>
+        <TextObject Name="Text57" Left="500.85" Top="85.05" Width="94.5" Height="18.9" Text="Freight:" HorzAlign="Right" Font="Arial, 10pt"/>
+        <TextObject Name="Text58" Left="500.85" Top="103.95" Width="94.5" Height="18.9" Text="Gst:" HorzAlign="Right" Font="Arial, 10pt"/>
+        <TextObject Name="Text59" Left="500.85" Top="122.85" Width="94.5" Height="18.9" Text="Total:" HorzAlign="Right" Font="Arial, 9.75pt, style=Bold"/>
+        <TextObject Name="Text60" Left="595.35" Top="9.45" Width="113.4" Height="18.9" Text="[SubTotal]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" Font="Arial, 10pt"/>
+        <TextObject Name="Text61" Left="595.35" Top="28.35" Width="113.4" Height="18.9" Text="[FilterDataSet.SubTotalDisc]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" Font="Arial, 10pt"/>
+        <TextObject Name="Text62" Left="595.35" Top="47.25" Width="113.4" Height="18.9" Text="[FilterDataSet.SubTotalSubsidy]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" Font="Arial, 10pt"/>
+        <TextObject Name="Text63" Left="595.35" Top="66.15" Width="113.4" Height="18.9" Text="[FilterDataSet.SubTotalAdmin]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" Font="Arial, 10pt"/>
+        <TextObject Name="Text64" Left="595.35" Top="85.05" Width="113.4" Height="18.9" Text="[FilterDataSet.SubTotalFreight]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" Font="Arial, 10pt"/>
+        <TextObject Name="Text65" Left="595.35" Top="103.95" Width="113.4" Height="18.9" Text="[FilterDataSet.GstAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" Font="Arial, 10pt"/>
+        <TextObject Name="Text66" Left="595.35" Top="122.85" Width="113.4" Height="18.9" Text="[FilterDataSet.Total]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" Font="Arial, 9.75pt, style=Bold"/>
+      </DataFooterBand>
+    </DataBand>
+  </ReportPage>
+</Report>

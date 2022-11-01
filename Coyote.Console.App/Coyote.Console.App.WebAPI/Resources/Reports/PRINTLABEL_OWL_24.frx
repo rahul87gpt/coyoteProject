@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/10/2020 18:10:00" ReportInfo.Modified="08/10/2021 14:36:03" ReportInfo.CreatorVersion="2020.3.0.0">
+	<Dictionary>
+		<TableDataSource Name="DataSet" ReferenceName="Data.DataSet" DataType="System.Int32" Enabled="true">
+			<Column Name="OUTP_PRODUCT" DataType="System.Int64"/>
+			<Column Name="OUTP_SHORT_LABEL_IND" DataType="System.Boolean" BindableControl="CheckBox"/>
+			<Column Name="OUTP_MIN_REORDER_QTY" DataType="System.Single"/>
+			<Column Name="SupplierId" DataType="System.Int32"/>
+			<Column Name="OUTP_SUPPLIER" DataType="System.String"/>
+			<Column Name="OUTP_LABEL_QTY" DataType="System.Single"/>
+			<Column Name="LBL_PRICE_1" DataType="System.Single"/>
+			<Column Name="LBL_PRICE_2" DataType="System.Single"/>
+			<Column Name="LBL_PRICE_3" DataType="System.Single"/>
+			<Column Name="LBL_PRICE_4" DataType="System.Single"/>
+			<Column Name="LBL_NORM_1" DataType="System.Single"/>
+			<Column Name="LBL_PROM_AMT_OFF" DataType="System.Int32"/>
+			<Column Name="Product_Number" DataType="System.Int64"/>
+			<Column Name="PROD_DESC" DataType="System.String"/>
+			<Column Name="PROD_CARTON_QTY" DataType="System.Int32"/>
+			<Column Name="PROD_DEPARTMENT" DataType="System.Int32"/>
+			<Column Name="CommodityId" DataType="System.Int32"/>
+			<Column Name="PROD_TYPE" DataType="System.Int32"/>
+			<Column Name="PROD_POS_DESC" DataType="System.String"/>
+			<Column Name="PROD_LAST_APN_SOLD" DataType="System.Int64"/>
+			<Column Name="APN_NUMBER" DataType="System.Int64"/>
+			<Column Name="PROD_SIZE" DataType="System.String"/>
+			<Column Name="PROD_UNIT_MEASURE" DataType="System.Int32"/>
+			<Column Name="SQL_DATE_END" DataType="System.DateTime"/>
+			<Column Name="PROD_HOST_NUMBER" DataType="System.String"/>
+			<Column Name="IsHostType" DataType="System.Int32"/>
+		</TableDataSource>
+	</Dictionary>
+	<ReportPage Name="Page1" Landscape="true" PaperWidth="240" PaperHeight="210" Watermark.Font="Arial, 60pt">
+		<DataBand Name="DataBand1" Width="302.4" Height="86.94" DataSource="DataSet" Columns.Count="3" Columns.Width="302.4" Columns.Layout="DownThenAcross" Columns.MinRowCount="10" ResetPageNumber="true">
+			<TextObject Name="Text1" Top="-3.78" Width="298.62" Height="26.46" VisibleExpression="[DataSet.OUTP_SHORT_LABEL_IND]==false" CanShrink="true" CanBreak="false" Text="[DataSet.PROD_DESC]" WordWrap="false" Font="Arial, 14pt, style=Bold">
+				<Highlight>
+					<Condition Expression="[DataSet.OUTP_SHORT_LABEL_IND]== false" Font="Arial, 9pt, style=Bold" ApplyTextFill="false" ApplyFont="true"/>
+				</Highlight>
+			</TextObject>
+			<TextObject Name="Text2" Left="3.78" Top="17.01" Width="94.5" Height="15.12" Text="[DataSet.Product_Number]" Font="Arial, 6pt"/>
+			<BarcodeObject Name="Barcode1" Top="39.69" Width="103.19" Height="45.36" VisibleExpression="[DataSet.PROD_HOST_NUMBER]!=&quot;0&quot;&amp;&amp;[DataSet.PROD_HOST_NUMBER]!=&quot;DELETE&quot;" AutoSize="false" DataColumn="DataSet.PROD_HOST_NUMBER" Text="[DataSet.PROD_HOST_NUMBER]" AllowExpressions="true"/>
+			<TextObject Name="Text5" Left="122.85" Top="17.01" Width="39.69" Height="15.12" CanShrink="true" CanBreak="false" Text="[DataSet.OUTP_SUPPLIER]" WordWrap="false" Font="Arial, 6pt"/>
+			<TextObject Name="Text6" Left="103.95" Top="39.69" Width="185.22" Height="47.25" Text="[DataSet.LBL_NORM_1]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="2" Font="Arial, 20pt, style=Bold"/>
+			<TextObject Name="Text7" Left="75.6" Top="17.01" Width="47.25" Height="15.12" Text="[DataSet.PROD_CARTON_QTY]/[DataSet.OUTP_MIN_REORDER_QTY]" Font="Arial, 6pt"/>
+			<TextObject Name="Text8" Left="170.1" Top="17.01" Width="58.59" Height="15.12" VisibleExpression="[DataSet.OUTP_SHORT_LABEL_IND]==false" Text="[DataSet.PROD_HOST_NUMBER]" Font="Arial, 6pt"/>
+			<TextObject Name="Text9" Top="-3.78" Width="298.62" Height="26.46" VisibleExpression="[DataSet.OUTP_SHORT_LABEL_IND]==true" CanShrink="true" CanBreak="false" Text="[DataSet.PROD_POS_DESC]" WordWrap="false" Font="Arial, 9pt, style=Bold">
+				<Highlight>
+					<Condition Expression="[DataSet.OUTP_SHORT_LABEL_IND]== false" Font="Arial, 9pt, style=Bold" ApplyTextFill="false" ApplyFont="true"/>
+				</Highlight>
+			</TextObject>
+		</DataBand>
+	</ReportPage>
+</Report>

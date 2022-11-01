@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/10/2020 18:10:00" ReportInfo.Modified="09/11/2020 20:33:01" ReportInfo.CreatorVersion="2020.3.0.0">
+  <Dictionary>
+   <TableDataSource Name="DataSet" ReferenceName="Data.DataSet" DataType="System.Int32" Enabled="true">
+        <Column Name="OUTP_PRODUCT" DataType="System.Int64"/>
+        <Column Name="OUTP_SHORT_LABEL_IND" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="OUTP_MIN_REORDER_QTY" DataType="System.Single"/>
+        <Column Name="SupplierId" DataType="System.Int32"/>
+        <Column Name="OUTP_SUPPLIER" DataType="System.String"/>
+        <Column Name="OUTP_LABEL_QTY" DataType="System.Single"/>
+        <Column Name="LBL_PRICE_1" DataType="System.Single"/>
+        <Column Name="LBL_PRICE_2" DataType="System.Single"/>
+        <Column Name="LBL_PRICE_3" DataType="System.Single"/>
+        <Column Name="LBL_PRICE_4" DataType="System.Single"/>
+        <Column Name="LBL_NORM_1" DataType="System.Single"/>
+        <Column Name="LBL_PROM_AMT_OFF" DataType="System.Int32"/>
+        <Column Name="Product_Number" DataType="System.Int64"/>
+        <Column Name="PROD_DESC" DataType="System.String"/>
+        <Column Name="PROD_CARTON_QTY" DataType="System.Int32"/>
+        <Column Name="PROD_DEPARTMENT" DataType="System.Int32"/>
+        <Column Name="CommodityId" DataType="System.Int32"/>
+        <Column Name="PROD_TYPE" DataType="System.Int32"/>
+        <Column Name="PROD_POS_DESC" DataType="System.String"/>
+        <Column Name="PROD_LAST_APN_SOLD" DataType="System.Int64"/>
+        <Column Name="APN_NUMBER" DataType="System.Int64"/>
+        <Column Name="PROD_SIZE" DataType="System.String"/>
+        <Column Name="PROD_UNIT_MEASURE" DataType="System.Int32"/>
+        <Column Name="SQL_DATE_END" DataType="System.DateTime"/>
+        <Column Name="PROD_HOST_NUMBER" DataType="System.String"/>
+        <Column Name="IsHostType" DataType="System.Int32"/>
+      </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Guides="302.4" Watermark.Font="Arial, 60pt">
+    <DataBand Name="DataBand1" Width="302.4" Height="120.96" DataSource="DataSet" Columns.Count="2" Columns.Width="302.4" ResetPageNumber="true">
+      <TextObject Name="Text1" Top="5.67" Width="298.62" Height="26.46" Text="[DataSet.PROD_DESC]" Font="Arial, 10pt, style=Bold">
+        <Highlight>
+          <Condition Expression="[DataSet.OUTP_SHORT_LABEL_IND]== true" Font="Arial, 12pt, style=Bold" ApplyTextFill="false" ApplyFont="true"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="Text2" Left="9.45" Top="29.11" Width="94.5" Height="15.12" Text="[DataSet.PROD_HOST_NUMBER]" Font="Arial, 10pt"/>
+      <TextObject Name="Text6" Left="122.85" Top="45.36" Width="170.1" Height="56.7" Text="[DataSet.LBL_NORM_1]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" Font="Arial, 36pt, style=Bold"/>
+      <TextObject Name="Text7" Left="179.55" Top="28.35" Width="18.9" Height="15.12" Text="[DataSet.PROD_CARTON_QTY]/[DataSet.OUTP_MIN_REORDER_QTY]" Font="Arial, 10pt"/>
+      <TextObject Name="Text8" Left="255.15" Top="28.35" Width="39.69" Height="15.12" VisibleExpression="[DataSet.OUTP_SHORT_LABEL_IND]==false" Text="[DataSet.PROD_HOST_NUMBER]" Font="Arial, 10pt"/>
+      <BarcodeObject Name="Barcode1" Left="9.45" Top="47.25" Width="113.4" Height="45.36" VisibleExpression="[DataSet.IsHostType]==1" CanGrow="true" AutoSize="false" DataColumn="DataSet.APN_NUMBER" Text="[DataSet.APN_NUMBER]" AllowExpressions="true" Barcode="EAN13"/>
+      <TextObject Name="Text9" Left="122.85" Top="28.35" Width="56.7" Height="15.12" VisibleExpression="[DataSet.OUTP_SHORT_LABEL_IND]==false" Text="[DataSet.SQL_DATE_END]" Font="Arial, 10pt"/>
+      <TextObject Name="Text10" Left="198.45" Top="28.35" Width="47.25" Height="15.12" VisibleExpression="[DataSet.OUTP_SHORT_LABEL_IND]==false" Text="[DataSet.OUTP_SUPPLIER]" Font="Arial, 10pt"/>
+    </DataBand>
+  </ReportPage>
+</Report>

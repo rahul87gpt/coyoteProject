@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/08/2020 01:40:44" ReportInfo.Modified="06/17/2022 17:04:11" ReportInfo.CreatorVersion="2022.1.2.0">
+  <Dictionary>
+    <TableDataSource Name="FilterDataSet" ReferenceName="Data.FilterDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="startDate" DataType="System.String"/>
+      <Column Name="endDate" DataType="System.String"/>
+      <Column Name="reportName" DataType="System.String"/>
+      <Column Name="type" DataType="System.Int32"/>
+    </TableDataSource>
+    <TableDataSource Name="DataSet" ReferenceName="Data.DataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Number" DataType="System.String"/>
+      <Column Name="Description" DataType="System.String"/>
+      <Column Name="SalesTY" DataType="System.Double"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" RawPaperSize="9" FirstPageSource="15" OtherPagesSource="15" LastPageSource="15" Watermark.Font="Arial, 60pt">
+    <PageHeaderBand Name="PageHeader1" Width="718.2" Height="76.7">
+      <TextObject Name="Text3" Width="718.2" Height="18.9" Text="NIGHTOWL COYOTE GROCERY SYSTEM" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text1" Width="200" Height="18.9" Text="Printed on [Date]" Format="Date" Format.Format="d" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text2" Left="524.75" Width="193.45" Height="18.9" Text="Page: [PAGE#] of [TOTALPAGES#]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text5" Top="28.35" Width="718.2" Height="18.9" Text="[FilterDataSet.reportName]" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+      <TextObject Name="Text6" Top="47.25" Width="718.2" Height="18.9" Text="[FilterDataSet.startDate] to [FilterDataSet.endDate]" HorzAlign="Center" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <ChildBand Name="Child1" Top="81" Width="718.2" Height="20" Fill.Color="Plum">
+        <TextObject Name="Text7" Width="75" Height="20" Text="Number" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        <TextObject Name="Text8" Left="77.5" Top="-1.1" Width="311.85" Height="20" VisibleExpression="[FilterDataSet.type]==1" Text="Outlet" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        <TextObject Name="Text8" Left="77.5" Width="311.85" Height="20" VisibleExpression="[FilterDataSet.type]==0" Text="Description" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        <TextObject Name="Text17" Left="623.7" Width="94.5" Height="18.9" Text="Sales TY" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      </ChildBand>
+    </PageHeaderBand>
+    <GroupHeaderBand Name="GroupHeader1" Top="105.3" Width="718.2" KeepWithData="true" Condition="[DataSet.Description]!=&quot;&quot;" SortOrder="None">
+      <DataBand Name="Data1" Top="109.6" Width="718.2" Height="20" Guides="0" DataSource="DataSet">
+        <TextObject Name="Text14" Width="75" Height="18.9" Text="[DataSet.Number]" VertAlign="Center" Font="Arial, 9pt"/>
+        <TextObject Name="Text15" Left="77.5" Width="311.85" Height="18.9" Text="[DataSet.Description]" VertAlign="Center" Font="Arial, 9pt"/>
+        <TextObject Name="Text18" Left="623.7" Width="94.5" Height="18.9" Text="[DataSet.SalesTY]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="2" Format.NegativePattern="12" HorzAlign="Right" VertAlign="Center" WordWrap="false" Font="Arial, 9pt"/>
+      </DataBand>
+      <GroupFooterBand Name="GroupFooter1" Top="133.9" Width="718.2" Height="19.35" KeepWithData="true">
+        <TextObject Name="Text16" Width="122.85" Height="18.9" Text="End Report&#13;&#10;" Font="Arial, 8pt, style=Bold"/>
+      </GroupFooterBand>
+    </GroupHeaderBand>
+    <PageFooterBand Name="PageFooter1" Top="157.56" Width="718.2" Height="18.9" Fill.Color="WhiteSmoke" CanGrow="true"/>
+  </ReportPage>
+</Report>

@@ -1,0 +1,13 @@
+30/04/2020
+1. Done changes in CDN_SP__DoOptimalOrder, CDN_SP_GetNonPromoSalesCalculation, CDN_SP__CreateOptimalOrder,CDN_SP__AddToOrder.
+2. Added 4 colums in DB in table ORDLTBL_Temp MinReorderQty,Perishable,NonPromoSales56Days,PromoSales56Days amd updated data in these fields.
+3. Now onwards , not using Normal daily 28 days sales rate.
+4. Change New Product Sales rate Calulation. 
+5. Change Non Promo Sales rate Calulation.
+
+08/04/2020
+1. Clone DB01 LIVE SP to test DB DBS99.
+2. Done Changes in SP as per real configuration by using original tables instead of Order TEMP tables.
+3. Now 12 new climns added in ORDLTBL  so change as per these coumns names.
+4. Change USE AASystem to USE AASandbox in SPin first line as running on DBS99 on AASandbox DB.
+5. Now using OSS_LastRun as per real configuration and update it after processing record so that it can not process on the same day again. 

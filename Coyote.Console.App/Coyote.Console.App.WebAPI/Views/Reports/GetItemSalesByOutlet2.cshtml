@@ -1,0 +1,21 @@
+﻿@using Coyote.Console.App.WebAPI.PredefinedReports
+@using DevExpress.AspNetCore;
+
+@{
+	var viewerRender = Html.DevExpress().WebDocumentViewer("DocumentViewer")
+		.Height("1000px")
+	  .Bind("Report1");
+  @viewerRender.RenderHtml()
+
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+  <link href="~/css/dx-reporting-skeleton-screen.css" rel="stylesheet" />
+  <link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+  <script src="~/js/reporting.thirdparty.bundle.js"></script>
+  <script src="~/js/viewer.part.bundle.js"></script>
+ 
+
+  @viewerRender.RenderScripts()
+}

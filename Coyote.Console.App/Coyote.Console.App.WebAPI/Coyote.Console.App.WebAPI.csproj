@@ -1,0 +1,263 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>7a535c22-9171-48d4-9a0d-59110cc620f8</UserSecretsId>
+    <AssemblyName>Coyote.Console.App.WebAPI</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>bin\swaggerdescription\Coyote.Console.App.WebAPI.xml</DocumentationFile>
+    <WarningsAsErrors>;NU1605</WarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="PredefinedReports\Report1.vsrepx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PredefinedReports\Report1.vsrepx" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="3.0.415" />
+    <PackageReference Include="DevExpress.AspNetCore.Core" Version="22.1.5" />
+    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="22.1.5" />
+    <PackageReference Include="DevExtreme.AspNet.Core" Version="22.1.5" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.4" />
+    <PackageReference Include="DotNetZip" Version="1.15.0" />
+    <PackageReference Include="FastReport.Core" Version="2022.2.8" />
+    <PackageReference Include="FastReport.Web" Version="2022.2.8" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.19" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.19" />
+    <PackageReference Include="Hangfire.MemoryStorage" Version="1.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.2.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.4.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Coyote.Console.App.Models\Coyote.Console.App.Models.csproj" />
+    <ProjectReference Include="..\Coyote.Console.App.Repository\Coyote.Console.App.Repository.csproj" />
+    <ProjectReference Include="..\Coyote.Console.App.Services\Coyote.Console.App.Services.csproj" />
+    <ProjectReference Include="..\Coyote.Console.Common\Coyote.Console.Common.csproj" />
+    <ProjectReference Include="..\Coyote.Console.ViewModels\Coyote.Console.ViewModels.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Orders\LION\" />
+    <Folder Include="Orders\CocaCola\" />
+    <Folder Include="Orders\Distributor\" />
+    <Folder Include="Resources\ExternalStockTake\132489820884301842\" />
+    <Folder Include="Resources\Images\" />
+    <Folder Include="Resources\Exports\" />
+    <Folder Include="Resources\Import\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Data.SqlClient">
+      <HintPath>bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="PredefinedReports\Report1.cs">
+      <DependentUpon>Report1.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="PredefinedReports\Report1.Designer.cs">
+      <DependentUpon>Report1.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Startup.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.Production.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Coyote.Console.App.WebAPI.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\ExternalStockTake\132494107487884299">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_21.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_24.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_BURLEIGH_APN.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_FRESH_9UP.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_HELENSVALE_24.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_OFFER_9UP.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_OFFER_A4_OWL.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_OWL_24.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_OWL_APN.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_OWL_MSI.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_PROMO_4UP.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_PROMO_9OWL.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_PROMO_9UP.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_PROMO_A4OWL.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_SHELF_1UP.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_SHORT.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_SLADEPOINT33.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_STARLINE.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_STARLINE_APN.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_STD_4OWL.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_STD_9BGOLD.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_STD_9FBLS.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_STD_9OWL.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_STD_A4OWL.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\PRINTLABEL_STD_APN.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_COST_VARIENCE.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_HOURLY_SALES.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_ITEMPURCHASE_SUMMARY.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_ITEMSALES.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_ITEMSALES_Outlet.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_ITEMSALES_SUMMARY.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_ITEMSALES_WITH_SLOW_MOVING_SUMMARY.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_ITEMSALE_FINANCIAL_SUMMARY.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_ITEMWITHNOSALES_SUMMARY_NO_STOCKOPTIONS.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_ITEMWITHNOSALES_SUMMARY.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_ITEM_WITH_NOSALES.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_JOURNALSALES_FINANCIAL_SUMMARY.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_JOURNALSALES_ROYALTY&amp;ADVERTISING_SUMMARY.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_NATIONAL_LEVEL_SALES_SUMMARY.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_NATIONAL_RANGING_PRODUCT.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_NIL_TRANS.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_NOSALES_DEP.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_PRODUCT_PRICE_DEVIATION.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_RANGING_PRODUCT.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_RANKING_BY_OUTLET.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_SalesHistortChartReport.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_SalesHistortChartReport_Chart.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_SALES_FINANCIAL_SUMMARY.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_STOCK_ADJUST.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_STOCK_OnHand.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_STOCK_PURCHASE.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_STOCK_VARIANCE.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Reports\RPT_WASTAGE_DEP_PRODUCT_WISE.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Update="C:\Users\majidqureshi\.nuget\packages\fastreport.compat\2020.3.2\build\lib\netcoreapp3.0\FastReport.Compat.dll">
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

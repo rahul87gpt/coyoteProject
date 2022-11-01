@@ -1,0 +1,6921 @@
+{
+"Level 1":{"1":{"id":1,"buttonIndex":1
+		,"color":"#008000FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":117131
+		,"product_number":2104
+		,"prod_desc":"FROSTBITE REGULAR 490ML"
+		,"text":"FROZEN COKE REGULAR 490ML"
+		,"product_value":0.72
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"2":{"id":2,"buttonIndex":2
+		,"color":"#008000FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":117130
+		,"product_number":2103
+		,"prod_desc":"FROSTBITE MAXI 650ML"
+		,"text":"FROZEN COKE 680ML"
+		,"product_value":0.91
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"3":{"id":3,"buttonIndex":3
+		,"color":"#008000FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":117129
+		,"product_number":2102
+		,"prod_desc":"FROSTBITE MEGA 1LT"
+		,"text":"FROZEN COKE MEGA 1LT"
+		,"product_value":1.41
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"4":{"id":4,"buttonIndex":4
+		,"color":"#0000FFFF","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 5"
+		,"buttonLevelIndex": 5
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"MANAGER MENU"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"5":{"id":5,"buttonIndex":5
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":182448
+		,"product_number":1047353
+		,"prod_desc":"CHUPA CHUPS ORIG 21752    12GM"
+		,"text":"CHUPA CHUP TIN 21758      12GM"
+		,"product_value":24.62
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"6":{"id":6,"buttonIndex":6
+		,"color":"#008000FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":164354
+		,"product_number":96261
+		,"prod_desc":"FCB CUPS 750ML"
+		,"text":"FCB CUPS 750ML"
+		,"product_value":127.25
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"7":{"id":7,"buttonIndex":7
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"8":{"id":8,"buttonIndex":8
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"9":{"id":9,"buttonIndex":9
+		,"color":"#00EBFD82","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"10":{"id":10,"buttonIndex":10
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "PRICE LEVEL NEXT ITEM"
+		,"price_level":"Price Level 3"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"OWL SHOUT"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"11":{"id":11,"buttonIndex":11
+		,"color":"#00800080","isChanged": true
+		,"selected_button_type": "SALE DISCOUNT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"STAFF DISCOUNT"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"12":{"id":12,"buttonIndex":12
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"13":{"id":13,"buttonIndex":13
+		,"color":"#00FF80FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":124666
+		,"product_number":9798
+		,"prod_desc":"GOLD/COCKERAL BBQ CHICKEN MARI"
+		,"text":"CHICKEN BBQ MARINATED SZ14"
+		,"product_value":67.75
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"14":{"id":14,"buttonIndex":14
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"15":{"id":15,"buttonIndex":15
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 17"
+		,"buttonLevelIndex": 17
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"EPAY - MOBILE PHONE CREDIT"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"16":{"id":16,"buttonIndex":16
+		,"color":"#0040FF00","isChanged": true
+		,"selected_button_type": "PRICE LEVEL NEXT ITEM"
+		,"price_level":"Price Level 3"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"UBER EATS"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"17":{"id":17,"buttonIndex":17
+		,"color":"#00AEAEFF","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 2"
+		,"buttonLevelIndex": 2
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"EAGLE BOYS"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"18":{"id":18,"buttonIndex":18
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":175239
+		,"product_number":1000911
+		,"prod_desc":"GILL FUSION GAMER MANUAL   1PK"
+		,"text":"FUSION   1PK"
+		,"product_value":44.1
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"19":{"id":19,"buttonIndex":19
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 3"
+		,"buttonLevelIndex": 3
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"Muffin  Cake  Filo  Donuts"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"20":{"id":20,"buttonIndex":20
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":175239
+		,"product_number":1000911
+		,"prod_desc":"GILL FUSION GAMER MANUAL   1PK"
+		,"text":"FUSION   1PK"
+		,"product_value":44.1
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"21":{"id":21,"buttonIndex":21
+		,"color":"#000000FF","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 4"
+		,"buttonLevelIndex": 4
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"NEWSPAPERS/MAGAZINES"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"22":{"id":22,"buttonIndex":22
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":175239
+		,"product_number":1000911
+		,"prod_desc":"GILL FUSION GAMER MANUAL   1PK"
+		,"text":"FUSION   1PK"
+		,"product_value":44.1
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"23":{"id":23,"buttonIndex":23
+		,"color":"#00808040","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":167980
+		,"product_number":100010
+		,"prod_desc":"CONFECTION KEYED SALES"
+		,"text":"CONFECTION KEYED SALES"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"24":{"id":24,"buttonIndex":24
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":175239
+		,"product_number":1000911
+		,"prod_desc":"GILL FUSION GAMER MANUAL   1PK"
+		,"text":"FUSION   1PK"
+		,"product_value":44.1
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"25":{"id":25,"buttonIndex":25
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 7"
+		,"buttonLevelIndex": 7
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"FRUIT AND VEG"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"26":{"id":26,"buttonIndex":26
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":175239
+		,"product_number":1000911
+		,"prod_desc":"GILL FUSION GAMER MANUAL   1PK"
+		,"text":"FUSION   1PK"
+		,"product_value":44.1
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"27":{"id":27,"buttonIndex":27
+		,"color":"#00000000","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 9"
+		,"buttonLevelIndex": 9
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"TOBACCO/MISC"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"28":{"id":28,"buttonIndex":28
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":175239
+		,"product_number":1000911
+		,"prod_desc":"GILL FUSION GAMER MANUAL   1PK"
+		,"text":"FUSION   1PK"
+		,"product_value":44.1
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"29":{"id":29,"buttonIndex":29
+		,"color":"#0000FFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":198692
+		,"product_number":1171335
+		,"prod_desc":"BAG OF ICE     5KG"
+		,"text":"PARTY ICE BALE BAG         5KG"
+		,"product_value":1.82
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"30":{"id":30,"buttonIndex":30
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":175239
+		,"product_number":1000911
+		,"prod_desc":"GILL FUSION GAMER MANUAL   1PK"
+		,"text":"FUSION   1PK"
+		,"product_value":44.1
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"31":{"id":31,"buttonIndex":31
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":155910
+		,"product_number":72863
+		,"prod_desc":"HOSTESS TWINKIES 38.5GM"
+		,"text":"HOSTESS TWINKIES 38G"
+		,"product_value":12.53
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"32":{"id":32,"buttonIndex":32
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":175239
+		,"product_number":1000911
+		,"prod_desc":"GILL FUSION GAMER MANUAL   1PK"
+		,"text":"FUSION   1PK"
+		,"product_value":44.1
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"33":{"id":33,"buttonIndex":33
+		,"color":"#00FF00FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":167971
+		,"product_number":100001
+		,"prod_desc":"GROCERY KEYED SALES"
+		,"text":"GROCERY KEYED SALE"
+		,"product_value":1.7
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"34":{"id":34,"buttonIndex":34
+		,"color":"#00FF00FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":167979
+		,"product_number":100009
+		,"prod_desc":"FOOD SERVICE KEYED SALES"
+		,"text":"FOOD SERVICE KEYED SALES"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"35":{"id":35,"buttonIndex":35
+		,"color":"#00FF80FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":199047
+		,"product_number":1174197
+		,"prod_desc":"B/GOLD EGGS XLGE CAGE 12PK 700"
+		,"text":"FRESH AS X  LARGE  EGGS 600GM"
+		,"product_value":46.8
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"36":{"id":36,"buttonIndex":36
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 10"
+		,"product_id":132161
+		,"product_number":19527
+		,"prod_desc":"DRY CLEAN 3 ITEMS"
+		,"text":"DRY CLEAN 3 ITEMS"
+		,"product_value":17.06
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		}}
+,"Level 2":{"1":{"id":1,"buttonIndex":1
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 1"
+		,"buttonLevelIndex": 1
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"MAIN MENU START"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"2":{"id":2,"buttonIndex":2
+		,"color":"#00AEAEFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"3":{"id":3,"buttonIndex":3
+		,"color":"#00AEAEFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"4":{"id":4,"buttonIndex":4
+		,"color":"#00AEAEFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"5":{"id":5,"buttonIndex":5
+		,"color":"#00FFFF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":159906
+		,"product_number":79596
+		,"prod_desc":"CURLY FRIES"
+		,"text":" CURLY FRIES"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"6":{"id":6,"buttonIndex":6
+		,"color":"#00FFFF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":117675
+		,"product_number":2650
+		,"prod_desc":"GARLIC BREAD 9"
+		,"text":"GARLIC BREAD 9""
+		,"product_value":37.77
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"7":{"id":7,"buttonIndex":7
+		,"color":"#0000FFFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"8":{"id":8,"buttonIndex":8
+		,"color":"#00AEAEFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"9":{"id":9,"buttonIndex":9
+		,"color":"#00AEAEFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":165970
+		,"product_number":97924
+		,"prod_desc":"BUTCHERS BLOCK SLAB PIZZA"
+		,"text":"BUTCHERS BLOCK SLAB PIZZA E/BO"
+		,"product_value":1.75
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"10":{"id":10,"buttonIndex":10
+		,"color":"#00AEAEFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":165967
+		,"product_number":97921
+		,"prod_desc":"TANDORI SLAB PIZZA"
+		,"text":"TANDORI SLAB PIZZA E/BOYS"
+		,"product_value":1.75
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"11":{"id":11,"buttonIndex":11
+		,"color":"#00AEAEFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":165969
+		,"product_number":97923
+		,"prod_desc":"THE ITALIAN  SLAB PIZZA"
+		,"text":"THE ITALIAN  SLAB PIZZA E/BOYS"
+		,"product_value":1.75
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"12":{"id":12,"buttonIndex":12
+		,"color":"#00AEAEFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":165970
+		,"product_number":97924
+		,"prod_desc":"BUTCHERS BLOCK SLAB PIZZA"
+		,"text":"BUTCHERS BLOCK SLAB PIZZA E/BO"
+		,"product_value":1.75
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"13":{"id":13,"buttonIndex":13
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":153633
+		,"product_number":60036
+		,"prod_desc":"ST & BAC & CH TSTIE"
+		,"text":"EAGLE BOYS TOASTIES ST/BAC/CH"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"14":{"id":14,"buttonIndex":14
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":153632
+		,"product_number":60035
+		,"prod_desc":"CHK & CHS TSTIE"
+		,"text":"EAGLE BOYS TOASTIES CHIC/CH"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"15":{"id":15,"buttonIndex":15
+		,"color":"#0000FFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":153425
+		,"product_number":59828
+		,"prod_desc":"CHICKEN & MUSHROOM PENNE"
+		,"text":"EAGLE BOYS CHICK & MUSHROOM PE"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"16":{"id":16,"buttonIndex":16
+		,"color":"#00AEAEFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"17":{"id":17,"buttonIndex":17
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":175057
+		,"product_number":1000032
+		,"prod_desc":"CHICKEN WINGS 5 PK"
+		,"text":"5PK CHICK WINGS"
+		,"product_value":3.36
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"18":{"id":18,"buttonIndex":18
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":141612
+		,"product_number":31927
+		,"prod_desc":"8PK CHICKEN DIPPERS"
+		,"text":" 8PK CHICKEN DIPPERS"
+		,"product_value":2.24
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"19":{"id":19,"buttonIndex":19
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":162733
+		,"product_number":87402
+		,"prod_desc":"CRSP SPCD TENDERLOINS 4PK"
+		,"text":"4PK TENDERLOI"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"20":{"id":20,"buttonIndex":20
+		,"color":"#00FFFF00","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"21":{"id":21,"buttonIndex":21
+		,"color":"#00FFFF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":159342
+		,"product_number":79010
+		,"prod_desc":"BEEF ROLL"
+		,"text":" BEEF ROLL"
+		,"product_value":4.37
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"22":{"id":22,"buttonIndex":22
+		,"color":"#00FFFF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":159343
+		,"product_number":79011
+		,"prod_desc":"PORK ROLL"
+		,"text":" PORK ROLL"
+		,"product_value":4.37
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"23":{"id":23,"buttonIndex":23
+		,"color":"#00FFFF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":162731
+		,"product_number":87400
+		,"prod_desc":"MEATBALL ROLL"
+		,"text":"EAGLE BOYS MEATBALL ROLL"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"24":{"id":24,"buttonIndex":24
+		,"color":"#00FFFF00","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":160000
+		,"product_number":79706
+		,"prod_desc":"GOURMET HOT DOG"
+		,"text":"EAGLE BOYS GOURMET HOT DOG"
+		,"product_value":3.1
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"25":{"id":25,"buttonIndex":25
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"26":{"id":26,"buttonIndex":26
+		,"color":"#00FF8080","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"27":{"id":27,"buttonIndex":27
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"28":{"id":28,"buttonIndex":28
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"29":{"id":29,"buttonIndex":29
+		,"color":"#00AEAEFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"30":{"id":30,"buttonIndex":30
+		,"color":"#00AEAEFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"31":{"id":31,"buttonIndex":31
+		,"color":"#00AEAEFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"32":{"id":32,"buttonIndex":32
+		,"color":"#00AEAEFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"33":{"id":33,"buttonIndex":33
+		,"color":"#00A00000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"34":{"id":34,"buttonIndex":34
+		,"color":"#00800000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"35":{"id":35,"buttonIndex":35
+		,"color":"#00800000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"36":{"id":36,"buttonIndex":36
+		,"color":"#00AEAEFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		}}
+,"Level 3":{"1":{"id":1,"buttonIndex":1
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 1"
+		,"buttonLevelIndex": 1
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"First Menu"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"2":{"id":2,"buttonIndex":2
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"3":{"id":3,"buttonIndex":3
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"4":{"id":4,"buttonIndex":4
+		,"color":"#00FF00FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":163048
+		,"product_number":87730
+		,"prod_desc":"HELENS PIE- BACON EGG TOMATO P"
+		,"text":"HELENS PIE- BACON EGG TOMATO P"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"5":{"id":5,"buttonIndex":5
+		,"color":"#0000FFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":153387
+		,"product_number":59788
+		,"prod_desc":"LEMON MERINGUE SLICE EACH"
+		,"text":"LEMON MERINGUE SLICE"
+		,"product_value":0.88
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"6":{"id":6,"buttonIndex":6
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":120430
+		,"product_number":5427
+		,"prod_desc":"PRIESTLEYS CARAMEL SLICE 300GM"
+		,"text":"CARAMEL SLICE"
+		,"product_value":34.27
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"7":{"id":7,"buttonIndex":7
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":168591
+		,"product_number":110662
+		,"prod_desc":"APPLE SLICE"
+		,"text":"APPLE SLICE"
+		,"product_value":1
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"8":{"id":8,"buttonIndex":8
+		,"color":"#00FF00FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"9":{"id":9,"buttonIndex":9
+		,"color":"#00FF0080","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":163043
+		,"product_number":87725
+		,"prod_desc":"HELENS LASAGNE TRADITIONAL SQU"
+		,"text":"HELENS LASAGNE TRADITIONAL SQU"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"10":{"id":10,"buttonIndex":10
+		,"color":"#00FF00FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":132652
+		,"product_number":20021
+		,"prod_desc":"HELENS CHICK AVOC FILO"
+		,"text":"HELENS CHICK AVOC FILO"
+		,"product_value":20.85
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"11":{"id":11,"buttonIndex":11
+		,"color":"#00FF00FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":194062
+		,"product_number":1129540
+		,"prod_desc":"HELENS FILO CHIC&MROOM 6X200GM"
+		,"text":"HELENS CHICK MUSH FILO"
+		,"product_value":266.42
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"12":{"id":12,"buttonIndex":12
+		,"color":"#00FF00FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":194082
+		,"product_number":1129663
+		,"prod_desc":"HELENS FILO STK & MROOM 6X200G"
+		,"text":"HELENS FILO STK & MROOM 6X200G"
+		,"product_value":272.57
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"13":{"id":13,"buttonIndex":13
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":164134
+		,"product_number":96021
+		,"prod_desc":"NANNAS STRAWBERRIES & CREAM D/"
+		,"text":"NANNA'S STRAWBERRIES & CREAM D"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"14":{"id":14,"buttonIndex":14
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":164131
+		,"product_number":96018
+		,"prod_desc":"NANNAS CLASSIC CHOC D/NUT"
+		,"text":"NANNA'S CLASSIC CHOC D/NUT"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"15":{"id":15,"buttonIndex":15
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":164129
+		,"product_number":96016
+		,"prod_desc":"NANNAS JAM BALL D/NUT"
+		,"text":"NANNA'S JAM BALL D/NUT"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"16":{"id":16,"buttonIndex":16
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":164133
+		,"product_number":96020
+		,"prod_desc":"NANNAS CARAMEL CARNIVAL D/NUT"
+		,"text":"NANNA'S CARAMEL CARNIVAL D/NUT"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"17":{"id":17,"buttonIndex":17
+		,"color":"#00FFFF00","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":163331
+		,"product_number":95180
+		,"prod_desc":"HELENS MUFFIN BUTTERSCOTCH W C"
+		,"text":"HELENS MUFFIN BUTTERSCOTCH W C"
+		,"product_value":1
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"18":{"id":18,"buttonIndex":18
+		,"color":"#00FFFF00","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":163260
+		,"product_number":95102
+		,"prod_desc":"HELENS MUFFIN DOUBLE CHOC CUST"
+		,"text":"HELENS MUFFIN DOUBLE CHOC CUST"
+		,"product_value":12.2
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"19":{"id":19,"buttonIndex":19
+		,"color":"#00FFFF80","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":163329
+		,"product_number":95178
+		,"prod_desc":"HELENS MUFFIN STRAW/WHITE CHOC"
+		,"text":"HELENS MUFFIN STRAW/WHITE CHOC"
+		,"product_value":1
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"20":{"id":20,"buttonIndex":20
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":124875
+		,"product_number":10014
+		,"prod_desc":"BANANA BREAD"
+		,"text":"BANANA BREAD"
+		,"product_value":45
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"21":{"id":21,"buttonIndex":21
+		,"color":"#00000000","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":194055
+		,"product_number":1129508
+		,"prod_desc":"HELENS SCROLL SPN&FETA 6X200GM"
+		,"text":"HELENS SCROLL SPN&FETA 6X200GM"
+		,"product_value":256.01
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"22":{"id":22,"buttonIndex":22
+		,"color":"#00000000","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":194057
+		,"product_number":1129516
+		,"prod_desc":"HELENS SCROLL PIZZA    6X200GM"
+		,"text":"HELENS SCROLL PIZZA    6X200GM"
+		,"product_value":259.83
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"23":{"id":23,"buttonIndex":23
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":163409
+		,"product_number":95260
+		,"prod_desc":"AROMAS COOKIE FRUIT AND SEED"
+		,"text":"AROMAS COOKIE FRUIT AND SEED"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"24":{"id":24,"buttonIndex":24
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":163351
+		,"product_number":95201
+		,"prod_desc":"AROMAS COOKIE FLORENTINES"
+		,"text":"AROMAS COOKIE FLORENTINES"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"25":{"id":25,"buttonIndex":25
+		,"color":"#00FF8080","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"26":{"id":26,"buttonIndex":26
+		,"color":"#00FF8080","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"27":{"id":27,"buttonIndex":27
+		,"color":"#00FF8080","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"28":{"id":28,"buttonIndex":28
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"29":{"id":29,"buttonIndex":29
+		,"color":"#000000FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":122050
+		,"product_number":7054
+		,"prod_desc":"INGHAMS DEVIL WING DINGS EA"
+		,"text":"INGHAM DEVIL WING DINGS    1KG"
+		,"product_value":12.75
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"30":{"id":30,"buttonIndex":30
+		,"color":"#000000FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":161722
+		,"product_number":81484
+		,"prod_desc":"INGHAM CHICKEN TENDERS SWT/CHI"
+		,"text":"CHICKEN TENDERS SWEET CHILLI 5"
+		,"product_value":17.09
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"31":{"id":31,"buttonIndex":31
+		,"color":"#000000FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":116087
+		,"product_number":1028
+		,"prod_desc":"STEGGLES CHICKEN GARLIC BALLS "
+		,"text":"CHICKEN GARLIC BALLS"
+		,"product_value":14.74
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"32":{"id":32,"buttonIndex":32
+		,"color":"#000000FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":127934
+		,"product_number":14803
+		,"prod_desc":"INGHAM CHIC STRP CNTRY CRP 32X"
+		,"text":"CHICKEN STRIPS COUNTRY CRISPY "
+		,"product_value":19.38
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"33":{"id":33,"buttonIndex":33
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"34":{"id":34,"buttonIndex":34
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"35":{"id":35,"buttonIndex":35
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"36":{"id":36,"buttonIndex":36
+		,"color":"#00FF8080","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		}}
+,"Level 4":{"1":{"id":1,"buttonIndex":1
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 1"
+		,"buttonLevelIndex": 1
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"First Menu"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"2":{"id":2,"buttonIndex":2
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"3":{"id":3,"buttonIndex":3
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"4":{"id":4,"buttonIndex":4
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"5":{"id":5,"buttonIndex":5
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":117365
+		,"product_number":2339
+		,"prod_desc":"THE COURIER MAIL - (MON)"
+		,"text":"THE COURIER MAIL - (MON)"
+		,"product_value":1.8
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"6":{"id":6,"buttonIndex":6
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"7":{"id":7,"buttonIndex":7
+		,"color":"#00FF0000","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":142923
+		,"product_number":33340
+		,"prod_desc":"THE AUSTRALIAN - MON"
+		,"text":"THE AUSTRALIAN - MON"
+		,"product_value":1.17
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"8":{"id":8,"buttonIndex":8
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"9":{"id":9,"buttonIndex":9
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":117366
+		,"product_number":2340
+		,"prod_desc":"THE COURIER MAIL - (TUE)"
+		,"text":"THE COURIER MAIL (TUESDAY)"
+		,"product_value":1.8
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"10":{"id":10,"buttonIndex":10
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"11":{"id":11,"buttonIndex":11
+		,"color":"#00FF0000","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":174761
+		,"product_number":117912
+		,"prod_desc":"THE AUSTRALIAN - TUE"
+		,"text":"THE AUSTRALIAN - TUE"
+		,"product_value":1
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"12":{"id":12,"buttonIndex":12
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"13":{"id":13,"buttonIndex":13
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":117367
+		,"product_number":2341
+		,"prod_desc":"THE COURIER MAIL - (WED)"
+		,"text":"THE COURIER MAIL (WED)"
+		,"product_value":1.8
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"14":{"id":14,"buttonIndex":14
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"15":{"id":15,"buttonIndex":15
+		,"color":"#00FF0000","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":127197
+		,"product_number":13488
+		,"prod_desc":"THE AUSTRALIAN METRO - WED"
+		,"text":"THE AUSTRALIAN METRO - WED"
+		,"product_value":1.35
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"16":{"id":16,"buttonIndex":16
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"17":{"id":17,"buttonIndex":17
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":117368
+		,"product_number":2342
+		,"prod_desc":"THE COURIER MAIL - (THU)"
+		,"text":"THE COURIER MAIL (THURSDAY)"
+		,"product_value":1.8
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"18":{"id":18,"buttonIndex":18
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"19":{"id":19,"buttonIndex":19
+		,"color":"#00FF0000","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":127198
+		,"product_number":13489
+		,"prod_desc":"THE AUSTRALIAN METRO - THU"
+		,"text":"THE AUSTRALIAN METRO - THU"
+		,"product_value":1.35
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"20":{"id":20,"buttonIndex":20
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"21":{"id":21,"buttonIndex":21
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":117369
+		,"product_number":2343
+		,"prod_desc":"THE COURIER MAIL - (FRI)"
+		,"text":"THE COURIER MAIL (FRIDAY)"
+		,"product_value":1.8
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"22":{"id":22,"buttonIndex":22
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"23":{"id":23,"buttonIndex":23
+		,"color":"#00FF0000","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":127199
+		,"product_number":13490
+		,"prod_desc":"THE AUSTRALIAN METRO - FRI"
+		,"text":"THE AUSTRALIAN METRO - FRI"
+		,"product_value":1.35
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"24":{"id":24,"buttonIndex":24
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"25":{"id":25,"buttonIndex":25
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"26":{"id":26,"buttonIndex":26
+		,"color":"#00DFDFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":188125
+		,"product_number":1084693
+		,"prod_desc":"PODS CHERRY 176GM"
+		,"text":"BLANK BUTTON       "
+		,"product_value":21.3
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"27":{"id":27,"buttonIndex":27
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"28":{"id":28,"buttonIndex":28
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"29":{"id":29,"buttonIndex":29
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":117370
+		,"product_number":2344
+		,"prod_desc":"THE COURIER MAIL - (SAT)"
+		,"text":"THE COURIER MAIL - (SAT)"
+		,"product_value":2.25
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"30":{"id":30,"buttonIndex":30
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"31":{"id":31,"buttonIndex":31
+		,"color":"#00FF0000","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":127200
+		,"product_number":13491
+		,"prod_desc":"THE WEEKEND AUSTRALIAN - METRO"
+		,"text":"WEEKEND AUSTRALIAN (METRO)"
+		,"product_value":3.6
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"32":{"id":32,"buttonIndex":32
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"33":{"id":33,"buttonIndex":33
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":117371
+		,"product_number":2345
+		,"prod_desc":"THE SUNDAY MAIL"
+		,"text":"THE SUNDAY MAIL"
+		,"product_value":2.7
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"34":{"id":34,"buttonIndex":34
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"35":{"id":35,"buttonIndex":35
+		,"color":"#00FF0000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"36":{"id":36,"buttonIndex":36
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		}}
+,"Level 5":{"1":{"id":1,"buttonIndex":1
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 1"
+		,"buttonLevelIndex": 1
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"First Menu"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"2":{"id":2,"buttonIndex":2
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"3":{"id":3,"buttonIndex":3
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":"1"
+		},"4":{"id":4,"buttonIndex":4
+		,"color":"#00FFFF80","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"5":{"id":5,"buttonIndex":5
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":"1"
+		},"6":{"id":6,"buttonIndex":6
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":"2"
+		},"7":{"id":7,"buttonIndex":7
+		,"color":"#000000FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 7"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":"3"
+		},"8":{"id":8,"buttonIndex":8
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"9":{"id":9,"buttonIndex":9
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"10":{"id":10,"buttonIndex":10
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"11":{"id":11,"buttonIndex":11
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"12":{"id":12,"buttonIndex":12
+		,"color":"#00FF00FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 8"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"13":{"id":13,"buttonIndex":13
+		,"color":"#00FF80FF","isChanged": true
+		,"selected_button_type": "PAID OUT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"PAID OUT"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"14":{"id":14,"buttonIndex":14
+		,"color":"#00FFFF80","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"15":{"id":15,"buttonIndex":15
+		,"color":"#00FFFF80","isChanged": true
+		,"selected_button_type": "NO SALE"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"NO SALE"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"16":{"id":16,"buttonIndex":16
+		,"color":"#00FFFFFF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":""
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"17":{"id":17,"buttonIndex":17
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"18":{"id":18,"buttonIndex":18
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"19":{"id":19,"buttonIndex":19
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"20":{"id":20,"buttonIndex":20
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"21":{"id":21,"buttonIndex":21
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "FLOAT ENTRY"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"Enter Float"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"22":{"id":22,"buttonIndex":22
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "WASTAGE"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"WASTAGE"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":"1"
+		},"23":{"id":23,"buttonIndex":23
+		,"color":"#00FFFF80","isChanged": true
+		,"selected_button_type": "EFTPOS SETTLEMENT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 8"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"EFTPOS SETTLEMENT"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"24":{"id":24,"buttonIndex":24
+		,"color":"#00FFFF80","isChanged": true
+		,"selected_button_type": "EFTPOS CONTROL PANEL"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 8"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"EFTPOS CONTROL PANEL"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"25":{"id":25,"buttonIndex":25
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"26":{"id":26,"buttonIndex":26
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"27":{"id":27,"buttonIndex":27
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"28":{"id":28,"buttonIndex":28
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"29":{"id":29,"buttonIndex":29
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "XREAD"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 8"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"CASHIER REPORT"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"30":{"id":30,"buttonIndex":30
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "ZREAD"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 2"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"END OF DAY REPORT - ZREAD"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"31":{"id":31,"buttonIndex":31
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "PICK UP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"PICK UP"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"32":{"id":32,"buttonIndex":32
+		,"color":"#00FF00FF","isChanged": true
+		,"selected_button_type": "NO SALE"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"Level 1"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"NO SALE"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"33":{"id":33,"buttonIndex":33
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"34":{"id":34,"buttonIndex":34
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"35":{"id":35,"buttonIndex":35
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"36":{"id":36,"buttonIndex":36
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		}}
+,"Level 6":{"18":{"id":18,"buttonIndex":18
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"19":{"id":19,"buttonIndex":19
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"20":{"id":20,"buttonIndex":20
+		,"color":"#00C080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"21":{"id":21,"buttonIndex":21
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"22":{"id":22,"buttonIndex":22
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"23":{"id":23,"buttonIndex":23
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"24":{"id":24,"buttonIndex":24
+		,"color":"#00FFFF80","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"25":{"id":25,"buttonIndex":25
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"26":{"id":26,"buttonIndex":26
+		,"color":"#00408000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"27":{"id":27,"buttonIndex":27
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"28":{"id":28,"buttonIndex":28
+		,"color":"#00FFFF80","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"29":{"id":29,"buttonIndex":29
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"30":{"id":30,"buttonIndex":30
+		,"color":"#00FF0000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"31":{"id":31,"buttonIndex":31
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":237378
+		,"product_number":1607496
+		,"prod_desc":"MF SCE TOM SQ  156753 100X14GM"
+		,"text":"M/FOODS SQ TOMATO SAUCE    100"
+		,"product_value":11.9
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"32":{"id":32,"buttonIndex":32
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":242902
+		,"product_number":1658374
+		,"prod_desc":"MF SCE BBQ SQUEEZY 100X14ML"
+		,"text":"MF SCE BBQ SQ ON 156726 PC100S"
+		,"product_value":18.4
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"33":{"id":33,"buttonIndex":33
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178052
+		,"product_number":1018574
+		,"prod_desc":"WHISKAS SNGLS FAV FISH12X100GM"
+		,"text":"WHISKAS100GM"
+		,"product_value":41.07
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"34":{"id":34,"buttonIndex":34
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178057
+		,"product_number":1018605
+		,"prod_desc":"WHISKAS SNGLS FAV PLTRY12X100G"
+		,"text":"WHISKAS 100G"
+		,"product_value":36.48
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"35":{"id":35,"buttonIndex":35
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178064
+		,"product_number":1018655
+		,"prod_desc":"ZAPPO STRAWBERRY          26GM"
+		,"text":"ZAPPO"
+		,"product_value":25.05
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"36":{"id":36,"buttonIndex":36
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178077
+		,"product_number":1018744
+		,"prod_desc":"J/WEST SALMON RED        105GM"
+		,"text":"SALMON  105G"
+		,"product_value":97.94
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		}}
+,"Level 7":{"1":{"id":1,"buttonIndex":1
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 1"
+		,"buttonLevelIndex": 1
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"First Menu"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"2":{"id":2,"buttonIndex":2
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178084
+		,"product_number":1018794
+		,"prod_desc":"ALLY SALMON PINK         210GM"
+		,"text":"SALMON  220G"
+		,"product_value":61.09
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"3":{"id":3,"buttonIndex":3
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178089
+		,"product_number":1018825
+		,"prod_desc":"J/WEST SALMON PINK       210GM"
+		,"text":"SALMON  210G"
+		,"product_value":92.09
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"4":{"id":4,"buttonIndex":4
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178100
+		,"product_number":1018891
+		,"prod_desc":"TWINING T/BAG LEMON        10S"
+		,"text":"TEA BAGS  10"
+		,"product_value":23.8
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"5":{"id":5,"buttonIndex":5
+		,"color":"#0000FFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":116069
+		,"product_number":1010
+		,"prod_desc":"BANANAS EACH"
+		,"text":"BANANAS EACH"
+		,"product_value":0.5
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"6":{"id":6,"buttonIndex":6
+		,"color":"#0080FFFF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":135441
+		,"product_number":22821
+		,"prod_desc":"LEMONS SEEDLESS    KG"
+		,"text":"LEMONS SEEDLESS    K/G"
+		,"product_value":0.5
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"7":{"id":7,"buttonIndex":7
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":135440
+		,"product_number":22820
+		,"prod_desc":"TAHITIAN LIME"
+		,"text":"TAHITIAN LIME"
+		,"product_value":1
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"8":{"id":8,"buttonIndex":8
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":133603
+		,"product_number":20980
+		,"prod_desc":"ORANGES NAVEL LARGE"
+		,"text":"ORANGES NAVEL LARGE"
+		,"product_value":0.5
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"9":{"id":9,"buttonIndex":9
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178134
+		,"product_number":1019130
+		,"prod_desc":"SORBENT T/ROLL EXT HYPO-AL 4PK"
+		,"text":"T/ROLLS 4PK"
+		,"product_value":39.59
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"10":{"id":10,"buttonIndex":10
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178137
+		,"product_number":1019148
+		,"prod_desc":"K/OSCAR SARDINE 1LAYR C2  45GM"
+		,"text":"SARDINES 42G"
+		,"product_value":26.13
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"11":{"id":11,"buttonIndex":11
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178138
+		,"product_number":1019156
+		,"prod_desc":"K/OSCAR SARD 2L SOY/OIL C4105G"
+		,"text":"SARDINE 105G"
+		,"product_value":30.17
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"12":{"id":12,"buttonIndex":12
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178139
+		,"product_number":1019164
+		,"prod_desc":"K/OSCAR SARDINE 1LAYR C6 105GM"
+		,"text":"SARDINE 105G"
+		,"product_value":32.96
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"13":{"id":13,"buttonIndex":13
+		,"color":"#0040FF00","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"14":{"id":14,"buttonIndex":14
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"15":{"id":15,"buttonIndex":15
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"16":{"id":16,"buttonIndex":16
+		,"color":"#004080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"17":{"id":17,"buttonIndex":17
+		,"color":"#0040FF00","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":116150
+		,"product_number":1093
+		,"prod_desc":"APPLES RED DELICIOUS EACH"
+		,"text":"APPLES RED DELICIOUS EACH"
+		,"product_value":0.5
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"18":{"id":18,"buttonIndex":18
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":116150
+		,"product_number":1093
+		,"prod_desc":"APPLES RED DELICIOUS EACH"
+		,"text":"APPLES RED DELICIOUS EACH"
+		,"product_value":0.5
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"19":{"id":19,"buttonIndex":19
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":116071
+		,"product_number":1012
+		,"prod_desc":"TOMATOES EACH"
+		,"text":"TOMATOES EACH"
+		,"product_value":0.73
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"20":{"id":20,"buttonIndex":20
+		,"color":"#004080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":264446
+		,"product_number":1872274
+		,"prod_desc":"ONIONS RED LARGE            KG"
+		,"text":"ONIONS RED SALAD    K/G"
+		,"product_value":0.01
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"21":{"id":21,"buttonIndex":21
+		,"color":"#00408000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"22":{"id":22,"buttonIndex":22
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"23":{"id":23,"buttonIndex":23
+		,"color":"#00004080","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"24":{"id":24,"buttonIndex":24
+		,"color":"#004080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"25":{"id":25,"buttonIndex":25
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"26":{"id":26,"buttonIndex":26
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178184
+		,"product_number":1019481
+		,"prod_desc":"C/LIFE T/SOAP FOREST BREEZE8PK"
+		,"text":"C/LIFE 800GM"
+		,"product_value":33.53
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"27":{"id":27,"buttonIndex":27
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178196
+		,"product_number":1019554
+		,"prod_desc":"SPAM HAM SPICED          340GM"
+		,"text":"SPAM    340G"
+		,"product_value":57.02
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"28":{"id":28,"buttonIndex":28
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178204
+		,"product_number":1019614
+		,"prod_desc":"PEDIGR PUPPY CHIC RICE 1KG"
+		,"text":"PEDIGR 1KG"
+		,"product_value":40.81
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"29":{"id":29,"buttonIndex":29
+		,"color":"#00408000","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":116148
+		,"product_number":1091
+		,"prod_desc":"AVOCADOS EACH"
+		,"text":"AVOCADOS EACH"
+		,"product_value":1.5
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"30":{"id":30,"buttonIndex":30
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"31":{"id":31,"buttonIndex":31
+		,"color":"#0040FF00","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":133460
+		,"product_number":20835
+		,"prod_desc":"PEARS NASHI EACH"
+		,"text":"PEARS NASHI EACH"
+		,"product_value":0.52
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"32":{"id":32,"buttonIndex":32
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178208
+		,"product_number":1019635
+		,"prod_desc":"ALLSEPS AUS/GLUC FRUIT FROG8KG"
+		,"text":"ALLSEPS  8KG"
+		,"product_value":36.07
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"33":{"id":33,"buttonIndex":33
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178211
+		,"product_number":1019651
+		,"prod_desc":"HAMPER CORNED BEEF       340GM"
+		,"text":"HAMPER  340G"
+		,"product_value":143.65
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"34":{"id":34,"buttonIndex":34
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178217
+		,"product_number":1019724
+		,"prod_desc":"ALLSEPS AUS/GLUC RASP BULK 8KG"
+		,"text":"ALLSEPS  8KG"
+		,"product_value":34.55
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"35":{"id":35,"buttonIndex":35
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178221
+		,"product_number":1019774
+		,"prod_desc":"CAMP V8 PLUS ENERGY         1L"
+		,"text":"CAMP V8 1L"
+		,"product_value":24.69
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"36":{"id":36,"buttonIndex":36
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178224
+		,"product_number":1019790
+		,"prod_desc":"NAT/CONF SFT JLY FRT SAL 180GM"
+		,"text":"NAT/CONF 180"
+		,"product_value":22.56
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		}}
+,"Level 8":{"1":{"id":1,"buttonIndex":1
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 1"
+		,"buttonLevelIndex": 1
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"First Menu"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"2":{"id":2,"buttonIndex":2
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178226
+		,"product_number":1019800
+		,"prod_desc":"SCHMACKOS P/CORN BF M/DOG150GM"
+		,"text":"SCHMACKOS150"
+		,"product_value":15.6
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"3":{"id":3,"buttonIndex":3
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178228
+		,"product_number":1019821
+		,"prod_desc":"B/GOLD SNAKES            200GM"
+		,"text":"BG SNAKE200G"
+		,"product_value":17.31
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"4":{"id":4,"buttonIndex":4
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178229
+		,"product_number":1019839
+		,"prod_desc":"B/GOLD LICORICE ALLSORTS 200GM"
+		,"text":"BG L/RICE200"
+		,"product_value":18.88
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"5":{"id":5,"buttonIndex":5
+		,"color":"#00FFFF00","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":182448
+		,"product_number":1047353
+		,"prod_desc":"CHUPA CHUPS ORIG 21752    12GM"
+		,"text":"CHUPA CHUP SINGLE"
+		,"product_value":24.62
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"6":{"id":6,"buttonIndex":6
+		,"color":"#00DEF228","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"7":{"id":7,"buttonIndex":7
+		,"color":"#00808040","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"8":{"id":8,"buttonIndex":8
+		,"color":"#00DEF228","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"9":{"id":9,"buttonIndex":9
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178239
+		,"product_number":1019944
+		,"prod_desc":"B/GOLD RASPBERRIES       200GM"
+		,"text":"BG RA/BRY200"
+		,"product_value":17.31
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"10":{"id":10,"buttonIndex":10
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178243
+		,"product_number":1019978
+		,"prod_desc":"O/E PASO TACO STD/STF KIT295GM"
+		,"text":"O/E PASO300G"
+		,"product_value":43.58
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"11":{"id":11,"buttonIndex":11
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178244
+		,"product_number":1019986
+		,"prod_desc":"KIRKS CREAMY SODA        375ML"
+		,"text":"KIRKS   375M"
+		,"product_value":44.31
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"12":{"id":12,"buttonIndex":12
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178245
+		,"product_number":1020000
+		,"prod_desc":"HNZ SOUP CHKY BF BOLOGNA 535GM"
+		,"text":"HNA SOUP535G"
+		,"product_value":40.27
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"13":{"id":13,"buttonIndex":13
+		,"color":"#000000F2","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":244620
+		,"product_number":1679647
+		,"prod_desc":"NES ALLENS REDSKIN STICKS 150S"
+		,"text":"REDSKIN STICKS"
+		,"product_value":19.14
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"14":{"id":14,"buttonIndex":14
+		,"color":"#00DEF228","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"15":{"id":15,"buttonIndex":15
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":126762
+		,"product_number":13020
+		,"prod_desc":"$1.00 CONFECTIONERY"
+		,"text":"25c CONFECTIONERY"
+		,"product_value":0.5
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE HEIGHT"
+
+		,"width": "100%"
+		,"height": "200%"
+		,"visibility": "visible"
+		,"password":null
+		},"16":{"id":16,"buttonIndex":16
+		,"color":"#00808040","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"17":{"id":17,"buttonIndex":17
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178254
+		,"product_number":1020068
+		,"prod_desc":"HARVEST IRISH STEW       425GM"
+		,"text":"HARV DIN 425"
+		,"product_value":23.66
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"18":{"id":18,"buttonIndex":18
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178255
+		,"product_number":1020076
+		,"prod_desc":"B/GOLD JELLY BABIES      200GM"
+		,"text":"BG JELLY200G"
+		,"product_value":16.56
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"19":{"id":19,"buttonIndex":19
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178261
+		,"product_number":1020131
+		,"prod_desc":"ALLSEPS AUS/GLUC SNAKES    8KG"
+		,"text":"ALLSEPS  8KG"
+		,"product_value":35.34
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"20":{"id":20,"buttonIndex":20
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178263
+		,"product_number":1020149
+		,"prod_desc":"HNZ SOUP M/R CORN & VEG  535GM"
+		,"text":"HNZ SOUP 535"
+		,"product_value":32.14
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"21":{"id":21,"buttonIndex":21
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178265
+		,"product_number":1020165
+		,"prod_desc":"KELL CORN FLAKES BOWL     30GM"
+		,"text":"CORN FLK BWL"
+		,"product_value":20.31
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"22":{"id":22,"buttonIndex":22
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178270
+		,"product_number":1020225
+		,"prod_desc":"SAMBOY CHIPS TOMATO      130GM"
+		,"text":"CHIPS  130GM"
+		,"product_value":20.82
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"23":{"id":23,"buttonIndex":23
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178272
+		,"product_number":1020262
+		,"prod_desc":"NAT/CONF JELLY BABIES    200GM"
+		,"text":"JEL BABY200G"
+		,"product_value":22.56
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"24":{"id":24,"buttonIndex":24
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178274
+		,"product_number":1020283
+		,"prod_desc":"DUO CONC FL VAL PK LINEN 2.5KG"
+		,"text":"DUO CONC2.5K"
+		,"product_value":40.23
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"25":{"id":25,"buttonIndex":25
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"26":{"id":26,"buttonIndex":26
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"27":{"id":27,"buttonIndex":27
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":191222
+		,"product_number":1106547
+		,"prod_desc":"R/TULIP SOLID EGG CYLNDR*6.6GM"
+		,"text":"MINI SOLID EASTER EGGS"
+		,"product_value":66.46
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"28":{"id":28,"buttonIndex":28
+		,"color":"#00DEF228","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"29":{"id":29,"buttonIndex":29
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178290
+		,"product_number":1020416
+		,"prod_desc":"MRS MACS TWIN PACK 2S/ROL240GM"
+		,"text":"MRS MACS"
+		,"product_value":38.37
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"30":{"id":30,"buttonIndex":30
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178298
+		,"product_number":1020474
+		,"prod_desc":"SOLO                     375ML"
+		,"text":"SOLO   375ML"
+		,"product_value":32.94
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"31":{"id":31,"buttonIndex":31
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178303
+		,"product_number":1020505
+		,"prod_desc":"NAT/CONF UNBEARABLES SOUR180GM"
+		,"text":"NAT/CONF 180"
+		,"product_value":22.56
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"32":{"id":32,"buttonIndex":32
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178305
+		,"product_number":1020521
+		,"prod_desc":"NAT/CONF SFT JLY FOR/FRT 180GM"
+		,"text":"NAT/CONF 180"
+		,"product_value":22.56
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"33":{"id":33,"buttonIndex":33
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178309
+		,"product_number":1020547
+		,"prod_desc":"HNZ SOUP M/R PUMP&BACON  535GM"
+		,"text":"HNZ SOUP 535"
+		,"product_value":33.05
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"34":{"id":34,"buttonIndex":34
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178314
+		,"product_number":1020571
+		,"prod_desc":"ALLSEPS AUS/GLUC PINEAPPLE 8KG"
+		,"text":"ALLSEPS  8KG"
+		,"product_value":35.34
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"35":{"id":35,"buttonIndex":35
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178319
+		,"product_number":1020597
+		,"prod_desc":"KFT MAYONASE FREE        365GM"
+		,"text":"MAYONASE365G"
+		,"product_value":19.91
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"36":{"id":36,"buttonIndex":36
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":178328
+		,"product_number":1020652
+		,"prod_desc":"RIBENA RTD B/CRNT         1L"
+		,"text":"RIBENA    1L"
+		,"product_value":25.26
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		}}
+,"Level 9":{"1":{"id":1,"buttonIndex":1
+		,"color":"#0080FF80","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 1"
+		,"buttonLevelIndex": 1
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"First Menu"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"2":{"id":2,"buttonIndex":2
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"3":{"id":3,"buttonIndex":3
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"4":{"id":4,"buttonIndex":4
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"5":{"id":5,"buttonIndex":5
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"6":{"id":6,"buttonIndex":6
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":231948
+		,"product_number":1454788
+		,"prod_desc":"ALLENS KILLER PYTHON"
+		,"text":"KILLER PYTHON"
+		,"product_value":31.34
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"7":{"id":7,"buttonIndex":7
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"8":{"id":8,"buttonIndex":8
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"9":{"id":9,"buttonIndex":9
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":135430
+		,"product_number":22810
+		,"prod_desc":"SINGLE CIGAR"
+		,"text":"SINGLE CIGAR"
+		,"product_value":0.95
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"10":{"id":10,"buttonIndex":10
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"11":{"id":11,"buttonIndex":11
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"12":{"id":12,"buttonIndex":12
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"13":{"id":13,"buttonIndex":13
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"14":{"id":14,"buttonIndex":14
+		,"color":"#00404080","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"single cigar"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"15":{"id":15,"buttonIndex":15
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"16":{"id":16,"buttonIndex":16
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"17":{"id":17,"buttonIndex":17
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "PRODUCT"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":129413
+		,"product_number":16353
+		,"prod_desc":"SINGLE CIGAR"
+		,"text":"SINGLE CIGAR"
+		,"product_value":9.68
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"18":{"id":18,"buttonIndex":18
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"19":{"id":19,"buttonIndex":19
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"20":{"id":20,"buttonIndex":20
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"21":{"id":21,"buttonIndex":21
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"22":{"id":22,"buttonIndex":22
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"23":{"id":23,"buttonIndex":23
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"24":{"id":24,"buttonIndex":24
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"25":{"id":25,"buttonIndex":25
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"26":{"id":26,"buttonIndex":26
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"27":{"id":27,"buttonIndex":27
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"28":{"id":28,"buttonIndex":28
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"29":{"id":29,"buttonIndex":29
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"30":{"id":30,"buttonIndex":30
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"31":{"id":31,"buttonIndex":31
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"32":{"id":32,"buttonIndex":32
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"33":{"id":33,"buttonIndex":33
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"34":{"id":34,"buttonIndex":34
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"35":{"id":35,"buttonIndex":35
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"36":{"id":36,"buttonIndex":36
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		}}
+,"Level 10":{"1":{"id":1,"buttonIndex":1
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":""
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		}}
+,"Level 11":{"1":{"id":1,"buttonIndex":1
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":""
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		}}
+,"Level 12":{}
+,"Level 13":{}
+,"Level 14":{}
+,"Level 15":{}
+,"Level 16":{}
+,"Level 17":{"1":{"id":1,"buttonIndex":1
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "LEVEL"
+		,"price_level":"0"
+		,"level_type":"Level 1"
+		,"buttonLevelIndex": 1
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"FIRST MENU"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "DOUBLE WIDTH"
+
+		,"width": "200%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"2":{"id":2,"buttonIndex":2
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"3":{"id":3,"buttonIndex":3
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"4":{"id":4,"buttonIndex":4
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"5":{"id":5,"buttonIndex":5
+		,"color":"#000000FF","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"3 G PREPAID MOBILE"
+		,"product_value":0
+		,"category_code":"1701"
+		,"category_id":1701
+		,"selected_size": "NORMAL SIZE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "visible"
+		,"password":null
+		},"6":{"id":6,"buttonIndex":6
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"3 MOBILE BROADBAND VOUCHERS"
+		,"product_value":0
+		,"category_code":"1702"
+		,"category_id":1702
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"7":{"id":7,"buttonIndex":7
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"AMAYSIM"
+		,"product_value":0
+		,"category_code":"1704"
+		,"category_id":1704
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"8":{"id":8,"buttonIndex":8
+		,"color":"#0000FFFF","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BOOST"
+		,"product_value":0
+		,"category_code":"1706"
+		,"category_id":1706
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"9":{"id":9,"buttonIndex":9
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"CRAZY JOHNS MOBILE SUPERSAVER"
+		,"product_value":0
+		,"category_code":"1731"
+		,"category_id":1731
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"10":{"id":10,"buttonIndex":10
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"CRAZY JOHNS MOBILE TOPUP CARD"
+		,"product_value":0
+		,"category_code":"1732"
+		,"category_id":1732
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"11":{"id":11,"buttonIndex":11
+		,"color":"#00808000","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"DODO PRE-PAID MOBILE"
+		,"product_value":0
+		,"category_code":"1735"
+		,"category_id":1735
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"12":{"id":12,"buttonIndex":12
+		,"color":"#00400080","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"GRLMOBILE"
+		,"product_value":0
+		,"category_code":"1737"
+		,"category_id":1737
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"13":{"id":13,"buttonIndex":13
+		,"color":"#00408000","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"GT MOBILE"
+		,"product_value":0
+		,"category_code":"1738"
+		,"category_id":1738
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"14":{"id":14,"buttonIndex":14
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"JUST PREPAID MOBILE"
+		,"product_value":0
+		,"category_code":"1739"
+		,"category_id":1739
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"15":{"id":15,"buttonIndex":15
+		,"color":"#0000FFFF","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"JAMSTER"
+		,"product_value":0
+		,"category_code":"1740"
+		,"category_id":1740
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"16":{"id":16,"buttonIndex":16
+		,"color":"#008080FF","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"LEBARA MOBILE"
+		,"product_value":0
+		,"category_code":"1741"
+		,"category_id":1741
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"17":{"id":17,"buttonIndex":17
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"LYCAMOBILE"
+		,"product_value":0
+		,"category_code":"1742"
+		,"category_id":1742
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"18":{"id":18,"buttonIndex":18
+		,"color":"#00FFFF00","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"OPTUS MOBILE"
+		,"product_value":0
+		,"category_code":"1748"
+		,"category_id":1748
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"19":{"id":19,"buttonIndex":19
+		,"color":"#00C08080","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"REVTEL RECHARGE"
+		,"product_value":0
+		,"category_code":"1760"
+		,"category_id":1760
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"20":{"id":20,"buttonIndex":20
+		,"color":"#00FF00FF","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"SAVVYTEL"
+		,"product_value":0
+		,"category_code":"1762"
+		,"category_id":1762
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"21":{"id":21,"buttonIndex":21
+		,"color":"#00008000","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"TEL PACIFIC HELLO MOBILE"
+		,"product_value":0
+		,"category_code":"1767"
+		,"category_id":1767
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"22":{"id":22,"buttonIndex":22
+		,"color":"#000080FF","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"TELSTRA PRE-PAID"
+		,"product_value":0
+		,"category_code":"1775"
+		,"category_id":1775
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"23":{"id":23,"buttonIndex":23
+		,"color":"#0000FF00","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"VIRGIN"
+		,"product_value":0
+		,"category_code":"1781"
+		,"category_id":1781
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"24":{"id":24,"buttonIndex":24
+		,"color":"#00A00000","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"VODAFONE VOUCHER"
+		,"product_value":0
+		,"category_code":"1785"
+		,"category_id":1785
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"25":{"id":25,"buttonIndex":25
+		,"color":"#00FF8000","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"WOOLWORTHS EVERYDAY MOBILE"
+		,"product_value":0
+		,"category_code":"1788"
+		,"category_id":1788
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"26":{"id":26,"buttonIndex":26
+		,"color":"#00FF00FF","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"AMICHI PREPAID"
+		,"product_value":0
+		,"category_code":"1789"
+		,"category_id":1789
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"27":{"id":27,"buttonIndex":27
+		,"color":"#0000FFFF","isChanged": true
+		,"selected_button_type": "CATEGORY LOOKUP"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"GOTALK MOBILE RECHARGE"
+		,"product_value":0
+		,"category_code":"1790"
+		,"category_id":1790
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"28":{"id":28,"buttonIndex":28
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"29":{"id":29,"buttonIndex":29
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"30":{"id":30,"buttonIndex":30
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"31":{"id":31,"buttonIndex":31
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"32":{"id":32,"buttonIndex":32
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"33":{"id":33,"buttonIndex":33
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"34":{"id":34,"buttonIndex":34
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"35":{"id":35,"buttonIndex":35
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		},"36":{"id":36,"buttonIndex":36
+		,"color":"#00FFCC99","isChanged": true
+		,"selected_button_type": "BLANK BUTTON"
+		,"price_level":"0"
+		,"level_type":"0"
+		,"buttonLevelIndex": 0
+		,"cashier_level":"0"
+		,"product_id":0
+		,"product_number":0
+		,"prod_desc":"0"
+		,"text":"BLANK BUTTON"
+		,"product_value":0
+		,"category_code":"0"
+		,"category_id":0
+		,"selected_size": "NOT VISIBLE"
+
+		,"width": "100%"
+		,"height": "100%"
+		,"visibility": "hidden"
+		,"password":null
+		}}
+,"level_mapping": {
+"Level 1" : "MAIN MENU START","Level 2" : "EAGLE BOYS","Level 3" : "Takeaway menu","Level 4" : "NEWSPAPERS/MAGAZINES","Level 5" : "MANAGER MENU","Level 6" : "PIES/SAUSAGE ROLLS MENU","Level 7" : "FRUIT AND VEG MENU","Level 8" : "CONFECTIONARY MENU","Level 9" : "TOBACCOMISC","Level 17" : "EPAY - MOBILE PHONE CREDIT","Level 18" : "EPAY - CALLING CARDS","Level 19" : "EPAY - CALLING CARDS 2","Level 20" : "EPAY - ENTERTAINMENT","Level 21" : "EPAY - INTERNET","Level 22" : "EPAY - MISC","Level 23" : "XPRESS MONEY"
+}}

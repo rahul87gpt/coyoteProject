@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/08/2020 01:40:44" ReportInfo.Modified="06/17/2022 17:04:29" ReportInfo.CreatorVersion="2022.1.2.0">
+  <Dictionary>
+    <TableDataSource Name="FilterDataSet" ReferenceName="Data.FilterDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="startDate" DataType="System.String"/>
+      <Column Name="endDate" DataType="System.String"/>
+      <Column Name="selectOutlets" DataType="System.String"/>
+      <Column Name="till" DataType="System.String"/>
+      <Column Name="reportName" DataType="System.String"/>
+      <Column Name="SalesQty" DataType="System.Int32"/>
+      <Column Name="SalesAmt" DataType="System.Double"/>
+      <Column Name="RoundingQty" DataType="System.Int32"/>
+      <Column Name="RoundingAmt" DataType="System.Double"/>
+      <Column Name="TotalSalesAmtNet" DataType="System.Double"/>
+      <Column Name="CashQty" DataType="System.Int32"/>
+      <Column Name="CashAmt" DataType="System.Double"/>
+      <Column Name="EftposQty" DataType="System.Int32"/>
+      <Column Name="EftposAmt" DataType="System.Double"/>
+      <Column Name="AmexQty" DataType="System.Int32"/>
+      <Column Name="AmexAmt" DataType="System.Double"/>
+      <Column Name="DinersQty" DataType="System.Int32"/>
+      <Column Name="DinersAmt" DataType="System.Double"/>
+      <Column Name="DELIVEROOQty" DataType="System.Int32"/>
+      <Column Name="DELIVEROOAmt" DataType="System.Double"/>
+      <Column Name="UBEREATSQty" DataType="System.Int32"/>
+      <Column Name="UBEREATSAmt" DataType="System.Double"/>
+      <Column Name="MOTORCHARGEQty" DataType="System.Int32"/>
+      <Column Name="MOTORCHARGEAmt" DataType="System.Double"/>
+      <Column Name="MOTORPASSQty" DataType="System.Int32"/>
+      <Column Name="MOTORPASSAmt" DataType="System.Double"/>
+      <Column Name="FLEETCARDQty" DataType="System.Int32"/>
+      <Column Name="FLEETCARDAmt" DataType="System.Double"/>
+      <Column Name="FUELCARDQty" DataType="System.Int32"/>
+      <Column Name="FUELCARDAmt" DataType="System.Double"/>
+      <Column Name="APPQty" DataType="System.Int32"/>
+      <Column Name="APPAmt" DataType="System.Double"/>
+      <Column Name="OtherQty" DataType="System.Int32"/>
+      <Column Name="OtherAmt" DataType="System.Double"/>
+      <Column Name="TotalPaymentAmtNet" DataType="System.Double"/>
+      <Column Name="CashOutQty" DataType="System.Int32"/>
+      <Column Name="CashOutAmt" DataType="System.Double"/>
+      <Column Name="PickUpQty" DataType="System.Int32"/>
+      <Column Name="PickUpAmt" DataType="System.Double"/>
+      <Column Name="PickOutQty" DataType="System.Int32"/>
+      <Column Name="PickOutAmt" DataType="System.Double"/>
+      <Column Name="TotalCashBalNet" DataType="System.Double"/>
+      <Column Name="LessGSTSalesAmt" DataType="System.Double"/>
+      <Column Name="GSTAmt" DataType="System.Double"/>
+      <Column Name="NoGSTProductSalesAmt" DataType="System.Double"/>
+      <Column Name="GSTProductSalesAmt" DataType="System.Double"/>
+      <Column Name="CancelsQty" DataType="System.Int32"/>
+      <Column Name="CancelsAmt" DataType="System.Double"/>
+      <Column Name="CancelsVoidQty" DataType="System.Int32"/>
+      <Column Name="CancelsVoidAmt" DataType="System.Double"/>
+      <Column Name="RefundsItemsQty" DataType="System.Int32"/>
+      <Column Name="RefundsItemsAmt" DataType="System.Double"/>
+      <Column Name="PromoDiscQty" DataType="System.Int32"/>
+      <Column Name="PromoDiscAmt" DataType="System.Double"/>
+      <Column Name="PromoMarkdownsQty" DataType="System.Int32"/>
+      <Column Name="PromoMarkdownsAmt" DataType="System.Double"/>
+      <Column Name="TotalCustomer" DataType="System.Int32"/>
+      <Column Name="AvgItemsPerCustomer" DataType="System.Double"/>
+      <Column Name="AvgAmtPerCustomer" DataType="System.Double"/>
+      <Column Name="TotalNoSales" DataType="System.Int32"/>
+      <Column Name="TotalKeyedSalesQty" DataType="System.Int32"/>
+      <Column Name="TotalKeyedSalesAmt" DataType="System.Double"/>
+      <Column Name="GrandTotalGPPer" DataType="System.Double"/>
+    </TableDataSource>
+    <TableDataSource Name="DataSet" ReferenceName="Data.DataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Number" DataType="System.Double"/>
+      <Column Name="Description" DataType="System.String"/>
+      <Column Name="PercentageTotal" DataType="System.Double"/>
+      <Column Name="SalesCost" DataType="System.Double"/>
+      <Column Name="Margin" DataType="System.Double"/>
+      <Column Name="GPPrecentage" DataType="System.Double"/>
+      <Column Name="SalesAmt" DataType="System.Double"/>
+      <Column Name="SalesAmtExGST" DataType="System.Double"/>
+    </TableDataSource>
+    <Total Name="SalesCostTotal" Expression="[DataSet.SalesCost]" Evaluator="Data1"/>
+    <Total Name="MarginTotal" Expression="[DataSet.Margin]" Evaluator="Data1"/>
+    <Total Name="GPPrecentageTotal" Expression="[DataSet.GPPrecentage]" Evaluator="Data1"/>
+    <Total Name="SalesAmtTotal" Expression="[DataSet.SalesAmt]" Evaluator="Data1"/>
+    <Total Name="SalesAmtExGSTTotal" Expression="[DataSet.SalesAmtExGST]" Evaluator="Data1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" RawPaperSize="9" FirstPageSource="15" OtherPagesSource="15" LastPageSource="15" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="75.6" CanGrow="true">
+      <TextObject Name="Text1" Width="200" Height="18.9" Text="Printed on [Date]" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text2" Left="524.75" Width="193.45" Height="18.9" Text="Page: [PAGE#] of [TOTALPAGES#]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text3" Width="718.2" Height="18.9" Text="NIGHTOWL COYOTE GROCERY SYSTEM" Format="Date" Format.Format="d" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text4" Top="18.9" Width="718.2" Height="18.9" Text="[FilterDataSet.selectOutlets]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text5" Top="37.8" Width="718.2" Height="18.9" Text="[FilterDataSet.reportName]" HorzAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text6" Top="56.7" Width="718.2" Height="18.9" Text="For Trading Day [FilterDataSet.startDate] to [FilterDataSet.endDate]" HorzAlign="Center" Font="Arial, 8pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="79.9" Width="718.2" Height="20" Fill.Color="Plum">
+      <TextObject Name="Text7" Width="66.15" Height="20" Text="Number" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text8" Left="69.93" Width="198.45" Height="20" Text="Department" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text9" Left="272.16" Width="56.7" Height="20" Text="%Total" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text10" Left="330.75" Width="85.05" Height="20" Text="Sales Cost" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text11" Left="419.58" Width="75.6" Height="20" Text="$ Margin" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text12" Left="499.85" Width="47.25" Height="20" Text="GP%" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text13" Left="551.88" Width="75.6" Height="20" Text="Sales Amt" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text14" Left="628.7" Width="89.5" Height="20" Text="Sales-ExGst" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+    </PageHeaderBand>
+    <GroupHeaderBand Name="GroupHeader1" Top="104.2" Width="718.2" KeepWithData="true" Condition="[DataSet.Description]!=&quot;&quot;" SortOrder="None">
+      <DataBand Name="Data1" Top="108.5" Width="718.2" Height="20" Guides="0" DataSource="DataSet">
+        <TextObject Name="Text15" Width="66.15" Height="18.9" Text="[DataSet.Number]" Duplicates="Hide" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text16" Left="69.93" Width="198.45" Height="18.9" Text="[DataSet.Description]" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text17" Left="272.16" Width="56.7" Height="18.9" Text="[DataSet.PercentageTotal]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="1" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text18" Left="330.75" Width="85.05" Height="18.9" Text="[DataSet.SalesCost]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text19" Left="419.58" Width="75.6" Height="18.9" Text="[DataSet.Margin]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text20" Left="499.85" Width="47.25" Height="18.9" Text="[DataSet.GPPrecentage]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="1" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text21" Left="551.88" Width="75.6" Height="18.9" Text="[DataSet.SalesAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+        <TextObject Name="Text22" Left="628.7" Width="89.5" Height="18.9" Text="[DataSet.SalesAmtExGST]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      </DataBand>
+      <GroupFooterBand Name="GroupFooter1" Top="132.8" Width="718.2" Height="19.35" KeepWithData="true">
+        <TextObject Name="Text61" Left="330.75" Top="0.45" Width="85.05" Height="18.9" Text="[SalesCostTotal]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text62" Left="419.58" Top="0.45" Width="75.6" Height="18.9" Text="[MarginTotal]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text63" Left="499.85" Top="0.45" Width="47.25" Height="18.9" Text="[DataSet.GrandTotalGPPer]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="1" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text64" Left="551.88" Top="0.45" Width="75.6" Height="18.9" Text="[SalesAmtTotal]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        <TextObject Name="Text65" Left="628.7" Top="0.45" Width="89.5" Height="18.9" Text="[SalesAmtExGSTTotal]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      </GroupFooterBand>
+    </GroupHeaderBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="156.46" Width="718.2" Height="571.7" Border.Lines="Top">
+      <TextObject Name="Text23" Top="9.45" Width="151.2" Height="18.9" Text="SALES" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text24" Left="160.65" Top="9.45" Width="85.05" Height="18.9" Text="Qty" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text25" Left="255.15" Top="9.45" Width="75.6" Height="18.9" Text="Total" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text26" Top="29.45" Width="151.2" Height="18.9" Text="Total Sales: " VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalSalesQty" Left="160.65" Top="29.45" Width="85.05" Height="18.9" Text="[FilterDataSet.SalesQty]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalSalesAmt" Left="255.15" Top="29.45" Width="75.6" Height="18.9" Text="[FilterDataSet.SalesAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text27" Top="49.45" Width="151.2" Height="18.9" Text="Rounding:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="RoundingQty" Left="160.65" Top="49.45" Width="85.05" Height="18.9" Text="[FilterDataSet.RoundingQty]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="RoundingAmt" Left="255.15" Top="49.45" Width="75.6" Height="18.9" Text="[FilterDataSet.RoundingAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text28" Top="69.45" Width="151.2" Height="18.9" Text="TOTAL" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="SalesTotal" Left="255.15" Top="69.45" Width="75.6" Height="18.9" Border.Lines="Top" Text="[FilterDataSet.TotalSalesAmtNet]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text29" Left="359.1" Top="9.45" Width="189" Height="18.9" Text="TOTALS" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text30" Left="628.7" Top="9.45" Width="89.5" Height="18.9" Text="Total" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text31" Left="359.1" Top="29.45" Width="189" Height="18.9" Text="Sales Less Gst:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="SalesLessGstAmt" Left="628.7" Top="29.45" Width="89.5" Height="18.9" Text="[FilterDataSet.LessGSTSalesAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text32" Left="359.1" Top="49.45" Width="189" Height="18.9" Text="Total Gst Levied:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalGstLeviedAmt" Left="628.7" Top="49.45" Width="89.5" Height="18.9" Text="[FilterDataSet.GSTAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text33" Left="359.1" Top="69.45" Width="189" Height="18.9" Text="Non-Gst Product Sales:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="NonGstProductSalesAmt" Left="628.7" Top="69.45" Width="89.5" Height="18.9" Text="[FilterDataSet.NoGSTProductSalesAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text34" Left="359.1" Top="89.45" Width="189" Height="18.9" Text="Gst Product Sales:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="GstProductSalesAmt" Left="628.7" Top="89.45" Width="89.5" Height="18.9" Text="[FilterDataSet.GSTProductSalesAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text35" Left="359.1" Top="120" Width="170.1" Height="18.9" Text="COUNTERS" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text36" Left="548.1" Top="120" Width="66.15" Height="18.9" Text="Qty" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text37" Left="628.7" Top="120" Width="89.5" Height="18.9" Text="Total" HorzAlign="Right" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text38" Left="359.1" Top="140" Width="170.1" Height="18.9" Text="Total Cancelled Sales:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalCancelledSalesQty" Left="548.1" Top="140" Width="66.15" Height="18.9" Text="[FilterDataSet.CancelsQty]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalCancelledSalesAmt" Left="628.7" Top="140" Width="89.5" Height="18.9" Text="[FilterDataSet.CancelsAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text39" Left="359.1" Top="160" Width="170.1" Height="18.9" Text="Total Void/Cancel Items:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalVoidQty" Left="548.1" Top="160" Width="66.15" Height="18.9" Text="[FilterDataSet.CancelsVoidQty]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalVoidAmt" Left="628.7" Top="160" Width="89.5" Height="18.9" Text="[FilterDataSet.CancelsVoidAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text40" Left="359.1" Top="180" Width="170.1" Height="18.9" Text="Total Refund Items:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalRefundQty" Left="548.1" Top="180" Width="66.15" Height="18.9" Text="[FilterDataSet.RefundsItemsQty]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalRefundAmt" Left="628.7" Top="180" Width="89.5" Height="18.9" Text="[FilterDataSet.RefundsItemsAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text41" Left="359.1" Top="200" Width="170.1" Height="18.9" Text="Total Promo Discounts:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalPromoQty" Left="548.1" Top="200" Width="66.15" Height="18.9" Text="[FilterDataSet.PromoDiscQty]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalPromoAmt" Left="628.7" Top="200" Width="89.5" Height="18.9" Text="[FilterDataSet.PromoDiscAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text42" Left="359.1" Top="220" Width="170.1" Height="18.9" Text="Total Pos Markdowns:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalPosQty" Left="548.1" Top="220" Width="66.15" Height="18.9" Text="[FilterDataSet.PromoMarkdownsQty]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalPosAmt" Left="628.7" Top="220" Width="89.5" Height="18.9" Text="[FilterDataSet.PromoMarkdownsAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text43" Left="359.1" Top="240" Width="170.1" Height="18.9" Text="Total Customers:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalCustomersQty" Left="548.1" Top="240" Width="66.15" Height="18.9" Text="[FilterDataSet.TotalCustomer]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text44" Left="359.1" Top="260" Width="170.1" Height="18.9" Text="Avg Items Per Customer:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="AvgItemsAmt" Left="628.7" Top="260" Width="89.5" Height="18.9" Text="[FilterDataSet.AvgItemsPerCustomer]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text45" Left="359.1" Top="280" Width="170.1" Height="18.9" Text="Avg Spend Per Customer:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="AvgSpendAmt" Left="628.7" Top="280" Width="89.5" Height="18.9" Text="[FilterDataSet.AvgAmtPerCustomer]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text46" Left="359.1" Top="300" Width="170.1" Height="18.9" Text="Total No Sales:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalNoQty" Left="548.1" Top="300" Width="66.15" Height="18.9" Text="[FilterDataSet.TotalNoSales]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text47" Left="359.1" Top="326" Width="170.1" Height="18.9" Text="Total Keyed Open Sales:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalKeyedQty" Left="548.1" Top="326" Width="66.15" Height="18.9" Text="[FilterDataSet.TotalKeyedSalesQty]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TotalKeyedAmt" Left="628.7" Top="326" Width="89.5" Height="18.9" Text="[FilterDataSet.TotalKeyedSalesAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text48" Top="98.5" Width="151.2" Height="18.9" Text="PAYMENT TYPES" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text49" Top="116.1" Width="151.2" Height="18.9" Text="Cash:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="CashQty" Left="160.65" Top="116.1" Width="85.05" Height="18.9" Text="[FilterDataSet.CashQty]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="CashAmt" Left="255.15" Top="116.1" Width="75.6" Height="18.9" Text="[FilterDataSet.CashAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text50" Top="136.1" Width="151.2" Height="18.9" Text="Eftpos:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="EftposQty" Left="160.65" Top="136.1" Width="85.05" Height="18.9" Text="[FilterDataSet.EftposQty]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="EftposAmt" Left="255.15" Top="136.1" Width="75.6" Height="18.9" Text="[FilterDataSet.EftposAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text51" Top="156.1" Width="151.2" Height="18.9" Text="Amex:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="AmexQty" Left="160.65" Top="156.1" Width="85.05" Height="18.9" Text="[FilterDataSet.AmexQty]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="AmexAmt" Left="255.15" Top="156.1" Width="75.6" Height="18.9" Text="[FilterDataSet.AmexAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text52" Top="176.1" Width="151.2" Height="18.9" Text="Diner:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="DinerQty" Left="160.65" Top="176.1" Width="85.05" Height="18.9" Text="[FilterDataSet.DinersQty]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="DinerAmt" Left="255.15" Top="176.1" Width="75.6" Height="18.9" Text="[FilterDataSet.DinersAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text53" Top="336.1" Width="151.2" Height="18.9" Text="Other:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="OtherQty" Left="160.65" Top="336.1" Width="85.05" Height="18.9" Text="[FilterDataSet.OtherQty]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="OtherAmt" Left="255.15" Top="336.1" Width="75.6" Height="18.9" Text="[FilterDataSet.OtherAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text54" Top="356.1" Width="151.2" Height="18.9" Text="TOTAL:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="TOTALAmt" Left="255.15" Top="356.1" Width="75.6" Height="18.9" Border.Lines="Top" Text="[FilterDataSet.TotalPaymentAmtNet]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text55" Top="385.7" Width="151.2" Height="18.9" Text="CASH BALANCE" VertAlign="Center" Font="Arial, 9pt, style=Bold"/>
+      <TextObject Name="Text56" Top="406.65" Width="151.2" Height="18.9" Text="Royalties:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="CashSalesQty" Left="160.65" Top="406.65" Width="85.05" Height="18.9" Text="[FilterDataSet.CashQty]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="CashSalesAmt" Left="255.15" Top="406.65" Width="75.6" Height="18.9" Text="[FilterDataSet.CashAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text57" Top="426.65" Width="151.2" Height="18.9" Text="Less Eftpos Cashout:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="LessEftposQty" Left="160.65" Top="426.65" Width="85.05" Height="18.9" Text="[FilterDataSet.CashOutQty]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="LessEftposAmt" Left="255.15" Top="426.65" Width="75.6" Height="18.9" Text="[FilterDataSet.CashOutAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text58" Top="446.65" Width="151.2" Height="18.9" Text="Less Pickup Cash:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="LessPickupQty" Left="160.65" Top="446.65" Width="85.05" Height="18.9" Text="[FilterDataSet.PickUpQty]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="LessPickupAmt" Left="255.15" Top="446.65" Width="75.6" Height="18.9" Text="[FilterDataSet.PickUpAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text59" Top="466.65" Width="151.2" Height="18.9" Text="Less Paidout Cash:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="LessPaidoutQty" Left="160.65" Top="466.65" Width="85.05" Height="18.9" Text="[FilterDataSet.PickOutQty]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="LessPaidoutAmt" Left="255.15" Top="466.65" Width="75.6" Height="18.9" Text="[FilterDataSet.PickOutAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text60" Top="486.65" Width="151.2" Height="18.9" Text="CASH NET:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="CASHNETAmt" Left="255.15" Top="486.65" Width="75.6" Height="18.9" Border.Lines="Top" Text="[FilterDataSet.TotalCashBalNet]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text66" Top="198.45" Width="151.2" Height="18.9" Text="App:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text67" Top="217.35" Width="151.2" Height="18.9" Text="Fuel Card:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text68" Top="236.25" Width="151.2" Height="18.9" Text="Fleet Card:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text69" Top="255.15" Width="151.2" Height="18.9" Text="Motor Pass:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text70" Top="274.05" Width="151.2" Height="18.9" Text="Motor Charge:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text71" Top="292.95" Width="151.2" Height="18.9" Text="Uber Eats:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text72" Top="311.85" Width="151.2" Height="18.9" Text="Deliveroo:" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text73" Left="160.65" Top="198.45" Width="85.05" Height="18.9" Text="[FilterDataSet.APPQty]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text74" Left="255.15" Top="198.45" Width="75.6" Height="18.9" Text="[FilterDataSet.APPAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text75" Left="160.65" Top="217.35" Width="85.05" Height="18.9" Text="[FilterDataSet.FUELCARDQty]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text76" Left="255.15" Top="217.35" Width="75.6" Height="18.9" Text="[FilterDataSet.FUELCARDAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text77" Left="160.65" Top="236.25" Width="85.05" Height="18.9" Text="[FilterDataSet.FLEETCARDQty]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text78" Left="255.15" Top="236.25" Width="75.6" Height="18.9" Text="[FilterDataSet.FLEETCARDAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text79" Left="160.65" Top="255.15" Width="85.05" Height="18.9" Text="[FilterDataSet.MOTORPASSQty]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text80" Left="255.15" Top="255.15" Width="75.6" Height="18.9" Text="[FilterDataSet.MOTORPASSAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text81" Left="160.65" Top="274.05" Width="85.05" Height="18.9" Text="[FilterDataSet.MOTORCHARGEQty]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text82" Left="255.15" Top="274.05" Width="75.6" Height="18.9" Text="[FilterDataSet.MOTORCHARGEAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text83" Left="160.65" Top="292.95" Width="85.05" Height="18.9" Text="[FilterDataSet.UBEREATSQty]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text84" Left="255.15" Top="292.95" Width="75.6" Height="18.9" Text="[FilterDataSet.UBEREATSAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text85" Left="160.65" Top="311.85" Width="85.05" Height="18.9" Text="[FilterDataSet.DELIVEROOQty]" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text86" Left="255.15" Top="311.85" Width="75.6" Height="18.9" Text="[FilterDataSet.DELIVEROOAmt]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" Font="Arial, 8pt"/>
+    </ReportSummaryBand>
+    <PageFooterBand Name="PageFooter1" Top="732.46" Width="718.2" Height="28.35" Fill.Color="WhiteSmoke" CanGrow="true"/>
+  </ReportPage>
+</Report>

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" TextQuality="Regular" ReportInfo.Name="Simple List" ReportInfo.Author="Fast Reports Inc" ReportInfo.Description="Demonstrates a simple list report. To create it:&#13;&#10;- go to &quot;Data&quot; menu and select &quot;Choose Report Data...&quot; item to select a datasource;&#13;&#10;- go to &quot;Report|Configure Bands...&quot; menu to create the band structure;&#13;&#10;- return to the report page, doubleclick the data band to show its editor;&#13;&#10;- choose the datasource;&#13;&#10;- drag data from the Data Dictionary window to the band." ReportInfo.Created="01/17/2008 03:05:57" ReportInfo.Modified="06/17/2022 16:48:55" ReportInfo.CreatorVersion="2022.1.2.0">
+  <Dictionary>
+    <TableDataSource Name="DataSet" ReferenceName="Data.DataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="number" DataType="System.Double"/>
+      <Column Name="SupplierItem" DataType="System.String"/>
+      <Column Name="desc" DataType="System.String"/>
+      <Column Name="InvestBuy" DataType="System.String"/>
+      <Column Name="CartonQty" DataType="System.String"/>
+      <Column Name="MinOnHand" DataType="System.String"/>
+      <Column Name="ORDL_Promo_Units" DataType="System.String"/>
+      <Column Name="ORDL_SUGG_UNITS_ONHAND" DataType="System.String"/>
+      <Column Name="OnOrder" DataType="System.String"/>
+      <Column Name="SalePromoEndDate" DataType="System.String"/>
+      <Column Name="NonPromoAvgDaily" DataType="System.String"/>
+      <Column Name="TradingCoverDays" DataType="System.String"/>
+      <Column Name="Cartons" DataType="System.String"/>
+      <Column Name="Units" DataType="System.String"/>
+      <Column Name="LineTotal" DataType="System.Double"/>
+    </TableDataSource>
+    <TableDataSource Name="FilterDataSet" ReferenceName="Data.FilterDataSet" DataType="System.Int32" Enabled="true">
+      <Column Name="Store" DataType="System.String"/>
+      <Column Name="Supplier" DataType="System.String"/>
+      <Column Name="OrderNo" DataType="System.String"/>
+    </TableDataSource>
+    <Total Name="Total" Expression="[DataSet.LineTotal]" Evaluator="Data2"/>
+  </Dictionary>
+  <ReportPage Name="Page2" Landscape="true" PaperWidth="297" PaperHeight="210" RawPaperSize="9" Watermark.Font="Arial, 60pt">
+    <PageHeaderBand Name="PageHeader1" Width="1047.06" Height="75.6">
+      <TextObject Name="Text19" Left="9.45" Width="425.25" Height="18.9" Text="Printed: [Date]" Format="Date" Format.Format="d" Font="Arial, 9pt"/>
+      <TextObject Name="Text20" Left="945" Width="94.5" Height="18.9" Text="Page: [PAGE#] of [TOTALPAGES#]" Font="Arial, 9pt"/>
+      <TextObject Name="Text21" Left="9.45" Top="18.9" Width="1030.05" Height="18.9" Text="[FilterDataSet.Store]" HorzAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text22" Left="9.45" Top="37.8" Width="1030.05" Height="18.9" Text="Order" HorzAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text23" Left="9.45" Top="56.7" Width="1030.05" Height="18.9" Text="[FilterDataSet.Supplier]" HorzAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text24" Left="9.45" Top="56.7" Width="160.65" Height="18.9" Text="Order No: [FilterDataSet.OrderNo]" Font="Arial, 9.75pt, style=Bold"/>
+      <ChildBand Name="Child3" Top="79.9" Width="1047.06" Height="28.35" Border.Lines="Top, Bottom" Fill.Color="LightCyan">
+        <TextObject Name="Text25" Left="9.45" Width="56.7" Height="28.35" Text="Product" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text26" Left="66.15" Width="66.15" Height="28.35" Text="Supplier Item" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text27" Left="132.3" Width="226.8" Height="28.35" Text="Description" VertAlign="Bottom" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text28" Left="359.1" Width="37.8" Height="28.35" Text="Inv Buy" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text29" Left="396.9" Width="56.7" Height="28.35" Text="Carton Qty" HorzAlign="Center" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text30" Left="453.6" Width="66.15" Height="28.35" Text="Min Stocklev" HorzAlign="Center" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text31" Left="519.75" Width="47.25" Height="28.35" Text="Promo Units" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text32" Left="567" Width="56.7" Height="28.35" Text="OnHand Units" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text33" Left="623.7" Width="66.15" Height="28.35" Text="OnOrder Units" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text34" Left="689.85" Width="66.15" Height="28.35" Text="Sale Prm Date" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text35" Left="756" Width="56.7" Height="28.35" Text="Daily Average" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text36" Left="812.7" Width="47.25" Height="28.35" Text="Days Cover" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text37" Left="859.95" Width="56.7" Height="28.35" Text="Order Cartons" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text38" Left="916.65" Width="47.25" Height="28.35" Text="Order Units" Font="Arial, 9pt, style=Bold"/>
+        <TextObject Name="Text39" Left="982.8" Width="56.7" Height="28.35" Text="Line Total" HorzAlign="Right" Font="Arial, 9pt, style=Bold"/>
+      </ChildBand>
+    </PageHeaderBand>
+    <DataBand Name="Data2" Top="112.55" Width="1047.06" Height="18.9" DataSource="DataSet">
+      <TextObject Name="Product" Left="9.45" Width="56.7" Height="18.9" Text="[DataSet.number]" Font="Arial, 9pt"/>
+      <TextObject Name="SupplierItem" Left="66.15" Width="66.15" Height="18.9" Text="[DataSet.SupplierItem]" Font="Arial, 9pt"/>
+      <TextObject Name="description" Left="132.3" Width="226.8" Height="18.9" CanBreak="false" Text="[DataSet.desc]" WordWrap="false" Font="Arial, 9pt"/>
+      <TextObject Name="InvBuy" Left="359.1" Width="37.8" Height="18.9" VisibleExpression="[DataSet.InvestBuy]==&quot;True&quot;" Text="Yes" Font="Arial, 9pt"/>
+      <TextObject Name="InvBuy" Left="359.1" Width="37.8" Height="18.9" VisibleExpression="[DataSet.InvestBuy]==&quot;False&quot;" Text="No" HorzAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="ctnQty" Left="396.9" Width="56.7" Height="18.9" Text="[DataSet.CartonQty]" HorzAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="MinStock" Left="453.6" Width="66.15" Height="18.9" Text="[DataSet.MinOnHand]" HorzAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="PromoUnits" Left="519.75" Width="47.25" Height="18.9" Text="[DataSet.ORDL_Promo_Units]" HorzAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="OnHandUnits" Left="567" Width="56.7" Height="18.9" Text="[DataSet.ORDL_SUGG_UNITS_ONHAND]" HorzAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="OnOrderUnits" Left="623.7" Width="66.15" Height="18.9" Text="[DataSet.OnOrder]" HorzAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="salePrmDate" Left="689.85" Width="66.15" Height="18.9" Text="[DataSet.SalePromoEndDate]" HorzAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="DailyAvg" Left="756" Width="56.7" Height="18.9" Text="[DataSet.NonPromoAvgDaily]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="DaysCover" Left="812.7" Width="47.25" Height="18.9" Text="[DataSet.TradingCoverDays]" HorzAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="OrderCtns" Left="859.95" Width="56.7" Height="18.9" Text="[DataSet.Cartons]" HorzAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="OrderUnits" Left="916.65" Width="47.25" Height="18.9" Text="[DataSet.Units]" HorzAlign="Center" Font="Arial, 9pt"/>
+      <TextObject Name="lineTotal" Left="963.9" Width="75.6" Height="18.9" Text="[DataSet.LineTotal]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" Font="Arial, 9pt"/>
+      <DataFooterBand Name="DataFooter1" Top="135.75" Width="1047.06" Height="37.8" Border.Lines="Top">
+        <TextObject Name="Text40" Left="859.95" Top="9.45" Width="94.5" Height="18.9" Text="Order Total:" Font="Arial, 9pt, style=Bold"/>
+        <ShapeObject Name="Shape1" Left="945" Top="9.45" Width="94.5" Height="18.9" Border.Color="LightGray"/>
+        <TextObject Name="Text41" Left="945" Top="9.45" Width="94.5" Height="18.9" Text="[Total]" Format="Currency" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.CurrencySymbol="$" Format.PositivePattern="0" Format.NegativePattern="0" HorzAlign="Right" Font="Arial, 9pt, style=Bold"/>
+      </DataFooterBand>
+    </DataBand>
+  </ReportPage>
+</Report>
