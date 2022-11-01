@@ -1,0 +1,8 @@
+tr {
+  cursor: pointer;
+}
+.active-custom label.custom-control-label {
+  font-size: 12px;
+}
+
+tr.red-all-text td,tr.red-all-text td a, tr.red-all-text td p, tr.red-all-text td span{ background-color:#ececec;}

@@ -1,0 +1,3280 @@
+<div class="mainContent-innner">
+  <div class="Stock-section">
+    <!-- <div class="d-flex align-items-center">
+           <h4 class="title flex-grow-1 mb-0">{{salesByText}}</h4>
+            <div class="probtn-wrap d-flex text-right">            
+                <button type="button" data-toggle="modal" data-target="#reportFilter" 
+                 (click)="unChecked()"   class="btn btn-blue with-icon">
+                    <i class="icon fa fa-file"></i> {{salesByText}}</button>
+            </div>
+        </div> -->
+    <div class="bg-box mt-15 vh-100">
+      <div *ngIf="reporterObj.currentUrl === reportNameObj.itemWithZeroSOH" class="text-right mb-2"
+        style="text-align: center">
+        <button type="button" class="btn btn-blue">Close</button>
+      </div>
+      <!-- <iframe [src]='safeURL' frameborder="0" allowfullscreen width="100%" height="100%"></iframe> -->
+
+      <ngx-extended-pdf-viewer [customToolbar]="additionalButtons" [src]="pdfData" [height]="'90vh'"
+        [useBrowserLocale]="true" [textLayer]="true" [showHandToolButton]="true" [zoom]="'page-width'">
+      </ngx-extended-pdf-viewer>
+
+      <ng-template #additionalButtons>
+        <div id="toolbarViewer">
+          <div id="toolbarViewerLeft">
+            <pdf-toggle-sidebar></pdf-toggle-sidebar>
+            <div class="toolbarButtonSpacer"></div>
+            <pdf-find-button [showFindButton]="true" [textLayer]="true"></pdf-find-button>
+            <pdf-paging-area></pdf-paging-area>
+          </div>
+          <div id="toolbarViewerRight">
+            <pdf-open-file></pdf-open-file>
+            <pdf-presentation-mode></pdf-presentation-mode>
+            <pdf-print></pdf-print>
+            <pdf-download></pdf-download>
+            <!-- <button type="button" class="toolbarButton new-tab hiddenMediumView" title="Download CSV file"
+              (click)="exportCSVData()">
+              <img class="toolbarImges" src="assets/img/csv.svg" />
+            </button>
+            <button type="button" class="toolbarButton new-tab hiddenMediumView" title="Download xlsx file"
+              (click)="exportAsXLSX()">
+              <img class="toolbarImges" src="assets/img/excel-file.svg" />
+            </button> -->
+            <!-- <pdf-bookmark></pdf-bookmark> -->
+            <!-- <button
+              type="button"
+              class="toolbarButton new-tab hiddenMediumView"
+              title="Page settings"
+              data-toggle="modal"
+              data-target="#PageSettings"
+            >
+              <img class="toolbarImges" src="assets/img/gear.svg" />
+            </button> -->
+            <button type="button" class="toolbarButton new-tab hiddenMediumView" title="Close" [routerLink]="['/']"
+              routerLinkActive="router-link-active">
+              <img class="toolbarImges" src="assets/img/cancel.svg" />
+            </button>
+            <div class="verticalToolbarSeparator hiddenSmallView"></div>
+            <pdf-toggle-secondary-toolbar></pdf-toggle-secondary-toolbar>
+          </div>
+          <pdf-zoom-toolbar></pdf-zoom-toolbar>
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade bd-example-modal-xl thm-popup" id="reportFilter" tabindex="-1" role="dialog"
+  aria-labelledby="reportFilterModalLabel" aria-hidden="true" data-backdrop="static">
+  <form [formGroup]="salesReportForm">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-body popup-box-width">
+          <div class="popup-box">
+            <div class="form-row align-items-center title-wrap">
+              <!-- Added click event to close promotion dropdown forcefully -->
+              <div class="col-6" (click)="htmlTagEvent(reporterObj.dropdownField.promotions)">
+                <div class="mb-0">
+                  <h4 class="title">{{ salesByText }}</h4>
+                </div>
+              </div>
+
+              <!-- Added click event to close promotion dropdown forcefully -->
+              <div class="col-6" (click)="htmlTagEvent(reporterObj.dropdownField.promotions)">
+                <div class="text-right">
+                  <div class="custom-control form-group custom-checkbox mb-0">
+                    <input type="checkbox" class="custom-control-input checkedFilter
+                    " id="{{ reporterObj.currentUrl }}"
+                      (change)="onDateOrKeepFilterChange('keepFilter', $event.target.checked)"
+                      [checked]="dropdownObj?.keep_filter ? dropdownObj?.keep_filter[reporterObj.currentUrl] : false" />
+                    <!-- [checked]="dropdownObj?.keep_filter ? dropdownObj?.keep_filter[reporterObj.currentUrl] : false"  -->
+                    <label class="custom-control-label mb-0" for="{{ reporterObj.currentUrl }}">Keep current
+                      filter</label>
+                    <button type="button" class="ml-2 btn btn-grey btn-grey-refresh" (click)="refreshBtnClicked()">
+                      <i class="icon fa fa-refresh"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Added click event to close promotion dropdown forcefully -->
+              <div class="col-lg-5 col-xl-5" (click)="htmlTagEvent(reporterObj.dropdownField.promotions)">
+                <div class="group-from mb-0 report-form-group">
+                  <h5 class="title">
+                    Date Range
+                  </h5>
+                  <div class="overflow-h">
+                    <ng-container *ngIf="
+                      reporterObj.currentUrl !==
+                      reportNameObj.productPriceDeviation
+                    ">
+                      <div class="accordion exclude-list mb-3" id="accordionExample"
+                        *ngIf="reporterObj.currentUrl != 'nationalRanging'">
+                        <div id="headingOne">
+                          <a href="javascript:void(0);" class="Out-btn" data-toggle="collapse"
+                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+
+                          </a>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                          data-parent="#accordionExample">
+                          <!-- DATE RANGE -->
+                          <div class="submenu h-auto">
+                            <div class="form-row align-items-center">
+                              <div class="col-5">
+                                <div class="form-group mb-0">
+                                  <div class="ctm-calendar">
+                                    <input type="text" onkeydown="return false" class="form-control"
+                                      (bsValueChange)="onDateChange($event, 'startDate', true); specDateChange($event, f?.endDate?.value);"
+                                      bsDatepicker [bsValue]="startDateBsValue" [bsConfig]="datepickerConfig"
+                                      [maxDate]="maxDate" [ngClass]="{
+                                      'is-invalid': submitted && f.startDate.errors
+                                     }" />
+                                    <div *ngIf="f.startDate.errors" class="invalid-feedback">
+                                      <div *ngIf="f.startDate.errors.required">
+                                        Start date is required
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-2">
+                                <div class="form-group mb-0 text-center">
+                                  <label for="" class="mb-0">To</label>
+                                </div>
+                              </div>
+                              <div class="col-5">
+                                <div class="form-group mb-0">
+                                  <div class="ctm-calendar">
+                                    <input type="text" onkeydown="return false" class="form-control" bsDatepicker
+                                      [bsValue]="endDateBsValue" [minDate]="lastEndDate || f?.startDate?.value"
+                                      [bsConfig]="datepickerConfig"
+                                      (bsValueChange)="onDateChange($event, 'endDate'); specDateChange(f?.startDate?.value, $event);"
+                                      [maxDate]="maxDate" [ngClass]="{
+                                      'is-invalid': submitted && f.endDate.errors
+                                    }" />
+                                    <div *ngIf="f.endDate.errors" class="invalid-feedback">
+                                      <div *ngIf="f.endDate.errors.required">
+                                        End date is required
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- <div class="col-2">
+                                <button type="button" class="btn btn-blue btn-block input-btn btn-grey">...</button>
+                            </div> -->
+                            </div>
+                            <div *ngIf="
+                              reporterObj.currentUrl !=
+                                'itemWithNoSalesProduct' &&
+                              reporterObj.currentUrl !==
+                                reportNameObj.NationalLevelSalesSummary
+                            " class="form-row form-group mb-0 mt-2">
+                              <ng-container *ngFor="let day of dropdownObj.days">
+                                <div class="col-lg-4 ">
+                                  <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" [id]="day.code" (change)="
+                                      onDateOrKeepFilterChange(
+                                        'day',
+                                        $event.target.checked,
+                                        day.code,
+                                        day.name
+                                      )
+                                    " [checked]="
+                                      f?.days?.value?.includes(day.code)
+                                        ? true
+                                        : false
+                                    " />
+                                    <label class="custom-control-label mb-0" [for]="day.code">
+                                      {{ day.name }}
+                                    </label>
+                                  </div>
+                                </div>
+                              </ng-container>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+
+                    <!-- General Field Filter -->
+                    <ng-container *ngIf="
+                      reporterObj.currentUrl !==
+                        reportNameObj.rankingByOutlet &&
+                      reporterObj.currentUrl !== 'nationalRanging' &&
+                      reporterObj.currentUrl !== 'ItemWithSlowMovingStock' &&
+                      reporterObj.currentUrl !== 'ItemWithNegativeSOH' &&
+                      reporterObj.currentUrl !==
+                        reportNameObj.productPriceDeviation &&
+                      reporterObj.currentUrl !==
+                        reportNameObj.salesMemberSummary &&
+                      reporterObj.currentUrl !==
+                        reportNameObj.itemWithNoSalesProduct &&
+                      reporterObj.currentUrl !==
+                        reportNameObj.lessthenXdaysStock &&
+                      reporterObj.currentUrl !==
+                        reportNameObj.NationalLevelSalesSummary && reporterObj.currentUrl !==
+                        reportNameObj.itemWithNoSalesSummary && reporterObj.currentUrl !== reportNameObj.itemWithZeroSOH
+                        
+                    ">
+                      <div class="group-from">
+                        <h5 class="title">General Field Filters</h5>
+                        <div class="form-row form-group align-items-center">
+                          <div class="col-4 text-right">
+                            <label for="" class="mb-0">Sales AMT</label>
+                          </div>
+                          <div class="col-8">
+                            <div class="form-row">
+                              <div class="col-8">
+                                <select id="salesAMT" class="form-control" (change)="
+                                  selectDropdownValue(
+                                    'salesAMT',
+                                    $event.target.value
+                                  )
+                                ">
+                                  <option *ngFor="
+                                    let generalField of generalFieldFilter
+                                  " [value]="generalField | json">
+                                    {{ generalField.name }}
+                                  </option>
+                                </select>
+                              </div>
+                              <div class="col-4">
+                                <input type="number" pattern="^\d+(?:\.\d{1,2})?$" [min]="0"
+                                  onkeyup="if(this.value<0){this.value= this.value * -1}" class="form-control"
+                                  formControlName="salesAMTRange" value="0.00" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-row form-group align-items-center field-disabled">
+                          <div class="col-4 text-right">
+                            <label for="salesQty" class="mb-0">Sales QTY</label>
+                          </div>
+                          <div class="col-8">
+                            <div class="form-row">
+                              <div class="col-8">
+                                <select name="salesQty" id="salesQty" class="form-control">
+                                  <option value="">NONE</option>
+                                </select>
+                              </div>
+                              <div class="col-4">
+                                <input type="text" class="form-control" [min]="0"
+                                  onkeyup="if(this.value<0){this.value= this.value * -1}" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-row form-group align-items-center">
+                          <div class="col-4 text-right">
+                            <label for="" class="mb-0">SOH</label>
+                          </div>
+                          <div class="col-8">
+                            <div class="form-row" [ngClass]="{'field-disabled': reporterObj.currentUrl == 'ranging'}">
+                              <div class="col-8">
+                                <select id="soh" class="form-control" (change)="
+                                selectDropdownValue(
+                                  'salesSOH',
+                                  $event.target.value
+                                )
+                              ">
+                                  <option *ngFor="
+                                    let generalField of generalFieldFilter
+                                  " [value]="generalField | json">
+                                    {{ generalField.name }}
+                                  </option>
+                                </select>
+                              </div>
+                              <div class="col-4">
+                                <input type="number" [min]="0" onkeyup="if(this.value<0){this.value= this.value * -1}"
+                                  class="form-control" formControlName="salesSOHRange" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-row form-group mb-0 align-items-center field-disabled">
+                          <div class="col-4 text-right">
+                            <label for="strVal" class="mb-0">String value</label>
+                          </div>
+                          <div class="col-8">
+                            <div class="form-row">
+                              <div class="col-8">
+                                <select name="strVal" id="strVal" class="form-control">
+                                  <option value="">NONE</option>
+                                </select>
+                              </div>
+                              <div class="col-4">
+                                <input type="text" class="form-control" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+
+                    <!-- PROMOTION FILTER -->
+                    <!-- <div class="group-from" *ngIf="
+                      reporterObj.currentUrl !==
+                        reportNameObj.rankingByOutlet &&
+                      reporterObj.currentUrl !== 'nationalRanging' &&
+                      reporterObj.currentUrl !== 'ranging' &&
+                      reporterObj.currentUrl !== 'ItemWithSlowMovingStock' &&
+                      reporterObj.currentUrl !== 'ItemWithNegativeSOH' &&
+                      reporterObj.currentUrl !==
+                        reportNameObj.productPriceDeviation &&
+                      reporterObj.currentUrl !==
+                        reportNameObj.salesMemberSummary &&
+                      reporterObj.currentUrl !==
+                        reportNameObj.itemWithNoSalesProduct &&
+                      reporterObj.currentUrl !==
+                        reportNameObj.lessthenXdaysStock &&
+                      reporterObj.currentUrl !==
+                        reportNameObj.NationalLevelSalesSummary &&  reporterObj.currentUrl !==
+                        reportNameObj.salesDepartmentSummary
+                    "> -->
+                    <div class="group-from" *ngIf="false">
+                      <h5 class="title">
+                        Promotion Filter {{ reporterObj.currentUrl }}
+                      </h5>
+                      <div class="form-row form-group align-items-center mb-0">
+                        <div class="col-6">
+                          <div class="custom-control custom-checkbox">
+                            <input formControlName="isPromoSale" type="checkbox" class="custom-control-input"
+                              id="Sales" />
+                            <label class="custom-control-label mb-0" for="Sales">Only Promo Sales</label>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="form-row align-items-center">
+                            <div class="col-4">
+                              <label class="label mb-0 pt-1 ">Promo</label>
+                            </div>
+                            <div class="col-8">
+                              <input formControlName="promoCode" type="text" class="form-control" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Summary Report Options -->
+                    <ng-container *ngIf="
+                      reporterObj.currentUrl !==
+                        reportNameObj.rankingByOutlet &&
+                      reporterObj.currentUrl !==
+                        reportNameObj.NationalLevelSalesSummary &&
+                        reporterObj.currentUrl !==
+                        reportNameObj.productPriceDeviation &&
+                        reporterObj.currentUrl !==
+                        reportNameObj.ranging 
+                    ">
+                      <div class="group-from">
+                        <h5 class="title">Summary Report Options</h5>
+                        <div class="d-flex flex-wrap form-group mb-0">
+                          <ng-container *ngFor="let summaryOpt of reporterObj.summary_option">
+                            <div class="custom-control custom-radio mr-2">
+                              <input type="radio" class="custom-control-input" [id]="summaryOpt.code" (change)="
+                                setSummaryOption(
+                                  summaryOpt.code,
+                                  'summary_option',
+                                  'summaryRep'
+                                )
+                              " name="summaryRep" [value]="f?.summaryRep?.value || summaryOpt.code" [checked]="
+                                f?.summaryRep?.value === summaryOpt.code &&
+                                !summaryOpt.disable
+                                  ? true
+                                  : false
+                              " [disabled]="summaryOpt.disable" />
+                              <label class="custom-control-label mb-0" [for]="summaryOpt.code">
+                                {{ summaryOpt.code }}
+                              </label>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </ng-container>
+
+                    <!-- Alternate Sort Order -->
+                    <ng-container *ngIf="
+                      reporterObj.currentUrl != reportNameObj.rankingByOutlet &&
+                      reporterObj.currentUrl != 'nationalRanging' &&
+                      reporterObj.currentUrl != 'ranging' &&
+                      reporterObj.currentUrl != 'ItemWithSlowMovingStock' &&
+                      reporterObj.currentUrl !==
+                      reportNameObj.productPriceDeviation &&
+                      reporterObj.currentUrl !==
+                      reportNameObj.itemWithNoSalesProduct &&
+                      reporterObj.currentUrl !==
+                      reportNameObj.NationalLevelSalesSummary &&
+                      reporterObj.currentUrl !==
+                      reportNameObj.ItemWithSlowMovingStock &&
+                      reporterObj.currentUrl !==
+                      reportNameObj.itemWithNoSalesSummary 
+
+                            
+                    ">
+                      <div class="group-from">
+                        <h5 class="title">Alternate Sort Order</h5>
+                        <div class="d-flex flex-wrap form-group mb-0">
+                          <ng-container *ngFor="let sortOpt of reporterObj.sort_option">
+                            <div class="custom-control custom-radio mr-2">
+                              <input type="radio" class="custom-control-input" id="{{sortOpt.code}}" (change)="
+                                setSummaryOption(sortOpt.code, 'sort_option')
+                              " name="sort" [value]="sortOpt.name" formControlName="sort" />
+                              <label class="custom-control-label mb-0" [for]="sortOpt.code">
+                                {{ sortOpt.name }}
+                              </label>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </ng-container>
+
+                    <!-- Stock Order -->
+                    <ng-container *ngIf="
+                      reporterObj.currentUrl !==
+                      reportNameObj.itemWithNoSalesProduct &&
+                      reporterObj.currentUrl !==
+                      reportNameObj.rankingByOutlet && reporterObj.currentUrl !==
+                      reportNameObj.itemWithNoSalesSummary
+                     
+                    ">
+                      <div class="group-from">
+                        <h5 class="title">Stock</h5>
+                        <div class="form-group mb-1">
+                          <div class="custom-control custom-checkbox" [ngClass]="
+                            reporterObj.currentUrl == 'productPriceDeviation' &&
+                            reporterObj.currentUrl ==
+                              'NationalLevelSalesSummary' || reporterObj.currentUrl == 'salesDepartmentSummary' || reporterObj.currentUrl == 'salesCommoditySummary' || reporterObj.currentUrl ==  'salesCategorySummary' || reporterObj.currentUrl ==  'salesGroupSummary' || reporterObj.currentUrl == 'salesSupplierSummary' || reporterObj.currentUrl == 'salesOutletSummary' || reporterObj.currentUrl == 'salesMemberSummary' 
+                              || reporterObj.currentUrl == 'ranging'  || reporterObj.currentUrl == 'productPriceDeviation'  || reporterObj.currentUrl == 'nationalRanging' 
+                              ? 'field-disabled'
+                              : ''
+                          ">
+                            <input formControlName="stockNegativeOH" type="checkbox" class="custom-control-input"
+                              id="stockNegativeOnHand" />
+                            <label class="custom-control-label mb-0" for="stockNegativeOnHand">
+                              {{ displayTextObj.stockNegativeOH }}
+                            </label>
+                          </div>
+                        </div>
+                        <div class="form-group mb-1">
+                          <div class="custom-control custom-checkbox" [ngClass]="
+                            reporterObj.currentUrl !==
+                              reportNameObj.lessthenXdaysStock &&
+                            reporterObj.currentUrl !==
+                              reportNameObj.itemWithZeroSOH && reporterObj.currentUrl !== 'salesDepartmentSummary' && reporterObj.currentUrl !== 'salesCommoditySummary' && reporterObj.currentUrl !=  'salesCategorySummary' && reporterObj.currentUrl !=  'salesGroupSummary' && reporterObj.currentUrl != 'salesSupplierSummary' && reporterObj.currentUrl != 'salesOutletSummary' && reporterObj.currentUrl != 'salesMemberSummary' && reporterObj.currentUrl != 'ItemWithSlowMovingStock' && reporterObj.currentUrl != 'ItemWithNegativeSOH'
+                              ? 'field-disabled'
+                              : ''
+                          ">
+                            <input type="checkbox" class="custom-control-input" id="Stock"
+                              formControlName="stockSOHLevel" />
+                            <ng-template [ngIf]=" reporterObj.currentUrl !==
+                              reportNameObj.nationalRanging && 
+                              reporterObj.currentUrl !==
+                              reportNameObj.ranging   && 
+                              reporterObj.currentUrl !==
+                              reportNameObj.lessthenXdaysStock  && 
+                              reporterObj.currentUrl !==
+                              reportNameObj.ItemWithNegativeSOH  && 
+                              reporterObj.currentUrl !==
+                              reportNameObj.ItemWithSlowMovingStock &&
+                              reporterObj.currentUrl !==
+                              reportNameObj.NationalLevelSalesSummary &&
+                              reporterObj.currentUrl !==
+                              reportNameObj.productPriceDeviation &&
+                              reporterObj.currentUrl !==
+                              reportNameObj.itemWithZeroSOH
+                              " [ngIfElse]="loading">
+                              <label class="custom-control-label mb-0" for="Stock">
+                                {{ displayTextObj.stockSOHLevel }}
+                              </label>
+                            </ng-template>
+
+                            <ng-template #loading>
+                              <label class="custom-control-label mb-0" for="Stock">
+                                {{ displayTextObj.stockSOHLevelForAdditionalReport }}
+                              </label>
+                            </ng-template>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="custom-control custom-checkbox" [ngClass]="
+                            reporterObj.currentUrl !==
+                              reportNameObj.lessthenXdaysStock &&
+                            reporterObj.currentUrl !==
+                              reportNameObj.itemWithZeroSOH && reporterObj.currentUrl !== 'salesDepartmentSummary' && reporterObj.currentUrl !== 'salesCommoditySummary' && reporterObj.currentUrl !=  'salesCategorySummary' && reporterObj.currentUrl !=  'salesGroupSummary'&& reporterObj.currentUrl != 'salesSupplierSummary' && reporterObj.currentUrl != 'salesOutletSummary' && reporterObj.currentUrl != 'ItemWithSlowMovingStock' && reporterObj.currentUrl != 'ItemWithNegativeSOH'
+                              ? 'field-disabled'
+                              : ''
+                          ">
+                            <input type="checkbox" class="custom-control-input" id="SOH1"
+                              formControlName="stockSOHButNoSales" />
+                            <label class="custom-control-label mb-0" for="SOH1">
+                              {{ displayTextObj.stockSOHButNoSales }}
+                            </label>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="custom-control custom-checkbox" [ngClass]="
+                            reporterObj.currentUrl !==
+                              reportNameObj.itemWithZeroSOH && reporterObj.currentUrl != 'ItemWithSlowMovingStock' && reporterObj.currentUrl != 'ItemWithNegativeSOH'  && reporterObj.currentUrl != 'lessthenXdaysStock'
+                              ? 'field-disabled'
+                              : ''
+                          ">
+                            <input type="checkbox" class="custom-control-input" id="SOHWarning"
+                              (change)="lowStockWarningChange(f.stockLowWarn.value, reporterObj.currentUrl)"
+                              formControlName="stockLowWarn" />
+                            <label class="custom-control-label mb-0" for="SOHWarning">
+                              {{ displayTextObj.stockLowWarn }}
+                            </label>
+                          </div>
+                        </div>
+                        <div class="form-group form-row align-items-center" [ngClass]="
+                          reporterObj.currentUrl 
+                            ? 'field-disabled'
+                            : ''
+                        ">
+                          <div class="col-2">
+                            <input class="form-control form-txt" type="number" id="numDays" name="quantity"
+                              formControlName="stockNoOfDaysWarn" />
+                          </div>
+                          <div class="col-9">
+                            <label for="numDays" class="mb-0">Number of days warning</label>
+                          </div>
+
+                        </div>
+                        <div class="form-group form-row align-items-center" [ngClass]="
+                          reporterObj.currentUrl !==
+                            reportNameObj.productPriceDeviation && reporterObj.currentUrl !== 'salesDepartmentSummary' && reporterObj.currentUrl !== 'salesCommoditySummary' && reporterObj.currentUrl !=  'salesCategorySummary' && reporterObj.currentUrl !=  'salesGroupSummary' && reporterObj.currentUrl != 'salesSupplierSummary' && reporterObj.currentUrl != 'salesOutletSummary'
+                            && reporterObj.currentUrl != 'ranging'
+                            && reporterObj.currentUrl != 'nationalRanging' 
+                            ? 'field-disabled'
+                            : ''
+                        ">
+                          <!-- <ng-select  
+                                                    [items]="dropdownObj.nationalranges"
+                                                    bindLabel="fullName"
+                                                    bindValue="id"
+                                                    [virtualScroll]="false"
+                                                    [multiple]="false"
+                                                    placeholder="Select National Range"
+                                                    formControlName="stockNationalRange"
+                                                    (remove)="removeNationRange()"
+                                                >
+                                                  
+                                                    <ng-template ng-option-tmp let-item="item" let-item$="item$" 
+                                                        let-index="index">
+                                                        <span>{{item.fullName}}</span>
+                                                    </ng-template>
+                                                </ng-select> -->
+                          <div class="col-2">
+                            <input type="number" class="form-control" onKeyDown="return false"
+                              formControlName="stockNationalRange" min="-1" max="100" />
+
+                          </div>
+                          <div class="col-9">
+                            <label class="mb-0 w-100" for="">National Range</label>
+                            <label for="" class="fontSize-11 mb-0 primaryColor" style="color: #5145cd">(less than or
+                              equal
+                              to,-1 = all)</label>
+                          </div>
+                        </div>
+                        <!-- Notinal Range -->
+                        <div class="form-group mb-1">
+                          <div class="mb-2" *ngIf="
+                            
+                            reporterObj.currentUrl ==
+                              reportNameObj.NationalLevelSalesSummary
+                          ">
+                            <ng-select [items]="dropdownObj.nationalranges" bindLabel="name" bindValue="id"
+                              [closeOnSelect]="false" [clearSearchOnAdd]="true" [virtualScroll]="false"
+                              [multiple]="true" placeholder="Select National Range" formControlName="stockNationalRange"
+                              (search)="
+                              searchBtnAction(
+                                $event,
+                                reporterObj.dropdownField.nationalranges
+                              )
+                            " (change)="
+                              setDropdownSelection(
+                                reporterObj.dropdownField.nationalranges,
+                                $event
+                              )
+                            " (open)="
+                              getAndSetFilterFata(
+                                reporterObj.dropdownField.nationalranges,
+                                reporterObj.dropdownField.nationalrangeId,
+                                true
+                              )
+                            " (remove)="
+                              addOrRemoveItem(
+                                $event,
+                                reporterObj.dropdownField.nationalranges,
+                                'remove'
+                              )
+                            " (clear)="
+                              addOrRemoveItem(
+                                $event,
+                                reporterObj.dropdownField.nationalranges,
+                                'clear_all',
+                                reporterObj.dropdownField.tillId
+                              )
+                            " (add)="
+                              addOrRemoveItem(
+                                $event,
+                                reporterObj.dropdownField.nationalranges,
+                                'add'
+                              )
+                            ">
+                              <!-- It hold value on the basis of filter -->
+                              <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                <input id="item-{{ index }}" type="checkbox" [checked]="
+                                  reporterObj?.remove_index_map?.nationalranges[
+                                    item.id
+                                  ]
+                                    ? true
+                                    : false
+                                " />&nbsp;
+                                <span>{{ item.name }}</span>
+                                <span>{{
+                                selectAll(
+                                  reporterObj.dropdownField.nationalranges,
+                                  item
+                                )
+                              }}</span>
+                              </ng-template>
+
+                              <!-- Add button on top of the select and perform operations -->
+                              <ng-template ng-header-tmp>
+                                <div class="form-row align-items-center form-group mb-0">
+                                  <div class="col-8"></div>
+                                  <div class="col-4 text-right">
+                                    <button (click)="
+                                      addOrRemoveItem(
+                                        null,
+                                        reporterObj.dropdownField
+                                          .nationalranges,
+                                        reporterObj?.button_text
+                                          ?.nationalranges,
+                                        reporterObj.dropdownField
+                                          .nationalrangeId
+                                      )
+                                    " class="btn btn-blue input-btn btn-grey">
+                                      {{
+                                      reporterObj?.button_text?.nationalranges
+                                    }}
+                                    </button>
+                                  </div>
+                                </div>
+                              </ng-template>
+
+                              <!-- Add more tag with count -->
+                              <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                                  <span class="ng-value-label">{{
+                                  item.name
+                                }}</span>
+                                  <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                </div>
+                                <div class="ng-value" *ngIf="items.length > 2">
+                                  <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                                </div>
+                              </ng-template>
+                            </ng-select>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-xl-4">
+                <div class="group-from mb-0 report-form-group report-form-select code-Height ">
+                  <h5 class="title">
+                    Codes
+                  </h5>
+                  <div class="overflow">
+                    <div class="mb-2" *ngIf="
+                      reporterObj.currentUrl != reportNameObj.rankingByOutlet
+                    ">
+
+                    <div class="form-group form-row">
+                      <label class="label col-md-3 mb-0">Stores</label>
+                      <div class="col-md-9 mb-0">
+                        <ng-select [items]="dropdownObj.stores" bindLabel="storeDetail" bindValue="id"
+                        [closeOnSelect]="false" [virtualScroll]="false" [multiple]="true" dropdownPosition="bottom"
+                        placeholder="Select Store" [clearSearchOnAdd]="true" formControlName="storeIds" (search)="
+                        searchBtnAction(
+                          $event,
+                          reporterObj.dropdownField.stores
+                        )
+                      " (change)="
+                        setDropdownSelection(
+                          reporterObj.dropdownField.stores,
+                          $event
+                        )
+                      " (open)="
+                        getAndSetFilterFata(
+                          reporterObj.dropdownField.stores,
+                          reporterObj.dropdownField.storeIds,
+                          true
+                        )
+                      " (remove)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.stores,
+                          'remove'
+                        )
+                      " (clear)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.stores,
+                          'clear_all',
+                          reporterObj.dropdownField.storeIds
+                        )
+                      " (add)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.stores,
+                          'add'
+                        )
+                      ">
+                        <!-- It hold value on the basis of filter -->
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                          <div class="form-row">
+                            <div class="col-10 zone-overflow">
+                              <input id="item-{{ index }}" type="checkbox" [checked]="
+                            reporterObj?.remove_index_map?.stores[item.id]
+                              ? true
+                              : false
+                          " />&nbsp;
+                              <span title="{{ item?.desc }}">
+                                {{ item?.desc }}
+                              </span>
+                            </div>
+                            <div class="col-2" title="{{ item?.code }}">
+                              {{ item?.code }}
+                            </div>
+                          </div>
+
+                          <span>{{
+                          selectAll(reporterObj.dropdownField.stores, item)
+                        }}</span>
+                        </ng-template>
+
+
+
+                        <!-- Add button on top of the select and perform operations -->
+                        <ng-template ng-header-tmp>
+                          <div class="form-row align-items-center form-group mb-0">
+                            <div class="col-12 text-right">
+                              <button (click)="
+                                addOrRemoveItem(
+                                  null,
+                                  reporterObj.dropdownField.stores,
+                                  reporterObj?.button_text?.stores,
+                                  reporterObj.dropdownField.storeIds
+                                )
+                              " class="btn btn-blue input-btn btn-grey">
+                                {{ reporterObj?.button_text?.stores }}
+                              </button>
+                            </div>
+                          </div>
+                        </ng-template>
+
+                        <!-- Add more tag with count -->
+                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                          <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                            <span class="ng-value-label">{{
+                            item.storeDetail
+                          }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </div>
+                          <div class="ng-value" *ngIf="items.length > 2">
+                            <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                      </div>
+                    </div> 
+                    </div>
+
+                    <!-- Promotions -->
+
+                    <div class="form-group form-row" *ngIf="
+                    reporterObj.currentUrl === 'ItemWithSlowMovingStock' ||
+                    reporterObj.currentUrl === 'ItemWithNegativeSOH' ||
+                    reporterObj.currentUrl ===
+                      reportNameObj.itemWithNoSalesProduct ||
+                    reporterObj.currentUrl === reportNameObj.itemWithZeroSOH || reporterObj.currentUrl === reportNameObj.salesCategorySummary || reporterObj.currentUrl === reportNameObj.salesDepartmentSummary || reporterObj.currentUrl === reportNameObj.salesCommoditySummary || reporterObj.currentUrl === reportNameObj.salesGroupSummary || reporterObj.currentUrl === reportNameObj.salesSupplierSummary || reporterObj.currentUrl === reportNameObj.salesOutletSummary || reporterObj.currentUrl === reportNameObj.salesMemberSummary || reporterObj.currentUrl === reportNameObj.rankingByOutlet || reporterObj.currentUrl === reportNameObj.itemWithNoSalesSummary || reporterObj.currentUrl === 'lessthenXdaysStock'
+                  " >
+                      <label class="label col-md-3 mb-0">Promotions</label>
+                      <div class="col-md-9 mb-0">
+                        <ng-select *ngIf="
+                        reporterObj.currentUrl !==
+                        reportNameObj.productPriceDeviation
+                      " [clearSearchOnAdd]="true" [items]="dropdownObj.promotions" bindLabel="code" bindValue="id"
+                        [closeOnSelect]="false" [virtualScroll]="false" [isOpen]="
+                        reporterObj.open_dropdown[
+                          reporterObj.dropdownField.promotions
+                        ]
+                      " [multiple]="true" [isOpen]="
+                        reporterObj.open_dropdown[
+                          reporterObj.dropdownField.promotions
+                        ]
+                      " placeholder="Select Promotion" formControlName="promotionIds" (search)="
+                        searchBtnAction(
+                          $event,
+                          reporterObj.dropdownField.promotions
+                        )
+                      " (change)="
+                        setDropdownSelection(
+                          reporterObj.dropdownField.promotions,
+                          $event
+                        )
+                      " (open)="
+                        getAndSetFilterFata(
+                          reporterObj.dropdownField.promotions,
+                          reporterObj.dropdownField.promotionIds,
+                          true
+                        )
+                      " (remove)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.promotions,
+                          'remove'
+                        )
+                      " (clear)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.promotions,
+                          'clear_all',
+                          reporterObj.dropdownField.promotionIds
+                        )
+                      " (add)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.promotions,
+                          'add'
+                        )
+                      ">
+                        <!-- It hold value on the basis of filter -->
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                          <div class="form-row">
+                            <div class="col-7 zone-overflow">
+                              <input id="item-{{ index }}" type="checkbox" ng-click="$event.stopPropagation()"
+                                [checked]="
+                            reporterObj?.remove_index_map?.promotions[item.id]
+                              ? true
+                              : false
+                          " />&nbsp;
+
+                              <span title="{{ item?.desc }}">
+                                {{ item?.desc }}
+                              </span>
+                            </div>
+                            <div class="col-2" title="{{ item?.code }}">
+                              {{ item?.code }}
+                            </div>
+                          </div>
+
+                          <span>{{
+                          selectAll(reporterObj.dropdownField.promotions, item)
+                        }}</span>
+                        </ng-template>
+
+                        <!-- Add button on top of the select and perform operations -->
+                        <ng-template ng-header-tmp>
+                          <div class="form-row align-items-center form-group">
+                            <div class="col-6">
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="promoFilter"
+                                  formControlName="isPromoSale" />
+                                <label class="custom-control-label mb-0" for="promoFilter">
+                                  Show only promotional sales
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-6 text-right">
+                              <button (click)="
+                                addOrRemoveItem(
+                                  null,
+                                  reporterObj.dropdownField.promotions,
+                                  reporterObj?.button_text?.promotions,
+                                  reporterObj.dropdownField.promotionIds
+                                )
+                              " class="btn btn-blue input-btn btn-grey">
+                                {{ reporterObj?.button_text?.promotions }}
+                              </button>
+                            </div>
+                          </div>
+                          <div class="form-row align-items-center form-group mb-0">
+                            <div class="col-5">
+                              <div class="form-group mb-0">
+                                <div class="ctm-calendar">
+                                  <!-- formControlName="promoFromDate" -->
+                                  <input #startPromoDate type="text" class="form-control" bsDatepicker
+                                    [bsConfig]="{ showWeekNumbers: false }" [maxDate]="maxDate"
+                                    [bsValue]="promoStartDateBsValue"
+                                    (bsValueChange)="specDateChange($event, toPromoDate.value, 'promotion');onDateChangePromo($event, 'promoFromDate', true);"
+                                    readonly />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-2">
+                              <div class="form-group mb-0 text-center">
+                                <label for="" class="mb-0">To</label>
+                              </div>
+                            </div>
+                            <div class="col-5">
+                              <div class="form-group mb-0">
+                                <div class="ctm-calendar">
+                                  <!-- formControlName="promoToDate" -->
+                                  <input #toPromoDate type="text" class="form-control" bsDatepicker
+                                    [bsConfig]="{ showWeekNumbers: false }" [maxDate]="maxDate"
+                                    [bsValue]=" promoEndDateBsValue" (bsValueChange)="
+                                    specDateChange(
+                                      startPromoDate.value,
+                                      $event,
+                                      'promotion'
+                                    );onDateChangePromo($event, 'promoToDate', true);
+                                  " readonly />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12 text-right mt-2">
+                              <button class="btn btn-blue input-btn btn-grey mr-1" (click)="loadPromotion()">
+                                Load Promotion
+                              </button>
+                              <button class="btn btn-blue input-btn btn-grey" (click)="
+                                closeDropdown(
+                                  reporterObj.dropdownField.promotions
+                                )
+                              ">
+                                Close Dropdown
+                              </button>
+                            </div>
+                          </div>
+                        </ng-template>
+
+                        <!-- Add more tag with count -->
+                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                          <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                            <span class="ng-value-label">{{
+                            item.desc
+                          }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </div>
+                          <div class="ng-value" *ngIf="items.length > 2">
+                            <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                      </div>
+                    </div>  
+
+
+                
+
+                    <!-- Zones -->
+                    
+
+                    <div class="form-group form-row" *ngIf="
+                    reporterObj.currentUrl !==
+                      reportNameObj.rankingByOutlet &&
+                    reporterObj.currentUrl !==
+                      reportNameObj.NationalLevelSalesSummary
+                  ">
+                      <label class="label col-md-3 mb-0">Zones</label>
+                      <div class="col-md-9 mb-0">
+                        <ng-select [items]="dropdownObj.zones" bindLabel="name" bindValue="id" [closeOnSelect]="false"
+                        [virtualScroll]="false" dropdownPosition="bottom" [multiple]="true" placeholder="Select Zone"
+                        formControlName="zoneIds" [clearSearchOnAdd]="true" (search)="
+                        searchBtnAction($event, reporterObj.dropdownField.zones)
+                      " (change)="
+                        setDropdownSelection(
+                          reporterObj.dropdownField.zones,
+                          $event
+                        )
+                      " (open)="
+                        getAndSetFilterFata(
+                          reporterObj.dropdownField.zones,
+                          reporterObj.dropdownField.zoneIds,
+                          true
+                        )
+                      " (remove)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.zones,
+                          'remove'
+                        )
+                      " (clear)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.zones,
+                          'clear_all',
+                          reporterObj.dropdownField.zoneIds
+                        )
+                      " (add)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.zones,
+                          'add'
+                        )
+                      ">
+                        <!-- It hold value on the basis of filter -->
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                          <div class="form-row">
+                            <div class="col-10 zone-overflow">
+                              <input id="item-{{ index }}" type="checkbox" [checked]="
+                            reporterObj?.remove_index_map?.zones[item.id]
+                              ? true
+                              : false
+                          " />&nbsp;
+
+                              <span title="{{ item?.name }}">
+                                {{ item?.name }}
+                              </span>
+                            </div>
+                            <div class="col-2" title="{{ item?.code }}">
+                              {{ item?.code }}
+                            </div>
+                          </div>
+
+                          <span>{{
+                          selectAll(reporterObj.dropdownField.zones, item)
+                        }}</span>
+                        </ng-template>
+
+                        <!-- Add button on top of the select and perform operations -->
+                        <ng-template ng-header-tmp>
+                          <div class="form-row align-items-center form-group mb-0">
+
+                            <div class="col-8">
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="deptFilter1"
+                                  (change)="filterStore($event.target.checked)"
+                                  [checked]="reporterObj?.autoSelectStores ? true :false" />
+                                <label class="custom-control-label mb-0" for="deptFilter1">
+                                  Auto select linked stores
+                                </label>
+                              </div>
+                            </div>
+
+                            <div class="col-12 text-right">
+                              <button (click)="
+                                addOrRemoveItem(
+                                  null,
+                                  reporterObj.dropdownField.zones,
+                                  reporterObj?.button_text?.zones,
+                                  reporterObj.dropdownField.zoneIds
+                                )
+                              " class="btn btn-blue input-btn btn-grey">
+                                {{ reporterObj?.button_text?.zones }}
+                              </button>
+                            </div>
+                          </div>
+                        </ng-template>
+
+                        <!-- Add more tag with count -->
+                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                          <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                            <span class="ng-value-label">{{ item.name }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </div>
+                          <div class="ng-value" *ngIf="items.length > 2">
+                            <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                      </div>
+                    </div> 
+
+
+                   
+
+                    <!-- WARNING :: Not able to see this dropdown in old application, implemented by ST  -->
+                    <!-- Departments -->
+
+                    <div class="form-group form-row" *ngIf="
+                    reporterObj.currentUrl !==
+                    reportNameObj.NationalLevelSalesSummary
+                    ">
+                      <label class="label col-md-3 mb-0">Departments</label>
+                      <div class="col-md-9 mb-0">
+                        <ng-select [items]="dropdownObj.departments" [clearSearchOnAdd]="true" bindLabel="desc"
+                        bindValue="id" [closeOnSelect]="false" dropdownPosition="bottom" [virtualScroll]="false"
+                        [multiple]="true" placeholder="Select Departments" formControlName="departmentIds" (search)="
+                        searchBtnAction(
+                          $event,
+                          reporterObj.dropdownField.departments
+                        )
+                      " (change)="
+                        setDropdownSelection(
+                          reporterObj.dropdownField.departments,
+                          $event
+                        )
+                      " (open)="
+                        getAndSetFilterFata(
+                          reporterObj.dropdownField.departments,
+                          reporterObj.dropdownField.departmentIds,
+                          true
+                        )
+                      " (remove)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.departments,
+                          'remove'
+                        )
+                      " (clear)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.departments,
+                          'clear_all',
+                          reporterObj.dropdownField.departmentIds
+                        )
+                      " (add)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.departments,
+                          'add'
+                        )
+                      ">
+                        <!-- It hold value on the basis of filter -->
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                          <div class="form-row">
+                            <div class="col-10 zone-overflow">
+                              <input id="item-{{ index }}" type="checkbox" [checked]="
+                            reporterObj?.remove_index_map?.departments[item.id]
+                              ? true
+                              : false
+                          " />&nbsp;
+
+                              <span title="{{ item?.desc }}">
+                                {{ item?.desc }}
+                              </span>
+                            </div>
+                            <div class="col-2" title="{{ item?.code }}">
+                              {{ item?.code }}
+                            </div>
+                          </div>
+
+                          <span>{{
+                          selectAll(reporterObj.dropdownField.departments, item)
+                        }}</span>
+                        </ng-template>
+
+                        <!-- Add button on top of the select and perform operations -->
+                        <ng-template ng-header-tmp>
+                          <div class="form-row align-items-center form-group mb-0">
+
+                            <div class="col-8">
+                              <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="deptFilter"
+                                  (change)="filterData($event.target.checked)"
+                                  [checked]="reporterObj?.autoSelectComodities ? true :false" />
+                                <label class="custom-control-label mb-0" for="deptFilter">
+                                  Auto select linked Commodities
+                                </label>
+                              </div>
+                            </div>
+
+                            <div class="col-12 text-right">
+                              <button (click)="
+                                addOrRemoveItem(
+                                  null,
+                                  reporterObj.dropdownField.departments,
+                                  reporterObj?.button_text?.departments,
+                                  reporterObj.dropdownField.departmentIds
+                                )
+                              " class="btn btn-blue input-btn btn-grey">
+                                {{ reporterObj?.button_text?.departments }}
+                              </button>
+                            </div>
+                          </div>
+                        </ng-template>
+
+                        <!-- Add more tag with count -->
+                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                          <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                            <span class="ng-value-label">{{ item.desc }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </div>
+                          <div class="ng-value" *ngIf="items.length > 2">
+                            <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                      </div>
+                    </div> 
+
+                    <!--Commodities -->
+
+                    <div class="form-group form-row" *ngIf="
+                    reporterObj.currentUrl !==
+                      reportNameObj.productPriceDeviation &&
+                    reporterObj.currentUrl !==
+                      reportNameObj.itemWithNoSalesProduct &&
+                    reporterObj.currentUrl !==
+                      reportNameObj.NationalLevelSalesSummary
+                  ">
+                      <label class="label col-md-3 mb-0">Commodities</label>
+                      <div class="col-md-9 mb-0">
+                        <ng-select [items]="dropdownObj.commodities" bindLabel="desc" bindValue="id"
+                        [closeOnSelect]="false" [clearSearchOnAdd]="true" [virtualScroll]="false"
+                        dropdownPosition="bottom" [multiple]="true" placeholder="Select Commodity"
+                        formControlName="commodityIds" (search)="
+                        searchBtnAction(
+                          $event,
+                          reporterObj.dropdownField.commodities
+                        )
+                      " (change)="
+                        setDropdownSelection(
+                          reporterObj.dropdownField.commodities,
+                          $event
+                        )
+                      " (open)="
+                        getAndSetFilterFata(
+                          reporterObj.dropdownField.commodities,
+                          reporterObj.dropdownField.commodityIds,
+                          true
+                        )
+                      " (remove)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.commodities,
+                          'remove'
+                        )
+                      " (clear)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.commodities,
+                          'clear_all',
+                          reporterObj.dropdownField.commodityIds
+                        )
+                      " (add)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.commodities,
+                          'add'
+                        )
+                      ">
+                        <!-- It hold value on the basis of filter -->
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                          <div class="form-row" id="depForComodity-{{item?.departmentId}}">
+                            <div class="col-10 zone-overflow">
+                              <input id="item-{{ index }}" type="checkbox" [checked]="
+                            reporterObj?.remove_index_map?.commodities[item.id]
+                              ? true
+                              : false
+                          " />&nbsp;
+
+                              <span title="{{ item?.desc }}">
+                                {{ item?.desc }}
+                              </span>
+                            </div>
+                            <div class="col-2" title="{{ item?.code }}">
+                              {{ item?.code }}
+                            </div>
+                          </div>
+
+                          <span>{{
+                          selectAll(reporterObj.dropdownField.commodities, item)
+                        }}</span>
+                        </ng-template>
+
+                        <!-- Add button on top of the select and perform operations -->
+                        <ng-template ng-header-tmp>
+                          <div class="form-row align-items-center form-group mb-0">
+
+                            <div class="col-12 text-right">
+                              <button (click)="
+                                addOrRemoveItem(
+                                  null,
+                                  reporterObj.dropdownField.commodities,
+                                  reporterObj?.button_text?.commodities,
+                                  reporterObj.dropdownField.commodityIds
+                                )
+                              " class="btn btn-blue input-btn btn-grey">
+                                {{ reporterObj?.button_text?.commodities }}
+                              </button>
+                            </div>
+                          </div>
+                        </ng-template>
+
+                        <!-- Add more tag with count -->
+                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                          <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                            <span class="ng-value-label">{{ item.desc }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </div>
+                          <div class="ng-value" *ngIf="items.length > 2">
+                            <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                      </div>
+                    </div> 
+
+                   
+                    <!-- Categories -->
+                    <div class="form-group form-row" *ngIf="
+                    reporterObj.currentUrl !== 'nationalRanging' &&
+                    reporterObj.currentUrl !== 'ranging' &&
+                    reporterObj.currentUrl !==
+                      reportNameObj.productPriceDeviation &&
+                    reporterObj.currentUrl !==
+                      reportNameObj.NationalLevelSalesSummary
+                  ">
+                      <label class="label col-md-3 mb-0">Categories</label>
+                      <div class="col-md-9 mb-0">
+                        <ng-select [items]="dropdownObj.categories" bindLabel="fullName" bindValue="id"
+                        [closeOnSelect]="false" [clearSearchOnAdd]="true" [virtualScroll]="false" [multiple]="true"
+                        placeholder="Select Category" formControlName="categoryIds" (search)="
+                        searchBtnAction(
+                          $event,
+                          reporterObj.dropdownField.categories
+                        )
+                      " (change)="
+                        setDropdownSelection(
+                          reporterObj.dropdownField.categories,
+                          $event
+                        )
+                      " (open)="
+                        getAndSetFilterFata(
+                          reporterObj.dropdownField.categories,
+                          reporterObj.dropdownField.categoryIds,
+                          true
+                        )
+                      " (remove)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.categories,
+                          'remove'
+                        )
+                      " (clear)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.categories,
+                          'clear_all',
+                          reporterObj.dropdownField.categoryIds
+                        )
+                      " (add)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.categories,
+                          'add'
+                        )
+                      ">
+                        <!-- It hold value on the basis of filter -->
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                          <div class="form-row">
+                            <div class="col-10 zone-overflow">
+                              <input id="item-{{ index }}" type="checkbox" [checked]="
+                            reporterObj?.remove_index_map?.categories[item.id]
+                              ? true
+                              : false
+                          " />&nbsp;
+
+                              <span title="{{ item?.fullName }}">
+                                {{ item?.fullName }}
+                              </span>
+                            </div>
+                            <div class="col-2" title="{{ item?.code }}">
+                              {{ item?.code }}
+                            </div>
+                          </div>
+
+                          <span>{{
+                          selectAll(reporterObj.dropdownField.categories, item)
+                        }}</span>
+                        </ng-template>
+
+                        <!-- Add button on top of the select and perform operations -->
+                        <ng-template ng-header-tmp>
+                          <div class="form-row align-items-center form-group mb-0">
+
+                            <div class="col-12 text-right">
+                              <button (click)="
+                                addOrRemoveItem(
+                                  null,
+                                  reporterObj.dropdownField.categories,
+                                  reporterObj?.button_text?.categories,
+                                  reporterObj.dropdownField.categoryIds
+                                )
+                              " class="btn btn-blue input-btn btn-grey">
+                                {{ reporterObj?.button_text?.categories }}
+                              </button>
+                            </div>
+                          </div>
+                        </ng-template>
+
+                        <!-- Add more tag with count -->
+                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                          <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                            <span class="ng-value-label">{{
+                            item.fullName
+                          }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </div>
+                          <div class="ng-value" *ngIf="items.length > 2">
+                            <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                      </div>
+                    </div>
+
+                  
+
+                    <!-- Groups -->
+                    <div class="form-group form-row" *ngIf="
+                    reporterObj.currentUrl != 'nationalRanging' &&
+                    reporterObj.currentUrl != 'ranging' &&
+                    reporterObj.currentUrl !==
+                      reportNameObj.productPriceDeviation &&
+                    reporterObj.currentUrl !==
+                      reportNameObj.NationalLevelSalesSummary
+                  ">
+                      <label class="label col-md-3 mb-0">Stores</label>
+                      <div class="col-md-9 mb-0">
+                        <ng-select [items]="dropdownObj.groups" bindLabel="fullName" bindValue="id"
+                        [clearSearchOnAdd]="true" [closeOnSelect]="false" [virtualScroll]="false" [multiple]="true"
+                        placeholder="Select Group" formControlName="groupIds" (search)="
+                        searchBtnAction(
+                          $event,
+                          reporterObj.dropdownField.groups
+                        )
+                      " (change)="
+                        setDropdownSelection(
+                          reporterObj.dropdownField.groups,
+                          $event
+                        )
+                      " (open)="
+                        getAndSetFilterFata(
+                          reporterObj.dropdownField.groups,
+                          reporterObj.dropdownField.groupIds,
+                          true
+                        )
+                      " (remove)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.groups,
+                          'remove'
+                        )
+                      " (clear)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.groups,
+                          'clear_all',
+                          reporterObj.dropdownField.groupIds
+                        )
+                      " (add)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.groups,
+                          'add'
+                        )
+                      ">
+                        <!-- It hold value on the basis of filter -->
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                          <div class="form-row">
+                            <div class="col-10 zone-overflow">
+                              <input id="item-{{ index }}" type="checkbox" [checked]="
+                              reporterObj?.remove_index_map?.groups[item.id]
+                                ? true
+                                : false
+                            " />&nbsp;
+
+                              <span title="{{ item?.fullName }}">
+                                {{ item?.fullName }}
+                              </span>
+                            </div>
+                            <div class="col-2" title="{{ item?.code }}">
+                              {{ item?.code }}
+                            </div>
+                          </div>
+
+
+                          <!-- <span>{{ item.fullName }}</span> -->
+                          <span>{{
+                          selectAll(reporterObj.dropdownField.groups, item)
+                        }}</span>
+                        </ng-template>
+
+                        <!-- Add button on top of the select and perform operations -->
+                        <ng-template ng-header-tmp>
+                          <div class="form-row align-items-center form-group mb-0">
+
+                            <div class="col-12 text-right">
+                              <button (click)="
+                                addOrRemoveItem(
+                                  null,
+                                  reporterObj.dropdownField.groups,
+                                  reporterObj?.button_text?.groups,
+                                  reporterObj.dropdownField.groupIds
+                                )
+                              " class="btn btn-blue input-btn btn-grey">
+                                {{ reporterObj?.button_text?.groups }}
+                              </button>
+                            </div>
+                          </div>
+                        </ng-template>
+
+                        <!-- Add more tag with count -->
+                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                          <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                            <span class="ng-value-label">{{
+                            item.fullName
+                          }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </div>
+                          <div class="ng-value" *ngIf="items.length > 2">
+                            <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                      </div>
+                    </div> 
+
+
+                    <!-- Suppliers -->
+
+                    <div class="form-group form-row" *ngIf="
+                    reporterObj.currentUrl != 'nationalRanging' &&
+                    reporterObj.currentUrl != 'ranging' &&
+                    reporterObj.currentUrl !==
+                      reportNameObj.productPriceDeviation &&
+                    reporterObj.currentUrl !==
+                      reportNameObj.NationalLevelSalesSummary
+                  ">
+                      <label class="label col-md-3 mb-0">Suppliers</label>
+                      <div class="col-md-9 mb-0">
+                        <ng-select #supplierSelection [items]="dropdownObj.suppliers" bindLabel="desc" bindValue="id"
+                        [closeOnSelect]="false" [clearSearchOnAdd]="true" [virtualScroll]="false" [multiple]="true"
+                        placeholder="Select Supplier" formControlName="supplierIds" [dropdownPosition]="'bottom'"
+                        (search)="
+                        searchBtnAction(
+                          $event,
+                          reporterObj.dropdownField.suppliers
+                        )
+                      " (change)="
+                        setDropdownSelection(
+                          reporterObj.dropdownField.suppliers,
+                          $event
+                        )
+                      " (open)="
+                        getAndSetFilterFata(
+                          reporterObj.dropdownField.suppliers,
+                          reporterObj.dropdownField.supplierIds,
+                          true
+                        )
+                      " (remove)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.suppliers,
+                          'remove'
+                        )
+                      " (clear)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.suppliers,
+                          'clear_all',
+                          reporterObj.dropdownField.supplierIds
+                        )
+                      " (add)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.suppliers,
+                          'add'
+                        )
+                      ">
+                        <!-- It hold value on the basis of filter -->
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                          <div class="form-row">
+                            <div class="col-10 zone-overflow">
+                              <input id="item-{{ index }}" type="checkbox" [checked]="
+                            reporterObj?.remove_index_map?.suppliers[item.id]
+                              ? true
+                              : false
+                          " />&nbsp;
+
+                              <span title="{{ item?.desc }}">
+                                {{ item?.desc }}
+                              </span>
+                            </div>
+                            <div class="col-2" title="{{ item?.code }}">
+                              {{ item?.code }}
+                            </div>
+                          </div>
+
+                          <span>{{
+                          selectAll(reporterObj.dropdownField.suppliers, item)
+                        }}</span>
+                        </ng-template>
+
+                        <!-- Add button on top of the select and perform operations -->
+                        <ng-template ng-header-tmp>
+                          <div class="form-row align-items-center form-group mb-0">
+
+                            <div class="col-12 text-right">
+                              <button (click)="
+                                addOrRemoveItem(
+                                  null,
+                                  reporterObj.dropdownField.suppliers,
+                                  reporterObj?.button_text?.suppliers,
+                                  reporterObj.dropdownField.supplierIds
+                                )
+                              " class="btn btn-blue input-btn btn-grey">
+                                {{ reporterObj?.button_text?.suppliers }}
+                              </button>
+                            </div>
+                          </div>
+                        </ng-template>
+
+                        <!-- Add more tag with count -->
+                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                          <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                            <span class="ng-value-label">{{ item.desc }} &nbsp;&nbsp;{{ item.code }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </div>
+                          <div class="ng-value" *ngIf="items.length > 2">
+                            <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                      </div>
+                    </div> 
+
+
+                    <!-- Tills -->
+                    <div class="form-group form-row" *ngIf="
+                    reporterObj.currentUrl != reportNameObj.rankingByOutlet &&
+                    reporterObj.currentUrl != 'nationalRanging' &&
+                    reporterObj.currentUrl != 'ranging' &&
+                    reporterObj.currentUrl !==
+                      reportNameObj.productPriceDeviation &&
+                    reporterObj.currentUrl !==
+                      reportNameObj.itemWithNoSalesProduct &&
+                    reporterObj.currentUrl !==
+                      reportNameObj.NationalLevelSalesSummary && reporterObj.currentUrl !==
+                      reportNameObj.itemWithNoSalesSummary  
+                  ">
+                      <label class="label col-md-3 mb-0">Tills</label>
+                      <div class="col-md-9 mb-0">
+                        <ng-select [items]="dropdownObj.tills" bindLabel="desc" bindValue="id" [closeOnSelect]="false"
+                        [virtualScroll]="false" [clearSearchOnAdd]="true" [multiple]="true" placeholder="Select Till"
+                        formControlName="tillId" [dropdownPosition]="'bottom'" (search)="
+                        searchBtnAction($event, reporterObj.dropdownField.tills)
+                      " (change)="
+                        setDropdownSelection(
+                          reporterObj.dropdownField.tills,
+                          $event
+                        )
+                      " (open)="
+                        getAndSetFilterFata(
+                          reporterObj.dropdownField.tills,
+                          reporterObj.dropdownField.tillId,
+                          true
+                        )
+                      " (remove)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.tills,
+                          'remove'
+                        )
+                      " (clear)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.tills,
+                          'clear_all',
+                          reporterObj.dropdownField.tillId
+                        )
+                      " (add)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.tills,
+                          'add'
+                        )
+                      ">
+                        <!-- It hold value on the basis of filter -->
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                          <div class="form-row">
+                            <div class="col-10 zone-overflow">
+                              <input id="item-{{ index }}" type="checkbox" [checked]="
+                            reporterObj?.remove_index_map?.tills[item.id]
+                              ? true
+                              : false
+                          " />&nbsp;
+
+                              <span title="{{ item?.desc }}">
+                                {{ item?.desc }}
+                              </span>
+                            </div>
+                            <div class="col-2" title="{{ item?.code }}">
+                              {{ item?.code }}
+                            </div>
+                          </div>
+
+                          <span>{{
+                          selectAll(reporterObj.dropdownField.tills, item)
+                        }}</span>
+                        </ng-template>
+
+                        <!-- Add button on top of the select and perform operations -->
+                        <ng-template ng-header-tmp>
+                          <div class="form-row align-items-center form-group mb-0">
+
+                            <div class="col-12 text-right">
+                              <button (click)="
+                                addOrRemoveItem(
+                                  null,
+                                  reporterObj.dropdownField.tills,
+                                  reporterObj?.button_text?.tills,
+                                  reporterObj.dropdownField.tillId
+                                )
+                              " class="btn btn-blue input-btn btn-grey">
+                                {{ reporterObj?.button_text?.tills }}
+                              </button>
+                            </div>
+                          </div>
+                        </ng-template>
+
+                        <!-- Add more tag with count -->
+                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                          <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                            <span class="ng-value-label">{{ item.desc }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </div>
+                          <div class="ng-value" *ngIf="items.length > 2">
+                            <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                      </div>
+                    </div>  
+
+
+      
+
+                    <!-- Manufacturers -->
+                    <!-- <div class="mb-2" *ngIf="
+                      reporterObj.currentUrl != 'nationalRanging' &&
+                      reporterObj.currentUrl != 'ranging' &&
+                      reporterObj.currentUrl !==
+                        reportNameObj.productPriceDeviation &&
+                      reporterObj.currentUrl !==
+                        reportNameObj.NationalLevelSalesSummary
+                    ">
+                      <ng-select [items]="dropdownObj.manufacturers" bindLabel="name" bindValue="id"
+                        [closeOnSelect]="false" [clearSearchOnAdd]="true" [virtualScroll]="false" [multiple]="true"
+                        placeholder="Select Manufacturer" formControlName="manufacturerIds"
+                        [dropdownPosition]="'bottom'" 
+                        (search)="
+                        searchBtnAction(
+                          $event,
+                          reporterObj.dropdownField.manufacturers
+                        )
+                      " (change)="
+                        setDropdownSelection(
+                          reporterObj.dropdownField.manufacturers,
+                          $event
+                        )
+                      " (open)="
+                        getAndSetFilterFata(
+                          reporterObj.dropdownField.manufacturers,
+                          reporterObj.dropdownField.manufacturerIds,
+                          true
+                        )
+                      " 
+                      (remove)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.manufacturers,
+                          'remove'
+                        )
+                      " (clear)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.manufacturers,
+                          'clear_all',
+                          reporterObj.dropdownField.manufacturerIds
+                        )
+                      " (add)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.manufacturers,
+                          'add'
+                        )
+                      ">
+                       
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                          <div class="form-row">
+                            <div class="col-10 zone-overflow">
+                              <input id="item-{{ index }}" type="checkbox" [checked]="
+                            reporterObj?.remove_index_map?.manufacturers[
+                              item.id
+                            ]
+                              ? true
+                              : false
+                          " />&nbsp;
+
+                              <span title="{{ item?.name }}">
+                                {{ item?.name }}
+                              </span>
+                            </div>
+                            <div class="col-2" title="{{ item?.code }}">
+                              {{ item?.code }}
+                            </div>
+                          </div>
+
+                          <span>{{
+                          selectAll(
+                            reporterObj.dropdownField.manufacturers,
+                            item
+                          )
+                        }}</span>
+                        </ng-template>
+
+                      
+                        <ng-template ng-header-tmp>
+                          <div class="form-row align-items-center form-group mb-0">
+
+                            <div class="col-12 text-right">
+                              <button (click)="addOrRemoveItem(null, reporterObj.dropdownField.manufacturers,
+                                  reporterObj?.button_text?.manufacturers, reporterObj.dropdownField.manufacturerIds)"
+                                class="btn btn-blue input-btn btn-grey">
+                                {{ reporterObj?.button_text?.manufacturers }}
+                              </button>
+                            </div>
+                          </div>
+                        </ng-template>
+
+                       
+                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                          <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                            <span class="ng-value-label">{{ item.name }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </div>
+                          <div class="ng-value" *ngIf="items.length > 2">
+                            <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                    </div> -->
+
+                    <div class="form-group form-row" *ngIf="
+                    reporterObj.currentUrl != 'nationalRanging' &&
+                    reporterObj.currentUrl != 'ranging' &&
+                    reporterObj.currentUrl !==
+                      reportNameObj.productPriceDeviation &&
+                    reporterObj.currentUrl !==
+                      reportNameObj.NationalLevelSalesSummary">
+                      <label class="label col-md-3 mb-0">Manufacturers</label>
+                      <div class="col-md-9 mb-0">
+                        <ng-select [items]="dropdownObj.manufacturers" bindLabel="name" bindValue="id"
+                        [virtualScroll]="true" [clearSearchOnAdd]="true" [closeOnSelect]="false" [multiple]="true"
+                        placeholder="Select Manufacturer" formControlName="manufacturerIds" (search)="
+                        searchBtnAction(
+                          $event,
+                          reporterObj.dropdownField.manufacturers
+                        )" (change)="
+                        setDropdownSelection(
+                          reporterObj.dropdownField.manufacturers, 
+                          $event
+                        )" (open)="
+                        getAndSetFilterData(
+                          reporterObj.dropdownField.manufacturers,
+                          reporterObj.dropdownField.manufacturerIds, 
+                          true
+                        )" (add)="
+                        addOrRemoveItem(
+                          $event, 
+                          reporterObj.dropdownField.manufacturers,
+                          'add'
+                        )" (remove)="
+                        addOrRemoveItem(
+                          $event, 
+                          reporterObj.dropdownField.manufacturers, 
+                          'remove'
+                        )" (clear)="
+                        addOrRemoveItem(
+                          $event, 
+                          reporterObj.dropdownField.manufacturers, 
+                          'clear_all', 
+                          reporterObj.dropdownField.manufacturerIds
+                          )">
+                        <!-- It hold value on the basis of filter -->
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                          <div class="form-row">
+                            <div class="col-9 zone-overflow">
+                              <input id="item-{{ index }}" type="checkbox"
+                                [checked]="reporterObj?.remove_index_map?.manufacturers[item.id] ? true : false" />&nbsp;
+                              <span title="{{ item?.name }}">
+                                {{ item?.name }}
+                              </span>
+                              <span>{{selectAll(reporterObj.dropdownField.manufacturers, item)}}</span>
+                            </div>
+                            <div class="col-3">
+                              {{ item?.code }}
+                            </div>
+                          </div>
+                        </ng-template>
+
+
+                        <!-- Add more tag with count -->
+                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                          <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                            <span class="ng-value-label">{{ item.name }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </div>
+                          <div class="ng-value" *ngIf="items.length > 2">
+                            <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                      </div>
+                    </div>  
+
+                  
+
+                    <!-- Member -->
+
+                    <div class="form-group form-row" *ngIf="false">
+                      <label class="label col-md-3 mb-0">members</label>
+                      <div class="col-md-9 mb-0">
+                        <ng-select [items]="dropdownObj.members" bindLabel="name" bindValue="id" [closeOnSelect]="false"
+                        [virtualScroll]="false" [clearSearchOnAdd]="true" [multiple]="true" placeholder="Select Member"
+                        formControlName="memberIds" (search)="
+                        searchBtnAction(
+                          $event,
+                          reporterObj.dropdownField.members
+                        )
+                      " (change)="
+                        setDropdownSelection(
+                          reporterObj.dropdownField.members,
+                          $event
+                        )
+                      " (open)="
+                        getAndSetFilterFata(
+                          reporterObj.dropdownField.members,
+                          reporterObj.dropdownField.memberIds,
+                          true
+                        )
+                      " (remove)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.members,
+                          'remove'
+                        )
+                      " (clear)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.members,
+                          'clear_all',
+                          reporterObj.dropdownField.memberIds
+                        )
+                      " (add)="
+                        addOrRemoveItem(
+                          $event,
+                          reporterObj.dropdownField.members,
+                          'add'
+                        )
+                      ">
+                        <!-- It hold value on the basis of filter -->
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                          <div class="form-row">
+                            <div class="col-10 zone-overflow">
+                              <input id="item-{{ index }}" type="checkbox" [checked]="
+                            reporterObj?.remove_index_map?.members[
+                              item.id
+                            ]
+                              ? true
+                              : false
+                          " />&nbsp;
+
+                              <span title="{{ item?.name }}">
+                                {{ item?.name }}
+                              </span>
+                            </div>
+                            <div class="col-2" title="{{ item?.code }}">
+                              {{ item?.code }}
+                            </div>
+                          </div>
+
+                          <span>{{
+                          selectAll(
+                            reporterObj.dropdownField.members,
+                            item
+                          )
+                        }}</span>
+                        </ng-template>
+
+                        <!-- Add button on top of the select and perform operations -->
+                        <ng-template ng-header-tmp>
+                          <div class="form-row align-items-center form-group mb-0">
+
+                            <div class="col-12 text-right">
+                              <button (click)="
+                                addOrRemoveItem(
+                                  null,
+                                  reporterObj.dropdownField.members,
+                                  reporterObj?.button_text?.members,
+                                  reporterObj.dropdownField.memberIds
+                                )
+                              " class="btn btn-blue input-btn btn-grey">
+                                {{ reporterObj?.button_text?.members }}
+                              </button>
+                            </div>
+                          </div>
+                        </ng-template>
+
+                        <!-- Add more tag with count -->
+                        <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                          <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                            <span class="ng-value-label">{{ item.name }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </div>
+                          <div class="ng-value" *ngIf="items.length > 2">
+                            <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                      </div>
+                    </div> 
+
+                    <!-- <div class="mb-0" *ngIf="reporterObj.currentUrl == 'salesMemberSummary'"> -->
+                  </div>
+                </div>
+
+                <!-- <div class="" *ngIf="reporterObj.currentUrl!='appSales' && reporterObj.currentUrl!='basketIncident' && reporterObj.currentUrl!='stockAdjustment' && reporterObj.currentUrl!='stockVariance' && reporterObj.currentUrl!='stockWastage' && reporterObj.currentUrl!='noSales' && reporterObj.currentUrl!='financial' && reporterObj.currentUrl!='hourlySales' && reporterObj.currentUrl!='nilTransaction'">
+                    <div class="custom-control form-group custom-checkbox mb-0">
+                        <input type="checkbox" class="custom-control-input" id="Member">
+                        <label class="custom-control-label mb-0" for="Member">Only Member Sales</label>
+                    </div>
+                </div> -->
+              </div>
+
+              <!-- Added click event to close promotion dropdown forcefully -->
+              <div class="col-lg-3 col-xl-3" (click)="htmlTagEvent(reporterObj.dropdownField.promotions)">
+                <div class="group-from mb-0 report-form-group">
+                  <h5 class="title">Selections</h5>
+                  <div class="overflow-h">
+                    <div class="reportDay_list">
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !==
+                          reportNameObj.productPriceDeviation &&
+                          reporterObj.currentUrl !==
+                          reportNameObj.nationalRanging
+                        ">
+                        <div *ngIf="f?.startDate?.value">
+                          <h4>Date Range</h4>
+                          <ul>
+                            <li>
+                              {{ f?.startDate?.value | date: "dd/MM/yyyy" }} to
+                              {{ f?.endDate?.value | date: "dd/MM/yyyy" }}
+                            </li>
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="
+                      reporterObj.currentUrl !==
+                      reportNameObj.productPriceDeviation && 
+                      reporterObj.currentUrl !==
+                      reportNameObj.nationalRanging && 
+                      reporterObj.currentUrl !==
+                      reportNameObj.itemWithNoSalesProduct &&
+                      reporterObj.currentUrl !==
+                      reportNameObj.lessthenXdaysStock &&
+                      reporterObj.currentUrl !==
+                      reportNameObj.ItemWithNegativeSOH &&
+                      reporterObj.currentUrl !==
+                      reportNameObj.itemWithZeroSOH &&
+                      reporterObj.currentUrl !==
+                      reportNameObj.ItemWithSlowMovingStock &&
+                      reporterObj.currentUrl !==
+                      reportNameObj.NationalLevelSalesSummary 
+                    ">
+                        <div *ngIf="(f?.salesAMT?.value) || (f?.salesSOH?.value)">
+                          <h4>General Field Filters
+                          </h4>
+                          <ul>
+                            <li *ngIf="(f?.salesAMT?.value)">
+                              {{ generalFilterSelection.salesAMT }} :
+                              {{ f?.salesAMTRange?.value | number: '0.1-2'}}
+                            </li>
+                            <li *ngIf="(f?.salesSOH?.value)">
+                              {{ generalFilterSelection.salesSOH  }} :
+                              {{ f?.salesSOHRange?.value | number: '0.1-2'}}
+                            </li>
+                          </ul>
+                        </div>
+
+                      </ng-container>
+
+
+                      <ng-container *ngIf="
+                     reporterObj.currentUrl !==
+                     reportNameObj.productPriceDeviation && 
+                     reporterObj.currentUrl !==
+                     reportNameObj.ranging &&
+                     reporterObj.currentUrl !==
+                     reportNameObj.nationalRanging &&
+                     reporterObj.currentUrl !==
+                     reportNameObj.itemWithNoSalesProduct 
+                   ">
+                        <div
+                          *ngIf="f?.stockNegativeOH?.value || f?.stockSOHLevel?.value ||  f?.stockSOHButNoSales?.value ||  f?.stockLowWarn?.value">
+                          <h4>Stock
+                          </h4>
+                          <ul>
+                            <li *ngIf="f?.stockNegativeOH?.value">
+                              Set Items With Negative on Hand to Zero
+                            </li>
+                            <li *ngIf="f?.stockSOHLevel?.value">
+                              <ng-template [ngIf]=" reporterObj.currentUrl !==
+                              reportNameObj.nationalRanging && 
+                              reporterObj.currentUrl !==
+                              reportNameObj.ranging   && 
+                              reporterObj.currentUrl !==
+                              reportNameObj.lessthenXdaysStock  && 
+                              reporterObj.currentUrl !==
+                              reportNameObj.ItemWithNegativeSOH  && 
+                              reporterObj.currentUrl !==
+                              reportNameObj.ItemWithSlowMovingStock &&
+                              reporterObj.currentUrl !==
+                              reportNameObj.NationalLevelSalesSummary &&
+                              reporterObj.currentUrl !==
+                              reportNameObj.productPriceDeviation &&
+                              reporterObj.currentUrl !==
+                              reportNameObj.itemWithZeroSOH
+                              " [ngIfElse]="loading">
+                                Show Stock-on-hand(and Product Level)
+                              </ng-template>
+                              <ng-template #loading>
+                                Show Stock-on-hand
+                              </ng-template>
+                            </li>
+                            <li *ngIf="f?.stockSOHButNoSales?.value">
+                              Show Items with SOH but no sales
+                            </li>
+                            <li *ngIf="f?.stockLowWarn?.value">
+                              Low Stock warnings
+                            </li>
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <div *ngIf="f?.stockNoOfDaysWarn?.value > 0">
+                        <h4>Number of days warning
+                        </h4>
+                        <ul>
+                          <li>
+                            {{f?.stockNoOfDaysWarn?.value}}
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div *ngIf="f?.stockNationalRange?.value > 0">
+                        <h4>National Range
+                        </h4>
+                        <ul>
+                          <li>
+                            {{f?.stockNationalRange?.value}}
+                          </li>
+                        </ul>
+                      </div>
+
+
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !==
+                          reportNameObj.productPriceDeviation &&
+                          reporterObj.currentUrl !==
+                          reportNameObj.nationalRanging &&
+                          reporterObj.currentUrl !==
+                          reportNameObj.itemWithNoSalesProduct
+                        ">
+                        <div *ngIf="f?.days?.value">
+                          <h4>Days</h4>
+                          <ul>
+                            <!-- <li *ngFor="let day of f?.days?.value?.split(',')">
+                              {{ day | uppercase }}
+                            </li> -->
+
+                            <li *ngFor="let day of dayName">
+                              {{ day | uppercase }}
+                            </li>
+
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !==
+                            reportNameObj.productPriceDeviation  &&
+                          reporterObj.currentUrl !==
+                            reportNameObj.lessthenXdaysStock
+                        ">
+                        <div class="mt-1" *ngIf="f?.isPromoSale?.value">
+                          <h4>Promotion</h4>
+                          <ul>
+                            <li>Only Promo Sales</li>
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !==
+                            reportNameObj.productPriceDeviation &&
+                          reporterObj.currentUrl !==
+                            reportNameObj.itemWithNoSalesProduct &&
+                          reporterObj.currentUrl !==
+                            reportNameObj.lessthenXdaysStock
+                        ">
+                        <div class="mt-1" *ngIf="f?.productStartId?.value">
+                          <h4>Product Range</h4>
+                          <ul>
+                            <li>
+                              {{ f?.productStartId?.value }} to
+                              {{ f?.productEndId?.value }}
+                            </li>
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !==
+                            reportNameObj.productPriceDeviation &&
+                          reporterObj.currentUrl !==
+                            reportNameObj.itemWithNoSalesProduct &&
+                          reporterObj.currentUrl !==
+                            reportNameObj.lessthenXdaysStock
+                        ">
+                        <div class="mt-1" *ngIf="shrinkage">
+                          <h4>Shrinkage</h4>
+                          <ul>
+                            <li>{{ shrinkage }}</li>
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <!-- <div class="mt-1" *ngIf="summaryOptionType">
+                          <h4>Summary Report Options</h4>
+                          <ul>
+                              <li>{{summaryOptionType | uppercase}}</li>
+                          </ul>
+                      </div> -->
+
+                      <ng-container *ngIf="
+                      reporterObj.currentUrl !==
+                      reportNameObj.productPriceDeviation &&
+                      reporterObj.currentUrl !==
+                      reportNameObj.nationalRanging &&
+                      reporterObj.currentUrl !==
+                      reportNameObj.ranging  &&
+                      reporterObj.currentUrl !==
+                      reportNameObj.rankingByOutlet 
+
+                    ">
+                        <div class="mt-1" *ngIf="
+                            f?.summaryRep?.value &&
+                            (f?.summaryRep?.value | lowercase) !== 'none'
+                          ">
+                          <h4>Summary Options</h4>
+                          <ul>
+                            <li>{{ f?.summaryRep?.value }}</li>
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !==
+                            reportNameObj.productPriceDeviation &&
+                          reporterObj.currentUrl !==
+                            reportNameObj.itemWithNoSalesProduct && 
+                            reporterObj.currentUrl !==
+                            reportNameObj.nationalRanging && 
+                            reporterObj.currentUrl !==
+                            reportNameObj.ranging &&  
+                            reporterObj.currentUrl !==
+                            reportNameObj.ItemWithSlowMovingStock &&
+                            reporterObj.currentUrl !==
+                            reportNameObj.rankingByOutlet &&
+                            reporterObj.currentUrl !==
+                            reportNameObj.itemWithNoSalesSummary 
+
+                          ">
+                        <div class="mt-1" *ngIf="f?.sort?.value">
+                          <h4>Sort Order</h4>
+                          <ul>
+                            <li>{{ f?.sort?.value | uppercase }}</li>
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !==
+                            reportNameObj.productPriceDeviation &&
+                          reporterObj.currentUrl !==
+                            reportNameObj.lessthenXdaysStock
+                        ">
+                        <div class="mt-1" *ngIf="f?.promoCode?.value">
+                          <h4>Promo Code</h4>
+                          <ul>
+                            <li>
+                              Only Items in Promo Code: {{ f?.promoCode?.value }}
+                            </li>
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container>
+                        <div class="mt-1" *ngIf="selectedValues.nationalranges">
+                          <h4>National Range</h4>
+                          <ul>
+                            <ng-container *ngIf="reporterObj?.button_text?.nationalranges === buttonObj?.select_all">
+                              <li *ngFor="let nationalrange of selectedValues.nationalranges">
+                                {{ nationalrange.name }}
+                              </li>
+                            </ng-container>
+                            <ng-container *ngIf="reporterObj?.button_text?.nationalranges !== buttonObj?.select_all">
+                              <li>All Values Has Been Selected</li>
+                            </ng-container>
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !==
+                            reportNameObj.productPriceDeviation &&
+                          reporterObj.currentUrl !== reportNameObj.ranging
+                        ">
+                        <div class="mt-1" *ngIf="f?.isPromoSale?.value">
+                          <h4>Promotional Sales</h4>
+                          <ul>
+                            <li>Only Promotional Sales will be shown</li>
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !==
+                            reportNameObj.productPriceDeviation &&
+                          reporterObj.currentUrl !== reportNameObj.ranging &&
+                          reporterObj.currentUrl !== reportNameObj.NationalLevelSalesSummary
+                        ">
+                        <div class="mt-1" *ngIf="selectedValues.promotions">
+                          <h4>Promotions</h4>
+                          <ul>
+                            <ng-container
+                              *ngIf="(dropdownObj.promotions?.length !== selectedValues?.promotions?.length); else allPromSelected">
+                              <li *ngFor="let promotion of selectedValues?.promotions">
+                                {{ promotion.fullName }}
+                              </li>
+                            </ng-container>
+                            <ng-template #allPromSelected>
+                              <li>All Values Has Been Selected</li>
+                            </ng-template>
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="
+                      reporterObj.currentUrl !== reportNameObj.NationalLevelSalesSummary
+                      ">
+                        <div class="mt-1" *ngIf="selectedValues.departments">
+                          <h4>Departments</h4>
+                          <ul>
+
+                            <ng-container
+                              *ngIf="(dropdownObj.departments?.length !== selectedValues?.departments?.length); else allDeptSelected">
+                              <li *ngFor="let department of selectedValues?.departments">
+                                <!-- {{ commodity.desc }} -->
+                                {{ department.code }} &nbsp;-&nbsp;{{ department.desc }}
+                              </li>
+                            </ng-container>
+                            <ng-template #allDeptSelected>
+                              <li>All Values Has Been Selected</li>
+                            </ng-template>
+
+
+                            <!-- <ng-container *ngIf="reporterObj?.button_text?.departments === buttonObj?.select_all">
+                            <li *ngFor="let department of selectedValues?.departments">
+                              {{ department.desc }}
+                            </li>
+                          </ng-container>
+                          <ng-container *ngIf="reporterObj?.button_text?.departments !== buttonObj?.select_all">
+                            <li>All Values Has Been Selected</li>
+                          </ng-container> -->
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !==
+                          reportNameObj.productPriceDeviation &&
+                          reporterObj.currentUrl !== reportNameObj.NationalLevelSalesSummary
+                        ">
+                        <div class="mt-1" *ngIf="selectedValues.commodities">
+                          <h4>Commodities</h4>
+                          <ul>
+
+                            <ng-container
+                              *ngIf="(dropdownObj.commodities?.length !== selectedValues?.commodities?.length); else allCateSelected">
+                              <li *ngFor="let commodity of selectedValues?.commodities">
+
+                                {{ commodity.code }} &nbsp;-&nbsp;{{ commodity.desc }}
+                              </li>
+                            </ng-container>
+                            <ng-template #allCateSelected>
+                              <li>All Values Has Been Selected</li>
+                            </ng-template>
+
+                            <!-- <ng-container *ngIf="reporterObj?.button_text?.commodities === buttonObj?.select_all">
+                              <li *ngFor="let commodity of selectedValues?.commodities">
+                                {{ commodity.desc }}
+                              </li>
+                            </ng-container>
+                            <ng-container *ngIf="reporterObj?.button_text?.commodities !== buttonObj?.select_all">
+                              <li>All Values Has Been Selected</li>
+                            </ng-container> -->
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !==
+                            reportNameObj.productPriceDeviation &&
+                          reporterObj.currentUrl !== reportNameObj.ranging  &&
+                          reporterObj.currentUrl !== reportNameObj.NationalLevelSalesSummary
+                        ">
+                        <div class="mt-1" *ngIf="selectedValues.categories">
+                          <h4>Categories</h4>
+                          <ul>
+
+                            <ng-container
+                              *ngIf="(dropdownObj.categories?.length !== selectedValues?.categories?.length); else allCateSelected">
+                              <li *ngFor="let category of selectedValues?.categories">
+
+                                {{ category.code }} &nbsp;-&nbsp;{{ category.fullName }}
+                              </li>
+                            </ng-container>
+                            <ng-template #allCateSelected>
+                              <li>All Values Has Been Selected</li>
+                            </ng-template>
+
+                            <!-- <ng-container *ngIf="reporterObj?.button_text?.categories === buttonObj?.select_all">
+                              <li *ngFor="let category of selectedValues?.categories">
+                                {{ category.fullName }}
+                              </li>
+                            </ng-container>
+                            <ng-container *ngIf="reporterObj?.button_text?.categories !== buttonObj?.select_all">
+                              <li>All Values Has Been Selected</li>
+                            </ng-container> -->
+
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !==
+                            reportNameObj.productPriceDeviation &&
+                          reporterObj.currentUrl !== reportNameObj.ranging &&
+                          reporterObj.currentUrl !== reportNameObj.nationalRanging &&
+                          reporterObj.currentUrl !== reportNameObj.NationalLevelSalesSummary
+                        ">
+                        <div class="mt-1" *ngIf="selectedValues.groups">
+                          <h4>Groups</h4>
+                          <ul>
+                            <ng-container
+                              *ngIf="(dropdownObj.groups?.length !== selectedValues?.groups?.length); else allGrpSelected">
+                              <li *ngFor="let group of selectedValues?.groups">
+
+                                {{ group.code }} &nbsp;-&nbsp;{{ group.fullName }}
+                              </li>
+                            </ng-container>
+                            <ng-template #allGrpSelected>
+                              <li>All Values Has Been Selected</li>
+                            </ng-template>
+
+                            <!-- <ng-container *ngIf="reporterObj?.button_text?.groups === buttonObj?.select_all">
+                              <li *ngFor="let group of selectedValues?.groups">
+                                {{ group.fullName }}
+                              </li>
+                            </ng-container>
+                            <ng-container *ngIf="reporterObj?.button_text?.groups !== buttonObj?.select_all">
+                              <li>All Values Has Been Selected</li>
+                            </ng-container> -->
+
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !==
+                            reportNameObj.productPriceDeviation &&
+                          reporterObj.currentUrl !== reportNameObj.ranging &&
+                          reporterObj.currentUrl !== reportNameObj.nationalRanging &&
+                          reporterObj.currentUrl !== reportNameObj.NationalLevelSalesSummary
+                        ">
+                        <div class="mt-1" *ngIf="selectedValues.suppliers">
+                          <h4>Suppliers</h4>
+                          <ul>
+
+                            <ng-container
+                              *ngIf="(dropdownObj.suppliers?.length !== selectedValues?.suppliers?.length); else allSuppSelected">
+                              <li *ngFor="let supplier of selectedValues?.suppliers">
+
+                                {{ supplier.code }} &nbsp;-&nbsp;{{ supplier.desc }}
+                              </li>
+                            </ng-container>
+                            <ng-template #allSuppSelected>
+                              <li>All Values Has Been Selected</li>
+                            </ng-template>
+
+                            <!-- <ng-container *ngIf="reporterObj?.button_text?.suppliers === buttonObj?.select_all">
+                              <li *ngFor="let supplier of selectedValues?.suppliers">
+                                {{ supplier.desc }}
+                              </li>
+                            </ng-container>
+                            <ng-container *ngIf="reporterObj?.button_text?.suppliers !== buttonObj?.select_all">
+                              <li>All Values Has Been Selected</li>
+                            </ng-container> -->
+
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !==
+                            reportNameObj.productPriceDeviation && 
+                          reporterObj.currentUrl !== reportNameObj.ranging &&
+                          reporterObj.currentUrl !== reportNameObj.nationalRanging  &&
+                          reporterObj.currentUrl !== reportNameObj.NationalLevelSalesSummary
+                        ">
+                        <div class="mt-1" *ngIf="selectedValues.manufacturers">
+                          <h4>Manufacturers</h4>
+                          <ul>
+
+                            <ng-container
+                              *ngIf="(dropdownObj.manufacturers?.length !== selectedValues?.manufacturers?.length); else allManuSelected">
+                              <li *ngFor="let manufacturer of selectedValues?.manufacturers">
+
+                                {{ manufacturer.code }} &nbsp;-&nbsp;{{ manufacturer.name }}
+                              </li>
+                            </ng-container>
+                            <ng-template #allManuSelected>
+                              <li>All Values Has Been Selected</li>
+                            </ng-template>
+
+                            <!-- <li *ngFor="
+                                let manufacturer of selectedValues?.manufacturers
+                              ">
+                              {{ manufacturer.name }} &nbsp;&nbsp;
+                              {{ manufacturer.code }}
+                            </li> -->
+                          </ul>
+                        </div>
+                      </ng-container>
+
+                      <div class="mt-1" *ngIf="selectedValues.stores">
+                        <h4>Outlets</h4>
+                        <ul>
+
+                          <ng-container
+                            *ngIf="(dropdownObj.stores?.length !== selectedValues?.stores?.length); else allStoreSelected">
+                            <li *ngFor="let store of selectedValues?.stores">
+
+                              {{ store.code }} &nbsp;-&nbsp;{{ store.desc }}
+                            </li>
+                          </ng-container>
+                          <ng-template #allStoreSelected>
+                            <li>All Values Has Been Selected</li>
+                          </ng-template>
+
+                          <!-- <ng-container *ngIf="reporterObj?.button_text?.stores === buttonObj?.select_all">
+                            <li *ngFor="let store of selectedValues.stores">
+                              {{ store.storeDetail }}
+                            </li>
+                          </ng-container>
+                          <ng-container *ngIf="reporterObj?.button_text?.stores !== buttonObj?.select_all">
+                            <li>All Values Has Been Selected</li>
+                          </ng-container> -->
+                        </ul>
+                      </div>
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !== reportNameObj.NationalLevelSalesSummary
+                        ">
+
+                        <div class="mt-1" *ngIf="selectedValues.zones">
+                          <h4>Zones</h4>
+                          <ul>
+
+                            <ng-container
+                              *ngIf="(dropdownObj.zones?.length !== selectedValues?.zones?.length); else allZonesSelected">
+                              <li *ngFor="let zone of selectedValues?.zones">
+
+                                {{ zone.code }} &nbsp;-&nbsp;{{ zone.name }}
+                              </li>
+                            </ng-container>
+                            <ng-template #allZonesSelected>
+                              <li>All Values Has Been Selected</li>
+                            </ng-template>
+
+                            <!-- <ng-container *ngIf="reporterObj?.button_text?.zones === buttonObj?.select_all">
+                              <li *ngFor="let zone of selectedValues.zones">
+                                {{ zone.name }}
+                              </li>
+                            </ng-container>
+                            <ng-container *ngIf="reporterObj?.button_text?.zones !== buttonObj?.select_all">
+                              <li>All Values Has Been Selected</li>
+                            </ng-container> -->
+                          </ul>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="
+                          reporterObj.currentUrl !==
+                            reportNameObj.productPriceDeviation &&
+                          reporterObj.currentUrl !==
+                            reportNameObj.itemWithNoSalesProduct &&
+                          reporterObj.currentUrl !== reportNameObj.ranging &&
+                          reporterObj.currentUrl !== reportNameObj.NationalLevelSalesSummary
+                        ">
+                        <div class="mt-1" *ngIf="selectedValues.tills">
+                          <h4>Till</h4>
+                          <ul>
+                            <ng-container
+                              *ngIf="(dropdownObj.tills?.length !== selectedValues?.tills?.length); else allTillsSelected">
+                              <li *ngFor="let till of selectedValues?.tills">
+
+                                {{ till.code }} &nbsp;-&nbsp;{{ till.desc }}
+                              </li>
+                            </ng-container>
+                            <ng-template #allTillsSelected>
+                              <li>All Values Has Been Selected</li>
+                            </ng-template>
+
+                            <!-- <ng-container *ngIf="reporterObj?.button_text?.tills === buttonObj?.select_all">
+                              <li *ngFor="let till of selectedValues.tills">
+                                {{ till.desc }}
+                              </li>
+                            </ng-container>
+                            <ng-container *ngIf="reporterObj?.button_text?.tills !== buttonObj?.select_all">
+                              <li>All Values Has Been Selected</li>
+                            </ng-container> -->
+
+                          </ul>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <!-- Added click event to close promotion dropdown forcefully -->
+              <div class="col-12" (click)="htmlTagEvent(reporterObj.dropdownField.promotions)">
+                <div class="btn-wrap text-right mt-10">
+                  <button type="button" class="btn btn-grey mr-2" [disabled]="
+                      reporterObj.currentUrl == reportNameObj.rankingByOutlet
+                    ">
+                    <i class="fa fa-info-circle"></i> Hide info
+                  </button>
+                  <button type="button" class="btn btn-grey mr-2" [disabled]="
+                      reporterObj.currentUrl == reportNameObj.rankingByOutlet
+                    ">
+                    Mail
+                  </button>
+                  <button type="button" class="btn btn-grey mr-2" (click)="schedularFilter()">
+                    <i class="fa fa-clock-o"></i> Schedule
+                  </button>
+                  <button type="button" class="btn btn-grey mr-2">
+                    <i class="fa fa-save"></i> Save
+                  </button>
+                  <button type="button" class="btn btn-grey mr-2">
+                    <i class="fa fa-folder-open"></i> Load
+                  </button>
+                  <!-- <a class="btn btn-grey mr-2" (click)="resetForm()">Clear Selections</a> -->
+                  <button class="btn btn-blue mr-2" (click)="getSalesReport()">
+                    Ok
+                  </button>
+                  <a class="btn btn-grey" data-dismiss="modal" (click)="isCancelApi()">Cancel</a>
+                </div>
+              </div>
+
+              <ng-container *ngIf="
+                reporterObj.currentUrl != reportNameObj.rankingByOutlet &&
+                reporterObj.currentUrl !== reportNameObj.productPriceDeviation &&
+                reporterObj.currentUrl !== reportNameObj.itemWithNoSalesProduct &&
+                reporterObj.currentUrl !== reportNameObj.lessthenXdaysStock &&
+                reporterObj.currentUrl !== reportNameObj.ranging &&
+                reporterObj.currentUrl !== reportNameObj.nationalRanging &&
+                reporterObj.currentUrl !== reportNameObj.ItemWithNegativeSOH &&
+                reporterObj.currentUrl !== reportNameObj.itemWithZeroSOH &&
+                reporterObj.currentUrl !== reportNameObj.ItemWithSlowMovingStock &&
+                reporterObj.currentUrl !== reportNameObj.NationalLevelSalesSummary
+              ">
+                <!-- Added click event to close promotion dropdown forcefully -->
+                <div class="col-12" (click)="htmlTagEvent(reporterObj.dropdownField.promotions)">
+                  <div class="form-group mt-2 mb-0">
+                    <textarea name="" id=""
+                      class="form-control">Sales Report data is retrieved from the Transaction Summary records (TRX) by default It can also be retrieved from the Journal Records (JNL)To do this, change your settings under ‘Settings>>REPORTS - Data’.Your current setting : TRX</textarea>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<div class="modal fade thm-popup" id="schedularFilter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered dialog-w2" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width border-popup">
+        <div class="popup-box">
+          <form name="searchForm2" id="searchForm2">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Filter Name</h4>
+            </div>
+            <div class="group-from mb-0 mx-2">
+              <div class="form-group">
+                <input id="reportName2" type="text" class="form-control col-md-10" placeholder="Report Name"
+                  #searchValue />
+              </div>
+
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2" (click)="schedularReport()">Ok</button>
+              <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg thm-popup" id="newSch" tabindex="-1" role="dialog"
+  aria-labelledby="reportFilterModalLabel" aria-hidden="true" data-backdrop="static">
+  <form [formGroup]="reportScheduleForm">
+    <div class="modal-dialog modal-dialog-centered modal-lg border-popup" role="document">
+      <div class="modal-content">
+        <div class="modal-body popup-box-width">
+          <div class="popup-box">
+            <div class="form-row align-items-center">
+              <!-- Added click event to close promotion dropdown forcefully -->
+              <div class="col-12">
+                <div class="title-wrap mb-0">
+                  <h4 class="title">New Schedule</h4>
+                </div>
+              </div>
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs col-md-12 flag-nav">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#home">Details</a>
+                </li>
+                <!-- <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#menu1">Flags</a>
+                                    </li> -->
+              </ul>
+              <!-- Tab panes -->
+              <div class="tab-content col-md-12 p-0 flag-content">
+                <div class="tab-pane active" id="home">
+                  <!-- Added click event to close promotion dropdown forcefully -->
+                  <div class="col-lg-12 col-xl-12">
+                    <!-- General Field Filter -->
+                    <div class="form-row align-items-center">
+                      <div class="col-md-6">
+                        <div class="group-from">
+                          <h5 class="title">Reports</h5>
+                          <div class="form-row form-group align-items-center">
+                            <div class="col-12">
+                              <input type="text" class="form-control" formControlName="reportName" readonly />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="group-from">
+                          <h5 class="title">Filters</h5>
+                          <div class="form-row form-group align-items-center">
+                            <div class="col-12">
+                              <input type="text" class="form-control" formControlName="description" readonly />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Filter Date Range -->
+                    <div class="form-row align-items-center">
+                      <div class="col-md-6">
+                        <div class="group-from">
+                          <h5 class="title">
+                            Filter Date Range
+                          </h5>
+                          <div class="form-row form-group align-items-center mb-0">
+                            <div class="col-12">
+                              <div class="form-row align-items-center">
+                                <div class="col-5">
+                                  <div class="form-group mb-0">
+                                    <div class="ctm-calendar">
+                                      <input #startDatesch type="text" class="form-control" bsDatepicker
+                                        [bsConfig]="{ showWeekNumbers: false }" [maxDate]="maxDate"
+                                        [ngClass]="{'is-invalid': submitted && f.startDate.errors}"
+                                        (bsValueChange)="onShDateChange($event, 'startDate');scheduleDateChange($event, startDatesch.value);"
+                                        [bsValue]="shStartDateBsValue" readonly />
+                                      <div *ngIf="f_schedule.startDate.errors" class="invalid-feedback">
+                                        <div *ngIf="f_schedule.startDate.errors.required">
+                                          Start date is required
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-2">
+                                  <div class="form-group mb-0 text-center">
+                                    <label for class="mb-0">To</label>
+                                  </div>
+                                </div>
+                                <div class="col-5">
+                                  <div class="form-group mb-0">
+                                    <div class="ctm-calendar">
+                                      <input #toDateSch type="text" class="form-control" bsDatepicker
+                                        [bsConfig]="{ showWeekNumbers: false }" [maxDate]="maxDate"
+                                        [ngClass]="{
+                                                                            'is-invalid': isReportScheduleFormSubmitted && f.endDate.errors }"
+                                        (bsValueChange)="onShDateChange($event, 'endDate');scheduleDateChange(toDateSch.value,$event);"
+                                        [bsValue]="shEndDateBsValue" readonly />
+                                      <div *ngIf="f_schedule.endDate.errors" class="invalid-feedback">
+                                        <div *ngIf="f_schedule.endDate.errors.required">
+                                          End date is required
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-5">
+                              <div *ngIf="false" class="custom-control custom-checkbox">
+                                <input formControlName="roleOnCompletion" type="checkbox" class="custom-control-input"
+                                  id="Sales" />
+                                <label class="custom-control-label mb-0" for="Sales">Roll of open complition</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="group-from">
+                          <h5 class="title">
+                            Intervel
+                          </h5>
+                          <div class="form-row form-group align-items-center mb-0">
+                            <div class="col-12">
+                              <div class="form-row align-items-center">
+                                <div class="col-md-4">
+                                  <div class="form-row align-items-center pt-2">
+                                    <div class="col-md-4">
+                                      <label>Every</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                      <input type="number" name="intervalBracket" [ngClass]="{
+                                                                                'is-invalid':
+                                                                                isReportScheduleFormSubmitted && f_schedule.intervalBracket.errors
+                                                                                }" formControlName="intervalBracket"
+                                        class="form-control">
+                                      <div *ngIf="isReportScheduleFormSubmitted && f_schedule.intervalBracket.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="f_schedule.intervalBracket.errors.required">
+                                          required
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="group-from my-0">
+                                    <div class="d-flex flex-wrap form-group mb-0">
+                                      <div class="custom-control custom-radio mr-2"><input type="radio" name="interval"
+                                          class="custom-control-input" formControlName="interval" id="months"
+                                          value="1"><label for="months" class="custom-control-label mb-0" for="months">
+                                          Months </label>
+                                      </div>
+                                      <div class="custom-control custom-radio mr-2"><input type="radio" name="interval"
+                                          class="custom-control-input" formControlName="interval" id="weeks"
+                                          value="2"><label class="custom-control-label mb-0" for="weeks">Weeks </label>
+                                      </div>
+                                      <div class="custom-control custom-radio mr-2" [ngClass]="{
+                                                                                'is-invalid':
+                                                                                isReportScheduleFormSubmitted && f_schedule.interval.errors
+                                                                                }"><input type="radio" name="interval"
+                                          class="custom-control-input" formControlName="interval" id="days"
+                                          value="3"><label class="custom-control-label mb-0" for="days"> Days </label>
+                                      </div>
+                                      <div *ngIf="isReportScheduleFormSubmitted && f_schedule.interval.errors"
+                                        class="invalid-feedback">
+                                        <div *ngIf="f_schedule.interval.errors.required">
+                                          required
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row form-group align-items-center">
+                      <div class="col-md-6">
+                        <div class="group-from">
+                          <h5 class="title">Schedule Group</h5>
+                          <div class="form-row form-group align-items-center">
+                            <div class="col-10">
+                              <select formControlName="groupIds" disabled class="form-control"
+                                placeholder='Schedule Group'>
+                                <option value="">select</option>
+                                <option *ngFor="let item of dropdownObj.stores">
+                                  {{ item.storeDetail }}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="group-from">
+                          <h5 class="title">Destination email </h5>
+                          <div class="form-row form-group align-items-center">
+                            <div class="col-12">
+                              <ng-select [clearSearchOnAdd]="true" [items]="dropdownObj.users" bindLabel="email"
+                                bindValue="id" [clearSearchOnAdd]="true" [closeOnSelect]="false" [virtualScroll]="false"
+                                [multiple]="true" placeholder="Destination email" formControlName="userIds" (change)="
+                                setDropdownSelection(
+                                  reporterObj.dropdownField.users,
+                                  $event
+                                )
+                              " (open)="
+                              getAndSetFilterFata(
+                                  reporterObj.dropdownField.users,
+                                  reporterObj.dropdownField.userIds,
+                                  true
+                                )
+                              " (remove)="
+                                addOrRemoveItem(
+                                  $event,
+                                  reporterObj.dropdownField.users,
+                                  'remove'
+                                )
+                              " (clear)="
+                                addOrRemoveItem(
+                                  $event,
+                                  reporterObj.dropdownField.users,
+                                  'clear_all',
+                                  reporterObj.dropdownField.userIds
+                                )
+                              " (add)="
+                                addOrRemoveItem(
+                                  $event,
+                                  reporterObj.dropdownField.users,
+                                  'add'
+                                )
+                              ">
+                                <!-- It hold value on the basis of filter -->
+                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                  <div class="form-row">
+                                    <div class="col-12 zone-overflow">
+                                      <input id="item-{{ index }}" type="checkbox" [checked]="
+                                    reporterObj?.remove_index_user?.users[item.id]
+                                      ? true
+                                      : false
+                                  " />&nbsp;
+                                      <span title="{{ item?.firstName }}, {{ item?.lastName }}, {{ item?.email }}">
+                                        {{ item.firstName }}, {{ item.lastName }}, {{ item.email }}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </ng-template>
+
+                                <!-- Add more tag with count -->
+                                <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                  <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                                    <span class="ng-value-label">{{ item.email }}</span>
+                                    <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                  </div>
+                                  <div class="ng-value" *ngIf="items.length > 2">
+                                    <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                                  </div>
+                                </ng-template>
+                              </ng-select>
+                              <div *ngIf="isReportScheduleFormSubmitted && f_schedule.userIds.errors"
+                                class="invalid-feedback">
+                                <div *ngIf="f_schedule.userIds.errors.required">
+                                  Destination email is required
+                                </div>
+                              </div>
+                            </div>
+                            <!-- <div class="col-2">
+                                                            <button class="btn blue browse-btn">New..</button>
+                                                            </div> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row form-group align-items-center">
+                      <div class="col-md-6">
+                        <div class="group-from">
+                          <h5 class="title">Export Format</h5>
+                          <div class="form-row form-group align-items-center">
+                            <div class="col-4">
+                              <div class="custom-control custom-checkbox">
+                                <input formControlName="excelExport" type="checkbox" class="custom-control-input"
+                                  id="Excel" />
+                                <label class="custom-control-label mb-0" for="Excel">Excel</label>
+                              </div>
+                            </div>
+                            <div class="col-4">
+                              <div class="custom-control custom-checkbox">
+                                <input formControlName="pdfExport" type="checkbox" class="custom-control-input"
+                                  id="PDF" />
+                                <label class="custom-control-label mb-0" for="PDF">PDF</label>
+                              </div>
+                            </div>
+
+                            <div
+                              *ngIf="isReportScheduleFormSubmitted && (f_schedule.pdfExport.errors || f_schedule.excelExport.errors || f_schedule.csvExport.errors)"
+                              class="invalid-feedback">
+                              <div *ngIf="f_schedule.exportFormat.errors.required">
+                                Export Format is required
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="group-from">
+                          <h5 class="title">Last Run</h5>
+                          <div class="form-row form-group align-items-center">
+                            <div class="col-10">
+                              <input onkeydown="return false" type="text" class="form-control" [disabled]="true"
+                                formControlName="lastRun" placeholder="Never" readonly />
+                              <!-- (bsValueChange)="
+                                                                specDateChange($event, last_run.value)
+                                                                " -->
+                            </div>
+                            <!-- <div class="col-2"><button class="btn blue browse-btn" disabled>Reset</button></div> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 123 -->
+                    <div class="form-row form-group align-items-center">
+                      <div class="group-from col-md-6">
+                        <h5 class="title">
+                          Inception
+                        </h5>
+                        <div class="form-row form-group align-items-center mb-0">
+                          <div class="col-12">
+                            <div class="row align-items-center">
+                              <div class="col-5 ">
+                                <div class="form-group mb-0">
+                                  <div class="ctm-calendar">
+                                    <!-- [maxDate]="maxDate" -->
+                                    <input #inceptionDate type="text" class="form-control"
+                                      formControlName="inceptionDate" bsDatepicker [minDate]="maxDate"
+                                      [bsConfig]="{ showWeekNumbers: false }" [ngClass]="{
+                                                                        'is-invalid':
+                                                                        isReportScheduleFormSubmitted && f_schedule.startDate.errors
+                                                                        }" readonly />
+                                    <!-- (bsValueChange)="
+                                                                            specDateChange($event, inceptionDate.value)
+                                                                            " -->
+                                    <div *ngIf="f_schedule.startDate.errors" class="invalid-feedback">
+                                      <div *ngIf="f_schedule.startDate.errors.required">
+                                        Inception is required
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-7">
+                                <div class="form-group mb-0">
+                                  <div class="ctm-timepicker">
+                                    <timepicker class="form-timepicker" formControlName="inceptionTime" #dateTimeSch>
+                                    </timepicker>
+                                    <div *ngIf="f_schedule.endDate.errors" class="invalid-feedback">
+                                      <div *ngIf="f_schedule.endDate.errors.required">
+                                        End date is required
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 text-right  mt-5">
+                        <div class="custom-control custom-checkbox sd-checkbox-active">
+                          <input formControlName="isFlags" class="custom-control-input" type="checkbox" id="isFlags"
+                            checked>
+                          <label for="isFlags" class="custom-control-label mb-0">
+                            <h6 class="mb-0">Active</h6>
+                          </label>
+                        </div>
+                        <!-- <button class="btn btn-blue">Flags</button> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="menu1">1234</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 p-0">
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2" (click)="scheduleData()">
+                Ok
+              </button>
+              <a class="btn btn-grey" (click)="resetScheduleform()" data-dismiss="modal">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- </div> -->
+    </div>
+    <!-- </div> -->
+  </form>
+</div>
+
+<div class="modal fade thm-popup" id="shFlagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered flag_w" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width border-popup">
+        <div class="popup-box">
+          <form name="searchForm3" id="searchForm3">
+            <div class="title-wrap mb-2">
+              <h4 class="title">AED Schedule Flags</h4>
+            </div>
+            <div class="group-from mb-0 mx-0">
+              <div class="form-group">
+                <div class="table-responsive flag-table">
+                  <table cellspacing="1" cellpadding="1" class="table">
+                    <tr>
+                      <td>Dummy Text</td>
+                      <td> <input type="text" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                      <td>Dummy Text</td>
+                      <td> <input type="text" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                      <td>Dummy Text</td>
+                      <td> <input type="text" class="form-control" /></td>
+                    </tr>
+                  </table>
+                </div>
+
+              </div>
+
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2">Ok</button>
+              <!-- <button class="btn btn-grey" (click)="cancelPopup()">Cancel</button> -->
+              <button class="btn btn-grey">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade thm-popup" id="shHostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered host_w" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width border-popup">
+        <div class="popup-box">
+          <form name="searchForm1" id="searchForm1">
+            <div class="title-wrap mb-2">
+              <h4 class="title">SANDBOX</h4>
+            </div>
+            <div class="group-from mb-0 mx-0">
+              <div class="form-row form-group align-items-center">
+                <div class="col-md-4">
+                  <select class="from-control ">
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                    <option>Daily</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input"
+                      id="wed1">
+                    <label class="custom-control-label mb-0" for="wed1"> Assume All Products HoldGP% </label></div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-row form-group align-items-center">
+                    <label class="col-md-4">Week No.</label>
+                    <div class="col-md-8">
+                      <input class="form-control w-100" placeholder="" />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="form-row form-group align-items-center">
+                <div class="col-md-12">
+                  <div class="multiple-check">
+
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-row form-group align-items-center mt-2">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-4 text-left">Start Time:</div>
+                    <div class="col-md-8"></div>
+                    <div class="col-md-4 text-left">End Time:</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="btn-wrap text-right mt-10">
+
+              <button class="btn btn-grey">Exit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

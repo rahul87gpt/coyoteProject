@@ -1,0 +1,95 @@
+/* ================================
+Start Responsive css
+================================== */
+@media (max-width: 1200px) {
+	.psJournal-wrap .psJournal-right {
+		width: 260px;
+		max-width: 260px;
+	}
+	.psJournal-wrap .psJournal-left {
+		width: calc(100% - 260px);
+		max-width: calc(100% - 260px);
+	}
+}
+@media screen and (min-width: 900px) and (max-width:1064px) {
+	ul.main-menu > li > a{
+		padding: 10px 5px;
+		font-size: 12px;
+	}
+	ul.main-menu span.menu-icon img{
+		width: 25px;
+	}
+	ul.main-menu span.menu-icon{
+		margin-bottom: 5px;
+	}
+}
+@media screen and (min-width: 768px) and (max-width:899px) {
+	ul.main-menu > li > a{
+		padding: 10px 4px;
+		font-size: 10px;
+	}
+	ul.main-menu span.menu-icon img{
+		width: 25px;
+	}
+	ul.main-menu span.menu-icon{
+		margin-bottom: 5px;
+	}
+	.sbLeftoggle{
+		font-size: 14px;
+		line-height: 30px;
+		height: 30px;
+		padding: 0 8px;
+	}
+}
+@media screen and (max-width:1229px) {
+	body.sb-open-wrap header.header-wrap,
+	body.sb-open-wrap .page-footer{
+		margin-left: 0px;
+		transition: padding 0.38s ease;
+	}
+	body.sb-open-wrap .mainContent{
+		padding-left: 0px;
+		transition: padding 0.38s ease;
+	}
+	body.sb-open-wrap .sidebar-left-arrow {
+		position: absolute;
+		top: 0;
+		right: -38px;
+		display: block;
+	}
+	body.sb-open-wrap .sidebar-left-arrow a{
+		display: block;
+	}
+	body.sb-open-wrap .sidebar-left-arrow a i{
+		display: block;
+		color: #fff;
+		text-align: center;
+		width: 38px;
+		height: 38px;
+		line-height: 37px;
+		background: #2a3042;
+		border-radius: 0px 8px 8px 0px;
+		transition: width 0.38s ease;
+	}
+	/* .sidebar-left.sb-close.sbHover-close ul.proSidebar-menu li:hover .submenu-wrap{
+		display: none!important;
+	} */
+}
+@media screen and (max-width:991px) {
+	.login-content-layout .login-card .content-container{
+		width: calc(100% - 45%);
+	}
+	.login-content-layout .login-card .form-container{
+		width: 55%;
+		padding: 0px 30px;
+	}	
+	.login-content-layout .login-card .content-txt{
+		padding: 0px 30px;
+	}
+	.login-content-layout .login-card .content-txt h2{
+		font-size: 32px;
+	}
+}
+/* ================================
+End 
+================================== */

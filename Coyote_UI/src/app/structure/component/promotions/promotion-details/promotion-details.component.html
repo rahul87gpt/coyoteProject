@@ -1,0 +1,2040 @@
+<div class="mainContent-innner">
+  <form [formGroup]="addPromotionDetailsForm" (ngSubmit)="savePromotion()">
+    <div class="promo-mixmatch-section">
+      <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">Promotions</h4>
+        <div class="probtn-wrap d-flex text-right">
+          <a
+            class="btn btn-blue mr-2"
+            (click)="
+              addProductItem(); isEditOpen = false; submittedPromoItem = false;mode='ADD';
+            "
+            ><i class="icon fa fa-plus-circle"></i> Add Product Item</a
+          >
+          <button class="btn mr-2" type="submit">Save</button>
+          <a class="btn mr-2"><i class="icon fa fa-print"></i> Print</a>
+          <a class="btn mr-2" data-toggle="modal"
+          data-target="#promoimportModal" ><i class="icon fa fa-file-excel-o"></i> Import</a>
+          <button class="btn" (click)="cancelPromotion()">Cancel</button>
+          <!-- data-toggle="modal"
+            data-target="#promoItemModal" -->
+          <!-- <div class="searchBtn">
+                <i class="fa fa-search"></i>
+                <input type="search" placeholder="" class="form-control">
+                </div> -->
+        </div>
+      </div>
+      <!-- /.action-topbar -->
+      <div class="promo-mixmatch-wrap mt-15">
+        <div class="promo-mixmatch-table-wrap">
+          <div class="bg-box mt-15">
+            <div class="row">
+              <div class="col-lg-5 col-xl-5">
+                <div class="group-from mb-0 promo-header">
+                  <h5 class="title">Promo Header</h5>
+                  <div class="form-row">
+                    <div class="col-md-12">
+                      <div class="form-group form-row align-items-center">
+                        <label class="label col-md-3 mb-0"
+                          >Promo Code<span class="text-danger">*</span></label
+                        >
+                        <div class="col-md-9">
+                          <div class="form-row align-items-center">
+                            <div class="col-4">
+                              <input
+                                [readonly]="promoFormStatus"
+                                type="text"
+                                class="form-control"
+                                #code
+                                formControlName="code"
+                                id="code"
+                                [ngClass]="{
+                                  'is-invalid': submitted && f.code.errors
+                                }"
+                                (input)="
+                                  code.value = code.value.toUpperCase();
+                                  addClass('code')
+                                "
+                              />
+                              <div
+                                *ngIf="f.code.errors"
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="f.code.errors.required">
+                                  Code is required
+                                </div>
+                                <div *ngIf="f.code.errors.pattern">
+                                  space is not allowed
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-4">
+                              <select
+                                type="text"
+                                class="form-control"
+                                formControlName="status"
+                                [ngClass]="{
+                                  'is-invalid': submitted && f.status.errors
+                                }"
+                              >
+                                <option value="true">Active</option>
+                                <option value="false">Inactive</option>
+                              </select>
+                              <div
+                                *ngIf="f.status.errors"
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="f.status.errors.required">
+                                  Status is required
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-4">
+                              <select
+                                (change)="setPromotionText($event)"
+                                class="form-control mix-w"
+                                formControlName="promotionTypeId"
+                                id="promotionTypeId"
+                                [ngClass]="{
+                                  'is-invalid':
+                                    submitted && f.promotionTypeId.errors
+                                }"
+                              >
+                                <option
+                                  *ngFor="
+                                    let promotionType of masterListPromoTypes
+                                  "
+                                  [value]="promotionType.id"
+                                >
+                                  {{ promotionType.name }}
+                                </option>
+                              </select>
+                              <div
+                                *ngIf="f.promotionTypeId.errors"
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="f.promotionTypeId.errors.required">
+                                  Type is required
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group form-row align-items-center">
+                        <label class="label col-md-3 mb-0"
+                          >Description <span class="text-danger">*</span></label
+                        >
+                        <div class="col-md-9">
+                          <input
+                            (input)="addClass('desc')"
+                            type="text"
+                            class="form-control"
+                            id="desc"
+                            formControlName="desc"
+                            appUppercase
+                            [ngClass]="{
+                              'is-invalid': submitted && f.desc.errors
+                            }"
+                          />
+                          <div *ngIf="f.desc.errors" class="invalid-feedback">
+                            <div *ngIf="f.desc.errors.required">
+                              Description is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group form-row align-items-center">
+                        <label class="label col-md-3 mb-0">Report Code</label>
+                        <div class="col-md-9">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder=""
+                            formControlName="rptGroup"
+                            appUppercase
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <ng-container
+                      *ngIf="promotionTypeText.toLowerCase() === 'mixmatch'"
+                    >
+                      <div class="col-md-12">
+                        <div class="form-group form-row align-items-center">
+                          <label
+                            class="label col-md-3 mb-0"
+                            title="Mixmatch Group"
+                            >Mixmatch Group
+                            <span class="text-danger">*</span></label
+                          >
+                          <div class="col-md-9">
+                            <select
+                              class="form-control"
+                              formControlName="groupId"
+                              [ngClass]="{
+                                'is-invalid': submitted && f.groupId.errors
+                              }"
+                            >
+                              <option
+                                [value]="group.value"
+                                *ngFor="let group of groupArray1"
+                              >
+                                {{ group.name }}
+                              </option>
+                              <!-- <option value="" disabled selected hidden> Select Offer group</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option> -->
+                            </select>
+
+                            <div
+                              *ngIf="f.groupId.errors"
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="f.groupId.errors.required">
+                                Please select an Mixmatch Group
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+
+                    <ng-container
+                      *ngIf="promotionTypeText.toLowerCase() === 'offer'"
+                    >
+                      <div class="col-md-12">
+                        <div class="form-group form-row align-items-center">
+                          <label class="label col-md-3 mb-0"
+                            >Offer Group
+                            <span class="text-danger">*</span></label
+                          >
+                          <div class="col-md-9">
+                            <select
+                              class="form-control"
+                              formControlName="groupId"
+                              [ngClass]="{
+                                'is-invalid': submitted && f.groupId.errors
+                              }"
+                            >
+                              <option
+                                [value]="group.value"
+                                *ngFor="let group of groupArray"
+                              >
+                                {{ group.name }}
+                              </option>
+                              <!-- <option value="" disabled selected hidden> Select Offer group</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option> -->
+                            </select>
+                            <div
+                              *ngIf="f.groupId.errors"
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="f.groupId.errors.required">
+                                Please select an Offer Group
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                    <div class="col-md-12">
+                      <div class="form-group mb-0 form-row align-items-center">
+                        <label class="label col-md-3 mb-0"
+                          >Outlet Zone <span class="text-danger">*</span></label
+                        >
+                        <div class="col-md-9 rebate-form zone-w">
+                          <div class="form-row align-items-center">
+                            <div class="col-8">
+                              <ng-select
+                                [items]="masterListZoneItems"
+                                bindLabel="name"
+                                bindValue="id"
+                                formControlName="zoneId"
+                                [virtualScroll]="false"
+                                [clearable]="false"
+                                [clearOnBackspace]="false"
+                                [searchable]="true"
+                                [multiple]="false"
+                                [ngClass]="{
+                                  'is-invalid': submitted && f.zoneId.errors
+                                }"
+                              >
+                                <ng-template
+                                  ng-option-tmp
+                                  let-item="item"
+                                  let-item$="item$"
+                                  let-index="index"
+                                >
+                                  <div class="form-row">
+                                    <span
+                                      class="col-8 zone-overflow"
+                                      title="{{ item.name }}"
+                                    >
+                                      {{ item.name }}
+                                    </span>
+                                    <div class="col-4">({{ item.code }})</div>
+                                  </div>
+                                </ng-template>
+                              </ng-select>
+                              <!-- <select
+                                class="form-control"
+                                formControlName="zoneId"
+                                [ngClass]="{
+                                  'is-invalid': submitted && f.zoneId.errors
+                                }"
+                              >
+                                <option [ngValue]="null">Select Zone</option>
+                                <ng-container
+                                  *ngFor="let zoneItem of masterListZoneItems"
+                                >
+                                  <option [value]="zoneItem.id">
+                                    {{ zoneItem.name }}
+                                  </option>
+                                </ng-container>
+                              </select> -->
+                              <div
+                                *ngIf="f.zoneId.errors"
+                                class="invalid-feedback"
+                              >
+                                <div *ngIf="f.zoneId.errors.required">
+                                  Zone is required
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-4">
+                              <button
+                                class="btn input-btn btn-grey btn-block"
+                                type="button"
+                                (click)="refreshOutlet()"
+                              >
+                                Clear
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5 col-xl-5">
+                <div class="group-from date-rangeW">
+                  <h5 class="title">Date Range</h5>
+                  <div class="form-row">
+                    <div class="col-md-6 pr-0">
+                      <div class="form-group mb-0 form-row align-items-center">
+                        <label class="label col-md-4 col-xxl-4 mb-0 pr-0"
+                          >Start Date <span class="text-danger">*</span></label
+                        >
+                        <div class="col-md-8 col-xxl-8 pr-">
+                          <div class="ctm-calendar">
+                            <!-- <input type="text" class="form-control" formControlName="start" [ngClass]="{
+                                'is-invalid': submitted && f.start.errors
+                              }" bsDatepicker [minDate]="minDate" value="{{ startDateValue | date: 'yyyy-MM-dd' }}" /> -->
+
+                            <input
+                              type="text"
+                              class="form-control"
+                              bsDatepicker
+                              (bsValueChange)="onDateChange($event)"
+                              [minDate]="minDate"
+                              [ngClass]="{
+                                'is-invalid': submitted && f.start.errors
+                              }"
+                              [bsConfig]="datepickerConfig"
+                              formControlName="start"
+                            />
+                            <div
+                              *ngIf="f.start.errors"
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="f.start.errors.required">
+                                Start date is required
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group mb-0 form-row align-items-center">
+                        <label class="label col-md-4 col-xxl-4 mb-0 pr-0"
+                          >End Date <span class="text-danger">*</span></label
+                        >
+                        <div class="col-md-8 col-xxl-8">
+                          <div class="ctm-calendar">
+                            <!-- <input type="text" class="form-control" formControlName="end" [ngClass]="{
+                                'is-invalid': submitted && f.end.errors
+                              }" bsDatepicker [minDate]="minEndDate" value="{{ endDateValue | date: 'yyyy-MM-dd' }}" /> -->
+                            <input
+                              type="text"
+                              class="form-control"
+                              bsDatepicker
+                              (bsValueChange)="lastEndDateDateChange($event)"
+                              [minDate]="lastEndDate"
+                              [ngClass]="{
+                                'is-invalid': submitted && f.end.errors
+                              }"
+                              [bsConfig]="datepickerConfig"
+                              formControlName="end"
+                            />
+                            <div *ngIf="f.end.errors" class="invalid-feedback">
+                              <div *ngIf="f.end.errors.required">
+                                End date is required
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="group-from mb-0 days-check">
+                  <h5 class="title">Days to Activate</h5>
+                  <div class="form-row form-group mb-0">
+                    <div class="col-3">
+                      <div class="custom-control custom-checkbox">
+                        <input
+                          [checked]="this.weekAvailability[0] == 'Y'"
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="Monday"
+                          (click)="setWeek($event, 'mon')"
+                        />
+                        <label class="custom-control-label mb-0" for="Monday"
+                          >Monday</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="custom-control custom-checkbox">
+                        <input
+                          [checked]="this.weekAvailability[1] == 'Y'"
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="Tuesday"
+                          (click)="setWeek($event, 'tue')"
+                        />
+                        <label class="custom-control-label mb-0" for="Tuesday"
+                          >Tuesday</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="custom-control custom-checkbox">
+                        <input
+                          [checked]="this.weekAvailability[2] == 'Y'"
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="Wednesday"
+                          (click)="setWeek($event, 'wed')"
+                        />
+                        <label class="custom-control-label mb-0" for="Wednesday"
+                          >Wednesday</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="custom-control custom-checkbox mr-2">
+                        <input
+                          [checked]="this.weekAvailability[3] == 'Y'"
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="Thursday"
+                          (click)="setWeek($event, 'thu')"
+                        />
+                        <label class="custom-control-label mb-0" for="Thursday"
+                          >Thursday</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="custom-control custom-checkbox">
+                        <input
+                          [checked]="this.weekAvailability[4] == 'Y'"
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="Friday"
+                          (click)="setWeek($event, 'fri')"
+                        />
+                        <label class="custom-control-label mb-0" for="Friday"
+                          >Friday</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="custom-control custom-checkbox">
+                        <input
+                          [checked]="this.weekAvailability[5] == 'Y'"
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="Saturday"
+                          (click)="setWeek($event, 'sat')"
+                        />
+                        <label class="custom-control-label mb-0" for="Saturday"
+                          >Saturday</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="custom-control custom-checkbox mr-2">
+                        <input
+                          [checked]="this.weekAvailability[6] == 'Y'"
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="Sunday"
+                          (click)="setWeek($event, 'sun')"
+                        />
+                        <label class="custom-control-label mb-0" for="Sunday"
+                          >Sunday</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-2 col-xl-2 p-0">
+                <div class="text-center mt-2">
+                  <h4 class="title flex-grow-1 mb-2 title-btn">
+                    Promotions <br />{{ promotionTypeText }}
+                  </h4>
+                  <div class="probtn-wrap text-right max-btn float-left w-100">
+                    <a
+                      *ngIf="promotionTypeText == 'MIXMATCH'"
+                      class="btn btn-blue"
+                      (click)="
+                        clickedpromotionTypeText('MIXMATCH', 'MixMatchModal')
+                      "
+                      data-toggle="modal"
+                      ><i class="icon fa fa-cog"></i> Mix Match Settings</a
+                    >
+                    <a
+                      *ngIf="promotionTypeText == 'OFFER'"
+                      class="btn btn-blue ml-3"
+                      (click)="clickedpromotionTypeText('OFFER', 'OfferModal')"
+                      data-toggle="modal"
+                      ><i class="icon fa fa-cog"></i> Offer Settings</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-box mt-15 all-w">
+            <div class="table-responsive">
+              <ng-container *ngIf="!isLoading">
+                <table class="table ctm-table" id="promotionsProducts-table">
+                  <thead>
+                    <tr>
+                      <th>Product
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>Description
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>Dept
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>Carton Cost
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>Price 1
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>Price 1 GP
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>Price 2
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>Price 3
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>Price 4
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>Amt Off Normal
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>Off Group
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>Buy Start
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>Buy End
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>CostIsPromo
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>Offer
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>MixMatch
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>HostPromType
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>Supplier
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th>Promotional Units
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                      </th>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngIf="promoProducts?.length; else noData">
+                      <ng-container
+                        *ngFor="
+                          let promoProduct of promoProducts;
+                          let i = index
+                        "
+                      >
+                        <tr>
+                          <td class="blue-text"  data-toggle="modal"
+                          data-target="#promoItemModal"
+                          (click)="
+                            editProduct(promoProduct);
+                            isSelected = true;
+                            isEditOpen = true;getProductFamily(promoProduct);mode='UPDATE'
+                          ">{{ promoProduct?.number }}</td>
+                          <td>{{ promoProduct?.desc }}</td>
+                          <td>
+                            {{ promoProduct?.departmentCode }}
+
+                            <!-- {{
+                              promoProduct?.departmentCode +
+                                "   " +
+                                (promoProduct?.departmentDesc ||
+                                  promoProduct?.department)
+                            }} -->
+                          </td>
+                          <td>{{ (promoProduct?.cartonCost | currency:'USD') ||  (0 | currency:'USD'  )}}</td>
+                          <td>{{ promoProduct?.price1  | currency:'USD' }}</td>
+                          <td>
+                            {{
+                              showValueOnTable[promoProduct.number]
+                                ? showValueOnTable[promoProduct.number].gp1
+                                :''
+                            }}
+                          </td>
+                          <td>{{ promoProduct?.price2 | currency:'USD' }}</td>
+                          <td>{{ promoProduct?.price3 | currency:'USD' }}</td>
+                          <td>{{ promoProduct?.price4 | currency:'USD' }}</td>
+                          <td>{{ promoProduct?.amtOffNorm1 | currency }}</td>
+                          <td>{{ promoProduct?.offerGroup }}</td>
+                          <td>{{ promoProduct?.costStart }}</td>
+                          <td>{{ promoProduct?.costEnd }}</td>
+
+                          <td>
+                            {{
+                              promoProduct?.costIsPromInd === null
+                                ? ""
+                                : promoProduct?.costIsPromInd === false
+                                ? "N"
+                                : "Y"
+                            }}
+                          </td>
+
+                          <!-- <td>{{ promoProduct?.costIsPromInd == false?"N":"Y"}}</td> -->
+                          <td>
+                            {{
+                              promoProduct.promoCode &&
+                              promoProduct?.promotionType == "OFFER"
+                                ? promoProduct?.promoCode
+                                : ""
+                            }}
+                          </td>
+                          <td>
+                            {{
+                              promoProduct.promoCode &&
+                              promoProduct?.promotionType == "MIXMATCH"
+                                ? promoProduct?.promoCode
+                                : ""
+                            }}
+                          </td>
+                          <td>{{ promoProduct?.hostPromoType }}</td>
+                          <td>
+                            {{ tableSupplierName(promoProduct?.supplierCode) }}
+                          </td>
+                          <td>
+                            {{
+                              promoProduct.promoUnits
+                                ? promoProduct.promoUnits
+                                : ""
+                            }}
+                          </td>
+                          <td class="text-center">
+                            <div class="tbHover-btnGroup">
+                              <button
+                                tooltip="Change"
+                                class="tbHover-btn trash-btn"
+                                type="button"
+                                data-toggle="modal"
+                                data-target="#promoItemModal"
+                                (click)="
+                                  editProduct(promoProduct);
+                                  isSelected = true;
+                                  isEditOpen = true;getProductFamily(promoProduct);mode='UPDATE'
+                                "
+                              >
+                                <i class="fa fa-pencil"></i>
+                              </button>
+                              <button
+                                type="button"
+                                tooltip="Delete"
+                                class="tbHover-btn trash-btn"
+                                (click)=" mode='DELETE';
+                                  getProductFamily(promoProduct,i);                                  
+                                  promoItemForm.reset();
+                                  submittedPromoItem = false;
+                                "
+                              >
+                                <i class="fa fa-trash"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </ng-container>
+                    <ng-template #noData>
+                      <tr class="ng-star-inserted">
+                        <td class="text-center" colspan="18">
+                          <strong>Data Not Avaialable!</strong>
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </tbody>
+                </table>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade thm-popup"
+  id="promoItemModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="promoItemModal"
+  aria-hidden="true"
+  data-backdrop="static"
+  data-keyboard="false"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form
+        [formGroup]="promoItemForm"
+        (keydown.enter)="$event.preventDefault()"
+      >
+        <div class="modal-body popup-box-width">
+          <div class="popup-box">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Promo Item</h4>
+            </div>
+            <div class="form-group">
+              <label>Product <span class="text-danger">*</span></label>
+              <div class="form-row align-items-center">
+                <div class="col-sm-6">
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="number"
+                    [readonly]="isEditOpen"
+                    (keyup)="enterKeyboardForSearch($event)"
+                    [ngClass]="{
+                      'is-invalid': submittedPromoItem && f1.number.errors
+                    }"
+                  />
+                  <div *ngIf="f1.number.errors" class="invalid-feedback">
+                    <div *ngIf="f1.number.errors.required">
+                      Product number is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <button
+                    class="btn btn-grey btn-block input-btn"
+                    (click)="clickedSearch()"
+                  >
+                    Search
+                  </button>
+                </div>
+                <div class="col-sm-4">
+                  <button
+                    type="button"
+                    class="btn btn-blue input-btn btn-block"
+                    (click)="changeProductDetails(1)"
+                  >
+                    Product Details
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" class="form-control" formControlName="desc"   [readonly]="true" />
+            </div>
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Carton Qty</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="cartonQty"
+                    [readonly]="true"
+                    placeholder=""
+                  />
+                </div>
+              </div>
+              <ng-container
+                *ngIf="promotionTypeText.toLowerCase() === 'memberoffer'"
+              >
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Supplier</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="supplierCode"
+                      placeholder=""
+                    />
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container
+                *ngIf="promotionTypeText.toLowerCase() === 'buying'"
+              >
+                <div class="col-md-6">
+                  <div class="form-group supplier-select">
+                    <label
+                      >Supplier
+                      <!-- <span
+                        *ngIf="
+                          f1.supplierId.errors && f1.supplierId.errors.required
+                        "
+                        class="text-danger"
+                        >*</span
+                      > -->
+                    </label>
+
+                    <ng-select
+                      [items]="suppliersData"
+                      bindLabel="desc"
+                      bindValue="id"
+                      formControlName="supplierId"
+                      [virtualScroll]="false"
+                      [clearable]="false"
+                      [clearOnBackspace]="false"
+                      [searchable]="true"
+                      [multiple]="false"
+                    >
+                      <ng-template
+                        ng-option-tmp
+                        let-item="item"
+                        let-item$="item$"
+                        let-index="index"
+                      >
+                        <div class="form-row">
+                          <span
+                            class="col-12 zone-overflow"
+                            title="{{ item.desc + ' (' + item.code + ')' }} "
+                          >
+                            {{ item.desc }}&nbsp;&nbsp;&nbsp;&nbsp;({{
+                              item.code
+                            }})
+                          </span>
+                        </div>
+                      </ng-template>
+                    </ng-select>
+                    <!-- <select class="form-control" formControlName="supplierId">
+                      <option [ngValue]="null" disabled selected>
+                        Please select supplier
+                      </option>
+                      <ng-container *ngFor="let supplier of suppliersData">
+                        <option [value]="supplier.id">
+                          {{ supplier?.desc }}&nbsp;&nbsp;({{ supplier?.code }})
+                        </option>
+                      </ng-container>
+                    </select> -->
+
+                    <!-- <div *ngIf="f1.supplierId.errors" class="invalid-feedback">
+                      <div *ngIf="f1.supplierId.errors.required">
+                        Please select a supplier
+                      </div>
+                    </div> -->
+                    <!-- <input type="text" class="form-control" formControlName="supplierId" placeholder="" /> -->
+                  </div>
+                </div>
+              </ng-container>
+              <div class="col-md-6">
+                <div class="form-group mb-0">
+                  <label
+                    >Carton Cost<span
+                      *ngIf="
+                        promotionTypeText.toLowerCase() === 'buying' &&
+                        f1.cartonCost.errors &&
+                        f1.cartonCost.errors.required
+                      "
+                      class="text-danger"
+                      >*</span
+                    ></label
+                  >
+                  <div class="dollar-symbol-icon">
+                    <input
+                      [readonly]="true"
+                      type="text"
+                      class="form-control"
+                      formControlName="cartonCost"
+                      placeholder=""
+                    />
+                  </div>
+                  <span class="fontSize-12">(Promo Buy Cartoon Cost)</span>
+                  <div *ngIf="f1.cartonCost.errors" class="invalid-feedback">
+                    <div *ngIf="f1.cartonCost.errors.required">
+                      Cartoon cost is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Action</label>
+                  <select class="form-control" formControlName="action">
+                    <option value=""></option>
+                    <option value="STOP">STOP</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- promotion offer start -->
+            <ng-container *ngIf="promotionTypeText.toLowerCase() === 'offer'">
+              <div class="group-from mb-1">
+                <h5 class="title">Offer</h5>
+                <div class="form-group mb-0 form-row align-items-center">
+                  <div class="col-4">
+                    <label for="inputPassword" class="mb-0"
+                      >Offer Group <span class="text-danger">*</span></label
+                    >
+                  </div>
+                  <div class="col-8">
+                    <select
+                      class="form-control"
+                      formControlName="offerGroup"
+                      [ngClass]="{
+                        'is-invalid': submittedPromoItem && f1.offerGroup.errors
+                      }"
+                    >
+                      <option value="" disabled selected hidden>
+                        Select Offer group
+                      </option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    </select>
+                    <div *ngIf="f1.offerGroup.errors" class="invalid-feedback">
+                      <div *ngIf="f1.offerGroup.errors.required">
+                        Please select an Offer Group
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <!-- promotion offer end -->
+
+            <!-- promotion Selling/memenveroffer/compitition start -->
+
+            <ng-container
+              *ngIf="
+                promotionTypeText.toLowerCase() === 'compitition' ||
+                promotionTypeText.toLowerCase() === 'memberoffer' ||
+                promotionTypeText.toLowerCase() === 'selling'
+              "
+            >
+              <div class="group-from">
+                <h5 class="title">Promo Selling Price</h5>
+                <div class="form-group mb-0 form-row align-items-center">
+                  <div class="col-3">
+                    <label for="inputPassword" class="mb-0">&nbsp;</label>
+                  </div>
+                  <div class="col-9">
+                    <div class="form-group mb-0 form-row align-items-center">
+                      <div class="col-3">
+                        <label for="inputPassword" class="mb-0"
+                          >Price 1
+                          <span
+                            *ngIf="
+                              promotionTypeText.toLowerCase() === 'buying' &&
+                              f1.price1.errors &&
+                              f1.price1.errors.required
+                            "
+                            class="text-danger"
+                            >*</span
+                          ></label
+                        >
+                      </div>
+                      <div class="col-3">
+                        <label for="inputPassword" class="mb-0">Price 2</label>
+                      </div>
+                      <div class="col-3">
+                        <label for="inputPassword" class="mb-0">Price 3</label>
+                      </div>
+                      <div class="col-3">
+                        <label for="inputPassword" class="mb-0">Price 4</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group form-row align-items-center">
+                  <div class="col-3">
+                    <label for="inputPassword" class="mb-0">Prices</label>
+                  </div>
+                  <div class="col-9">
+                    <div class="form-group mb-0 form-row align-items-center">
+                      <div class="col-3">
+                        <div class="dollar-symbol-icon">
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="price1"
+                            (keyup)="
+                              gpCalculation(
+                                'price1',
+                                $event.target.value,
+                                'gp1'
+                              )
+                            "
+                          />
+                        </div>
+
+                        <div *ngIf="f1.price1.errors" class="invalid-feedback">
+                          <div *ngIf="f1.price1.errors.required">
+                            Price is required
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="dollar-symbol-icon">
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="price2"
+                            (keyup)="
+                              gpCalculation(
+                                'price2',
+                                $event.target.value,
+                                'gp2'
+                              )
+                            "
+                          />
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="dollar-symbol-icon">
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="price3"
+                            (keyup)="
+                              gpCalculation(
+                                'price3',
+                                $event.target.value,
+                                'gp3'
+                              )
+                            "
+                          />
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="dollar-symbol-icon">
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="price4"
+                            (keyup)="
+                              gpCalculation(
+                                'price4',
+                                $event.target.value,
+                                'gp4'
+                              )
+                            "
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-0 form-row align-items-center">
+                  <div class="col-3">
+                    <label for="inputPassword" class="mb-0">GP %</label>
+                  </div>
+                  <div class="col-9">
+                    <div class="form-group mb-0 form-row align-items-center">
+                      <div class="col-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          readonly
+                          [(value)]="
+                            showValueOnTable[promoItemForm.value.number]?.gp1 ||
+                            gpObj.gp1
+                          "
+                        />
+                      </div>
+                      <div class="col-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          readonly
+                          [(value)]="
+                            showValueOnTable[promoItemForm.value.number]?.gp2 ||
+                            gpObj.gp2
+                          "
+                        />
+                      </div>
+                      <div class="col-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          readonly
+                          [(value)]="
+                            showValueOnTable[promoItemForm.value.number]?.gp3 ||
+                            gpObj.gp3
+                          "
+                        />
+                      </div>
+                      <div class="col-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          readonly
+                          [(value)]="
+                            showValueOnTable[promoItemForm.value.number]?.gp4 ||
+                            gpObj.gp4
+                          "
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="group-from mb-0">
+                <h5 class="title">Amount To take Off The Normal Price</h5>
+                <div class="form-group mb-0 form-row align-items-center">
+                  <div class="col-3">
+                    <label for="inputPassword" class="mb-0">Amount Off</label>
+                  </div>
+                  <div class="col-9">
+                    <div class="dollar-symbol-icon">
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="amtOffNorm1"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <!-- promotion Selling/memenveroffer/compitition end -->
+            <ng-container
+              *ngIf="promotionTypeText.toLowerCase() !== 'memberoffer'"
+            >
+              <div class="form-group mb-0">
+                <label>Promotional Units</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="promoUnits"
+                  placeholder="0"
+                  (keypress)="onlyNumber($event)"
+                />
+              </div>
+            </ng-container>
+            <div class="btn-wrap text-right mt-10">
+              <a
+                data-toggle="modal"
+                data-target="#searchProductModal"
+                class="d-none openProductList"
+              >
+                product list model</a
+              >
+              <button
+                type="button"
+                class="btn btn-blue mr-2"
+                (click)="pushProducts()"
+              >
+                Save
+              </button>
+              <button
+                type="button"
+                class="btn btn-grey"
+                data-dismiss="modal"
+                (click)="
+                  submittedPromoItem = false;
+                  gpCalculation('price1', f?.value?.price1, 'gp1')
+                "
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade thm-popup"
+  id="MixMatchModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="MixMatchModal"
+  aria-hidden="true"
+  data-backdrop="static"
+  data-keyboard="false"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form [formGroup]="promoMixmatchForm">
+        <div class="modal-body popup-box-width">
+          <div class="popup-box">
+            <div class="title-wrap">
+              <h4 class="title">Mix Match Group</h4>
+            </div>
+            <div class="group-from">
+              <h5 class="title">Mix Match Group Code Description</h5>
+              <div class="form-group">
+                <label>Code</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="code"
+                  [ngClass]="{
+                    'is-invalid': submittedMixmatch && f3.code.errors
+                  }"
+                  readonly
+                />
+                <div *ngIf="f3.code.errors" class="invalid-feedback">
+                  <div *ngIf="f3.code.errors.required">
+                    Description is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="desc"
+                  [ngClass]="{
+                    'is-invalid': submittedMixmatch && f3.desc.errors
+                  }"
+                  readonly
+                />
+                <div *ngIf="f3.desc.errors" class="invalid-feedback">
+                  <div *ngIf="f3.desc.errors.required">
+                    Description is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mb-0">
+                <div class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    formControlName="cumulativeOffer"
+                    id="Item"
+                  />
+                  <label class="custom-control-label mb-0" for="Item"
+                    >Item sold over the Quantity Break will also receive the
+                    Bundle discount</label
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="group-from mb-0">
+                  <h5 class="title">Quantity Break 1</h5>
+                  <div class="form-row align-items-center form-group">
+                    <div class="col-5">
+                      <label class="mb-0">Quantity</label>
+                    </div>
+                    <!-- oninput="validity.valid||(value='');" -->
+                    <div class="col-7">
+                      <input
+                        type="number"
+                        [min]="0"
+                        onkeyup="if(this.value<0){this.value= this.value * -1}"
+                        id="qty1"
+                        class="form-control"
+                        formControlName="qty1"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-row align-items-center form-group">
+                    <div class="col-5">
+                      <label class="mb-0">Total Price</label>
+                    </div>
+                    <div class="col-7">
+                      <div class="dollar-symbol-icon">
+                        <input
+                          type="number"
+                          [min]="0"
+                          onkeyup="if(this.value<0){this.value= this.value * -1}"
+                          class="form-control"
+                          id="amt1"
+                          formControlName="amt1"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row align-items-center form-group">
+                    <div class="col-5">
+                      <label class="mb-0">Discount%</label>
+                    </div>
+                    <div class="col-7">
+                      <input
+                        type="number"
+                        [min]="0"
+                        onkeyup="if(this.value<0){this.value= this.value * -1}"
+                        class="form-control"
+                        id="discPcnt1"
+                        formControlName="discPcnt1"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-row align-items-center form-group">
+                    <div class="col-5">
+                      <label class="mb-0">Price Level</label>
+                    </div>
+                    <div class="col-7">
+                      <div class="dollar-symbol-icon">
+                        <input
+                          type="number"
+                          [min]="0"
+                          onkeyup="if(this.value<0){this.value= this.value * -1}"
+                          class="form-control"
+                          [readonly]="true"
+                          formControlName="priceLevel1"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="group-from mb-0">
+                  <h5 class="title">Quantity Break 2</h5>
+                  <div class="form-row align-items-center form-group">
+                    <div class="col-5">
+                      <label>Quantity</label>
+                    </div>
+                    <div class="col-7">
+                      <input
+                        type="number"
+                        [min]="0"
+                        onkeyup="if(this.value<0){this.value= this.value * -1}"
+                        class="form-control"
+                        id="qty2"
+                        formControlName="qty2"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-row align-items-center form-group">
+                    <div class="col-5">
+                      <label>Total Price</label>
+                    </div>
+                    <div class="col-7">
+                      <div class="dollar-symbol-icon">
+                        <input
+                          type="number"
+                          [min]="0"
+                          onkeyup="if(this.value<0){this.value= this.value * -1}"
+                          class="form-control"
+                          id="amt2"
+                          formControlName="amt2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row align-items-center form-group">
+                    <div class="col-5">
+                      <label>Discount%</label>
+                    </div>
+                    <div class="col-7">
+                      <input
+                        type="number"
+                        [min]="0"
+                        onkeyup="if(this.value<0){this.value= this.value * -1}"
+                        class="form-control"
+                        id="discPcnt2"
+                        formControlName="discPcnt2"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-row align-items-center form-group mb-0">
+                    <div class="col-5">
+                      <label>Price Level</label>
+                    </div>
+                    <div class="col-7">
+                      <div class="dollar-symbol-icon">
+                        <input
+                          type="number"
+                          [min]="0"
+                          onkeyup="if(this.value<0){this.value= this.value * -1}"
+                          class="form-control"
+                          [readonly]="true"
+                          formControlName="priceLevel2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <h6 style="color: #5145cd">{{ showMessage || showMessage1 }}</h6>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button
+                type="button"
+                class="btn btn-blue mr-2"
+                (click)="setPromotionMixmatch()"
+              >
+                Save Changes
+              </button>
+              <button
+                type="button"
+                class="btn btn-grey"
+                (click)="cancelPromoMixmatchForm()"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade thm-popup bd-example-modal-xl"
+  id="searchProductModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="searchProductModal"
+  aria-hidden="true"
+  data-backdrop="static"
+  data-keyboard="false"
+>
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <form [formGroup]="prodSearchForm">
+          <div class="title-wrap mb-2">
+            <h4 class="title">Product Lookup</h4>
+          </div>
+          <div class="popup-box">
+            <div class="form-row">
+              <div class="col-lg-6 col-xl-6">
+                <div class="form-row align-items-center">
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <input
+                        type="number"
+                        [min]="0"
+                        placeholder="Number"
+                        class="form-control"
+                        formControlName="number"
+                        (keyup)="
+                          productInputSearchChange('number');
+                          enterKeyboard($event)
+                        "
+                        [ngClass]="{
+                          'is-invalid': submittedSearchProd && f2.number.errors
+                        }"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        placeholder="Description"
+                        class="form-control"
+                        formControlName="desc"
+                        appUppercase
+                        (keyup)="
+                          productInputSearchChange('desc');
+                          enterKeyboard($event)
+                        "
+                        [ngClass]="{
+                          'is-invalid': submittedSearchProd && f2.desc.errors
+                        }"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <button
+                        type="button"
+                        id="wildCardSearch"
+                        (click)="searchProductByText()"
+                        class="btn btn-blue input-btn btn-block"
+                      >
+                        Wildcard Search
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <div class="custom-control custom-checkbox">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          formControlName="status"
+                          id="customControlStatus"
+                          (change)="
+                            searchProductByStatus(productCheckBox.checked)
+                          "
+                          [checked]="searchProductByStatus"
+                          #productCheckBox
+                        />
+                        <label
+                          class="custom-control-label mb-0"
+                          for="customControlStatus"
+                          >Only Active</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xl-6">
+                <div class="form-row align-items-center">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <button
+                        type="button"
+                        class="btn btn-blue input-btn btn-block"
+                        (click)="changeProductDetails(2)"
+                      >
+                        Product Details
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <div class="d-flex">
+                        <!-- <select class="form-control" formControlName="zoneId"  (change)="selectedZone($event)">
+                          <option *ngFor="let zoneItem of masterListZoneItems" [value]="zoneItem.id">
+                            {{ zoneItem.name }}</option>
+                        </select> -->
+                        <select
+                          class="form-control"
+                          formControlName="outletId"
+                          (change)="selectedOutlet($event)"
+                        >
+                          <option [ngValue]="null" disabled selected hidden>
+                            Select Outlet
+                          </option>
+                          <option
+                            [value]="outlet.id"
+                            *ngFor="let outlet of Outletdata"
+                          >
+                            {{ outlet.desc }} &nbsp;&nbsp;&nbsp;&nbsp;{{
+                              outlet.code
+                            }}
+                          </option>
+                        </select>
+                        <button
+                          type="button"
+                          class="btn btn-grey input-btn ml-2"
+                          (click)="clickedClear()"
+                        >
+                          Clear
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="table-scroll"> -->
+              <div class="table-responsive table-minHeight">
+                <table class="table w-100 ctm-table" id="product_list_table">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th class="text-center">Status</th>
+                      <th>Number</th>
+                      <th>Description</th>
+                      <th>Comm</th>
+                      <th>Commodity</th>
+                      <th>Department</th>
+                      <th>Category</th>
+                      <th>Group</th>
+                      <th>Group</th>
+                      <th>Supp</th>
+                      <th>Supplier</th>
+                      <th>Replicate</th>
+                      <th>Type</th>
+                      <th>Tax</th>
+                      <th>Ctn Qty</th>
+                      <th>Sell Unit Qty</th>
+                      <th>Parent</th>
+                      <th>Pos Des</th>
+                      <th>Date Added</th>
+                      <th>Date Changed</th>
+                      <th>Date Deleted</th>
+                      <th>Info</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let product of searchProducts; let i = index">
+                      <td>
+                        <input
+                          type="radio"
+                          (change)="setProductObj(product); getProductFamily(product);"
+                          [checked]="i == 0"
+                          name="product"
+                          [disabled]="!product.status"
+                        />
+                      </td>
+                      <td class="text-center">
+                        <span
+                          class="status-check"
+                          [ngClass]="{
+                            'status-true': product.status,
+                            'status-false': !product.status
+                          }"
+                        ></span>
+                      </td>
+                      <td>{{ product?.number }}</td>
+                      <td>{{ product?.desc }}</td>
+                      <td>{{ product?.commodityId }}</td>
+                      <td>{{ product?.commodity }}</td>
+                      <td>{{ product?.department }}</td>
+                      <td>{{ product?.category }}</td>
+                      <td>{{ product?.groupCode }}</td>
+                      <td>{{ product?.group }}</td>
+                      <td>{{ product?.supplierCode }}</td>
+                      <td>{{ product?.supplier }}</td>
+                      <td>{{ product?.replicate }}</td>
+                      <td>{{ product?.type }}</td>
+                      <td>{{ product?.tax }}</td>
+                      <td>{{ product?.cartonQty }}</td>
+                      <td>{{ product?.unitQty }}</td>
+                      <td>{{ product?.parent }}</td>
+                      <td>{{ product?.posDesc }}</td>
+                      <td>{{ product?.createdAt | customdatetimeformat }}</td>
+                      <td>{{ product?.updatedAt | customdatetimeformat }}</td>
+                      <td>{{ product?.deletedAt | customdatetimeformat }}</td>
+                      <td>{{ product?.info }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            <!-- </div> -->
+            <div class="btn-wrap text-right mt-10">
+              <button
+                type="button"
+                class="btn btn-blue mr-2"
+                (click)="clickedSelect() ;"
+              >
+                Select
+              </button>
+              <button
+                #prodSearchTerm
+                type="button"
+                class="btn btn-grey"
+                (click)="closeSearchPopup()"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade thm-popup"
+  id="OfferModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="OfferModalLabel"
+  aria-hidden="true"
+  data-backdrop="static"
+  data-keyboard="false"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <form [formGroup]="promoOfferForm">
+          <div class="popup-box">
+            <div class="title-wrap">
+              <h4 class="title">Offer Settings</h4>
+            </div>
+            <div class="group-from">
+              <h5 class="title">Offer</h5>
+              <div class="form-group">
+                <label>Code</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="code"
+                  [ngClass]="{ 'is-invalid': submittedOffer && f4.code.errors }"
+                  readonly
+                />
+                <div *ngIf="f4.code.errors" class="invalid-feedback">
+                  <div *ngIf="f4.code.errors.required">Code is required</div>
+                </div>
+              </div>
+              <div class="form-group mb-0">
+                <label>Description</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="desc"
+                  [ngClass]="{ 'is-invalid': submittedOffer && f4.desc.errors }"
+                  readonly
+                />
+                <div *ngIf="f4.desc.errors" class="invalid-feedback">
+                  <div *ngIf="f4.desc.errors.required">
+                    Description is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="group-from mb-1">
+                  <h5 class="title">Total Quantity Required</h5>
+                  <div class="form-group mb-0">
+                    <label>Quantity</label>
+                    <input
+                      type="number"
+                      [min]="0"
+                      onkeyup="if(this.value<0){this.value= this.value * -1}"
+                      class="form-control"
+                      formControlName="totalQty"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="group-from mb-1">
+                  <h5 class="title">Offer Selling Price</h5>
+                  <div class="form-group mb-0">
+                    <label>Total Price</label>
+                    <div class="dollar-symbol-icon">
+                      <input
+                        type="number"
+                        [min]="0"
+                        onkeyup="if(this.value<0){this.value= this.value * -1} "
+                        class="form-control"
+                        formControlName="totalPrice"
+                        [readonly]="
+                          (f4?.group1Price?.value &&
+                            f4?.group1Price?.value !== 'null') ||
+                          (f4?.group2Price?.value &&
+                            f4?.group2Price?.value !== 'null') ||
+                          (f4?.group3Price?.value &&
+                            f4?.group3Price?.value !== 'null')
+                        "
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6"></div>
+              <div class="col-md-6">
+                <div class="group-from p-1 mb-2">
+                  <span class="or-offer">OR</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="group-from mb-0">
+                  <h5 class="title">Offer Item Groups</h5>
+                  <div class="form-group">
+                    <label>Minimum Required in Group 1</label>
+                    <input
+                      type="number"
+                      [min]="0"
+                      onkeyup="if(this.value<0){this.value= this.value * -1}"
+                      class="form-control"
+                      formControlName="group1Qty"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Minimum Required in Group 2</label>
+                    <input
+                      type="number"
+                      [min]="0"
+                      onkeyup="if(this.value<0){this.value= this.value * -1}"
+                      class="form-control"
+                      formControlName="group2Qty"
+                    />
+                  </div>
+                  <div class="form-group mb-0">
+                    <label>Minimum Required in Group 3</label>
+                    <input
+                      type="number"
+                      [min]="0"
+                      onkeyup="if(this.value<0){this.value= this.value * -1}"
+                      class="form-control"
+                      formControlName="group3Qty"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="group-from mb-0">
+                  <h5 class="title">Item Price at Group Level</h5>
+                  <div class="form-group">
+                    <label>Group 1</label>
+
+                    <select
+                      class="form-control"
+                      formControlName="group1Price"
+                      [attr.disabled]="f4?.totalPrice?.value"
+                    >
+                      <!-- <option [ngValue]="null" disabled selected>
+                        Select group 1
+                      </option> -->
+                      <option [value]="'null'"></option>
+                      <option [value]="'NORMAL'">NORMAL</option>
+                      <option [value]="'FREE'">FREE</option>
+                      <option [value]="'1.00'">1.00</option>
+                      <option [value]="'2.00'">2.00</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Group 2</label>
+
+                    <select
+                      class="form-control"
+                      formControlName="group2Price"
+                      [attr.disabled]="f4?.totalPrice?.value"
+                    >
+                      <!-- <option [ngValue]="null" disabled selected>
+                        Select group 2
+                      </option> -->
+                      <option [value]="null"></option>
+                      <option [value]="'NORMAL'">NORMAL</option>
+                      <option [value]="'FREE'">FREE</option>
+                      <option [value]="'1.00'">1.00</option>
+                      <option [value]="'2.00'">2.00</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Group 3</label>
+
+                    <select
+                      class="form-control"
+                      formControlName="group3Price"
+                      [attr.disabled]="f4?.totalPrice?.value"
+                    >
+                      <!-- <option [ngValue]="null" disabled selected>
+                        Select group 3
+                      </option> -->
+                      <option [value]="null"></option>
+                      <option [value]="'NORMAL'">NORMAL</option>
+                      <option [value]="'FREE'">FREE</option>
+                      <option [value]="'1.00'">1.00</option>
+                      <option [value]="'2.00'">2.00</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button
+                type="button"
+                class="btn btn-blue mr-2"
+                data-dismiss="modal"
+                (click)="setPromotionOffer()"
+              >
+                Save Changes
+              </button>
+              <button type="button" class="btn btn-grey" data-dismiss="modal">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-md thm-popup" id="ReplicateProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-md popup-box-rebates" role="document">
+<!-- <div class="modal fade bd-example-modal-md thm-popup" id="ReplicateProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document"> -->
+      <div class="modal-content">
+          <div class="modal-body popup-box-width">
+              <div class="popup-box">
+                  <form>
+                      <div class="title-wrap mb-1">
+                          <h4 class="title">Replicate Products in Family</h4>
+                      </div>    
+                      <div class="form-row">                                
+                         <div class="col-6">
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" name="ReplicatePrices" [(ngModel)]="productFamilyOption.ReplicatePrices" id="ReplicatePrices" [ngModelOptions]="{ standalone : true }"> 
+                              <label class="custom-control-label" for="ReplicatePrices">Replicate Prices</label>
+                           </div>
+                         </div>
+                         <div class="col-6">
+                          <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" name="ReplicateCosts" [(ngModel)]="productFamilyOption.ReplicateCosts" id="ReplicateCosts" [ngModelOptions]="{ standalone : true }">
+                              <label class="custom-control-label" for="ReplicateCosts">Replicate Costs</label>
+                           </div>
+                           </div>
+                           <div class="col-6">
+                              <div class="custom-control custom-checkbox">
+                                  <input type="checkbox" class="custom-control-input" name="ReplicateSpecials" [(ngModel)]="productFamilyOption.ReplicateSpecials" id="ReplicateSpecials" [ngModelOptions]="{ standalone : true}"  [disabled]="true">
+                                  <label class="custom-control-label" for="ReplicateSpecials">Replicate Specials</label>
+                               </div>
+                             </div>
+                             <div class="col-6">
+                              <div class="custom-control custom-checkbox">
+                                  <input type="checkbox" class="custom-control-input" name="ReplicateRebate" [(ngModel)]="productFamilyOption.ReplicateRebate" id="ReplicateRebate" [ngModelOptions]="{ standalone : true }">
+                                  <label class="custom-control-label" for="ReplicateRebate">Replicate Rebate</label>
+                               </div>
+                               </div>
+                           </div> 
+                            <div class="card mt-15" > 
+                              <!-- <div class="card-body p-2 min-height-5 "> -->
+                                  <div class="table-scroll">
+                                      <div class="table-responsive">
+                                          <table class="table ctm-table" >
+                                              <tbody>
+                                                  <tr *ngFor="let product of productFamilyList">     
+                                                     <td>    
+                                                       <div class="custom-control custom-checkbox">
+                                                         <input type="checkbox"   name="product" 
+                                                           class="custom-control-input" 
+                                                           id="product_{{product.id}}" [ngModelOptions]="{ standalone : true }" [(ngModel)]="selectedProductFamily[product.id]" [readonly]="product.id == parentProductDetails ? true : false"> 
+                                                         <label class="custom-control-label" for="product_{{product.id}}"></label>
+                                                        </div>
+                                                     </td>
+                                                      <td>{{product.desc}}</td>
+                                                  </tr> 
+                                              </tbody>
+                                          </table>
+                                      </div>
+                                  </div>
+                                 
+                           </div> 
+                           <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-blue mr-2" (click)="addProductFamily()">Yes</button>
+                            <button type="button" class="btn btn-grey" 
+                            data-dismiss="modal">No</button>
+                        </div>   
+                  </form>
+              </div>                    
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade bd-example-modal-md thm-popup" id="promoimportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md popup-box-rebates" role="document">
+<!-- <div class="modal fade bd-example-modal-md thm-popup" id="ReplicateProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document"> -->
+      <div class="modal-content">
+          <div class="modal-body popup-box-width">
+              <div class="popup-box">
+                  <form>
+                      <div class="title-wrap mb-1">
+                          <h4 class="title">Import </h4>
+                      </div>    
+                      <div class="form-row">                                
+                         <div class="col-6">
+                          <div class="custom-control custom-checkbox">
+                              <input type="file" class="form-control" id="promoInputImport" (change)="importFileChange($event)" name="fileImport"> 
+                           </div>
+                         </div>
+                        </div>
+                       
+                  </form>
+              </div>                    
+          </div>
+          <div class="btn-wrap text-right mt-10">
+            <button
+              type="button"
+              class="btn btn-blue mr-2"
+              data-dismiss="modal" (click)="convertToBAse64(CsvFile)"            >
+              Ok
+            </button>
+            <button
+              type="button"
+              class="btn btn-blue mr-2"
+               (click)="removeCsvFile()"            >
+              Remove File
+            </button>
+            <button type="button" class="btn btn-grey" (click)="removeCsvFile()"  data-dismiss="modal">
+              Cancel
+            </button>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,755 @@
+<div class="mainContent-innner">
+  <div class="d-flex align-items-center">
+    <h4 class="title flex-grow-1 mb-0">Outlet Suppliers</h4>
+    <div class="probtn-wrap d-flex text-right">
+      <button class="btn btn-blue mr-2" data-toggle="modal" data-target="#AddModal" (click)="clickAdd()">
+        <i class="icon fa fa-plus-circle"></i> Add
+      </button>
+      <button class="btn mr-2"><i class="icon fa fa-print"></i> Print</button>
+      <button class="btn mr-2" (click)="exportOutletSuppliersData()">
+        <i class="icon fa fa-file-excel-o"></i> Export
+      </button>
+      <button class="btn btn-blue with-icon" data-toggle="modal" data-target="#OutletSuppliersSearch"
+        (click)="openOutletSuppliersSearchFilter()">
+        <i class="icon fa fa-filter"></i> Filter
+      </button>
+    </div>
+  </div>
+  <div class="bg-box mt-15 all-w">
+    <div class="table-responsive">
+      <table class="table ctm-table" id="outlet-supplier-table">
+        <thead>
+          <tr>
+            <th>code<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i> </th>
+            <!-- <th>Code</th> -->
+            <th>Description<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+
+            <th>Outlet<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+
+            <th>customer Number<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+            <th>Posted</th>
+            <!-- <th></th> -->
+            <th>State/Division<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+            <th>User Id<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+            <!-- <th>User Id <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th> -->
+            <!-- <th>Password <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th> -->
+            <th class="no-sort">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let outletSupplier of outletSupplierData">
+            <td data-toggle="modal" data-target="#EditModal" (click)="getOutletSupplierById(outletSupplier.id)">
+              <a>
+                {{ outletSupplier?.supplierCode }}
+              </a>
+            </td>
+            <!-- <td data-toggle="modal" data-target="#EditModal" (click)="getOutletSupplierById( outletSupplier.id)">{{outletSupplier.id}}</td> -->
+            <td>
+              {{ outletSupplier?.desc }}
+            </td>
+            <td><span class="pl-2">{{ outletSupplier.storeCode }}</span></td>
+            <td>
+              {{ outletSupplier?.customerNumber }}
+            </td>
+            <td>
+             {{outletSupplier?.postedOrder}}
+            </td>
+            <!-- <td data-toggle="modal" data-target="#EditModal" (click)="getOutletSupplierById( outletSupplier.id)">METCASH</td> -->
+            <td>
+              {{ outletSupplier?.stateCode }}
+            </td>
+            <td data-toggle="modal" data-target="#EditModal" (click)="getOutletSupplierById( outletSupplier.id)">{{outletSupplier.userId}}</td>
+            <!-- <td data-toggle="modal" data-target="#EditModal" (click)="getOutletSupplierById( outletSupplier.id)">{{outletSupplier.userId}}</td> -->
+            <!-- <td data-toggle="modal" data-target="#EditModal" (click)="getOutletSupplierById( outletSupplier.id)">{{outletSupplier.password}}</td> -->
+            <td class="no-sort">
+              <div class="tbHover-btnGroup">
+                <a tooltip="Change" placement="left" class="tbHover-btn trash-btn" data-toggle="modal"
+                  data-target="#EditModal" (click)="getOutletSupplierById(outletSupplier.id)"><i
+                    class="fa fa-pencil"></i></a>
+                <a tooltip="Delete" placement="right" class="tbHover-btn trash-btn"
+                  (click)="deleteOutletSupplier(outletSupplier.id)"><i class="fa fa-trash"></i></a>
+              </div>
+              <!-- <div class="tbHover-btnGroup">
+                                <a tooltip="Change" placement="left" class="tbHover-btn trash-btn"  data-toggle="modal" data-target="#EditModal" (click)="getOutletSupplierById(outletSupplier.id)"><i class="fa fa-pencil"></i></a>
+                                <a tooltip="Delete" placement="left" class="tbHover-btn trash-btn" (click)="deleteOutletSupplier( outletSupplier.id)"><i class="fa fa-trash"></i></a>
+                             </div> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal fade bd-example-modal-lg thm-popup" id="AddModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form [formGroup]="addOutletSupplierForm" (ngSubmit)="addOutletSupplier()">
+            <div class="title-wrap mb-0">
+              <h4 class="title">Add Outlet Supplier</h4>
+            </div>
+            <div class="group-from mb-2">
+              <div class="form-row form-group align-items-center">
+                <div class="col-6">
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Supplier<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-9">
+                      <ng-select [items]="supplierData" bindLabel="desc" bindValue="id" formControlName="supplierId"
+                        [virtualScroll]="false" [clearable]="false" [clearOnBackspace]="false" [searchable]="true"
+                        [multiple]="false" [ngClass]="{
+                          'is-invalid': submitted && f.supplierId.errors
+                        }">
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                          <div class="form-row">
+                            <span class="col-9 zone-overflow" title="{{ item.desc }}">
+                              {{ item.desc }}
+                            </span>
+                            <div class="col-3 zone-overflow" title="{{ item.code }}">
+                              {{ item.code }}
+                            </div>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                      <!-- <select
+                        class="form-control"
+                        formControlName="supplierId"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.supplierId.errors
+                        }"
+                      >
+                        <option
+                          [ngValue]="supplier.id"
+                          *ngFor="let supplier of supplierData"
+                        >
+                          {{ supplier.desc }}
+                        </option>
+                      </select> -->
+                      <div *ngIf="f.supplierId.errors" class="invalid-feedback">
+                        <div *ngIf="f.supplierId.errors.required">
+                          Supplier is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-row mb-0 form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Outlet<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-9">
+                      <ng-select [items]="storeData" bindLabel="desc" bindValue="id" formControlName="storeId"
+                        [virtualScroll]="false" [clearable]="false" [clearOnBackspace]="false" [searchable]="true"
+                        [multiple]="false" [ngClass]="{
+                          'is-invalid': submitted && f.storeId.errors
+                        }">
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                          <div class="form-row">
+                            <span class="col-10 zone-overflow" title="{{ item.desc }}">
+                              {{ item.desc }}
+                            </span>
+                            <div class="col-2 zone-overflow" title="{{ item.code }}">
+                              {{ item.code }}
+                            </div>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                      <!-- <select
+                        class="form-control"
+                        formControlName="storeId"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.storeId.errors
+                        }"
+                      >
+                        <option
+                          [ngValue]="outlet.id"
+                          *ngFor="let outlet of storeData"
+                        >
+                          {{ outlet.storeDetail }}
+                        </option>
+                      </select> -->
+                      <div *ngIf="f.storeId.errors" class="invalid-feedback">
+                        <div *ngIf="f.storeId.errors.required">
+                          Outlet is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row form-group mb-0 align-items-center">
+                <div class="col-6">
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Description <span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-9">
+                      <input appUppercase type="text" class="form-control" name="desc" formControlName="desc"
+                        [ngClass]="{ 'is-invalid': submitted && f.desc.errors }" />
+                      <div *ngIf="f.desc.errors" class="invalid-feedback">
+                        <div *ngIf="f.desc.errors.maxlength">
+                          Description Should be maximum 30 characters
+                        </div>
+                        <div *ngIf="f.desc.errors.required">
+                          Description is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Customer No</label>
+                    </div>
+                    <div class="col-9">
+                      <input appUppercase type="text" maxLength="30" class="form-control" name="customerNumber"
+                        formControlName="customerNumber" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-6">
+                <div class="group-from">
+                  <h5 class="title">Orders</h5>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Order Type</label>
+                    </div>
+                    <div class="col-9">
+                      <select class="form-control" formControlName="postedOrder" >
+                        <option [value]="order.fullName" *ngFor="let order of orderType ">{{order?.fullName}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label>State/Division<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-9">
+                      <div class="form-row align-items-center">
+                        <div class="col-6">
+                          <select class="form-control" formControlName="stateId" [ngClass]="{
+                              'is-invalid': submitted && f.stateId.errors
+                            }">
+                            <option [ngValue]="state.id" *ngFor="let state of outletSupplierState">
+                              {{ state.name }}
+                            </option>
+                          </select>
+                          <div *ngIf="f.stateId.errors" class="invalid-feedback">
+                            <div *ngIf="f.stateId.errors.required">
+                              State is required
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <select class="form-control" formControlName="divisionId" [ngClass]="{
+                              'is-invalid': submitted && f.divisionId.errors
+                            }">
+                            <option [ngValue]="division.id" *ngFor="let division of outletSupplierDivision">
+                              {{ division.name }}
+                            </option>
+                          </select>
+                          <div *ngIf="f.divisionId.errors" class="invalid-feedback">
+                            <div *ngIf="f.divisionId.errors.required">
+                              Division is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="group-from">
+                  <h5 class="title">Mailbox</h5>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Phone No</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" formControlName="phoneNumber" />
+                    </div>
+                  </div>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">User Id</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" formControlName="userId" />
+                    </div>
+                  </div>
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Password</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" formControlName="password" />
+                    </div>
+                  </div>
+                </div>
+                <div class="group-from mb-0">
+                  <h5 class="title">Order FTP details</h5>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">FTP Server</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" [readonly]="codeStatus" />
+                    </div>
+                  </div>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">User Id</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" [readonly]="codeStatus" />
+                    </div>
+                  </div>
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Password</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" [readonly]="codeStatus" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="group-from">
+                  <h5 class="title">Host</h5>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Phone No</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" [readonly]="codeStatus" [ngClass]="{
+                          'is-invalid': submitted && f.phoneNumber.errors
+                        }" />
+                      <div *ngIf="f.phoneNumber.errors" class="invalid-feedback">
+                        <div *ngIf="f.phoneNumber.errors.pattern">
+                          Entr Valid Phone No
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Password</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" maxLength="10" class="form-control" [readonly]="codeStatus" [ngClass]="{
+                          'is-invalid': submitted && f.password.errors
+                        }" />
+                      <!-- <div *ngIf="f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.pattern">
+                          Must contain atleast 1 Capital letter, 1 number, 1
+                          special character and minimum 8 character in length
+                        </div>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="group-from">
+                  <h5 class="title">PDE APN Order Mode Default</h5>
+                  <div class="form-row form-group align-items-center mb-0">
+                    <div class="col-3">
+                      <label class="mb-0">Qty Default</label>
+                    </div>
+                    <div class="col-9">
+                      <select class="form-control" formControlName="qtyDefault">
+                        <option value="SINGLES">SINGLES</option>
+                        <option value="CARTONS">CARTONS</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="group-from">
+                  <h5 class="title">Carton Buys only from this Supplier</h5>
+                  <div class="form-row form-group align-items-center mb-0">
+                    <div class="col-3">
+                      <label class="mb-0">Buy in Cartons Only<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-9">
+                      <select class="form-control" formControlName="buyCartoon" [ngClass]="{
+                          'is-invalid': submitted && f.buyCartoon.errors
+                        }">
+                        <option [ngValue]="true">YES</option>
+                        <option [ngValue]="false">NO</option>
+                      </select>
+                      <div *ngIf="f.buyCartoon.errors" class="invalid-feedback">
+                        <div *ngIf="f.buyCartoon.errors.required">
+                          Buy in Cartons is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="group-from mb-0">
+                  <h5 class="title">Host FTP details</h5>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">FTP Server</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" [readonly]="codeStatus" />
+                    </div>
+                  </div>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">User Id</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" [readonly]="codeStatus" />
+                    </div>
+                  </div>
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label>Password</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" [readonly]="codeStatus" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2">Save</button>
+              <button type="button" class="btn btn-grey" data-dismiss="modal">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade bd-example-modal-lg thm-popup" id="EditModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form [formGroup]="editOutletSupplierForm" (ngSubmit)="updateOutletSupplier()">
+            <div class="title-wrap mb-0">
+              <h4 class="title">Outlet Supplier</h4>
+            </div>
+            <div class="group-from mb-2">
+              <div class="form-row form-group align-items-center">
+                <div class="col-6">
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Supplier<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-9">
+                      <select class="form-control" formControlName="supplierId" disabled>
+                        <option [ngValue]="supplier.id" *ngFor="let supplier of supplierData">
+                          {{ supplier.desc }}
+                        </option>
+                      </select>
+                      <div *ngIf="f1.supplierId.errors" class="invalid-feedback">
+                        <div *ngIf="f1.supplierId.errors.required">
+                          Supplier is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-row mb-0 form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Outlet<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-9">
+                      <select class="form-control" formControlName="storeId" disabled>
+                        <option [ngValue]="outlet.id" *ngFor="let outlet of storeData">
+                          {{ outlet.desc }}
+                        </option>
+                      </select>
+                      <div *ngIf="f1.storeId.errors" class="invalid-feedback">
+                        <div *ngIf="f1.storeId.errors.required">
+                          Supplier is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row form-group mb-0 align-items-center">
+                <div class="col-6">
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Description <span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" maxLength="30" class="form-control" appUppercase name="desc" formControlName="desc"
+                        [ngClass]="{
+                          'is-invalid': submitted1 && f1.desc.errors
+                        }" />
+                      <div *ngIf="f1.desc.errors" class="invalid-feedback">
+                        <div *ngIf="f1.desc.errors.required">
+                          Description is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Customer No</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" maxLength="30" class="form-control" appUppercase name="customerNumber"
+                        formControlName="customerNumber" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-6">
+                <div class="group-from">
+                  <h5 class="title">Orders</h5>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Order Type</label>
+                    </div>
+                    <div class="col-9">
+                      <select class="form-control" formControlName="postedOrder" >
+                        <option [value]="order.fullName" *ngFor="let order of orderType ">{{order.fullName}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label>State/Division<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-9">
+                      <div class="form-row align-items-center">
+                        <div class="col-6">
+                          <select class="form-control" formControlName="stateId" [ngClass]="{
+                              'is-invalid': submitted1 && f1.stateId.errors
+                            }">
+                            <option [ngValue]="state.id" *ngFor="let state of outletSupplierState">
+                              {{ state.name }}
+                            </option>
+                          </select>
+                          <div *ngIf="f1.stateId.errors" class="invalid-feedback">
+                            <div *ngIf="f1.stateId.errors.required">
+                              State Id is required
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <select class="form-control" formControlName="divisionId" [ngClass]="{
+                              'is-invalid': submitted1 && f1.divisionId.errors
+                            }">
+                            <option [ngValue]="division.id" *ngFor="let division of outletSupplierDivision">
+                              {{ division.name }}
+                            </option>
+                          </select>
+                          <div *ngIf="f1.divisionId.errors" class="invalid-feedback">
+                            <div *ngIf="f1.divisionId.errors.required">
+                              Division Id is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="group-from">
+                  <h5 class="title">Mailbox</h5>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Phone No</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" formControlName="phoneNumber" />
+                    </div>
+                  </div>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">User Id</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control"  formControlName="userId" />
+                    </div>
+                  </div>
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Password</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" formControlName="password" />
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="group-from mb-0">
+                  <h5 class="title">Order FTP details</h5>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">FTP Server</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" [readonly]="codeStatus" />
+                    </div>
+                  </div>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">User Id</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" [readonly]="codeStatus" />
+                    </div>
+                  </div>
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Password</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" [readonly]="codeStatus" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="group-from">
+                  <h5 class="title">Host</h5>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Phone No</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" [readonly]="codeStatus" />
+                    </div>
+                  </div>
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">Password</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" maxLength="10" class="form-control" [readonly]="codeStatus" [ngClass]="{
+                          'is-invalid': submitted1 && f1.password.errors
+                        }" />
+                      <!-- <div *ngIf="f1.password.errors" class="invalid-feedback">
+                        <div *ngIf="f1.password.errors.pattern">
+                          Must contain atleast 1 Capital letter, 1 number, 1
+                          special character and minimum 8 character in length
+                        </div>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="group-from">
+                  <h5 class="title">PDE APN Order Mode Default</h5>
+                  <div class="form-row form-group align-items-center mb-0">
+                    <div class="col-3">
+                      <label class="mb-0">Qty Default</label>
+                    </div>
+                    <div class="col-9">
+                      <select class="form-control" formControlName="qtyDefault">
+                        <option value="SINGLES">SINGLES</option>
+                        <option value="CARTONS">CARTONS</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="group-from">
+                  <h5 class="title">Carton Buys only from this Supplier</h5>
+                  <div class="form-row form-group align-items-center mb-0">
+                    <div class="col-3">
+                      <label class="mb-0">Buy in Cartons Only<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-9">
+                      <select class="form-control" formControlName="buyCartoon" [ngClass]="{
+                          'is-invalid': submitted1 && f1.buyCartoon.errors
+                        }">
+                        <option [ngValue]="true">YES</option>
+                        <option [ngValue]="false">NO</option>
+                      </select>
+                      <div *ngIf="f1.buyCartoon.errors" class="invalid-feedback">
+                        <div *ngIf="f1.buyCartoon.errors.required">
+                          Carton Buys is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="group-from mb-0">
+                  <h5 class="title">Host FTP details</h5>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">FTP Server</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" [readonly]="codeStatus" />
+                    </div>
+                  </div>
+                  <div class="form-row form-group align-items-center">
+                    <div class="col-3">
+                      <label class="mb-0">User Id</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" [readonly]="codeStatus" />
+                    </div>
+                  </div>
+                  <div class="form-row form-group mb-0 align-items-center">
+                    <div class="col-3">
+                      <label>Password</label>
+                    </div>
+                    <div class="col-9">
+                      <input type="text" class="form-control" [readonly]="codeStatus" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2">Update</button>
+              <button type="button" class="btn btn-grey" data-dismiss="modal">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade thm-popup" id="OutletSuppliersSearch" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form name="searchForm" id="searchForm">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Search Filter</h4>
+            </div>
+            <div class="form-group mb-0">
+              <label> Wildcard Search</label>
+              <input type="text" id="OutletSuppliers_Search_filter" appUppercase class="form-control" #searchValue />
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2" (click)="OutletSuppliersSearch(searchValue)">
+                Ok
+              </button>
+              <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

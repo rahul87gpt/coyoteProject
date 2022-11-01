@@ -1,0 +1,1780 @@
+<div class="mainContent-innner">
+  <form [formGroup]="storeForm">
+    <div class="btn-wrap text-right mt-10">
+      <button class="btn btn-blue with-icon mr-2" (click)="onSubmit()">
+        Save
+      </button>
+      <button type="button" class="btn btn-grey" [routerLink]="['/stores']">
+        Cancel
+      </button>
+    </div>
+    <div class="bg-box mt-15">
+      <div class="apn-navTab">
+        <ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="pills-App-tab" data-toggle="pill" href="#pills-App" role="tab"
+              aria-controls="pills-App" aria-selected="true">Details</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-Fuel-tab" data-toggle="pill" href="#pills-Fuel" role="tab"
+              aria-controls="pills-Fuel" aria-selected="false">Fuel</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-Detail-tab" data-toggle="pill" href="#pills-Detail" role="tab"
+              aria-controls="pills-Detail" aria-selected="true">App</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-Ordering-tab" data-toggle="pill" href="#pills-Ordering" role="tab"
+              aria-controls="pills-Ordering" aria-selected="false">Supplier Ordering Schedule</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-App" role="tabpanel" aria-labelledby="pills-App-tab">
+            <div class="addStore-section">
+              <div class="form-row">
+                <div class="col-lg-7">
+                  <div class="group-from">
+                    <h5 class="title">Store Details</h5>
+                    <div class="form-row">
+                      <div class="col-lg-6">
+                        <div class="form-group form-row align-items-center">
+                          <label class="label col-md-4 mb-0">Code <span class="text-danger">*</span></label>
+                          <div class="col-md-8">
+                            <input type="number" [readonly]="codeFieldStatus" min="0" onKeyPress="if(this.value.length==5) return false;"
+                              class="form-control" formControlName="code" [ngClass]="{
+                                'is-invalid': submitted && f.code.errors
+                              }" />
+                            <div *ngIf="f.code.errors" class="invalid-feedback">
+                              <div *ngIf="f.code.errors.maxlength">
+                                Description Should be maximum 30 characters
+                              </div>
+                              <div *ngIf="f.code.errors.required">
+                                Code is Required
+                              </div>
+                              <div *ngIf="f.code.errors.pattern">
+                                Space is not allowed
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group form-row align-items-center">
+                          <label class="label col-md-6 mb-0">Status <span class="text-danger">*</span></label>
+                          <div class="col-md-6">
+                            <select class="form-control" formControlName="status">
+                              <option [ngValue]="status.value" *ngFor="let status of statusArray">
+                                {{ status?.status }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group form-row align-items-center">
+                          <label class="label col-md-4 mb-0">Description
+                            <span class="text-danger">*</span></label>
+                          <div class="col-md-8">
+                            <input type="text" class="form-control" formControlName="desc" appUppercase [ngClass]="{
+                                'is-invalid': submitted && f.desc.errors
+                              }" />
+                            <div *ngIf="f.desc.errors" class="invalid-feedback">
+                              <div *ngIf="f.desc.errors.maxlength">
+                                Description Should be maximum 40 characters
+                              </div>
+                              <div *ngIf="f.desc.errors.required">
+                                Description is required
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group form-row align-items-center">
+                          <label class="label col-md-6 mb-0">Address 1</label>
+                          <div class="col-md-6">
+                            <input type="text" class="form-control" formControlName="address1" appUppercase [ngClass]="{
+                                'is-invalid': submitted && f.address1.errors
+                              }" />
+                            <div *ngIf="f.address1.errors" class="invalid-feedback">
+                              <div *ngIf="f.address1.errors.maxlength">
+                                Address 1 Should be maximum 30 characters
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group form-row align-items-center">
+                          <label class="label col-md-4 mb-0">Address 2</label>
+                          <div class="col-md-8">
+                            <input type="text" class="form-control" formControlName="address2" appUppercase [ngClass]="{
+                                'is-invalid': submitted && f.address2.errors
+                              }" />
+                            <div *ngIf="f.address2.errors" class="invalid-feedback">
+                              <div *ngIf="f.address2.errors.maxlength">
+                                Address 2 Should be maximum 30 characters
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group form-row align-items-center">
+                          <label class="label col-md-6 mb-0">Address 3</label>
+                          <div class="col-md-6">
+                            <input type="text" class="form-control" formControlName="address3" appUppercase [ngClass]="{
+                                'is-invalid': submitted && f.address3.errors
+                              }" />
+                            <div *ngIf="f.address3.errors" class="invalid-feedback">
+                              <div *ngIf="f.address3.errors.maxlength">
+                                Address 3 Should be maximum 30 characters
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group form-row align-items-center">
+                          <label class="label col-md-4 mb-0">Post Code</label>
+                          <div class="col-md-8">
+                            <input type="text" class="form-control" formControlName="postCode" appUppercase [ngClass]="{
+                                'is-invalid': submitted && f.postCode.errors
+                              }" />
+                            <div *ngIf="f.postCode.errors" class="invalid-feedback">
+                              <div *ngIf="f.postCode.errors.maxlength">
+                                PostCode Should be maximum 4 characters
+                              </div>
+                              <div *ngIf="f.postCode.errors.pattern">
+                                Please enter valid post code
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group form-row align-items-center">
+                          <label class="label col-md-6 mb-0">Selling Outlet</label>
+                          <div class="col-md-6">
+                            <select class="form-control" formControlName="sellingInd">
+                              <option [ngValue]="label.value" *ngFor="let label of labelType">
+                                {{ label?.status }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group form-row align-items-center">
+                          <label class="label col-md-4 mb-0">Phone</label>
+                          <div class="col-md-8">
+                            <input type="text" class="form-control" formControlName="phoneNumber" appUppercase [ngClass]="{
+                                'is-invalid': submitted && f.phoneNumber.errors
+                              }" />
+                            <div *ngIf="f.phoneNumber.errors" class="invalid-feedback">
+                              <div *ngIf="f.phoneNumber.errors.maxlength">
+                                Phone Should be maximum 15 characters
+                              </div>
+                              <div *ngIf="f.phoneNumber.errors.pattern">
+                                Enter valid Phone
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group form-row align-items-center">
+                          <label class="label col-md-6 mb-0">Stock Outlet</label>
+                          <div class="col-md-6">
+                            <select class="form-control" formControlName="stockInd">
+                              <option [ngValue]="label.value" *ngFor="let label of labelType">
+                                {{ label?.status }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group mb-0 form-row align-items-center">
+                          <label class="label col-md-4 mb-0">Fax</label>
+                          <div class="col-md-8">
+                            <input type="text" class="form-control" appUppercase formControlName="fax" [ngClass]="{
+                                'is-invalid': submitted && f.fax.errors
+                              }" />
+                            <div *ngIf="f.fax.errors" class="invalid-feedback">
+                              <div *ngIf="f.fax.errors.maxlength">
+                                Fax Should be maximum 15 characters
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group form-row align-items-center">
+                          <div class="col-md-6">
+                            <label class="mb-0">Update Cost Option</label>
+                          </div>
+                          <div class="col-md-6">
+                            <select class="form-control" formControlName="costInd">
+                              <option [ngValue]="label.value" *ngFor="let label of labelType">
+                                {{ label?.status }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-from">
+                    <h5 class="title">Statement Header Address</h5>
+                    <div class="form-row">
+                      <div class="col-lg-6">
+                        <div class="form-group form-row align-items-center">
+                          <label class="label col-md-4 mb-0">Name </label>
+                          <div class="col-md-8">
+                            <input type="text" class="form-control" formControlName="delName" appUppercase [ngClass]="{
+                                'is-invalid': submitted && f.delName.errors
+                              }" />
+                            <div *ngIf="f.delName.errors" class="invalid-feedback">
+                              <div *ngIf="f.delName.errors.maxlength">
+                                Name Should be maximum 30 characters
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group form-row align-items-center">
+                          <label class="label col-md-4 mb-0">Address 1 </label>
+                          <div class="col-md-8">
+                            <input type="text" class="form-control" formControlName="delAddr1" appUppercase [ngClass]="{
+                                'is-invalid': submitted && f.delAddr1.errors
+                              }" />
+                            <div *ngIf="f.delAddr1.errors" class="invalid-feedback">
+                              <div *ngIf="f.delAddr1.errors.maxlength">
+                                Address 1 Should be maximum 30 characters
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group form-row align-items-center">
+                          <label class="label col-md-4 mb-0">Address 2</label>
+                          <div class="col-md-8">
+                            <input type="text" class="form-control" formControlName="delAddr2" appUppercase [ngClass]="{
+                                'is-invalid': submitted && f.delAddr2.errors
+                              }" />
+                            <div *ngIf="f.delAddr2.errors" class="invalid-feedback">
+                              <div *ngIf="f.delAddr2.errors.maxlength">
+                                Address 2 Should be maximum 30 characters
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group form-row align-items-center">
+                          <label class="label col-md-4 mb-0">Address 3</label>
+                          <div class="col-md-8">
+                            <input type="text" class="form-control" formControlName="delAddr3" appUppercase [ngClass]="{
+                                'is-invalid': submitted && f.delAddr3.errors
+                              }" />
+                            <div *ngIf="f.delAddr3.errors" class="invalid-feedback">
+                              <div *ngIf="f.delAddr3.errors.maxlength">
+                                Address 3 Should be maximum 30 characters
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group mb-0 form-row align-items-center">
+                          <label class="label col-md-4 mb-0">Post Code </label>
+                          <div class="col-md-8">
+                            <input type="text" class="form-control" formControlName="delPostCode" appUppercase [ngClass]="{
+                                'is-invalid': submitted && f.delPostCode.errors
+                              }" />
+                            <div *ngIf="f.delPostCode.errors" class="invalid-feedback">
+                              <div *ngIf="f.delPostCode.errors.pattern">
+                                Please enter valid post code
+                              </div>
+                              <div *ngIf="f.delPostCode.errors.maxlength">
+                                PostCode Should be maximum 4 characters.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-from">
+                    <h5 class="title">Default Label Types</h5>
+                    <div class="form-row">
+                      <div class="col-lg-12">
+                        <div class="form-group form-row custom-ng-select align-items-center">
+                          <div class="col-md-3">
+                            <label class="mb-0">Shelf Edge</label>
+                          </div>
+                          <div class="col-md-9">
+                            <!--  <select
+                              class="form-control"
+                              formControlName="labelTypeShelfId"
+                            >
+                              <option value="" disabled selected>
+                                Select Shelf
+                              </option>
+                              <option
+                                *ngFor="let edge of storeDataObj.shelfEdges"
+                                [ngValue]="edge.id"
+                              >
+                                {{ edge?.desc }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -  <span>{{ edge?.code }}</span>
+                              </option>
+                            </select> -->
+
+                            <ng-select [items]="storeDataObj.shelfEdges" bindLabel="desc" bindValue="id"
+                              formControlName="labelTypeShelfId" [virtualScroll]="false" [clearable]="false"
+                              [clearOnBackspace]="false" [searchable]="false" [multiple]="false"
+                              placeholder="Select Shelf">
+                              <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                <div class="form-row">
+                                  <span class="col-9 zone-overflow" title="{{ item.desc }}">
+                                    {{ item.desc }}
+                                  </span>
+                                  <div class="col-3">
+                                    {{ item.code }}
+                                  </div>
+                                </div>
+                              </ng-template>
+                            </ng-select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group custom-ng-select form-row align-items-center">
+                          <div class="col-md-3">
+                            <label class="mb-0">Short Label</label>
+                          </div>
+                          <div class="col-md-9">
+                            <!--  <select
+                              class="form-control"
+                              formControlName="labelTypeShortId"
+                            >
+                              <option value="" disabled selected>
+                                Select Label
+                              </option>
+                              <option
+                                *ngFor="
+                                  let shortLabel of storeDataObj.shelfEdges
+                                "
+                                [ngValue]="shortLabel.id"
+                              >
+                                {{ shortLabel?.desc }} &nbsp;&nbsp;
+                                {{ shortLabel?.code }}
+                              </option>
+                            </select> -->
+
+                            <ng-select [items]="storeDataObj.shelfEdges" bindLabel="desc" bindValue="id"
+                              formControlName="labelTypeShortId" [virtualScroll]="false" [clearable]="false"
+                              [clearOnBackspace]="false" [searchable]="false" [multiple]="false"
+                              placeholder="Select Label">
+                              <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                <div class="form-row">
+                                  <span class="col-9 zone-overflow" title="{{ item.desc }}">
+                                    {{ item.desc }}
+                                  </span>
+                                  <div class="col-3">
+                                    {{ item.code }}
+                                  </div>
+                                </div>
+                              </ng-template>
+                            </ng-select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <div class="form-group custom-ng-select form-row align-items-center">
+                          <div class="col-md-3">
+                            <label class="mb-0">Promotion</label>
+                          </div>
+                          <div class="col-md-9">
+                            <!-- <select
+                              class="form-control"
+                              formControlName="labelTypePromoId"
+                            >
+                              <option value="" disabled selected>
+                                Select Promotion
+                              </option>
+                              <option
+                                *ngFor="
+                                  let promotion of storeDataObj.shelfEdges
+                                "
+                                [ngValue]="promotion.id"
+                              >
+                                {{ promotion?.desc }} &nbsp;&nbsp;
+                                {{ promotion?.code }}
+                              </option>
+                            </select> -->
+
+                            <ng-select [items]="storeDataObj.shelfEdges" bindLabel="desc" bindValue="id"
+                              formControlName="labelTypePromoId" [virtualScroll]="false" [clearable]="false"
+                              [clearOnBackspace]="false" [searchable]="false" [multiple]="false"
+                              placeholder="Select Promotion">
+                              <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                <div class="form-row">
+                                  <span class="col-9 zone-overflow" title="{{ item.desc }}">
+                                    {{ item.desc }}
+                                  </span>
+                                  <div class="col-3">
+                                    {{ item.code }}
+                                  </div>
+                                </div>
+                              </ng-template>
+                            </ng-select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-from">
+                    <h5 class="title">Price Level Descriptions</h5>
+                    <div class="form-group mb-0 form-row align-items-center">
+                      <div class="col-3">
+                        <label for="">Price Level 1</label>
+                        <input type="text" class="form-control" maxlength="15" formControlName="priceLevelDesc1" />
+                      </div>
+                      <div class="col-3">
+                        <label for="">Price Level 2</label>
+                        <input type="text" class="form-control" maxlength="15" formControlName="priceLevelDesc2" />
+                      </div>
+                      <div class="col-3">
+                        <label for="">Price Level 3</label>
+                        <input type="text" class="form-control" maxlength="15" formControlName="priceLevelDesc3" />
+                      </div>
+                      <div class="col-3">
+                        <label for="">Price Level 4</label>
+                        <input type="text" class="form-control" maxlength="15" formControlName="priceLevelDesc4" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-from">
+                    <h5 class="title">
+                      Royalty Scales and Budget Growth Factor
+                    </h5>
+                    <div class="form-group mb-0 form-row align-items-center">
+                      <div class="col-3">
+                        <button type="button" data-toggle="modal" data-target="#RoyaltyScales"
+                          class="btn btn-grey btn-blue btn-block input-btn">
+                          Royalty Scales
+                        </button>
+                      </div>
+                      <div class="col-9">
+                        <div class="form-row align-items-center">
+                          <div class="col-7 text-right">
+                            <label for="" class="mb-0">Budget Growth Factor</label>
+                          </div>
+                          <div class="col-5">
+                            <input type="number" class="form-control" formControlName="budgetGrowthFact" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-lg-6">
+                      <div class="group-from mb-0">
+                        <button type="button" data-toggle="modal" data-target="#TrandingHours"
+                          class="btn btn-grey btn-blue input-btn">
+                          Trading Hours
+                        </button>
+                      </div>
+                    </div>
+                    <!-- <div class="col-lg-6">
+                      <div class="group-from mb-0">
+                        <h5 class="title">Sage</h5>
+                        <div class="form-row align-items-center">
+                          <div class="col-5">
+                            <label for="" class="mb-0">Entity Number</label>
+                          </div>
+                          <div class="col-7">
+                            <input
+                              type="text"
+                              class="form-control"
+                              maxlength="3"
+                              formControlName="entityNumber"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+
+                    <div class="col-lg-6">
+                      <div class="col-lg-12 p-0">
+                        <div class="group-from">
+                          <h5 class="title">Sage</h5>
+                          <div class="form-row">
+                            <div class="col-lg-12">
+                              <div class="form-group form-row align-items-center">
+                                <label class="label col-md-4 mb-0">Entity Number</label>
+                                <div class="col-md-8">
+                                  <input type="text" class="form-control" maxlength="3"
+                                    formControlName="entityNumber" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="group-from">
+                    <h5 class="title">
+                      Store Group <span class="text-danger">*</span>
+                    </h5>
+                    <div class="form-group mb-0">
+                      <select class="form-control" formControlName="groupId" [ngClass]="{
+                          'is-invalid': submitted && f.groupId.errors
+                        }">
+                        <option value="" disabled selected>
+                          Select Store Group
+                        </option>
+                        <option *ngFor="let storeGroup of storeGroups" [ngValue]="storeGroup.id">
+                          {{ storeGroup.name }}&nbsp;&nbsp;(
+                          {{ storeGroup.code }})
+                        </option>
+                      </select>
+                      <div *ngIf="f.groupId.errors" class="invalid-feedback">
+                        <div *ngIf="f.groupId.errors.required">
+                          Store group is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-from">
+                    <h5 class="title">ABN</h5>
+                    <div class="form-group mb-0">
+                      <input type="text" class="form-control" formControlName="abn" appUppercase
+                        [ngClass]="{ 'is-invalid': submitted && f.abn.errors }" />
+                      <div *ngIf="f.abn.errors" class="invalid-feedback">
+                        <div *ngIf="f.abn.errors.maxlength">
+                          ABN Should be maximum 30 characters
+                        </div>
+
+                        <div *ngIf="f.abn.errors.pattern">
+                          ABN must be valid
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-from p-0">
+                    <h5 class="title">General Zones</h5>
+                    <div class="general-zone-list">
+                      <ng-container *ngIf="store_Id > 0">
+                        <ul class="sub_modules">
+                          <li (click)="activateClass(zone, i)" *ngFor="
+                              let zone of storeDataObj.generalZones;
+                              let i = index
+                            " [ngClass]="selectedIndex == i ? 'active' : ''">
+                            <!-- <a>{{ zone?.code }} &nbsp; &nbsp; {{zone?.desc}}</a> -->
+                            <a>{{ zone?.name }}</a>
+                          </li>
+                        </ul>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="group-from custom-ng-select">
+                    <h5 class="title">Cost Zones</h5>
+                    <ng-select [items]="storeObj.costZone" bindLabel="description" bindValue="id"
+                      formControlName="costZoneId" [virtualScroll]="false" [clearable]="false"
+                      [clearOnBackspace]="false" [searchable]="false" [multiple]="false" placeholder="Select Cost Zone">
+                      <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <div class="form-row">
+                          <span class="col-9 zone-overflow" title="{{ item.name }}">
+                            {{ item.description }}
+                          </span>
+                          <div class="col-3">
+                            {{ item.code }}
+                          </div>
+                        </div>
+                      </ng-template>
+                    </ng-select>
+                  </div>
+                  <div class="group-from custom-ng-select">
+                    <h5 class="title">Price Zones</h5>
+                    <ng-select [items]="storeObj.priceZone" bindLabel="description" bindValue="id"
+                      formControlName="priceZoneId" [virtualScroll]="false" [clearable]="false"
+                      [clearOnBackspace]="false" [searchable]="false" [multiple]="false"
+                      placeholder="Select Price Zone">
+                      <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <div class="form-row">
+                          <span class="col-9 zone-overflow" title="{{ item.name }}">
+                            {{ item.description }}
+                          </span>
+                          <div class="col-3">
+                            {{ item.code }}
+                          </div>
+                        </div>
+                      </ng-template>
+                    </ng-select>
+                  </div>
+                  <div class="group-from">
+                    <h5 class="title">Warehouse</h5>
+                    <div class="form-group mb-0">
+                      <select class="form-control" formControlName="warehouseId">
+                        <option value="" disabled selected>
+                          Select Warehouse
+                        </option>
+                        <option *ngFor="let warehouse of storeObj.warehouse" [ngValue]="warehouse.id"
+                          [selected]="warehouse.checked">
+                          {{ warehouse.desc }} &nbsp;&nbsp; {{ warehouse.code }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="group-from">
+                    <h5 class="title">
+                      Replicate Price level 1 from Outlet and Price level
+                    </h5>
+                    <div class="form-group mb-0 form-row align-items-center">
+                      <div class="col-9">
+                        <select class="form-control" formControlName="outletPriceFromOutletId">
+                          <option value="" disabled selected>
+                            Select Store
+                          </option>
+                          <option *ngFor="let store of storeObj.stores" [ngValue]="store.id" [selected]="store.checked">
+                            {{ store.desc }} &nbsp;&nbsp; {{ store.code }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-3">
+                        <select class="form-control" formControlName="priceFromLevel">
+                          <option value="" disabled selected></option>
+                          <option *ngFor="
+                              let price_level of storeObj.store_price_level
+                            " [ngValue]="price_level" [selected]="price_level.checked">
+                            {{ price_level }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group-from p-0">
+                    <h5 class="title">Outlets and Tills in this Store</h5>
+                    <div class="general-zone-list corporate-tree-sec">
+                      <ul *ngIf="storeTills?.length">
+                        <li>
+                          <ul class="nested active second-nested">
+                            <li>
+                              <a data-toggle="collapse" href="#multiCollapseExample1" aria-expanded="false"
+                                aria-controls="multiCollapseExample1" class="caret caret-down ">
+                                <h5>
+                                  <img src="assets/images/house.svg" alt="" />
+                                  <!-- {{ storeData ? storeData?.desc : "" }} (Store
+                                  {{ storeData ? storeData?.code : "" }}) -->
+
+                                  {{ f.desc ? f?.desc.value : "" }} (Store
+                                  {{ f.code ? f?.code.value : "" }})
+                                </h5>
+                              </a>
+                              <ul class="nested active" class="collapse multi-collapse show" id="multiCollapseExample1">
+                                <li *ngFor="let till of storeTills">
+                                  <p>
+                                    <img *ngIf="till.status" src="assets/images/check-arrow.svg" alt="" />
+                                    <img *ngIf="!till.status" src="assets/images/check-arrow-gray.svg" alt="" />
+                                    {{ till.desc }} (Till {{ till.code }})
+                                  </p>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fuel Tab -->
+          <div class="tab-pane fade" id="pills-Fuel" role="tabpanel" aria-labelledby="pills-Fuel-tab">
+            <div class="form-row">
+              <div class="col-12">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" id="Sales" class="custom-control-input" formControlName="fuelSite" />
+                  <label for="Sales" class="custom-control-label mb-0">Fuel Site</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- App Tab -->
+          <div class="tab-pane fade" id="pills-Detail" role="tabpanel" aria-labelledby="pills-Detail-tab">
+            <ng-container formGroupName="appStoreDetails">
+              <div class="form-row">
+                <div class="col-12">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" id="Display" class="custom-control-input" formControlName="displayOnApp" />
+                    <label for="Display" class="custom-control-label mb-0">Display On App</label>
+                  </div>
+                </div>
+                <div class="col-lg-6 mt-10">
+                  <div class="group-from mb-0">
+                    <h5 class="title">App Settings</h5>
+                    <div class="form-group form-row align-items-center">
+                      <div class="col-3">
+                        <label class="mb-0">Name</label>
+                      </div>
+                      <div class="col-9">
+                        <input type="text" class="form-control" formControlName="nameOnApp" />
+                      </div>
+                    </div>
+                    <div class="form-group form-row align-items-center">
+                      <div class="col-3">
+                        <label class="mb-0">Address</label>
+                      </div>
+                      <div class="col-9">
+                        <input type="text" class="form-control" formControlName="addressOnApp" />
+                      </div>
+                    </div>
+                    <div class="form-group form-row align-items-center">
+                      <div class="col-3">
+                        <label class="mb-0">Does Ordering</label>
+                      </div>
+                      <div class="col-9">
+                        <div class="custom-control custom-checkbox">
+                          <input type="checkbox" id="Display1" class="custom-control-input"
+                            formControlName="appOrders" />
+                          <label for="Display1" class="custom-control-label mb-0">&nbsp;</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group form-row align-items-center">
+                      <div class="col-3">
+                        <label class="mb-0">Latitude</label>
+                      </div>
+                      <div class="col-9">
+                        <input type="number" class="form-control" formControlName="latitude" />
+                      </div>
+                    </div>
+                    <div class="form-group form-row align-items-center">
+                      <div class="col-3">
+                        <label class="mb-0">Longitude</label>
+                      </div>
+                      <div class="col-9">
+                        <input type="number" class="form-control" formControlName="longitude" />
+                      </div>
+                    </div>
+                    <div class="form-group form-row align-items-center">
+                      <div class="col-3">
+                        <label class="mb-0">Email</label>
+                      </div>
+                      <div class="col-9">
+                        <input type="email" class="form-control" formControlName="email" [ngClass]="{
+                            'is-invalid': submitted && Email.errors
+                          }" />
+                        <div *ngIf="Email.errors" class="invalid-feedback">
+                          Enter Valid Email
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group mb-0 form-row align-items-center">
+                      <div class="col-3">
+                        <label class="mb-0">Open Hours</label>
+                      </div>
+                      <div class="col-9">
+                        <input type="text" class="form-control" formControlName="openHours" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+
+          <!-- Supplier Ordering Tab -->
+          <div class="tab-pane fade" id="pills-Ordering" role="tabpanel" aria-labelledby="pills-Ordering-tab">
+            <div class="form-row">
+              <div class="col-12">
+                <div class="text-right mt-1">
+                  <button type="button" data-toggle="modal" data-target="#SupplierOrdering" class="btn btn-blue mr-2"
+                    (click)="clickedAdd()">
+                    <i class="icon fa fa-plus-circle"></i> Add
+                  </button>
+                </div>
+                <div class="mt-15 all-w">
+                  <div class="table-responsive ">
+                    <table class="table ctm-table" id="create-store-supplier">
+                      <thead>
+                        <tr>
+                          <th>
+                            Supplier
+                          </th>
+                          <th>
+                            Generate Order DOW
+                          </th>
+                          <th>
+                            Send Order Offset
+                          </th>
+                          <th>
+                            Multiple Order In a Week
+                          </th>
+                          <th>
+                            Order Non Default Supplier
+                          </th>
+                          <th>
+                            Cover Days
+                          </th>
+                          <th>
+                            Receive Order Offset
+                          </th>
+                          <th>
+                            Invoice Order Offset
+                          </th>
+                          <th>
+                            Discount Threshold one
+                          </th>
+                          <th>
+                            Cover Days Discount Threshold one
+                          </th>
+                          <th>
+                            Discount Threshold Two
+                          </th>
+                          <th>
+                            Cover Days Discount Threshold Two
+                          </th>
+                          <th>
+                            Discount Threshold Three
+                          </th>
+                          <th>
+                            Cover Days Discount Threshold Three
+                          </th>
+                          <th>
+                            Last Run
+                          </th>
+                          <th>
+                            Date Created
+                          </th>
+                          <th>
+                            Date Last Changed
+                          </th>
+                          <th>
+                            User Last Change
+                          </th>
+                          <th class="text-center">Action</th>
+                          <th class="text-center" *ngIf="SupplierOrderScheduleData_id">
+                            Reset Last Run
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="
+                            let supplierOrder of SupplierOrderScheduleData;
+                            let i = index
+                          ">
+                          <td><a data-toggle="modal" data-target="#SupplierOrdering" (click)="
+                              getSupplierOrderSchedule(supplierOrder)
+                            ">
+                              {{ supplierOrder.supplierDesc }}
+                            </a></td>
+                          <td>{{ supplierOrder.generateOrderDOW }}</td>
+                          <td><span class="pl-2">{{ supplierOrder.sendOrderOffset }}</span></td>
+                          <td>
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" [disabled]="true" id="week" class="custom-control-input" [checked]="
+                                  supplierOrder.multipleOrdersInAWeek
+                                    ? 'true'
+                                    : ''
+                                " />
+                              <label for="week" class="custom-control-label mb-0"></label>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" [disabled]="true" id="week1" class="custom-control-input"
+                                [checked]="
+                                  supplierOrder.orderNonDefaultSupplier
+                                    ? 'true'
+                                    : ''
+                                " />
+                              <label for="week1" class="custom-control-label mb-0"></label>
+                            </div>
+                          </td>
+                          <td><span class="pl-2">{{ supplierOrder.coverDays }}</span></td>
+                          <td><span class="pl-2">{{ supplierOrder.receiveOrderOffset }}</span></td>
+                          <td><span class="pl-2">{{ supplierOrder.invoiceOrderOffset }}</span></td>
+                          <td><span class="pl-2">{{ supplierOrder.discountThresholdOne }}</span></td>
+                          <td>
+                            <span class="pl-2">{{ supplierOrder.coverDaysDiscountThreshold1 }}</span>
+                          </td>
+                          <td><span class="pl-2">{{ supplierOrder.discountThresholdTwo }}</span></td>
+                          <td>
+                            <span class="pl-2">{{ supplierOrder.coverDaysDiscountThreshold2 }}</span>
+                          </td>
+                          <td><span class="pl-2">{{ supplierOrder.discountThresholdThree }}</span></td>
+                          <td>
+                            <span class="pl-2">{{ supplierOrder.coverDaysDiscountThreshold3 }}</span>
+                          </td>
+                          <td>
+                            {{ supplierOrder.lastRun | dateTimeFormate }}
+                          </td>
+                          <td>
+                            {{ supplierOrder.createdAt | dateTimeFormate }}
+                          </td>
+                          <td>
+                            {{ supplierOrder.updatedAt | dateTimeFormate }}
+                          </td>
+                          <td>{{ supplierOrder.userName }}</td>
+                          <td>
+                            <div class="tbHover-btnGroup">
+
+                              <div class="tbHover-btnGroup">
+                                <!-- <a tooltip="Change" placement="left" class="tbHover-btn trash-btn" [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]"><i class="fa fa-pencil"></i></a> -->
+                                <a tooltip="Change" placement="left" class="tbHover-btn trash-btn" data-toggle="modal"
+                                  data-target="#SupplierOrdering" (click)="
+                                  getSupplierOrderSchedule(supplierOrder)
+                                "><i class="fa fa-pencil"></i></a>
+                                <a tooltip="Delete" placement="right" class="tbHover-btn trash-btn"
+                                  (click)="deleteSupplierOrderSchedule(i)"><i class="fa fa-trash"></i></a>
+                              </div>
+                              <!-- <button
+                                class="tbHover-btn trash-btn"
+                                data-toggle="modal"
+                                data-target="#SupplierOrdering"
+                                (click)="
+                                  getSupplierOrderSchedule(supplierOrder)
+                                "
+                              >
+                                <i class="fa fa-pencil"></i>
+                              </button>
+                              <button
+                                class="tbHover-btn trash-btn"
+                                (click)="deleteSupplierOrderSchedule(i)"
+                              >
+                                <i class="fa fa-trash"></i>
+                              </button> -->
+                            </div>
+                          </td>
+                          <td *ngIf="SupplierOrderScheduleData_id">
+                            <a tooltip="Reset" placement="right" class="tbHover-btn trash-btn"
+                              (click)="clickedResetlastRunButton(supplierOrder)"> <i class="fa fa-key"></i></a>
+                            <!-- <button class="tbHover-btn trash-btn" (click)="clickedResetlastRunButton(supplierOrder)">
+                              <i class="fa fa-key"></i>
+                            </button> -->
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade bd-example-modal-md thm-popup" id="ResetLastRun" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form>
+            <div class="title-wrap mb-1">
+              <h4 class="title"></h4>
+            </div>
+            <div class="mt-15 pop-img">
+              <h5 class="title d-flex mb-0 align-items-center">
+                <img src="assets/images/info-img.svg" class="mr-2" />Reset Last
+                Run For METCASH's {{ weekDay }} order?
+              </h5>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button type="button" class="btn btn-success mr-2" (click)="resetLastRun()">
+                Yes
+              </button>
+              <button type="button" class="btn btn-grey" data-dismiss="modal">
+                No
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-md thm-popup" id="TrandingHours" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form [formGroup]="storeForm">
+            <ng-container formGroupName="storeTradingHours">
+              <div class="title-wrap mb-2">
+                <h4 class="title">Trading Hours</h4>
+              </div>
+              <div class="form-group form-row align-items-center">
+                <div class="col-7 text-center">
+                  <label for="" class="mb-0">Opening Time</label>
+                </div>
+                <div class="col-5 text-center">
+                  <label for="" class="mb-0">Closing Time</label>
+                </div>
+              </div>
+              <div class="form-group form-row align-items-center">
+                <div class="col-2">
+                  <label for="" class="mb-0">Monday</label>
+                </div>
+                <div class="col-5">
+                  <input #monOpnTime type="time" class="form-control" formControlName="monOpenTime" (blur)="
+                      validateTime(
+                        $event.target.value,
+                        monClsTime.value,
+                        'monOpenTime',
+                        'monTime',
+                        true
+                      )
+                    " />
+                </div>
+                <div class="col-5">
+                  <input #monClsTime type="time" class="form-control" formControlName="monCloseTime" (blur)="
+                      validateTime(
+                        $event.target.value,
+                        monOpnTime.value,
+                        'monCloseTime',
+                        'monTime'
+                      )
+                    " />
+                </div>
+              </div>
+              <div class="form-group form-row align-items-center">
+                <div class="col-2">
+                  <label for="" class="mb-0">Tuesday</label>
+                </div>
+                <div class="col-5">
+                  <input #tueOpnTime type="time" class="form-control" formControlName="tueOpenTime" (blur)="
+                      validateTime(
+                        $event.target.value,
+                        tueClsTime.value,
+                        'tueOpenTime',
+                        'tuesTime',
+                        true
+                      )
+                    " />
+                </div>
+                <div class="col-5">
+                  <input #tueClsTime type="time" class="form-control" formControlName="tueCloseTime" (blur)="
+                      validateTime(
+                        $event.target.value,
+                        tueOpnTime.value,
+                        'tueCloseTime',
+                        'tuesTime'
+                      )
+                    " />
+                </div>
+              </div>
+              <div class="form-group form-row align-items-center">
+                <div class="col-2">
+                  <label for="" class="mb-0">Wednesday</label>
+                </div>
+                <div class="col-5">
+                  <input #wedOpnTime type="time" class="form-control" formControlName="wedOpenTime" (blur)="
+                      validateTime(
+                        $event.target.value,
+                        wedClsTime.value,
+                        'wedOpenTime',
+                        'wedTime',
+                        true
+                      )
+                    " />
+                </div>
+                <div class="col-5">
+                  <input #wedClsTime type="time" class="form-control" formControlName="wedCloseTime" (blur)="
+                      validateTime(
+                        $event.target.value,
+                        wedOpnTime.value,
+                        'wedCloseTime',
+                        'wedTime'
+                      )
+                    " />
+                </div>
+              </div>
+              <div class="form-group form-row align-items-center">
+                <div class="col-2">
+                  <label for="" class="mb-0">Thursday</label>
+                </div>
+                <div class="col-5">
+                  <input #thuOpnTime type="time" class="form-control" formControlName="thuOpenTime" (blur)="
+                      validateTime(
+                        $event.target.value,
+                        thuClsTime.value,
+                        'thuOpenTime',
+                        'thuTime',
+                        true
+                      )
+                    " />
+                </div>
+                <div class="col-5">
+                  <input #thuClsTime type="time" class="form-control" formControlName="thuCloseTime" (blur)="
+                      validateTime(
+                        $event.target.value,
+                        thuOpnTime.value,
+                        'thuCloseTime',
+                        'thuTime'
+                      )
+                    " />
+                </div>
+              </div>
+              <div class="form-group form-row align-items-center">
+                <div class="col-2">
+                  <label for="" class="mb-0">Friday</label>
+                </div>
+
+                <div class="col-5">
+                  <input #friOpnTime type="time" class="form-control" formControlName="friOpenTime" (blur)="
+                      validateTime(
+                        $event.target.value,
+                        friClsTime.value,
+                        'friOpenTime',
+                        'friTime',
+                        true
+                      )
+                    " />
+                </div>
+                <div class="col-5">
+                  <input #friClsTime type="time" class="form-control" formControlName="friCloseTime" (blur)="
+                      validateTime(
+                        $event.target.value,
+                        friOpnTime.value,
+                        'friCloseTime',
+                        'friTime'
+                      )
+                    " />
+                </div>
+              </div>
+              <div class="form-group form-row align-items-center">
+                <div class="col-2">
+                  <label for="" class="mb-0">Saturday</label>
+                </div>
+                <div class="col-5">
+                  <input #satOpnTime type="time" class="form-control" formControlName="satOpenTime" (blur)="
+                      validateTime(
+                        $event.target.value,
+                        satClsTime.value,
+                        'satOpenTime',
+                        'satTime',
+                        true
+                      )
+                    " />
+                </div>
+                <div class="col-5">
+                  <input #satClsTime type="time" class="form-control" formControlName="satCloseTime" (blur)="
+                      validateTime(
+                        $event.target.value,
+                        satOpnTime.value,
+                        'satCloseTime',
+                        'satTime'
+                      )
+                    " />
+                </div>
+              </div>
+              <div class="form-group form-row align-items-center">
+                <div class="col-2">
+                  <label for="" class="mb-0">Sunday</label>
+                </div>
+                <div class="col-5">
+                  <input #sunOpnTime type="time" class="form-control" formControlName="sunOpenTime" (blur)="
+                      validateTime(
+                        $event.target.value,
+                        sunClsTime.value,
+                        'sunOpenTime',
+                        'sunTime',
+                        true
+                      )
+                    " />
+                </div>
+                <div class="col-5">
+                  <input #sunClsTime type="time" class="form-control" formControlName="sunCloseTime" (blur)="
+                      validateTime(
+                        $event.target.value,
+                        sunOpnTime.value,
+                        'sunCloseTime',
+                        'sunTime'
+                      )
+                    " />
+                </div>
+              </div>
+              <div class="btn-wrap text-right mt-10">
+                <button type="button" class="btn btn-blue mr-2" (click)="resetTradingHours(true)">
+                  Ok
+                </button>
+                <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="resetTradingHours()">
+                  Cancel
+                </button>
+              </div>
+            </ng-container>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-md thm-popup" id="SupplierOrdering" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form [formGroup]="SupplierOrderScheduleForm" >
+            <div class="title-wrap mb-2">
+              <h4 class="title">
+                {{ supplierOrderId ? "Update" : "Add" }} Outlet Supplier
+                Schedule
+              </h4>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <div class="col-4">
+                <label for="" class="mb-0">Supplier<span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <div class="form-row align-items-center">
+                  <div class="col-9">
+                    <ng-container *ngIf="(supplierOrderId || supplierId) else ableSupplier">
+                      <select formControlName="supplierId" class="form-control" [ngClass]="{
+                          'is-invalid': submitted1 && f1.supplierId.errors
+                        }" disabled>
+                        <option [value]="supplier.id" *ngFor="let supplier of supplierData">
+                          {{ supplier.desc }}
+                        </option>
+                      </select>
+                    </ng-container>
+                    <ng-template #ableSupplier>
+                     <ng-select [items]="supplierData" bindLabel="desc" bindValue="id" formControlName="supplierId"
+                      [virtualScroll]="false" [clearable]="false" [clearOnBackspace]="false" [searchable]="true"
+                      [multiple]="false" (change)="selectedsupplier($event)" [ngClass]="{
+                      'is-invalid': submitted1 && f1.supplierId.errors
+                       }">
+                      <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <div class="form-row">
+                          <span class="col-12 zone-overflow" title="{{ item.desc }}">
+                            {{ item.desc }}
+                          </span>
+                        </div>
+                      </ng-template>
+                      </ng-select>
+                    </ng-template>
+                    <!-- <ng-container *ngIf="!(supplierOrderId || supplierId)">
+                      <ng-select [items]="supplierData" bindLabel="desc" bindValue="id" formControlName="supplierId"
+                        [virtualScroll]="false" [clearable]="false" [clearOnBackspace]="false" [searchable]="true"
+                        [multiple]="false" (change)="selectedsupplier($event)" [ngClass]="{
+                        'is-invalid': submitted1 && f1.supplierId.errors
+                      }">
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                          <div class="form-row">
+                            <span class="col-10 zone-overflow" title="{{ item.name }}">
+                              {{ item.desc }}
+                            </span>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                    </ng-container> -->
+                   
+                    <div *ngIf="f1.supplierId.errors" class="invalid-feedback">
+                      <div *ngIf="f1.supplierId.errors.required">
+                        Supplier is Required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <button [disabled]="clearStatus" type="button" (click)="clearsupplier()"
+                      class="btn btn-grey btn-block input-btn">
+                      Clear
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <div class="col-4">
+                <label for="" class="mb-0">Generate Order Day<span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <div class="form-row align-items-center">
+                  <div class="col-9">
+                    <ng-container *ngIf="(supplierOrderId || supplierId) else enabledField">
+                      <select formControlName="dowGenerateOrder" class="form-control" [ngClass]="{
+                          'is-invalid': submitted1 && f1.dowGenerateOrder.errors
+                        }" disabled>
+                        <option [value]="day.id" *ngFor="let day of weekDays">
+                          {{ day.name }}
+                        </option>
+                      </select>
+                    </ng-container>
+                    <ng-template #enabledField>
+                      <ng-select [items]="weekDays" bindLabel="name" bindValue="id" [virtualScroll]="true" [multiple]="false"
+                        [clearable]="false" [clearOnBackspace]="false" [clearSearchOnAdd]="true"  (change)="selectedGenerateOrderDay($event)"
+                        formControlName="dowGenerateOrder" [ngClass]="{ 'is-invalid': submitted1 && f1.dowGenerateOrder.errors }">
+                         <!-- It hold value on the basis of filter -->
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <span class="col-9 zone-overflow" title="{{ item?.name }}">
+                                 {{ item?.name }}
+                              </span>
+                            </div>
+                        </ng-template>
+                      </ng-select>
+                    </ng-template>
+                    <!-- <ng-container *ngIf="!(supplierOrderId || supplierId)">
+                      <select formControlName="dowGenerateOrder" class="form-control"
+                        (change)="selectedGenerateOrderDay($event)" [ngClass]="{
+                          'is-invalid': submitted1 && f1.dowGenerateOrder.errors
+                        }">
+                        <option [value]="day.id" *ngFor="let day of weekDays">
+                          {{ day.name }}
+                        </option>
+                      </select>
+                    </ng-container> -->
+                    <div *ngIf="f1.dowGenerateOrder.errors" class="invalid-feedback">
+                      <div *ngIf="f1.dowGenerateOrder.errors.required">
+                        Generate Order Day is Required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <button type="button" [disabled]="clearStatus" (click)="clearGenerateOrderDay()"
+                      class="btn btn-grey btn-block input-btn">
+                      Clear
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <div class="col-4">
+                <label for="" class="mb-0">Send Order Offset<span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <div class="form-row align-items-center">
+                  <div class="col-9">
+                    <input type="text" autocomplete="off" class="form-control" id="sendOrderOffset" formControlName="sendOrderOffset"
+                      [ngClass]="{
+                        'is-invalid': submitted1 && f1.sendOrderOffset.errors
+                      }" />
+                    <div *ngIf="f1.sendOrderOffset.errors" class="invalid-feedback">
+                      <div *ngIf="f1.sendOrderOffset.errors.required">
+                        Send Order Offset is Required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-3"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <div class="col-4">
+                <label for="" class="mb-0">Multiple Orders In a Week</label>
+              </div>
+              <div class="col-8">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" id="Display2" class="custom-control-input"
+                    formControlName="multipleOrdersInAWeek" (change)="checckMultipleOrdersInAWeek(checkBox.checked)"
+                    #checkBox />
+                  <label for="Display2" class="custom-control-label mb-0">Tick this if you get multiple deliveries in a
+                    week from
+                    this supplier</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <div class="col-4">
+                <label for="" class="mb-0">Non Default Supplier</label>
+              </div>
+              <div class="col-8">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" id="Display3" class="custom-control-input"
+                    formControlName="orderNonDefaultSupplier" />
+                  <label for="Display3" class="custom-control-label mb-0">Tick to check if cheaper than default
+                    supplier</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <div class="col-4">
+                <label for="" class="mb-0">Cover Days</label>
+              </div>
+              <div class="col-8">
+                <input type="number" [min]="0" class="form-control" formControlName="coverDays"
+                  [readonly]="CoverDaysStatus" onkeyup="if(this.value<0){this.value= this.value * -1}" [ngClass]="{
+                    'is-invalid': submitted1 && f1.coverDays.errors
+                  }" />
+                <div *ngIf="f1.coverDays.errors" class="invalid-feedback">
+                  <div *ngIf="f1.coverDays.errors.required">
+                    Cover Days is Required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <div class="col-4">
+                <label for="" class="mb-0">Receive Order Offset<span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <input type="number" [min]="0" class="form-control" id="receiveOrderOffset"
+                  formControlName="receiveOrderOffset" onkeyup="if(this.value<0){this.value= this.value * -1}"
+                  [ngClass]="{
+                    'is-invalid': submitted1 && f1.receiveOrderOffset.errors
+                  }" />
+                <div *ngIf="f1.receiveOrderOffset.errors" class="invalid-feedback">
+                  <div *ngIf="f1.receiveOrderOffset.errors.required">
+                    Receive Order Offset is Required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <div class="col-4">
+                <label for="" class="mb-0">Invoice Order Offset<span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <input type="number" [min]="0" class="form-control" id="invoiceOrderOffset"
+                  formControlName="invoiceOrderOffset" onkeyup="if(this.value<0){this.value= this.value * -1}"
+                  [ngClass]="{
+                    'is-invalid': submitted1 && f1.invoiceOrderOffset.errors
+                  }" />
+                <div *ngIf="f1.invoiceOrderOffset.errors" class="invalid-feedback">
+                  <div *ngIf="f1.invoiceOrderOffset.errors.required">
+                    Invoice Order Offset is Required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <div class="col-4">
+                <label for="" class="mb-0">Discount Threshold 1<span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <input type="number" [min]="0" class="form-control" formControlName="discountThresholdOne"
+                  onkeyup="if(this.value<0){this.value= this.value * -1}" [ngClass]="{
+                    'is-invalid': submitted1 && f1.discountThresholdOne.errors
+                  }" />
+                <div *ngIf="f1.discountThresholdOne.errors" class="invalid-feedback">
+                  <div *ngIf="f1.discountThresholdOne.errors.required">
+                    Discount Threshold 1 is Required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <div class="col-4">
+                <label for="" class="mb-0">Threshold 1 Cover Days<span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <input type="number" [min]="0" class="form-control" formControlName="coverDaysDiscountThreshold1"
+                  onkeyup="if(this.value<0){this.value= this.value * -1}" [ngClass]="{
+                    'is-invalid':
+                      submitted1 && f1.coverDaysDiscountThreshold1.errors
+                  }" />
+                <div *ngIf="f1.coverDaysDiscountThreshold1.errors" class="invalid-feedback">
+                  <div *ngIf="f1.coverDaysDiscountThreshold1.errors.required">
+                    Threshold 1 Cover Days is Required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <div class="col-4">
+                <label for="" class="mb-0">Discount Threshold 2<span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <input type="number" [min]="0" class="form-control" formControlName="discountThresholdTwo"
+                  onkeyup="if(this.value<0){this.value= this.value * -1}" [ngClass]="{
+                    'is-invalid': submitted1 && f1.discountThresholdTwo.errors
+                  }" />
+                <div *ngIf="f1.discountThresholdTwo.errors" class="invalid-feedback">
+                  <div *ngIf="f1.discountThresholdTwo.errors.required">
+                    Discount Threshold 2 is Required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <div class="col-4">
+                <label for="" class="mb-0">Threshold 2 Cover Days<span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <input type="number" [min]="0" class="form-control" formControlName="coverDaysDiscountThreshold2"
+                  onkeyup="if(this.value<0){this.value= this.value * -1}" [ngClass]="{
+                    'is-invalid':
+                      submitted1 && f1.coverDaysDiscountThreshold2.errors
+                  }" />
+                <div *ngIf="f1.coverDaysDiscountThreshold2.errors" class="invalid-feedback">
+                  <div *ngIf="f1.coverDaysDiscountThreshold2.errors.required">
+                    Threshold 2 Cover Days is Required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <div class="col-4">
+                <label for="" class="mb-0">Discount Threshold 3<span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <input type="number" [min]="0" class="form-control" formControlName="discountThresholdThree"
+                  onkeyup="if(this.value<0){this.value= this.value * -1}" [ngClass]="{
+                    'is-invalid': submitted1 && f1.discountThresholdThree.errors
+                  }" />
+                <div *ngIf="f1.discountThresholdThree.errors" class="invalid-feedback">
+                  <div *ngIf="f1.discountThresholdThree.errors.required">
+                    Discount Threshold 3 is Required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-0 form-row align-items-center">
+              <div class="col-4">
+                <label for="" class="mb-0">Threshold 3 Cover Days<span class="text-danger">*</span></label>
+              </div>
+              <div class="col-8">
+                <input type="number" [min]="0" class="form-control" formControlName="coverDaysDiscountThreshold3"
+                  onkeyup="if(this.value<0){this.value= this.value * -1}" [ngClass]="{
+                    'is-invalid':
+                      submitted1 && f1.coverDaysDiscountThreshold3.errors
+                  }" />
+                <div *ngIf="f1.coverDaysDiscountThreshold3.errors" class="invalid-feedback">
+                  <div *ngIf="f1.coverDaysDiscountThreshold3.errors.required">
+                    Threshold 3 Cover Days is Required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <h6 style="color: #5145cd">{{ showMessage }}</h6>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button type="button" class="btn btn-blue mr-2" [disabled]="disableButton" (click)="addSupplierOrderSchedule()">
+                {{ supplierOrderId || supplierId ? "change" : "Add" }}
+              </button>
+              <button type="button" class="btn btn-grey" data-dismiss="modal">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg thm-popup" id="RoyaltyScales" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form [formGroup]="storeForm">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Royalty Scales</h4>
+            </div>
+
+            <div class="form-row">
+              <div class="col-lg-6">
+                <div class="group-from mb-0">
+                  <h5 class="title">Royalty Scales (Weekly Sales)</h5>
+                  <div class="form-group mb-0 form-row align-items-center">
+                    <div class="col-4">
+                      <label for="" class="mb-0">$Sales From</label>
+                    </div>
+                    <div class="col-4">
+                      <label for="" class="mb-0">$Sales To</label>
+                    </div>
+                    <div class="col-4">
+                      <label for="" class="mb-0">Percent %</label>
+                    </div>
+                  </div>
+
+                  <ng-container *ngFor="let index of storeObj.royaltyScales.length">
+                    <div class="form-group form-row align-items-center">
+                      <div class="col-4">
+                        <input id="{{ index }}" type="number" class="form-control" (blur)="
+                            royalyAndAdvertisingScales(
+                              $event.target.value,
+                              storeObj.royaltyScales.data[index]?.scalesTo,
+                              storeObj.royaltyScales.data[index]?.percent,
+                              index,
+                              'royaltyScales'
+                            )
+                          " [(ngModel)]="
+                            storeObj.royaltyScales.data[index].scalesFrom
+                          " [ngModelOptions]="{ standalone: true }" />
+                      </div>
+                      <div class="col-4">
+                        <input id="{{ index }}" type="number" class="form-control" (blur)="
+                            royalyAndAdvertisingScales(
+                              storeObj.royaltyScales.data[index]?.scalesFrom,
+                              $event.target.value,
+                              storeObj.royaltyScales.data[index]?.percent,
+                              index,
+                              'royaltyScales'
+                            )
+                          " [(ngModel)]="
+                            storeObj.royaltyScales.data[index].scalesTo
+                          " [ngModelOptions]="{ standalone: true }" />
+                      </div>
+                      <div class="col-4">
+                        <input id="{{ index }}" type="number" class="form-control" (blur)="
+                            royalyAndAdvertisingScales(
+                              storeObj.royaltyScales.data[index]?.scalesFrom,
+                              storeObj.royaltyScales.data[index]?.scalesTo,
+                              $event.target.value,
+                              index,
+                              'royaltyScales'
+                            )
+                          " [(ngModel)]="
+                            storeObj.royaltyScales.data[index].percent
+                          " [ngModelOptions]="{ standalone: true }" />
+                      </div>
+                    </div>
+                  </ng-container>
+
+                  <div class="form-group form-row mb-0 align-items-center">
+                    <div class="col-8 text-right">
+                      <label for="" class="mb-0">Inc GST</label>
+                    </div>
+                    <div class="col-4">
+                      <select class="form-control" [(ngModel)]="storeObj.royaltyScales.incGST"
+                        [ngModelOptions]="{ standalone: true }">
+                        <option [ngValue]="label.value" *ngFor="let label of labelType">
+                          {{ label?.status }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="group-from mb-0">
+                  <h5 class="title">Advertising Levy Rate</h5>
+                  <div class="form-group mb-0 form-row align-items-center">
+                    <div class="col-4">
+                      <label for="" class="mb-0">$Sales From</label>
+                    </div>
+                    <div class="col-4">
+                      <label for="" class="mb-0">$Sales To</label>
+                    </div>
+                    <div class="col-4">
+                      <label for="" class="mb-0">Percent %</label>
+                    </div>
+                  </div>
+
+                  <ng-container *ngFor="let adIndex of storeObj.advertisingScales.length">
+                    <div class="form-group form-row align-items-center">
+                      <div class="col-4">
+                        <input id="{{ adIndex }}" type="number" class="form-control" (blur)="
+                            royalyAndAdvertisingScales(
+                              $event.target.value,
+                              storeObj.advertisingScales.data[adIndex]
+                                ?.scalesTo,
+                              storeObj.advertisingScales.data[adIndex]?.percent,
+                              adIndex,
+                              'advertisingScales'
+                            )
+                          " [(ngModel)]="
+                            storeObj.advertisingScales.data[adIndex].scalesFrom
+                          " [ngModelOptions]="{ standalone: true }" />
+                      </div>
+                      <div class="col-4">
+                        <input id="{{ adIndex }}" type="number" class="form-control" (blur)="
+                            royalyAndAdvertisingScales(
+                              storeObj.advertisingScales.data[adIndex]
+                                ?.scalesFrom,
+                              $event.target.value,
+                              storeObj.advertisingScales.data[adIndex]?.percent,
+                              adIndex,
+                              'advertisingScales'
+                            )
+                          " [(ngModel)]="
+                            storeObj.advertisingScales.data[adIndex].scalesTo
+                          " [ngModelOptions]="{ standalone: true }" />
+                      </div>
+                      <div class="col-4">
+                        <input id="{{ adIndex }}" type="number" class="form-control" (blur)="
+                            royalyAndAdvertisingScales(
+                              storeObj.advertisingScales.data[adIndex]
+                                ?.scalesFrom,
+                              storeObj.advertisingScales.data[adIndex]
+                                ?.scalesTo,
+                              $event.target.value,
+                              adIndex,
+                              'advertisingScales'
+                            )
+                          " [(ngModel)]="
+                            storeObj.advertisingScales.data[adIndex].percent
+                          " [ngModelOptions]="{ standalone: true }" />
+                      </div>
+                    </div>
+
+                    <!-- <div class="form-group form-row align-items-center">
+                                                <div class="col-4">
+                                                    <input #fromAdValue id="{{adIndex}}" type="number" class="form-control"
+                                                        (blur)="royalyAndAdvertisingScales(fromAdValue.value, toAdValue.value, 
+                                                        adPercent.value, adIndex, 'advertisingScales')"
+                                                        [value]="storeObj.advertisingScales.data[adIndex]?.scalesFrom"
+                                                    >
+                                                </div>
+                                                <div class="col-4">
+                                                    <input #toAdValue id="{{adIndex}}" type="number" class="form-control"
+                                                        (blur)="royalyAndAdvertisingScales(fromAdValue.value, toAdValue.value, 
+                                                        adPercent.value, adIndex, 'advertisingScales')"
+                                                        [value]="storeObj.advertisingScales.data[adIndex]?.scalesTo"
+                                                    >
+                                                </div>
+                                                <div class="col-4">
+                                                    <input #adPercent id="{{adIndex}}" type="number" class="form-control"
+                                                        (blur)="royalyAndAdvertisingScales(fromAdValue.value, toAdValue.value, 
+                                                        adPercent.value, adIndex, 'advertisingScales')"
+                                                        [value]="storeObj.advertisingScales.data[adIndex]?.percent"
+                                                    >
+                                                </div>
+                                            </div> -->
+                  </ng-container>
+
+                  <div class="form-group form-row mb-0 align-items-center">
+                    <div class="col-8 text-right">
+                      <label for="" class="mb-0">Inc GST</label>
+                    </div>
+                    <div class="col-4">
+                      <select class="form-control" [(ngModel)]="storeObj.advertisingScales.incGST"
+                        [ngModelOptions]="{ standalone: true }">
+                        <option [ngValue]="label.value" *ngFor="let label of labelType">
+                          {{ label?.status }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-wrap text-right mt-10">
+              <button type="button" class="btn btn-blue mr-2" (click)="royaltyAndAdvertisingOkOrCanacel('ok')">
+                Ok
+              </button>
+              <button type="button" class="btn btn-grey" data-dismiss="modal"
+                (click)="royaltyAndAdvertisingOkOrCanacel('cancel')">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

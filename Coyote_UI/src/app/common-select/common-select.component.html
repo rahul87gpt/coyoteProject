@@ -1,0 +1,127 @@
+<div class="mainContent-innner">
+  <div class="d-flex align-items-center">
+    <h4 class="title flex-grow-1 mb-0">{{ title }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <!-- <div class="probtn-wrap d-flex text-right">
+      <button
+        class="btn btn-blue mr-2"
+        data-toggle="modal"
+        data-target="#FilterModal"
+      >
+        <i class="icon fa fa-filter"></i> Filter
+      </button>
+      <button class="btn">
+        <i class="icon fa fa-file-excel-o"></i> Export
+      </button>
+    </div> -->
+  </div>
+
+  <div class="bg-box mt-15">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="custom-mega-menu">
+          <div class="dropdown">
+            <a
+              href="javascript:void(0);"
+              class="form-control dropdown-toggle"
+              type="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              id="dropdownMenuButton"
+            >
+              {{ label }}
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-left"
+              aria-labelledby="dropdownMenuButton"
+            >
+              <ng-container *ngIf="listData?.length">
+                <div class="mega-list-search">
+                  <input
+                    type="search"
+                    class="form-control"
+                    placeholder="Search"
+                    #searchVal
+                    [(ngModel)]="searchText"
+                    (ngModelChange)="searchFun(searchVal.value)"
+                  />
+                </div>
+              </ng-container>
+              <div class="mega-list-menu">
+                <ul>
+                  <ng-container
+                    *ngFor="
+                      let value of listData
+                        | slice
+                          : (currentPage - 1) * pageLimit
+                          : (currentPage - 1) * pageLimit + pageLimit
+                    "
+                  >
+                    <li>
+                      <ng-container
+                        *ngIf="dataDisplayfields?.length > 1; else nolength"
+                      >
+                        <a
+                          class="dropdown-item"
+                          href="javascript:void(0);"
+                          title="{{
+                            value[
+                              dataDisplayfields[dataDisplayfields.length - 2]
+                            ] +
+                              '-' +
+                              value[
+                                dataDisplayfields[dataDisplayfields.length - 1]
+                              ]
+                          }}"
+                          (click)="accept(value)"
+                        >
+                          {{
+                            value[
+                              dataDisplayfields[dataDisplayfields.length - 2]
+                            ] +
+                              "-" +
+                              value[
+                                dataDisplayfields[dataDisplayfields.length - 1]
+                              ]
+                          }}
+                        </a>
+                      </ng-container>
+
+                      <ng-template #nolength>
+                        <a
+                          class="dropdown-item"
+                          href="javascript:void(0);"
+                          title="{{ value[dataDisplayfields] }}"
+                        >
+                          {{ value[dataDisplayfields] }}
+                        </a>
+                      </ng-template>
+                    </li>
+                  </ng-container>
+                </ul>
+              </div>
+              <div class="mega-list-btn text-right">
+                <ng-container *ngIf="listData?.length">
+                  <ngb-pagination
+                    [collectionSize]="listData?.length"
+                    [(page)]="currentPage"
+                    [pageSize]="pageLimit"
+                    [maxSize]="startval"
+                    [rotate]="true"
+                    [disabled]="false"
+                    [ellipses]="false"
+                    [disabled]="false"
+                    (pageChange)="pageChangeEvent($event)"
+                  ></ngb-pagination>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

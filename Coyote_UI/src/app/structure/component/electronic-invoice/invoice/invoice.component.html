@@ -1,0 +1,137 @@
+<div class="modal fade bd-example-modal-md thm-popup" id="electronicInvoice" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="electronicInvoicesForm">
+                        <div class="title-wrap mb-1">
+                            <h4 class="title mb-0">Import Invoices</h4>
+                        </div>
+                        <div class="group-from">
+                            <h5 class="title">Outlet and Supplier</h5>
+                            <div class="form-group">
+                                <ng-select [items]="outletList" bindLabel="desc" bindValue="id" [virtualScroll]="true"
+                                    [multiple]="false" [clearable]="false" [clearOnBackspace]="false"
+                                    [clearSearchOnAdd]="true" formControlName="storeId"
+                                    [ngClass]="{'is-invalid': submitted && f.storeId.errors}">
+
+                                    <!-- It hold value on the basis of filter -->
+                                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                        <div class="form-row">
+                                            <span class="col-9 zone-overflow" title="{{ item?.desc }}">
+                                                {{ item?.desc }}
+                                            </span>
+                                            <div class="col-3" title="{{ item?.code }}">
+                                                {{ item.code }}
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </ng-select>
+                                <div *ngIf="f.storeId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.storeId.errors.required">
+                                        Outlet is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <ng-select [items]="suppliers" bindLabel="desc" bindValue="id" [virtualScroll]="true"
+                                    [multiple]="false" [clearable]="false" [clearOnBackspace]="false"
+                                    [clearSearchOnAdd]="true" formControlName="supplierId" [(ngModel)]="selectedValue"
+                                    [ngClass]="{'is-invalid': submitted && f.supplierId.errors}">
+
+                                    <!-- It hold value on the basis of filter -->
+                                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                        <div class="form-row">
+                                            <span class="col-9 zone-overflow" title="{{ item?.desc }}">
+                                                {{ item?.desc }}
+                                            </span>
+                                            <div class="col-3" title="{{ item?.code }}">
+                                                {{ item.code }}
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="group-from">
+                            <div class="form-group mb-0">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <label class="d-flex align-items-center"><input type="checkbox"
+                                                (click)="setInvoices('newInvoices',$event.target.checked)"
+                                                [checked]="checkedNewInvoices">&nbsp;<span>Connect
+                                                to host to pickup new Invoices
+                                            </span></label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="d-flex align-items-center"><input type="checkbox"
+                                                (click)="setInvoices('ediInvoices',$event.target.checked)"
+                                                [checked]="checkededEdiInvoices">&nbsp;<span>EDI
+                                                Invoices</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="showRadioButton">
+                            <div class="group-from">
+                                <div class="form-group mb-0">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="d-flex align-items-center"><input type="radio"
+                                                    checked>&nbsp;&nbsp;<span>Convert
+                                                    before processing</span></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="d-flex align-items-center"><input
+                                                    type="radio">&nbsp;&nbsp;<span>Re-Use existing INVOICES.TXT
+                                                </span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <div class="group-from">
+                            <div class="form-group">
+                                <div class="import-invoice-table">
+                                    <ng-container *ngIf="listAllDocuments?.length">
+                                        <div class="table-height-list all-w">
+                                            <div class="table-responsive inner-responsive ">
+
+                                                <table class="table ctm-table" id="invoicesList-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Customer Id</th>
+                                                            <th>Document GUID</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let product of listAllDocuments">
+                                                            <td id="td-id" (click)="selectParticularInvoice(product)">
+                                                                <a>{{product.customerId}}</a></td>
+                                                            <td id="td-id" (click)="selectParticularInvoice(product)">
+                                                                {{product.documentGUID}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="btn-wrap mt-10">
+                            <button class="btn btn-blue" (click)="getInvoiceList()">Invoice List</button>
+                            <span class="float-right"><button class="btn btn-blue mr-2"
+                                    (click)="submitElectronicInvoices()"
+                                    [disabled]="ableButton ? true: false">Ok</button>
+                                <a data-dismiss="modal" class="btn btn-grey" (click)="isCancelApi()">Cancel</a></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

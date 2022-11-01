@@ -1,0 +1,212 @@
+<div class="mainContent-innner">
+    <div class="texcode-section">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">Tax Codes</h4>
+            <!-- <h4 class="title flex-grow-1 mb-0">Taxes <span class="bdms"><a href="#">Accounts</a> | <span class="current">Tax Code</span></span></h4> -->
+            <div class="probtn-wrap text-right">
+                <a class="btn btn-blue mr-2" data-toggle="modal" data-target="#taxModal" (click)="clickedAdd()"><i
+                        class="icon fa fa-plus-circle"></i> Add</a>
+                <button class="btn mr-2"><i class="icon fa fa-print"></i> Print</button>
+                <button class="btn mr-2" (click)="exportData()"><i class="icon fa fa-file-excel-o"></i> Export</button>
+                <button class="btn btn-blue with-icon" data-toggle="modal" data-target="#TaxCodesSearch" (click)="openTaxCodesSearchFilter()">
+                    <i class="icon fa fa-filter"></i> Filter
+                </button>
+            </div>
+        </div>
+        <div class="texcode-wrap bg-box mt-15">
+            <div class="texcode-table-wrap all-w">
+                <div class="table-responsive">
+                    <table class="table ctm-table systemWide-table" id="taxCode-table">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Code
+                                    <span class="column_id float-right" (click)="openFilter('Code')" ><i class="fa fa-filter"></i></span>
+                                </th>
+                                <th>
+              
+                                    <span  class="sortingIcon" >
+                                     <i (click)="shortData('accend')" class="ml-1 fa fa-long-arrow-up"
+                                      [ngClass]="short_icon_class === 'accend' ? 'accend' : ''" ></i><i  [ngClass]="short_icon_class === 'decend' ? 'decend' : ''" (click)="shortData('decend')" class="fa fa-long-arrow-down"></i>
+                                  </span>
+                                 </th>
+                                <th>Description
+                                    <span class="column_id float-right" (click)="openFilter('Description')" ><i class="fa fa-filter"></i></span>
+                                </th>
+                                <th>
+              
+                                    <span  class="sortingIcon" >
+                                     <i (click)="shortData('accend')" class="ml-1 fa fa-long-arrow-up"
+                                      [ngClass]="short_icon_class === 'accend' ? 'accend' : ''" ></i><i  [ngClass]="short_icon_class === 'decend' ? 'decend' : ''" (click)="shortData('decend')" class="fa fa-long-arrow-down"></i>
+                                  </span>
+                                 </th>
+                                <th>Percent
+                                    <span class="column_id float-right" (click)="openFilter('Percent')" ><i class="fa fa-filter"></i></span>
+                                </th>
+                                <th>
+              
+                                    <span  class="sortingIcon" >
+                                     <i (click)="shortData('accend')" class="ml-1 fa fa-long-arrow-up"
+                                      [ngClass]="short_icon_class === 'accend' ? 'accend' : ''" ></i><i  [ngClass]="short_icon_class === 'decend' ? 'decend' : ''" (click)="shortData('decend')" class="fa fa-long-arrow-down"></i>
+                                  </span>
+                                 </th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody (click)="removeSeachFiterDisplay()">
+                            <ng-container *ngFor="let tax of taxesList">
+                                <tr>
+                                    <td class="text-center">
+                                        <!-- <span class="status-check" [ngClass]="{ 'status-true': tax.status, 'status-false': !tax.status }"></span> -->
+                                        <div class="status-icons">
+                                            <img *ngIf="tax.status" src="assets/images/status-true.svg" alt="">
+                                            <img *ngIf="!tax.status" src="assets/images/status-false.svg" alt="">
+                                        </div>
+                                        <span hidden>
+                                            {{ tax.status ? "Active" : "In-Active" }}
+                                        </span>
+                                    </td>
+                                    <td data-toggle="modal" data-target="#taxModal" (click)="getTaxbyId(tax.id)" class="blue-test">
+                                        {{tax.code.length > 10? tax.code.substring(0,10)+"..." :tax.code}}
+                                    </td>
+                                    <td></td>
+                                    <td>
+
+                                        {{tax.desc.length > 30? tax.desc.substring(0,30)+"..." :tax.desc}}
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        {{tax.factor}}
+                                    </td>
+                                    <td></td>
+                                    <td class="text-center">
+                                        <div class="tbHover-btnGroup">
+                                            <a tooltip="Change" placement="left" class="tbHover-btn trash-btn"
+                                                data-toggle="modal" data-target="#taxModal"
+                                                (click)="getTaxbyId(tax.id)"><i class="fa fa-pencil"></i></a>
+                                            <a tooltip="Delete" placement="right" class="tbHover-btn trash-btn"
+                                                (click)="deleteTax(tax.id)"><i class="fa fa-trash"></i></a>
+                                        </div>
+                                        <!-- <div class="tbHover-btnGroup">
+                                        <button tooltip="Change" class="tbHover-btn trash-btn"  data-toggle="modal" data-target="#taxModal" (click)="getTaxbyId(tax.id)"><i class="fa fa-pencil"></i></button>
+                                        <button tooltip="Delete" class="tbHover-btn trash-btn" (click)="deleteTax(tax.id)"><i class="fa fa-trash"></i></button>
+                                    </div> -->
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup" id="taxModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <form [formGroup]="taxForm" (ngSubmit)="onSubmit()">
+                    <div class="popup-box">
+                        <div class="title-wrap mb-2">
+                            <ng-container *ngIf="formStatus">
+                                <h4 class="title">Update Tax Codes</h4>
+                            </ng-container>
+                            <ng-container *ngIf="!formStatus">
+                                <h4 class="title">Add Tax Codes</h4>
+                            </ng-container>
+                        </div>
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Code <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <input [readonly]="formStatus" type="text" maxlength="17"
+                                    [ngClass]="{ 'is-invalid': submitted && f.code.errors }" formControlName="code"
+                                    class="form-control" appUppercase>
+                                <div *ngIf="f.code.errors" class="invalid-feedback">
+                                    <div *ngIf="f.code.errors.maxlength"> Code Should be maximum 15 characters </div>
+                                    <div *ngIf="f.code.errors.required">
+                                        Code is required
+                                    </div>
+                                    <div *ngIf="f.code.errors.pattern">Space is not allowed</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Description <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" maxlength="40" appUppercase
+                                    [ngClass]="{ 'is-invalid': submitted && f.desc.errors }" formControlName="desc"
+                                    class="form-control">
+                                <div *ngIf="f.desc.errors" class="invalid-feedback">
+                                    <div *ngIf="f.desc.errors.maxlength"> Description Should be maximum 30 characters
+                                    </div>
+                                    <div *ngIf="f.desc.errors.required">
+                                        Description is required
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Percent<span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <input type="number" [ngClass]="{ 'is-invalid': submitted && f.factor.errors }"
+                                    formControlName="factor" class="form-control" [min]="0"
+                                    onkeyup="if(this.value<0){this.value= this.value * -1}">
+                                <div *ngIf="f.factor.errors" class="invalid-feedback">
+                                    <div *ngIf="f.factor.errors.required">
+                                        Factor is required
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Status</label>
+                            <div class="col-md-9">
+                                <select class="form-control" formControlName="status">
+                                    <option value="true">Active</option>
+                                    <option value="false">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button class="btn btn-blue mr-2" type="submit">{{buttonText}}</button>
+                            <a *ngIf="formStatus" class="btn btn-grey" data-dismiss="modal"
+                                (click)="cancel()">Cancel</a>
+                            <a *ngIf="!formStatus" class="btn btn-grey" data-dismiss="modal"
+                                (click)="clickedAdd()">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup" id="TaxCodesSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form name="searchForm" id="searchForm">
+                        <div class="title-wrap mb-2">
+                            <h4 class="title">Search Filter</h4>
+                        </div>
+                        <div class="form-group mb-0">
+                            <label> Wildcard Search</label>
+                            <input type="text" appUppercase id="TaxCodes_Search_filter" class="form-control" #searchValue>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button class="btn btn-blue mr-2" (click)="TaxCodesSearch(searchValue)">Ok</button>
+                            <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

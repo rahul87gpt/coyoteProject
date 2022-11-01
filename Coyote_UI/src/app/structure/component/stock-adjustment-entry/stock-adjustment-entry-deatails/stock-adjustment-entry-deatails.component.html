@@ -1,0 +1,681 @@
+<div class="mainContent-innner">
+    <div class="stocktake-section">
+      <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">Stock Adjustment Batch</h4>
+        <div class="probtn-wrap d-flex text-right">
+          <a
+            (click)="setForm()"
+            type="button"
+            class="btn btn-blue mr-2"
+            data-toggle="modal"
+            data-target="#StocktakeItem"
+          >
+            <i class="icon fa fa-plus-circle"></i>
+            Add
+          </a>
+          <button type="button" class="btn mr-2">
+            <i class="icon fa fa-print"></i> Print
+          </button>
+    
+          <button
+            type="button"
+            class="btn mr-2"
+            (click)="submitStockAdjustEntry()"
+          >
+            <i class="icon fa fa-flag"></i> Finish
+          </button>
+    
+          <a class="btn" (click)="goBack()">Cancel</a>
+        </div>
+      </div>
+<div class="stocktake-wrap">
+	<form [formGroup]="stockTakeForm">
+		<div class="stocktake-table-wrap">
+			<div class="bg-box mt-15">
+				<div class="form-row">
+					<div class="col-lg-6 col-xl-6">
+						<div class="group-from mb-0">
+							<h5 class="title">Stock Adjustment Batch</h5>
+							<div class="form-group form-row align-items-center">
+								<label class="label col-md-4 mb-0">Outlet No</label>
+								<div class="col-md-8">
+									<input
+										[readonly]="true"
+										type="text"
+										class="form-control"
+										formControlName="outletCode"
+										/>
+								</div>
+							</div>
+							<div class="form-group form-row align-items-center">
+								<label class="label col-md-4 mb-0"
+									>Outlet Description</label
+									>
+								<div class="col-md-8">
+									<input
+										
+										type="text"
+										class="form-control"
+										formControlName="outletDesc"
+										/>
+								</div>
+							</div>
+							<div class="form-group mb-0 form-row align-items-center">
+								<label class="label col-md-4 mb-0">Post to Date</label>
+								<div class="col-md-8">
+									<div class="ctm-calendar">
+										<input
+											type="text"
+											class="form-control"
+											formControlName="postToDate"
+											bsDatepicker
+											[bsConfig]="datepickerConfig"
+											[ngClass]="{'is-invalid': submitted && f.postToDate.errors}"
+											/>
+										<!-- <input
+										type="text"
+										[readonly]="true"
+										class="form-control"
+										formControlName="postToDate"
+										[ngClass]="{
+										'is-invalid': submitted && f.postToDate.errors
+										}"
+										/> -->
+										<div
+											*ngIf="f.postToDate.errors"
+											class="invalid-feedback"
+											>
+											<div *ngIf="f.postToDate.errors.required">
+												Post to Date is required
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-5 col-xl-5">
+						<div class="group-from mb-0">
+							<div class="form-group form-row align-items-center">
+								<label class="col-md-4 mb-0">Waste Total</label>
+								<div class="col-md-8">
+									<div class="dollar-symbol-icon">
+										<input
+											[readonly]="true"
+											type="number"
+											class="form-control"
+											id="wasteTotal"
+											formControlName="wasteTotal"
+											/>
+									</div>
+								</div>
+							</div>
+							<div class="form-group form-row align-items-center">
+								<label class="col-md-4 mb-0">Confirm Total</label>
+								<div class="col-md-8">
+									<div class="dollar-symbol-icon">
+										<input type="number"  id="total"
+										formControlName="total" class="form-control" />
+									</div>
+								</div>
+							</div>
+							<div class="form-group mb-0 form-row align-items-center">
+								<label class="col-md-4 mb-0">Reference</label>
+								<div class="col-md-8">
+									<div>
+										<input
+											type="text"
+											class="form-control"
+											formControlName="reference"
+											[readonly]="true"
+											/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bg-box mt-15">
+				<div class="table-responsive">
+					<table class="table ctm-table">
+						<thead>
+							<tr>
+								<th>Product</th>
+								<th>Description</th>
+								<th>Reason</th>
+								<th>Qty</th>
+								<th>Item Cost ( $ )</th>
+								<th>Line Total ( $ )</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let product of stockProducts; index as i">
+								<td>{{ product.number }}</td>
+								<td>
+									{{ product.desc ? product.desc : product.productDesc }}
+								</td>
+								<td>
+									{{product.reasonName}}
+									<!-- {{
+									product.reasonName
+									? product.reasonName
+									: product.reasonId
+									}} -->
+								</td>
+								<td>{{ product.quantity }}</td>
+								<td>{{ getFormatedNumber(product.itemCost) }}</td>
+								<td>{{ getFormatedNumber(product.lineTotal) }}</td>
+								<td>
+									<div class="moreOption">
+										<div class="tbHover-btnGroup">
+											<a
+												class="tbHover-btn trash-btn"
+												data-toggle="modal"
+												data-target="#StocktakeItem"
+												(click)="
+												getProductById(product, i, product?.productId)
+												"
+												><i class="fa fa-pencil"></i
+												></a>
+											<a
+												class="tbHover-btn trash-btn"
+												(click)="deleteStockAdjustById(product)"
+												><i class="fa fa-trash"></i
+												></a>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div
+	class="modal thm-popup fade"
+	id="StocktakeItem"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="exampleModalLabel"
+	aria-hidden="true"
+	data-backdrop="static"
+	>
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form
+					[formGroup]="stockTakeDetailsForm"
+					(keydown.enter)="$event.preventDefault()"
+					>
+					<div class="title-wrap">
+						<h4 class="title">Stock Adjustment Item</h4>
+					</div>
+					<div class="group-from mb-0">
+						<h5 class="title">Line Details</h5>
+						<div class="form-group">
+							<label>Product</label>
+							<div class="form-row align-items-center">
+								<div class="col-5">
+									<input
+										id="productNumber"
+										type="number"
+										class="form-control"
+										formControlName="number"
+										[ngClass]="{
+										'is-invalid': submitted2 && f1.number.errors
+										}"
+										/>
+									<!-- <div *ngIf="f1.number.errors" class="invalid-feedback">
+										<div *ngIf="f1.number.errors.required">
+											Product number is required
+										</div>
+										</div> -->
+								</div>
+								<div class="col-3">
+									<button
+									#searchProductBtn
+									*ngIf="!proFormStatus"
+									type="button"
+									class="btn btn-grey btn-block input-btn"
+									(click)="searchProduct()"
+									>
+									Search
+									</button>
+								</div>
+								<div class="col-4">
+									<button
+										type="button"
+										class="btn btn-grey btn-block input-btn"
+										(click)="changeProductDetails(1)"
+										>
+									Product Details
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Description</label>
+							<div class="d-flex align-items-center">
+								<input
+									[readonly]="true"
+									type="text"
+									class="form-control"
+									formControlName="desc"
+									/>
+							</div>
+						</div>
+						<div class="form-row align-items-center">
+							<div class="col-4">
+								<div class="form-group">
+									<label>Quantity</label>
+									<input
+									(keyup)="calculateTotalCost()"
+									(click)="calculateTotalCost()"
+									type="number"
+									class="form-control"
+									formControlName="quantity"
+									[ngClass]="{
+									'is-invalid': submitted2 && f1.quantity.errors
+									}"
+									/>
+									<div *ngIf="f1.quantity.errors" class="invalid-feedback">
+										<div *ngIf="f1.quantity.errors.required">
+											Quantity is required
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-8">
+								<div
+									class="form-group form-row align-items-center justify-content-end"
+									>
+									<div class="col-6">
+										<label>Units On Hand</label>
+										<input
+											[readonly]="true"
+											type="number"
+											class="form-control"
+											formControlName="unitOnHand"
+											/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-row align-items-end">
+							<div class="col-4">
+								<div class="form-group">
+									<label>Total Cost</label>
+									<div class="dollar-symbol-icon">
+										<input
+											[readonly]="true"
+											type="number"
+											class="form-control"
+											formControlName="lineCost"
+											/>
+									</div>
+								</div>
+								<div class="form-group mb-0">
+									<label>Item Cost</label>
+									<input
+										[readonly]="true"
+										type="number"
+										class="form-control"
+										formControlName="itemCost"
+										/>
+								</div>
+							</div>
+							<div class="col-8">
+								<div class="group-from form-group mb-0 mt-0 light-bg p-2">
+									<div>
+										<label class="mb-1"
+											>Positive Quantity Increases Stock Level</label
+											>
+									</div>
+									<div>
+										<label class="mb-0"
+											>Negative Quantity Decreases Stock level</label
+											>
+									</div>
+									<div class="mt-2">
+										<label class="mb-0"
+											>Wastage should be entered as negative in this
+										function.</label
+											>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group mb-0 mt-2">
+							<label>Reason</label>
+							<select
+							class="form-control"
+							formControlName="reasonId"
+							(change)="setReason($event)"
+							[ngClass]="{ 'is-invalid': submitted2 && f1.number.errors }"
+							>
+							<option [value]=""></option>
+							<option
+							*ngFor="let reason of masterListReasons"
+							[value]="reason.id"
+							>
+							{{ reason.name }}
+							</option>
+							</select>
+							<div *ngIf="f1.reasonId.errors" class="invalid-feedback">
+								<div *ngIf="f1.reasonId.errors.required">
+									Reason is required
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="btn-wrap text-right mt-10">
+						<a
+							data-toggle="modal"
+							data-target="#searchProductModal"
+							class="dn openProductList"
+							></a>
+						<button class="btn btn-blue mr-2" (click)="pushProducts()">
+						<i class="icon fa fa-pencil-square-o"></i
+							>{{ selectedId > 0 ? "Change" : "Add" }}
+						</button>
+						<button
+						#closebutton
+						type="button"
+						class="btn btn-grey"
+						data-dismiss="modal"
+						(click)="resetProdLineItems()"
+						>
+						Cancel
+						</button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div
+	class="modal fade thm-popup bd-example-modal-xl"
+	id="searchProductModal"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="searchProductModal"
+	aria-hidden="true"
+	data-backdrop="static"
+	>
+	<form [formGroup]="stockTakeProdSearchForm">
+		<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+			<div class="modal-content">
+				<div class="modal-body popup-box-width">
+					<div class="popup-box">
+						<div class="title-wrap mb-2">
+							<h4 class="title">Product Lookup</h4>
+						</div>
+						<div class="form-row">
+							<div class="col-lg-6 col-xl-6">
+								<div class="form-row align-items-center">
+									<div class="col-md-2">
+										<div class="form-group">
+											<input type="number" [min]="0" placeholder="Number" class="form-control" formControlName="number">        
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<input type="text" placeholder="description" class="form-control" formControlName="desc">
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<button type="button" (click)="searchByProductDetails()" class="btn btn-blue input-btn btn-block">Wildcard Search</button>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" formControlName="status" id="customControlStatus">
+												<label class="custom-control-label mb-0" for="customControlStatus">Only Active</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-xl-6">
+								<div class="form-row align-items-center">
+									<div class="col-md-3">
+										<div class="form-group">
+											<button type="button" class="btn btn-grey input-btn btn-block" (click)="changeProductDetails(2)">Product Details</button>
+										</div>
+									</div>
+									<div class="col-md-9">
+										<div class="form-group">
+											<div class="d-flex">
+												<select class="form-control" formControlName="outletId">
+												    <option [ngValue]="null" disabled selected hidden>Select Outlet</option>
+													<option [value]="outlet.id" *ngFor="let outlet of Outletdata">{{outlet.desc + " " + outlet.code }}</option>
+												</select>
+												<button type="button" class="btn ml-2 btn-grey input-btn" (click)="resetProdSearchListForm()">Clear</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<div class="">
+								<table id="product_list_table" class="table ctm-table table-responsive h-340
+								">
+									<thead>
+										<tr>
+											<th>Select</th>
+											<th>Status</th>
+											<th>Number</th>
+											<th>Description</th>
+											<th>Comm</th>
+											<th>Commodity</th>
+											<th>Department</th>
+											<th>Category</th>
+											<th>Group</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let product of searchProducts; let i = index">
+											<td>
+												<div class="custom-control custom-radio">
+													<input type="radio" [checked]="i == 0" (click)="setProductObj(product)" name="product" class="custom-control-input" id="product_{{product.id}}" [disabled]="!product.status"> 
+													<label class="custom-control-label" for="product_{{product.id}}"></label>
+												</div>
+											</td>
+											<td class="text-center">
+												<span class="status-check" [ngClass]="{
+													'status-true': product.status,
+													'status-false': !product.status
+													}"></span>
+											</td>
+											<td (click)="setProductObj(product)">{{product.number}}</td>
+											<td (click)="setProductObj(product)">{{product.desc}}</td>
+											<td (click)="setProductObj(product)">{{product.commodityId}}</td>
+											<td (click)="setProductObj(product)">{{product.commodity}}</td>
+											<td (click)="setProductObj(product)">{{product.department}}</td>
+											<td>{{product.category}}</td>
+											<td>{{product.group}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="btn-wrap text-right mt-10 float-left w-100">         
+							<button [disabled]="isDisabled" type="button" class="btn btn-blue mr-2" data-dismiss="modal">Select</button>
+							<button #prodSearchTerm type="button" class="btn btn-grey" data-dismiss="modal" (click)="resetLineItems()">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="btn-wrap text-right mt-10">
+				<button
+					[disabled]="isDisabled"
+					type="button"
+					class="btn btn-blue mr-2"
+					data-dismiss="modal"
+					>
+				Select
+				</button>
+				<button
+				#prodSearchTerm
+				type="button"
+				class="btn btn-grey"
+				data-dismiss="modal"
+				(click)="resetLineItems()"
+				>
+				Close
+				</button>
+			</div> -->
+		</div>
+	</form>
+</div>
+
+<div
+	class="modal fade bd-example-modal-md thm-popup"
+	id="Confirm"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="exampleModalLabel"
+	aria-hidden="true"
+	>
+	<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form>
+						<div class="title-wrap mb-1">
+							<h4 class="title">Confirm</h4>
+						</div>
+						<div class="mt-15 pop-img">
+							<h5 class="title d-flex mb-0 align-items-center">
+								<img src="assets/images/info-img.svg" class="mr-2" />Post Stock
+								Adjustment batch now to <BR />
+								{{ dateValue | customdatetimeformat }}
+							</h5>
+						</div>
+						<div class="btn-wrap text-right mt-10">
+							<button
+								type="button"
+								class="btn btn-success mr-2"
+								(click)="confirmTotal()"
+								>
+							Yes
+							</button>
+							<button type="button" class="btn btn-grey" data-dismiss="modal">
+							No
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div
+	class="modal fade thm-popup bd-example-modal-xl"
+	id="TabletLoad"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="exampleModalLabel"
+	aria-hidden="true"
+	>
+	<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form>
+						<div class="title-wrap mb-2">
+							<h4 class="title">Stockt Adjustment Tablet Import</h4>
+						</div>
+						<div class="table-responsive">
+							<table class="table ctm-table">
+								<thead>
+									<tr>
+										<th>Import Batch</th>
+										<th>Last Import</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>26/08/2018 7:26:22 AM</td>
+										<td>26/08/2018 7:26:22 AM</td>
+									</tr>
+									<tr>
+										<td>08/08/2018 10:26:22 AM</td>
+										<td>08/08/2018 10:26:22 AM</td>
+									</tr>
+									<tr>
+										<td>29/07/2018 1:34:29 PM</td>
+										<td>29/07/2018 1:34:29 PM</td>
+									</tr>
+									<tr>
+										<td>26/08/2018 7:26:22 AM</td>
+										<td>26/08/2018 7:26:22 AM</td>
+									</tr>
+									<tr>
+										<td>08/08/2018 10:26:22 AM</td>
+										<td>08/08/2018 10:26:22 AM</td>
+									</tr>
+									<tr>
+										<td>29/07/2018 1:34:29 PM</td>
+										<td>29/07/2018 1:34:29 PM</td>
+									</tr>
+									<tr>
+										<td>26/08/2018 7:26:22 AM</td>
+										<td>26/08/2018 7:26:22 AM</td>
+									</tr>
+									<tr>
+										<td>08/08/2018 10:26:22 AM</td>
+										<td>08/08/2018 10:26:22 AM</td>
+									</tr>
+									<tr>
+										<td>29/07/2018 1:34:29 PM</td>
+										<td>29/07/2018 1:34:29 PM</td>
+									</tr>
+									<tr>
+										<td>26/08/2018 7:26:22 AM</td>
+										<td>26/08/2018 7:26:22 AM</td>
+									</tr>
+									<tr>
+										<td>08/08/2018 10:26:22 AM</td>
+										<td>08/08/2018 10:26:22 AM</td>
+									</tr>
+									<tr>
+										<td>29/07/2018 1:34:29 PM</td>
+										<td>29/07/2018 1:34:29 PM</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="btn-wrap text-right mt-10">
+							<button type="button" class="btn btn-grey mr-2">
+							<i class="icon fa fa-file-excel-o"></i> Import
+							</button>
+							<button type="button" class="btn btn-grey mr-2">
+							<i class="icon fa fa-refresh"></i> Refresh
+							</button>
+							<button type="button" class="btn btn-grey mr-2">
+							<i class="icon fa fa-trash"></i> Delete
+							</button>
+							<button type="button" class="btn btn-grey" data-dismiss="modal">
+							Cancel
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	

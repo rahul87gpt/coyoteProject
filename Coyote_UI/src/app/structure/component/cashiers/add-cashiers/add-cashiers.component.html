@@ -1,0 +1,836 @@
+<div class="mainContent-innner">
+  <form [formGroup]="cashierForm" >
+     <!-- <form [formGroup]="cashierForm" enctype="multipart/form-data"></form> -->
+    <div class="Cashier-section">
+      <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">
+          {{ cashier_id ? " Update Cashier" : "Add Cashier" }}
+        </h4>
+        <div class="probtn-wrap text-right">
+          <button
+            class="btn btn-blue with-icon mr-2"
+            (click)="submitCashierForm()"
+          >
+            
+            {{ cashier_id ? " Update" : "Save " }}
+          </button>
+          <button class="btn " [routerLink]="['/cashiers']">Cancel
+          </button>
+        </div>
+      </div>
+      <!-- /.action-topbar -->
+      <div class="Cashier-wrap bg-box mt-15">
+        <div class="row">
+          <div class="col-lg-6 col-xl-6">
+            <div class="group-from">
+              <h5 class="title">Cashier Details</h5>
+              <div class="form-row">
+                <div class="col-md-6 ">
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-4  mb-0"
+                      >Number <span class="text-danger">*</span></label
+                    >
+                    <div class="col-md-8 ">
+                      <input
+                       [readonly]="numberStatus" 
+                        type="number"
+                        class="form-control"
+                        formControlName="number"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.number.errors
+                        }"
+                      />
+                      <div *ngIf="f.number.errors" class="invalid-feedback">
+                        <div *ngIf="f.number.errors.required">
+                          Number is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 ">
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-4  mb-0"
+                      >Status <span class="text-danger">*</span></label
+                    >
+                    <div class="col-md-8 ">
+                      <select
+                        class="form-control"
+                        id="status"
+                        name="status"
+                        formControlName="status"
+                        [(value)]="selected"
+                      >
+                        <option [ngValue]="true">Active</option>
+                        <option [ngValue]="false">Inactive</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 ">
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-4  mb-0"
+                      >First Name <span class="text-danger">*</span></label
+                    >
+                    <div class="col-md-8 ">
+                      <input
+                      appUppercase
+                        type="text"
+                        class="form-control"
+                        id="firstName"
+                        name="firstName"
+                        formControlName="firstName"
+                        maxLength="20"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.firstName.errors
+                        }"
+                      />
+                      <div
+                        *ngIf="f.firstName.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.firstName.errors.required">
+                          First Name is required
+                        </div>
+                        <div *ngIf="f.firstName.errors.pattern">
+                          Accept only alphabets 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 ">
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-4  mb-0"
+                      >Gender<span class="text-danger">*</span></label
+                    >
+                    <div class="col-md-8 ">
+                      <select
+                        class="form-control"
+                        id="gender"
+                        name="gender"
+                        formControlName="gender"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.gender.errors
+                        }"
+                      >
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>
+                      <div
+                      *ngIf="f.gender.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.gender.errors.required">
+                        Gender is required
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 col-xxl-12">
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-2  mb-0"
+                      >Surname <span class="text-danger">*</span></label
+                    >
+                    <div class="col-md-10 ">
+                      <input
+                      appUppercase
+                        type="text"
+                        class="form-control"
+                        id="surname"
+                        name="surname"
+                        formControlName="surname"
+                        maxLength="30"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.surname.errors
+                        }"
+                      />
+                      <div *ngIf="f.surname.errors" class="invalid-feedback">
+                        <div *ngIf="f.surname.errors.required">
+                          Surname is required
+                        </div>
+                        <div *ngIf="f.surname.errors.pattern">
+                          Accept only alphabets 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 col-xxl-12">
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-2  mb-0"
+                      >Address 1</label
+                    >
+                    <div class="col-md-10 ">
+                      <input
+                      appUppercase
+                        type="text"
+                        class="form-control"
+                        id="addr1"
+                        name="addr1"
+                        formControlName="addr1"
+                        maxLength="30"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 col-xxl-12">
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-2  mb-0"
+                      >Address 2</label
+                    >
+                    <div class="col-md-10 ">
+                      <input
+                      appUppercase
+                        type="text"
+                        class="form-control"
+                        id="addr2"
+                        name="addr2"
+                        formControlName="addr2"
+                        maxLength="30"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 ">
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-4  mb-0"
+                      >Address 3</label
+                    >
+                    <div class="col-md-8 ">
+                      <input
+                      appUppercase
+                        type="text"
+                        class="form-control"
+                        id="addr3"
+                        name="addr3"
+                        formControlName="addr3"
+                        maxLength="30"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 ">
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-4  mb-0"
+                      >Post Code</label
+                    >
+                    <div class="col-md-8 ">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="postcode"
+                        name="postcode"
+                        formControlName="postcode"
+                        (keypress)="keyPress($event)"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.postcode.errors
+                        }"
+                      />
+                      <div *ngIf="f.postcode.errors" class="invalid-feedback">
+                        <div *ngIf="f.postcode.errors.maxlength"> Post Code Should be maximum 4 characters </div>
+                     </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-md-6 ">
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-4  mb-0">Phone</label>
+                    <div class="col-md-8 ">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="phone"
+                        name="phone"
+                        formControlName="phone"
+                        (keypress)="keyPress($event)"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.phone.errors
+                        }"
+                      />
+                      <div *ngIf="f.phone.errors" class="invalid-feedback">
+                        <div *ngIf="f.phone.errors.maxlength">Phone Should be maximum 15 characters </div>
+                     </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 ">
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-4  mb-0"
+                      >Mobile</label
+                    >
+                    <div class="col-md-8 ">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="mobile"
+                        name="mobile"
+                        formControlName="mobile"
+                        (keypress)="keyPress($event)"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.mobile.errors
+                        }"
+                      />
+                      <div *ngIf="f.mobile.errors" class="invalid-feedback">
+                        <div *ngIf="f.mobile.errors.maxlength">Mobile be maximum 15 characters </div>
+                     </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 ">
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-2 mb-0"
+                      >Email <span class="text-danger">*</span></label
+                    >
+                    <div class="col-md-10 ">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        formControlName="email"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.email.errors
+                        }"
+                      />
+                      <div *ngIf="f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">
+                          Email is required
+                        </div>
+                        <div *ngIf="f.email.errors.email">
+                          Enter valid email
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 ">
+                  <div class="form-group custom-ng-select form-row align-items-center">
+                    <label class="label col-md-2 mb-0">Type<span class="text-danger">*</span></label>
+                    <div class="col-md-10 cashier-dropdown">
+
+                      <ng-select
+                      [items]="cashierTypes"
+                      bindLabel="name"
+                      bindValue="id"
+                      formControlName="typeId"
+                      [virtualScroll]="false"
+                      [clearable]="false"
+                      [clearOnBackspace]="false"
+                      [searchable]="false"
+                      [multiple]="false"
+                      placeholder="Select Type"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.typeId.errors
+                      }"
+                    >
+                      <ng-template
+                        ng-option-tmp
+                        let-item="item"
+                        let-item$="item$"
+                        let-index="index"
+                      >
+                        <div class="form-row">
+                          <span
+                            class="col-8 zone-overflow"
+                            title="{{ item.name }}"
+                          >
+                            {{ item.name }}
+                          </span>
+                          <div class="col-4 zone-overflow"  title="{{ item.code }}">
+                            {{ item.code }}
+                          </div>
+                        </div>
+                      </ng-template>
+                    </ng-select>
+<!-- 
+                      <select
+                        class="form-control"
+                        id="typeId"
+                        name="typeId"
+                        formControlName="typeId"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.typeId.errors
+                        }"
+                      >
+                        <option
+                          *ngFor="let type of cashierTypes"
+                          [value]="type.id"
+                          >{{ type.name }}</option
+                        >
+                      </select> -->
+                      <div *ngIf="f.typeId.errors" class="invalid-feedback">
+                        <div *ngIf="f.typeId.errors.required">
+                          Type is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="group-from mb-0">
+              <h5 class="title">Outlet Restrictions</h5>
+              <div class="form-row">
+                <div class="col-md-12">
+                  <div class="form-group form-row align-items-center custom-ng-select">
+                    <label class="label col-md-2 mb-0"
+                      >Store group</label
+                    >
+                    <div class="col-md-10 cashier-dropdown">
+                      <!-- <select
+                      class="form-control"
+                      id="storeGroupId"
+                      name="storeGroupId"
+                      formControlName="storeGroupId"
+                     
+                    >
+                      <option
+                        [value]="store.id"
+                        *ngFor="let store of storeGroupData"
+                        >{{ store.name }}</option
+                      >
+                    </select> -->
+
+                    <ng-select
+                    [items]="storeGroupData"  bindLabel="name"
+                    bindValue="id" formControlName="storeGroupId"
+                    [virtualScroll]="false" [clearable]="false"
+                    [clearOnBackspace]="false"
+                    [searchable]="false" [multiple]="false"
+                    placeholder="Select Store Group"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.storeGroupId.errors
+                    }"
+                  >
+                    <ng-template
+                      ng-option-tmp
+                      let-item="item"
+                      let-item$="item$"
+                      let-index="index"
+                    >
+                      <div class="form-row">
+                        <span
+                          class="col-10 zone-overflow"
+                          title="{{ item.name }}"
+                        >
+                          {{ item.name }}
+                        </span>
+                        <div class="col-2 zone-overflow"   title="{{ item.code }}">
+                          {{ item.code }}
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ng-select>
+
+                    <!-- <div class="invalid-feedback">
+                      <div *ngIf="storeError">{{storeError}}</div>
+                    </div> -->
+                      <!-- <select
+                        class="form-control"
+                        id="storeGroupId"
+                        name="storeGroupId"
+                        formControlName="storeGroupId"
+                        (change)="selectedStoreGroup($event)"
+                      >
+                        <option
+                          [value]="store.id"
+                          *ngFor="let store of storeGroup"
+                          >{{ store.name }}</option
+                        >
+                      </select> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 ">
+                  <div class="form-group form-row align-items-center custom-ng-select">
+                    <label class="label col-md-2  mb-0"
+                      >Store </label
+                    >
+                    <div class="col-md-10 cashier-dropdown">
+                      <!-- <select
+                      class="form-control"
+                      formControlName="outletId"
+                      (change)="selectedStore($event)"
+                      
+                    >
+                      <option
+                        [value]="store.id"
+                        *ngFor="let store of storeList"
+                        >{{ store.desc }}</option
+                      >
+                      </select> -->
+
+                      <ng-select
+                      [items]="storeList"  bindLabel="desc"
+                      bindValue="id" formControlName="outletId"
+                      [virtualScroll]="false" [clearable]="false"
+                      [clearOnBackspace]="false"
+                      [searchable]="false" [multiple]="false"
+                      placeholder="Select Store"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.outletId.errors
+                      }"
+                      (change)="selectedStore($event)"
+                    >
+                      <ng-template
+                        ng-option-tmp
+                        let-item="item"
+                        let-item$="item$"
+                        let-index="index"
+                        
+                      >
+                        <div class="form-row">
+                          <span
+                            class="col-10 zone-overflow"
+                            title="{{ item.desc }}"
+                          >
+                            {{ item.desc }}
+                          </span>
+                          <div class="col-2 zone-overflow"   title="{{ item.code }}">
+                            {{ item.code }}
+                          </div>
+                        </div>
+                      </ng-template>
+                    </ng-select>
+                      <!-- <select
+                      class="form-control"
+                      formControlName="outletId"
+                      (click)="onClickedStore()"
+                      [ngClass]="{ 'is-invalid': storeError }"
+                    >
+                      <option
+                        [value]="store.id"
+                        *ngFor="let store of storeData"
+                        >{{ store.desc }}</option
+                      >
+                      </select> -->
+                    <!-- <div class="invalid-feedback">
+                      <div *ngIf="storeError">{{storeError}}</div>
+                    </div> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group form-row mb-0 align-items-center custom-ng-select">
+                    <label class="label col-md-2  mb-0"
+                      >Zone
+                    </label>
+                    <div class="col-md-8 cashier-dropdown ">
+
+                      <ng-select
+                      [items]="ZoneData"  bindLabel="name"
+                      bindValue="id" formControlName="zoneId"
+                      [virtualScroll]="false" [clearable]="false"
+                      [clearOnBackspace]="false"
+                      [searchable]="false" [multiple]="false"
+                      placeholder="Select Zone"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.zoneId.errors
+                      }"
+                    >
+                      <ng-template
+                        ng-option-tmp
+                        let-item="item"
+                        let-item$="item$"
+                        let-index="index"
+                      >
+                        <div class="form-row">
+                          <span
+                            class="col-9 zone-overflow"
+                            title="{{ item.name }}"
+                          >
+                            {{ item.name }}
+                          </span>
+                          <div class="col-3 zone-overflow"   title="{{ item.code }}">
+                            {{ item.code }}
+                          </div>
+                        </div>
+                      </ng-template>
+                    </ng-select>
+<!--   
+                      <select
+                      class="form-control"
+                      id="zoneId"
+                      name="zoneId"
+                      formControlName="zoneId"
+                    >
+                      <option
+                        [value]="zone.id"
+                        *ngFor="let zone of ZoneData"
+                        >{{ zone.name }}</option
+                      >
+                    </select> -->
+                        <!-- <select
+                          class="form-control"
+                          id="zoneId"
+                          name="zoneId"
+                          formControlName="zoneId"
+                          [ngClass]="{ 'is-invalid': zoneError }"
+                          (change)="selectedZoneGroup($event)"
+                        >
+                          <option
+                            [value]="zone.id"
+                            *ngFor="let zone of ZoneData"
+                            >{{ zone.name }}</option
+                          >
+                        </select>
+                        <div class="invalid-feedback">
+                          <div *ngIf="zoneError">{{zoneError}}</div>
+                        </div> -->
+                    </div>
+
+                    <div class="col-md-2">
+                                        
+                          <button class="btn btn-grey input-btn w-100" (click)="clickedRefresh()">Refresh</button>
+                       
+                        <!-- <div class="col-md-8 ">
+                          <div class="d-flex align-items-center">
+                            <button class="btn btn-grey input-btn ml-2">Refresh</button>
+                          </div>
+                        </div> -->
+                
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xl-6">
+            <div class="group-from">
+              <h5 class="title">Photo ID</h5>
+              <div class="PhotoIDWrap">
+                <div class="form-row form-group">                  
+                  <div class="col-md-6">
+                    <img [src]="croppedImage" />
+                  </div>
+                  <div class="col-md-6">
+                    <image-cropper
+                      [imageChangedEvent]="imageChangedEvent"
+                      [maintainAspectRatio]="true"
+                      [aspectRatio]="1/ 1"
+                      format="png"
+                      (imageCropped)="imageCropped($event)"
+                      (imageLoaded)="imageLoaded()"
+                      (loadImageFailed)="loadImageFailed()"
+                    ></image-cropper>
+                  </div>
+                </div>
+                <div class="form-group mb-0">
+                  <div class="col-md-4">
+                    <input #input type="file" id="fileInputId" class="form-control"  [ngClass]="{ 'is-invalid': imageError}" (change)="fileChangeEvent($event)"   style="display:none">
+                    <button type="button" (click)="input.click()" class="btn btn-blue  btn-block input-btn"><i class="icon fa fa-plus-circle"></i> Choose File</button>
+                    <!-- <input type="file" class="form-control"  [ngClass]="{ 'is-invalid': imageError}" (change)="fileChangeEvent($event)" /> -->
+                    <div class="invalid-feedback">
+                      <div *ngIf="imageError">{{imageError}}</div>
+                    </div>
+                  </div>
+                 </div>
+               
+                  <!-- <input
+                  formControlName="image"
+                  id="imagePath"
+                  type="file"
+                  accept="image/*"
+                  class="form-control"
+                  (change)="onFileChange($event)"
+                />
+                <label for="imagePath">
+                <div class="photoId">
+                  <img [src]="imageSrc" class="img-resize" height="400" />
+
+                  <span class="edit-icon"
+                    ><i class="fa fa-pencil"></i
+                  ></span>
+                  
+                </div>
+              </label> -->
+              </div>
+            </div>
+            <div class="group-from">
+              <h5 class="title">Fuel Attendant Details</h5>
+              <div class="form-group form-row align-items-center">
+                <label class="label col-md-3 mb-0">FuelUser</label>
+                <div class="col-md-9">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="fuelUser"
+                    name="fuelUser"
+                    formControlName="fuelUser"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.fuelUser.errors
+                    }"
+                  />
+                  <div *ngIf="f.fuelUser.errors" class="invalid-feedback">
+                    <div *ngIf="f.fuelUser.errors.maxlength"> FuelUser Should be maximum 10 characters </div>
+                  </div> 
+                </div>
+              </div>
+              <div class="form-group form-row mb-0 align-items-center">
+                <label class="label col-md-3 mb-0">Password</label>
+                <div class="col-md-9">
+                  <!-- <input
+                  type="checkbox"
+                  (change)="showPassword(input)"
+                />
+                <ion-input #input formControlName="fuelPass" type="password"></ion-input> -->
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="fuelPass"
+                    name="fuelPass"
+                    formControlName="fuelPass"
+                    [ngClass]="{
+                      'is-invalid': submitted && f.fuelPass.errors
+                    }"
+                  />
+                  <div *ngIf="f.fuelPass.errors" class="invalid-feedback">
+                    <div *ngIf="f.fuelPass.errors.maxlength"> Password Should be maximum 10 characters </div>
+                    <div *ngIf="f.fuelPass.errors.pattern">Must contain atleast 1 Capital letter, 1 number, 1 special character and minimum 8 character in length and maximum 10 character in length </div>
+                  </div>  
+                </div>
+              </div>
+            </div>
+            <div class="group-from mb-0">
+              <h5 class="title">Cash Register Login</h5>
+              <div class="form-row">
+                <div class="col-md-6 ">
+                  <div class="form-group form-row align-items-center custom-ng-select">
+                    <label class="label col-md-5 mb-0">Level<span class="text-danger">*</span></label>
+                    <div class="col-md-7 cashier-dropdown">
+                      <!-- <select
+                        class="form-control"
+                        formControlName="accessLevelId"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.accessLevelId.errors
+                        }"
+                      >
+                        <option [value]="level.id" *ngFor="let level of acessLevel">{{level.name}}</option>
+                      </select> -->
+
+                      
+                      <ng-select
+                      [items]="acessLevel"  bindLabel="name"
+                      bindValue="id" formControlName="accessLevelId"
+                      [virtualScroll]="false" [clearable]="false"
+                      [clearOnBackspace]="false"
+                      [searchable]="false" [multiple]="false"
+                      placeholder="Select Level"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.accessLevelId.errors
+                      }"
+                    >
+                      <ng-template
+                        ng-option-tmp
+                        let-item="item"
+                        let-item$="item$"
+                        let-index="index"
+                        
+                      >
+                        <div class="form-row">
+                          <span
+                            class="col-12 zone-overflow"
+                            title="{{ item.name }}"
+                          >
+                            {{ item.name }}
+                          </span>
+                          <!-- <div class="col-3">
+                            {{ item.code }}
+                          </div> -->
+                        </div>
+                      </ng-template>
+                    </ng-select>
+
+                      
+                      <div *ngIf="f.accessLevelId.errors" class="invalid-feedback">
+                        <div *ngIf="f.accessLevelId.errors.required">Level is required</div>
+                    </div> 
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 ">
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-5  mb-0"
+                      >Password<span class="text-danger">*</span></label
+                    >
+                    <div class="col-md-7 ">
+                      <input
+                        type="password"
+                        class="form-control"
+                        formControlName="password"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.password.errors
+                        }"
+                      />
+                      <div *ngIf="f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.maxlength"> Password Should be maximum 10 characters </div>
+                        <div *ngIf="f.password.errors.required">
+                          Password is required
+                        </div>
+                        <div *ngIf="f.password.errors.pattern">Numeric Password greater than zero required</div>
+                      </div>  
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 ">
+                  <div class="form-group form-row mb-0 align-items-center">
+                    <label class="label col-md-5 mb-0"
+                      >Display Name<span class="text-danger">*</span></label
+                    >
+                    <div class="col-md-7">
+                      <input
+                      appUppercase
+                        type="text"
+                        class="form-control"
+                        id="dispname"
+                        name="dispname"
+                        formControlName="dispname"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.dispname.errors
+                        }"
+                      />
+                      <div *ngIf="f.dispname.errors" class="invalid-feedback">
+                        <div *ngIf="f.dispname.errors.required">
+                          Display Name is required
+                        </div>
+                      </div>  
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-row mb-0 align-items-center">
+                    <label class="label col-md-5 mb-0"
+                      >Left Handed</label
+                    >
+                    <div class="col-md-7">
+                      <select
+                        class="form-control"
+                        id="leftHandTillInd"
+                        name="leftHandTillInd"
+                        formControlName="leftHandTillInd"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.leftHandTillInd.errors
+                        }"
+                      >
+                        <option value="yes">YES</option>
+                        <option value="No">NO</option>
+                      </select>
+                      <!-- <div *ngIf="f.leftHandTillInd.errors" class="invalid-feedback">
+                        <div *ngIf="f.leftHandTillInd.errors.required">
+                          Left Handed is required
+                        </div>
+                      </div>   -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

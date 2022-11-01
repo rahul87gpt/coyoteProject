@@ -1,0 +1,121 @@
+<div class="mainContent-innner pt-2">
+    <div class="addCmmditis-section">
+      
+       <form [formGroup]="comodityDetailsForm" (ngSubmit)="submitComodityDetailsForm()"> 
+       <div class="addCmmditis-wrap">
+        
+          <div class="addCmmditis-form popup-box">
+           
+                <div class="title-wrap">
+                  <h4 class="title flex-grow-1 mb-0"> {{ commodityId ? "Update Commodities" : " Add Commodities" }}</h4>
+                </div>
+                <div class="form-group mt-2 form-row align-items-center">
+                   <label class="label col-md-4 col-xxl-3 mb-0">Code <span class="text-danger">*</span></label>
+                   <div class="col-md-8 col-xxl-9">
+                     <input type="text" class="form-control" placeholder="Doe" name="code" id="code" formControlName="code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
+                     <div *ngIf="f.code.errors" class="invalid-feedback">
+                         <div *ngIf="f.code.errors.required">Code is required</div>
+                     </div>
+                   </div>
+                </div>
+                <div class="form-group mt-2 form-row align-items-center">
+                   <label class="label col-md-4 col-xxl-3 mb-0">Description <span class="text-danger">*</span></label>
+                   <div class="col-md-8 col-xxl-9">
+                     <input type="text" class="form-control" placeholder="Doe" name="desc" id="desc" formControlName="desc" [ngClass]="{ 'is-invalid': submitted && f.desc.errors }">
+                     <div *ngIf="f.desc.errors" class="invalid-feedback">
+                         <div *ngIf="f.desc.errors.required">Description is required</div>
+                     </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-md-12">
+                      <div class="form-group mt-2 form-row align-items-center">
+                         <label class="label col-md-4 mb-0">Map Dept</label>
+                         <div class="col-md-8">
+                           <select
+                        class="form-control"
+                        name="'departmentId'"
+                        formControlName="departmentId"
+                        id="departmentId"
+                      >
+                            
+                      <option [ngValue]="commodityId.departmentId"
+                      *ngFor="let commodityId of commodityData?.data">{{commodityId.departmentId}}</option> 
+                      </select>
+                           <!-- <input type="number"  placeholder="enter here" class="form-control"  name="commodity_Dept_Id" id="commodity_Dept_Id" formControlName="commodity_Dept_Id"> -->
+                         </div>
+                      </div>
+                   </div>
+                   <div class="col-md-12">
+                      <div class="form-group mt-2 form-row align-items-center">
+                         <label class="label col-md-4 pl-1 mb-0">Cover Days <span class="text-danger">*</span></label>
+                         <div class="col-md-8">
+                            
+                            <input type="text" class="form-control" placeholder="Doe" name="coverDays" id="coverDays" formControlName="coverDays" [ngClass]="{ 'is-invalid': submitted && f.coverDays.errors }">
+                            <div *ngIf="f.coverDays.errors" class="invalid-feedback">
+                                <div *ngIf="f.coverDays.errors.required">It is required</div>
+                            </div>
+                           </div>
+                      </div>
+                   </div>
+                </div>
+                <div class="row">
+                   <div class="col-md-12">
+                     <div class="form-group mt-2 form-row align-items-center">
+                        <label class="label col-md-4 pl-1 mb-0">Commodity Deleted </label>
+                        <div class="col-md-8">
+                        <select
+                        class="form-control"
+                        name="'isDeleted'"
+                        formControlName="isDeleted"
+                        id="isDeleted"
+                      >
+                      <option [ngValue]="true">Deleted</option>       
+                      <option [ngValue]="false">Not Deleted</option>
+                      </select>
+                      </div>
+                   </div>
+                   </div>
+               
+                </div>
+                <hr>
+                <h5 class="title mt-3">Default GP%</h5>
+                <div class="form-row">
+                   <div class="col-md-3">
+                      <div class="form-group">
+                         <label>Level 1</label>
+                         <input type="number" class="form-control" placeholder="enter here"  formControlName="gpPcntLevel1"  min="0" max="100" onkeyup="if(this.value<0){this.value= this.value * -1}">
+                      </div>
+                   </div>
+                   <div class="col-md-3">
+                      <div class="form-group">
+                         <label>Level 2</label>
+                         <input type="number" class="form-control" placeholder="enter here" formControlName="gpPcntLevel2"  min="0" max="100"
+                         onkeyup="if(this.value<0){this.value= this.value * -1}">
+                      </div>
+                   </div>
+                   <div class="col-md-3">
+                      <div class="form-group">
+                         <label>Level 3</label>
+                         <input type="number" class="form-control" placeholder="enter here" formControlName="gpPcntLevel3"  min="0" max="100" onkeyup="if(this.value<0){this.value= this.value * -1}">
+                      </div>
+                   </div>
+                   <div class="col-md-3">
+                      <div class="form-group">
+                         <label>Level 4</label>
+                         <input type="number" class="form-control" placeholder="enter here"  formControlName="gpPcntLevel4"  min="0" max="100" onkeyup="if(this.value<0){this.value= this.value * -1}">
+                      </div>
+                   </div>
+                </div>
+                <div class="btn-wrap text-right btns-top-space">
+                  <input class="btn btn-blue with-icon mr-2" type="submit"/>
+                   <button class="btn width-80" (click)="backToComodity()">Cancel</button>
+                </div>
+          </div>
+       </div>
+       </form>
+   
+       <!-- /.productForm -->
+    
+  
+ </div>

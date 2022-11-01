@@ -1,0 +1,516 @@
+<div class="mainContent-innner">
+    <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">Store Dashboard</h4>
+        <!-- <div class="probtn-wrap d-flex text-right">  <button type="button" class="btn btn-info mr-2" data-toggle="modal" data-target="#myModal">Open
+                Modal</button>
+            <button class="btn"><i class="icon fa fa-file-excel-o"></i> Export</button>
+        </div> -->
+    </div>
+</div>
+
+<ng-container *ngIf="storeDashboardPdfData ">
+    <div class="bg-box">
+        <div class="text-right mb-2">
+            <!-- <button type="button" class="btn btn-blue" (click)="reportClose()">Close</button> -->
+        </div>
+        <ngx-extended-pdf-viewer [src]="storeDashboardPdfData" [height]="'90vh'" [zoom]="'page-width'" [useBrowserLocale]="true"
+            [textLayer]="true" [showHandToolButton]="true"></ngx-extended-pdf-viewer>
+    </div>
+</ng-container>
+<!-- <div class="DepartmentBarChartData-table">
+    <ng-container *ngIf="weeklyLineChartData.length">
+        <div class="DepartmentBarChartData-table-wrap bg-box mt-15 all-w">
+            <div class="table-responsive">
+                <table class="table ctm-table ctm-data-table" id="WeeklyLineChartData-table">
+                    <thead>
+                        <tr>
+                            <th>This year week Ending</th>
+                            <th class="no-short">This year sales</th>
+                            <th> Last Year sales</th>
+                            <th class="no-short"></th>
+                            <th>Outlet</th>
+                            <th class="no-short"></th>
+                            <th>Outlet Description</th>
+                            <th class="no-short"></th>
+                            <th>Recipe Description</th>
+                            <th class="no-short"></th>
+                            <th>Makes Qty</th>
+                            <th class="no-short"></th>
+                            <th class="no-short">Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+
+                            </td>
+
+
+
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </ng-container>
+    <div class="table-responsive">
+
+        <table class="table ctm-table ctm-data-table salesOutlet" style="width:262px;">
+            <tbody>
+                <tr>
+                    <td>Sales for Outlet</td>
+                    <td>ASHGROVE BP</td>
+                </tr>
+                <tr>
+                    <td>AVG for Zone</td>
+                    <td>DEMO sub</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="table ctm-table ctm-data-table" id="WeeklyLineChartData-table">
+            <thead>
+                <tr>
+                    <th>This year<br> week Ending</th>
+                    <th class="no-short">This year<br> sales</th>
+                    <th> Last Year <br>sales</th>
+                    <th>This year <br>week Ending</th>
+                    <th class="no-short">This year <br>sales</th>
+                    <th> Last Year <br>sales</th>
+                    <th>This year <br>week Ending</th>
+                    <th class="no-short">This year <br>sales</th>
+                    <th> Last Year <br>sales</th>
+                    <th>This year <br>week Ending</th>
+                    <th class="no-short">This year <br>sales</th>
+                    <th> Last Year <br>sales</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                </tr>
+                <tr>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                </tr>
+                <tr>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                </tr>
+                <tr>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                </tr>
+                <tr>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                </tr>
+                <tr>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                </tr>
+                <tr>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                    <td>05-01-2021</td>
+                    <td>$00.00</td>
+                    <td>$00.00</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Header</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+
+                <div class="modal-body">
+                    <div class="side-drower">
+                        <table border="0" width="100%">
+                            <tr>
+                                <td style="width: 86px;"></td>
+                                <td style="width: 127px;">My Store</td>
+                                <td>ASGROVE</td>
+                                <td style="width: 164px;"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Zone</td>
+                                <td>DEMO</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Avg Basket</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>02-01-2021</td>
+                                <td>to 28-02-2021</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+
+                        </table>
+                        <table border="1" width="100%">
+                            <tr>
+                                <td></td>
+                                <td>My Store</td>
+                                <td>Zone</td>
+                                <td>BestStore</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total</strong></td>
+                                <td>$0.00</td>
+                                <td>$0.00</td>
+                                <td><input type="text"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div> -->
+
+<!-- <ng-container *ngIf="departmentBarChartData.length"> -->
+<!-- <ng-container *ngIf="false">
+    <div class="DepartmentBarChartData-table">
+        <div class="DepartmentBarChartData-table-wrap bg-box mt-15 all-w">
+            <div class="table-responsive">
+                <table class="table ctm-table ctm-data-table" id="DepartmentBarChartData-table">
+                    <thead>
+                        <tr>
+                            <th>MyStore</th>
+                            <th>Zone</th>
+                            <th>Recipe Description</th>
+                            <th>Makes Qty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of departmentBarChartData">
+                            <td>{{data.MyStore}}</td>
+                            <td>{{data.Zone}}</td>
+                            <td>{{data.Desc}}</td>
+                            <td>{{data.BestStore}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</ng-container> -->
+
+<div class="modal fade bd-example-modal-md thm-popup" id="deactivateProductModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="storeDashboardForm" (ngSubmit)="submitstoreDashboardForm()">
+                        <div class="title-wrap">
+                            <h4 class="title">Store Dashboard</h4>
+                        </div>
+                        <div class="group-from">
+                            <h5 class="title">Outlet and Zone</h5>
+                            <div class="form-row form-group align-items-center mb-0">
+                                <div class="col-12">
+                                    <label for="">Outlet for Report</label>
+                                    <ng-select [items]="outletList" bindLabel="desc" bindValue="id"
+                                        formControlName="OutletId" [virtualScroll]="false" [clearable]="false"
+                                        [clearOnBackspace]="false" [searchable]="true" [multiple]="false"
+                                        [ngClass]="{ 'is-invalid': submitted && f.OutletId.errors }">
+                                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                            <div class="form-row">
+                                                <span class="col-9 zone-overflow" title="{{ item.desc }}">
+                                                    {{ item.desc }}
+                                                </span>
+                                                <div class="col-3 zone-overflow" title="{{ item.code }}">
+                                                    {{ item.code }}
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </ng-select>
+                                    <!-- <select class="form-control"  formControlName="OutletId" [ngClass]="{ 'is-invalid': submitted && f.OutletId.errors }">
+                                        <option [value]="outlet.id" *ngFor="let outlet of outletList">{{outlet.desc}}</option>
+                                    </select> -->
+                                    <div *ngIf="f.OutletId.errors" class="invalid-feedback">
+                                        <div *ngIf="f.OutletId.errors.required">Outlet for Report is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="">Zone to Compare</label>
+                                    <ng-select [items]="zoneList" bindLabel="name" bindValue="id"
+                                        formControlName="ZoneId" [virtualScroll]="false" [clearable]="false"
+                                        [clearOnBackspace]="false" [searchable]="true" [multiple]="false"
+                                        [ngClass]="{ 'is-invalid': submitted && f.ZoneId.errors }">
+                                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                            <div class="form-row">
+                                                <span class="col-9 zone-overflow" title="{{ item.name }}">
+                                                    {{ item.name }}
+                                                </span>
+                                                <div class="col-3 zone-overflow" title="{{ item.code }}">
+                                                    {{ item.code }}
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </ng-select>
+                                    <!-- <select class="form-control"  formControlName="ZoneId" [ngClass]="{ 'is-invalid': submitted && f.ZoneId.errors }">
+                                        <option [value]="zone.id" *ngFor="let zone of zoneList">{{zone.name}}</option>
+                                    </select> -->
+                                    <div *ngIf="f.ZoneId.errors" class="invalid-feedback">
+                                        <div *ngIf="f.ZoneId.errors.required">Zone to Compare is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-from">
+                            <h5 class="title">Date Ranges for Sales Figures</h5>
+                            <div class="form-row form-group align-items-center">
+                                <div class="col-8">
+                                    <label for="">Date Range</label>
+                                    <div class="form-row form-group align-items-center mb-0">
+                                        <div class="col-5">
+                                            <div class="ctm-calendar">
+                                                <input type="text" class="form-control" bsDatepicker
+                                                    formControlName="DateRangeFrom"
+                                                    (bsValueChange)="onDateChange($event)"
+                                                    [bsConfig]="datepickerConfig" />
+
+                                                <!-- <input type="text" class="form-control"  bsDatepicker
+                                                   formControlName="DateRangeFrom" [bsConfig]="datepickerConfig">  -->
+                                            </div>
+                                        </div>
+                                        <div class="col-2 text-center">
+                                            <label for="" class="mb-0">To</label>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="ctm-calendar">
+                                                <input type="text" class="form-control" bsDatepicker
+                                                    formControlName="DateRangeTo" [minDate]="lastEndDate"
+                                                    [bsConfig]="datepickerConfig" />
+                                                <!-- <input type="text" class="form-control"  bsDatepicker
+                                                    formControlName="DateRangeTo" [bsConfig]="datepickerConfig">  -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label for="">&nbsp;</label>
+                                    <input type="text" class="form-control" value="This year">
+                                    <!-- <select class="form-control">
+                                        <option>This Year</option>
+                                    </select> -->
+                                </div>
+                            </div>
+                            <div class="form-row form-group align-items-center mb-0">
+                                <div class="col-8">
+                                    <label for="">Compare Range</label>
+                                    <div class="form-row form-group align-items-center mb-0">
+                                        <div class="col-5">
+                                            <div class="ctm-calendar">
+                                                <input type="text" class="form-control" bsDatepicker
+                                                    formControlName="CompareRangeFrom"
+                                                    (bsValueChange)="onCompareRangeDateChange($event)"
+                                                    [bsConfig]="datepickerConfig" />
+                                                <!-- <input type="text" class="form-control"  bsDatepicker   
+                                             formControlName="CompareRangeFrom" [bsConfig]="datepickerConfig">  -->
+                                            </div>
+                                        </div>
+                                        <div class="col-2 text-center">
+                                            <label for="" class="mb-0">To</label>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="ctm-calendar">
+                                                <input type="text" class="form-control" bsDatepicker
+                                                    formControlName="CompareRangeTo" [minDate]="lastEndCompareRangeDate"
+                                                    [bsConfig]="datepickerConfig" />
+                                                <!-- <input type="text" class="form-control"  bsDatepicker
+                                               formControlName="CompareRangeTo" [bsConfig]="datepickerConfig">  -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label for="">&nbsp;</label>
+                                    <input type="text" class="form-control" value="Last year">
+                                    <!-- <select class="form-control">
+                                        <option>Last Year</option>
+                                    </select> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-from">
+                            <h5 class="title">Date Ranges for Department Summary</h5>
+                            <div class="form-row form-group align-items-center">
+                                <div class="col-8">
+                                    <label for="">Date Range</label>
+                                    <div class="form-row form-group align-items-center mb-0">
+                                        <div class="col-5">
+                                            <div class="ctm-calendar">
+                                                <input type="text" class="form-control" bsDatepicker
+                                                    formControlName="DepartmentDateFrom"
+                                                    (bsValueChange)="onDepartmentDateChange($event)"
+                                                    [bsConfig]="datepickerConfig" />
+                                                <!-- <input type="text" class="form-control"  bsDatepicker  
+                                                    formControlName="DepartmentDateFrom" [bsConfig]="datepickerConfig"> -->
+
+                                            </div>
+                                        </div>
+                                        <div class="col-2 text-center">
+                                            <label for="" class="mb-0">To</label>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="ctm-calendar">
+                                                <input type="text" class="form-control" bsDatepicker
+                                                    formControlName="DepartmentDateTo"
+                                                    [minDate]="lastEndDepartmentDateTo" [bsConfig]="datepickerConfig" />
+                                                <!-- <input type="text" class="form-control"  bsDatepicker  
+                                                    formControlName="DepartmentDateTo" [bsConfig]="datepickerConfig"> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <label for="">&nbsp;</label>
+                                    <input type="text" class="form-control" value="Departments">
+                                    <!-- <select class="form-control">
+                                        <option>Departments</option>
+                                    </select> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row align-items-center">
+                            <div class="custom-control mb-0 form-group custom-checkbox mr-3">
+                                <input type="checkbox" id="AllowWeekly" class="custom-control-input"
+                                    formControlName="lineChart">
+                                <label for="AllowWeekly" class="custom-control-label mb-0"><span
+                                        class="d-block label-mt-2">Weekly Line Charts</span></label>
+                            </div>
+                            <div class="custom-control form-group mb-0 custom-checkbox">
+                                <input type="checkbox" id="Allow" class="custom-control-input"
+                                    formControlName="barChart">
+                                <label for="Allow" class="custom-control-label mb-0"><span
+                                        class="d-block label-mt-2">Department Bar Charts</span></label>
+                            </div>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="submit" class="btn btn-blue mr-2">Ok</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="isCancelApi()" >Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

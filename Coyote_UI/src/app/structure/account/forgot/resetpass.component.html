@@ -1,0 +1,51 @@
+
+<div id="wrapper">
+   <form [formGroup]="resetpassForm" (ngSubmit)="onSubmit()">
+      <div class="login-content-layout resetPassword-page">
+         <div class="login-card">
+            <div class="form-container">
+               <div class="form-group text-center">                  
+                  <h2>Reset password</h2>
+                  <p><span>Enter Your New Password</span></p>
+               </div>               
+               <div class="form-group thm-group">
+                  <label>New Password <span class="text-danger">*</span></label>
+                  <input type="password" formControlName="newPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.newPassword.errors }" />
+                  <div *ngIf="submitted && f.newPassword.errors" class="invalid-feedback">
+                     <div *ngIf="f.newPassword.errors.required">New Password is Required!</div>
+                  </div>
+               </div>
+               <div class="form-group thm-group">
+                  <label>Confirm Password <span class="text-danger">*</span></label>
+                  <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                  <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                     <div *ngIf="f.confirmPassword.errors.required">Confirm Password is Required!</div>
+                  </div>
+               </div>
+               <div class="btn-wrap form-group btn-wrap mt-2">
+                  <button type="submit" class="btn btn-block thm-btn">Change Password</button>                  
+               </div>
+               <div class="return-txt mt-2">
+                  <h6>Return to <a [routerLink]="['/login']">Sign In</a></h6>
+               </div>
+            </div>
+            <div class="content-container">
+               <div class="content-txt">
+                     <div class="logo-txt mb-3">
+                        <img src="assets/images/logo.png" alt="Logo">
+                     </div>
+                     <h2>Well Crafted,<br/>Coded with attention,<br/> Build with passion.</h2>
+                     <p> Treo helps developers to build organized and well-coded admin dashboards full of beautiful and feature rich modules. </p>
+               </div>
+            </div>
+         </div>
+         <div class="login-wrap02">
+            <div class="login-form02 pb-4">
+
+               
+            </div>
+         </div>
+      </div>
+   </form>
+</div>
+      

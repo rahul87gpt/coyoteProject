@@ -1,0 +1,300 @@
+<div class="mainContent-innner">
+    <div class="Keypads-section">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">{{priceZoneText}}</h4>
+            <div class="probtn-wrap d-flex text-right">
+                <button type="button" data-toggle="modal" data-target="#costPriceZones" (click)="clcikedAddButton()"
+                    class="btn btn-blue mr-2"><i class="icon fa fa-plus-circle"></i> Add</button>
+                <button type="button" class="btn mr-2"><i class="icon fa fa-print"></i> Print</button>
+                <button type="button" class="btn mr-2" (click)="exportCostPriceZoneData()"><i
+                        class="icon fa fa-file-excel-o"></i> Export</button>
+                <button type="button" class="btn btn-blue" data-toggle="modal" data-target="#costPriceZoneSearch" (click)="openCostPriceZoneSearchFilter()"><i
+                        class="icon fa fa-filter"></i> filter</button>
+            </div>
+        </div>
+        <!-- /.action-topbar -->
+
+        <div class="costPriceZone-wrap bg-box mt-15">
+            <div class="costPriceZone-table-wrap all-w">
+                <div class="table-responsive ctm-data-table">
+                    <table class="table ctm-table " id="priceZones-table">
+                        <thead>
+                            <tr>
+                                <th>Code<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>Description <i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i></th>
+                                <th>Host <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>Suspend Updating Outlets <i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i></th>
+                                <th class="text-center">Action </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <ng-container *ngFor="let priceZone of priceZonesItemsList">
+                                <tr>
+                                    <td><a data-toggle="modal" data-target="#costPriceZones"
+                                            (click)="getPriceZoneItemById(priceZone.id)">{{priceZone.code}}</a></td>
+
+                                    <td>{{priceZone.description}}</td>
+                                    <td>{{priceZone.hostSetting}}</td>
+
+                                    <td>{{ priceZone.suspUpdOutlet && priceZone.suspUpdOutlet=== true? "Y":"N"  }}</td>
+
+                                    <td class="text-center">
+                                        <div class="tbHover-btnGroup">
+                                            <a tooltip="Change" placement="left" class="tbHover-btn trash-btn"
+                                                data-toggle="modal" data-target="#costPriceZones"
+                                                (click)="getPriceZoneItemById(priceZone.id)"><i
+                                                    class="fa fa-pencil"></i></a>
+                                            <a tooltip="Delete" placement="left" class="tbHover-btn trash-btn"
+                                                (click)="deleteCostPriceZone(priceZone.id)"><i
+                                                    class="fa fa-trash"></i></a>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="outlets-wrap">                        
+            <div class="bg-box mt-15">
+                <div class="table-responsive">
+                    <table class="table ctm-table" id="priceZones-table">
+                        <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Description</th>
+                            <th>Host</th>
+                            <th>Suspend Updating Outlets</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let priceZone of priceZonesItemsList">
+                                <td><a data-toggle="modal" data-target="#costPriceZones" (click)="getPriceZoneItemById(priceZone.id)">{{priceZone.code}}</a></td>
+                             
+                                <td>{{priceZone.description}}</td>
+                                <td>{{priceZone.hostSetting}}</td>
+                                
+                                <td>{{ priceZone.suspUpdOutlet && priceZone.suspUpdOutlet=== true? "Y":"N"  }}</td>
+                              
+                                <td class="text-center">
+                                    <div class="tbHover-btnGroup">
+                               
+                                        <a
+                                          tooltip="Change"
+                                          placement="left"
+                                          class="tbHover-btn trash-btn"
+                                          data-toggle="modal" data-target="#costPriceZones" 
+                                          (click)="getPriceZoneItemById(priceZone.id)"
+                                          ><i class="fa fa-pencil"></i
+                                        ></a>
+                                        <a
+                                          tooltip="Delete"
+                                          placement="left"
+                                          class="tbHover-btn trash-btn"
+                                          (click)="deleteCostPriceZone(priceZone.id)"
+                                          ><i class="fa fa-trash"></i
+                                        ></a>
+                                      </div>   
+                                  
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>  -->
+    </div>
+</div>
+<div class="modal fade bd-example-modal-md thm-popup" id="costPriceZones" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="costPriceZonesForm">
+                        <div class="title-wrap mb-1">
+                            <h4 class="title">{{priceZoneText}} &nbsp;Settings</h4>
+                        </div>
+                        <div class="group-from">
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">{{priceZoneText}}</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" formControlName="code" [readonly]="codeStatus" appUppercase
+                                        class="form-control" [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
+                                    <div *ngIf="f.code.errors" class="invalid-feedback">
+                                        <div *ngIf="f.code.errors.maxlength"> {{priceZoneText}}&nbsp;Should be maximum
+                                            50 characters </div>
+                                        <div *ngIf="f.code.errors.required">{{priceZoneText}}&nbsp;is required</div>
+                                    </div>
+                                    <div *ngIf="f.code.errors?.whitespace" class="invalid-feedback">
+                                        {{priceZoneText}}&nbsp;is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Description</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" formControlName="description" class="form-control" appUppercase
+                                        [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+                                    <div *ngIf="f.description.errors" class="invalid-feedback">
+                                        <div *ngIf="f.description.errors.maxlength"> Description Should be maximum 80
+                                            characters </div>
+                                        <div *ngIf="f.description.errors.required">Description is required</div>
+                                    </div>
+                                    <div *ngIf="f.description.errors?.whitespace" class="invalid-feedback">
+                                        Description is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Host</label>
+                                </div>
+                                <div class="col-9">
+                                    <ng-select [items]="hostList" bindLabel="description" bindValue="id"
+                                        formControlName="hostSettingID" [virtualScroll]="false" [clearable]="false"
+                                        [clearOnBackspace]="false" [searchable]="true" [multiple]="false"
+                                        [ngClass]="{ 'is-invalid': submitted && f.hostSettingID.errors }">
+                                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                                            <div class="form-row">
+                                                <span class="col-10 zone-overflow" title="{{ item.description }}">
+                                                    {{ item.description }}
+                                                </span>
+                                                <div class="col-2" title="{{ item.code }}">
+                                                    {{item.code}}
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </ng-select>
+                                    <!-- <select formControlName="hostSettingID" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.hostSettingID.errors }">
+                                     <option [value]="host.id" *ngFor="let host of hostList">{{host.description}}&nbsp;&nbsp;&nbsp;{{host.code}}</option>   
+                                    </select> -->
+                                    <div *ngIf="f.hostSettingID.errors" class="invalid-feedback">
+                                        <div *ngIf="f.hostSettingID.errors.required">Host is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ng-container *ngIf="(priceZonesCode === 'CostZones')">
+                                <div class="form-group form-row align-items-center">
+                                    <div class="col-3">
+                                        <label for="" class="mb-0">Factor 1</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="form-row align-items-center">
+                                            <div class="col-7">
+                                                <input type="number"
+                                                    onkeyup="if(this.value<0){this.value= this.value * -1}" [min]="0"
+                                                    formControlName="factor1" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.factor1.errors }">
+                                                <div *ngIf="f.factor1.errors?.trimError" class="invalid-feedback">
+                                                    {{ f.factor1.errors.trimError.value }}</div>
+                                            </div>
+                                            <div class="col-5">
+                                                <label for="" class="mb-0 fontSize-11" style="color:#5145cd;">(Service
+                                                    Fee %)</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-row align-items-center">
+                                    <div class="col-3">
+                                        <label for="" class="mb-0">Factor 2</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="form-row align-items-center">
+                                            <div class="col-7">
+                                                <input type="number"
+                                                    onkeyup="if(this.value<0){this.value= this.value * -1}" [min]="0"
+                                                    formControlName="factor2" class="form-control">
+                                            </div>
+                                            <div class="col-5">
+                                                <label for="" class="mb-0 fontSize-11" style="color:#5145cd;">(Dry Del
+                                                    Fee %)</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-row align-items-center">
+                                    <div class="col-3">
+                                        <label for="" class="mb-0">Factor 3</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="form-row align-items-center">
+                                            <div class="col-7">
+                                                <input type="number"
+                                                    onkeyup="if(this.value<0){this.value= this.value * -1}" [min]="0"
+                                                    formControlName="factor3" class="form-control">
+
+                                            </div>
+                                            <div class="col-5">
+                                                <label for="" class="mb-0 fontSize-11"
+                                                    style="color:#5145cd;">(Perishable Del Fee %)</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                            <div class="form-group mb-0 form-row align-items-center">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="Control01"
+                                        formControlName="suspUpdOutlet">
+                                    <label class="custom-control-label" for="Control01"><span
+                                            class="label-mt-2 d-block">Suspend Updating Outlets in this
+                                            Zone</span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-blue mr-2"
+                                (click)="submitCostPriceZonesForm()">{{priceZone_id > 0 ? "Update":"Add"}}</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup" id="costPriceZoneSearch" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form name="searchForm" id="searchForm">
+                        <div class="title-wrap mb-2">
+                            <h4 class="title"> Search Filter </h4>
+                        </div>
+                        <div class="form-group mb-0">
+                            <label>Wildcard Search</label>
+                            <input type="text" id="costPriceZone_Search_filter" appUppercase class="form-control" #searchValue>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button class="btn btn-blue mr-2" (click)="searchCostPriceZone(searchValue)">Ok</button>
+                            <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="tbHover-btnGroup">
+<button class="tbHover-btn trash-btn" data-toggle="modal" data-target="#costPriceZones" (click)="getPriceZoneItemById(priceZone.id)" ><i class="fa fa-pencil"></i></button> <button class="tbHover-btn trash-btn" (click)="deleteCostPriceZone(priceZone.id)"><i class="fa fa-trash"></i></button>
+</div> -->

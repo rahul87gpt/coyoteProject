@@ -1,0 +1,92 @@
+<div class="mainContent-innner">
+    <div class="addMaster-section">
+
+        <form [formGroup]="taxForm" (ngSubmit)="onSubmit()">
+
+            <div class="d-flex align-items-center">
+                <h4 class="title flex-grow-1 mb-0">Add Text Code<span class="bdms"><a href="#">Accounts</a> | <a href="#">System Wide</a> | <span class="current">Add Text Code</span></span></h4>
+                <div class="probtn-wrap text-right">
+                    <!-- <button class="btn mr-2" [routerLink]="['/taxes']"><span class="icon cancel-icon">X</span> Cancel</button> -->
+                </div>
+            </div>
+            <div class="addMaster-wrap">
+                <div class="popup-box">
+                        <div class="title-wrap mb-1">
+                          <h4 class="title">Add Text Code</h4>
+                        </div>                        
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Code <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <input [readonly]="formStatus" type="text" 
+									[ngClass]="{ 'is-invalid': submitted && f.code.errors }"
+									formControlName="code"
+									class="form-control"
+                                >
+                            </div>
+                            <div
+							  *ngIf="(submitted && taxForm.controls['code'].errors) ||
+								(f.code.invalid && (f.code.untouched || f.code.dirty))"
+							  class="invalid-feedback" >
+							  <div *ngIf="f.code.errors.required" class="alert error-alert">
+								Code is required
+							  </div>
+							</div>
+                        </div>
+                        
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Description <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" 
+									[ngClass]="{ 'is-invalid': submitted && f.desc.errors }"
+									formControlName="desc"
+									class="form-control"
+								>
+                            </div>
+                            <div
+							  *ngIf="(submitted && taxForm.controls['desc'].errors) ||
+								(f.desc.invalid && (f.desc.untouched || f.desc.dirty))"
+							  class="invalid-feedback" >
+							  <div *ngIf="f.desc.errors.required" class="alert error-alert">
+								Desc is required
+							  </div>
+							</div>
+                        </div>
+                        
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Factor <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <input type="number" 
+									[ngClass]="{ 'is-invalid': submitted && f.factor.errors }"
+									formControlName="factor"
+									class="form-control"
+								>
+                            </div>
+                            <div
+							  *ngIf="(submitted && taxForm.controls['factor'].errors) ||
+								(f.factor.invalid && (f.factor.untouched || f.factor.dirty))"
+							  class="invalid-feedback" >
+							  <div *ngIf="f.factor.errors.required" class="alert error-alert">
+								Factor is required
+							  </div>
+							</div>
+                        </div>
+                        
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Status</label>
+                            <div class="col-md-9">
+                                <select class="form-control" formControlName="status">
+                                    <option *ngFor="let status of statusArray">{{status}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="btn-wrap text-right mt-10">
+                            <button class="btn btn-blue mr-2">{{ buttonText }}</button>
+                            <button class="btn btn-grey" [routerLink]="['/taxes']">Cancel</button>
+                        </div>
+                        
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

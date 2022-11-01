@@ -1,0 +1,318 @@
+<!-- <div class="mainContent-innner">
+    <div class="Keypads-section">
+    <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">System Controls</h4>
+        <div class="probtn-wrap d-flex text-right">
+            <button  data-toggle="modal" data-target="#SystemControls" type="button" class="btn btn-blue">System Controls</button>
+        </div>
+    </div>
+    <div class="outlets-wrap">                        
+        <div class="bg-box mt-15">
+            
+        </div>
+    </div>
+    </div>
+</div> -->
+<div class="modal fade bd-example-modal-lg thm-popup" id="SystemControls" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="systemControlsForm" (ngSubmit)="onSubmitSystemControlsForm()">
+                        <div class="title-wrap mb-2">
+                            <h4 class="title">System Controls</h4>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-8">
+                                <div class="group-from mb-2">
+                                    <h5 class="title">Licence</h5>
+                                    <div class="form-group form-row align-items-center">                                
+                                       <div class="col-3">
+                                        <label for="" class="mb-0">Name</label>
+                                       </div>
+                                       <div class="col-9">
+                                        <input type="text" class="form-control" appUppercase formControlName="name">
+                                       </div>
+                                    </div>
+                                    <div class="form-group form-row align-items-center">                                
+                                        <div class="col-3">
+                                            <label for="" class="mb-0">Expiry Date</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="form-row align-items-center">
+                                                <div class="col-5">
+                                                    <input type="text" onkeydown="return false" class="form-control" bsDatepicker 
+                                                    formControlName="expiryDate" [bsConfig]="datepickerConfig"> 
+                                                    <!-- <input type="text" class="form-control" formControlName="expiryDate"> -->
+                                                </div>
+                                                <div class="col-7">
+                                                    <div class="form-row align-items-center">
+                                                        <div class="col-6">
+                                                            <label for="" class="mb-0">Serial No</label>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <input type="text" class="form-control" formControlName="serialNo">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-0 form-row align-items-center">                                
+                                        <div class="col-3">
+                                            <label for="" class="mb-0">Max Stores</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="form-row align-items-center">
+                                                <div class="col-5">
+                                                    <input type="text" class="form-control" formControlName="maxStores">
+                                                </div>
+                                                <div class="col-7">
+                                                    <div class="form-row align-items-center">
+                                                        <div class="col-6">
+                                                            <label for="" class="mb-0">Licence Key</label>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <input type="text" class="form-control" formControlName="licenceKey"> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-6">
+                                        <div class="group-from mb-2">
+                                            <h5 class="title">Till Journal Update</h5>   
+                                            <div class="form-group mb-0">
+                                                <select formControlName="tillJournal" class="form-control" >
+                                                    <option [ngValue]="till.value" *ngFor="let till of tillJournal">
+                                                      {{till?.journal}}
+                                                    </option>
+                                                </select>
+                                            </div>                                     
+                                        </div> 
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="group-from mb-2">
+                                            <h5 class="title">MixMatch and Offers</h5>   
+                                            <div class="form-row form-group mb-0 align-items-center">
+                                                <div class="col-6">
+                                                    <label for="" class="mb-0">Alocate Groups </label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <select formControlName="allocateGroups" class="form-control">
+                                                        <option [ngValue]="alocate.value" *ngFor="let alocate of statusArray">
+                                                         {{alocate?.status}}
+                                                        </option>    
+                                                    </select>
+                                                </div>
+                                            </div>                                     
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-6">
+                                        <div class="group-from mb-2">
+                                            <h5 class="title">Password</h5>   
+                                            <div class="form-row form-group mb-0 align-items-center">
+                                                <div class="col-7">
+                                                    <label for="" class="mb-0">Mass Price Update</label>
+                                                </div>
+                                                <div class="col-5">
+                                                    <input type="text" class="form-control" formControlName="massPriceUpdate">
+                                                </div>
+                                            </div>                                     
+                                        </div> 
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="group-from mb-2">
+                                            <h5 class="title">Allow ALM Electronic Invoices</h5>   
+                                            <div class="form-row form-group mb-0 align-items-center">
+                                                <div class="col-6">
+                                                    <label for="" class="mb-0">Allow ALM select</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <select formControlName="allowALM" class="form-control">
+                                                        <option [ngValue]="allowALM.value" *ngFor="let allowALM of statusArray">
+                                                         {{allowALM?.status}}
+                                                        </option> 
+                                                    </select>
+                                                </div>
+                                            </div>                                     
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-6">
+                                        <div class="group-from mb-2">
+                                            <h5 class="title">Database Usage</h5>   
+                                            <div class="form-row form-group mb-0 align-items-center">
+                                                <div class="col-7">
+                                                    <label for="" class="mb-0">Database Usage</label>
+                                                </div>
+                                                <div class="col-5">
+                                                    <input type="number" [min]="0" class="form-control" formControlName="databaseUsage">
+                                                </div>
+                                            </div>                                     
+                                        </div> 
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="group-from mb-2">
+                                            <h5 class="title">Global Growth Factor (KPI)</h5>   
+                                            <div class="form-row form-group mb-0 align-items-center">
+                                                <div class="col-6">
+                                                    <label for="" class="mb-0">Growth Factor</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <input type="text" class="form-control" formControlName="growthFactor">
+                                                </div>
+                                            </div>                                     
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-6">
+                                        <div class="group-from mb-0">
+                                            <h5 class="title">Allow First In First Out Stock Control</h5>   
+                                            <div class="form-row form-group mb-0 align-items-center">
+                                                <div class="col-7">
+                                                    <label for="" class="mb-0">Allow FIFO</label>
+                                                </div>
+                                                <div class="col-5">
+                                                    <select formControlName="allowFIFO" class="form-control">
+                                                      <option [ngValue]="allowFIFO.value" *ngFor="let allowFIFO of statusArray">
+                                                        {{allowFIFO?.status}}
+                                                      </option>  
+                                                    </select>
+                                                </div>
+                                            </div>                                     
+                                        </div> 
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="group-from mb-0">
+                                            <h5 class="title">Colour Scheme</h5>   
+                                            <div class="form-row form-group mb-0 align-items-center">
+                                                <div class="col-6">
+                                                    <label for="" class="mb-0">Colour</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <select formControlName="color" class="form-control">
+                                                        <option [value]="colour.value" *ngFor="let colour of colorArray">
+                                                          {{colour?.colour}}
+                                                        </option>  
+                                                    </select>
+                                                </div>
+                                            </div>                                     
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-from">
+                                    <h5 class="title">Counters</h5>
+                                    <div class="form-group form-row align-items-center">                                
+                                       <div class="col-6">
+                                        <label for="" class="mb-0">Transaction Ref</label>
+                                       </div>
+                                       <div class="col-6">
+                                        <input type="text" class="form-control" formControlName="transactionRef">
+                                       </div>
+                                    </div>
+                                    <div class="form-group form-row align-items-center">                                
+                                        <div class="col-6">
+                                         <label for="" class="mb-0">Wastage Ref</label>
+                                        </div>
+                                        <div class="col-6">
+                                         <input type="text" class="form-control" formControlName="wastageRef">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-0 form-row align-items-center">                                
+                                        <div class="col-6">
+                                         <label for="" class="mb-0">Transfer Ref</label>
+                                        </div>
+                                        <div class="col-6">
+                                         <input type="text" class="form-control" formControlName="transferRef">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group-from">
+                                    <h5 class="title">Host Product Numbering</h5>
+                                    <div class="form-group mb-0 form-row align-items-center">                                
+                                       <div class="col-6">
+                                        <label for="" class="mb-0">Number Factor</label>
+                                       </div>
+                                       <div class="col-6">
+                                        <input type="text" class="form-control" formControlName="numberFactor">                                            
+                                       </div>
+                                       <div class="col-12">
+                                        <label for="" class="fontSize-11">(Factor to add to Product Number when creating new
+                                            items from the Host, may be left blank)</label>
+                                       </div>
+                                    </div>
+                                </div>
+                                <div class="group-from mb-0">
+                                    <h5 class="title">Host Pricing and Invoice Pricing</h5>
+                                    <div class="form-group form-row align-items-center">                                
+                                       <div class="col-7">
+                                        <label for="" class="mb-0">Host Update Pricing</label>
+                                       </div>
+                                       <div class="col-5">
+                                        <select formControlName="hostUpdatePricing" class="form-control">
+                                         <option [ngValue]="hostUpdatePricing.value" *ngFor="let hostUpdatePricing of statusArray">
+                                          {{hostUpdatePricing?.status}}
+                                         </option>     
+                                        </select>
+                                       </div>
+                                    </div>
+                                    <div class="form-group form-row align-items-center">                                
+                                        <div class="col-7">
+                                         <label for="" class="mb-0">Invoice Post Pricing</label>
+                                        </div>
+                                        <div class="col-5">
+                                            <select formControlName="invoicePostPricing" class="form-control">
+                                              <option [ngValue]="hostUpdatePricing.value" *ngFor="let hostUpdatePricing of statusArray">
+                                                {{hostUpdatePricing?.status}}
+                                              </option>   
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-row align-items-center">                                
+                                        <div class="col-7">
+                                         <label for="" class="mb-0">Price Rounding</label>
+                                        </div>
+                                        <div class="col-5">
+                                            <select formControlName="priceRounding" class="form-control">
+                                                <option [value]="priceRounding.value" *ngFor="let priceRounding of priceRounding">
+                                                  {{priceRounding?.round}}
+                                                </option> 
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-0 form-row align-items-center">                                
+                                        <div class="col-7">
+                                         <label for="" class="mb-0">Default Item Pricing</label>
+                                        </div>
+                                        <div class="col-5">
+                                            <select formControlName="defaultItemPricing" class="form-control">
+                                                <option [value]="defaultItemPricing.value" *ngFor="let defaultItemPricing of defaultItemPricing">
+                                                  {{defaultItemPricing?.pricing}}
+                                                </option>   
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="submit" class="btn btn-blue mr-2" >Ok</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>                    
+            </div>
+        </div>
+    </div>
+</div>

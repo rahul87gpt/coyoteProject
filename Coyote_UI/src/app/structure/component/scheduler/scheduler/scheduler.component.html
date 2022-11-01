@@ -1,0 +1,732 @@
+<div class="mainContent-innner">
+  <div class="UserStoreGroup-section">
+    <div class="d-flex align-items-center">
+      <!-- <h4 class="title flex-grow-1 mb-0">Store Groups <span class="bdms"><a href="javascript:void(0)">Accounts</a> | <a href="javascript:void(0)">Entry Setup</a> | <span class="current">Store Groups</span></span></h4> -->
+      <h4 class="title flex-grow-1 mb-0">Schedulers</h4>
+      <div class="probtn-wrap text-right">
+        <!-- <a class="btn btn-blue with-icon mr-2" data-toggle="modal" data-target="#storeGroupModal"
+          (click)="resetForm()"><i class="icon fa fa-plus-circle"></i> Add</a> -->
+        <!-- <button class="btn with-icon mr-2"><img class="icon" src="assets/images/save-btn-icon.svg" alt="Icon"> Save</button> -->
+        <!-- <button class="btn with-icon mr-2"><img class="icon" src="assets/images/edit-btn-icon.svg" alt="Icon"> Change</button>
+             <button class="btn with-icon mr-2"><img class="icon" src="assets/images/trash-btn-icon.svg" alt="Icon"> Delete</button> -->
+        <button class="btn with-icon mr-2">
+          <i class="icon fa fa-print"></i> Print
+        </button>
+        <button class="btn with-icon mr-2" (click)="exportschedulerData()">
+          <i class="icon fa fa-file-excel-o"></i> Export
+        </button>
+        <button class="btn btn-blue with-icon" data-toggle="modal" data-target="#schedulerSearch">
+          <i class="icon fa fa-filter"></i> Filter
+        </button>
+        <!-- <button class="btn with-icon mr-2"><img class="icon" src="assets/images/filter-icon.svg" alt="Icon"> filter</button> -->
+      </div>
+    </div>
+    <div class="Scheduler-wrap bg-box mt-15 ">
+      <div class="Scheduler-table-wrap all-w">
+        <div class="table-responsive ">
+          <table class="table ctm-table" id="scheduler-table">
+            <thead>
+              <tr>
+                <th>
+                  Status
+
+                </th>
+                <th>
+                  Filter Name
+                </th>
+                <th>
+                  Scheduler Name
+
+                </th>
+                <!-- <th>
+                  Description
+                </th> -->
+                <th>
+                  Report Start Date
+                </th>
+                <th>
+                  Report End Date
+                </th>
+                <th>
+                  Inception Date
+                </th>
+                <th>
+                  Inception Time
+                </th>
+                <th>
+                  Frequency
+                </th>
+                <th>
+                  Inteval
+                </th>
+                <!-- <th>
+                  Last Run
+                </th>
+                <th>
+                  Emails
+                </th> -->
+                <th class="text-center">Action </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let scheduler of schedulerList">
+                <td>
+                  <!-- <span class="status-check" [ngClass]="{ 'status-true': store.status, 'status-false': !store.status }"></span> -->
+                  <div class="status-icons">
+                    <img *ngIf="scheduler?.isActive == 1" src="assets/images/status-true.svg" alt="" />
+                    <img *ngIf="scheduler?.isActive != 1" src="assets/images/status-false.svg" alt="" />
+                    <span hidden>
+                      <!-- {{ scheduler?.status ? "Active" : "In-Active" }} -->
+                      {{ scheduler?.isActive == 1 ? "Active" : "In-Active" }}
+                    </span>
+                  </div>
+                </td>
+                <td>
+                  {{scheduler?.filterName}}                  
+                </td>
+                <td>
+                  {{scheduler?.reportName}}
+                </td>
+                <!-- <td>
+                  {{scheduler?.reportName}}
+                </td> -->
+                <td>
+                  {{scheduler?.startDate | customdatetimeformat }}
+                </td>
+                <td>
+                  {{scheduler?.endDate | customdatetimeformat }}
+                </td>
+                <td>
+                  {{scheduler?.inceptionDate | customdatetimeformat}}
+                </td>
+                <td>
+                  {{scheduler?. inceptionTime | timeformate}}
+
+                </td>
+                <td>
+                  {{scheduler?.intervalBracket}}
+                </td>
+                <td>
+                  {{scheduler?.intervalIndex}}
+                </td>
+                <!-- <td>
+                  {{scheduler?.lastRun | dateTimeFormate}}
+                </td>
+                <td>
+                  -
+                </td> -->
+                <td class="text-center">
+                  <div class="tbHover-btnGroup">
+                    <a tooltip="Change" placement="left" class="tbHover-btn trash-btn"
+                      (click)="getSchedulerByID(scheduler.id)" data-toggle="modal" data-target="#schedulerModal"><i
+                        class="fa fa-pencil"></i></a>
+                    <a tooltip="Delete" placement="right" class="tbHover-btn trash-btn"
+                      (click)="deleteScheduler(scheduler.id)"><i class="fa fa-trash"></i></a>
+                    <!-- <button  class="tbHover-btn trash-btn" (click)="getStoreByID(store.id)" data-toggle="modal" data-target="#storeGroupEditModal"><i class="fa fa-pencil"></i></button>
+                           <button  class="tbHover-btn trash-btn" (click)="deleteStoreGroup(store.id)"><i class="fa fa-trash"></i></button> -->
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- /.UserStoreGroup-wrap -->
+  </div>
+</div>
+
+<div class="modal fade thm-popup" id="schedulerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-lg border-popup" role="document">
+    <div class="modal-content">
+      <form [formGroup]="scheduleForm">
+        <div class="modal-body popup-box-width">
+          <div class="popup-box">
+            <div class="form-row align-items-center">
+
+              <div class="col-12">
+                <div class="title-wrap mb-0">
+                  <h4 class="title">Schedule</h4>
+                </div>
+              </div>
+              <div class="col-lg-12 col-xl-12">
+                <!-- General Field Filter -->
+                <div class="form-row align-items-center">
+                  <div class="col-md-6">
+                    <div class="group-from">
+                      <h5 class="title">Reports</h5>
+
+                      <div class="form-row form-group align-items-center">
+
+                        <div class="col-12">
+                          <input type="text" class="form-control" formControlName="filterName" disabled />
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="group-from">
+                      <h5 class="title">Filters</h5>
+
+                      <div class="form-row form-group align-items-center">
+
+                        <div class="col-12">
+                          <input type="text" class="form-control" formControlName="description" readonly />
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Filter Date Range -->
+                <div class="form-row align-items-center">
+                  <div class="col-md-6">
+                    <div class="group-from">
+                      <h5 class="title">
+                        Filter Date Range
+                      </h5>
+                      <div class="form-row form-group align-items-center mb-0">
+                        <div class="col-12">
+                          <div class="form-row align-items-center">
+                            <div class="col-5">
+                              <div class="form-group mb-0">
+                                <div class="ctm-calendar">
+                                  <!-- <input #startDatesch type="text" class="form-control" bsDatepicker
+                                    [bsConfig]="{ showWeekNumbers: false }" [maxDate]="maxDate" [ngClass]="{
+                                        'is-invalid':
+                                          submitted && f.startDate.errors
+                                      }" [bsValue]="startDateBsValue" readonly /> -->
+<!-- 
+                                  <input onkeydown="return false" type="text" class="form-control" bsDatepicker
+                                    (bsValueChange)="onDateChange($event)" [minDate]="minDate"
+                                    formControlName="startDate" [bsConfig]="datepickerConfig" [ngClass]="{
+                                        'is-invalid':
+                                          submitted && f.startDate.errors
+                                     }" /> -->
+                                      <input 
+                                      #startDatesch 
+                                      type="text" 
+                                      class="form-control" 
+                                      bsDatepicker
+                                      [bsConfig]="datepickerConfig" 
+                                      [maxDate]="maxDate" 
+                                      [ngClass]="{'is-invalid': submitted && f.startDate.errors}"
+                                      (bsValueChange)="onShDateChange($event, 'startDate');scheduleDateChange($event, startDatesch.value);"
+                                      [bsValue]="shStartDateBsValue" 
+                                      disabled 
+                                      />
+                                  <div *ngIf="f_schedule.startDate.errors" class="invalid-feedback">
+                                    <div *ngIf="f_schedule.startDate.errors.required">
+                                      Start date is required
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-2">
+                              <div class="form-group mb-0 text-center">
+                                <label for class="mb-0">To</label>
+                              </div>
+                            </div>
+                            <div class="col-5">
+                              <div class="form-group mb-0">
+                                <div class="ctm-calendar">
+                                  <!-- <input onkeydown="return false" type="text" class="form-control" bsDatepicker
+                                    [minDate]="lastEndDate" formControlName="endDate" [bsConfig]="datepickerConfig"
+                                    [ngClass]="{
+                                    'is-invalid':
+                                    isReportScheduleFormSubmitted && f.endDate.errors
+                                  }" /> -->
+                                  <input 
+                                  #toDateSch 
+                                  type="text" 
+                                  class="form-control" 
+                                  bsDatepicker
+                                  [bsConfig]="datepickerConfig" [maxDate]="maxDate" [ngClass]="{
+                                  'is-invalid': isReportScheduleFormSubmitted && f.endDate.errors }" 
+                                  (bsValueChange)="onShDateChange($event, 'endDate');scheduleDateChange(toDateSch.value,$event);" 
+                                  [bsValue]="shEndDateBsValue"
+                                  disabled
+                                  />
+
+                                  <!-- <input #toDateSch type="text" class="form-control" bsDatepicker
+                                    [bsConfig]="{ showWeekNumbers: false }" [maxDate]="maxDate" [ngClass]="{
+                                  'is-invalid':
+                                  isReportScheduleFormSubmitted && f.endDate.errors
+                                }" [bsValue]="endDateBsValue" readonly /> -->
+                                  <div *ngIf="f_schedule.endDate.errors" class="invalid-feedback">
+                                    <div *ngIf="f_schedule.endDate.errors.required">
+                                      End date is required
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="col-5">
+                          <div *ngIf="false" class="custom-control custom-checkbox">
+                            <input formControlName="roleOnCompletion" type="checkbox" class="custom-control-input"
+                              id="Sales" />
+                            <label class="custom-control-label mb-0" for="Sales">Roll of open complition</label>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="group-from">
+                      <h5 class="title">
+                        Intervel
+                      </h5>
+                      <div class="form-row form-group align-items-center mb-0">
+                        <div class="col-12">
+                          <div class="form-row align-items-center">
+                            <div class="col-md-4">
+                              <div class="form-row align-items-center pt-2">
+                                <div class="col-md-4">
+                                  <label>Every</label> 
+                                </div>
+                                <div class="col-md-8">
+                                  <input type="number" name="intervalBracket" [ngClass]="{
+                                      'is-invalid':
+                                      isReportScheduleFormSubmitted && f_schedule.intervalBracket.errors
+                                    }" formControlName="intervalBracket" class="form-control">
+                                  <div *ngIf="isReportScheduleFormSubmitted && f_schedule.intervalBracket.errors"
+                                    class="invalid-feedback">
+                                    <div *ngIf="f_schedule.intervalBracket.errors.required">
+                                      required
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-8">
+                              <div class="group-from my-0">
+                                <div class="d-flex flex-wrap form-group mb-0">
+                                  <div class="custom-control custom-radio mr-2">
+                                    <input type="radio" name="intervalInd"
+                                      class="custom-control-input" formControlName="intervalInd" id="months" [checked]="
+                                      f_schedule?.intervalInd?.value == 1
+                                        ? true
+                                        : false
+                                    " value="1">
+                                    <label for="months" class="custom-control-label mb-0" for="months">
+                                      Months </label>
+                                    </div>
+                                  <div class="custom-control custom-radio mr-2"><input type="radio" name="intervalInd"
+                                      [checked]="
+                                    f_schedule?.intervalInd?.value == 2
+                                      ? true
+                                      : false
+                                      " class="custom-control-input" formControlName="intervalInd" id="weeks"
+                                      value="2">
+                                      <label class="custom-control-label mb-0" for="weeks">Weeks </label>
+                                  </div>
+                                  <div class="custom-control custom-radio mr-2" [ngClass]="{
+                                    'is-invalid':
+                                    isReportScheduleFormSubmitted && f_schedule.intervalInd.errors
+                                  }"><input type="radio" name="intervalInd" class="custom-control-input" [checked]="
+                                     f_schedule?.intervalInd?.value == 3
+                                       ? true
+                                       : false
+                                       " formControlName="intervalInd" id="days" value="3"><label
+                                      class="custom-control-label mb-0" for="days"> Days </label></div>
+                                  <div *ngIf="isReportScheduleFormSubmitted && f_schedule.intervalInd.errors"
+                                    class="invalid-feedback">
+                                    <div *ngIf="f_schedule.intervalInd.errors.required">
+                                      required
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row form-group align-items-center">
+                  <div class="col-md-6">
+                    <div class="group-from">
+                      <h5 class="title">Schedule Group</h5>
+
+                      <div class="form-row form-group align-items-center">
+
+                        <div class="col-10">
+
+                          <select formControlName="groupIds" disabled class="form-control" placeholder='Schedule Group'>
+                            <option value="">select</option>
+                            <!-- <option *ngFor="let item of dropdownObj.stores">
+                                  {{ item.storeDetail }}
+                                </option> -->
+                          </select>
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="group-from">
+                      <h5 class="title">Destination email </h5>
+
+                      <div class="form-row form-group align-items-center">
+
+                        <div class="col-10">
+                          <ng-select [items]="UserEmailsList" bindLabel="firstName" bindValue="id"
+                            [closeOnSelect]="false" [virtualScroll]="false" [multiple]="true" dropdownPosition="bottom"
+                            placeholder="Destination email" formControlName="userIds" (remove)="addOrRemoveUserItem('remove',$event)
+                              " (add)="addOrRemoveUserItem('add',$event)">
+
+                            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                              <!-- <input id="item-{{ index }}" type="checkbox" [checked]="
+                                  selectedUserIds[item.id]
+                                      ? true
+                                      : false
+                                  " />&nbsp; -->
+                              <span>{{ item.firstName }}, {{ item.lastName }}, {{ item.userName }}</span>
+
+                            </ng-template>
+
+
+                            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                              <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                                <span class="ng-value-label">{{
+                                    item.firstName
+                                  }} , {{ item.lastName }}, {{ item.userName }} </span>
+                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                              </div>
+                              <div class="ng-value" *ngIf="items.length > 2">
+                                <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                              </div>
+                            </ng-template>
+                          </ng-select>
+                          <div *ngIf="isReportScheduleFormSubmitted && f_schedule.userIds.errors"
+                            class="invalid-feedback">
+                            <div *ngIf="f_schedule.userIds.errors.required">
+                              Destination email is required
+                            </div>
+                          </div>
+                        </div>
+                        <!-- <div class="col-2">
+                              <button class="btn blue browse-btn">New..</button>
+                            </div> -->
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row form-group align-items-center">
+                  <div class="col-md-6">
+                    <div class="group-from">
+                      <h5 class="title">Export Format</h5>
+
+                      <div class="form-row form-group align-items-center">
+                        <div class="col-4">
+                          <div class="custom-control custom-checkbox">
+                            <input formControlName="excelExport" type="checkbox" class="custom-control-input"
+                              id="Excel" disabled />
+                            <label class="custom-control-label mb-0" for="Excel">Excel</label>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="custom-control custom-checkbox">
+                            <input formControlName="pdfExport" type="checkbox" class="custom-control-input" id="PDF" disabled/>
+                            <label class="custom-control-label mb-0" for="PDF">PDF</label>
+                          </div>
+                        </div>
+                        <div class="col-4" [ngClass]="{
+                                'is-invalid':
+                                isReportScheduleFormSubmitted && (f_schedule.pdfExport.errors || f_schedule.excelExport.errors || f_schedule.csvExport.errors)
+                              }">
+                          <div class="custom-control custom-checkbox">
+                            <input formControlName="csvExport" type="checkbox" class="custom-control-input" id="CSV" disabled />
+                            <label class="custom-control-label mb-0" for="CSV">CSV</label>
+                          </div>
+                        </div>
+                        <div
+                          *ngIf="isReportScheduleFormSubmitted && (f_schedule.pdfExport.errors || f_schedule.excelExport.errors || f_schedule.csvExport.errors)"
+                          class="invalid-feedback">
+                          <div *ngIf="f_schedule.exportFormat.errors.required">
+                            Export Format is required
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="group-from">
+                      <h5 class="title">Last Run</h5>
+                      <div class="form-row form-group align-items-center">
+                        <div class="col-10">
+
+                          <input onkeydown="return false" type="text" class="form-control" 
+                            [disabled]="true" formControlName="lastRun" [ngClass]="{
+                            'is-invalid':
+                            isReportScheduleFormSubmitted && f_schedule.lastRun.errors
+                          }" placeholder="Never" readonly/>
+
+                          <!-- <input #last_run type="text" class="form-control" formControlName="lastRun"
+                            bsDatepicker [isDisabled]="true" [bsConfig]="{ showWeekNumbers: false }" [maxDate]="maxDate"
+                            placement="top right" [ngClass]="{
+                              'is-invalid':
+                              isReportScheduleFormSubmitted && f_schedule.lastRun.errors
+                            }" readonly /> -->
+
+                          <!-- (bsValueChange)="
+                              specDateChange($event, last_run.value)
+                            " -->
+
+                        </div>
+                        <!-- <div class="col-2"><button class="btn blue browse-btn" disabled>Reset</button></div> -->
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <!-- 123 -->
+                <div class="form-row form-group align-items-center">
+                  <div class="group-from col-md-6">
+                    <h5 class="title">
+                      Inception
+                    </h5>
+                    <div class="form-row form-group align-items-center mb-0">
+                      <div class="col-12">
+                        <div class="form-row align-items-center">
+                          <div class="col-5  mt-27">
+                            <div class="form-group mb-0">
+                              <div style="margin-top: 27px;" class="ctm-calendar">
+                                <!-- [maxDate]="maxDate" -->
+                                <input onkeydown="return false" type="text" class="form-control" bsDatepicker
+                                  formControlName="inceptionDate" [bsConfig]="datepickerConfig" [ngClass]="{
+                                    'is-invalid':
+                                    isReportScheduleFormSubmitted && f_schedule.inceptionDate.errors
+                                  }"
+                                  disabled
+                                   />
+                                <!-- <input #inceptionDate type="text" class="form-control" formControlName="inceptionDate"
+                                  bsDatepicker [minDate]="maxDate" [bsConfig]="{ showWeekNumbers: false }" [ngClass]="{
+                                'is-invalid':
+                                isReportScheduleFormSubmitted && f_schedule.startDate.errors
+                              }" readonly /> -->
+                                <!-- (bsValueChange)="
+                                specDateChange($event, inceptionDate.value)
+                              " -->
+                                <div *ngIf="f_schedule.inceptionDate.errors" class="invalid-feedback">
+                                  <div *ngIf="f_schedule.inceptionDate.errors.required">
+                                    Inception is required
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-7">
+                            <div class="form-group mb-0">
+                              <div class="ctm-timepicker">
+
+                                <timepicker class="form-timepicker" formControlName="inceptionTime" [disabled]="true" [readonlyInput]="true">
+                                </timepicker>
+
+
+                                <div *ngIf="f_schedule.inceptionTime.errors" class="invalid-feedback">
+                                  <div *ngIf="f_schedule.inceptionTime.errors.required">
+                                    End date is required
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                  <div class="col-md-6 text-right mt-5">
+                    <div class="custom-control custom-checkbox sd-checkbox-active"><input formControlName="isActive"
+                        class="custom-control-input" type="checkbox" id="isActive"><label for="isActive"
+                        class="custom-control-label mb-0">
+                        <h6 class="mb-0">Active</h6>
+                      </label></div>
+                    <!-- <button class="btn btn-blue">Flags</button> -->
+                  </div>
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 p-0">
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2" (click)="updateScheduler()">
+                Update
+              </button>
+              <a class="btn btn-grey" data-dismiss="modal">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="modal fade thm-popup" id="storeGroupModal" tabindex="-1" role="dialog" aria-labelledby="storeGroupModal"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form [formGroup]="storeGroupForm" (submit)="addStoreGroup()">
+            <div class="title-wrap mb-1">
+              <h4 class="title">Add Store Group</h4>
+            </div>
+            <div class="form-group">
+              <label>Code <span class="text-danger">*</span></label>
+              <input type="number" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.code.errors }"
+                formControlName="code" />
+              <div *ngIf="f.code.errors" class="invalid-feedback">
+                <div *ngIf="f.code.errors.maxlength">
+                  Code Should be maximum 15 digits
+                </div>
+                <div *ngIf="f.code.errors.required">Code is required</div>
+                <div *ngIf="f.code.errors.pattern">Space is not allowed</div>
+                
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Description <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                formControlName="name" />
+              <div *ngIf="f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.maxlength">
+                  Description Should be maximum 100 characters
+                </div>
+                <div *ngIf="f.name.errors.required">
+                  Description is required
+                </div>
+                <div *ngIf="f.name.errors.maxLength">
+                  Maximum 100 Characyers allowed
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-0">
+             
+              <label>Status</label>
+              <select class="form-control" formControlName="status"
+                [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+              </select>
+              <div *ngIf="f.status.errors" class="invalid-feedback">
+                <div *ngIf="f.status.errors.required">Status is required</div>
+               
+              </div>
+            </div>
+
+            <div class="btn-wrap text-right mt-10">
+              <button type="submit" class="btn btn-blue mr-2">Save</button>
+              <a class="btn btn-grey" data-dismiss="modal">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- <div class="modal fade thm-popup" id="storeGroupEditModal" tabindex="-1" role="dialog" aria-labelledby="storeGroupModal"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form [formGroup]="storeGroupEditForm" (submit)="upDateStoreGroup()">
+            <div class="title-wrap mb-1">
+              <h4 class="title">Update Store Group</h4>
+            </div>
+            <div class="form-group">
+              <label>Code <span class="text-danger">*</span></label>
+              <input [readonly]="codeStatus" type="text" class="form-control" formControlName="code" />
+              <div *ngIf="f.code.errors" class="invalid-feedback">
+                <div *ngIf="f.code.errors.required">Code is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Description <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && f1.name.errors }"
+                formControlName="name" />
+              <div *ngIf="f1.name.errors" class="invalid-feedback">
+                <div *ngIf="f1.name.errors.maxlength">
+                  Description Should be maximum 100 characters
+                </div>
+                <div *ngIf="f1.name.errors.required">
+                  Description is required
+                </div>
+               
+              </div>
+            </div>
+            <div class="form-group mb-0">
+              
+              <label>Status</label>
+              <select class="form-control" formControlName="status"
+                [ngClass]="{ 'is-invalid': submitted1 && f1.status.errors }">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+              </select>
+              <div *ngIf="f1.status.errors" class="invalid-feedback">
+                <div *ngIf="f1.status.errors.required">Status is required</div>
+              
+              </div>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button type="submit" class="btn btn-blue mr-2">Save</button>
+              <a class="btn btn-grey" data-dismiss="modal">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="modal fade thm-popup" id="schedulerSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form name="searchForm" id="searchForm">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Search Filter</h4>
+            </div>
+            <div class="form-group mb-0">
+              <label> Wildcard Search</label>
+              <input type="text" id="myID" class="form-control" #searchValue />
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2" (click)="schedulerSearch(searchValue)">
+                Ok
+              </button>
+              <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

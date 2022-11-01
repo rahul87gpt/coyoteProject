@@ -1,0 +1,110 @@
+<div class="mainContent-innner">
+  <div class="d-flex align-items-center">
+    <h4 class="title flex-grow-1 mb-0">Recipes List</h4>
+    <div class="probtn-wrap d-flex text-right">
+      <button class="btn btn-blue mr-2" (click)="goToaddRecipePage()"><i class="icon fa fa-plus-circle"></i>
+        Add</button>
+      <button class="btn mr-2"><i class="icon fa fa-print"></i> Print</button>
+      <button class="btn mr-2" (click)="exportRecipeData()"><i class="icon fa fa-file-excel-o"></i> Export</button>
+      <!-- <button class="btn"><i class="icon fa fa-filter"></i> Filter</button> -->
+    </div>
+  </div>
+  <div class="recipe-table">
+    <div class="rebate-table-wrap bg-box mt-15 all-w">
+      <div class="table-responsive">
+        <table class="table ctm-table ctm-data-table" id="recipe-table">
+          <thead>
+            <tr>
+              <!-- <th>Product <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th> -->
+              <th>Product</th>
+              <th class="no-short"></th>
+              <th>Product Description</th>
+              <th class="no-short"></th>
+              <th>Outlet</th>
+              <th class="no-short"></th>
+              <th>Outlet Description</th>
+              <th class="no-short"></th>
+              <th>Recipe Description</th>
+              <th class="no-short"></th>
+              <th>Makes Qty</th>
+              <th class="no-short"></th>
+              <th class="no-short">Action</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let recipe of recipeData">
+              <tr>
+                <td>
+                  <a [routerLink]="['./update-recipe', recipe.id]">
+                    {{recipe.productNumber}}
+                  </a>
+                </td>
+                <td></td>
+                <td>{{recipe.productDescription}}</td>
+                <td></td>
+                <td>{{recipe.outletCode ? recipe.outletCode : 0}}</td>
+                <td></td>
+                <td>{{recipe.outletDesc}}</td>
+                <td></td>
+                <td>{{recipe.description}}</td>
+                <td></td>
+                <td>{{recipe.qty}}</td>
+                <td></td>
+                <td>
+                  <div class="tbHover-btnGroup">
+
+                    <a tooltip="Change" placement="left" class="tbHover-btn trash-btn"
+                      [routerLink]="['./update-recipe', recipe.id]"><i class="fa fa-pencil"></i></a>
+                    <a tooltip="Delete" placement="right" class="tbHover-btn trash-btn"
+                      (click)="deleteRecipe(recipe.id)"><i class="fa fa-trash"></i></a>
+                  </div>
+                </td>
+
+
+
+
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="bg-box mt-15">
+        <div class="table-responsive">
+            <table class="table ctm-table " id="recipe-table">
+                <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Product Description</th>
+                    <th>Outlet</th>
+                    <th>Outlet Description</th>
+                    <th>Recipe Description</th>
+                    <th>Makes Qty</th>
+                    <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let recipe of recipeData">
+                        <tr>
+                            <td  [routerLink]="['./update-recipe', recipe.id]">{{recipe.productNumber}}</td>
+                            <td  [routerLink]="['./update-recipe', recipe.id]">{{recipe.productDescription}}</td>
+                            <td  [routerLink]="['./update-recipe', recipe.id]">{{recipe.outletCode ? recipe.outletCode : 0}}</td>
+                            <td  [routerLink]="['./update-recipe', recipe.id]">{{recipe.outletDesc}}</td>
+                            <td  [routerLink]="['./update-recipe', recipe.id]">{{recipe.description}}</td>
+                            <td  [routerLink]="['./update-recipe', recipe.id]">{{recipe.qty}}</td>
+                            <td class="text-center">
+                                <div class="tbHover-btnGroup">
+                                 
+                                    <a tooltip="Change" placement="left" class="tbHover-btn trash-btn" [routerLink]="['./update-recipe', recipe.id]"><i class="fa fa-pencil"></i></a>
+                                    <a tooltip="Delete" placement="right" class="tbHover-btn trash-btn" (click)="deleteRecipe(recipe.id)"><i class="fa fa-trash"></i></a>
+                                 </div>
+                            </td>
+                        </tr> 
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div> -->
+</div>

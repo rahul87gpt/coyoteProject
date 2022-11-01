@@ -1,0 +1,1118 @@
+<div class="mainContent-innner">
+    <div class="Order-section">
+      <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0"> Invoicing History  {{totalInvoiceCount}} 
+            <!-- <span
+            id="totalRecordId">{{(recordOrderObj.total_api_records > 0) ? recordOrderObj.total_api_records : ''}}</span> -->
+        </h4>
+        <div class="probtn-wrap d-flex text-right" >
+          <button class="btn btn-blue mr-2" [hidden]="is_hidden_button" (click)="addInvoiceHistory()">
+  
+            <i class="icon fa fa-plus-circle" ></i> Add
+          </button>
+          <button [hidden]="is_hidden_button" class="btn mr-2"><i class="icon fa fa-print" ></i> Print</button>
+          <button class="btn mr-2" (click)="exportInvoiceingHistoryData()" [hidden]="is_hidden_button">
+            <i class="icon fa fa-file-excel-o" ></i> Export
+          </button>
+          <button [hidden]="is_hidden_button" class="btn btn-blue with-icon" data-toggle="modal" data-target="#inVoiceSearch" (click)="openInvoiceHistorySearchFilter()">
+            <i class="icon fa fa-filter"></i> Filter
+          </button>
+        </div>
+      </div>
+      <!-- /.action-topbar -->
+      <div class="Order-wrap bg-box mt-15 all-w">
+        <div class="Order-table-wrap">
+          <div class="table-responsive ctm-data-table">
+            <table class="table ctm-table" id="inVoicing-table">
+              <thead>
+                <tr>
+                  <th>Outlet <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Order No <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Supplier Name <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Type <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Status <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Posted Date <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Delivery No<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Invoice No <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Invoice Date <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Invoice Total <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Reference<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Gst Amt<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+  
+  
+  
+                  <th>Order Date<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Order Posted<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Delivery Date<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Delivery Posted<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Supplier<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Payment Due<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <th>Timestamp<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                  <!-- <th>Cover Days <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th> -->
+                  <th>Order Type <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+  
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let invoice of inVoicingData; let i = index" [ngClass]="selectedInvoiceIndex == i ? 'row-active'  : (invoice.typeName == 'ORDER' && invoice.statusName == 'ORDER') ? 'text-green' : ''" (click)="updateInvoice(invoice.id , i )" >
+                  <td >
+                    <!-- <a> -->
+                      {{ invoice.storeCode }}
+                    <!-- </a> -->
+                  </td>
+                  <td >
+                    {{
+                    invoice.orderNo
+                    }}
+                  </td>
+                  <td>
+                      {{
+                      invoice.supplierDesc?.length > 30
+                      ? invoice.supplierDesc?.substring(0, 30) + "..."
+                      : invoice?.supplierDesc
+                      }}
+                  </td>
+                  <td>
+                    {{ invoice?.typeName }}
+                  </td>
+                  <td>
+                    {{ invoice?.statusName }}
+                  </td>
+                  <td><span style="display: none;">
+                      {{ConvertDateToMiliSeconds(invoice?.postedDate)}}
+                    </span>{{invoice?.postedDate | customdatetimeformat}}</td>
+                  <td>{{ invoice?.deliveryNo }}</td>
+                  <td>
+                    {{ invoice?.invoiceNo }}
+                  </td>
+                  <td><span style="display: none;">
+                      {{ConvertDateToMiliSeconds(invoice?.invoiceDate)}}
+                    </span>{{invoice?.invoiceDate | customdatetimeformat}}</td>
+                  <td>
+                    {{ invoice?.invoiceTotal | currency: 'USD' }}
+                  </td>
+                  <td>{{ invoice?.reference }}</td>
+                  <td>{{ invoice?.gstAmt | currency: 'USD' }}</td>
+  
+  
+  
+                  <td><span style="display: none;"> {{ConvertDateToMiliSeconds(invoice?.createdDate)}}
+                    </span>{{invoice?.createdDate | customdatetimeformat}}</td>
+                  <td></td>
+                  <td><span style="display: none;"> {{ConvertDateToMiliSeconds(invoice?.deliveryDate)}}
+                    </span>{{invoice?.deliveryDate | customdatetimeformat}}</td>
+                  <td></td>
+                  <td>{{ invoice?.supplierCode }}</td>
+                  <!-- <td [routerLink]="['/orders/update', invoice.id]">
+                    {{ invoice.coverDays }}
+                  </td> -->
+                  <td [routerLink]="['/orders/update', invoice.id]">
+  
+                  </td>
+                  <!-- <td><span style="display: none;"> {{ConvertDateToMiliSeconds(invoice?.createdDate)}}
+                    </span>{{invoice?.createdDate | dateTimeFormate}}</td>
+                  <td> -->
+                  <td><span style="display: none;"> {{ConvertDateToMiliSeconds(invoice?.updatedAt)}}
+                    </span>{{invoice?.updatedAt | dateTimeFormate}}</td>
+                  <td>
+                    {{ invoice?.creationTypeName }}
+                  </td>
+  
+                  <td class="text-center no-sort">
+                    <div class="moreOption">
+                      <div class="tbHover-btnGroup">
+                        <button tooltip="Change" placement="left" class="tbHover-btn trash-btn" (click)="updateInvoice(invoice.id ,i)"
+                         ><i class="fa fa-pencil"></i></button>
+                        <button tooltip="Delete" placement="left" class="tbHover-btn trash-btn" (click)="deleteInvoicing(invoice.id)"
+                          ><i class="fa fa-trash"></i></button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade thm-popup" id="inVoiceOutlet" tabindex="-1" ole="dialog" aria-labelledby="Select_OutletModalLabel"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form [formGroup]="inVoiceOutletForm">
+            <div class="title-wrap mb-1">
+              <h4 class="title">Select Outlet</h4>
+            </div>
+            <div class="form-group custom-ng-select">
+              <label>Outlets</label>
+              <ng-select [items]="outletData" bindLabel="desc" bindValue="id" [virtualScroll]="true" [multiple]="false"
+                [clearable]="false" [clearOnBackspace]="false" [clearSearchOnAdd]="true" placeholder="Select Store"
+                formControlName="outletId" (change)="selected_Oulet($event)"
+                [ngClass]="{ 'is-invalid': submittedinVoiceOutletForm && f1.outletId.errors }">
+
+                <!-- It hold value on the basis of filter -->
+                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                  <div class="form-row">
+                    <span class="col-9 zone-overflow" title="{{ item?.desc }}">
+                      {{ item?.desc }}
+                    </span>
+                    <div class="col-3" title="{{ item?.code }}">
+                      {{ item.code }}
+                    </div>
+                  </div>
+                </ng-template>
+              </ng-select>
+              <div *ngIf="f1.outletId.errors" class="invalid-feedback">
+                <div *ngIf="f1.outletId.errors.required">
+                  Please select outlet
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button type="button" class="btn btn-success mr-2" (click)="selectInvoicehistoryOutlet()">
+                Yes
+              </button>
+              <button type="button" class="btn btn-grey" data-dismiss="modal">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="modal fade thm-popup" id="inVoiceSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form name="invoiceSearchForm" id="invoiceSearchForm">
+            <div class="title-wrap mb-2">
+              <h4 class="title"> Search Filter</h4>
+            </div>
+            <div class="form-group mb-0">
+              <label> Wildcard Search</label>
+              <input type="text" id="invoice_Search_filter" appUppercase class="form-control" #search_Value>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2" (click)="inVoiceSearch(search_Value.value)">Ok</button>
+              <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="modal fade bd-example-modal-lg thm-popup" id="invoice_report_Filter" tabindex="-1" role="dialog"
+  aria-labelledby="reportFilterModalLabel" aria-hidden="true" data-backdrop="static">
+  <form [formGroup]="salesReportForm">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body popup-box-width">
+          <div class="popup-box">
+            <div class="title-wrap mb-1">
+              <!-- <h4 class="title">{{salesByText}}</h4> -->
+              <div class="form-row align-items-center">
+                <div class="col-10">
+                  <h4 class="title mb-0">Invoicing History</h4>
+                </div>
+                <div class="col-2 text-right">
+                  <button type="button" class="btn btn-grey btn-grey-refresh" (click)="getDropdownsListItems()">
+                    <i class="icon fa fa-refresh"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-lg-6 col-xl-6">
+                <!-- DATE RANGE -->
+                <div class="group-from">
+                  <h5 class="title">
+                    Date Range <span class="text-danger">*</span>
+                  </h5>
+                  <div class="form-row align-items-center">
+                    <div class="col-5">
+                      <div class="form-group mb-0">
+                        <div class="ctm-calendar">
+                          <input type="text" onkeydown="return false" class="form-control"
+                            (bsValueChange)="onDateChange($event, 'startDate', true); specDateChange($event, f?.endDate?.value);"
+                            bsDatepicker [bsValue]="startDateBsValue" [bsConfig]="datepickerConfig" [maxDate]="maxDate"
+                            [ngClass]="{
+                              'is-invalid': submitted && f.startDate.errors
+                            }" />
+                          <div *ngIf="f.startDate.errors" class="invalid-feedback">
+                            <div>
+                              Start date is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="form-group mb-0 text-center">
+                        <label for="" class="mb-0">To</label>
+                      </div>
+                    </div>
+                    <div class="col-5">
+                      <div class="form-group mb-0">
+                        <div class="ctm-calendar">
+                          <input type="text" onkeydown="return false" class="form-control" bsDatepicker
+                            [bsValue]="endDateBsValue" [minDate]="lastEndDate || f?.startDate?.value"
+                            [bsConfig]="datepickerConfig"
+                            (bsValueChange)="onDateChange($event, 'endDate'); specDateChange(f?.startDate?.value, $event);"
+                            [maxDate]="maxDate" [ngClass]="{
+                              'is-invalid': submitted && f.endDate.errors
+                            }" />
+                          <div *ngIf="f.endDate.errors" class="invalid-feedback">
+                            <div>
+                              End date is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--Invoice DATE RANGE -->
+                <div class="group-from">
+                  <h5 class="title">
+                    Invoice Date Range 
+                  </h5>
+                  <div class="form-row align-items-center">
+                    <div class="col-5">
+                      <div class="form-group mb-0">
+                        <div class="ctm-calendar">
+                          <input [readonly]="isReadonly" type="text" (bsValueChange)="onDateChangeInvoice($event)"
+                            class="form-control" formControlName="orderInvoiceStartDate" bsDatepicker
+                            [bsConfig]="datepickerConfig" [maxDate]="maxDate" [ngClass]="{
+                              'is-invalid':
+                                submitted && f.orderInvoiceStartDate.errors
+                            }" />
+                          <div *ngIf="f.orderInvoiceStartDate.errors" class="invalid-feedback">
+                            <div *ngIf="f.orderInvoiceStartDate.errors.required">
+                              Invoice Start date is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="form-group mb-0 text-center">
+                        <label for="" class="mb-0">To</label>
+                      </div>
+                    </div>
+                    <div class="col-5">
+                      <div class="form-group mb-0">
+                        <div class="ctm-calendar">
+                          <input [readonly]="isReadonly" type="text" class="form-control" [minDate]="lastEndDateInvoice"
+                            formControlName="orderInvoiceEndDate" bsDatepicker [bsConfig]="datepickerConfig"
+                            [maxDate]="maxDate" [ngClass]="{
+                              'is-invalid':
+                                submitted && f.orderInvoiceEndDate.errors
+                            }" />
+                          <div *ngIf="f.orderInvoiceEndDate.errors" class="invalid-feedback">
+                            <div *ngIf="f.orderInvoiceEndDate.errors.required">
+                              Invoice End date is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="custom-control form-group custom-checkbox mb-0 mt-1">
+                      <input type="checkbox" class="custom-control-input" id="invoiceDates"
+                        formControlName="useInvoiceDates" />
+                      <label class="custom-control-label mb-0" for="invoiceDates">Use Invoice Dates</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Till Selection -->
+                <div class="group-from mb-0">
+                  <h5 class="title">Till Selection</h5>
+                  <div class="form-row align-items-center">
+                    <div class="col-12">
+                      <div class="form-group mb-0">
+                        <ng-select [items]="dropdownObj.tills" bindLabel="desc" bindValue="id" [virtualScroll]="false"
+                          placeholder="Select Till" formControlName="tillId" (search)="
+                          searchBtnAction(
+                            $event,
+                            reporterObj.dropdownField.tills
+                          )
+                        " (change)="setSelection($event)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <span title="{{ item?.desc }}">
+                                  {{ item?.desc }}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                              item.desc
+                            }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-xl-6">
+                <div class="group-from">
+                  <h5 class="title">Codes</h5>
+                  <div class="">
+                    <div class="accordion OutletRestList" id="accordionExample">
+
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Stores</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.stores" bindLabel="storeDetail" bindValue="id"
+                          [virtualScroll]="false" [multiple]="true" [clearSearchOnAdd]="true" [closeOnSelect]="false"
+                          placeholder="Select Store" formControlName="storeIds"
+                          (search)="searchBtnAction($event, reporterObj.dropdownField.stores)"
+                          (change)="setDropdownSelection(reporterObj.dropdownField.stores, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.stores, reporterObj.dropdownField.storeIds,
+                        true)" (add)="addOrRemoveItem($event, reporterObj.dropdownField.stores, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.stores, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.stores, 'clear_all', 
+                          reporterObj.dropdownField.storeIds)">
+
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.stores[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.desc }}">
+                                  {{ item?.desc }} {{selectAll(reporterObj.dropdownField.stores, item)}}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add button on top of the select and perform operations -->
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                addOrRemoveItem(
+                                  null,
+                                  reporterObj.dropdownField.stores,
+                                  reporterObj?.button_text?.stores,
+                                  reporterObj.dropdownField.storeIds
+                                )
+                              " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.stores }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                              item.storeDetail
+                            }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div> 
+
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Days of Week</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.days" bindLabel="name" bindValue="code" [virtualScroll]="false"
+                          [clearSearchOnAdd]="true" [closeOnSelect]="false" [multiple]="true" placeholder="Days of Week"
+                          formControlName="days" (change)="setDropdownSelection(reporterObj.dropdownField.days, $event)"
+                          (open)="getAndSetFilterData(reporterObj.dropdownField.days, reporterObj.dropdownField.daysId,
+                        true)" (add)="addOrRemoveItem($event, reporterObj.dropdownField.days, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.days, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.days, 'clear_all', 
+                          reporterObj.dropdownField.daysId)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ item?.name }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.days[item?.code] ? true : false" />&nbsp;
+                                <span title="{{ item?.name }}">
+                                  {{ item?.name }} {{selectAll(reporterObj.dropdownField.days, item)}}
+                                </span>
+
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add button on top of the select and perform operations -->
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                    addOrRemoveItem(
+                                      null,
+                                      reporterObj.dropdownField.days,
+                                      reporterObj?.button_text?.days,
+                                      reporterObj.dropdownField.daysId
+                                    )
+                                  " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.days }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                              item.name
+                            }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Zones</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.zones" bindLabel="name" bindValue="id" [virtualScroll]="false"
+                          [multiple]="true" [clearSearchOnAdd]="true" [closeOnSelect]="false" placeholder="Select Zone"
+                          formControlName="zoneIds" (search)="searchBtnAction($event,reporterObj.dropdownField.zones)"
+                          (change)="setDropdownSelection(reporterObj.dropdownField.zones, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.zones, reporterObj.dropdownField.zoneIds,
+                        true)" (add)="addOrRemoveItem($event, reporterObj.dropdownField.zones, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.zones, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.zones, 'clear_all', 
+                          reporterObj.dropdownField.zoneIds)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.zones[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.name }}">
+                                  {{ item?.name }} {{selectAll(reporterObj.dropdownField.zones, item)}}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add button on top of the select and perform operations -->
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                              
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                    addOrRemoveItem(
+                                      null,
+                                      reporterObj.dropdownField.zones,
+                                      reporterObj?.button_text?.zones,
+                                      reporterObj.dropdownField.zoneIds
+                                    )
+                                  " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.zones }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                              item.name
+                            }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div>  
+
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Departments</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.departments" bindLabel="desc" bindValue="id"
+                          [clearSearchOnAdd]="true" [closeOnSelect]="false" [virtualScroll]="false" [multiple]="true"
+                          placeholder="Select Department" formControlName="departmentIds" (search)="
+                          searchBtnAction(
+                            $event,
+                            reporterObj.dropdownField.departments
+                          )
+                        " (change)="setDropdownSelection(reporterObj.dropdownField.departments, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.departments, 
+                        reporterObj.dropdownField.departmentIds, true)"
+                          (add)="addOrRemoveItem($event, reporterObj.dropdownField.departments, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.departments, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.departments, 'clear_all', 
+                          reporterObj.dropdownField.departmentIds)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.departments[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.desc }}">
+                                  {{ item?.desc }} {{selectAll(reporterObj.dropdownField.departments, item)}}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add button on top of the select and perform operations -->
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                    addOrRemoveItem(
+                                      null,
+                                      reporterObj.dropdownField.departments,
+                                      reporterObj?.button_text?.departments,
+                                      reporterObj.dropdownField.departmentIds
+                                    )
+                                  " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.departments }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                              item.desc
+                            }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div> 
+                      
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Commodities</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.commodities" bindLabel="desc" bindValue="id"
+                          [clearSearchOnAdd]="true" [closeOnSelect]="false" [virtualScroll]="false" [multiple]="true"
+                          placeholder="Select Commodity" formControlName="commodityIds"
+                          (search)="searchBtnAction($event,reporterObj.dropdownField.commodities)"
+                          (change)="setDropdownSelection(reporterObj.dropdownField.commodities, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.commodities, 
+                          reporterObj.dropdownField.commodityIds, true)"
+                          (add)="addOrRemoveItem($event, reporterObj.dropdownField.commodities, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.commodities, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.commodities, 'clear_all', 
+                          reporterObj.dropdownField.commodityIds)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.commodities[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.desc }}">
+                                  {{ item?.desc }} {{selectAll(reporterObj.dropdownField.commodities, item)}}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add button on top of the select and perform operations -->
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                             
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                  addOrRemoveItem(
+                                    null,
+                                    reporterObj.dropdownField.commodities,
+                                    reporterObj?.button_text?.commodities,
+                                    reporterObj.dropdownField.commodityIds
+                                  )
+                                " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.commodities }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                              item.desc
+                            }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div> 
+                      
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Categories</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.categories" bindLabel="name" bindValue="id"
+                          [clearSearchOnAdd]="true" [closeOnSelect]="false" [virtualScroll]="false" [multiple]="true"
+                          placeholder="Select Category" formControlName="categoryIds"
+                          (search)="searchBtnAction($event,reporterObj.dropdownField.categories)"
+                          (change)="setDropdownSelection(reporterObj.dropdownField.categories, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.categories, 
+                          reporterObj.dropdownField.categoryIds, true)"
+                          (add)="addOrRemoveItem($event, reporterObj.dropdownField.categories, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.categories, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.categories, 'clear_all', 
+                          reporterObj.dropdownField.categoryIds)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.categories[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.name }}">
+                                  {{ item?.name }} {{selectAll(reporterObj.dropdownField.categories, item)}}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add button on top of the select and perform operations -->
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                             
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                  addOrRemoveItem(
+                                    null,
+                                    reporterObj.dropdownField.categories,
+                                    reporterObj?.button_text?.categories,
+                                    reporterObj.dropdownField.categoryIds
+                                  )
+                                " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.categories }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                              item.name
+                            }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div>
+
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Groups</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.groups" bindLabel="name" bindValue="id"
+                          [clearSearchOnAdd]="true" [closeOnSelect]="false" [virtualScroll]="false" [multiple]="true"
+                          placeholder="Select Group" formControlName="groupIds" (search)="
+                          searchBtnAction(
+                            $event,
+                            reporterObj.dropdownField.groups
+                          )
+                        " (change)="setDropdownSelection(reporterObj.dropdownField.groups, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.groups, 
+                          reporterObj.dropdownField.groupIds, true)"
+                          (add)="addOrRemoveItem($event, reporterObj.dropdownField.groups, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.groups, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.groups, 'clear_all', 
+                          reporterObj.dropdownField.groupIds)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.groups[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.name }}">
+                                  {{ item?.name }} {{selectAll(reporterObj.dropdownField.groups, item)}}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                             
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                  addOrRemoveItem(
+                                    null,
+                                    reporterObj.dropdownField.groups,
+                                    reporterObj?.button_text?.groups,
+                                    reporterObj.dropdownField.groupIds
+                                  )
+                                " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.groups }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+
+
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                              item.name
+                            }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Suppliers</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.suppliers" bindLabel="desc" bindValue="id"
+                          [clearSearchOnAdd]="true" [closeOnSelect]="false" [virtualScroll]="false" [multiple]="true"
+                          placeholder="Select Supplier" formControlName="supplierIds" (search)="
+                          searchBtnAction(
+                            $event,
+                            reporterObj.dropdownField.suppliers
+                          )
+                        " (change)="setDropdownSelection(reporterObj.dropdownField.suppliers, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.suppliers, 
+                          reporterObj.dropdownField.supplierIds, true)"
+                          (add)="addOrRemoveItem($event, reporterObj.dropdownField.suppliers, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.suppliers, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.suppliers, 'clear_all', 
+                          reporterObj.dropdownField.supplierIds)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.suppliers[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.desc }}">
+                                  {{ item?.desc }} {{
+                                  selectAll(reporterObj.dropdownField.suppliers, item)
+                                }}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add button on top of the select and perform operations -->
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                             
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                  addOrRemoveItem(
+                                    null,
+                                    reporterObj.dropdownField.suppliers,
+                                    reporterObj?.button_text?.suppliers,
+                                    reporterObj.dropdownField.supplierIds
+                                  )
+                                " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.suppliers }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                              item.desc
+                            }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div> 
+
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Manufacturers</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.manufacturers" bindLabel="name" bindValue="id"
+                          [virtualScroll]="true" [clearSearchOnAdd]="true" [closeOnSelect]="false" [multiple]="true"
+                          placeholder="Select Manufacturer" formControlName="manufacturerIds"
+                          (search)="searchBtnAction($event,reporterObj.dropdownField.manufacturers)"
+                          (change)="setDropdownSelection(reporterObj.dropdownField.manufacturers, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.manufacturers, 
+                        reporterObj.dropdownField.manufacturerIds, true)"
+                          (add)="addOrRemoveItem($event, reporterObj.dropdownField.manufacturers, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.manufacturers, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.manufacturers, 'clear_all', 
+                          reporterObj.dropdownField.manufacturerIds)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.manufacturers[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.name }}">
+                                  {{ item?.name }} {{selectAll(reporterObj.dropdownField.manufacturers, item)}}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                              item.name
+                            }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div>
+                     
+                    </div>
+                  </div>
+                </div>
+                <!-- All Selections -->
+                <div class="group-from">
+                  <h5 class="title">Selections</h5>
+                  <div class="Day_list">
+                    <div *ngIf="f?.startDate?.value">
+                      <h4>Date Range</h4>
+                      <ul>
+                        <li>
+                          {{ f?.startDate?.value | customdatetimeformat }}
+                          to
+                          {{ f?.endDate?.value | customdatetimeformat }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div *ngIf="f?.orderInvoiceStartDate?.value">
+                      <h4>Invoice Date Range</h4>
+                      <ul>
+                        <li>
+                          {{
+                            f?.orderInvoiceStartDate?.value
+                              | customdatetimeformat
+                          }}
+                          to
+                          {{
+                            f?.orderInvoiceEndDate?.value | customdatetimeformat
+                          }}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="" *ngIf="selectedValues.stores">
+                      <h4>Outlets</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.stores?.length !== selectedValues?.stores?.length); else allStoSelected">
+                          <li *ngFor="let store of selectedValues.stores">
+                            {{ store.storeDetail }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allStoSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.zones">
+                      <h4>Zones</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.zones?.length !== selectedValues?.zones?.length); else allZoneSelected">
+                          <li *ngFor="let zone of selectedValues.zones">
+                            {{ zone.name }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allZoneSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues?.days?.length">
+                      <h4>Days</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.days?.length !== selectedValues?.days?.length); else allDaysSelected">
+                          <li *ngFor="let week of selectedValues.days">
+                            {{ week.name }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allDaysSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.departments">
+                      <h4>Departments</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.departments?.length !== selectedValues?.departments?.length); else allDeptSelected">
+                          <li *ngFor="let deprt of selectedValues.departments">
+                            {{ deprt.desc }} &nbsp;-&nbsp;{{ deprt.code }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allDeptSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.commodities">
+                      <h4>Commodities</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.commodities?.length !== selectedValues?.commodities?.length); else allCommSelected">
+                          <li *ngFor="let commodity of selectedValues.commodities">
+                            {{ commodity.desc }}&nbsp;-&nbsp;{{ commodity.code }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allCommSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.categories">
+                      <h4>Categories</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.categories?.length !== selectedValues?.categories?.length); else allCateSelected">
+                          <li *ngFor="let category of selectedValues.categories">
+                            {{ category.name }}&nbsp;-&nbsp;{{ category.code }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allCateSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.groups">
+                      <h4>Groups</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.groups?.length !== selectedValues?.groups?.length); else allGrpSelected">
+                          <li *ngFor="let group of selectedValues.groups">
+                            {{ group.name }}&nbsp;-&nbsp;{{ group.code }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allGrpSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.suppliers">
+                      <h4>Suppliers</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.suppliers?.length !== selectedValues?.suppliers?.length); else allSuppSelected">
+                          <li *ngFor="let supplier of selectedValues.suppliers">
+                            {{ supplier.desc }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allSuppSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.manufacturers">
+                      <h4>Manufacturer</h4>
+                      <ul>
+                        <li *ngFor="let manuf of selectedValues.manufacturers">
+                          {{ manuf.name }} &nbsp;-&nbsp;{{ manuf.code }}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mt-1" *ngIf="selectedValues?.members?.length">
+                      <h4>Member</h4>
+                      <ul>
+                        <li *ngFor="let memf of selectedValues.members">
+                          {{ memf.memB_NUMBER }}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mt-1" *ngIf="selectedTillValues">
+                      <h4>Till</h4>
+                      <ul>
+                        <li> Only Till Number : {{selectedTillValues }}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="btn-wrap text-right mt-10">
+                  <a class="btn btn-grey mr-2" (click)="resetForm()">Clear Selections</a>
+                  <button class="btn btn-blue mr-2" (click)="getInvoiceHistory()">Ok</button>
+                  <a class="btn btn-grey" data-dismiss="modal" (click)="isCancelApi()">Cancel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+

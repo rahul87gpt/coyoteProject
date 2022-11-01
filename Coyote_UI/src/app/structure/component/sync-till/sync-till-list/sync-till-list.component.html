@@ -1,0 +1,278 @@
+<div class="mainContent-innner">
+    <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">Sync Tills</h4>
+        <div class="probtn-wrap d-flex text-right">
+            <button class="btn btn-blue mr-2" (click)="addOrUpdateSyncTill()"><i class="icon fa fa-plus-circle"></i> Add</button>
+            <button class="btn mr-2"><i class="icon fa fa-print"></i> Print</button>
+            <button class="btn mr-2" (click)="exportSycTillData()"><i class="icon fa fa-file-excel-o"></i> Export</button>
+            <button class="btn" data-toggle="modal" data-target="#tillSearch"><i class="icon fa fa-filter"></i> Filter</button>
+        </div>
+    </div>
+    <div class="bg-box mt-15">
+        <div class="table-responsive">
+            <table class="table ctm-table" id= "sycTill-table">
+                <thead>
+                    <tr>
+                        <ng-container *ngFor="let column of syncListColumns">
+                            <th>{{column}}</th>
+                        </ng-container>
+                        <th class="no-sort">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let syncTill of syncTillObj.till">
+                        <tr>
+                            <td>
+                                <a (click)="addOrUpdateSyncTill(syncTill)">
+                                    {{syncTill.tillCode}}
+                                </a>
+                            </td>
+                            <td>{{syncTill.tillDesc}}</td>
+                            <td>{{syncTill.storeCode}}</td>
+                            <td>{{syncTill.productSync}}</td>
+                            <td>{{syncTill.keypadSync}}</td>
+                            <td>{{syncTill.cashierSync}}</td>
+                            <td>{{syncTill.accountSync}}</td>
+  <!-- Last sync -->        <td><span style="display: none;"> {{ConvertDateToMiliSeconds(syncTill?.updatedAt)}}</span>{{syncTill.updatedAt | dateTimeFormate}}</td>
+                            <td><span style="display: none;"> {{ConvertDateToMiliSeconds(syncTill?.tillActivity)}}</span>{{syncTill.tillActivity | dateTimeFormate}}</td>
+                            <td>{{syncTill.clientVersion}}</td>
+                            <td>{{syncTill.posVersion}}</td>
+
+                            <td class="no-sort">
+                                <div class="tbHover-btnGroup">
+                                    <button tooltip="Change" class="tbHover-btn trash-btn" 
+                                        (click)="addOrUpdateSyncTill(syncTill)"><i class="fa fa-pencil-square-o"></i>
+                                    </button>
+                                    <button tooltip="Delete" class="tbHover-btn trash-btn" 
+                                        (click)="deleteOrCancelSyncTill('delete')"><i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade thm-popup bd-example-modal-xl" id="addOrUpdateSyncTillPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form name="syncTillForm">
+                            <div class="d-flex align-items-center mb-4">
+                                <h4 class="title flex-grow-1 mb-0">Sync Tills</h4>                              
+                            </div>
+                            <div class="group-from mb-0">
+                                <h5 class="title">Apply to Selected Outlets below</h5>
+                                <div class="form-row form-group align-items-center mb-0">
+                                    <div class="col-lg-12">
+                                        <div class="d-flex form-group mb-0">                                        
+                                            <div class="custom-control custom-checkbox col">
+                                                <input type="checkbox" class="custom-control-input" id="product1" 
+                                                    formControlName="product"
+                                                    [checked]="f.product.value"
+                                                    (change)="onCheckOrDropdownChange({
+                                                        product: $event.target.checked, 
+                                                        removeSync: $event.target.checked ? false : f.removeSync.value
+                                                    })"
+                                                >
+                                                <label class="custom-control-label" for="product1">
+                                                    <span class="label-mt-2 d-block mb-0">
+                                                        Sync Products
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col">
+                                                <input type="checkbox" class="custom-control-input" id="keypad1" 
+                                                    formControlName="keypad"
+                                                    [checked]="f.keypad.value"
+                                                    (change)="onCheckOrDropdownChange({
+                                                        keypad: $event.target.checked, 
+                                                        removeSync: $event.target.checked ? false : f.removeSync.value
+                                                    })"
+                                                >
+                                                <label class="custom-control-label" for="keypad1">
+                                                    <span class="label-mt-2 d-block mb-0">
+                                                        Sync Keypads
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col">
+                                                <input type="checkbox" class="custom-control-input" id="cashier1" 
+                                                    formControlName="cashier"
+                                                    [checked]="f.cashier.value"
+                                                    (change)="onCheckOrDropdownChange({
+                                                        cashier: $event.target.checked, 
+                                                        removeSync: $event.target.checked ? false : f.removeSync.value
+                                                    })"
+                                                >
+                                                <label class="custom-control-label" for="cashier1">
+                                                    <span class="label-mt-2 d-block mb-0">
+                                                        Sync Cashiers
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox col">
+                                                <input type="checkbox" class="custom-control-input" id="account1" 
+                                                    formControlName="account"
+                                                    [checked]="f.account.value"
+                                                    (change)="onCheckOrDropdownChange({
+                                                        account: $event.target.checked, 
+                                                        removeSync: $event.target.checked ? false : f.removeSync.value
+                                                    })"
+                                                >
+                                                <label class="custom-control-label" for="account1">
+                                                    <span class="label-mt-2 d-block mb-0">
+                                                        Sync Accounts
+                                                    </span>
+                                                </label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="removeSync1" 
+                                                    formControlName="removeSync"
+                                                    [checked]="f.removeSync.value"
+                                                    (change)="onCheckOrDropdownChange({
+                                                        removeSync: $event.target.checked, 
+                                                        account: $event.target.checked ? false : f.account.value,
+                                                        cashier: $event.target.checked ? false : f.cashier.value,
+                                                        keypad: $event.target.checked ? false : f.keypad.value,
+                                                        product: $event.target.checked ? false : f.product.value
+                                                    })"
+                                                >
+                                                <label class="custom-control-label" for="removeSync1">
+                                                    <span class="label-mt-2 d-block mb-0">
+                                                        Remove Sync Requests
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 text-right"><div class="form-group mb-0">
+                                        <label class="mb-0 fontSize-11"><sup>*</sup>Please Select At least one from <b> Product, Keypad, Cashier, Account or 
+                                            RemoveSync</b></label>
+                                    </div></div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group mb-0">
+                                            <!-- <select class="form-control" 
+                                                (change)="onCheckOrDropdownChange($event.target.value, 'zone')"
+                                            >
+                                                 <option value="adfdasfdasfdas" disabled selected></option>
+                                                <option *ngFor="let zone of syncTillObj.zone" [value]="zone.id">
+                                                    {{zone?.name}} &nbsp;&nbsp; {{zone?.code}}
+                                                </option>
+                                            </select> -->
+
+                                            <ng-select
+                                                [items]="syncTillObj.zone"
+                                                bindLabel="name"
+                                                bindValue="id"
+                                                [multiple]="false"
+                                                [virtualScroll]="true"
+                                                [clearable]="false"
+                                                [clearSearchOnAdd]="true"
+                                                [clearOnBackspace]="false"
+                                                [searchable]="false"
+                                                [closeOnSelect]="true"
+                                                (change)="onCheckOrDropdownChange($event, 'zone')"
+                                                placeholder="Select Zone"
+                                            >
+                                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                                    <div class="form-row">
+                                                        <div class="col-9 zone-overflow">
+                                                        <span title="{{ item?.name }}">
+                                                            {{ item?.name }}
+                                                        </span>
+                                                        </div>
+                                                        <div class="col-3" title="{{ item?.code }}">
+                                                        {{ item?.code }}
+                                                        </div>
+                                                    </div>
+                                                </ng-template>
+
+                                                <!-- <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                                                    <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                                                        <span class="ng-value-label">{{item.desc}}</span>
+                                                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                    </div>
+                                                    <div class="ng-value" *ngIf="items.length > 2">
+                                                        <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                                                    </div>
+                                                </ng-template> -->
+                                            </ng-select>
+
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div> 
+                            <div class="zoneOutlets-checklist border mt-15">
+                                <div class="form-row form-group align-items-center mb-0">
+                                    <ng-container *ngFor="let store of syncTillObj.store">
+                                        <div class="ctmCheckbox-wra col-lg-4">
+                                            <div class="custom-control form-group mb-0 custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="{{store.id || store.storeId}}"
+                                                    (click)="selectDeselectStoreIds(store, 'updated', $event);"
+                                                    [checked]="syncTillObj.active_store_obj[(store.id || store.storeId)] ? true : false"
+                                                >
+                                                <label class="custom-control-label" for="{{store.id || store.storeId}}">
+                                                    <span class="label-mt-2 d-block">
+                                                        {{(store?.desc || store?.storeName) + ' ' + (store?.code || store?.storeCode)}}
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div> 
+                            <div class="form-row align-items-center pt-3">
+                                <div class="col-lg-6">
+                                <div class="custom-control form-group mb-0 custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="Control01"
+                                        [checked]="f?.active_zone_outlet?.value"
+                                        (change)="onCheckOrDropdownChange($event.target.checked, 'filter_active_till')"
+                                    >
+                                    <label class="custom-control-label" for="Control01">
+                                        <span class="label-mt-2 d-block">
+                                            Only Tills with Active Status
+                                        </span>
+                                    </label>
+                                 </div>
+                                </div>
+                                 <div class="col-lg-6 text-right">                                    
+                                    <button type="button" class="btn btn-blue mr-2" (click)="onSubmit()">Apply</button>
+                                    <button type="button" class="btn btn-grey" (click)="deleteOrCancelSyncTill('cancel')">Cancel</button>
+                                </div>
+                            </div>
+                    </form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade thm-popup" id="tillSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form name="syncTillSearchForm" id="syncTillSearchForm">
+						<div class="title-wrap mb-2">
+							<h4 class="title"> Search Filter </h4>
+						</div>
+						<div class="form-group mb-0">
+							<label> Wildcard Search</label>
+							<input type="text"  id="myID" class="form-control" #searchValue>
+						</div>
+						<div class="btn-wrap text-right mt-10">
+							<a href="javascript:void(0);" class="btn btn-blue mr-2" (click)="sycTillSearch(searchValue.value)">Ok</a>
+							<button class="btn btn-grey" data-dismiss="modal" >Cancel</button>
+						</div>
+					</form>	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

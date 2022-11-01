@@ -1,0 +1,140 @@
+<div class="mainContent-innner"  *ngIf="!pdfData">
+    <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">Print Special Price Labels</h4>
+        <!-- <div class="probtn-wrap d-flex text-right">
+            <button type="button" class="btn btn-blue" data-toggle="modal" data-target="#PromotionLabel">Print Special Price Labels</button>
+        </div> -->
+    </div>
+    <div class="bg-box mt-15">
+        <div class="table-responsive">
+            <table class="table ctm-table" id="specialPrice-table">
+                <thead>
+                    <tr>
+                        <th>Outlet</th>
+                        <th>Outlet Name</th>
+                        <th class="text-center">Special Price Labels</th>
+                        <th>From</th>
+                        <th>To</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let specialPrice of printSpecialPrice">
+                        <td >
+                            <a data-target="#specialLabel" (click)="updatePrintSpecialLabels(specialPrice)">
+                                {{specialPrice.storeCode}}
+                            </a>
+                        </td>
+                        <!-- <td data-toggle="modal" data-target="#specialLabel" (click)="updatePrintSpecialLabels(specialPrice)">{{specialPrice.storeCode}}</td> -->
+                        <td data-toggle="modal" data-target="#specialLabel" (click)="updatePrintSpecialLabels(specialPrice)">{{specialPrice.storeDesc}}</td>
+                        <td data-toggle="modal" data-target="#specialLabel" (click)="updatePrintSpecialLabels(specialPrice)" class="text-center">{{specialPrice.specPrice}}</td>
+                        <td data-toggle="modal" data-target="#specialLabel" (click)="updatePrintSpecialLabels(specialPrice)"><span style="display: none;"> {{ConvertDateToMiliSeconds(specialPrice.specFrom)}} </span>{{specialPrice.specFrom | customdatetimeformat}}</td>
+                        <td data-toggle="modal" data-target="#specialLabel" (click)="updatePrintSpecialLabels(specialPrice)"><span style="display: none;"> {{ConvertDateToMiliSeconds(specialPrice?.specTo)}} </span>{{specialPrice?.specTo | customdatetimeformat}}</td>
+                        <!-- <td data-toggle="modal" data-target="#specialLabel" (click)="updatePrintSpecialLabels(specialPrice)">{{specialPrice.specFrom | customdatetimeformat}}</td>
+                        <td data-toggle="modal" data-target="#specialLabel" (click)="updatePrintSpecialLabels(specialPrice)">{{specialPrice.specto | customdatetimeformat}}</td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup" id="specialLabel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+              <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form  [formGroup]="printSpecialPriceForm">
+                        <div class="title-wrap mb-1">
+                            <h4 class="title">Print Special Price Labels</h4>
+                        </div>
+                        <div class="form-group">
+                            <label>Outlet</label>
+                            <select class="form-control"  formControlName="storeId" disabled>
+                                <option [value]="store.id" *ngFor="let store of storeData">
+                                    {{store.desc}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-0 form-row align-items-center*
+                        ">
+                          <label class="col-md-12 mb-1"
+                            >Label Type</label
+                          >
+                          <div class="col-md-12 range-drop mb-1">
+                            <ng-select
+                              [items]="labelType"                              
+                              bindLabel="desc"
+                              bindValue="code"
+                              [multiple]="false"
+                              [virtualScroll]="true"
+                              [clearable]="false"                              
+                              placeholder="Select Label Type"
+                              formControlName="defaultLabelId"
+                            >
+                              <!-- It hold value on the basis of filter -->
+                            
+                              <ng-template
+                                ng-option-tmp
+                                let-item="item"
+                                let-item$="item$"
+                                let-index="index" 
+                              >
+                                <div class="form-row">
+                                  <span class="col-9 zone-overflow text-left">
+                                    {{ item?.desc }}
+                                  </span>
+                                  <div class="col-3 text-right" title="{{ item?.name }}">
+                                    {{ item?.code }}
+                                  </div>
+                                </div>    
+                              </ng-template>
+                            </ng-select>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                            <!-- <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Label Type</label>
+                                    <select class="form-control"  formControlName="defaultLabelId">
+                                        <option [ngValue]="label.code" *ngFor="let label of labelType">{{label.name}}</option>
+                                    </select>
+                                </div>
+                            </div> -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Price Levels</label>
+                                    <select class="form-control"  formControlName="priceLevel" disabled>
+                                        <option [ngValue]="price.id" *ngFor="let price of price_level">
+                                            {{price.price}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Selections</label>
+                            <textarea name="" id="" rows="3" class="form-control" [readonly]="true">Start Date {{specFromDate | customdatetimeformat }} End Date {{specToDate | customdatetimeformat}} </textarea>
+                        </div>    
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-blue mr-2" (click)="updatePrintSpecialLabels(null, 'submitted')"> ok</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>                    
+              </div>
+        </div>
+    </div>
+  </div>
+  <ng-container *ngIf="pdfData">
+    <div class="bg-box">    
+        <div class="text-right mb-2">
+            <button type="button" class="btn btn-blue" (click)="updatePrintSpecialLabels(null, 'close')">Close</button>
+        </div>
+        <ngx-extended-pdf-viewer
+            [src]="pdfData"
+            [height]="'90vh'"
+            [useBrowserLocale]="true"
+            [textLayer]="true"
+            [showHandToolButton]="true"
+        ></ngx-extended-pdf-viewer>
+    </div>
+</ng-container>

@@ -1,0 +1,356 @@
+<div class="mainContent-innner">
+  <div class="promo-mixmatch-section">
+    <div class="d-flex align-items-center">
+      <h4 class="title flex-grow-1 mb-0">Promotion Batches
+          <span id="totalRecordId">{{(recordObj.total_api_records > 0) ? recordObj.total_api_records : ''}}</span>
+			</h4>
+      <div class="probtn-wrap d-flex text-right">
+        <button class="btn btn-blue mr-2" [routerLink]="['./change-promotion']">
+          <i class="icon fa fa-plus-circle"></i> Add
+        </button>
+        <button class="btn mr-2"><i class="icon fa fa-print"></i> Print</button>
+        <button class="btn mr-2" (click)="exportPromotionsData()">
+          <i class="icon fa fa-file-excel-o" ></i> Export
+        </button>
+        <button class="btn with-icon mr-2" data-toggle="modal" data-target="#promotionSearch" (click)="openPromotionProductSearchFilter()">
+          <i class="icon fa fa-filter" ></i> Filter
+        </button>
+      </div>
+    </div>
+    <!-- /.action-topbar -->
+    <div class="promo-mixmatch-wrap">
+      <div class="custom-control ml-2 custom-checkbox active-custom">
+        <input
+        type="checkbox"
+        class="custom-control-input"
+        id="promotion"
+        [checked]="true"
+        (click)="filterPromotionData($event.target.checked)"
+      />
+      <label
+        class="custom-control-label mb-0 show-only"
+        for="promotion"
+      >
+        Show Only Active Promotions
+      </label>
+      </div>
+      <div class="promo-mixmatch-table-wrap bg-box mt-15 all-w">
+        <div class="table-responsive ctm-data-table">
+          <table class="table ctm-table" id="promotions-table">
+            <thead>
+              <tr>
+                <th>Status
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Promo Code
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Promotion Description
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Status
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Promo Type
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Group
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Start
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>End
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Out Zone
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Mon
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Tue
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Wed
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Thu
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Fri
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Sat
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Sun
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Report Group
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Promo Source
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <th>Date Created
+                  	<i class="ml-1 fa fa-long-arrow-up"></i>
+									<i class="fa fa-long-arrow-down"></i>
+                </th>
+                <!-- <th>Date Created</th> -->
+                <th class="no-sort">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let promotion of promotions">
+                <tr [ngClass]="{'red-all-text': promotion.id === promoId ? true : false}">
+                  <!-- <td class="text-center">
+                    <div class="status-icons">
+                      <img
+                        *ngIf="promotion.status"
+                        src="assets/images/status-true.svg"
+                        alt=""
+                      />
+                      <img
+                        *ngIf="!promotion.status"
+                        src="assets/images/status-false.svg"
+                        alt=""
+                      />
+                    </div>
+                    <p style="display: none;"> {{promotion.status ? 'Active' : 'Inactive'}} </p>
+
+                 
+                  </td> -->
+                  <td>
+										<span class="status-check"[ngClass]="promotion.status ? 'status-true' : 'status-false'"
+										></span>
+										<div style="display: none;">{{promotion.status ? 'Active' : 'Inactive'}} </div>
+									</td>
+                  <td  [routerLink]="['./change-promotion/' + promotion.id]">
+                   
+                    <a >{{ promotion?.code }}</a>
+                  </td>
+                  <td>{{ promotion?.desc }}</td>
+                  <td>{{ promotion.status && promotion.status=== true?"Active":"Inactive"  }}</td>
+                  <td >{{ promotion?.promotionType }}</td>
+                  <td >{{ promotion.group ? promotion.group : '' }}</td>
+                  <td><span style="display: none;"> {{ConvertDateToMiliSeconds(promotion?.start )}} </span>{{promotion?.start  | customdatetimeformat}}</td>
+                  <td><span style="display: none;"> {{ConvertDateToMiliSeconds(promotion?.end )}} </span>{{promotion?.end  | customdatetimeformat}}</td>
+                  <!-- <td >{{ promotion?.start | customdatetimeformat}}</td>
+                  <td >{{ promotion?.end | customdatetimeformat }}</td> -->
+                  <td >{{ promotion?.zoneCode }}</td>
+                  <td >
+                    {{
+                      promotion.availibility && promotion.availibility.length
+                        ? promotion.availibility[1]
+                        : "N"
+                    }}
+                  </td>
+                  <td >
+                    {{
+                      promotion.availibility && promotion.availibility.length
+                        ? promotion.availibility[2]
+                        : "N"
+                    }}
+                  </td>
+                  <td  >
+                    {{
+                      promotion.availibility && promotion.availibility.length
+                        ? promotion.availibility[3]
+                        : "N"
+                    }}
+                  </td>
+                  <td> 
+                    {{
+                      promotion.availibility ? promotion.availibility[4] : "N"
+                    }}
+                  </td>
+                  <td>
+                    {{
+                      promotion.availibility && promotion.availibility.length
+                        ? promotion.availibility[5]
+                        : "N"
+                    }}
+                  </td>
+                  <td>
+                    {{
+                      promotion.availibility && promotion.availibility.length
+                        ? promotion.availibility[6]
+                        : "N"
+                    }}
+                  </td>
+                  <td>
+                    {{
+                      promotion.availibility && promotion.availibility.length
+                        ? promotion.availibility[0]
+                        : "N"
+                    }}
+                  </td>
+                  <td>{{ promotion?.rptGroup }}</td>
+                  <td [routerLink]="['./change-promotion/' + promotion.id]">{{ promotion?.source }}</td>
+                  <td><span style="display: none;"> {{ConvertDateToMiliSeconds(promotion?.createdAt)}} </span>{{promotion?.createdAt | customdatetimeformat }}</td>
+                  <!-- <td>{{promotion.createdAt}}</td> -->
+                  <!-- (click)="changePromotionDetails(promotion.id)" -->
+                  <td class="no-sort">
+                    <div class="tbHover-btnGroup">
+                      <button
+                        tooltip="Change" placement="left"
+                        class="tbHover-btn trash-btn"
+                        [routerLink]="['./change-promotion/' + promotion.id]"
+                      >
+                        <i class="fa fa-pencil"></i>
+                      </button>
+                      <button
+                        tooltip="Delete" placement="left"
+                        class="tbHover-btn trash-btn"
+                        (click)="deletePromotions(promotion.id)"
+                      >
+                        <i class="fa fa-trash"></i>
+                      </button>
+                      <!-- data-toggle="modal" -->
+                      <!-- data-target="#SelectOutlet" -->
+                      <button
+                        tooltip="Clone" placement="left" 
+                        class="tbHover-btn trash-btn"
+                        data-toggle="modal" data-target="#clonePromoBatch"
+                        (click)="setPromotionDetails(promotion)"
+                      >
+                        <i class="fa fa-copy"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-md thm-popup" id="clonePromoBatch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <form [formGroup]="clonePromoForm">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                        <div class="title-wrap mb-1">
+                            <h4 class="title">Clone Promo Batch</h4>
+                        </div>    
+                        <div class="form-group">
+                            <label class="mb-0">Clone Promo Batch</label>
+                            <div class="form-row align-items-center">
+                                <div class="col-8">
+                                  <input [readonly]="true" type="text" class="form-control" formControlName="clonePromoBatch" />
+                                </div>
+                                <div class="col-4">
+                                    <button type="button" class="btn btn-blue btn-block input-btn text-uppercase"> {{selectedPromotion.promotionType}} </button>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <label class="mb-0">New Promo Code</label>
+                            <input type="text" class="form-control" formControlName="code" maxlength="15" [ngClass]="{'is-invalid': submitted && f.code.errors}" />
+                              <div *ngIf=" f.code.errors" class="invalid-feedback">
+                                <div *ngIf="f.code.errors.required">
+                                  Code is required
+                                </div>
+                                <div *ngIf="f.code.errors.pattern">
+                                  space is not allowed
+                                </div>
+                              </div>
+                        </div>  
+                        <div class="form-group">
+                            <label class="mb-0">New Description</label>
+                            <input type="text" class="form-control" formControlName="desc" [ngClass]="{
+                              'is-invalid': submitted && f.desc.errors
+                            }" />
+                            <div *ngIf="f.desc.errors" class="invalid-feedback">
+                              <div *ngIf="f.desc.errors.required">
+                                Description is required
+                              </div>
+                            </div>
+                        </div>  
+                        <div class="form-group">
+                            <label class="mb-0">Only Items in Outlet</label>
+                            <div class="d-flex align-items-center">
+                              <select class="form-control" formControlName="outletId">
+                                <option [ngValue]="null">Select Outlet</option>
+                                <ng-container *ngFor="let store of outlets">
+                                  <option [value]="store.id">{{ store.storeDetail }}</option>
+                                </ng-container>
+                              </select>
+                                <button type="button" class="btn btn-grey input-btn" (click)="resetStore()"> Clear</button>                                    
+                            </div>
+                            <div class="">
+                                <label for="" class="mb-0 d-block fontSize-11 mt-1">(Optional)</label>
+                            </div>
+                        </div> 
+                        <div class="form-group mb-0">
+                            <label class="mb-0">Only Items in Zone</label>
+                            <div class="d-flex align-items-center">
+                              <select class="form-control" formControlName="zoneId">
+                                <option [ngValue]="null">Select Zone</option>
+                                <ng-container *ngFor="let zoneItem of zones">
+                                  <option [value]="zoneItem.id">{{ zoneItem.name }}</option>
+                                </ng-container>
+                              </select>
+                                <button type="button" class="btn btn-grey input-btn" (click)="resetZone()"> Clear</button>                                    
+                            </div>
+                            <div class="">
+                                <label for="" class="mb-0 d-block fontSize-11 mt-1">(Optional)</label>
+                            </div>
+                        </div> 
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-blue mr-2" (click)="clonePromotionBatch()">Ok</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="resetCloneBatchForm()">Cancel</button>
+                        </div>
+                </div>                    
+            </div>
+        </div>
+    </div>
+  </form>
+</div>
+<div class="modal fade thm-popup" id="promotionSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form name = "searchForm" id = "searchForm">
+						<div class="title-wrap mb-2">
+							<h4 class="title">Search Filter</h4>
+						</div>
+						<div class="form-group mb-0">
+							<label>Description Wildcard</label>
+							<input type="text" appUppercase  id="promotionSearch_product_search_filter" class="form-control" #searchValue>
+						</div>
+						<div class="btn-wrap text-right mt-10">
+							<button class="btn btn-blue mr-2" (click)="promotionSearch(searchValue, true)" >Ok</button>
+							<button class="btn btn-grey"   data-dismiss="modal" >Cancel</button>
+						</div>
+					</form>	
+				</div>					
+			</div>
+		</div>
+	</div>
+</div>
+

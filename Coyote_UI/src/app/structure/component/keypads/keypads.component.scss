@@ -1,0 +1,161 @@
+.table-rescroll{
+    height: 400px;
+    overflow-y: auto;
+    .ctm-table {
+        tbody {
+            tr{
+                td{
+                    width: 100px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    max-width: 100px;
+                }                
+            }
+        }
+    }
+}
+.ctm-table {
+    tbody {
+        tr.active{
+            background-color: #5145cd;
+            td{
+                color: #fff;
+            }                
+        }
+    }
+}
+.keyLable-control {
+    margin-bottom: 10px;
+}
+.keyLable-list{
+    max-height: 242px;
+    overflow: auto;
+    border: solid 1px #ced4da;
+    border-radius: 4px;
+    button{
+        color: #3b3f5c;
+        font-size: 12px;
+        text-align: left;
+        display: block;
+        width: 100%;
+        border: none;
+        border-bottom: solid 1px #ced4da;
+        padding: 0px 10px;
+        background: #fff;
+        &:last-child{
+            border-bottom: none;
+        }
+        &.active{
+            // color: #5145cd;
+            // background: #efefef;
+            color: #000000;
+            background: #807c8a;
+        }
+    }
+}
+// .keypadProductTable-wrap{
+//     height: calc(100vh - 160px);
+// }
+
+.visited-color{
+    background-color: linear-gradient(#81858d, #414c57) !important;
+}
+.p-relative {
+    position: relative;
+    .selected-text {
+        position: absolute;
+        top: 3px;
+        left: 0;
+        height: 19px;
+        background-color: #fff;
+        width: calc(100% - 43px);
+        margin-left: 15px;
+        font-size: 12px;
+}
+}
+.border-1{
+    border:1px solid #ccc;
+}
+.modal-back:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 20%);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+.keypad-func{
+    min-width: 374px;
+    max-width: 374px;
+}
+.keypad-tabs{
+    max-width:calc(100% - 374px);
+    > .group-from {
+        margin-top: 0;
+    }
+}
+// .keypad-func .col-md-3 {
+//     min-width: 80px;
+// }
+// .keypad-func .col-md-9 {
+//     max-width:calc(100% - 80px);
+// }
+// .KeypadSearch-w .col-md-2 {
+//     min-width: 80px;
+// }
+// .KeypadSearch-w .col-md-10 {
+//     max-width:calc(100% - 80px);
+// }
+.keypadProductTable-wrap {
+    min-height: 400px;
+}
+.keyLable-list button{
+    height: 24px;
+}
+h4.keypad-title {
+    font-size: 15px;
+}
+.pass-show {
+    position: absolute;
+    right: 9px;
+    bottom: 0;
+}
+span.input-group-text {
+    padding: 4px;
+    background-color: transparent;
+    border: 0 none;
+    border-radius: 0;
+   
+}
+.pass-input{
+    padding-right: 24px;
+}
+.keypad-inner-body{
+    max-height: calc(100vh - 115px);
+    overflow: auto;
+}
+@media (min-width: 576px){
+    .modal-dialog.keypad-w {
+        margin: 0.2rem auto;
+    }
+}
+
+@media (min-width: 1200px){
+.modal-xl.keypad-w {
+    max-width: 920px;
+}
+}
+
+// .green {
+//     background-color: yellow;
+// }
+.ngselect .ng-select-searchable.is-invalid .ng-select-container{
+    background-image: none;
+}
+.keypad-w .btn-wrap {
+    padding-top: 10px;
+    margin-top: 0;
+}

@@ -1,0 +1,84 @@
+<div class="mainContent-innner">
+    <div class="pricingApnSearch-section">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">Apn Search 
+				<span id="totalRecordId">{{(recordObj.total_api_records > 0) ? recordObj.total_api_records : ''}}</span>
+				<span class="subTitles" *ngIf="(recordObj.total_api_records > 0) && search_search_key">
+					<b>{{"Search Result For '" + (search_search_key | uppercase) + "'"}}</b>
+				</span>
+			</h4>
+			<div *ngIf="isTopOptionShow" class="probtn-wrap text-right">
+                <button class="btn btn-blue mr-2"  data-toggle="modal" data-target="#abnSearch"><i class="icon fa fa-filter"></i>Filter</button>
+                <button class="btn mr-2" (click)="inprogressFunction()"><i class="icon fa fa-print"></i> Print</button>
+                <button class="btn" (click)="exportApnData()"><i class="icon fa fa-file-excel-o"></i> Export</button>
+            </div>
+        </div>
+
+        <!-- /.action-topbar -->
+		<div class="cmdtyList-table-wrap bg-box mt-15">
+			<div class="table-responsive ctm-data-table">
+				<table class="table ctm-table" id="apnsearch-table">
+					<thead>
+						<tr>
+							<ng-container *ngFor="let column of columns">
+								<th>{{column}} <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+							</ng-container>
+						</tr>
+					</thead>
+					<ng-container *ngIf="apnData.length" >
+						<tbody>
+							<tr *ngFor="let data of apnData">
+								<td>
+									<div class="status-icons">
+										<img *ngIf="data.status" src="assets/images/status-true.svg" alt="">
+										<img *ngIf="!data.status" src="assets/images/status-false.svg" alt="">
+									</div>
+								</td>
+								<td>
+									<a (click)="updateOrDeleteApnNumber(data, 'UPDATE')">
+									{{ data?.number }}
+									</a>
+								</td>
+								<td>{{data.desc}}</td>
+								<td>{{data.productNumber}}</td>
+								<td>
+									<div class="tbHover-btnGroup">
+										<button tooltip="Change" class="tbHover-btn trash-btn" (click)="updateOrDeleteApnNumber(data, 'UPDATE')"><i class="fa fa-pencil"></i></button>
+										<!--
+										<button tooltip="Delete" class="tbHover-btn trash-btn" (click)="updateOrDeleteApnNumber(data, 'DELETE')"><i class="fa fa-trash"></i></button>
+										-->
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</ng-container>
+				</table>
+				<!-- <span *ngIf="!apnData.length">No Record Exits</span> -->
+			</div>
+		</div>
+    </div>
+</div>
+
+<div class="modal fade thm-popup" id="abnSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form name = "searchForm" id= "searchForm">
+						<div class="title-wrap mb-2">
+							<h4 class="title">Apn Search</h4>
+						</div>
+						<div class="form-group mb-0">
+							<label>Number or Descriptions Wildcard <span class="text-danger">*</span></label>
+							<input type="text" appUppercase placeholder=" Number or Description "  id="myID" class="form-control" #searchValue>
+						</div>
+						<div class="btn-wrap text-right mt-10">
+							<button class="btn btn-blue mr-2" (click)="getApnNumber(searchValue)">Ok</button>
+							<button class="btn btn-grey" (click)="cancelPopup()">Cancel</button>
+						</div>
+					</form>	
+				</div>					
+			</div>
+		</div>
+	</div>
+</div>

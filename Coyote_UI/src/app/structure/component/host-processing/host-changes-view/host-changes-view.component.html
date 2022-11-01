@@ -1,0 +1,120 @@
+<div class="mainContent-innner">
+    <div class="Order-section">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">Host Changes Run 
+                {{hostChangeSheetDesc}}
+                <!-- <span
+            id="totalRecordId">{{(recordOrderObj.total_api_records > 0) ? recordOrderObj.total_api_records : ''}}
+            </span> -->
+            </h4>
+            <div class="probtn-wrap d-flex text-right">
+                <button class="btn mr-2" (click)="exportChangeSheetViewData()">
+                    <i class="icon fa fa-file-excel-o"></i> Export
+                </button>
+            </div>
+        </div>
+        <!-- /.action-topbar -->
+        <div class="Order-wrap bg-box mt-15 all-w">
+            <div class="Order-table-wrap">
+                <div class="table-responsive ctm-data-table">
+                    <table class="table ctm-table" id="changeSheetView-table">
+                        <thead>
+                            <tr>
+                                <th>Change Type <i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>PromCode<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i></th>
+                                <th>Prom Desc <i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i></th>
+                                <th>Status <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>Product<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>Desc <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>Oulet<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>CtnCost Before<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>CtnCost After <i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>Price 1 Before <i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>Price 1 Suggested <i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>CtnQty Before<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>CtnQty After <i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>Host Cost<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>TimeStamp <i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of hostViewData ; let i = index"  [ngClass]="selectedRow_Index == i ? 'row-active' : ''"  (click)="selectHostViewRow(i , data)">
+                                <td>
+                                    {{data?.changeType}}   
+                                </td>
+
+                                <td>
+                                    {{data?.promocode}}
+                                </td>
+
+                                <td >
+                                    {{data?.promoDesc}}
+                                </td>
+                                <td>
+                                    {{data.status == null ? '' : data.status == true ? 'Active' : 'InActive'}}
+                                </td>
+                                <td>
+                                    {{data?.productcode == null ? '0' : data?.productcode}}
+                                </td>
+                                <td>
+                                    {{data?.productdesc}}   
+                                </td>
+                                <td>
+                                    {{data?.outletId == null ? '0' : data?.outletId }}
+                                </td>
+                                <td>
+                                    {{(data?.ctnCostBefore | currency : 'USD')}}
+                                </td>
+                                <td>
+                                    {{(data?.ctnCostAfter | currency : 'USD')}}
+                                </td>
+                                <td>
+                                    {{(data?.price1Before | currency : 'USD')}}
+                                </td>
+                                <td>
+                                    {{(data?.ctnCostSuggested | currency : 'USD')}}
+                                </td>
+                                <td>
+                                    {{data?.ctnQtyBefore}}
+                                </td>
+                                <td>
+                                    {{data?.ctnQtyAfter}}
+                                </td>
+                                <td>
+                                    {{data?.hostcode}}
+                                </td>
+                                <td>
+                                    {{data?.hostUpdTimeStamp}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

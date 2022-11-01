@@ -1,0 +1,187 @@
+<div class="mainContent-innner">
+    <div class="Labeltypes-section">
+       <div class="d-flex align-items-center">
+          <h4 class="title flex-grow-1 mb-0">Label Types</h4>
+          <div class="probtn-wrap d-flex text-right">
+           <a (click)="openAddForm()" class="btn btn-blue mr-2" data-toggle="modal" data-target="#addPrintLabelType"><i class="icon fa fa-plus-circle"></i> Add</a>
+           <a class="btn mr-2"><i class="icon fa fa-print"></i> Print</a>
+           <a class="btn mr-2" (click)="exportPrintLabelTypesData()"><i class="icon fa fa-file-excel-o"></i> Export</a> 
+           <a class="btn" data-toggle="modal" data-target="#PrintLabelTypesSearch"><i class="icon fa fa-filter"></i> Filter</a> 
+          </div>
+       </div>
+       <!-- /.action-topbar -->
+       <div class="Labeltypes-wrap">
+          <div class="Labeltypes-table-wrap bg-box mt-15">
+             <div class="table-responsive ctm-data-table">
+                <table class="table ctm-table" id="printlabeltypes-table">
+                   <thead>
+                   <tr>
+                       <th>Status <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                       <th>Code <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                       <th>Description <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                       <th>Barcode Number</th>
+                       <th class="no-sort">Action</th>
+                   </tr>
+                   </thead>
+                   <tbody>
+                       <tr *ngFor="let printLabelType of printLabelTypes">     
+                        <td class="text-center">
+                            <!-- <span class="status-check" [ngClass]="{ 'status-true': printLabelType.status, 'status-false': !printLabelType.status }"></span> -->
+                            <div class="status-icons">
+                                <span hidden> {{printLabelType.status ? 'Active' : "In-actice"}}</span>
+                                <img *ngIf="printLabelType.status" src="assets/images/status-true.svg" alt="">
+                                <img *ngIf="!printLabelType.status" src="assets/images/status-false.svg" alt="">
+                            </div>
+                          </td>                               
+                           <td (click)="getPrintLabelTypeById(printLabelType.id)" data-toggle="modal" data-target="#addPrintLabelType"><a>{{printLabelType.code}}</a></td>
+                           <td>{{printLabelType.desc}}</td>
+                           <td>{{printLabelType.printBarCodeType}}</td>
+                           
+                           <td class="no-sort">
+                                <div class="tbHover-btnGroup">
+                                    <a tooltip="Change" placement="left"  class="tbHover-btn trash-btn" (click)="getPrintLabelTypeById(printLabelType.id)" data-toggle="modal" data-target="#addPrintLabelType"><i class="fa fa-pencil"></i></a>
+                                    <a tooltip="Delete"  placement="left"  class="tbHover-btn trash-btn" (click)="deletePrintLabelType(printLabelType.id)"><i class="fa fa-trash"></i></a>
+                                </div>
+                           </td>
+                       </tr>
+                       
+                   </tbody>
+                </table>
+             </div>
+            
+          </div>
+       </div>
+    </div>
+ </div>
+
+ <div class="modal fade thm-popup" id="addPrintLabelType" tabindex="-1" role="dialog" aria-labelledby="printLabelModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <form [formGroup]="printLabelTypeForm" (ngSubmit)="createPrintLabelType()">
+                    <div class="popup-box">
+                        <div class="title-wrap mb-2">
+                            <h4 class="title">Label Type</h4>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Status <span class="text-danger">*</span></label>
+                                    <select type="text" class="form-control" formControlName="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                                        <option value="true">Active</option>
+                                        <option value="false">Inactive</option>
+                                    </select>     
+                                    <div *ngIf="f.status.errors" class="invalid-feedback">
+                                        <div *ngIf="f.status.errors.required"> Status is required</div>
+                                    </div>
+                                </div>
+                            </div>   
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Label Type Code <span class="text-danger">*</span></label>
+                                    <input [readonly]="formStatus" type="text" appUppercase class="form-control" formControlName="code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }" >
+                                    <div *ngIf="f.code.errors" class="invalid-feedback">
+                                        <div *ngIf="f.code.errors.required"> Code is required</div>
+                                        <div *ngIf="f.code.errors.pattern">Space is not allowed</div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>                            
+                        <div class="form-group">
+                            <label>Description <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" formControlName="desc" appUppercase [ngClass]="{ 'is-invalid': submitted && f.desc.errors }" >
+                            <div *ngIf="f.desc.errors" class="invalid-feedback">
+                                <div *ngIf="f.desc.errors.required"> Description is required</div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-0">
+                                    <label>Labels Per Page <span class="text-danger">*</span></label>
+                                    <input type="number" [min]="0" class="form-control" formControlName="lablesPerPage" [ngClass]="{ 'is-invalid': submitted && f.lablesPerPage.errors }" >
+                                    <div *ngIf="f.lablesPerPage.errors" class="invalid-feedback">
+                                        <div *ngIf="f.lablesPerPage.errors.required"> Labels Per Page is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-0">
+                                    <label>Barcode Number<span class="text-danger">*</span></label>
+                                    <select class="form-control" formControlName="printBarCodeType" [ngClass]="{ 'is-invalid': submitted && f.printBarCodeType.errors }">
+                                        <option value="APN">APN</option>
+                                        <option value="METCASH">METCASH</option>
+                                    </select>
+                                    
+                                     <!-- <select class="form-control" formControlName="PrintBarCodeType" [ngClass]="{ 'is-invalid': submitted && f.PrintBarCodeType.errors }">
+                                        <option *ngFor="let barCodeTypeId of barCodeTypeIds" [value]="barCodeTypeId.id">{{barCodeTypeId.name}}</option>
+                                    </select> -->
+
+                                    <!-- <input list="barCodes" name="barCode" id="barCode"  class="form-control" formControlName="PrintBarCodeType" [ngClass]="{ 'is-invalid': submitted && f.PrintBarCodeType.errors }" >
+                                    <datalist id="barCodes">
+                                      <option value="APN">APN</option>
+                                      <option value="METCASH">METCASH</option>
+                                    </datalist> -->
+                                    <div *ngIf="f.printBarCodeType.errors" class="invalid-feedback">
+                                        <div *ngIf="f.printBarCodeType.errors.required"> Barcode Number is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                                
+                        <div class="btn-wrap text-right mt-10">
+                            <button *ngIf="!formStatus" type="submit" class="btn btn-blue mr-2">Save</button>
+                          <button *ngIf="formStatus" type="submit" class="btn btn-blue mr-2">Change</button>
+                            <a type="button" class="btn btn-grey" data-dismiss="modal">Cancel</a>
+                        </div>
+                    </div>    
+                </form>  
+                <button *ngIf="formStatus" (click)="fastReportGenerate()" class="btn btn-blue mr-2 design-btn">Design</button>  
+
+            </div>
+        </div>
+    </div>    
+</div>
+<div class="modal fade thm-popup" id="PrintLabelTypesSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form name = "searchForm" id = "searchForm">
+						<div class="title-wrap mb-2">
+							<h4 class="title"> Search Filter </h4>
+						</div>
+						<div class="form-group mb-0">
+							<label>Wildcard Search</label>
+							<input type="text" appUppercase  id="myID" class="form-control" #searchValue>
+						</div>
+						<div class="btn-wrap text-right mt-10">
+							<button class="btn btn-blue mr-2" (click)="PrintLabelTypesSearch(searchValue)" >Ok</button>
+							<button class="btn btn-grey"   data-dismiss="modal" >Cancel</button>
+						</div>
+					</form>	
+				</div>					
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!--== iframe start ==-->
+<div class="modal fade thm-popup" id="fastreport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		<div class="modal-content">
+                <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+			<div class="modal-body">
+                <div class="border rounded p-2">
+                        <iframe width="100%" height="450px" class="embed-responsive-item" [src]="safeUrl" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+		</div>
+	</div>
+</div>
+<!--== iframe end ==-->

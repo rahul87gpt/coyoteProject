@@ -1,0 +1,965 @@
+{
+	"header_list": [
+		"pricing",
+		"Stock",
+		"End Day",
+		"Sales",
+		"Purchase",
+		"Additional",
+		"Settings",
+		"Tools",
+		"Fuel",
+		"Accounts",
+		"Hosting",
+		"BI"
+	],
+	"pricing": [
+		{
+			"module_name": "Pricing Functions",
+			"module_class": "fa fa-money",
+			"sub_modules": [
+				{
+					"route": "/products",
+					"label": "Active Products",
+					"method_calling": true,
+					"roleName": "PRODUCT",
+					"timeout": 1000,
+					"sorting": "number"
+				},
+				{
+					"route": "/outlet-products",
+					"label": "Outlet Product List",
+					"method_calling": true,
+					"roleName": "OUTLET PRODUCT",
+					"timeout": 500
+				},
+				{
+					"route": "/products",
+					"label": "Product Masterfile",
+					"method_calling": true,
+					"roleName": "PRODUCT",
+					"timeout": 500,
+					"sorting": "number"
+				},
+				{
+					"route": "/apn-search",
+					"label": "Apn Search",
+					"method_calling": true,
+					"roleName": "APN",
+					"timeout": 500
+				},
+				{
+					"route": "/promotions",
+					"label": "Promotion Batches",
+					"roleName": "PROMOTION"
+				},
+				{
+					"route": "/rebates",
+					"label": "Rebates",
+					"roleName": "REBATES"
+				},
+				{
+					"route": "/competition",
+					"label": "Competitions",
+					"roleName": "COMPETITION"
+				},
+				{
+					"route": "/recipe",
+					"label": "Recipes",
+					"roleName": "Recipe"
+				}
+			]
+		},
+		{
+			"module_name": "Labels Printing",
+			"module_class": "fa fa-tag",
+			"sub_modules": [
+				{
+					"route": "/print-changed-labels",
+					"label": "Print Changed Labels"
+				},
+				{
+					"route": "/reprint-changed-labels",
+					"label": "Reprint Changed Labels"
+				},
+				{
+					"route": "/print-selected-labels",
+					"label": "Print Selected Labels",
+					"timeout": 1000
+				},
+				{
+					"route": "/print-promotional-labels",
+					"label": "Print Promotion Labels"
+				},
+				{
+					"route": "/print-special-price-labels",
+					"label": "Print Special Price Labels"
+				},
+				{
+					"route": "/print-lable/print-lable-from/tablet",
+					"label": "Print Lables from Tablet"
+				},
+				{
+					"route": "/print-label-types",
+					"label": "Label Types"
+				}
+			]
+		},
+		{
+			"module_name": "Till Activity",
+			"module_class": "fa fa-tag",
+			"sub_modules": [
+				{
+					"route": "/sync-till",
+					"label": "Sync Tills"
+				},
+				{
+					"route": "/till-journal/show-till-journal/todays",
+					"label": "Show Todays Till Journal",
+					"method_calling": false
+				},
+				{
+					"route": "/till-journal/show-till-journal/range",
+					"label": "Show Till Journal Range",
+					"timeout": 1000
+				},
+				{
+					"route": "/till-journal/show-till-journal/exceptions",
+					"label": "Show Journal Exceptions",
+					"timeout": 1000
+				},
+				{
+					"route": "/keypads",
+					"label": "Keypads",
+					"method_calling": false,
+					"timeout": 1000
+				}
+			]
+		}
+	],
+	"stock": [
+		{
+			"module_name": "Stock Entry",
+			"module_class": "fa fa-dedent",
+			"sub_modules": [
+				{
+					"route": "/orders",
+					"label": "Order Entry Invoicing"
+				},
+				{
+					"route": "/automatic-orders",
+					"label": "Automatic Orders"
+				},
+				{
+					"route": "/electronic-invoices",
+					"label": "Electronic Invoices"
+				},
+				{
+					"route": "/stock-adjustment-entry",
+					"label": "Stock Adjustment Entry"
+				}
+			]
+		},
+		{
+			"module_name": "Stocktake",
+			"module_class": "fa fa-cube",
+			"sub_modules": [
+				{
+					"route": "/stocktake-entry",
+					"label": "Stocktake Entry"
+				}
+			]
+		},
+		{
+			"module_name": "Stock History",
+			"module_class": "fa fa-cube",
+			"sub_modules": [
+				{
+					"route": "/stock-history/stock-sheet/trx",
+					"label": "Stock Trx Sheet",
+					"timeout": 1000
+				},
+				{
+					"route": "/pde-load-history",
+					"label": "PDE Load History"
+				},
+				{
+					"route": "/stock-history/invoicing-history",
+					"label": "Invoicing History",
+					"timeout": 1000
+				},
+				{
+					"route": "/stock-history/purchase-cost-variance",
+					"label": "Purchase Cost Variance",
+					"timeout": 500
+				},
+
+				{
+					"route": "/stock-history/promotion-tie-up",
+					"label": "Promotion Tie-up"
+				}
+				
+			]
+		},
+		{
+			"module_name": "Stock General",
+			"module_class": "fa fa-cube",
+			"sub_modules": [
+				{
+					"route": "/products/product-without-apn",
+					"label": "Products Without APN"
+				},
+				{
+					"route": "/stock-general",
+					"label": "Set Min On Hand Qty"
+				},
+				{
+					"route": "/stock-general/external-stocktake-file",
+					"label": "External Stocktake File"
+				}
+			]
+		},
+		{
+			"module_name": "Stock Reports",
+			"module_class": "fa fa-file",
+			"sub_modules": [
+				{
+					"route": "/sales/sales-reports/stockOnHand",
+					"label": "Stock OnHand Valuation",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/sales-reports/stockWastage",
+					"label": "Stock Wastage",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/sales-reports/stockAdjustment",
+					"label": "Stock Adjustment",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/sales-reports/stockVariance",
+					"label": "Stock Variance",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/sales-reports/stockPurchase",
+					"label": "Stock Purchases",
+					"timeout": 1000
+				},
+				{
+					"route": "/stock-history",
+					"label": " Stock Optimal"
+				}
+			]
+		}
+	],
+	"end_day": [
+		{
+			"module_name": "Functions",
+			"module_class": "fa fa-shopping-cart",
+			"sub_modules": [
+				{
+					"route": "#",
+					"label": "Till Journal Update"
+				}
+			]
+		}
+	],
+	"sales": [
+		{
+			"module_name": "Sales Reports",
+			"module_class": "fa fa-file",
+			"sub_modules": [
+				{
+					"route": "/sales/sales-reports/salesDepartment",
+					"label": "Item Sales by Department",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/sales-reports/salesCommodity",
+					"label": "Item Sales by Commodity",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/sales-reports/salesCategory",
+					"label": "Item Sales by Category",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/sales-reports/salesGroup",
+					"label": "Item Sales by Group",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/sales-reports/salesSupplier",
+					"label": "Item Sales by Supplier",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/sales-reports/salesOutlet",
+					"label": "Item Sales by Outlet",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/sales-reports/noSales",
+					"label": "Items with No Sales",
+					"timeout": 1000
+				}
+			]
+		},
+		{
+			"module_name": "Journal Sales Reports",
+			"module_class": "fa fa-file",
+			"sub_modules": [
+				{
+					"route": "/sales/sales-reports/financial",
+					"label": "Financial Summary",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/sales-reports/hourlySales",
+					"label": "Hourly Sales Summary",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/sales-reports/nilTransaction",
+					"label": "Nil Transactions",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/sales-reports/basketIncident",
+					"label": "Basket Incidence",
+					"timeout": 1000
+				}
+			]
+		},
+		{
+			"module_name": "Sales History",
+			"module_class": "fa fa-history",
+			"sub_modules": [
+				{
+					"route": "/stock-history/stock-sheet/saleTrxSheet",
+					"label": "Sales Trx Sheet",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales-history/chart/outlet",
+					"label": "Outlet Sales Chart",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales-history/chart/department",
+					"label": "Department Sales Chart",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales-history/chart/commodity",
+					"label": "Commodity Sales Chart",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales-history/chart/category",
+					"label": "Category Sales Chart",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales-history/chart/group",
+					"label": "Group Sales Chart",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales-history/chart/supplier",
+					"label": "Supplier Sales Chart",
+					"timeout": 1000
+				},
+				{
+					"route": "/stock-history/stock-sheet/weeklysales",
+					"label": "Weekly Sales Workbook",
+					"timeout": 1000
+				},
+				{
+					"route": "/stock-history/stock-sheet/KPIReport",
+					"label": "Store KPI Report",
+					"timeout": 1000
+				},
+				{
+					"route": "/store-dashboard",
+					"label": "Store Dashboard",
+					"timeout": 1000
+				},
+				{
+					"route": "#",
+					"label": "App Sales"
+				}
+			]
+		},
+		{
+			"module_name": "Reporter Sales Reports",
+			"module_class": "fa fa-file",
+			"sub_modules": [
+				{
+					"route": "/sales/reporter/salesDepartmentSummary",
+					"label": "Item Sales by Department",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/salesCommoditySummary",
+					"label": "Item Sales by Commodity",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/salesCategorySummary",
+					"label": "Item Sales by Category",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/salesGroupSummary",
+					"label": "Item Sales by Group",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/salesSupplierSummary",
+					"label": "Item Sales by Supplier",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/salesOutletSummary",
+					"label": "Item Sales by Outlet",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/rankingByOutlet",
+					"label": "Ranking by outlet",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/salesMemberSummary",
+					"label": "Item Sales by Member",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/itemWithNoSalesSummary",
+					"label": "Item with No Sales (NAT Code, No SOH)",
+					"timeout": 1000
+				}
+			]
+		},
+		{
+			"module_name": "Reporter Sales History",
+			"module_class": "fa fa-history",
+			"sub_modules": [
+				{
+					"route": "/reporter-sales-history/sales-chart/SalesHistoryChartByOutlet",
+					"label": "Outlet Sales Chart",
+					"timeout": 1500
+				},
+				{
+					"route": "/reporter-sales-history/sales-chart/SalesHistoryChartByDepartment",
+					"label": "Department Sales Chart",
+					"timeout": 1500
+				},
+				{
+					"route": "/reporter-sales-history/sales-chart/SalesHistoryChartByCommodity",
+					"label": "Commodity Sales Chart",
+					"timeout": 1500
+				},
+				{
+					"route": "/reporter-sales-history/sales-chart/SalesHistoryChartByCategory",
+					"label": "Category Sales Chart",
+					"timeout": 1500
+				},
+				{
+					"route": "/reporter-sales-history/sales-chart/SalesHistoryChartByGroup",
+					"label": "Group Sales Chart",
+					"timeout": 1500
+				},
+				{
+					"route": "/reporter-sales-history/sales-chart/SalesHistoryChartBySupplier",
+					"label": "Supplier Sales Chart",
+					"timeout": 1500
+				},
+				{
+					"route": "/store-kpi/report/ReporterStoreKPI",
+					"label": "Store KPI Report",
+					"timeout": 1000
+				},
+				{
+					"route": "/store-kpi/report/KPIRanking",
+					"label": "Store KPI Ranking Report",
+					"timeout": 1000
+				}
+			]
+		},
+		{
+			"module_name": "Manual Sales",
+			"module_class": "fa fa-history",
+			"sub_modules": [
+				{
+					"route": "/manual-sales-entry",
+					"label": "Manual Sales Entry"
+				}
+			]
+		}
+	],
+	"purchase_report": [
+		{
+			"module_name": "Report",
+			"module_class": "fa fa-file"
+		}
+	],
+	"addition_report": [
+		{
+			"module_name": "Report",
+			"module_class": "fa fa-file"
+		}
+	],
+	"account": [
+		{
+			"module_name": "Account",
+			"module_class": "fa fa-file"
+		}
+	],
+	"hosting": [
+		{
+			"module_name": "Host Processing",
+			"module_class": "fa fa-server",
+			"sub_modules": [
+				{
+					"route": "/host-processing/host-processing",
+					"label": "Host Processing"
+				},
+				{
+					"route": "/host-processing/changes-sheet",
+					"label": "Host Changes Sheet"
+				},
+				{
+					"route": "#",
+					"label": "Host Suggest Price"
+				}
+			]
+		},
+		{
+			"module_name": "Host Controls",
+			"module_class": "fa fa-server",
+			"sub_modules": [
+				{
+					"route": "/host-setting",
+					"label": "Host Settings"
+				},
+				{
+					"route": "/cost-price-zones/CostZones",
+					"label": "Cost Zones"
+				},
+				{
+					"route": "/cost-price-zones/PriceZones",
+					"label": "Price Zones"
+				}
+			]
+		}
+	],
+	"settings": [
+		{
+			"module_name": "Entity Setup",
+			"module_class": "fa fa-dedent",
+			"sub_modules": [
+				{
+					"route": "/store-group",
+					"router_link_active": "router-link-active",
+					"label": "Store Groups"
+				},
+				{
+					"route": "/stores",
+					"label": "Stores"
+				},
+				{
+					"route": "/tills",
+					"label": "Tills"
+				},
+				{
+					"route": "/keypads",
+					"label": "Keypads"
+				},
+				{
+					"route": "/corporate-tree",
+					"label": "Corporate Tree"
+				}
+			]
+		},
+		{
+			"module_name": "Codes",
+			"module_class": "fa fa-file-code-o",
+			"sub_modules": [
+				{
+					"route": "/commodities",
+					"label": "Commodities"
+				},
+				{
+					"route": "/departments",
+					"label": "Departments"
+				},
+				{
+					"route": "/master-list-module/CATEGORY",
+					"label": "Categories"
+				},
+				{
+					"route": "/master-list-module/GROUP",
+					"label": "Groups"
+				},
+				{
+					"route": "/master-list-module/SUBRANGE",
+					"label": "SubRanges"
+				},
+				{
+					"route": "/suppliers",
+					"label": "Suppliers"
+				},
+				{
+					"route": "/master-list-module/MANUFACTURER",
+					"label": "Manufacturers"
+				},
+				{
+					"route": "/master-list-module/ADJUSTCODE",
+					"label": "Stock Adjustment Codes"
+				},
+				{
+					"route": "/outlet-supplier",
+					"label": "Outlet Suppliers"
+				},
+				{
+					"route": "/gl-accounts",
+					"label": "GL Accounts"
+				},
+				{
+					"route": "/master-list-module/GLACCOUNT_TYPE",
+					"label": "GL Account Types"
+				},
+				{
+					"route": "/master-list-module/OUTLET_FIFO",
+					"label": "FIFO Outlet Departments"
+				},
+				{
+					"route": "/master-list-module/NATIONALRANGE",
+					"label": "National Range"
+				},
+				{
+					"route": "/xero-accounting",
+					"label": "Xero Accounting"
+				}
+			]
+		},
+		{
+			"module_name": "Till Cashiers",
+			"module_code": "tillcash",
+			"module_class": "fa fa-diamond",
+			"sub_modules": [
+				{
+					"route": "/cashiers",
+					"router_link_active": "router-link-active",
+					"label": "Cashiers"
+				},
+				{
+					"route": "/master-list-module/CASHIERTYPE",
+					"label": "Cashiers Types"
+				}
+			]
+		},
+		{
+			"module_name": "User Setup",
+			"module_code": "user",
+			"module_class": "fa fa-address-card-o",
+			"sub_modules": [
+				{
+					"route": "/users",
+					"label": "Users"
+				},
+				{
+					"route": "/roles",
+					"label": "Roles"
+				},
+				{
+					"route": "/users/user-card-view",
+					"label": "User Card View"
+				},
+				{
+					"route": "/users/user-activity",
+					"label": "User Activity"
+				}
+			]
+		},
+		{
+			"module_name": "Zone Setup",
+			"module_code": "zone",
+			"module_class": "fa fa-hourglass-end",
+			"sub_modules": [
+				{
+					"route": "/master-list-module/ZONE",
+					"label": "Zone Codes"
+				},
+				{
+					"route": "/zone-outlets",
+					"router_link_active": "router-link-active",
+					"label": "Zone Outlets"
+				}
+			]
+		},
+		{
+			"module_name": "System Wide",
+			"module_code": "system",
+			"module_class": "fa fa-database",
+			"sub_modules": [
+				{
+					"route": "/system-controls",
+					"label": "System Controls",
+					"method_calling": true,
+					"roleName": "System Controls"
+				},
+				{
+					"route": "/taxes",
+					"label": "Tax Codes"
+				},
+				{
+					"route": "/path",
+					"label": "Paths"
+				},
+				{
+					"route": "/warehouses",
+					"label": "Warehouses"
+				},
+				{
+					"route": "/mass-price-update",
+					"label": "Mass Price Update",
+					"method_calling": true
+				},
+				{
+					"route": "/deactivate-products",
+					"label": "Deactivate Products",
+					"method_calling": true
+				},
+				{
+					"route": "/pos-messaging",
+					"label": "POS Messaging"
+				}
+			]
+		},
+		{
+			"module_name": "Reporter Setting",
+			"module_code": "reporter-setting",
+			"module_class": "fa fa-database",
+			"sub_modules": [
+				{
+					"route": "#",
+					"label": "Data"
+				},
+				{
+					"route": "#",
+					"label": "Pathing"
+				},
+				{
+					"route": "#",
+					"label": "Interface"
+				},
+				{
+					"route": "#",
+					"label": "Report-Filter Availability"
+				},
+				{
+					"route": "#",
+					"label": "Report-Global Setting"
+				},
+				{
+					"route": "#",
+					"label": "Deactivate Products"
+				},
+				{
+					"route": "#",
+					"label": "Report-Log"
+				},
+				{
+					"route": "#",
+					"label": "Report-Data"
+				},
+				{
+					"route": "#",
+					"label": "System"
+				},
+				{
+					"route": "#",
+					"label": "About"
+				},
+				{
+					"route": "#",
+					"label": "Users"
+				},
+				{
+					"route": "/scheduler",
+					"label": "Scheduling"
+				},
+				{
+					"route": "#",
+					"label": "Emailing"
+				},
+				{
+					"route": "#",
+					"label": "Other"
+				}
+			]
+		}
+	],
+	"tools": [
+		{
+			"module_name": "Sales",
+			"module_class": "fa fa-download",
+			"sub_modules": [
+				{
+					"route": "/sales-tools/export-data",
+					"label": "Export Data"
+				},
+				{
+					"route": "/sales-tools/import-data",
+					"label": "Import Data"
+				},
+				{
+					"route": "#",
+					"label": "Export JNL"
+				}
+			]
+		},
+		{
+			"module_name": "Database",
+			"module_class": "fa fa-download",
+			"sub_modules": [
+				{
+					"route": "#",
+					"label": "Database Upgrade"
+				},
+				{
+					"route": "#",
+					"label": "SQL Command"
+				},
+				{
+					"route": "/epay-product-config",
+					"label": "Epay Product Config"
+				},
+				{
+					"route": "#",
+					"label": "Merge Products"
+				}
+			]
+		}
+	],
+	"purchase": [
+		{
+			"module_name": "Purchase Reports",
+			"module_class": "fa fa-file",
+			"sub_modules": [
+				{
+					"route": "/purchase/reporter/purchaseDepartmentSummary",
+					"label": "Item Purchases By Department",
+					"timeout": 1000
+				},
+				{
+					"route": "/purchase/reporter/purchaseCommoditySummary",
+					"label": "Item Purchases by Commodity",
+					"timeout": 1000
+				},
+				{
+					"route": "/purchase/reporter/purchaseCategorySummary",
+					"label": "Item Purchases by Category",
+					"timeout": 1000
+				},
+				{
+					"route": "/purchase/reporter/purchaseGroupSummary",
+					"label": "Item Purchases by Group",
+					"timeout": 1000
+				},
+				{
+					"route": "/purchase/reporter/purchaseSupplierSummary",
+					"label": "Item Purchases by Supplier",
+					"timeout": 1000
+				},
+				{
+					"route": "/purchase/reporter/purchaseOutletSummary",
+					"label": "Item Purchase by Outlet",
+					"timeout": 1000
+				}
+			]
+		}
+	],
+	"additional": [
+		{
+			"module_name": "Product Report",
+			"module_class": "fa fa-file",
+			"sub_modules": [
+				{
+					"route": "/sales/reporter/ranging",
+					"label": "Ranging ",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/nationalRanging",
+					"label": " Item with No SOH per National Ranging",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/productPriceDeviation",
+					"label": "Product Price Deviation",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/itemWithNoSalesProduct",
+					"label": "Item With No Sales",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/lessthenXdaysStock",
+					"label": "Item With Less Than 3 Days Stock",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/ItemWithNegativeSOH",
+					"label": " Item With Negative Stock on Hand",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/itemWithZeroSOH",
+					"label": "Item with Zero Stock On Hand",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/ItemWithSlowMovingStock",
+					"label": "Slow Moving Stock",
+					"timeout": 1000
+				},
+				{
+					"route": "/sales/reporter/NationalLevelSalesSummary",
+					"label": "National Level Sales Summary",
+					"timeout": 1000
+				}
+			]
+		},
+		{
+			"module_name": "Journal Sales",
+			"module_class": "fa fa-file",
+			"sub_modules": [
+				{
+					"route": "/financial-summary/summary/finance",
+					"label": "Financial Summary",
+					"timeout": 1000
+				},
+				{
+					"route": "/financial-summary/summary/royalty",
+					"label": "Royalty Summary",
+					"timeout": 1000
+				},
+				{
+					"route": "/financial-summary/summary/advertise",
+					"label": "Advertising Summary",
+					"timeout": 1000
+				}
+			]
+		}
+	],
+	"bi": []
+}

@@ -1,0 +1,272 @@
+<div class="mainContent-innner" >
+  <div class="UserStoreGroup-section">
+    <div class="d-flex align-items-center">
+      <!-- <h4 class="title flex-grow-1 mb-0">Store Groups <span class="bdms"><a href="javascript:void(0)">Accounts</a> | <a href="javascript:void(0)">Entry Setup</a> | <span class="current">Store Groups</span></span></h4> -->
+      <h4 class="title flex-grow-1 mb-0">Store Groups</h4>
+      <div class="probtn-wrap text-right">
+        <a class="btn btn-blue with-icon mr-2" data-toggle="modal" data-target="#storeGroupModal"
+          (click)="resetForm()"><i class="icon fa fa-plus-circle"></i> Add</a>
+        <!-- <button class="btn with-icon mr-2"><img class="icon" src="assets/images/save-btn-icon.svg" alt="Icon"> Save</button> -->
+        <!-- <button class="btn with-icon mr-2"><img class="icon" src="assets/images/edit-btn-icon.svg" alt="Icon"> Change</button>
+             <button class="btn with-icon mr-2"><img class="icon" src="assets/images/trash-btn-icon.svg" alt="Icon"> Delete</button> -->
+        <button class="btn with-icon mr-2">
+          <i class="icon fa fa-print"></i> Print
+        </button>
+        <button class="btn with-icon mr-2" (click)="exportStoreGroupsData()">
+          <i class="icon fa fa-file-excel-o"></i> Export
+        </button>
+        <button class="btn btn-blue with-icon" data-toggle="modal" data-target="#storeGroupSearch" (click)="openStoreGroupSearchFilter()">
+          <i class="icon fa fa-filter"></i> Filter
+        </button>
+        <!-- <button class="btn with-icon mr-2"><img class="icon" src="assets/images/filter-icon.svg" alt="Icon"> filter</button> -->
+      </div>
+    </div>
+    <div class="UserStoreGroup-wrap bg-box mt-15 all-w">
+      <div class="table-responsive">
+        <table class="table ctm-table" id="storeGroup-table">
+          <thead>
+            <tr>
+              <th>
+                Status
+
+              </th>
+              <th class="code">
+               
+                  Code
+               
+               
+                <span class="column_id float-right" (click)="openFilter('Code')" ><i class="fa fa-filter"></i></span>
+               
+              </th>
+              <th>
+              
+                 <span  class="sortingIcon" >
+                  <i (click)="shortData('accend',1)" class="ml-1 fa fa-long-arrow-up"
+                   [ngClass]=" (short_icon_class_accend === true && thIndex === 1 )  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend === true && thIndex == 1)  ? 'decend' : ''" (click)="shortData('decend',1)" class="fa fa-long-arrow-down"></i>
+               </span>
+              </th>
+             
+              <th >
+                Description 
+                <span class="column_id float-right" (click)="openFilter('Description')" ><i class="fa fa-filter"></i></span>
+              </th>
+
+              <th>
+              
+                 <span  class="sortingIcon" >
+                  <i (click)="shortData('accend',3)" class="ml-1 fa fa-long-arrow-up"
+                   [ngClass]="(short_icon_class_accend === true && thIndex === 3 ) ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend === true && thIndex == 3)  ? 'decend' : ''" (click)="shortData('decend',3)" class="fa fa-long-arrow-down"></i>
+                 </span>
+             
+              </th>
+            
+              <th>Action </th>
+            </tr>
+          </thead>
+          <tbody (click)="removeSeachFiterDisplay()" >
+            <tr *ngFor="let store of storeGroupList">
+              <td>
+                <!-- <span class="status-check" [ngClass]="{ 'status-true': store.status, 'status-false': !store.status }"></span> -->
+                <div class="status-icons">
+                  <img *ngIf="store.status" src="assets/images/status-true.svg" alt="" />
+                  <img *ngIf="!store.status" src="assets/images/status-false.svg" alt="" />
+                  <span hidden>
+                    {{ store.status ? "Active" : "In-Active" }}
+                  </span>
+                </div>
+              </td>
+              
+              <td  class="blue-text" (click)="getStoreByID(store.id)" data-toggle="modal" data-target="#storeGroupEditModal">
+                 <!-- <a class="pl-2">   -->
+                  {{
+                  store.code.length > 10
+                    ? store.code.substring(0, 10) + "..."
+                    : store.code
+                }}
+                 <!-- </a>   -->
+              </td>
+              <td></td>
+             
+              <td>
+                {{
+                  store.name.length > 30
+                    ? store.name.substring(0, 30) + "..."
+                    : store.name
+                }}
+              </td>
+              <td></td>
+             
+              <td>
+                <div class="tbHover-btnGroup">
+                  <a tooltip="Change" placement="left" class="tbHover-btn trash-btn" (click)="getStoreByID(store.id)"
+                    data-toggle="modal" data-target="#storeGroupEditModal"><i class="fa fa-pencil"></i></a>
+                  <a tooltip="Delete" placement="right" class="tbHover-btn trash-btn"
+                    (click)="deleteStoreGroup(store.id)"><i class="fa fa-trash"></i></a>
+                  <!-- <button  class="tbHover-btn trash-btn" (click)="getStoreByID(store.id)" data-toggle="modal" data-target="#storeGroupEditModal"><i class="fa fa-pencil"></i></button>
+                           <button  class="tbHover-btn trash-btn" (click)="deleteStoreGroup(store.id)"><i class="fa fa-trash"></i></button> -->
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /.UserStoreGroup-wrap -->
+  </div>
+</div>
+
+<div class="modal fade thm-popup" id="storeGroupModal" tabindex="-1" role="dialog" aria-labelledby="storeGroupModal"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form [formGroup]="storeGroupForm" (submit)="addStoreGroup()">
+            <div class="title-wrap mb-1">
+              <h4 class="title">Add Store Group</h4>
+            </div>
+            <div class="form-group">
+              <label>Code <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.code.errors }"
+                formControlName="code" (keypress)="numberOnly($event)" />
+              <div *ngIf="f.code.errors" class="invalid-feedback">
+                <div *ngIf="f.code.errors.maxlength">
+                  Code Should be maximum 15 digits
+                </div>
+                <div *ngIf="f.code.errors.required">Code is required</div>
+                <div *ngIf="f.code.errors.pattern">Space is not allowed</div>
+                <!-- <div *ngIf="f.email.errors.email">First name must be a valid email address</div> -->
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Description<span class="text-danger">*</span></label>
+              <!-- appUppercase  dIRECTIVE FOR UPPERCASE-->
+              <input type="text" appUppercase class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                formControlName="name" />
+              <div *ngIf="f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.maxlength">
+                  Description Should be maximum 100 characters
+                </div>
+                <div *ngIf="f.name.errors.required">
+                  Description is required
+                </div>
+                <div *ngIf="f.name.errors.maxLength">
+                  Maximum 100 Characyers allowed
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-0">
+              <!-- <div class="ctm-input"> -->
+              <label>Status</label>
+              <select class="form-control" formControlName="status"
+                [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+              </select>
+              <div *ngIf="f.status.errors" class="invalid-feedback">
+                <div *ngIf="f.status.errors.required">Status is required</div>
+                <!-- <div *ngIf="f.email.errors.email">First name must be a valid email address</div> -->
+              </div>
+            </div>
+
+            <div class="btn-wrap text-right mt-10">
+              <button type="submit" class="btn btn-blue mr-2">Save</button>
+              <a class="btn btn-grey" data-dismiss="modal">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade thm-popup" id="storeGroupEditModal" tabindex="-1" role="dialog" aria-labelledby="storeGroupModal"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form [formGroup]="storeGroupEditForm" (submit)="upDateStoreGroup()">
+            <div class="title-wrap mb-1">
+              <h4 class="title">Update Store Group</h4>
+            </div>
+            <div class="form-group">
+              <label>Code <span class="text-danger">*</span></label>
+              <input [readonly]="codeStatus" type="text" class="form-control" formControlName="code" />
+              <div *ngIf="f.code.errors" class="invalid-feedback">
+                <div *ngIf="f.code.errors.required">Code is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Description <span class="text-danger">*</span></label>
+              <input type="text" appUppercase class="form-control" [ngClass]="{ 'is-invalid': submitted1 && f1.name.errors }"
+                formControlName="name" />
+              <div *ngIf="f1.name.errors" class="invalid-feedback">
+                <div *ngIf="f1.name.errors.maxlength">
+                  Description Should be maximum 100 characters
+                </div>
+                <div *ngIf="f1.name.errors.required">
+                  Description is required
+                </div>
+                <!-- <div *ngIf="f.email.errors.email">First name must be a valid email address</div> -->
+              </div>
+            </div>
+            <div class="form-group mb-0">
+              <!-- <div class="ctm-input"> -->
+              <label>Status</label>
+              <select class="form-control" formControlName="status"
+                [ngClass]="{ 'is-invalid': submitted1 && f1.status.errors }">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+              </select>
+              <div *ngIf="f1.status.errors" class="invalid-feedback">
+                <div *ngIf="f1.status.errors.required">Status is required</div>
+                <!-- <div *ngIf="f.email.errors.email">First name must be a valid email address</div> -->
+              </div>
+            </div>
+            <!-- <div class="form-group">
+                         <label>Status</label>
+                         <div class="dropdown select-dropdown">
+                             <button class="btn btn-block select-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Status</button>
+                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                 <a class="dropdown-item" href="#">Action</a>
+                                 <a class="dropdown-item" href="#">Another action</a>
+                                 <a class="dropdown-item" href="#">Something else here</a>
+                             </div>
+                         </div> 
+                        </div> -->
+            <div class="btn-wrap text-right mt-10">
+              <button type="submit" class="btn btn-blue mr-2">Save</button>
+              <a class="btn btn-grey" data-dismiss="modal">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade thm-popup" id="storeGroupSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form name="searchForm" id="searchForm">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Search Filter</h4>
+            </div>
+            <div class="form-group mb-0">
+              <label> Wildcard Search</label>
+              <input type="text" appUppercase id="storeGroup_Search_filter" class="form-control" #searchValue />
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2" (click)="storeGroupSearch(searchValue)">
+                Ok
+              </button>
+              <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

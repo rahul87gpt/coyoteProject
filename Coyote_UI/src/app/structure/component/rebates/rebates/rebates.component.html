@@ -1,0 +1,205 @@
+<div class="mainContent-innner">
+    <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">Rebates<span id="totalRecordId">{{(recordObj.total_api_records > 0) ? recordObj.total_api_records : ''}}</span>
+        </h4>
+        <div class="probtn-wrap d-flex text-right">
+            <!-- <button type="button" class="btn btn-blue" data-toggle="modal" data-target="#PromotionLabel">Print Special Price Labels</button> -->
+            <button type="button" class="btn btn-blue mr-2"  [routerLink]="['/rebates/add-rebate']"  routerLinkActive="router-link-active">
+                <i class="fa fa-plus-circle" ></i> Add</button>
+            <button type="button" class="btn mr-2"><i class="fa fa-print"></i> Print</button>
+            <button type="button" class="btn mr-2" (click)="exportRebates()"><i class="fa fa-file-excel-o"></i> Export</button>
+            <button type="button" class="btn" data-toggle="modal" data-target="#rebatesSearch" (click)="openRebatesSearchFilter()"><i class="fa fa-filter"></i> filter</button>
+        </div>
+    </div>
+     <div class="rebate-wrap">
+        <div class="rebate-table-wrap bg-box mt-15 all-w">
+          <div class="table-responsive ctm-data-table">
+            <table class="table ctm-table " id="rebates-table">
+              <thead>
+                <tr>
+                  <th>Code
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th>Description
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th>Type
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th>Manufacturer
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th>Manufacturer Name
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th>Zone
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th>Zone Name
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th>Start Date
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th>End Date
+                        <i class="ml-1 fa fa-long-arrow-up"></i>
+                        <i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th class="no-short">Action</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let rebate of rebatesData">
+                  <tr >
+                 
+                    <td >
+                        <a [routerLink]="['/rebates/update-rebate', rebate.id]">
+                            {{rebate.code}}
+                        </a>
+                    </td>
+                    <td >{{rebate.description}}</td>
+                    <td >{{rebate.typeName}}</td>
+                    <td >{{rebate.manufacturerCode}}</td>
+                    <td >{{rebate.manufacturerDesc}}</td>
+                    <td >{{rebate.zoneCode}}</td>
+                    <td >{{rebate.zoneDesc}}</td>
+                    <td ><span style="display: none;"> {{ConvertDateToMiliSeconds(rebate?.startDate )}} </span>{{rebate?.startDate  | customdatetimeformat}}</td>
+                    <td ><span style="display: none;"> {{ConvertDateToMiliSeconds(rebate?.endDate )}} </span>{{rebate?.endDate  | customdatetimeformat}}</td>
+                  
+               
+                    <td class="no-short">
+                        <div class="tbHover-btnGroup">
+                            <button class="tbHover-btn trash-btn" [routerLink]="['/rebates/update-rebate', rebate.id]"><i class="fa fa-pencil"></i></button>
+                            <button class="tbHover-btn trash-btn" (click)="deleteRebate(rebate.id)"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </td>
+                    <td></td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div> 
+    <!-- <div class="bg-box mt-15">
+        <div class="table-responsive ctm-data-table">
+            <table class="table ctm-table  " id="rebates-table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Manufacturer</th>
+                        <th>Manufacturer Name</th>
+                        <th>Zone</th>
+                        <th>Zone Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let rebate of rebatesData">
+                        <td [routerLink]="['/rebates/update-rebate', rebate.id]">{{rebate.code}}</td>
+                        <td [routerLink]="['/rebates/update-rebate', rebate.id]">{{rebate.description}}</td>
+                        <td [routerLink]="['/rebates/update-rebate', rebate.id]">{{rebate.typeName}}</td>
+                        <td [routerLink]="['/rebates/update-rebate', rebate.id]">{{rebate.manufacturerCode}}</td>
+                        <td [routerLink]="['/rebates/update-rebate', rebate.id]">{{rebate.manufacturerDesc}}</td>
+                        <td [routerLink]="['/rebates/update-rebate', rebate.id]">{{rebate.zoneCode}}</td>
+                        <td [routerLink]="['/rebates/update-rebate', rebate.id]">{{rebate.zoneDesc}}</td>
+                        <td [routerLink]="['/rebates/update-rebate', rebate.id]"><span style="display: none;"> {{ConvertDateToMiliSeconds(rebate?.startDate )}} </span>{{rebate?.startDate  | customdatetimeformat}}</td>
+                        <td [routerLink]="['/rebates/update-rebate', rebate.id]"><span style="display: none;"> {{ConvertDateToMiliSeconds(rebate?.endDate )}} </span>{{rebate?.endDate  | customdatetimeformat}}</td>
+                      
+                        <td class="text-center">
+                            <div class="tbHover-btnGroup">
+                                <button class="tbHover-btn trash-btn" [routerLink]="['/rebates/update-rebate', rebate.id]"><i class="fa fa-pencil"></i></button>
+                                <button class="tbHover-btn trash-btn" (click)="deleteRebate(rebate.id)"><i class="fa fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>  -->
+</div>
+
+<div class="modal fade thm-popup" id="rebatesSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form name = "searchForm" id = "searchForm">
+						<div class="title-wrap mb-2">
+							<h4 class="title">Rebates Search</h4>
+						</div>
+						<div class="form-group mb-0">
+							<label> Wildcard Search</label>
+							<input type="text" appUppercase id="rebatesSearch_filter" class="form-control" #searchValue>
+						</div>
+						<div class="btn-wrap text-right mt-10">
+							<button class="btn btn-blue mr-2" (click)="getrebatesData(searchValue)" >Ok</button>
+							<button class="btn btn-grey"   data-dismiss="modal" >Cancel</button>
+						</div>
+					</form>	
+				</div>					
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade thm-popup" id="PromotionLabel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form>
+                        <div class="title-wrap mb-1">
+                            <h4 class="title">Print Special Price Labels</h4>
+                        </div>
+                        <div class="form-group">
+                            <label>Outlet</label>
+                            <select class="form-control" disabled>
+                                <option>HIGHGATE HILL</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Label Type</label>
+                                    <select class="form-control">
+                                        <option>PROMO 9UP WEEKLY SPECIALS</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Price Levels</label>
+                                    <select class="form-control">
+                                        <option>1</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Selections</label>
+                            <textarea name="" id="" rows="3" class="form-control">Start Date 27/05/2020 End Date 31/05/2021</textarea>
+                        </div>    
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-blue mr-2"> ok</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>                    
+            </div>
+        </div>
+    </div>
+  </div>

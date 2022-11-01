@@ -1,0 +1,107 @@
+<div class="mainContent-innner">
+    <div class="Keypads-section">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">Epay Product Config</h4>
+            <div class="probtn-wrap d-flex text-right">
+                <button type="button" class="btn" (click)="exportEpayProductsData()"><i class="fa fa-file-excel-o"></i>
+                    Export</button>
+            </div>
+        </div>
+        <!-- /.action-topbar -->
+        <div class="outlets-wrap">
+            <div class="bg-box mt-15">
+                <div class="table-responsive">
+                    <table class="table ctm-table" id="ePayProducts-table">
+                        <thead>
+                            <tr>
+                                <th>EPAY_ITEM</th>
+                                <th>EPAY_PRODUCTS</th>
+                                <th>EPAY_ProductTypeCode</th>
+                                <th>EPAY_ProductTypeTitle</th>
+                                <th>EPAY_ProductCategoryCode</th>
+                                <th>EPAY_ProductCategoryTitle</th>
+                                <th>EPAY_SupplierAccCode</th>
+                                <th>EPAY_SupplierAccTitle</th>
+                                <th>EPAY_ProductGroupCode</th>
+                                <th>EPAY_ProductGroupTitle</th>
+                                <th>EPAY_ProductCode</th>
+                                <th>EPAY_ProductTitle</th>
+                                <th>EPAY_Value</th>
+                                <th>EPAY_ETUTTrack1IINFieldNo</th>
+                                <th>EPAY_ETUTTrack1IINPosition</th>
+                                <th>EPAY_ETUTTrack1IIN</th>
+                                <th>EPAY_ETUTTrack2IIN</th>
+                                <th>EPAY_ETUPANTrack</th>
+                                <th>EPAY_ETUPANTrackFieldNo</th>
+                                <th>EPAY_ETUPANTrackPosition</th>
+                                <th>EPAY_ETUPANTrackSize</th>
+                                <th>EPAY_PINPAN</th>
+
+                                <th>EPAY_CustomField</th>
+                                <th>EPAY_BarCode</th>
+                                <th>EPAY_ReceiptTitle</th>
+                                <th>EPAY_ReceiptPinTitle</th>
+                                <th>EPAY_ReceiptSerialTitle</th>
+                                <th>EPAY_ReceiptTopupTitle</th>
+                                <th>EPAY_ReceiptTopupRefrenceTitle</th>
+                                <th>EPAY_ReceiptLogo</th>
+                                <th>EPAY_ReceiptLogo2</th>
+                                <th>EPAY_ReceiptTex</th>
+                                <th>EPAY_Margin</th>
+                                <th>EPAY_CostExGs</th>
+                                <th>EPAY_GST</th>
+                                <th>EPAY_IMPORT_SEQ</th>
+                                <th>EPAY_TIMESTAMP</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let epay of ePayProductsData">
+                                <td>{{epay?.item}}</td>
+                                <td>{{epay?.productID}}</td>
+                                <td>{{epay?.productTypeCode}}</td>
+                                <td>{{epay?.productTypeTitle}}</td>
+                                <td>{{epay?.productCategoryCode}}</td>
+                                <td>{{epay?.productCategoryTitle}}</td>
+                                <td>{{epay?.supplierAccCode}}</td>
+                                <td>{{epay?.supplierAccTitle}}</td>
+                                <td>{{epay?.productGroupCode}}</td>
+                                <td>{{epay?.productGroupTitle}}</td>
+                                <td>{{epay?.productCode}}</td>
+                                <td>{{epay?.productTitle}}</td>
+                                <td>{{epay?.value}}</td>
+                                <td>{{epay?.etuTrack1IINFieldNo}}</td>
+                                <td>{{epay?.etuTrack1IINPosition}}</td>
+                                <td>{{epay?.etuTrack1IIN}}</td>
+                                <td>{{epay?.etuTrack2IIN}}</td>
+                                <td>{{epay?.etupanTrack}}</td>
+                                <td>{{epay?.etupanTrackFieldNo}}</td>
+                                <td>{{epay?.etupanTrackPosition}}</td>
+                                <td>{{epay?.etupanTrackSize}}</td>
+                                <td>{{epay?.pinpan}}</td>
+
+                                <td>{{epay?.customField}}</td>
+                                <td>{{epay?.barCode}}</td>
+                                <td>{{epay?.receiptTitle}}</td>
+                                <td>{{epay?.receiptPINTitle}}</td>
+                                <td>{{epay?.receiptSerialTitle}}</td>
+                                <td>{{epay?.receiptTopupTitle}}</td>
+                                <td>{{epay?.receiptTopupReferenceTitle}}</td>
+                                <td>{{epay?.receiptLogo1}}</td>
+                                <td>{{epay?.receiptLogo2}}</td>
+                                <td>{{epay?.receiptText}}</td>
+                                <td>{{epay?.margin}}</td>
+                                <td>{{epay?.costExGST}}</td>
+                                <td>{{epay?.gst}}</td>
+                                <td>{{epay?.importseq}}</td>
+                                <td>{{epay?.timestamp | dateTimeFormate}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

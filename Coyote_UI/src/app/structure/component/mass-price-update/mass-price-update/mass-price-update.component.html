@@ -1,0 +1,232 @@
+<!-- <div class="mainContent-innner">
+    <div class="Keypads-section">
+    <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">Mass Price Update</h4>
+        <div class="probtn-wrap d-flex text-right">
+            <button type="button" data-toggle="modal" data-target="#MassPriceUpdate" class="btn btn-blue" (click)="clickedMassPriceUpdateButton()">Mass Price Update</button>                            
+        </div>
+    </div>
+    <div class="outlets-wrap">                        
+        <div class="bg-box mt-15">
+        </div>
+    </div>
+    </div>
+</div> -->
+<div class="modal fade bd-example-modal-md thm-popup" id="MassPriceUpdate" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="massPriceUpdateForm">
+                        <div class="title-wrap">
+                            <h4 class="title">Mass Price Update</h4>
+                        </div>
+                        <div class="group-from">
+                            <h5 class="title">Outlet and Department</h5>
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Outlet</label>
+                                </div>
+                                <div class="col-9">
+                                    <ng-select [items]="outletList" bindLabel="desc" bindValue="id"
+                                        formControlName="storeId" [virtualScroll]="false" [clearable]="false"
+                                        [clearOnBackspace]="false" [searchable]="true" [multiple]="false"
+                                        [ngClass]="{ 'is-invalid': submitted && f.storeId.errors }"
+                                        (change)="selectedStore($event)">
+                                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                                            <div class="form-row">
+                                                <span class="col-9 zone-overflow" title="{{ item.name }}">
+                                                    {{ item.desc}}
+                                                </span>
+                                                <div class="col-3">
+                                                    {{item.code}}
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </ng-select>
+                                    <!-- <select  class="form-control" formControlName="storeId"  (change)="selectedStore($event)" [ngClass]="{ 'is-invalid': submitted && f.storeId.errors }">
+                                    <option
+                                    [value]="outlet.id"
+                                    *ngFor="let outlet of outletList"
+                                    >  {{outlet.desc }}-{{outlet.code}}
+                                   </option>  
+                                </select> -->
+                                    <div *ngIf="f.storeId.errors" class="invalid-feedback">
+                                        <div *ngIf="f.storeId.errors.required">Outlet is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Department</label>
+                                </div>
+                                <div class="col-9">
+                                    <ng-select [items]="departmentList" bindLabel="desc" bindValue="id"
+                                        formControlName="departmentId" [virtualScroll]="false" [clearable]="false"
+                                        [clearOnBackspace]="false" [searchable]="true" [multiple]="false"
+                                        [ngClass]="{ 'is-invalid': submitted && f.departmentId.errors }">
+                                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                                            <div class="form-row">
+                                                <span class="col-10 zone-overflow" title="{{ item.name }}">
+                                                    {{ item.desc}}
+                                                </span>
+                                                <div class="col-2" title="{{ item.code }}">
+                                                    {{item.code}}
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </ng-select>
+                                    <!-- <select class="form-control" formControlName="departmentId"
+                                        [ngClass]="{ 'is-invalid': submitted && f.departmentId.errors }">
+                                        <option [value]="department.id" *ngFor="let department of departmentList">
+                                            {{department.desc}}-{{department.code}}
+                                        </option>
+                                    </select> -->
+                                    <div *ngIf="f.departmentId.errors" class="invalid-feedback">
+                                        <div *ngIf="f.departmentId.errors.required">Department is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-0 form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Commodity</label>
+                                </div>
+                                <div class="col-9">
+                                    <ng-select [items]="commoditiesList" bindLabel="desc" bindValue="id"
+                                        formControlName="commodityId" [virtualScroll]="false" [clearable]="false"
+                                        [clearOnBackspace]="false" [searchable]="true" [multiple]="false">
+                                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                                            <div class="form-row">
+                                                <span class="col-10 zone-overflow" title="{{ item.name }}">
+                                                    {{ item.desc}}
+                                                </span>
+                                                <div class="col-2" title="{{ item.code }}">
+                                                    {{item.code}}
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </ng-select>
+                                    <!-- <select class="form-control" formControlName="commodityId">
+                                        <option [value]="commodity.id" *ngFor="let commodity of commoditiesList">
+                                            {{commodity.desc}}-{{commodity.code}}
+                                        </option>
+                                    </select> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-6">
+                                <div class="group-from mt-0">
+                                    <div class="form-group form-row align-items-center">
+                                        <div class="col-8">
+                                            <label for="" class="mb-0">Outlet Cost Zone Code</label>
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" [readonly]="true"
+                                                formControlName="priceZone">
+                                            <!-- <select  class="form-control" formControlName="priceZone">
+                                        <option
+                                        [value]="priceZone.id"
+                                        *ngFor="let priceZone of priceZoneData"
+                                        >  {{priceZone.name}}
+                                       </option>  
+                                    </select> -->
+                                        </div>
+                                    </div>
+                                    <div class="custom-control form-group mb-0 custom-checkbox">
+                                        <input formControlName="onlyHostCodes" type="checkbox" id="Sales"
+                                            class="custom-control-input">
+                                        <label for="Sales" class="custom-control-label mb-0">
+                                            <span class="label-mt-2 d-block">Use Only Host Costs from
+                                                Zone</span></label>
+                                    </div>
+                                </div>
+                                <div class="group-from mb-0 mt-0">
+                                    <div class="form-group form-row align-items-center">
+                                        <div class="col-5">
+                                            <label for="" class="mb-0">Outlet Pass<span
+                                                    class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-7">
+                                            <input type="text" class="form-control" formControlName="outletPassword"
+                                                [ngClass]="{ 'is-invalid': submitted && f.outletPassword.errors }">
+                                            <div *ngIf="f.outletPassword.errors" class="invalid-feedback">
+                                                <div *ngIf="f.outletPassword.errors.required">Outlet Password is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-0 form-row align-items-center">
+                                        <div class="col-5">
+                                            <label for="" class="mb-0">System Pass<span
+                                                    class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-7">
+                                            <input type="password" class="form-control" formControlName="systemPassword"
+                                                [ngClass]="{ 'is-invalid': submitted && f.systemPassword.errors }">
+                                            <div *ngIf="f.systemPassword.errors" class="invalid-feedback">
+                                                <div *ngIf="f.systemPassword.errors.required">System Password is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="group-from mt-0 mb-0 h-100">
+                                    <div class="form-group form-row align-items-center">
+                                        <div class="col-12">
+                                            <label for="">Change Cost by percent</label>
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="number" (keypress)="maxlenght($event.target.value)"
+                                                class="form-control" formControlName="changeCost" min="0" max="100"
+                                                onkeyup="if(this.value<0){this.value= this.value * -1}"
+                                                [ngClass]="{ 'is-invalid': submitted && f.changeCost.errors }">
+                                            <div *ngIf="f.changeCost.errors" class="invalid-feedback">
+                                                <div *ngIf="f.changeCost.errors.required">Change Cost by percent is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-row align-items-center">
+                                        <div class="col-12">
+                                            <label for="">Change Sell Price to GP% </label>
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="number" (keypress)="maxlenght($event.target.value)"
+                                                class="form-control" formControlName="chaneSellGP" min="0" max="100"
+                                                onkeyup="if(this.value<0){this.value= this.value * -1}"
+                                                [ngClass]="{ 'is-invalid': submitted && f.chaneSellGP.errors }">
+                                            <div *ngIf="f.chaneSellGP.errors" class="invalid-feedback">
+                                                <div *ngIf="f.chaneSellGP.errors.required">Change Sell Price to GP% is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="custom-control form-group mb-0 custom-checkbox">
+                                        <input formControlName="roundSellPrice" type="checkbox" id="Sell"
+                                            class="custom-control-input" checked>
+                                        <label for="Sell" class="custom-control-label mb-0">
+                                            <span class="label-mt-2 d-block">Round Sell Price to 5 Cents</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="submit" class="btn btn-blue mr-2" (click)="UpdateMassPrice()"><i
+                                    class="fa fa-check-circle mr-1" aria-hidden="true"></i>
+                                Post</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal"
+                                (click)="clickedMassPriceUpdateButton()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

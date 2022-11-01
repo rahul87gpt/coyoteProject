@@ -1,0 +1,707 @@
+<div class="mainContent-innner">
+  <div class="departmentsList-section">
+    <div class="d-flex align-items-center">
+      <h4 class="title flex-grow-1 mb-0">Departments</h4>
+      <!-- <h4 class="title flex-grow-1 mb-0">Departments <span class="bdms"><a href="#">Accounts</a> | <a href="#">Code</a> | <span class="current">Departments</span></span></h4> -->
+      <div class="probtn-wrap text-right">
+        <a
+          class="btn btn-blue with-icon mr-2"
+          data-toggle="modal"
+          data-target="#departmentModal"
+          (click)="resetForm()"
+          ><i class="icon fa fa-plus-circle"></i> Add</a
+        >
+        <button class="btn with-icon mr-2">
+          <i class="icon fa fa-print"></i> Print
+        </button>
+        <button class="btn with-icon mr-2" (click)="exportDepartmentsData()">
+          <i class="icon fa fa-file-excel-o"></i> Export
+        </button>
+        <button
+          class="btn btn-blue with-icon"
+          data-toggle="modal"
+          data-target="#departmentsSearch"
+          (click)="openDepartmentsSearchFilter()"
+        >
+          <i class="icon fa fa-filter"></i> Filter
+        </button>
+      </div>
+    </div>
+    <div class="departmentsList-wrap bg-box mt-15 all-w">
+      <div class="table-responsive inner-responsive">
+        <table
+          class="table ctm-table"
+          *ngIf="departments?.length"
+          id="department-table"
+        >
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Code</th>
+              <th>Description</th>
+              <th>Map Type</th>
+              <th>Budget</th>
+              <th>Royally</th>
+              <th>Advertising</th>
+              <th>Allow Sale Discount</th>
+              <th>Excl Wastage Optimal Ordering</th>
+              <th class="no-sort">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let department of departments">
+              <td>
+                <!-- <span class="status-check" [ngClass]="{ 'status-true': department.status, 'status-false': !department.status }"></span> -->
+                <div class="status-icons">
+                  <img
+                    *ngIf="department.status"
+                    src="assets/images/status-true.svg"
+                    alt=""
+                  />
+                  <img
+                    *ngIf="!department.status"
+                    src="assets/images/status-false.svg"
+                    alt=""
+                  />
+                  <span hidden>
+                    {{ department?.status ? "Active" : "In-Active" }}
+                  </span>
+                </div>
+              </td>
+              <td
+                (click)="getDepartmentByID(department.id)"
+                data-toggle="modal"
+                data-target="#departmentEditModal"
+              >
+                <a class="pl-2"> {{ department.code }}</a>
+              </td>
+              <td>
+                {{
+                  department.desc.length > 30
+                    ? department.desc.substring(0, 30) + "..."
+                    : department.desc
+                }}
+              </td>
+              <td>
+                {{ department.mapType }}
+              </td>
+              <td>
+                <span class="pl-2">{{ department.budgetGrowthFactor }}</span>
+              </td>
+              <td>
+                <span class="pl-2">{{ department.royaltyDisc }}</span>
+              </td>
+              <td>
+                <span class="pl-2">{{ department.advertisingDisc }}</span>
+              </td>
+              <td>
+                {{
+                  department.allowSaleDisc && department.allowSaleDisc === true
+                    ? "True"
+                    : "False"
+                }}
+              </td>
+              <td>
+                {{
+                  department.excludeWastageOptimalOrdering === true
+                    ? "True"
+                    : "False"
+                }}
+              </td>
+              <td class="no-sort">
+                <div class="tbHover-btnGroup">
+                  <button
+                    tooltip="Change"
+                    placement="left"
+                    class="tbHover-btn trash-btn"
+                    data-toggle="modal"
+                    data-target="#departmentEditModal"
+                    (click)="getDepartmentByID(department.id)"
+                  >
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                  <button
+                    tooltip="Delete"
+                    placement="left"
+                    class="tbHover-btn trash-btn"
+                    (click)="deleteDepartment(department.id)"
+                  >
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+              <!-- <td class="no-sort">
+                           <div class="tbHover-btnGroup">
+                              <a class="tbHover-btn trash-btn" (click)="getDepartmentByID(department.id)" data-toggle="modal" data-target="#departmentEditModal"><i class="fa fa-pencil"></i></a>
+                              <a class="tbHover-btn trash-btn" (click)="deleteDepartment(department.id)"><i class="fa fa-trash"></i></a>
+                           </div>
+                      </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="modal fade thm-popup" id="departmentModal" tabindex="-1" role="dialog" aria-labelledby="storeGroupModal" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+       <div class="modal-content">
+           <div class="modal-body popup-box-width">
+               <div class="popup-box">
+                  <form [formGroup]="departmentForm"  #savedepartmentGroupForm="ngForm" (ngSubmit)="submitDepartmentModal()">
+                     <div class="addDepartment-section">
+                         <div class="action-topbar d-flex align-items-center">
+                             <h4 class="title flex-grow-1 mb-0">Add Department</h4>
+                             <div class="probtn-wrap text-right">
+                              
+                             </div>
+                         </div>
+                         <div class="addDepartment-wrap">
+                             <div class="addDepartment-form">
+                                 <div class="row justify-content-center">
+                                     <div class="col-xxl-6 col-lg-7 col-md-12">
+                                         <div class="card-grey height-full">
+                                             <div class="form-group form-row mt-2 align-items-center">
+                                                 <label class="label col-md-4 col-xxl-3 mb-0">Code <span class="text-danger">*</span></label>
+                                                 <div class="col-md-8 col-xxl-9">
+                                                     <input [readonly]="formStatus" type="text" ngModel maxlength="30" class="form-control" formControlName="code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
+                                                     <div *ngIf="f.code.errors" class="invalid-feedback">
+                                                         <div *ngIf="f.code.errors.required">Code is required</div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <div class="form-group form-row align-items-center">
+                                                 <label class="label col-md-4 col-xxl-3 mb-0">Description <span class="text-danger">*</span></label>
+                                                 <div class="col-md-8 col-xxl-9">
+                                                     <input type="text" class="form-control" ngModel maxlength="80" formControlName="desc" [ngClass]="{ 'is-invalid': submitted && f.desc.errors }">
+                                                     <div *ngIf="f.desc.errors" class="invalid-feedback">
+                                                         <div *ngIf="f.desc.errors.required">Description is required</div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <div class="form-group form-row align-items-center">
+                                                 <label class="label col-md-4 col-xxl-3 mb-0">Map Type <span class="text-danger">*</span></label>
+                                                 <div class="col-md-8 col-xxl-9">
+                                                     <select class="form-control" formControlName="mapTypeId" [ngClass]="{ 'is-invalid': submitted && f.mapTypeId.errors }">
+                                                         <option *ngFor="let mapType of mapTypes" [value]="mapType.id">{{mapType.name}}</option>
+                                                     </select>
+                                                     <div *ngIf="f.mapTypeId.errors" class="invalid-feedback">
+                                                         <div *ngIf="f.mapTypeId.errors.required">Map Type is required</div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <div class="form-group form-row align-items-center">
+                                                 <label class="label col-md-4 col-xxl-3 mb-0">Budget</label>
+                                                 <div class="col-md-8 col-xxl-9">
+                                                     <div class="input-group input-Tooltip">
+                                                         <input type="text" class="form-control" formControlName="budgetGroethFactor" [ngClass]="{ 'is-invalid': submitted && f.budgetGroethFactor.errors }">
+                                                         <div *ngIf="f.budgetGroethFactor.errors" class="invalid-feedback">
+                                                             <div *ngIf="f.budgetGroethFactor.errors.required">Budget is required</div>
+                                                         </div>
+                                                         <div class="input-group-prepend">
+                                                             <span class="input-group-text border-0 p-0"><a href="javascript:void(0);"data-toggle="tooltip" data-placement="bottom" title="(Budget Growth Factor %)"> <i class="fa fa-question-circle-o"></i></a></span>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <div class="form-group form-row align-items-center">
+                                                 <label class="label col-md-4 col-xxl-3 mb-0">Royalty</label>
+                                                 <div class="col-md-8 col-xxl-9">
+                                                     <div class="input-group input-Tooltip">
+                                                         <input type="text" class="form-control" formControlName="royaltyDisc" [ngClass]="{ 'is-invalid': submitted && f.royaltyDisc.errors }">
+                                                         <div *ngIf="f.royaltyDisc.errors" class="invalid-feedback">
+                                                             <div *ngIf="f.royaltyDisc.errors.required">Royalty is required</div>
+                                                         </div>
+                                                         <div class="input-group-prepend">
+                                                             <span class="input-group-text border-0 p-0"><a href="javascript:void(0);"data-toggle="tooltip" data-placement="bottom" title="(Royalty Discount %)"> <i class="fa fa-question-circle-o"></i></a></span>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <div class="form-group form-row align-items-center">
+                                                 <label class="label col-md-4 col-xxl-3 mb-0">Advertising</label>
+                                                 <div class="col-md-8 col-xxl-9">
+                                                     <div class="input-group input-Tooltip">
+                                                         <input type="text" class="form-control" formControlName="advertisingDisc" [ngClass]="{ 'is-invalid': submitted && f.advertisingDisc.errors }">
+                                                         <div *ngIf="f.advertisingDisc.errors" class="invalid-feedback">
+                                                             <div *ngIf="f.advertisingDisc.errors.required">Advertising is required</div>
+                                                         </div>
+                                                         <div class="input-group-prepend">
+                                                             <span class="input-group-text border-0 p-0"><a href="javascript:void(0);"data-toggle="tooltip" data-placement="bottom" title="(Advertising Discount %)"> <i class="fa fa-question-circle-o"></i></a></span>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <div class="form-group form-row align-items-center">
+                                                 <div class="col-lg-6">
+                                                     <div class="custom-control custom-checkbox">
+                                                       
+                                                         <input type="checkbox" formControlName="allowSaleDisc" class="custom-control-input" id="Allow">
+                                                         <label class="custom-control-label" for="Allow">Allow Sale Discount</label>
+                                                     </div>
+                                                 </div>
+                                                 <div class="col-lg-6">
+                                                     <div class="custom-control custom-checkbox">
+                                                         <input type="checkbox" formControlName="excludeWastageOptimalOrdering" class="custom-control-input" id="Exclude">
+                                                         <label class="custom-control-label" for="Exclude">Exclude wastage From Optimal ordering</label>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <div class="btn-wrap text-right btns-top-space">
+                                                 <button class="btn btn-blue with-icon mr-2"><i class="icon fa fa-plus-circle"></i>Save</button>
+                                                 <a class="btn" data-dismiss="modal" (click)="resetForm()"><span class="icon cancel-icon">X</span> Cancel</a>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </form>
+               </div>                    
+           </div>
+       </div>
+   </div>
+</div> -->
+<div
+  class="modal fade thm-popup"
+  id="departmentModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="storeGroupModal"
+  aria-hidden="true"
+  data-backdrop="static"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form [formGroup]="departmentForm" (ngSubmit)="addDepartment()">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Add Department</h4>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <label class="label col-md-4 mb-0"
+                >Code <span class="text-danger">*</span></label
+              >
+              <div class="col-md-8">
+                <input
+                  type="number"
+                  [min]="0"
+                  onKeyPress="if(this.value.length==3) return false;"
+                  class="form-control"
+                  formControlName="code"
+                  [ngClass]="{ 'is-invalid': submitted && f.code.errors }"
+                />
+                <div *ngIf="f.code.errors" class="invalid-feedback">
+                  <div *ngIf="f.code.errors.maxlength">
+                    Code Should be maximum 3 characters
+                  </div>
+                  <div *ngIf="f.code.errors.required">Code is required</div>
+                  <div *ngIf="f.code.errors.pattern">Space is not allowed</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <label class="label col-md-4 mb-0"
+                >Description<span class="text-danger">*</span></label
+              >
+              <div class="col-md-8">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="desc"
+                  appUppercase
+                  [ngClass]="{ 'is-invalid': submitted && f.desc.errors }"
+                />
+                <div *ngIf="f.desc.errors" class="invalid-feedback">
+                  <div *ngIf="f.desc.errors.maxlength">
+                    Description Should be maximum 40 characters
+                  </div>
+                  <div *ngIf="f.desc.errors.required">
+                    Description is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <label class="label col-md-4 mb-0"
+                >Map Type <span class="text-danger">*</span></label
+              >
+              <div class="col-md-8">
+                <select
+                  class="form-control"
+                  formControlName="mapTypeId"
+                  [ngClass]="{ 'is-invalid': submitted && f.mapTypeId.errors }"
+                >
+                  <option *ngFor="let mapType of mapTypes" [value]="mapType.id">
+                    {{ mapType.name }}
+                  </option>
+                </select>
+                <div *ngIf="f.mapTypeId.errors" class="invalid-feedback">
+                  <div *ngIf="f.mapTypeId.errors.required">
+                    Map Type is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-start">
+              <label class="label col-md-4 mb-0">Budget</label>
+              <div class="col-md-8">
+                <input
+                  type="number"
+                  (keypress)="maxlenght($event.target.value)"
+                  class="form-control"
+                  formControlName="budgetGrowthFactor"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.budgetGrowthFactor.errors
+                  }"
+                />
+                <div
+                  *ngIf="f.budgetGrowthFactor.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f.budgetGrowthFactor.errors.required">
+                    Budget is required
+                  </div>
+                  <div *ngIf="f.budgetGrowthFactor.errors.pattern">
+                    Space is not allowed
+                  </div>
+                </div>
+                <label for="" class="fontSize-11"
+                  >(Budget Growth Factor %)</label
+                >
+                <!-- <div class="input-group input-Tooltip">
+                                 <div class="input-group-prepend">
+                                     <span class="input-group-text border-0 p-0"><a href="javascript:void(0);"data-toggle="tooltip" data-placement="bottom" title="(Budget Growth Factor %)"> <i class="fa fa-question-circle-o"></i></a></span>
+                                 </div>
+                             </div> -->
+              </div>
+            </div>
+            <div class="form-group form-row align-items-start">
+              <label class="label col-md-4 mb-0">Royalty</label>
+              <div class="col-md-8">
+                <input
+                  type="number"
+                  (keypress)="maxlenght($event.target.value)"
+                  class="form-control"
+                  formControlName="royaltyDisc"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.royaltyDisc.errors
+                  }"
+                />
+                <div *ngIf="f.royaltyDisc.errors" class="invalid-feedback">
+                  <div *ngIf="f.royaltyDisc.errors.required">
+                    Royalty is required
+                  </div>
+                  <div *ngIf="f.royaltyDisc.errors.pattern">
+                    Space is not allowed
+                  </div>
+                </div>
+                <label for="" class="fontSize-11">(Royalty Discount %)</label>
+                <!-- <div class="input-group input-Tooltip">
+                                 
+                                 <div class="input-group-prepend">
+                                     <span class="input-group-text border-0 p-0"><a href="javascript:void(0);"data-toggle="tooltip" data-placement="bottom" title="(Royalty Discount %)"> <i class="fa fa-question-circle-o"></i></a></span>
+                                 </div>
+                             </div> -->
+              </div>
+            </div>
+            <div class="form-group form-row align-items-start">
+              <label class="label col-md-4 mb-0">Advertising</label>
+              <div class="col-md-8">
+                <input
+                  type="number"
+                  (keypress)="maxlenght($event.target.value)"
+                  class="form-control"
+                  formControlName="advertisingDisc"
+                  [ngClass]="{
+                    'is-invalid': submitted && f.advertisingDisc.errors
+                  }"
+                />
+                <div *ngIf="f.advertisingDisc.errors" class="invalid-feedback">
+                  <div *ngIf="f.advertisingDisc.errors.required">
+                    Advertising is required
+                  </div>
+                </div>
+                <label for="" class="fontSize-11"
+                  >(Advertising Discount %)</label
+                >
+                <!-- <div class="input-group input-Tooltip">
+                                 <div class="input-group-prepend">
+                                     <span class="input-group-text border-0 p-0"><a href="javascript:void(0);"data-toggle="tooltip" data-placement="bottom" title="(Advertising Discount %)"> <i class="fa fa-question-circle-o"></i></a></span>
+                                 </div>
+                             </div> -->
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <div class="col-lg-4">
+                <div class="custom-control custom-checkbox">
+                  <!-- <input type="checkbox" class="custom-control-input" id="Allow"> -->
+                  <input
+                    type="checkbox"
+                    formControlName="allowSaleDisc"
+                    class="custom-control-input"
+                    id="Allow"
+                  />
+                  <label class="custom-control-label" for="Allow"
+                    >Allow Sale Discount</label
+                  >
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <div class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    formControlName="excludeWastageOptimalOrdering"
+                    class="custom-control-input"
+                    id="Exclude"
+                  />
+                  <label class="custom-control-label" for="Exclude"
+                    >Exclude wastage From Optimal ordering</label
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2">Save</button>
+              <a class="btn btn-grey" data-dismiss="modal">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade thm-popup"
+  id="departmentEditModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="storeGroupModal"
+  aria-hidden="true"
+  data-backdrop="static"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form
+            [formGroup]="departmentEditForm"
+            (ngSubmit)="updateDepartment()"
+          >
+            <div class="title-wrap mb-2">
+              <h4 class="title">Update Departments</h4>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <label class="label col-md-4 mb-0"
+                >Code <span class="text-danger">*</span></label
+              >
+              <div class="col-md-8">
+                <input
+                  [readonly]="formStatus"
+                  type="number"
+                  [maxlength]="3"
+                  [min]="0"
+                  class="form-control"
+                  formControlName="code"
+                  [ngClass]="{ 'is-invalid': submitted1 && f1.code.errors }"
+                />
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <label class="label col-md-4 mb-0"
+                >Description <span class="text-danger">*</span></label
+              >
+              <div class="col-md-8">
+                <input
+                  type="text"
+                  maxlength="40"
+                  class="form-control"
+                  formControlName="desc"
+                  [ngClass]="{ 'is-invalid': submitted1 && f1.desc.errors }"
+                  appUppercase
+                />
+                <div *ngIf="f1.desc.errors" class="invalid-feedback">
+                  <div *ngIf="f1.desc.errors.maxlength">
+                    Description Should be maximum 80 characters
+                  </div>
+                  <div *ngIf="f1.desc.errors.required">
+                    Description is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <label class="label col-md-4 mb-0"
+                >Map Type <span class="text-danger">*</span></label
+              >
+              <div class="col-md-8">
+                <select
+                  class="form-control"
+                  formControlName="mapTypeId"
+                  [ngClass]="{
+                    'is-invalid': submitted1 && f1.mapTypeId.errors
+                  }"
+                >
+                  <option *ngFor="let mapType of mapTypes" [value]="mapType.id">
+                    {{ mapType.name }}
+                  </option>
+                </select>
+                <div *ngIf="f1.mapTypeId.errors" class="invalid-feedback">
+                  <div *ngIf="f1.mapTypeId.errors.required">
+                    Map Type is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-start">
+              <label class="label col-md-4 mb-0">Budget</label>
+              <div class="col-md-8">
+                <input
+                  type="number"
+                  (keypress)="maxlenght($event.target.value)"
+                  class="form-control"
+                  formControlName="budgetGrowthFactor"
+                  [ngClass]="{
+                    'is-invalid': submitted1 && f1.budgetGrowthFactor.errors
+                  }"
+                />
+                <div
+                  *ngIf="f1.budgetGrowthFactor.errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="f1.budgetGrowthFactor.errors.required">
+                    Budget is required
+                  </div>
+                  <div *ngIf="f1.budgetGrowthFactor.errors.pattern">
+                    Space is not allowed
+                  </div>
+                </div>
+                <label for="" class="fontSize-11"
+                  >(Budget Growth Factor %)</label
+                >
+              </div>
+            </div>
+            <div class="form-group form-row align-items-start">
+              <label class="label col-md-4 mb-0">Royalty</label>
+              <div class="col-md-8">
+                <input
+                  type="number"
+                  (keypress)="maxlenght($event.target.value)"
+                  class="form-control"
+                  formControlName="royaltyDisc"
+                  [ngClass]="{
+                    'is-invalid': submitted1 && f1.royaltyDisc.errors
+                  }"
+                />
+                <div *ngIf="f1.royaltyDisc.errors" class="invalid-feedback">
+                  <div *ngIf="f1.royaltyDisc.errors.required">
+                    Royalty is required
+                  </div>
+                  <div *ngIf="f1.royaltyDisc.errors.pattern">
+                    Space is not allowed
+                  </div>
+                </div>
+                <label for="" class="fontSize-11">(Royalty Discount %)</label>
+              </div>
+            </div>
+            <div class="form-group form-row align-items-start">
+              <label class="label col-md-4 mb-0">Advertising</label>
+              <div class="col-md-8">
+                <input
+                  type="number"
+                  (keypress)="maxlenght($event.target.value)"
+                  class="form-control"
+                  formControlName="advertisingDisc"
+                  [ngClass]="{
+                    'is-invalid': submitted1 && f1.advertisingDisc.errors
+                  }"
+                />
+                <div *ngIf="f1.advertisingDisc.errors" class="invalid-feedback">
+                  <div *ngIf="f1.advertisingDisc.errors.required">
+                    Advertising is required
+                  </div>
+                  <div *ngIf="f1.advertisingDisc.errors.pattern">
+                    Space is not allowed
+                  </div>
+                </div>
+                <label for="" class="fontSize-11"
+                  >(Advertising Discount %)</label
+                >
+              </div>
+            </div>
+            <div class="form-group form-row align-items-center">
+              <div class="col-lg-4">
+                <div class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    formControlName="allowSaleDisc"
+                    class="custom-control-input"
+                    id="Allow1"
+                  />
+                  <label class="custom-control-label" for="Allow1"
+                    >Allow Sale Discount</label
+                  >
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <div class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    formControlName="excludeWastageOptimalOrdering"
+                    class="custom-control-input"
+                    id="Exclude1"
+                  />
+                  <label class="custom-control-label" for="Exclude1"
+                    >Exclude wastage From Optimal ordering</label
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2">Save</button>
+              <a class="btn btn-grey" data-dismiss="modal">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade thm-popup"
+  id="departmentsSearch"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-backdrop="static"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form name="searchForm" id="searchForm">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Search Filter</h4>
+            </div>
+            <div class="form-group mb-0">
+              <label> Wildcard Search</label>
+              <input type="text" id="departments_Search_filter" appUppercase class="form-control" #searchValue />
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button
+                class="btn btn-blue mr-2"
+                (click)="departmentsSearch(searchValue)"
+              >
+                Ok
+              </button>
+              <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

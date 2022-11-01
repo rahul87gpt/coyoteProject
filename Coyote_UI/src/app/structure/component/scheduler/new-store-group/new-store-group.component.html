@@ -1,0 +1,75 @@
+<div class="mainContent-innner pt-2">
+    <div class="UserStoreGroup-section">
+        <!-- <div class="action-topbar d-flex align-items-center">
+          <h4 class="title flex-grow-1 mb-0">Store Group <span class="bdms"><a href="#">Accounts</a> | <a href="#">Entry Setup</a> | <span class="current">Store Group</span></span></h4>
+          <div class="probtn-wrap text-right">
+             <a class="btn btn-blue with-icon mr-2" href="#"><img class="icon" src="assets/images/addMore-gray-icon.svg" alt="Icon"> Add</a>
+             <button class="btn with-icon mr-2"><img class="icon" src="assets/images/edit-btn-icon.svg" alt="Icon"> Change</button>
+             <button class="btn with-icon mr-2"><img class="icon" src="assets/images/trash-btn-icon.svg" alt="Icon"> Delete</button>
+             <button class="btn with-icon mr-2"><img class="icon" src="assets/images/print-icon.svg" alt="Icon"> Print</button>
+             <button class="btn with-icon mr-2"><object type="image/svg+xml" data="assets/images/exel-icon.svg" class="icon">Exel</object> Export</button>
+             <button class="btn with-icon mr-2"><img class="icon" src="assets/images/filter-icon.svg" alt="Icon"> filter</button>
+          </div>
+       </div> -->
+        <div class="UserStoreGroup-wrap mt-4">
+            <div class="UserStoreGroup-form pfunPopup-height popup-box fixed-center">
+                <form [formGroup]="storeGroupForm" #savestoreGroupForm="ngForm" (submit)="saveStoreGroup()">
+                    <div class="title-wrap">
+                        <h4 class="title">Store Groups</h4>
+                    </div>
+                    <div class="form-group">
+                        <label>Code <span class="text-danger">*</span></label>
+                        <input [readonly]="codeStatus" type="text" class="form-control" 
+                            [ngClass]="{ 'is-invalid': savestoreGroupForm.submitted && f.code.errors }"
+                            formControlName="code">
+                        <div *ngIf="f.code.errors" class="invalid-feedback">
+                            <div *ngIf="f.code.errors.required">Code is required</div>
+                            <!-- <div *ngIf="f.email.errors.email">First name must be a valid email address</div> -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control"
+                            [ngClass]="{ 'is-invalid': savestoreGroupForm.submitted && f.name.errors }"
+                            formControlName="name">
+                        <div *ngIf="f.name.errors" class="invalid-feedback">
+                            <div *ngIf="f.name.errors.required">Description is required</div>
+                            <!-- <div *ngIf="f.email.errors.email">First name must be a valid email address</div> -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <div class="ctm-input"> -->
+                            <label>Status</label>
+                        <select class="form-control" formControlName="status" [ngClass]="{ 'is-invalid': savestoreGroupForm.submitted && f.status.errors }">
+                                <option value="">Select Status</option>
+                                <option value="true">Active</option>
+                                <option value="false">Inactive</option>
+                            </select>
+                            <div *ngIf="f.status.errors" class="invalid-feedback">
+                                <div *ngIf="f.status.errors.required">Status is required</div>
+                                <!-- <div *ngIf="f.email.errors.email">First name must be a valid email address</div> -->
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                    <!-- <div class="form-group">
+                   <label>Status</label>
+                   <select class="form-control">
+                      <option>Option</option>
+                      <option>Option</option>
+                      <option>Option</option>
+                   </select>
+                </div> -->
+                    <!-- <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" formControlName="status" class="custom-control-input" id="customControl78">
+                        <label class="custom-control-label" for="customControl78">Status</label>
+                    </div> -->
+                    <div class="btn-wrap text-right btns-top-space">
+                        <button type="submit" class="btn width-80 btn-right-space btn-blue">Save</button>
+                        <a class="btn width-80" [routerLink]="['/store-group']" >Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.UserStoreGroup-wrap -->
+    </div>
+</div>

@@ -1,0 +1,76 @@
+.report-form-group .overflow-h{
+    height: 380px;
+    overflow: auto;
+    .exclude-list {
+        .submenu{
+           height: 190px; 
+        }
+    }
+    .reportDay_list{
+        background-color: #ffffff;
+        padding: 8px;
+    }
+}
+
+table.ctm-table.dataTable tr td, table.ctm-table.dataTable tr th {
+     min-width: 100px !important;
+}
+table.ctm-table.dataTable tr td, table.ctm-table.dataTable tr td {
+    padding: .75rem;
+}
+.list-li ul li span i { color: #5145cd;}
+
+.code-Height{
+    height: 401.99px;  
+}
+
+.Out-btn{
+    height: 23px;
+}
+.modal-content{
+    box-shadow:0 2px 10px 0 #00000029;
+    border-color:#00000033;
+}
+
+.flag-nav{
+    border-bottom: 1px solid #ccc;
+    padding: 0;
+}
+#newSch .nav-tabs .nav-link.active{
+    background-color:transparent;
+    
+    border-color:#ccc #ccc #e2ebff;
+}
+.apn-navTab .nav-pills .nav-link {
+    color: #27303f;
+    font-size: 9px;
+    font-weight: 500;
+    padding: 7px 5px;
+    border: 1px solid #666;
+    margin: 3px 2px 5px;
+}
+
+.tab-content{
+    width:100%;
+    float:left;
+}
+
+.ctm-table{
+    background-color: #fff;
+}
+.bg-white{
+    background-color: #fff;
+}
+ 
+// DONOT REMOVE--------------Future use----------selection design------
+// <ng-container
+// *ngIf="(dropdownObj.zones?.length !== selectedValues?.zones?.length); else allZonesSelected">
+// <li class="d-flex" *ngFor="let zone of selectedValues?.zones">
+
+//     <span class="mr-2"><i class="fa fa-check "></i></span>
+//     {{ zone.code }} &nbsp;-&nbsp;{{ zone.name }}
+// </li>
+// </ng-container>
+// <ng-template #allZonesSelected>
+// <li>All Values Has Been Selected</li>
+// </ng-template>

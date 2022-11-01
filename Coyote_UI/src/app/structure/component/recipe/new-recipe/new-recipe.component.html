@@ -1,0 +1,412 @@
+<div class="mainContent-innner">  
+    <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">Recipes</h4>
+        <div class="probtn-wrap d-flex text-right">
+            <button class="btn btn-blue mr-2" (click)="onAddRecipeItem($event, 'recipeHeader')"><i class="icon fa fa-plus-circle"></i> Add Recipe Items</button>
+            <button  class="btn mr-2" (click)="submitRecipeForm()" class="btn mr-2">Finish</button>
+            <button class="btn mr-2"><i class="icon fa fa-print"></i> Print</button>
+            <button class="btn btn-blue mr-2" [routerLink]="['/recipe']" > Cancel</button>
+        </div>
+    </div>
+    <form [formGroup]="recipeForm">    
+      <div class="bg-box mt-15">
+          <div formGroupName="recipeHeader">
+            <div class="form-row">
+                <div class="col-6">
+                    <div class="group-from">
+                        <h5 class="title">Recipe Product Number</h5>
+                        <div class="form-row align-items-center">
+                            <div class="col-8">
+                                <div class="form-group">
+                                    <input type="number" [readonly]="numberStaus" (keyup)="enterRecipeItemSearch($event)"  [min]="0" formControlName="productNumber" (input)="productInputSearchChange($event.target.value)" class="form-control" autofocus>
+                                </div>
+                            </div>
+                            <div class="col-1" *ngIf="!recipe_id">
+                                <button type="button" (click)="searchProduct(0)" class="btn btn-grey input-btn btn-block"><i class="fa fa-search"></i></button>
+                                <a
+                                data-toggle="modal"
+                                data-target="#searchProductModal"
+                                class="dn openProductList"
+                              ></a>
+                            </div>
+                            <div class="col-3">
+                                <button type="button" (click)="productDetails(0)" class="btn btn-blue input-btn btn-block" >Product Details</button>
+                            </div>
+                            <div class="col-12">
+                                <h6 class="text-uppercase mb-0" style="color:#5145cd;">{{productDesc}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="group-from">
+                        <h5 class="title">Recipe Header</h5>
+                        <div class="form-row align-items-center form-group">
+                            <div class="col-3">
+                               <label for="" class="mb-0">Description </label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" formControlName="description" appUppercase class="form-control">
+                            </div>                                            
+                        </div>
+                        <div class="form-row align-items-center form-group rebate-form">
+                            <div class="col-3">
+                               <label for="" class="mb-0">Outlet</label>
+                            </div>
+                            <div class="col-9">
+                                <ng-container *ngIf="!(recipe_id)">
+                                    <ng-select
+                                      [items]="recipeObj.store"
+                                      bindLabel="nameCode"
+                                      bindValue="id"
+                                      formControlName="outletID"
+                                      [virtualScroll]="false"
+                                      [clearable]="false"
+                                      [clearOnBackspace]="false"
+                                      [searchable]="true"
+                                      [multiple]="false"
+                                      placeholder="Select Outlet"
+                                    >
+                                   <ng-template
+                                    ng-option-tmp
+                                    let-item="item"
+                                    let-item$="item$"
+                                    let-index="index"
+                                   >
+                                  <div class="form-row">
+                                  <span
+                                   class="col-9 zone-overflow"
+                                    title="{{ item.name }}"
+                                  >
+                                    {{ item.desc }}
+                                 </span>
+                                  <div class="col-3">
+                                     {{ item.code }}
+                                 </div>
+                                  </div>
+                                   </ng-template>
+                                    </ng-select>
+                                    <!-- <select class="form-control" formControlName="outletID" >
+                                        <option *ngFor="let outlet of storeData" [value]="outlet.id">{{outlet.desc}}</option>
+                                    </select> -->
+                                </ng-container>
+                                <ng-container *ngIf="(recipe_id)">
+                                    <ng-select
+                                      [items]="recipeObj.store"
+                                      bindLabel="nameCode"
+                                      bindValue="id"
+                                      formControlName="outletID"
+                                      [virtualScroll]="false"
+                                      [clearable]="false"
+                                      [clearOnBackspace]="false"
+                                      [searchable]="false"
+                                      [multiple]="false"
+                                      [readonly]="true"  
+                                    >
+                                   <ng-template
+                                    ng-option-tmp
+                                    let-item="item"
+                                    let-item$="item$"
+                                    let-index="index"
+                                   >
+                                 <div class="form-row">
+                                  <span
+                                   class="col-9 zone-overflow"
+                                    title="{{ item.name }}"
+                                  >
+                                    {{ item.desc }}
+                                  </span>
+                                  <div class="col-3">
+                                     {{ item.code }}
+                                 </div>
+                                  </div>
+                                </ng-template>
+                                    </ng-select>
+                                  <!-- <select class="form-control" formControlName="outletID" disabled>
+                                    <option *ngFor="let outlet of storeData" [value]="outlet.id">{{outlet.desc}}</option>
+                                  </select>     -->
+                                </ng-container>
+                               
+                            </div>                                            
+                        </div>
+                        <div class="form-row align-items-center form-group mb-0">
+                            <div class="col-3">
+                               <label for="" class="mb-0">Makes Qty</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" formControlName="qty" class="form-control">
+                            </div>                                            
+                        </div>
+                    </div>
+                </div>
+            </div>  
+          </div>
+        <div class="table-responsive">
+            <table class="table ctm-table">
+                <thead>
+                <tr>
+                    <th>Ingredient Product</th>
+                    <th>Ingredient Description</th>
+                    <th>Ingredient Qty</th>
+                    <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let items of recipe_Detail , index as i">
+                        <td>{{items.ingredientNumber}}</td>
+                        <td>{{items.ingredientDescription}}</td>
+                        <td>{{items.qty}}</td>
+                        <td class="text-center">
+                            <div class="tbHover-btnGroup">
+                                <button class="tbHover-btn trash-btn" data-toggle="modal" data-target="#RecipesItem" (click)="getRecipeItemById(items, i, items?.id)" ><i class="fa fa-pencil"></i></button>
+                                <button class="tbHover-btn trash-btn" (click)="deleteRecipeItem(items)"><i class="fa fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+    </form>  
+</div>
+<div class="modal fade bd-example-modal-md thm-popup" id="RecipesItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="recipeItemForm" (keydown.enter)="$event.preventDefault()" >
+                        <div class="title-wrap">
+                            <h4 class="title">Recipe Item</h4>
+                        </div>  
+                        <div class="group-from mb-0">
+                            <h5 class="title">Line Details</h5>
+                            <div class="form-row align-items-center form-group">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Product</label>
+                                 </div>
+                                <div class="col-4">
+                                    <input  type="number" [min]="0" [readonly]="productNumberStatus"   onkeyup="if(this.value<0){this.value= this.value * -1}" formControlName="ingredientNumber"  class="form-control" (keyup)="enterKeyboardForRecipeItemSearch($event)" [ngClass]="{ 'is-invalid': submitted && f1.ingredientNumber.errors }">
+                                    <div *ngIf="f1.ingredientNumber.errors" class="invalid-feedback">
+                                        <div *ngIf="f1.ingredientNumber.errors.required">Product is required</div>
+                                    </div>
+                                </div>
+                                <ng-container *ngIf="(!selectedRecipeItemProductID)">
+                                    <div class="col-1">
+                                        <button type="button"  #searchProductBtn (click)=" searchRecipeItem(0)" class="btn btn-grey input-btn btn-block"><i class="fa fa-search"></i></button>
+                                        <a
+                                        data-toggle="modal"
+                                        data-target="#searchProductModal"
+                                        class="dn openProductList"
+                                      ></a>
+                                    </div>
+                                </ng-container>
+                                <div class="col-4">
+                                    <button type="button" class="btn btn-blue input-btn btn-block" (click)="productDetails(1)">Product Details</button>
+                                </div>
+                            </div>
+                            <div class="form-row align-items-center form-group">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Description</label>
+                                 </div>
+                                <div class="col-9">
+                                    <input type="text" [readonly]="true" formControlName="ingredientDescription" class="form-control" [ngClass]="{ 'is-invalid': submitted && f1.ingredientDescription.errors }">
+                                    <div *ngIf="f1.ingredientDescription.errors" class="invalid-feedback">
+                                        <div *ngIf="f1.ingredientDescription.errors.required">Description is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row align-items-center form-group mb-0">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Quantity</label>
+                                 </div>
+                                <div class="col-9">
+                                    <input  type="number" [min]="0"  onkeyup="if(this.value<0){this.value= this.value * -1}"  formControlName="qty"  class="form-control"  [ngClass]="{ 'is-invalid': submitted && f1.qty.errors }">
+                                    <div *ngIf="f1.qty.errors" class="invalid-feedback">
+                                        <div *ngIf="f1.qty.errors.required">Quantity is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" (click)="addRecipeItems()" class="btn btn-blue mr-2">{{ (selectedRecipeItemId > 0) || (selectedRecipeItemProductID > 0) ? "Change":"Add"}}</button>
+                            <button #closebutton type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>                    
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup bd-example-modal-xl" id="searchProductModal" tabindex="-1" role="dialog" aria-labelledby="searchProductModal" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">               
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="RecipeProductSearchForm">
+                     <div class="title-wrap mb-2">
+                         <h4 class="title">Product Lookup</h4>
+                     </div>
+                     <div class="form-row">
+                         <div class="col-lg-6 col-xl-6">
+                             <div class="form-row align-items-center">
+                                 <div class="col-md-2">
+                                     <div class="form-group">
+                                         <input  type="number" [min]="0"  onkeyup="if(this.value<0){this.value= this.value * -1}"  [min]="0" placeholder="Number" class="form-control" formControlName="number" (keyup)="productsearchChange('number') ; enterKeyboard($event)"  >        
+                                     </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                     <div class="form-group">
+                                         <input type="text" placeholder="Description" class="form-control" formControlName="desc" (keyup)="productsearchChange('desc') ;enterKeyboard($event)"  >
+                                     </div>
+                                 </div>
+                                 <div class="col-md-3">
+                                     <div class="form-group">
+                                         <button type="button" id="recipeWildCardSearch" (click)="searchByProductDetails()" class="btn btn-blue input-btn btn-block">Wildcard Search</button>
+                                     </div>
+                                 </div>
+                                 <div class="col-md-3">
+                                     <div class="form-group">
+                                         <div class="custom-control custom-checkbox">
+                                             <input type="checkbox" class="custom-control-input" formControlName="status" id="customControlStatus" [checked]="searchProductByStatus" 
+                                             (change)="searchProductByStatus(saveUserNameCheckBox.checked)" #saveUserNameCheckBox >
+                                             <label class="custom-control-label mb-0" for="customControlStatus">Only Active</label>
+                                         </div>
+                                     </div>       
+                                 </div>
+                             </div>                                        
+                         </div>
+                         <div class="col-lg-6 col-xl-6">
+                             <div class="form-row align-items-center">
+                                 <div class="col-md-3">
+                                     <div class="form-group">
+                                         <button type="button" class="btn btn-blue input-btn btn-block" (click)="productDetails(2)">Product Details</button>
+                                     </div>
+                                 </div>
+                                 <div class="col-md-9">
+                                     <div class="form-group">
+                                         <div class="d-flex">
+                                             <!-- <ng-select
+                                      [items]="storeData"
+                                      bindLabel="desc"
+                                      bindValue="id"
+                                      formControlName="outletID"
+                                      [virtualScroll]="false"
+                                      [clearable]="false"
+                                      [clearOnBackspace]="false"
+                                      [searchable]="false"
+                                      [multiple]="false"
+                                    >
+                                   <ng-template
+                                    ng-option-tmp
+                                    let-item="item"
+                                    let-item$="item$"
+                                    let-index="index"
+                                   >
+                                 <div class="form-row">
+                                  <span
+                                   class="col-9 zone-overflow"
+                                    title="{{ item.name }}"
+                                  >
+                                    {{ item.desc }}
+                                  </span>
+                                  <div class="col-3">
+                                     {{ item.code }}
+                                 </div>
+                                  </div>
+                                </ng-template>
+                                             </ng-select> -->
+                                             <select class="form-control" formControlName="outletId" (change)="changeOutlet($event)" >
+                                                <option [ngValue]="null" disabled selected hidden>Select Outlet</option> 
+                                                <option [value]="outlet.id" *ngFor="let outlet of recipeObj.store">{{outlet.desc }}&nbsp;&nbsp;&nbsp;&nbsp;({{outlet.code}})</option>
+                                             </select>
+                                             <button type="button" class="btn ml-2 btn-grey input-btn" (click)="clearField()">Clear</button>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>                                        
+                         </div>
+                     </div>
+                     <div class="table-scroll">
+                         <div class="table-responsive">
+                             <table class="table ctm-table" id="recipeProduct-table">
+                                 <thead>
+                                 <tr>
+                                     <th>Select</th>
+                                     <th>Status</th>
+                                     <th>Number</th>
+                                     <th>Description</th>
+                                     <th>Comm</th>
+                                     <th>Commodity</th>
+                                     <th>Dep</th>
+                                     <th>Department</th>
+                                     <th>Cat</th>
+                                     <th>Category</th>
+                                     <th>Group</th>
+                                     <th>Group</th>
+                                     <th>Supp</th>
+                                     <th>Supplier</th>
+                                     <th>Replicate</th>
+                                     <th>Type</th>
+                                     <th>Tax</th>
+                                     <th>Ctn Qty</th>
+                                     <th>Sell Unit Qty</th>
+                                     <th>Parent</th>
+                                     <th>Pos Des</th>
+                                     <th>Date Added </th>
+                                     <th>Date Changed</th>
+                                     <th>Date Deleted</th>
+                                     <th>Info</th>
+                                 </tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr *ngFor="let product of searchProducts">     
+                                        <td>    
+                                          <div class="custom-control custom-radio">
+                                            <input type="radio"  name="product" (click)="setProductObj(product)" class="custom-control-input" id="product_{{product.id}}"> 
+                                            <label class="custom-control-label" for="product_{{product.id}}"></label>
+                                           </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="status-check" [ngClass]="{
+                                                'status-true': product.status,
+                                                'status-false': !product.status
+                                              }"></span>
+                                        </td>
+                                         <td>{{product.number}}</td>
+                                         <td>{{product.desc}}</td>
+                                         <td>{{product.commodityCode}}</td>                                          
+                                         <td>{{product.commodity}}</td>
+                                         <td>{{product.departmentCode}}</td>
+                                         <td>{{product.department}}</td>
+                                         <td>{{product.categoryCode}}</td>
+                                         <td>{{product.category}}</td>
+                                         <td>{{product.groupCode}}</td>
+                                         <td>{{product.group}}</td>
+                                         <td>{{product.supplierCode}}</td>
+                                         <td>{{product.supplier}}</td>
+                                         <td>{{product?.replicate}}</td>
+                                         <td>{{product.type}}</td>
+                                         <td>{{product.tax}}</td>
+                                         <td>{{product.cartonQty}}</td>
+                                         <td>{{product.unitQty}}</td>
+                                         <td>{{product.parent}}</td>
+                                         <td>{{product.posDesc}}</td>
+                                         <td>{{product.createdAt | customdatetimeformat }}</td>
+                                         <td>{{product.updatedAt | customdatetimeformat}}</td>
+                                         <td>{{product.deletedAt | customdatetimeformat}}</td>
+                                         <td>{{product.info}}</td>
+                                     </tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                     </div>
+                     <div class="btn-wrap text-right mt-10">          
+                         <button  type="button" class="btn btn-blue mr-2" (click)="selectProduct()">Select</button>
+                         <button #prodSearchTerm type="button" class="btn btn-grey"  data-dismiss="modal" >Close</button>
+                     </div>
+                    </form>
+                </div>                    
+            </div>
+        </div>
+    </div>
+</div>

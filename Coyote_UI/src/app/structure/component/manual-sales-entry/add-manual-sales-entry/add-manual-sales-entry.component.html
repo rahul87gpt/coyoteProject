@@ -1,0 +1,530 @@
+<div class="mainContent-innner">
+    <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">Manual Sale</h4>
+        <div class="probtn-wrap d-flex text-right">
+            <button class="btn btn-blue mr-2" (click)="addManualSalesItem()"><i class="icon fa fa-plus-circle"></i> Add</button>
+            <button class="btn mr-2"><i class="icon fa fa-print"></i> Print</button>
+            <button  class="btn mr-2" (click)="submitManualSalesEntryForm()"><i class="icon fa fa-flag"></i> Finish</button>
+            <button type="button" class="btn btn-blue " [routerLink]="['/manual-sales-entry']">
+                Cancel
+              </button>                            
+        </div>
+    </div>
+ <form [formGroup]="manualSalesEntryForm" >   
+    <div class="bg-box mt-15">
+        <div class="form-row">
+            <div class="col-lg-4">
+                <div class="group-from mb-0">
+                    <div class="form-group form-row align-items-center">
+                        <div class="col-4">
+                            <label class="label mb-0">Reference<span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" class="form-control" formControlName="code"  [readonly]="true" [ngClass]="{'is-invalid': submitted && f.code.errors}" >
+                            <div *ngIf="f.desc.errors" class="invalid-feedback">
+                                <div *ngIf="f.desc.errors.required"> Description is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-row align-items-center">
+                        <div class="col-4">
+                            <label class="label mb-0">Description<span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" class="form-control" formControlName="desc" [ngClass]="{'is-invalid': submitted && f.desc.errors}">
+                            <div *ngIf="f.desc.errors" class="invalid-feedback">
+                                <div *ngIf="f.desc.errors.required"> Description is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-0 form-row align-items-center">
+                        <div class="col-4">
+                            <label class="label mb-0">Post to Date</label>
+                        </div>
+                        <div class="col-8">
+                            <div class="ctm-calendar">
+                                <input
+                                type="text"
+                                class="form-control"
+                                bsDatepicker
+                                [bsConfig]="datepickerConfig"
+                                formControlName="postToDate"
+                               />
+                              
+                            </div>                                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="group-from mb-0">
+                    <h5 class="title">Manual Sales</h5>
+                    <div class="form-group form-row align-items-center">
+                        <div class="col-4">
+                            <label class="label mb-0">Account</label>
+                        </div>
+                        <div class="col-8">
+                            <select name="" id="" class="form-control">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group mb-0 form-row align-items-center">
+                        <div class="col-4">
+                            <label class="label mb-0">Sale Type</label>
+                        </div>
+                        <div class="col-8">
+                            <select name="" id="" class="form-control" >
+                                <option value="">Account</option>
+                                <option value="">Cash Sale</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="group-from mb-0">
+                    <div class="form-group form-row align-items-center">
+                        <div class="col-4">
+                            <label class="label mb-0">Sale Total</label>
+                        </div>
+                        <div class="col-8">
+                            <!-- <div class="dollar-symbol-icon"> -->
+                             <input type="text" class="form-control" formControlName="totalSalesAmt" currencyMask  [options]="{ align: 'left', thousands: ','}" [readonly]="true">
+                            <!-- </div>  -->
+                        </div>
+                    </div>
+                    <div class="form-group mb-0 form-row align-items-center">
+                        <div class="col-4">
+                            <label class="label mb-0">Confirm Total</label>
+                        </div>
+                        <div class="col-8">
+                            <div class="dollar-symbol-icon">
+                             <input type="text" class="form-control">
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-box mt-15">
+        <div class="table-responsive">
+            <table class="table ctm-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Price Level</th>
+                        <th>Outlet</th>
+                        <th>Item Cost</th>
+                        <th>Qty</th>
+                        <th>Item Price</th>
+                        <th>Line Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="manualSalesItemsDetails?.length; else noData">
+                        <ng-container
+                          *ngFor="
+                            let items of manualSalesItemsDetails; index as i"
+                        >
+                          <tr>
+                            <td data-toggle="modal" data-target="#saleItemModal" (click)="getmanualSalesItemById(items,i)"><a>{{ items?.productNumber }}</a></td>
+                            <td>{{ items?.productDesc }}</td>
+                            <td>{{ items?.priceLevel  }}</td>
+                            <td>{{ items?.outletId }}</td>
+                            <td>{{ items?.cost | currency:'USD' }}</td>
+                            <td>{{ items?.qty }}</td>
+                            <td>{{ items?.price | currency:'USD'}}</td>
+                            <td>{{ items?.amount | currency:'USD'}}</td>
+                            <td class="text-center">
+                                <div class="tbHover-btnGroup">
+                                    <button type="button" class="tbHover-btn" data-toggle="modal" data-target="#saleItemModal" (click)="getmanualSalesItemById(items,i)"><i class="fa fa-pencil"></i></button>
+                                    <button type="button" class="tbHover-btn" (click)="deleteManualSalesItemById(items)"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </td>
+                          </tr>
+                        </ng-container>
+                      </ng-container>
+                      <ng-template #noData>
+                        <tr class="ng-star-inserted">
+                          <td class="text-center" colspan="18">
+                            <strong id="entry-not-found">Data Not Avaialable!</strong>
+                          </td>
+                        </tr>
+                      </ng-template>                                                     
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </form>   
+</div>
+<div class="modal fade bd-example-modal-md thm-popup" id="saleItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="saleItemForm" (ngSubmit)="submitsaleItemFormForm()">
+                        <div class="title-wrap">
+                            <h4 class="title">Sale Item</h4>
+                        </div>
+                        <div class="group-from">
+                            <h5 class="title">Line Details</h5>
+                            <div class="form-group mb-0 form-row align-items-center">
+                                <div class="col-6">
+                                    <label class="label mb-0">Product<span class="text-danger">*</span></label>
+                                    <div class="form-row form-group align-items-center">
+                                        <div class="col-8">
+                                            <input type="text" class="form-control"  formControlName="productNumber">
+                                            <!-- <div *ngIf="f1.productNumber.errors" class="invalid-feedback">
+                                                <div *ngIf="f1.productNumber.errors.required"> Product is required</div>
+                                            </div> -->
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-grey btn-block input-btn" (click)="searchProduct(0)">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label class="label mb-0">Price Level<span class="text-danger">*</span></label>
+                                     <select  class="form-control" formControlName="priceLevel" >
+                                    <option value="1" >1</option>
+                                    <option value="2" >2</option>
+                                    <option value="3" >3</option>
+                                    <option value="4" >4</option>
+                                    <option value="5" >5</option>
+                                    <option value="Cost" >Cost</option>
+                                    <option value="Free" >Free</option>
+                                </select>
+                                <!-- <div *ngIf="f1.priceLevel.errors" class="invalid-feedback">
+                                    <div *ngIf="f1.priceLevel.errors.required"> Price Level is required</div>
+                                </div>                                 -->
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="label mb-0">Description</label>
+                                        <input type="text" class="form-control" formControlName="productDesc" [readonly]="true" >
+                                    </div>                                        
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="label mb-0">Quantity<span class="text-danger">*</span></label>
+                                        <input type="text"  (keyup)="calculateTotalCost($event)" class="form-control" formControlName="qty" >
+                                        <!-- <div *ngIf="f1.qty.errors" class="invalid-feedback">
+                                            <div *ngIf="f1.qty.errors.required"> Quantity is required</div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="label mb-0">Sale Amt<span class="text-danger">*</span></label>
+                                        <div class="dollar-symbol-icon">
+                                         <input type="text" class="form-control" formControlName="amount" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group mb-0">
+                                        <label class="label mb-0">Item Price</label>
+                                        <div class="dollar-symbol-icon">
+                                          <input type="text" (keyup)="calculateTotal_Cost($event)" class="form-control" formControlName="price"  >
+                                          <!-- <div *ngIf="f1.price.errors" class="invalid-feedback">
+                                            <div *ngIf="f1.price.errors.required"> Item Price is required</div>
+                                          </div> -->
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group mb-0">
+                                        <label class="label mb-0">Item Cost</label>
+                                        <div class="dollar-symbol-icon">
+                                         <input type="text" class="form-control" formControlName="cost" [readonly]="true">
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-from">
+                            <h5 class="title">Outlet<span class="text-danger">*</span></h5>
+                            <div class="form-group mb-0">
+                                <select  class="form-control" formControlName="outletId" (change)="changeOutletForsaleItemForm($event)">
+                                    <option [value]="outlet.id" *ngFor="let outlet of Outletdata">{{outlet.desc + " " + outlet.code}}</option>
+                                </select>
+                                <!-- <div *ngIf="f1.outletId.errors" class="invalid-feedback">
+                                    <div *ngIf="f1.outletId.errors.required"> Outlet is required</div>
+                                </div> -->
+                            </div>
+                        </div> 
+                        
+                        <div class="alert-error">
+                              {{requiredMessage}}
+                        </div> 
+                        <div class="btn-wrap text-right mt-10">
+                            <a
+                             data-toggle="modal"
+                             data-target="#searchProductModal"
+                             class="dn openProductList"
+                            ></a>
+                            <button type="submit" class="btn btn-blue mr-2" > {{manualSalesItem_Id > 0 ? "Change" : "Add"}}</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>                    
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="modal fade bd-example-modal-md thm-popup" id="saleItemEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="saleItemEditForm" (ngSubmit)="submitsaleItemEditForm()">
+                        <div class="title-wrap">
+                            <h4 class="title">Sale Item</h4>
+                        </div>
+                        <div class="group-from">
+                            <h5 class="title">Line Details</h5>
+                            <div class="form-group mb-0 form-row align-items-center">
+                                <div class="col-6">
+                                    <label class="label mb-0">Product<span class="text-danger">*</span></label>
+                                    <div class="form-row form-group align-items-center">
+                                        <div class="col-8">
+                                            <input type="text" class="form-control"  formControlName="productNumber" [ngClass]="{'is-invalid': submitted2 && f2.productNumber.errors}">
+                                            <div *ngIf="f2.productNumber.errors" class="invalid-feedback">
+                                                <div *ngIf="f2.productNumber.errors.required"> Product is required</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-grey btn-block input-btn" (click)="searchProductForUpdate()">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label class="label mb-0">Price Level<span class="text-danger">*</span></label>
+                                    <select  class="form-control"  formControlName="priceLevel" [ngClass]="{'is-invalid': submitted2 && f2.priceLevel.errors}">
+                                        <option value="1" >1</option>
+                                        <option value="2" >2</option>
+                                        <option value="3" >3</option>
+                                        <option value="4" >4</option>
+                                        <option value="5" >5</option>
+                                        <option value="Cost" >Cost</option>
+                                        <option value="Free" >Free</option>
+                                    </select> 
+                                    <div *ngIf="f2.priceLevel.errors" class="invalid-feedback">
+                                        <div *ngIf="f2.priceLevel.errors.required"> Price Level is required</div>
+                                    </div>                                   
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="label mb-0">Description</label>
+                                        <input type="text" class="form-control" formControlName="productDesc" [readonly]="true">
+                                    </div>                                        
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="label mb-0">Quantity<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control"  (keyup)="calculateTotalCostForUpdate()"  formControlName="qty" [ngClass]="{'is-invalid': submitted2 && f2.qty.errors}">
+                                        <div *ngIf="f2.qty.errors" class="invalid-feedback">
+                                            <div *ngIf="f2.qty.errors.required"> Quantity is required</div>
+                                        </div>    
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="label mb-0">Sale Amt</label>
+                                        <div class="dollar-symbol-icon">
+                                         <input type="text" class="form-control" formControlName="amount" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group mb-0">
+                                        <label class="label mb-0">Item Price<span class="text-danger">*</span></label>
+                                        <div class="dollar-symbol-icon">
+                                          <input type="text" class="form-control" formControlName="price" (keyup)="calculateTotalCostForUpdate()" [ngClass]="{'is-invalid': submitted2 && f2.price.errors}">
+                                          <div *ngIf="f2.price.errors" class="invalid-feedback">
+                                            <div *ngIf="f2.price.errors.required"> Item Price is required</div>
+                                          </div>  
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group mb-0">
+                                        <label class="label mb-0">Item Cost</label>
+                                        <div class="dollar-symbol-icon">
+                                         <input type="text" class="form-control" formControlName="cost" [readonly]="true">
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-from">
+                            <h5 class="title">Outlet<span class="text-danger">*</span></h5>
+                            <div class="form-group mb-0">
+                                <select  class="form-control" formControlName="outletId" [ngClass]="{'is-invalid': submitted2 && f2.outletId.errors}">
+                                    <option [value]="outlet.id" *ngFor="let outlet of Outletdata">{{outlet.desc}}</option>
+                                </select>
+                                <div *ngIf="f2.outletId.errors" class="invalid-feedback">
+                                    <div *ngIf="f2.outletId.errors.required"> Outlet is required</div>
+                                </div> 
+                            </div>
+                        </div>   
+                        <div class="btn-wrap text-right mt-10">
+                            <a
+                            data-toggle="modal"
+                            data-target="#searchProductModal"
+                            class="dn openProductList"
+                           ></a>
+                            <button type="submit" class="btn btn-blue mr-2" > Change</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>                    
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="modal fade thm-popup bd-example-modal-xl" id="searchProductModal" tabindex="-1" role="dialog" aria-labelledby="searchProductModal" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">               
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="manualSalesProdSearchForm">
+                     <div class="title-wrap mb-2">
+                         <h4 class="title">Product Lookup</h4>
+                     </div>
+                     <div class="form-row">
+                         <div class="col-lg-6 col-xl-6">
+                             <div class="form-row align-items-center">
+                                 <div class="col-md-2">
+                                     <div class="form-group">
+                                         <input type="number" [min]="0" placeholder="Number" class="form-control" formControlName="number" (keyup)="productInputSearchChange('number') ; enterKeyboard($event)"  >        
+                                     </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                     <div class="form-group">
+                                         <input type="text" placeholder="Description" class="form-control" formControlName="desc" (keyup)="productInputSearchChange('desc') ; enterKeyboard($event)" >
+                                     </div>
+                                 </div>
+                                 <div class="col-md-3">
+                                     <div class="form-group">
+                                         <button type="button" id="manualWildCardSearch" (click)="searchByProductDetails()" class="btn btn-blue input-btn btn-block">Wildcard Search</button>
+                                     </div>
+                                 </div>
+                                 <div class="col-md-3">
+                                     <div class="form-group">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" formControlName="status" id="customControlStatus" [checked]="searchProductByStatus" 
+                                            (change)="searchProductByStatus(saveUserNameCheckBox.checked)" #saveUserNameCheckBox >
+                                            <label class="custom-control-label mb-0" for="customControlStatus">Only Active</label>
+                                        </div>
+                                     </div>       
+                                 </div>
+                             </div>                                        
+                         </div>
+                         <div class="col-lg-6 col-xl-6">
+                             <div class="form-row align-items-center">
+                                 <div class="col-md-3">
+                                     <div class="form-group">
+                                         <button type="button" class="btn btn-grey input-btn btn-block" >Product Details</button>
+                                     </div>
+                                 </div>
+                                 <div class="col-md-9">
+                                     <div class="form-group">
+                                         <div class="d-flex">
+                                             <select class="form-control" formControlName="outletId" (change)="changeOutlet($event)" >
+                                                <option [ngValue]="null" disabled selected hidden>Select Outlet</option>
+                                                <option [value]="outlet.id" *ngFor="let outlet of Outletdata">{{outlet.desc + " " + outlet.code }}</option>
+                                             </select>
+                                             <button type="button" class="btn ml-2 btn-grey input-btn" (click)="clearField()" >Clear</button>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>                                        
+                         </div>
+                     </div>
+                     <div class="table-scroll">
+                         <div class="table-responsive">
+                             <table class="table ctm-table" >
+                                 <thead>
+                                 <tr>
+                                     <th>Select</th>
+                                     <th>Status</th>
+                                     <th>Number</th>
+                                     <th>Description</th>
+                                     <th>Comm</th>
+                                     <th>Commodity</th>
+                                     <th>Dep</th>
+                                     <th>Department</th>
+                                     <th>Cat</th>
+                                     <th>Category</th>
+                                     <th>Group</th>
+                                     <th>Group</th>
+                                     <th>Supp</th>
+                                     <th>Supplier</th>
+                                     <th>Type</th>
+                                     <th>Tax</th>
+                                     <th>Ctn Qty</th>
+                                     <th>Sell Unit Qty</th>
+                                     <th>Parent</th>
+                                     <th>Pos Des</th>
+                                     <th>Date Added </th>
+                                     <th>Date Changed</th>
+                                     <th>Date Deleted</th>
+                                     <th>Info</th>
+                                 </tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr *ngFor="let product of searchProducts">     
+                                        <td>    
+                                          <div class="custom-control custom-radio">
+                                            <input type="radio"  name="product" (click)="setProductObj(product)" class="custom-control-input" id="product_{{product.id}}"> 
+                                            <label class="custom-control-label" for="product_{{product.id}}"></label>
+                                           </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="status-check" [ngClass]="{
+                                                'status-true': product.status,
+                                                'status-false': !product.status
+                                              }"></span>
+                                        </td>
+                                         <td>{{product.number}}</td>
+                                         <td>{{product.desc}}</td>
+                                         <td>{{product.commodityCode}}</td>                                          
+                                         <td>{{product.commodity}}</td>
+                                         <td>{{product.departmentCode}}</td>
+                                         <td>{{product.department}}</td>
+                                         <td>{{product.categoryCode}}</td>
+                                         <td>{{product.category}}</td>
+                                         <td>{{product.groupCode}}</td>
+                                         <td>{{product.group}}</td>
+                                         <td>{{product.supplierCode}}</td>
+                                         <td>{{product.supplier}}</td>
+                                         <td>{{product.type}}</td>
+                                         <td>{{product.tax}}</td>
+                                         <td>{{product.cartonQty}}</td>
+                                         <td>{{product.unitQty}}</td>
+                                         <td>{{product.parent}}</td>
+                                         <td>{{product.posDesc}}</td>
+                                         <td>{{product.createdAt | date : 'shortDate'}}</td>
+                                         <td>{{product.updatedAt | date : 'shortDate'}}</td>
+                                         <td>{{product.deletedAt | date : 'shortDate'}}</td>
+                                         <td>{{product.info}}</td>
+                                     </tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                     </div>
+                     <div class="btn-wrap text-right mt-10">          
+                         <button  type="button" class="btn btn-blue mr-2" (click)="selectProduct()">Select</button>
+                         <button type="button" class="btn btn-grey"  data-dismiss="modal" >Close</button>
+                     </div>
+                    </form>
+                </div>                    
+            </div>
+        </div>
+    </div>
+</div>

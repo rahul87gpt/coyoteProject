@@ -1,0 +1,202 @@
+<div class="mainContent-innner" *ngIf="!pdfData">
+    <div class="Tills-section">
+        <!-- <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">Print Changes Label</h4>
+            <div class="probtn-wrap d-flex text-right">
+                <button class="btn btn-blue" data-toggle="modal" data-target="#addModal">
+                    Print Changed Labels
+                </button>
+            </div>
+        </div> -->
+
+        <div class="d-flex align-items-center">
+			<h4 class="title flex-grow-1 mb-0">
+				Print Labels From Tablet
+			</h4>
+		</div>
+       <!-- /.action-topbar -->
+       <div class="Tills-wrap bg-box">
+            <div class="Tills-table-wrap">
+                <div class="table-responsive">
+                    <table class="table ctm-table" id="print-changed-labels">
+                        <thead>
+                            <tr>
+                                <th>Outlet</th>
+                                <th>Outlet Name</th>
+                                <th>Batch Date Time</th>
+                                <th>Lable Count</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let printlabel of printChangedLabels">
+                                <td>
+                                    <a data-toggle="modal" data-target="#addModal" (click)="updateAndPrintLabel(printlabel)">
+										{{printlabel.outlet}}
+									</a>
+                                </td>
+                                <td>{{printlabel.outletDescription}}</td>
+                                <td><span style="display: none">{{convertDateToMiliSeconds(printlabel.batchDateTime)}}</span>{{printlabel.batchDateTime | tfdatetimeformat}}</td>
+                                <td>{{printlabel.batchCount}}</td>
+                                <td>
+                                    <div class="tbHover-btnGroup">
+                                        <button tooltip="Print"
+                                            class="tbHover-btn fa fa-print"
+                                            data-toggle="modal" data-target="#addModal"
+                                            (click)="updateAndPrintLabel(printlabel)" placement="left" 
+                                        ></button>
+                                    </div>
+                                </td>
+                            </tr>                            
+                        </tbody>
+                    </table>
+                </div>            
+            </div>
+       </div>      
+    </div>
+ </div>
+ 
+ <div class="modal fade thm-popup bd-example-modal-md" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="printChangedForm">
+                        <div class="title-wrap mb-1">
+                            <h4 class="title">Print Labels From Tablet</h4>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label>Outlet</label>
+                            <select class="form-control" formControlName="outletId" >
+                                <option [ngValue]="store.id" *ngFor="let store of storeData">
+                                    {{store.desc}}
+                                </option>
+                            </select>
+                        </div> -->
+                        <div class="form-group mb-1 form-row align-items-center*
+                        ">
+                          <label class="col-md-12 mb-1"
+                            >Outlet</label
+                          >
+                          <div class="col-md-12 range-drop mb-1">
+                            <ng-select
+                              [items]="storeData"                              
+                              bindLabel="desc"
+                              bindValue="id"
+                              [multiple]="false"
+                              [virtualScroll]="true"
+                              [clearable]="false"                              
+                              placeholder="Select Outlet"
+							  formControlName="outletId"
+							  #store
+							 
+                            >
+                              <!-- It hold value on the basis of filter -->
+                            
+                              <ng-template
+                                ng-option-tmp
+                                let-item="item"
+                                let-item$="item$"
+                                let-index="index" 
+                              >
+                                <div class="form-row">
+                                  <span class="col-9 zone-overflow text-left">
+                                    {{ item?.desc }}
+                                  </span>
+                                  <div class="col-3 text-right" title="{{ item?.name }}">
+                                    {{ item?.code }}
+                                  </div>
+                                </div>    
+                              </ng-template>
+                            </ng-select>
+						  </div>
+						 
+                        </div>
+						<div class="form-group mb-0 form-row align-items-center*
+                        ">
+                          <label class="col-md-12 mb-1"
+                            >Label Type</label
+                          >
+                          <div class="col-md-12 range-drop mb-1">
+                            <ng-select
+                              [items]="labelType"                              
+                              bindLabel="desc"
+                              bindValue="code"
+                              [multiple]="false"
+                              [virtualScroll]="true"
+                              [clearable]="false"                              
+                              placeholder="Select Label Type"
+                              formControlName="defaultLabelId"
+                            >
+                              <!-- It hold value on the basis of filter -->
+                            
+                              <ng-template
+                                ng-option-tmp
+                                let-item="item"
+                                let-item$="item$"
+                                let-index="index" 
+                              >
+                                <div class="form-row">
+                                  <span class="col-9 zone-overflow text-left">
+                                    {{ item?.desc }}
+                                  </span>
+                                  <div class="col-3 text-right" title="{{ item?.name }}">
+                                    {{ item?.code }}
+                                  </div>
+                                </div>    
+                              </ng-template>
+                            </ng-select>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                            <!-- <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Label Type</label>
+                                    <select class="form-control" formControlName="defaultLabelId">
+                                        <option [value]="label.code" *ngFor="let label of labelType">{{label.name}}</option>
+                                    </select>
+                                </div>
+                            </div> -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Price Levels</label>
+                                    <select class="form-control" formControlName="priceLevel">
+                                        <option [ngValue]="price" *ngFor="let price of printChangeObj.price_level">
+                                            {{price}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-0">
+                            <label>
+                                Selections
+                            </label>
+                            <textarea name="" id="" rows="2" class="form-control"  readonly>Print Labels from {{ changeLabelPrinted | dateTimeFormate }}</textarea>
+                        </div>         
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-blue mr-2" (click)="updateAndPrintLabel(null, 'submitted')">Ok</button>                            
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>                    
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-container *ngIf="pdfData">
+    <div class="bg-box">    
+        <div class="text-right mb-2">
+            <button type="button" class="btn btn-blue" (click)="updateAndPrintLabel(null, 'close')">Close</button>
+        </div>
+        <ngx-extended-pdf-viewer
+            [src]="pdfData"
+            [height]="'90vh'"
+            [useBrowserLocale]="true"
+            [textLayer]="true"
+            [showHandToolButton]="true"
+        ></ngx-extended-pdf-viewer>
+    </div>
+</ng-container>

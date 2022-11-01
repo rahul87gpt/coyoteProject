@@ -1,0 +1,249 @@
+$midnight: #2c3e50;
+$clouds: #ecf0f1;
+
+// Accordion
+.accordian {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+/* Accordion styles */
+.tab {
+  width: 100%;
+  color: white;
+  overflow: hidden;
+  &-label {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background: $midnight;
+    font-weight: bold;
+    cursor: pointer;
+    /* Icon */
+    &:hover {
+      background: darken($midnight, 10%);
+    }
+    &::after {
+      content: "\276F";
+      width: 1em;
+      height: 1em;
+      text-align: center;
+      transition: all .35s;
+    }
+  }
+  &-content {
+    max-height: 0;
+    padding: 0 1em;
+    color: $midnight;
+    background: white;
+    transition: all .35s;
+  }
+  &-close {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1em;
+    font-size: 0.75em;
+    background: $midnight;
+    cursor: pointer;
+    &:hover {
+      background: darken($midnight, 10%);
+    }
+  }
+}
+
+// :checked
+input:checked {
+  + .tab-label {
+    background: darken($midnight, 10%);
+    &::after {
+      transform: rotate(90deg);
+    }
+  }
+  ~ .tab-content {
+    max-height: 100vh;
+    padding: 1em;
+  }
+}
+
+// .ctm-table.dataTable{
+//   table-layout: fixed;
+//   min-width: 1200px;
+//   tr{
+//     td {
+//       overflow: hidden;
+//       white-space: nowrap;
+//       text-overflow: ellipsis;
+//       min-width: 60px;
+//     }
+//   }
+// }
+
+#transactionHistory{
+  tr{ 
+    td.full_date{
+      overflow: inherit;
+    }
+  }
+}
+
+// .zone-overflow{
+//   overflow: hidden;
+//   white-space: nowrap;
+//   text-overflow: ellipsis;
+// }
+
+.px-18{
+  padding: 0 18px;
+}
+/* 13-01-2021 */
+.pills-tab-form .form-group{
+  margin-bottom: 3px;
+}
+.pills-tab-form .form-group > .col-md-3:first-child {
+  max-width: 84px;
+}
+.pills-tab-form .form-group > .col-md-9{
+  min-width: calc(100% - 84px);
+}
+.pills-tab-form .col-8 .form-row > .col-7 {
+  max-width: 128px;
+}
+.pills-tab-form .col-8 .form-row > .col-5{
+  min-width: calc(100% - 128px);
+}
+
+
+
+
+.pills-tab-form .ware-house .col-5{
+  max-width: 48px;;
+}
+.pills-tab-form .ware-house .col-7{
+  min-width: calc(100% - 48px);
+}
+.pills-tab-form .col-lg-5 .group-from {
+   margin-bottom: 5px;
+}
+.other-check .custom-control-input{
+  right: 0;
+  left: inherit;
+}
+.other-check .custom-control {
+  padding-right: 1.5rem;
+  padding-left: 0px;
+}
+.other-check .custom-control.custom-checkbox label{
+  width: 100%;;
+  margin-bottom: 4.5px;
+}
+.other-check .custom-control-label::before,.other-check .custom-control-label::after{
+right:-1.5rem;
+left:inherit;
+}
+
+.h-90{
+  height: 90px;
+}
+
+.other-w label.col-md-6.mb-0 {
+  max-width: 99px;
+}
+.other-w div.col-md-6{
+  min-width: calc(100% - 99px);
+}
+.border-0{
+  border: 0 none;
+}
+.border-1 {
+  border-top: 1px solid #fff;}
+  .w-170{
+    min-width: 170px;
+    max-width: 170px;
+  }
+  .center-v label{
+    margin-bottom: 0px;
+  }
+  .center-v .form-row.align-items-center {
+    align-items: center !important;
+}
+.input-p input {
+  padding-left: 20px;
+}
+.pl-12{
+  padding-left: 12px;
+}
+.h-142{
+  height: 142px;
+}
+.group-from.ware-house {
+  margin-top: 0;
+}
+.pb-17{
+  padding-bottom: 17px;
+}
+.group-from.ware-house {
+  margin-bottom: 10px;
+}
+.mt-10{
+  margin-top: 10px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/* stock-move search button  */
+.drop-btn-w{width: calc(100% - 80px);
+  float: left;
+}
+.w-69{
+  width: 69px;
+}
+
+.prodcut-w .col-md-2 {
+  min-width: 80px;
+}
+.prodcut-w .col-md-10 {
+  max-width: calc(100% - 80px) !important;
+}
+
+.special-ctn {
+  background-color: yellow;
+}
+
+.host_price{
+  background-color:#01ffff;
+}
+.ctn_Cost{
+  background-color:#25d324;
+}
+
+.rowactive{
+  background-color:#25d324;
+}
+
+.apn-left {
+  width: 8%;
+  margin-right: 1%;
+  color: #3b3f5c;
+  font-size: 12px;
+  height: 24px;
+  border: solid 1px #ced4da;
+  background: #fff;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.apn-right {
+  width: 90%;
+  display: inline-block;
+}
+

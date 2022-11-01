@@ -1,0 +1,26 @@
+
+body.sb-open-wrap .mainContent{
+    overflow: inherit;
+}
+.mainContent-innner .bg-box {
+    padding-left: 47px;
+}
+.data-title{
+    font-size: 12px;
+    padding: 8px 0px;
+    width: 91px;
+}
+.probtn-wrap button.btn {
+    font-size: 12px;
+}
+.clear {
+    clear: both;
+}
+.select-dropdown .dropdown-menu .dropdown-item.active, .select-dropdown .dropdown-menu .dropdown-item:active {
+    color: #010508;
+    font-weight: 600;
+    background-color: #ebf5ff !important;
+}
+.select-dropdown .dropdown-menu .dropdown-item:hover {
+   background-color: #f5faff;
+}

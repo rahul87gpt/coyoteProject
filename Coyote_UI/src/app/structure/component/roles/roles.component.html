@@ -1,0 +1,44 @@
+<div class="mainContent-innner">
+    <div class="stpUsers-wrap">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">Roles</h4>
+            <div class="probtn-wrap text-right">
+                <a class="btn btn-blue" [routerLink]="['./add-role']" routerLinkActive="router-link-active" > New Role</a>
+            </div>
+        </div>
+        <div class="asuRoleList-wrap bg-box mt-15">
+            <!-- <h4 class="title">Roles</h4> -->
+            <div class="table-responsive ctm-data-table">
+                <table class="table ctm-table" id="roles-table">
+                    <thead>
+                        <tr>
+                            <th>Status <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                            <th>Name <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                            <th>Type <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let role of roleList">
+                            <td>
+                                <!-- <span class="status-check" [ngClass]="{ 'status-true': role.status, 'status-false': !role.status }"></span> -->
+                                <div class="status-icons">
+                                    <img *ngIf="role.status" src="assets/images/status-true.svg" alt="">
+                                    <img *ngIf="!role.status" src="assets/images/status-false.svg" alt="">
+                                </div>
+                            </td>
+                            <td (click)="updateOrDeleteRole(role, 'PUT')" >{{role.name.length > 30? role.name.substring(0,30)+"..." :role.name}}</td>
+                            <td (click)="updateOrDeleteRole(role, 'PUT')" >{{role.type}}</td>
+                            <td class="text-center">
+                                <div class="tbHover-btnGroup">
+                                    <button tooltip="Change" placement="left" class="tbHover-btn trash-btn" (click)="updateOrDeleteRole(role, 'PUT')" ><i class="fa fa-pencil"></i></button>
+                                    <button tooltip="Delete" placement="left" class="tbHover-btn trash-btn"(click)="updateOrDeleteRole(role, 'DELETE')"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

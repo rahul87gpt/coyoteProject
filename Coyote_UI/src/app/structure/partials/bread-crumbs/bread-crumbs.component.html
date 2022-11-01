@@ -1,0 +1,20 @@
+<div class="bs-example">
+  <nav>
+    <ol class="breadcrumb mb-0 our-breadcrumb">
+      <li class="breadcrumb-item" (click)="goToDashboard()">
+        <a [routerLink]="['/dashboard']">Home</a>
+      </li>
+      <ng-container *ngFor="let data of breadCrumbs; let i = index">
+        <li
+          class="breadcrumb-item {{
+            i === breadCrumbs?.length - 1 ? '' : 'active'
+          }}"
+        >
+          <a>{{ data?.moduleName }}</a>
+        </li>
+      </ng-container>
+      <!-- <li class="breadcrumb-item"><a href="#">Products</a></li>
+      <li class="breadcrumb-item active">Accessories</li> -->
+    </ol>
+  </nav>
+</div>

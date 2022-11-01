@@ -1,0 +1,23 @@
+<router-outlet></router-outlet>
+<notifier-container></notifier-container>
+<ngx-loading-bar></ngx-loading-bar>
+
+<div class="modal fade thm-popup overlay-popup" id="idleTime_out" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+            <h4 id="dialog-child-name" class="modal-title pull-left">You Have Been Idle!</h4>
+            <button type="button" class="close pull-right" aria-label="Close" data-dismiss="modal">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <div>{{idleState}}</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" (click)="log_out()" class="btn btn-danger">Logout</button>
+            <button type="button" (click)="stayOnPage()" class="btn btn-success">Stay</button>
+          </div>
+      </div>
+    </div>
+  </div>

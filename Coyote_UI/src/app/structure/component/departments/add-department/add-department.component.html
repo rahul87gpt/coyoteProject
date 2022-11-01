@@ -1,0 +1,114 @@
+<div class="mainContent-innner pt-2">
+    <form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
+        <div class="addDepartment-section">
+            <div class="action-topbar d-flex align-items-center">
+                <h4 class="title flex-grow-1 mb-0">Add Department</h4>
+                <div class="probtn-wrap text-right">
+                    <!-- <button class="btn btn-blue with-icon mr-2"><i class="icon fa fa-plus-circle"></i> Add</button>
+                    <a class="btn" [routerLink]="['/departments']"><span class="icon cancel-icon">X</span> Cancel</a> -->
+                </div>
+            </div>
+            <div class="addDepartment-wrap">
+                <div class="addDepartment-form">
+                    <div class="row justify-content-center">
+                        <div class="col-xxl-6 col-lg-7 col-md-12">
+                            <div class="card-grey height-full">
+                                <div class="form-group form-row mt-2 align-items-center">
+                                    <label class="label col-md-4 col-xxl-3 mb-0">Code <span class="text-danger">*</span></label>
+                                    <div class="col-md-8 col-xxl-9">
+                                        <input [readonly]="formStatus" type="number" [min]="0" maxlength="3" class="form-control" formControlName="code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
+                                        <div *ngIf="f.code.errors" class="invalid-feedback">
+                                            <div *ngIf="f.code.errors.required">Code is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-row align-items-center">
+                                    <label class="label col-md-4 col-xxl-3 mb-0">Description <span class="text-danger">*</span></label>
+                                    <div class="col-md-8 col-xxl-9">
+                                        <input type="text" maxlength="40" class="form-control" formControlName="desc" [ngClass]="{ 'is-invalid': submitted && f.desc.errors }">
+                                        <div *ngIf="f.desc.errors" class="invalid-feedback">
+                                            <div *ngIf="f.desc.errors.required">Description is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-row align-items-center">
+                                    <label class="label col-md-4 col-xxl-3 mb-0">Map Type <span class="text-danger">*</span></label>
+                                    <div class="col-md-8 col-xxl-9">
+                                        <select class="form-control" formControlName="mapTypeId" [ngClass]="{ 'is-invalid': submitted && f.mapTypeId.errors }">
+                                            <option *ngFor="let mapType of mapTypes" [value]="mapType.id">{{mapType.name}}</option>
+                                        </select>
+                                        <div *ngIf="f.mapTypeId.errors" class="invalid-feedback">
+                                            <div *ngIf="f.mapTypeId.errors.required">Map Type is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-row align-items-center">
+                                    <label class="label col-md-4 col-xxl-3 mb-0">Budget</label>
+                                    <div class="col-md-8 col-xxl-9">
+                                        <div class="input-group input-Tooltip">
+                                            <input type="number" maxlength="2" class="form-control" formControlName="budgetGroethFactor" [ngClass]="{ 'is-invalid': submitted && f.budgetGroethFactor.errors }">
+                                            <div *ngIf="f.budgetGroethFactor.errors" class="invalid-feedback">
+                                                <div *ngIf="f.budgetGroethFactor.errors.required">Budget is required</div>
+                                            </div>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text border-0 p-0"><a href="javascript:void(0);"data-toggle="tooltip" data-placement="bottom" title="(Budget Growth Factor %)"> <i class="fa fa-question-circle-o"></i></a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-row align-items-center">
+                                    <label class="label col-md-4 col-xxl-3 mb-0">Royalty</label>
+                                    <div class="col-md-8 col-xxl-9">
+                                        <div class="input-group input-Tooltip">
+                                            <input type="number" maxlength="2" class="form-control" formControlName="royaltyDisc" [ngClass]="{ 'is-invalid': submitted && f.royaltyDisc.errors }">
+                                            <div *ngIf="f.royaltyDisc.errors" class="invalid-feedback">
+                                                <div *ngIf="f.royaltyDisc.errors.required">Royalty is required</div>
+                                            </div>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text border-0 p-0"><a href="javascript:void(0);"data-toggle="tooltip" data-placement="bottom" title="(Royalty Discount %)"> <i class="fa fa-question-circle-o"></i></a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-row align-items-center">
+                                    <label class="label col-md-4 col-xxl-3 mb-0">Advertising</label>
+                                    <div class="col-md-8 col-xxl-9">
+                                        <div class="input-group input-Tooltip">
+                                            <input type="number" maxlength="2" class="form-control" formControlName="advertisingDisc" [ngClass]="{ 'is-invalid': submitted && f.advertisingDisc.errors }">
+                                            <div *ngIf="f.advertisingDisc.errors" class="invalid-feedback">
+                                                <div *ngIf="f.advertisingDisc.errors.required">Advertising is required</div>
+                                            </div>
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text border-0 p-0"><a href="javascript:void(0);"data-toggle="tooltip" data-placement="bottom" title="(Advertising Discount %)"> <i class="fa fa-question-circle-o"></i></a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group form-row align-items-center">
+                                    <div class="col-lg-6">
+                                        <div class="custom-control custom-checkbox">
+                                            <!-- <input type="checkbox" class="custom-control-input" id="Allow"> -->
+                                            <input type="checkbox" formControlName="allowSaleDisc" class="custom-control-input" id="Allow">
+                                            <label class="custom-control-label" for="Allow">Allow Sale Discount</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" formControlName="excludeWastageOptimalOrdering" class="custom-control-input" id="Exclude">
+                                            <label class="custom-control-label" for="Exclude">Exclude wastage From Optimal ordering</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btn-wrap text-right btns-top-space">
+                                    <button class="btn btn-blue with-icon mr-2"><i class="icon fa fa-plus-circle"></i>Save</button>
+                                    <a class="btn" [routerLink]="['/departments']"><span class="icon cancel-icon">X</span> Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.productForm -->
+        </div>
+    </form>
+</div>

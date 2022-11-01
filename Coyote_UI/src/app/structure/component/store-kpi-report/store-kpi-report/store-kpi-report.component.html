@@ -1,0 +1,246 @@
+<div class="mainContent-innner">
+    <div class="Keypads-section">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">Store KPI Report</h4>
+            <div class="probtn-wrap d-flex text-right">
+                <button type="button" data-toggle="modal" data-target="#storeKpiReportFilter" class="btn btn-blue"
+                    (click)=" resetForm()">Report</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-lg thm-popup" id="storeKpiReportFilter" tabindex="-1" role="dialog"
+    aria-labelledby="reportFilterModalLabel" aria-hidden="true">
+    <form [formGroup]="storeReportForm" (ngSubmit)="submitStoreReportForm()">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body popup-box-width">
+                    <div class="popup-box">
+                        <div class="title-wrap mb-1">
+                            <h4 class="title">Store KPI Report</h4>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-6 col-xl-6">
+                                <!-- DATE RANGE -->
+                                <div class="group-from">
+                                    <h5 class="title">Date Range <span class="text-danger">*</span></h5>
+                                    <div class="form-row align-items-center">
+                                        <div class="col-5">
+                                            <div class="form-group mb-0">
+                                                <div class="ctm-calendar">
+                                                    <input type="text" class="form-control" formControlName="startDate"
+                                                        bsDatepicker [bsConfig]="{ showWeekNumbers:false }"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }">
+                                                    <div *ngIf="f.startDate.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.startDate.errors.required">
+                                                            Start date is required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="form-group mb-0 text-center">
+                                                <label for="" class="mb-0">To</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="form-group mb-0">
+                                                <div class="ctm-calendar">
+                                                    <input type="text" class="form-control" formControlName="endDate"
+                                                        bsDatepicker [bsConfig]="{ showWeekNumbers:false }"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }">
+                                                    <div *ngIf="f.endDate.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.endDate.errors.required">
+                                                            End date is required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Till Selection -->
+                                <div class="group-from mb-0">
+                                    <h5 class="title">Till Selection</h5>
+                                    <div class="form-row align-items-center">
+                                        <div class="col-12">
+                                            <div class="form-group mb-0">
+                                                <ng-select [items]="dropdownObj.tills" bindLabel="desc" bindValue="code"
+                                                    [virtualScroll]="true" placeholder="Select Till"
+                                                    (change)="setSelection($event)">
+                                                </ng-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group-from mb-0">
+                                    <div class="group-from">
+                                        <h5 class="title">Selections</h5>
+                                        <div class="Day_list">
+                                            <!-- <div *ngIf="dateStart">
+                                                <h4>Date Range</h4>
+                                                <ul>
+                                                    <li>{{dateStart | date: 'dd/MM/yyyy'}} to
+                                                        {{dateEnd | date: 'dd/MM/yyyy'}}</li>
+                                                </ul>
+                                            </div> -->
+                                            <div class="mt-1" *ngIf="selectedValues.till">
+                                                <h4><u>Tills</u></h4>
+                                                <ul>
+                                                    <li>{{selectedValues.till}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="mt-1" *ngIf="selectedValues.store">
+                                                <h4><u>Outlets</u></h4>
+                                                <ul>
+                                                    <li *ngFor="let store of selectedValues.store">{{store.storeDetail}}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="mt-1" *ngIf="selectedValues.days">
+                                                <h4><u>Day</u></h4>
+                                                <ul>
+                                                    <li *ngFor="let day of selectedValues.days">{{day.name}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="mt-1" *ngIf="selectedValues.zone">
+                                                <h4><u>Zones</u></h4>
+                                                <ul>
+                                                    <li *ngFor="let zone of selectedValues.zone">{{zone.name}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="mt-1" *ngIf="selectedValues.department">
+                                                <h4><u>Deparments</u></h4>
+                                                <ul>
+                                                    <li *ngFor="let deparment of selectedValues.department">
+                                                        {{deparment.desc}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="mt-1" *ngIf="selectedValues.commodity">
+                                                <h4><u>Commodities</u></h4>
+                                                <ul>
+                                                    <li *ngFor="let commodity of selectedValues.commodity">
+                                                        {{commodity.desc}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="mt-1" *ngIf="selectedValues.category">
+                                                <h4><u>Categories</u></h4>
+                                                <ul>
+                                                    <li *ngFor="let category of selectedValues.category">
+                                                        {{category.name}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="mt-1" *ngIf="selectedValues.group">
+                                                <h4><u>Group</u></h4>
+                                                <ul>
+                                                    <li *ngFor="let group of selectedValues.group">{{group.name}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="mt-1" *ngIf="selectedValues.supplier">
+                                                <h4><u>Suppliers</u></h4>
+                                                <ul>
+                                                    <li *ngFor="let supplier of selectedValues.supplier">
+                                                        {{supplier.desc}}</li>
+                                                </ul>
+                                            </div>
+                                            <div class="mt-1" *ngIf="selectedValues.manufacturer">
+                                                <h4><u>Manufacturers</u></h4>
+                                                <ul>
+                                                    <li *ngFor="let manufacturer of selectedValues.manufacturer">
+                                                        {{manufacturer.name}}</li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-xl-6">
+                                <div class="group-from">
+                                    <h5 class="title">Codes</h5>
+                                    <div class="">
+                                        <div class="accordion OutletRestList" id="accordionExample">
+                                            <div class="mb-2">
+                                                <ng-select [items]="dropdownObj.stores" bindLabel="storeDetail"
+                                                    bindValue="id" [virtualScroll]="true" [multiple]="true"
+                                                    placeholder="Select Store" formControlName="storeIds"
+                                                    (change)="setDropdownSelection('store', $event)">
+                                                </ng-select>
+                                            </div>
+                                            <div class="mb-2">
+                                                <ng-select [items]="dropdownObj.zones" bindLabel="name" bindValue="code"
+                                                    [virtualScroll]="true" [multiple]="true" placeholder="Select Zone"
+                                                    (change)="setDropdownSelection('zone', $event)">
+                                                </ng-select>
+                                            </div>
+                                            <div class="mb-2">
+                                                <ng-select [items]="dropdownObj.days" bindLabel="name" bindValue="code"
+                                                    [virtualScroll]="true" [multiple]="true"
+                                                    placeholder=" Select Days of Week Days"
+                                                    (change)="setDropdownSelection('days', $event)">
+                                                </ng-select>
+                                            </div>
+                                            <div class="mb-2">
+                                                <ng-select [items]="dropdownObj.departments" bindLabel="desc"
+                                                    bindValue="id" [virtualScroll]="true" [multiple]="true"
+                                                    placeholder="Select Department" formControlName="departmentIds"
+                                                    (change)="setDropdownSelection('department', $event)">
+                                                </ng-select>
+                                            </div>
+                                            <div class="mb-2">
+                                                <ng-select [items]="dropdownObj.commodities" bindLabel="desc"
+                                                    bindValue="code" [virtualScroll]="true" [multiple]="true"
+                                                    placeholder="Select Commodity"
+                                                    (change)="setDropdownSelection('commodity', $event)">
+                                                </ng-select>
+                                            </div>
+                                            <div class="mb-2">
+                                                <ng-select [items]="dropdownObj.categories" bindLabel="name"
+                                                    bindValue="code" [virtualScroll]="true" [multiple]="true"
+                                                    placeholder="Select Category"
+                                                    (change)="setDropdownSelection('category', $event)">
+                                                </ng-select>
+                                            </div>
+                                            <div class="mb-2">
+                                                <ng-select [items]="dropdownObj.groups" bindLabel="name"
+                                                    bindValue="code" [virtualScroll]="true" [multiple]="true"
+                                                    placeholder="Select Group"
+                                                    (change)="setDropdownSelection('group', $event)">
+                                                </ng-select>
+                                            </div>
+                                            <div class="mb-2">
+                                                <ng-select [items]="dropdownObj.suppliers" bindLabel="desc"
+                                                    bindValue="code" [virtualScroll]="true" [multiple]="true"
+                                                    placeholder="Select Supplier"
+                                                    (change)="setDropdownSelection('supplier', $event)">
+                                                </ng-select>
+                                            </div>
+                                            <div class="mb-0">
+                                                <ng-select [items]="dropdownObj.manufacturers" bindLabel="name"
+                                                    bindValue="code" [virtualScroll]="true" [multiple]="true"
+                                                    placeholder="Select Manufacturer"
+                                                    (change)="setDropdownSelection('manufacturer', $event)">
+                                                </ng-select>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="btn-wrap text-right mt-10">
+                                    <a class="btn btn-grey mr-2" (click)="resetForm()">Clear Selections</a>
+                                    <button class="btn btn-blue mr-2">Ok</button>
+                                    <a class="btn btn-grey" data-dismiss="modal">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

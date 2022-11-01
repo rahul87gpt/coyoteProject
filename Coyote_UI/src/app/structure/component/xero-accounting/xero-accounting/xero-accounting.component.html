@@ -1,0 +1,124 @@
+<div class="mainContent-innner">
+  <div class="xero-accounting-section">
+    <div class="d-flex align-items-center">
+      <h4 class="title flex-grow-1 mb-0">Xero Accounting</h4>
+      <div class="probtn-wrap d-flex text-right">
+        <button class="btn btn-blue with-icon mr-2" [routerLink]="['./new']">
+          <i class="icon fa fa-plus-circle"></i> Add
+        </button>
+        <button class="btn with-icon mr-2">
+          <i class="icon fa fa-print"></i> Print
+        </button>
+        <button class="btn with-icon mr-2" (click)="exportXeroAccountingData()">
+          <i class="icon fa fa-file-excel-o"></i> Export
+        </button>
+        <button
+          class="btn btn-blue with-icon"
+          data-toggle="modal"
+          data-target="#XeroAccountingSearch"
+          (click)="openXeroAccountingSearchFilter()"
+        >
+          <i class="icon fa fa-filter"></i> Filter
+        </button>
+      </div>
+    </div>
+    <div class="xero-accounting-wrap bg-box mt-15 all-w">
+      <div class="table-responsive">
+        <table class="table ctm-table" id="xero-accounting-table">
+          <thead>
+            <tr>
+              <th>Code 
+                <span class="column_id float-right"    (click)="openFilter('Code')"><i class="fa fa-filter"></i></span>
+              </th>
+                <th>
+                  
+                  <span  class="sortingIcon" >
+                    <i (click)="shortData('accend',0)" class="ml-1 fa fa-long-arrow-up"
+                     [ngClass]=" (short_icon_class_accend == true && thIndex == 0)  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 0)  ? 'decend' : ''" (click)="shortData('decend',0)" class="fa fa-long-arrow-down"></i>
+                 </span>
+                </th>
+                <th>Description 
+                  <span class="column_id float-right"  (click)="openFilter('Description')"><i class="fa fa-filter"></i></span>
+                </th>
+                <th>
+                  <span  class="sortingIcon" >
+                    <i (click)="shortData('accend',2)" class="ml-1 fa fa-long-arrow-up"
+                     [ngClass]=" (short_icon_class_accend == true && thIndex == 2)  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 2)  ? 'decend' : ''" (click)="shortData('decend',2)" class="fa fa-long-arrow-down"></i>
+                 </span>
+                </th>
+              <th class="no-sort">Action</th>
+            </tr>
+          </thead>
+          <tbody (click)="removeSeachFiterDisplay()">
+            <tr *ngFor="let xero of xeroAccountdata">
+              <td [routerLink]="['./update/' + xero.id]" class="blue-text">
+                <!-- <a> -->
+                  {{ xero?.storeCode }}
+                <!-- </a> -->
+              </td>
+              <td></td>
+              <td>{{ xero?.desc }}</td>
+              <td></td>
+              <td class="no-sort" id="stocktake-entry-table">
+                <div class="tbHover-btnGroup">
+                  <button
+                    tooltip="Change"
+                    placement="left"
+                    class="tbHover-btn trash-btn"
+                    [routerLink]="['./update/' + xero.id]"
+                  >
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                  <button
+                    tooltip="Delete"
+                    placement="right"
+                    class="tbHover-btn trash-btn"
+                    (click)="deleteXeroAccounting(xero.id)"
+                  >
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade thm-popup"
+  id="XeroAccountingSearch"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-backdrop="static"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form name="searchForm" id="searchForm">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Search Filter</h4>
+            </div>
+            <div class="form-group mb-0">
+              <label> Wildcard Search</label>
+              <input type="text" id="XeroAccounting_Search_filter" class="form-control" #searchValue />
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button
+                class="btn btn-blue mr-2"
+                (click)="XeroAccountingSearch(searchValue)"
+              >
+                Ok
+              </button>
+              <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+<div class="mainContent-innner">
+    <div class="Order-section">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">Host Changes Sheet
+                <!-- <span
+            id="totalRecordId">{{(recordOrderObj.total_api_records > 0) ? recordOrderObj.total_api_records : ''}}
+            </span> -->
+            </h4>
+            <div class="probtn-wrap d-flex text-right">
+                <button class="btn mr-2"><i class="icon fa fa-print"></i> Print</button>
+                <button class="btn mr-2" (click)="exportChangeSheetData()">
+                    <i class="icon fa fa-file-excel-o"></i> Export
+                </button>
+                <button class="btn btn-blue with-icon" data-toggle="modal" data-target="#changeSheetSearch" (click)="openChangeSheetSearchFilter()">
+                    <i class="icon fa fa-filter"></i> Filter
+                </button>
+            </div>
+        </div>
+        <!-- /.action-topbar -->
+        <div class="Order-wrap bg-box mt-15 all-w">
+            <div class="Order-table-wrap">
+                <div class="table-responsive ctm-data-table">
+                    <table class="table ctm-table" id="changesSheet-table" >
+                        <thead>
+                            <tr>
+                                <th>Code 
+                                    <span class="column_id float-right" (click)="openFilter('Code')" ><i class="fa fa-filter"></i></span>
+                                </th>
+                                <th>
+                                    <span  class="sortingIcon" >
+                                     <i (click)="shortData('accend',0)" class="ml-1 fa fa-long-arrow-up"
+                                      [ngClass]=" (short_icon_class_accend === true && thIndex === 0 )  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend === true && thIndex == 0)  ? 'decend' : ''" (click)="shortData('decend',0)" class="fa fa-long-arrow-down"></i>
+                                  </span>
+                                 </th>
+                                <th>Update Run 
+                                    <span class="column_id float-right" (click)="openFilter('UpdateRun')" ><i class="fa fa-filter"></i></span>
+                                </th>
+
+                                <th>
+                                    <span  class="sortingIcon" >
+                                     <i (click)="shortData('accend',2)" class="ml-1 fa fa-long-arrow-up"
+                                      [ngClass]=" (short_icon_class_accend === true && thIndex === 2 )  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend === true && thIndex == 2)  ? 'decend' : ''" (click)="shortData('decend',2)" class="fa fa-long-arrow-down"></i>
+                                  </span>
+                                 </th>
+
+                                <th>Timestape 
+                                    <span class="column_id float-right" (click)="openFilter('Timestape')" ><i class="fa fa-filter"></i></span>
+                                </th>
+                                <th>
+                                    <span  class="sortingIcon" >
+                                     <i (click)="shortData('accend',4)" class="ml-1 fa fa-long-arrow-up"
+                                      [ngClass]=" (short_icon_class_accend === true && thIndex === 4 )  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend === true && thIndex == 4)  ? 'decend' : ''" (click)="shortData('decend',4)" class="fa fa-long-arrow-down"></i>
+                                  </span>
+                                 </th>
+
+                                <th>Posted  <span class="column_id float-right" (click)="openFilter('Posted')" ><i class="fa fa-filter"></i></span>
+                                </th>
+                                <th>
+                                    <span  class="sortingIcon" >
+                                     <i (click)="shortData('accend',6)" class="ml-1 fa fa-long-arrow-up"
+                                      [ngClass]=" (short_icon_class_accend === true && thIndex === 6 )  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend === true && thIndex == 6)  ? 'decend' : ''" (click)="shortData('decend',6)" class="fa fa-long-arrow-down"></i>
+                                  </span>
+                                 </th>
+                            </tr>
+                        </thead>
+                        <tbody (click)="removeSeachFiterDisplayInHostchangesheet()">
+                            <tr *ngFor = "let data of changesSheetData">
+                                <td class="blue-text" (click)="goToHostCahngeView(data?.id ,data?.description)">
+                                   {{data?.code}}
+                                </td>
+                                <td></td>
+                                <td>
+                                    {{data?.description}}
+                                </td>
+                                <td></td>
+                                <td tooltip="">
+                                    {{data?.timeStamp}}
+                                </td>
+                                <td></td>
+                                <td>
+                                    {{data.posted === true ? 'Y' : 'N'}}
+                                    <!-- {{ data.posted && data.posted == 'true' ? Y : N }} -->
+                                </td>
+                                <td></td>
+
+                                <!-- <td class="text-center no-sort">
+                                    <div class="moreOption">
+                                        <div class="tbHover-btnGroup">
+                                            <a tooltip="View" placement="left" class="tbHover-btn btn-blue trash-btn"><i
+                                                    [routerLink]="['/host-processing/host-processing-view',data.id]"
+                                                    class="fa fa-eye"></i></a>
+                                        </div>
+                                    </div>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup" id="changeSheetSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form name="searchForm" id="searchForm">
+                        <div class="title-wrap mb-2">
+                            <h4 class="title"> Search Filter</h4>
+                        </div>
+                        <div class="form-group mb-0">
+                            <label> Wildcard Search</label>
+                            <input type="text" id="changeSheet_Search_filter" appUppercase class="form-control" #searchValue>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button class="btn btn-blue mr-2" (click)="searchHostChangeSheet(searchValue)">Ok</button>
+                            <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

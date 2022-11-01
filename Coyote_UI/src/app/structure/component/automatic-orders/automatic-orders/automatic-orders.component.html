@@ -1,0 +1,520 @@
+<div class="mainContent-innner">
+    <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">Automatic Order</h4>
+        <div class="probtn-wrap d-flex text-right align-items-center">
+            <div class="custom-control custom-checkbox form-group mb-0 mr-2">
+                <input type="checkbox" id="customControlStatus" class="custom-control-input" ng-reflect-name="status">
+                <label for="customControlStatus" class="custom-control-label mb-0">
+                    <span class="d-block label-mt-2">Close When done</span>
+                </label>
+            </div>
+            <button type="button" class="btn btn-blue mr-2" (click)="generateAutomaticOrders()">Generate</button>
+            <button type="button" class="btn" (click)="resetForm()">Cancel</button>
+        </div>
+    </div>
+    <div class="bg-box mt-15">
+        <div class="apn-navTab select-automactic-orders">
+            <ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-Detail-tab" data-toggle="pill" href="#pills-Detail" role="tab"
+                        aria-controls="pills-Detail" aria-selected="true">Detail</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-Products-tab" data-toggle="pill" href="#pills-Products" role="tab"
+                        aria-controls="pills-Products" aria-selected="false">Products</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-Detail" role="tabpanel"
+                    aria-labelledby="pills-Detail-tab">
+                    <form [formGroup]="automaticOrderForm" (ngSubmit)="submitAutomaticOrderForm()">
+                        <div class="form-row">
+
+                            <div class="col-lg-7 col-xl-7">
+                                <div class="group-from">
+                                    <h5 class="title">Outlet and Supplier<span class="text-danger">*</span></h5>
+                                    <div class="form-row align-items-center">
+                                        <div class="col-6">
+                                            <div class="form-group rebate-form">
+                                                <ng-select [items]="Outlet" bindLabel="desc" bindValue="id"
+                                                    [virtualScroll]="true" [multiple]="false" [clearable]="false"
+                                                    [clearOnBackspace]="false" [clearSearchOnAdd]="true"
+                                                    formControlName="storeId"
+                                                    [ngClass]="{'is-invalid': submitted && f.storeId.errors}">
+
+                                                    <!-- It hold value on the basis of filter -->
+                                                    <ng-template ng-option-tmp let-item="item" let-item$="item$"
+                                                        let-index="index">
+                                                        <div class="form-row">
+                                                            <span class="col-9 zone-overflow" title="{{ item?.desc }}">
+                                                                {{ item?.desc }}
+                                                            </span>
+                                                            <div class="col-3" title="{{ item?.code }}">
+                                                                {{ item.code }}
+                                                            </div>
+                                                        </div>
+                                                    </ng-template>
+                                                </ng-select>
+                                                <!-- <select formControlName="storeId" class="form-control" 
+                                            [ngClass]="{'is-invalid': submitted && f.storeId.errors}">
+                                            <option [value]="outlet.id" *ngFor="let outlet of Outlet" >{{outlet.desc}}&nbsp;({{outlet.code}})</option>   
+                                            </select> -->
+                                                <div *ngIf="f.storeId.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.storeId.errors.required">
+                                                        Outlet is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group rebate-form">
+                                                <!-- <select formControlName="supplierId" class="form-control" [ngClass]="{'is-invalid': submitted && f.supplierId.errors}">
+                                                <option [value]="supplier.id" *ngFor="let supplier of suppliers" >{{supplier.desc}}&nbsp;({{supplier.code}})</option>   
+                                            </select> -->
+                                                <ng-select [items]="suppliers" bindLabel="desc" bindValue="id"
+                                                    [virtualScroll]="true" [multiple]="false" [clearable]="false"
+                                                    [clearOnBackspace]="false" [clearSearchOnAdd]="true"
+                                                    formControlName="supplierId"
+                                                    [ngClass]="{'is-invalid': submitted && f.supplierId.errors}">
+
+                                                    <!-- It hold value on the basis of filter -->
+                                                    <ng-template ng-option-tmp let-item="item" let-item$="item$"
+                                                        let-index="index">
+                                                        <div class="form-row">
+                                                            <span class="col-9 zone-overflow" title="{{ item?.desc }}">
+                                                                {{ item?.desc }}
+                                                            </span>
+                                                            <div class="col-3" title="{{ item?.code }}">
+                                                                {{ item.code }}
+                                                            </div>
+                                                        </div>
+                                                    </ng-template>
+                                                </ng-select>
+                                                <div *ngIf="f.supplierId.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.supplierId.errors.required">
+                                                        Supplier is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group mb-0">
+                                                <select formControlName="orderType" class="form-control"
+                                                    (change)="changeOrderType($event)"
+                                                    [ngClass]="{'is-invalid': submitted && f.orderType.errors}">
+                                                    <option [value]="order.id" *ngFor="let order of orderArray">
+                                                        {{order.name}}</option>
+                                                </select>
+                                                <div *ngIf="f.orderType.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.orderType.errors.required">
+                                                        Order Type is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="custom-control custom-checkbox form-group mb-0">
+                                                <input type="checkbox" formControlName="ingnoreStockLevel" id="Ignore"
+                                                    class="custom-control-input">
+                                                <label for="Ignore" class="custom-control-label mb-0">
+                                                    <span class="d-block label-mt-2">Ignore Current Stock Level</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group-from">
+                                    <h5 class="title">Settings</h5>
+                                    <div class="form-row align-items-center">
+                                        <div class="col-6">
+                                            <div class="form-group form-row align-items-center">
+                                                <div class="col-5">
+                                                    <label for="" class="mb-0">History Days</label>
+                                                </div>
+                                                <div class="col-7">
+                                                    <input type="text" formControlName="daysHistory"
+                                                        class="form-control">
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="" class="mb-0 fontSize-11" style="color:#5145cd;">(Sales
+                                                        history days to calculate daily usage)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group form-row align-items-center">
+                                                <div class="col-12">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" id="Promo" class="custom-control-input"
+                                                            formControlName="excludePromo">
+                                                        <label for="Promo" class="custom-control-label mb-0">
+                                                            <span class="d-block label-mt-2">Exclude Promo</span>
+                                                        </label>
+                                                    </div>
+                                                    <label for="" class="mb-0 fontSize-11"
+                                                        style="color:#5145cd;">(Exclude Sales for Days While on
+                                                        Promotion)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group form-row align-items-center mb-0">
+                                                <div class="col-5">
+                                                    <label for="" class="mb-0">Cover Days</label>
+                                                </div>
+                                                <div class="col-7">
+                                                    <input type="text" class="form-control" formControlName="coverDays">
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="" class="mb-0 fontSize-11" style="color:#5145cd;">(Days
+                                                        of stock required to hold)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group form-row align-items-center mb-0">
+                                                <div class="col-6">
+                                                    <label for="" class="mb-0">Discount threshold</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-row align-items-center">
+                                                        <div class="col-8">
+                                                            <div class="form-row align-items-center">
+                                                                <div class="col-9">
+                                                                    <input type="text" class="form-control"
+                                                                        formControlName="discountThreshold">
+                                                                </div>
+                                                                <div class="col-3">
+                                                                    <label for="" class="mb-0">%</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox" id="Promo1"
+                                                                    class="custom-control-input">
+                                                                <label for="Promo1"
+                                                                    class="custom-control-label mb-0"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="" class="mb-0 fontSize-11"
+                                                        style="color:#5145cd;">(Exclude products with current discount
+                                                        less than..)</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group-from">
+                                    <h5 class="title">Investment Buy Order (Buy Products currently on Supplier Promo)
+                                    </h5>
+                                    <div class="form-row form-group mb-0 align-items-center">
+                                        <div class="col-4">
+                                            <label for="" class="mb-0">Buy Days</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" class="form-control" formControlName="investmentBuyDays"
+                                                [readonly]="buyDays">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group-from rebate-form">
+                                    <h5 class="title">Select Products using Direct Supplier (If Different to Order
+                                        Supplier above)</h5>
+                                    <div class="form-group mb-0">
+                                        <!-- <select  class="form-control" formControlName="altSupplierId">
+                                        <option [value]="supplier.id" *ngFor="let supplier of suppliers" >{{supplier.desc}}</option>   
+                                    </select> -->
+                                        <ng-select [items]="suppliers" bindLabel="desc" bindValue="id"
+                                            [virtualScroll]="true" [multiple]="false" [clearable]="false"
+                                            [clearOnBackspace]="false" [clearSearchOnAdd]="true"
+                                            formControlName="altSupplierId">
+
+                                            <!-- It hold value on the basis of filter -->
+                                            <ng-template ng-option-tmp let-item="item" let-item$="item$"
+                                                let-index="index">
+                                                <div class="form-row">
+                                                    <span class="col-9 zone-overflow" title="{{ item?.desc }}">
+                                                        {{ item?.desc }}
+                                                    </span>
+                                                    <div class="col-3" title="{{ item?.code }}">
+                                                        {{ item.code }}
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="group-from">
+                                    <h5 class="title">Add to existing unfinished Order for Supplier</h5>
+                                    <div class="form-row form-group mb-0 align-items-center">
+                                        <div class="col-4">
+                                            <label for="" class="mb-0">Order Number</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" class="form-control" formControlName="existingOrderNo">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group-from mb-0">
+                                    <h5 class="title">Metcash Orders</h5>
+                                    <div class="d-flex form-group mb-0 align-items-center">
+                                        <div class="custom-control custom-checkbox mr-2">
+                                            <input type="checkbox" id="Normal" class="custom-control-input"
+                                                formControlName="metcashNormal">
+                                            <label for="Normal" class="custom-control-label mb-0"><span
+                                                    class="d-block label-mt-2">Normal</span></label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox mr-2">
+                                            <input type="checkbox" id="Moving" class="custom-control-input"
+                                                formControlName="metcashSlow">
+                                            <label for="Moving" class="custom-control-label mb-0"><span
+                                                    class="d-block label-mt-2">Slow Moving</span></label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox mr-2">
+                                            <input type="checkbox" id="Variety" class="custom-control-input"
+                                                formControlName="metcashVariety">
+                                            <label for="Variety" class="custom-control-label mb-0"><span
+                                                    class="d-block label-mt-2">Variety</span></label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox mr-2">
+                                            <input type="checkbox" id="Supplers" class="custom-control-input"
+                                                formControlName="compareDirectSuppliers">
+                                            <label for="Supplers" class="custom-control-label mb-0"><span
+                                                    class="d-block label-mt-2">Compare Direct Supplers</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-xl-5">
+                                <div class="group-from mb-0">
+                                    <h5 class="title">Department Filter</h5>
+                                    <div class="form-group mb-0 align-items-center ">
+                                        <!-- <ng-select [items]="departments"
+                                    bindLabel="desc"
+                                    bindValue="id"
+                                    [virtualScroll]="true"
+                                    [multiple]="true"
+                                    placeholder=""
+                                    formControlName="departmentIds"
+                                    >
+                                    </ng-select> -->
+                                        <div class="autoOrder-height">
+                                            <ng-container *ngFor="let store of rebatesObj.store">
+                                                <div class="col innner-box">
+                                                    <div class="custom-control form-group mb-0 custom-checkbox">
+
+                                                        <!-- Using for selectAll functionality -->
+                                                        <span
+                                                            *ngIf="!rebatesObj.is_store_ids_exist">{{exitingCheckboxAndHoldStoreIds(store)}}</span>
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="{{store.id }}"
+                                                            [checked]="rebatesObj.active_store_obj[store.id] ? true : false"
+                                                            (click)="selectDeselectStoreIds(store, 'updated', $event.target.checked);">
+                                                        <label class="custom-control-label" for="{{store.id}}">
+                                                            <span class="label-mt-2 d-block">
+                                                                {{(store?.desc )}}
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="pills-Products" role="tabpanel" aria-labelledby="pills-Products-tab">
+                    <div class="form-row">
+                        <div class="col-lg-6 col-xl-6">
+                            <div class="group-from mb-0">
+                                <h5 class="title">Induded</h5>
+                                <div class="table-responsive">
+                                    <table class="table ctm-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Pro..</th>
+                                                <th>Reg..</th>
+                                                <th>Disc..</th>
+                                                <th>Reb..</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-xl-6">
+                            <div class="group-from mb-0">
+                                <h5 class="title">Excluded</h5>
+                                <div class="table-responsive">
+                                    <table class="table ctm-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Pro..</th>
+                                                <th>Reg..</th>
+                                                <th>Disc..</th>
+                                                <th>Reb..</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

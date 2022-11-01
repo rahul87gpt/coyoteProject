@@ -1,0 +1,22 @@
+.general-zone-list ul li.active {
+  background: #5145cd;
+}
+.general-zone-list ul li.active a {
+  color: #fff;
+}
+.general-zone-list ul li a {
+  color: #27303f;
+  cursor: pointer;
+}
+.zone-overflow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.disableDiv {
+  pointer-events: none;
+}
+.general-zone-list ul li a {
+  font-size: 12px;
+  padding: 0 8px;
+}

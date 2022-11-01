@@ -1,0 +1,207 @@
+<div class="mainContent-innner">
+    <div class="Stock-section">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">Purchase Cost Variance</h4>
+            <!-- <div class="probtn-wrap d-flex text-right">
+                <button type="button" data-toggle="modal" data-target="#purchaseCostVarianceModal"
+                    class="btn btn-blue with-icon"><i class="icon fa fa-file"></i> Purchase Cost Variance </button>
+            </div> -->
+        </div>
+        <div class="bg-box mt-15 vh-100">
+            <iframe [src]='safeURL' frameborder="0" allowfullscreen width="100%" height="100%"></iframe>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-md thm-popup" id="purchaseCostVarianceModal" tabindex="-1" role="dialog"
+    aria-labelledby="purchaseCostVarianceModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <form [formGroup]="purchaseCostVarianceForm">
+                    <div class="popup-box">
+                        <div class="title-wrap">
+                            <h4 class="title">Purchase Cost Variance Report</h4>
+                        </div>
+                        <div class="group-from">
+                            <h5 class="title">Outlet and Supplier</h5>
+                            <div class="form-row align-items-center">
+                                <div class="col-6">
+                                    <div class="form-group mb-0">
+                                        <!-- <select  class="form-control" formControlName="storeId">
+                                            <option [value]="store.id" *ngFor="let store of stores" >{{store.storeDetail}}</option>   
+                                        </select> -->
+                                        <ng-select [items]="stores" bindLabel="storeDetail" bindValue="id"
+                                            [virtualScroll]="true" [multiple]="false" [clearable]="false"
+                                            [clearOnBackspace]="false" [clearSearchOnAdd]="true"
+                                            placeholder="Select Store" formControlName="storeId"
+                                            [ngClass]="{ 'is-invalid': submitted && f.storeId.errors }">
+                                            <!-- It hold value on the basis of filter -->
+                                            <ng-template ng-option-tmp let-item="item" let-item$="item$"
+                                                let-index="index">
+                                                <div class="form-row">
+                                                    <span class="col-9 zone-overflow" title="{{ item?.desc }}">
+                                                        {{ item?.desc }}
+                                                    </span>
+                                                    <div class="col-3" title="{{ item?.code }}">
+                                                        {{ item.code }}
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </ng-select>
+                                        <div *ngIf="f.storeId.errors" class="invalid-feedback">
+                                            <div *ngIf="f.storeId.errors.required">
+                                                Store is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group mb-0">
+                                        <!-- <select  class="form-control" formControlName="supplierId">
+                                            <option [value]="supplier.id" *ngFor="let supplier of suppliers" >{{supplier.desc}}</option>   
+                                        </select> -->
+                                        <ng-select [items]="suppliers" bindLabel="desc" bindValue="id"
+                                            [multiple]="false" [clearable]="false" [clearOnBackspace]="false"
+                                            [clearSearchOnAdd]="true" placeholder="Select Supplier"
+                                            formControlName="supplierId"
+                                            [ngClass]="{ 'is-invalid': submitted && f.supplierId.errors }">
+                                            <ng-template ng-option-tmp let-item="item" let-item$="item$"
+                                                let-index="index">
+                                                <div class="form-row">
+                                                    <span class="col-9 zone-overflow" title="{{item.desc}}">
+                                                        {{item.desc}}
+                                                    </span>
+                                                    <div class="col-3">
+                                                        {{item.code}}
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </ng-select>
+                                        <div *ngIf="f.supplierId.errors" class="invalid-feedback">
+                                            <div *ngIf="f.supplierId.errors.required">
+                                                Supplier is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-from">
+                            <h5 class="title">Invoice Date Range</h5>
+                            <div class="form-row align-items-center">
+                                <div class="col-5">
+                                    <div class="form-group mb-0">
+                                        <div class="ctm-calendar">
+                                            <input type="text" class="form-control" bsDatepicker
+                                                [bsConfig]="datepickerConfig" [maxDate]="maxDate"
+                                                [value]="f?.invoiceDateFrom?.value | date: 'dd/MM/yyyy'"
+                                                (bsValueChange)="onDateChange($event, 'invoiceDateFrom', true)"
+                                                [ngClass]="{ 'is-invalid': submitted && f.invoiceDateFrom.errors }">
+                                            <div *ngIf="f.invoiceDateFrom.errors" class="invalid-feedback">
+                                                <div *ngIf="f.invoiceDateFrom.errors.required">
+                                                    Invoice Start date is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group mb-0 text-center">
+                                        <label for="" class="mb-0">To</label>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-group mb-0">
+
+                                        <div class="ctm-calendar">
+                                            <input type="text" class="form-control"
+                                                [value]="f?.invoiceDateTo?.value | date: 'dd/MM/yyyy'"
+                                                (bsValueChange)="onDateChange($event, 'invoiceDateTo')" bsDatepicker
+                                                [bsConfig]="datepickerConfig" [maxDate]="maxDate"
+                                                [ngClass]="{ 'is-invalid': submitted && f.invoiceDateTo.errors }">
+                                            <div *ngIf="f.invoiceDateTo.errors" class="invalid-feedback">
+                                                <div *ngIf="f.invoiceDateTo.errors.required">
+                                                    Invoice End date is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-from">
+                            <div class="form-row align-items-center">
+                                <div class="col-12">
+
+                                    <div class="custom-control form-group mb-0 custom-radio">
+                                        <input formControlName="isHostCost" type="radio" id="isHostCost"
+                                            class="custom-control-input" value="1">
+                                        <label for="isHostCost" class="custom-control-label mb-0">
+                                            <span class="label-mt-2 d-block">Check Invoice Cost against Host Carton
+                                                Cost</span></label>
+
+                                    </div>
+                                    <div class="custom-control form-group mb-0 custom-radio">
+                                        <input formControlName="isHostCost" type="radio" id="isNormalCost"
+                                            class="custom-control-input" value="2">
+                                        <label for="isNormalCost" class="custom-control-label mb-0">
+                                            <span class="label-mt-2 d-block">Check Invoice Cost against Normal Carton
+                                                Cost</span></label>
+
+                                    </div>
+                                    <div class="custom-control form-group custom-radio mt-0">
+                                        <input formControlName="isHostCost" type="radio" id="Batch"
+                                            class="custom-control-input" value="3">
+                                        <label for="Batch" class="custom-control-label mb-0">
+                                            <span class="label-mt-2 d-block">Check Invoice Cost against Supplier Cost
+                                                Batch below</span></label>
+
+                                    </div>
+                                </div>
+                                <div class="col-6 mt-2">
+                                    <div class="form-group mb-0 promotion-select">
+                                        <ng-select [items]="promotions" bindLabel="desc" bindValue="id"
+                                            id="supplierBatch" [virtualScroll]="true" [multiple]="false"
+                                            [clearable]="false" [clearOnBackspace]="false" [clearSearchOnAdd]="true"
+                                            placeholder="Select Promotion" formControlName="supplierBatch"
+                                            (change)="ChangePromotion($event)">
+
+                                            <ng-template ng-option-tmp let-item="item" let-item$="item$"
+                                                let-index="index">
+                                                <div class="row">
+                                                    <span class="col-5 zone-whitespace" title="{{ item?.desc }}">
+                                                        {{ item?.desc }}
+                                                    </span>
+                                                    <div class="col-3" title="{{ item.code }}">
+                                                        {{ item?.code }}
+                                                    </div>
+                                                    <div class="col-2" title="{{ item.start | customdatetimeformat }}">
+                                                        {{ item.start | customdatetimeformat}}
+                                                    </div>
+                                                    <div class="col-2" title="{{ item.end | customdatetimeformat }}">
+                                                        {{ item.end | customdatetimeformat}}
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="col-6 mt-2">
+                                    <div class="form-group mb-0">
+                                        <button type="button" class="btn btn-grey input-btn btn-block"
+                                            (click)="getPromotionsByDate(); reset()">Filter list by date range above</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-blue mr-2" (click)="getSalesReport()">Ok</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="isCancelApi()">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

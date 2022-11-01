@@ -1,0 +1,79 @@
+<div id="wrapper" class="loginSection">
+   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="login-content-layout">
+         <div class="login-card">            
+            <div class="form-container">
+               <div class="form-width">               
+                  <div class="form-group text-center">                  
+                     <h2>Sign In</h2>
+                     <p><span>{{dateLogin | date: 'EEEE, MMMM d, y'}}</span></p>
+                  </div>
+                  <div class="form-group thm-group">
+                     <label>User No. / Email Id</label>
+                     <input type="text" formControlName="userEmail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.userEmail.errors }" placeholder="User No. / Email Id" />
+                     <div *ngIf="f.userEmail.errors" class="invalid-feedback">
+                        <div *ngIf="f.userEmail.errors.required">Email is required</div>
+                        <div *ngIf="f.userEmail.errors.pattern">Enter valid email</div>
+                     </div>
+                  </div>
+                  <div class="form-group thm-group">
+                     <label>Password</label>
+                     <div class="custom-input-group">
+                        <input [type]="isShowPassword ? 'text' : 'password'" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Password" />
+                        <span class="input-icon" (click)="showPassword()"><i [ngClass]="isShowPassword ?  'fa fa-eye-slash' : 'fa fa-eye' " ></i>
+                        </span>
+
+                        <div *ngIf="f.password.errors" class="invalid-feedback">
+                           <div *ngIf="f.password.errors?.required">Password is required</div>
+                           <div *ngIf="f.password.errors?.minlength">Password must be at least 8 characters</div>
+                           <div *ngIf="f.password.errors?.invalidPassword"> Password must have at leat 1 upper case charater, 1 lower case charater, 1 special character, 1 number.</div>
+
+                             
+                        
+                           <!-- <span class="text-danger"
+                           *ngIf="registerFormControl.password.touched && registerFormControl.password.errors?.invalidPassword">
+                           Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
+                           letter and 1 number
+                       </span> -->
+                        
+                        </div>
+
+                     </div>
+                   
+                  </div>
+                  <div class="form-group thm-group">
+                     <div class="form-row">
+                        <div class="col-6">
+                           <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" formControlName="rememberMe" id="customControl01">
+                              <label class="custom-control-label" for="customControl01">Remember me</label>
+                           </div>
+                        </div>                     
+                        <div class="col-6 text-right">                     
+                           <a routerLink="/forgot" class="forgot-link">Forgot Password?</a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="btn-wrap mt-2">
+                     <button type="submit" class="btn btn-block thm-btn">Sign In</button>
+                  </div>
+               </div>
+            </div>
+            <div class="content-container">
+               <div class="content-txt">
+                     <div class="logo-txt mb-3">
+                        <a target="_blank" href="http://www.coyotesoftware.com.au/">
+                           <img src="assets/images/logo.png" alt="Logo">
+                        </a>
+                     </div>
+                     <h2><a  target="_blank" href="http://www.coyotesoftware.com.au/"><u>www.coyotesoftware.com.au</u></a>
+                        <!-- Well Crafted,<br/>Coded with attention,<br/> Build with passion. -->
+                     </h2>
+                     <!-- <p> Treo helps developers to build organized and well-coded admin dashboards full of beautiful and feature rich modules.
+                     </p> -->
+               </div>
+            </div>
+         </div>         
+      </div>
+   </form>
+</div>

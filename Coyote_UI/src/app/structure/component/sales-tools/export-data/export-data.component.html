@@ -1,0 +1,122 @@
+<div class="mainContent-innner">
+    <div class="exportData-section">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">{{displayText}}</h4>
+            <div *ngIf="pageName == 'export-data'" class="probtn-wrap d-flex text-right">
+                <button type="button"  (click)="getExportFile()"  class="btn btn-blue with-icon">
+                    <i class="icon fa fa-file"></i> Export</button>
+            </div>
+
+            <div *ngIf="pageName == 'import-data'" class="probtn-wrap d-flex text-right mr-2">
+                <input type="file" (change)="selectFile($event)" id="importData" style="display: none;">
+                    <button type="button"  id="selectFile" (click)="openDailogBox()" class="btn btn-blue with-icon">
+                        <i class="icon fa fa-file"></i> Select File</button>
+                </div>
+
+            <div *ngIf="pageName == 'import-data'" class="probtn-wrap d-flex text-right">
+                    <button type="button" (click)="importFile()"   class="btn btn-blue with-icon">
+                        <i class="icon fa fa-file"></i> Import</button>
+            </div>
+        </div>
+        <form  [formGroup]="exportFormGroup" enctype="multipart/form-data">
+        <!-- <div class="bg-box mt-15">        
+            <div class="table-responsive">
+                <form  [formGroup]="exportFormGroup" >
+                    <table class="table ctm-table exportData-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="custom-control custom-checkbox">
+                                        <input (change)="checkEvent('selectAll', $event)" type="checkbox" id="selectAll" class="custom-control-input">
+                                        <label for="selectAll" class="custom-control-label mb-0"></label>
+                                    </div>
+                                </th>
+                                <th>Title</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr  *ngFor="let exportItem of exportDataList; let i = index">
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" [id]="exportItem.code" formControlName="{{exportItem.code}}" [name]="exportItem.code" (change)="checkEvent('',$event)"
+                                            class="custom-control-input">
+                                        <label [for]="exportItem.code" class="custom-control-label mb-0"></label>
+                                    </div>
+                                </td>
+                                <td>{{exportItem.code}} ({{exportItem.name}})</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>            
+        </div> -->
+        <div class="bg-box mt-15">
+                <div class="form-row form-group">
+                    <ng-container *ngIf="pageName == 'import-data'" >
+                        <div class="col-6">
+                            <div class="d-flex justify-content-end">
+                                <div class="custom-control custom-checkbox mr-2">
+                                    <input type="checkbox" formControlName="AddNewOnly" id="Only" class="custom-control-input">
+                                    <label for="Only" class="custom-control-label mb-0 text-uppercase"><span class="d-block label-mt-2">Only Add New</span></label>
+                                </div>
+                                <div class="custom-control custom-checkbox mr-2">
+                                    <input type="checkbox" formControlName="AddNewAsInactive" id="InActive" class="custom-control-input">
+                                    <label for="InActive" class="custom-control-label mb-0 text-uppercase"><span class="d-block label-mt-2">Add New as InActive</span></label>
+                                </div>
+                            </div>                                    
+                        </div> 
+                        <div class="col-3">
+                            <div class="form-group mb-0 form-row align-items-center">                                
+                                <div class="col-5">
+                                    <label for="" class="mb-0">Only Outlet</label>
+                                </div>
+                                <div class="col-7">
+                                    <!-- <input type="text" formControlName="OnlyOutlet" class="form-control"> -->
+                                    <select formControlName="OnlyOutlet" class="form-control" >
+                                    <option [value]="outlet.id" *ngFor="let outlet of Outlet" >{{outlet.desc}}&nbsp;({{outlet.code}})</option>   
+                                    </select>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group mb-0 form-row align-items-center">                                
+                                <div class="col-5">
+                                    <label for="" class="mb-0">Password</label>
+                                </div>
+                                <div class="col-7">
+                                    <input type="text" formControlName="ImportPassword" class="form-control">
+                                </div>
+                             </div>
+                        </div>
+                    </ng-container>
+                    <div class="col-lg-6">
+                        <div class="group-from mb-0">
+                            <!-- <div class="form-group">
+                                <input type="text" class="form-control" value="Import Data">
+                            </div> -->
+                            <div class="form-row align-items-center form-group mb-0">
+                               
+                                <div class="col-6">
+                                        <ng-container  *ngFor="let exportItem of exportDataList; let i = index">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" [id]="exportItem.code" formControlName="{{exportItem.code}}" [name]="exportItem.code" (change)="checkEvent('',$event)">
+                                                <label [for]="exportItem.code" class="custom-control-label mb-0 text-uppercase"><span class="d-block label-mt-2">{{exportItem.code}} ({{exportItem.name}})</span></label>
+                                            </div>                                    
+                                            </ng-container>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-6">
+                        <div class="group-from">
+                            <div class="form-group">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+        </div>
+        </form>
+    </div>
+</div>

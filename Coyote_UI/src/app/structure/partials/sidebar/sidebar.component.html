@@ -1,0 +1,60 @@
+<div class="sidebar-left sbHover-close sb-open">
+  <div class="side-logo">
+    <a [routerLink]="['/']" class="logo">
+      <img src="assets/images/logo.png" alt="Logo" />
+    </a>
+    <a [routerLink]="['/']" class="logo-icon">
+      <img src="assets/images/logo-icon.png" alt="Logo" />
+    </a>
+  </div>
+
+  <div class="sidebar-content">
+    <ng-container *ngIf="modules && modules.length">
+      <ng-container *ngFor="let module of modules; let i = index">
+        <ul class="proSidebar-menu">
+          <li class="has-submenu" [ngClass]="{ 'submenu-open': !(module?.module_code == 'user' || module?.module_code == 'tillcash' || module?.module_code == 'zone' || module?.module_code == 'system' || module?.module_code == 'reporter-setting') ? 'none' : '' }" 
+            [title]="module.module_name"> <!-- submenu-open this class only for menu arrow-->
+            <a href="javascript:void(0)">
+              <span class="icon">
+                <i class="{{ module.module_class }}"></i>
+              </span>
+              <span class="text">{{ module.module_name }}</span>
+            </a>
+            <div class="submenu-wrap" [ngStyle]="{ 'display': (module?.module_code == 'user' || module?.module_code == 'tillcash' || module?.module_code == 'zone' || module?.module_code == 'system' || module?.module_code == 'reporter-setting') ? 'none' : '' }">
+              <ul class="submenu">
+                <ng-container
+                  *ngIf="module.sub_modules && module.sub_modules.length"
+                >
+                  <ng-container *ngFor="let subModule of module.sub_modules">
+                    <li [title]="subModule.label">
+                      
+                      <ng-container
+                        *ngIf="subModule.route === '#'; else loading"
+                      >
+                        <a  routerLinkActive="subModule.route" (click)="subModuleSelection(subModule.route)" 
+                          [hidden]="isAdminPermission ? false : subModule.isPermissionGranted" >
+							{{ subModule.label }}
+                        </a>
+                      </ng-container>
+                      <ng-template #loading>
+                        <a [routerLink]="subModule.route" routerLinkActive="subModule.router_link_active"
+                          (click)="subModuleSelection(subModule.route, subModule.method_calling, subModule.label, subModule.timeout, subModule.sorting)" [hidden]="isAdminPermission ? false : subModule.isPermissionGranted"
+                        >
+							{{ subModule.label }}
+                        </a>
+                      </ng-template>
+                    </li>
+                  </ng-container>
+                </ng-container>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </ng-container>
+    </ng-container>
+  </div>
+  <div class="sidebar-left-arrow">
+    <a href="javascript:void(0);" id="sidebarBack"><i class="fa fa-close"></i></a>
+  </div>
+</div>
+

@@ -1,0 +1,77 @@
+<div class="mainContent-innner">
+    <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">PDE Load History</h4>
+        <div class="probtn-wrap d-flex text-right">
+            <button class="btn"><i class="icon fa fa-file-excel-o"></i> Export</button>
+        </div>
+    </div>
+    <div class="bg-box mt-15">
+            <div class="table-responsive">
+              <table class="table ctm-table" id="load-table" >
+                <thead>
+                  <tr>
+                    <th>Date Time Loaded</th>
+                    <th>Description</th>
+                    <th>User</th>
+                    <th>Outlet</th>
+                  </tr>
+                </thead>
+                 <tbody>
+                    <tr *ngFor="let pdf of pdeLoadHistory" >
+                        <td  data-toggle="modal" data-target="#pdfHistoryModalModal" (click)="getPdeLoadHistoryByid(pdf.id)"> {{pdf.actionAt | dateTimeFormate }}</td>
+                        <td data-toggle="modal" data-target="#pdfHistoryModalModal" (click)="getPdeLoadHistoryByid(pdf.id)">{{pdf.action}}</td>
+                        <td data-toggle="modal" data-target="#pdfHistoryModalModal" (click)="getPdeLoadHistoryByid(pdf.id)">{{pdf.userNumber}}</td>
+                        <td data-toggle="modal" data-target="#pdfHistoryModalModal" (click)="getPdeLoadHistoryByid(pdf.id)">{{pdf.code || pdf.tableId}}</td>
+                    </tr>
+                </tbody>
+              </table> 
+            </div>     
+            <div class="modal fade thm-popup bd-example-modal-xl" id="pdfHistoryModalModal" tabindex="-1" role="dialog" aria-labelledby="searchProductModal" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">               
+                    <div class="modal-body popup-box-width">
+                        <div class="popup-box">
+                            <table class="table ctm-table" id="log-table">
+                                <thead>
+                                <tr>
+                                    <th>Date Time Loaded</th>
+                                    <th >Description</th>
+                                    <th >User</th>
+                                    <th>Outlet</th>
+                                    <th>Pde Date</th>
+                                    <th>Pde Qty</th>
+                                    <th>Product</th>
+                                    <th>Status</th>
+                                    <th>Sequence</th>
+                                    <th>Carton Qty</th>
+                                    <th>Carton Qty</th>
+                                </tr>
+                                </thead>
+                                <tbody >
+                                    <tr *ngFor="let pdfLogList of pdeDataLogList">
+                                        <td ></td>
+                                        <td>{{pdfLogList.description}}</td> 
+                                         <td></td>
+                                         <td>{{pdfLogList.outletCode}}</td>
+                                         <td>{{pdfLogList.pdeData}}</td>
+                                         <td>{{pdfLogList.pdeQty}}</td>
+                                         <td>{{pdfLogList.productNumber}}</td>
+                                         <td>{{pdfLogList.status}}</td>
+                                         <td>{{pdfLogList.sequence}}</td>
+                                         <td>{{pdfLogList.cartonQty}}</td>
+                                         <td>{{pdfLogList.cost}}</td>      
+                                        
+                                    </tr>
+                                </tbody>
+                                <!-- *ngFor="let Log of pdfLogList.pdeDataLogList.data, let index=index" -->
+                            </table>
+                             <div class="btn-wrap text-right mt-10">          
+                                 <button type="button" class="btn btn-grey"  data-dismiss="modal">Close</button>
+                             </div>
+                        </div>                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>

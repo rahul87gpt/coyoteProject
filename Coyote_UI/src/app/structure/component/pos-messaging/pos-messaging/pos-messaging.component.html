@@ -1,0 +1,1793 @@
+<div class="mainContent-innner pt-2">
+    <div class="user-card-section">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">POS Messaging</h4>
+            <div class="probtn-wrap text-right">
+                <button class="btn btn-blue mr-2" (click)="clickedAdd()" data-toggle="modal" data-target="#AddModal"><i
+                        class="icon fa fa-plus-circle"></i> Add</button>
+                <button type="button" class="btn mr-2"><i class="icon fa fa-print"></i> Print</button>
+                <button type="button" class="btn mr-2" (click)="exportPosMessagingData()"><i
+                        class="icon fa fa-file-excel-o"></i> Export</button>
+                <button type="button" class="btn" data-toggle="modal" data-target="#popMessagingSearch" (click)="openPopMessagingSearchfilter()"><i
+                        class="icon fa fa-filter"></i> Filter</button>
+            </div>
+        </div>
+        <div class="bg-box mt-15 all-w">
+            <div class="table-responsive inner-responsive">
+                <table class="table ctm-table" id="posMessaging-table">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Message ID</th>
+                            <th>Reference ID</th>
+                            <th>Description</th>
+                            <th>Reference Type</th>
+                            <th>Zone</th>
+                            <th>Display</th>
+                            <th>Priority</th>
+                            <th>Message</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Status</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let pos of posMessageData" >
+                            <td>
+                                <!-- <span class="status-check status-{{till.status}}"></span>  -->
+                                <div class="status-icons">
+                                  <img *ngIf="pos?.status" src="assets/images/status-true.svg" alt="" />
+                                  <img *ngIf="!pos?.status" src="assets/images/status-false.svg" alt="" />
+                                  <span hidden>
+                                    {{ pos?.status ? "Active" : "In-Active" }}
+                                  </span>
+                                </div>
+                              </td>
+                            <td><a data-toggle="modal" data-target="#EditModal"
+                                    (click)="getPosmessagingById(pos.id)">{{pos.id}}</a></td>
+                            <td data-toggle="modal" data-target="#EditModal" (click)="getPosmessagingById(pos.id)">
+                                {{pos.referenceId}}</td>
+                            <td data-toggle="modal" data-target="#EditModal" (click)="getPosmessagingById(pos.id)">
+                                {{pos.desc}}</td>
+                            <td data-toggle="modal" data-target="#EditModal" (click)="getPosmessagingById(pos.id)">
+                                {{pos.referenceType}}</td>
+                            <td data-toggle="modal" data-target="#EditModal" (click)="getPosmessagingById(pos.id)">
+                                {{pos.zoneDesc}}</td>
+                            <td data-toggle="modal" data-target="#EditModal" (click)="getPosmessagingById(pos.id)">
+                                {{pos.displayType}}</td>
+                            <td data-toggle="modal" data-target="#EditModal" (click)="getPosmessagingById(pos.id)">
+                                {{ pos.priority > 0 ? pos.priority : ''  }}</td>
+                            <td data-toggle="modal" data-target="#EditModal" (click)="getPosmessagingById(pos.id)">
+                                {{pos.posMessage}}</td>
+                            <td data-toggle="modal" data-target="#EditModal" (click)="getPosmessagingById(pos.id)"><span
+                                    style="display: none;"> {{ConvertDateToMiliSeconds(pos?.dateFrom)}}
+                                </span>{{pos?.dateFrom | customdatetimeformat}}</td>
+                            <td data-toggle="modal" data-target="#EditModal" (click)="getPosmessagingById(pos.id)"><span
+                                    style="display: none;"> {{ConvertDateToMiliSeconds(pos?.dateTo)}}
+                                </span>{{pos?.dateTo | customdatetimeformat}}</td>
+                            <!-- <td data-toggle="modal" data-target="#EditModal" (click)="getPosmessagingById(pos.id)">{{pos.dateFrom | customdatetimeformat }}</td> -->
+                            <!-- <td data-toggle="modal" data-target="#EditModal" (click)="getPosmessagingById(pos.id)">{{pos.dateTo |  customdatetimeformat}}</td> -->
+                            <td data-toggle="modal" data-target="#EditModal" (click)="getPosmessagingById(pos.id)">
+                                {{ pos.status && pos.status=== true?"Active":"Inactive"  }}</td>
+                            <td class="text-center">
+                                <div class="tbHover-btnGroup">
+                                    <button tooltip="Change" placement="left" class="tbHover-btn trash-btn"
+                                        data-toggle="modal" data-target="#EditModal"
+                                        (click)="getPosmessagingById(pos.id)"><i class="fa fa-pencil"></i></button>
+                                    <button tooltip="Delete" placement="left" class="tbHover-btn trash-btn"
+                                        (click)="deletePosmessaging(pos.id)"><i class="fa fa-trash"></i></button>
+                                </div>
+                                <!-- <div class="tbHover-btnGroup">
+                                   <button type="button" class="tbHover-btn trash-btn" data-toggle="modal" data-target="#EditModal" (click)="getPosmessagingById(pos.id)"><i class="fa fa-pencil" ></i></button>
+                                   <button type="button" class="tbHover-btn trash-btn" (click)="deletePosmessaging(pos.id)"><i class="fa fa-trash"></i></button>
+                               </div> -->
+                            </td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup bd-example-modal-xl" id="AddModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="posMessagingForm" (ngSubmit)="addposMessagingForm()">
+                        <div class="title-wrap">
+                            <h4 class="title">New POS Message</h4>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <div class="col-6">
+                                        <div class="group-from">
+                                            <div class="form-group mb-0 text-right">
+                                                <b>{{PosNumber}}</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="group-from">
+                                            <h5 class="title">Status<span class="text-danger">*</span></h5>
+                                            <div class="form-group mb-0">
+                                                <select class="form-control" formControlName="status"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                                                    <option [ngValue]="true">Active</option>
+                                                    <option [ngValue]="false">Inactive</option>
+                                                </select>
+                                                <div *ngIf="f.status.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.status.errors.required"> Status is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group-from">
+                                    <h5 class="title">Message Reference Type<span class="text-danger">*</span></h5>
+                                    <div class="form-group mb-0">
+                                        <select class="form-control" formControlName="referenceTypeId"
+                                            (change)="setrefrencetypeText($event)"
+                                            [ngClass]="{ 'is-invalid': submitted && f.referenceTypeId.errors }">
+                                            <option [value]="refrence.id" *ngFor="let refrence of referencetype">
+                                                {{refrence.name}}</option>
+                                        </select>
+                                        <div *ngIf="f.referenceTypeId.errors" class="invalid-feedback">
+                                            <div *ngIf="f.referenceTypeId.errors.required"> Message Reference Type is
+                                                required</div>
+                                        </div>
+                                        <ng-container *ngIf="referencetypeId >0">
+                                            <label *ngIf="referencetypeText==='PRODUCT'" for=""
+                                                class="fontSize-11 mb-0 primaryColor" style="color:#5145cd;">This
+                                                message will be specific to a Product</label>
+                                            <label *ngIf="referencetypeText==='PROMOTION'" for=""
+                                                class="fontSize-11 mb-0 primaryColor" style="color:#5145cd;">This
+                                                message will be specific to a Promotion</label>
+                                            <label *ngIf="referencetypeText==='COMPETITION'" for=""
+                                                class="fontSize-11 mb-0 primaryColor" style="color:#5145cd;">This
+                                                message will be specific to a Competition</label>
+                                            <label *ngIf="referencetypeText==='COMMODITY'" for=""
+                                                class="fontSize-11 mb-0 primaryColor" style="color:#5145cd;">This
+                                                message will be specific to a Commodity. This could prevent the need to
+                                                set up a message for each product</label>
+                                            <label *ngIf="referencetypeText==='CFD_DEFAULT'" for=""
+                                                class="fontSize-11 mb-0 primaryColor" style="color:#5145cd;">This is
+                                                default 'Customer Facing Display' It scrolls past on CFD when not
+                                                transaction is in progress</label>
+                                            <label *ngIf="referencetypeText==='RECEIPT'" for=""
+                                                class="fontSize-11 mb-0 primaryColor" style="color:#5145cd;">This is a
+                                                message for the Customer. Displayed on the receipt</label>
+                                            <label *ngIf="referencetypeText==='REMINDER'" for=""
+                                                class="fontSize-11 mb-0 primaryColor" style="color:#5145cd;">This is a
+                                                reminder for the Cashier. It is scheduled by the selected day parts
+                                                below. It pops once for each selected day part</label>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="group-from">
+                                    <h5 class="title">Reference ID(Primary)<span class="text-danger">*</span></h5>
+                                    <div class="form-row form-group mb-0">
+                                        <div class="col-11">
+                                            <input [readonly]="codeStatus" type="text" class="form-control"
+                                                formControlName="referenceId"
+                                                appUppercase
+                                                [ngClass]="{ 'is-invalid': submitted && f.referenceId.errors }">
+
+                                            <div *ngIf="f.referenceId.errors" class="invalid-feedback">
+                                                <div *ngIf="f.referenceId.errors.required"> Reference ID is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <button type="button" class="btn w-100 d-block btn-grey btn-blue input-btn"
+                                                (click)="openPopup()"> <i class="icon fa fa-ellipsis-h"></i> </button>
+                                        </div>
+
+                                        <div class="col-md-12 mt-2">
+                                            <div class="form-group mb-0">
+                                                <input [readonly]="codeStatus" type="text" class="form-control"
+                                                    formControlName="desc"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.desc.errors }">
+                                                <div *ngIf="f.desc.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.desc.errors.required"> Description is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- <ng-container  *ngIf="referencetypeText==='Product'">
+                                    <div class="group-from">
+                                        <h5 class="title">Replicate</h5>
+                                        <div class="form-group mb-0">
+                                          <textarea class="form-control"  style="height: 80px;"></textarea>
+                                        </div>
+                                    </div>   
+                                </ng-container> -->
+                                <div class="form-row">
+                                    <div class="col-6">
+                                        <div class="group-from">
+                                            <h5 class="title">Zone<span class="text-danger">*</span></h5>
+                                            <div class="form-group mb-0">
+                                                <ng-select [items]="zoneData" bindLabel="name" bindValue="id" [virtualScroll]="true" [multiple]="false"
+                                                [clearable]="false" [clearOnBackspace]="false" [clearSearchOnAdd]="true" 
+                                                formControlName="zoneId"
+                                                [ngClass]="{ 'is-invalid': submitted && f.zoneId.errors }">
+                                
+                                                <!-- It hold value on the basis of filter -->
+                                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                                  <div class="form-row">
+                                                    <span class="col-12 zone-overflow" title="{{ item?.name }}">
+                                                      {{ item?.name }}
+                                                    </span>
+                                                  </div>
+                                                </ng-template>
+                                                </ng-select>
+                                                <!-- <select class="form-control" formControlName="zoneId"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.zoneId.errors }">
+                                                    <option [ngValue]="zone.id" *ngFor="let zone of zoneData">
+                                                        {{zone.name}}</option>
+                                                </select> -->
+                                                <div *ngIf="f.zoneId.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.zoneId.errors.required"> Zone is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="group-from">
+                                            <h5 class="title">Display<span class="text-danger">*</span></h5>
+                                            <ng-container *ngIf="!referencetypeText">
+                                                <div class="form-group mb-0">
+                                                    <select class="form-control" formControlName="displayTypeId"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.displayTypeId.errors }">
+                                                        <option [ngValue]="display.id"
+                                                            *ngFor="let display of displayData">{{display.name}}
+                                                        </option>
+                                                    </select>
+                                                    <div *ngIf="f.displayTypeId.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.displayTypeId.errors.required"> Display is
+                                                            required</div>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                            <ng-container *ngIf="referencetypeText==='PRODUCT' ||
+                                            referencetypeText==='PROMOTION' ||
+                                            referencetypeText==='COMPETITION' ||
+                                            referencetypeText==='COMMODITY'
+                                            ">
+                                                <div class="form-group mb-0">
+                                                    <select class="form-control" formControlName="displayTypeId"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.displayTypeId.errors }">
+                                                        <option [ngValue]="display.id"
+                                                            *ngFor="let display of displayData">{{display.name}}
+                                                        </option>
+                                                    </select>
+                                                    <div *ngIf="f.displayTypeId.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.displayTypeId.errors.required"> Display is
+                                                            required</div>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                            <ng-container *ngIf="referencetypeText==='CFD_DEFAULT' ||
+                                            referencetypeText==='RECEIPT' ||
+                                            referencetypeText==='REMINDER'
+                                            ">
+                                                <div class="form-group mb-0">
+                                                    <select class="form-control" formControlName="displayTypeId"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.displayTypeId.errors }"
+                                                        disabled>
+                                                        <option [ngValue]="display.id"
+                                                            *ngFor="let display of displayData">{{display.name}}
+                                                        </option>
+                                                    </select>
+                                                    <div *ngIf="f.displayTypeId.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.displayTypeId.errors.required"> Display is
+                                                            Required</div>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group-from mb-0">
+                                    <h5 class="title">Priority</h5>
+                                    <div class="d-flex flex-wrap">
+                                        <div class="custom-control custom-radio mr-2">
+                                            <input name="priority" type="radio" class="custom-control-input" id="Monday"
+                                                formControlName="priority" value="1">
+                                            <label class="custom-control-label" for="Monday">
+                                                <span class="d-block label-mt-2">1(Warnning)</span>
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio mr-2">
+                                            <input name="priority" type="radio" class="custom-control-input"
+                                                id="Tuesday" formControlName="priority" value="2">
+                                            <label class="custom-control-label" for="Tuesday">
+                                                <span class="d-block label-mt-2">2</span>
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio mr-2">
+                                            <input name="priority" type="radio" class="custom-control-input"
+                                                id="Wednesday" formControlName="priority" value="3">
+                                            <label class="custom-control-label" for="Wednesday">
+                                                <span class="d-block label-mt-2">3</span>
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio mr-2">
+                                            <input name="priority" type="radio" class="custom-control-input"
+                                                id="Thursday" formControlName="priority" value="4">
+                                            <label class="custom-control-label" for="Thursday">
+                                                <span class="d-block label-mt-2">4</span>
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio mr-2">
+                                            <input name="priority" type="radio" class="custom-control-input" id="Sunday"
+                                                formControlName="priority" value="5">
+                                            <label class="custom-control-label" for="Sunday">
+                                                <span class="d-block label-mt-2">5</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="d-flex flex-wrap">
+                                        <div class="mr-2">
+                                            <input type="radio" name="priority" formControlName="priority" value=1>1 &nbsp;(Warning)
+                                        </div>
+                                        <div class="mr-2">
+                                            <input type="radio" name="priority" formControlName="priority" value=2>2
+                                        </div>
+                                        <div class="mr-2">
+                                            <input type="radio" name="priority" formControlName="priority" value=3>3
+                                        </div>
+                                        <div class="mr-2">
+                                            <input type="radio" name="priority" formControlName="priority" value=4>4
+                                        </div>
+                                        <div class="">
+                                            <input type="radio" name="priority" formControlName="priority"  value=5 >5
+                                        </div>
+                                    </div>  -->
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="group-from">
+                                    <h5 class="title">Date Range</h5>
+                                    <div class="form-row">
+                                        <div class="col-md-6 ">
+                                            <div class="form-row align-items-center mb-0">
+                                                <label class="col-md-4 mb-0">Start Date<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="col-md-8 ">
+                                                    <div class="ctm-calendar">
+                                                        <input onkeydown="return false" type="text" class="form-control"
+                                                            bsDatepicker (bsValueChange)="onDateChange($event)"
+                                                            [minDate]="minDate" formControlName="dateFrom"
+                                                            [bsConfig]="datepickerConfig"
+                                                            [ngClass]="{ 'is-invalid': submitted && f.dateFrom.errors }" />
+                                                        <div *ngIf="f.dateFrom.errors" class="invalid-feedback">
+                                                            <div *ngIf="f.dateFrom.errors.required"> Start Date is
+                                                                Required</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <div class="form-row align-items-center mb-0">
+                                                <label class="col-md-4 mb-0">End Date<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="col-md-8 ">
+                                                    <div class="ctm-calendar">
+                                                        <input onkeydown="return false" type="text" class="form-control"
+                                                            bsDatepicker [minDate]="lastEndDate"
+                                                            formControlName="dateTo" [bsConfig]="datepickerConfig"
+                                                            [ngClass]="{ 'is-invalid': submitted && f.dateTo.errors }" />
+                                                        <div *ngIf="f.dateTo.errors" class="invalid-feedback">
+                                                            <div *ngIf="f.dateTo.errors.required"> End Date is Required
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ng-container *ngIf="hideDayParts">
+                                    <div class="group-from">
+                                        <h5 class="title">Day Parts</h5>
+                                        <table class="table mb-0 day-parts-table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <th rowspan="2" class="am-txt">AM</th>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[0] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio1"
+                                                                (click)="setDay($event, 'part1')"><label
+                                                                for="radio1">00-01</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[1] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio2"
+                                                                (click)="setDay($event, 'part2')"><label
+                                                                for="radio2">01-02</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[2] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio3"
+                                                                (click)="setDay($event, 'part3')"><label
+                                                                for="radio3">02-03</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[3] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio4"
+                                                                (click)="setDay($event, 'part4')"><label
+                                                                for="radio4">03-04</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[4] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio5"
+                                                                (click)="setDay($event, 'part5')"><label
+                                                                for="radio5">04-05</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[5] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio6"
+                                                                (click)="setDay($event, 'part6')"><label
+                                                                for="radio6">05-06</label></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[6] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio7"
+                                                                (click)="setDay($event, 'part7')"><label
+                                                                for="radio7">06-07</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[7] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio8"
+                                                                (click)="setDay($event, 'part8')"><label
+                                                                for="radio8">07-08</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[8] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio9"
+                                                                (click)="setDay($event, 'part9')"><label
+                                                                for="radio9">08-09</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[9] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio10"
+                                                                (click)="setDay($event, 'part10')"><label
+                                                                for="radio10">09-10</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[10] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio11"
+                                                                (click)="setDay($event, 'part11')"><label
+                                                                for="radio11">10-11</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[11] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio12"
+                                                                (click)="setDay($event, 'part12')"><label
+                                                                for="radio12">11-12</label></div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="pm-select">
+                                                    <th rowspan="2" class="pm-txt">PM</th>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[12] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio14"
+                                                                (click)="setDay($event, 'part13')"><label
+                                                                for="radio14">12-13</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[13] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio15"
+                                                                (click)="setDay($event, 'part14')"><label
+                                                                for="radio15">13-14</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[14] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio16"
+                                                                (click)="setDay($event, 'part15')"><label
+                                                                for="radio16">14-15</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[15] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio17"
+                                                                (click)="setDay($event, 'part16')"><label
+                                                                for="radio17">15-16</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[16] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio18"
+                                                                (click)="setDay($event, 'part17')"><label
+                                                                for="radio18">16-17</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[17] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio19"
+                                                                (click)="setDay($event, 'part18')"><label
+                                                                for="radio19">17-18</label></div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="pm-select">
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[18] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio20"
+                                                                (click)="setDay($event, 'part19')"><label
+                                                                for="radio20">18-19</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[19] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio21"
+                                                                (click)="setDay($event, 'part20')"><label
+                                                                for="radio21">19-20</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[20] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio22"
+                                                                (click)="setDay($event, 'part21')"><label
+                                                                for="radio22">20-21</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[21] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio23"
+                                                                (click)="setDay($event, 'part22')"><label
+                                                                for="radio23">21-22</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[22] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio24"
+                                                                (click)="setDay($event, 'part23')"><label
+                                                                for="radio24">22-23</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[23] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio25"
+                                                                (click)="setDay($event, 'part24')"><label
+                                                                for="radio25">23-24</label></div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </ng-container>
+                                <div class="group-from pt-0 mb-0">
+                                    <div class="apn-navTab">
+                                        <ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="pills-message-tab" data-toggle="pill"
+                                                    href="#pills-message" role="tab" aria-controls="pills-message"
+                                                    aria-selected="true">Message<span class="text-danger">*</span></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="pills-image-tab" data-toggle="pill"
+                                                    href="#pills-image" role="tab" aria-controls="pills-image"
+                                                    aria-selected="false">Image</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="pills-tabContent">
+                                            <div class="tab-pane fade show active" id="pills-message" role="tabpanel"
+                                                aria-labelledby="pills-message-tab">
+                                                <div class="form-group mb-0">
+                                                    <textarea class="form-control" formControlName="posMessage"
+                                                        style="height: 80px;"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.posMessage.errors }"></textarea>
+                                                    <div *ngIf="f.posMessage.errors" class="invalid-feedback">
+                                                        <div *ngIf="f.posMessage.errors.required"> Message is required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-image" role="tabpanel"
+                                                aria-labelledby="pills-image-tab">
+                                                <div class="form-group mb-0">
+                                                    <label for="" class="fontSize-11 mb-1 primaryColor"
+                                                        style="color:#5145cd;"> An image will take precedence over the
+                                                        message</label>
+                                                    <div class="form-row align-items-center form-group">
+                                                        <div class="col-11">
+                                                            <input #input type="file" id="fileUpdateInputId"
+                                                                class="form-control"
+                                                                [ngClass]="{ 'is-invalid': imageError}"
+                                                                (change)="fileChangeEvent($event)" style="display:none">
+                                                            <button type="button" (click)="input.click()"
+                                                                class="btn btn-grey  btn-block input-btn">Choose
+                                                                File</button>
+                                                            <div class="invalid-feedback ">
+                                                                <div *ngIf="imageError">{{imageError}}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <button type="button" (click)="closedImageTab()"
+                                                                class="btn d-block w-100 btn-blue input-btn ml-2"><i
+                                                                    class="fa fa-close"></i></button>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <ng-container *ngIf="imageChangedEvent && croppedImage">
+                                                                <img [src]="croppedImage" />
+                                                                <div *ngIf="imageChangedEvent && croppedImage "
+                                                                    class="text-center">
+                                                                    <label class="mt-2 mb-0">Preview</label>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ng-container *ngIf="imageChangedEvent">
+                                                                <image-cropper [imageChangedEvent]="imageChangedEvent"
+                                                                [maintainAspectRatio]="true" [aspectRatio]="4 / 3"
+                                                                format="png" (imageCropped)="imageCropped($event)"
+                                                                (imageLoaded)="imageLoaded()"
+                                                                (loadImageFailed)="loadImageFailed()"></image-cropper>
+                                                            <div *ngIf="imageChangedEvent && !imageError"
+                                                                class="text-center">
+                                                                <label class="mt-2 mb-0 ">Orignal</label>
+                                                            </div>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="group-from"> -->
+                                <!-- <div class="row">
+                                        <div class="col-md-6">
+                                                <img [src]="croppedImage" />
+                                                <div *ngIf="imageChangedEvent && croppedImage " class="text-center">
+                                                    <label class="mt-2 mb-0">Preview</label>
+                                                </div>
+                                        </div>  
+                                        <div class="col-md-6">
+                                            <image-cropper
+                                              [imageChangedEvent]="imageChangedEvent"
+                                              [maintainAspectRatio]="true"
+                                              [aspectRatio]="4 / 3"
+                                              format="png"
+                                              (imageCropped)="imageCropped($event)"
+                                              (imageLoaded)="imageLoaded()"
+                                              
+                                              (loadImageFailed)="loadImageFailed()"
+                                            ></image-cropper>
+                                            <div *ngIf="imageChangedEvent && !imageError" class="text-center">
+                                                <label class="mt-2 mb-0 ">Orignal</label>
+                                              </div>
+                                        </div>                                         
+                                    </div> -->
+
+                                <!-- <div class="image-cropper-custom">
+                                        <img src="assets/images/placeholder.png" alt="">
+                                    </div> -->
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button class="btn btn-blue  mr-2"><i class="icon fa fa-plus-circle"></i> Add</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup bd-example-modal-xl" id="EditModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="posMessagingEditForm" (ngSubmit)="UpdatePosMessaging()">
+                        <div class="title-wrap">
+                            <h4 class="title">Update POS Message</h4>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-6">
+                                <div class="form-row">
+                                    <div class="col-6">
+                                        <div class="group-from">
+                                            <h5 class="title">Status<span class="text-danger">*</span></h5>
+                                            <div class="form-group mb-0">
+                                                <select class="form-control" formControlName="status"
+                                                    [ngClass]="{ 'is-invalid': submitted1 && f1.status.errors }">
+                                                    <option [ngValue]="true">Active</option>
+                                                    <option [ngValue]="false">Inactive</option>
+                                                </select>
+                                                <div *ngIf="f1.referenceTypeId.errors" class="invalid-feedback">
+                                                    <div *ngIf="f1.referenceTypeId.errors.required"> Message Reference
+                                                        Type is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="group-from">
+                                            <h5 class="title">Message Reference Type<span class="text-danger">*</span>
+                                            </h5>
+                                            <div class="form-group mb-0">
+                                                <select class="form-control" formControlName="referenceTypeId"
+                                                    (change)="setrefrencetypeText($event)"
+                                                    [ngClass]="{ 'is-invalid': submitted1 && f1.referenceTypeId.errors }"
+                                                    disabled>
+                                                    <option [value]="refrence.id"
+                                                        *ngFor="let refrence of referencetype">{{refrence.name}}
+                                                    </option>
+                                                </select>
+
+                                                <label *ngIf="messageReferenceType=== 1" for=""
+                                                    class="fontSize-11 mb-0 primaryColor" style="color:#5145cd;">This
+                                                    message will be specific to a Product</label>
+                                                <label *ngIf="messageReferenceType=== 2" for=""
+                                                    class="fontSize-11 mb-0 primaryColor" style="color:#5145cd;">This
+                                                    message will be specific to a Promotion</label>
+                                                <label *ngIf="messageReferenceType=== 3" for=""
+                                                    class="fontSize-11 mb-0 primaryColor" style="color:#5145cd;">This
+                                                    message will be specific to a Competition</label>
+                                                <label *ngIf="messageReferenceType=== 5" for=""
+                                                    class="fontSize-11 mb-0 primaryColor" style="color:#5145cd;">This
+                                                    message will be specific to a Commodity. This could prevent the need
+                                                    to set up a message for each product</label>
+                                                <label *ngIf="messageReferenceType=== 4" for=""
+                                                    class="fontSize-11 mb-0 primaryColor" style="color:#5145cd;">This is
+                                                    default 'Customer Facing Display' It scrolls past on CFD when not
+                                                    transaction is in progress</label>
+                                                <label *ngIf="messageReferenceType=== 6" for=""
+                                                    class="fontSize-11 mb-0 primaryColor" style="color:#5145cd;">This is
+                                                    a message for the Customer. Displayed on the receipt</label>
+                                                <label *ngIf="messageReferenceType=== 7" for=""
+                                                    class="fontSize-11 mb-0 primaryColor" style="color:#5145cd;">This is
+                                                    a reminder for the Cashier. It is scheduled by the selected day
+                                                    parts below. It pops once for each selected day part</label>
+
+                                                <div *ngIf="f1.referenceTypeId.errors" class="invalid-feedback">
+                                                    <div *ngIf="f1.referenceTypeId.errors.required"> Message Reference
+                                                        Type is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group-from">
+                                    <h5 class="title">Reference ID(Primary)<span class="text-danger">*</span></h5>
+                                    <div class="form-row form-group mb-0">
+                                        <div class="col-11">
+                                            <input [readonly]="codeStatus" type="text" class="form-control"
+                                                formControlName="referenceId"
+                                                [ngClass]="{ 'is-invalid': submitted1 && f1.referenceId.errors }">
+                                            <div *ngIf="f1.referenceId.errors" class="invalid-feedback ">
+                                                <div *ngIf="f1.referenceId.errors.required"> Reference ID is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <button type="button" class="btn b-block w-100 btn-grey btn-blue input-btn"
+                                                (click)="openPopup()"> <i class="icon fa fa-ellipsis-h"></i> </button>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group mb-0 mt-2">
+                                                <input [readonly]="codeStatus" type="text" class="form-control"
+                                                    formControlName="desc"
+                                                    [ngClass]="{ 'is-invalid': submitted1 && f1.desc.errors }">
+                                                <div *ngIf="f1.desc.errors" class="invalid-feedback">
+                                                    <div *ngIf="f1.desc.errors.required"> Description is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-6">
+                                        <div class="group-from">
+                                            <h5 class="title">Zone<span class="text-danger">*</span></h5>
+                                            <div class="form-group mb-0">
+                                                <ng-select [items]="zoneData" bindLabel="name" bindValue="id" [virtualScroll]="true" [multiple]="false"
+                                                [clearable]="false" [clearOnBackspace]="false" [clearSearchOnAdd]="true" 
+                                                formControlName="zoneId"
+                                                [ngClass]="{ 'is-invalid': submitted && f.zoneId.errors }">
+                                
+                                                <!-- It hold value on the basis of filter -->
+                                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                                  <div class="form-row">
+                                                    <span class="col-12 zone-overflow" title="{{ item?.name }}">
+                                                      {{ item?.name }}
+                                                    </span>
+                                                  </div>
+                                                </ng-template>
+                                                </ng-select>
+                                                <!-- <select class="form-control" formControlName="zoneId"
+                                                    [ngClass]="{ 'is-invalid': submitted1 && f1.zoneId.errors }">
+                                                    <option [ngValue]="zone.id" *ngFor="let zone of zoneData">
+                                                        {{zone.name}}</option>
+                                                </select> -->
+                                                <div *ngIf="f1.zoneId.errors" class="invalid-feedback">
+                                                    <div *ngIf="f1.zoneId.errors.required"> Zone is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <ng-container *ngIf="messageReferenceType=== 1 ||
+                                            messageReferenceType=== 2 ||
+                                            messageReferenceType=== 3 ||
+                                            messageReferenceType=== 5
+                                            ">
+                                            <div class="group-from">
+                                                <h5 class="title">Display<span class="text-danger">*</span></h5>
+                                                <div class="form-group mb-0">
+                                                    <select class="form-control" formControlName="displayTypeId"
+                                                        [ngClass]="{ 'is-invalid': submitted1 && f1.displayTypeId.errors }">
+                                                        <option [ngValue]="display.id"
+                                                            *ngFor="let display of displayData">{{display.name}}
+                                                        </option>
+                                                    </select>
+                                                    <div *ngIf="f1.displayTypeId.errors" class="invalid-feedback">
+                                                        <div *ngIf="f1.displayTypeId.errors.required"> Display is
+                                                            required</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="messageReferenceType=== 4 ||
+                                                messageReferenceType=== 6 ||
+                                                messageReferenceType=== 7 
+                                                ">
+                                            <div class="group-from">
+                                                <h5 class="title">Display<span class="text-danger">*</span></h5>
+                                                <div class="form-group mb-0">
+                                                    <select class="form-control" formControlName="displayTypeId"
+                                                        [ngClass]="{ 'is-invalid': submitted1 && f1.displayTypeId.errors }"
+                                                        disabled>
+                                                        <option [ngValue]="display.id"
+                                                            *ngFor="let display of displayData">{{display.name}}
+                                                        </option>
+                                                    </select>
+                                                    <div *ngIf="f1.displayTypeId.errors" class="invalid-feedback">
+                                                        <div *ngIf="f1.displayTypeId.errors.required"> Display is
+                                                            required</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="group-from mb-0">
+                                    <h5 class="title">Priority</h5>
+                                    <div class="d-flex flex-wrap">
+                                        <div class="custom-control custom-radio mr-2">
+                                            <input [checked]="posMessagingPriority == 1" name="priority" type="radio"
+                                                class="custom-control-input" id="Monday1" formControlName="priority"
+                                                value="1">
+                                            <label class="custom-control-label" for="Monday1">
+                                                <span class="d-block label-mt-2">1(Warnning)</span>
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio mr-2">
+                                            <input name="priority" type="radio" class="custom-control-input"
+                                                id="Tuesday1" formControlName="priority" value="2">
+                                            <label class="custom-control-label" for="Tuesday1">
+                                                <span class="d-block label-mt-2">2</span>
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio mr-2">
+                                            <input [checked]="posMessagingPriority == 3" name="priority" type="radio"
+                                                class="custom-control-input" id="Wednesday1" formControlName="priority"
+                                                value="3">
+                                            <label class="custom-control-label" for="Wednesday1">
+                                                <span class="d-block label-mt-2">3</span>
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio mr-2">
+                                            <input [checked]="posMessagingPriority == 4" name="priority" type="radio"
+                                                class="custom-control-input" id="Thursday1" formControlName="priority"
+                                                value="4">
+                                            <label class="custom-control-label" for="Thursday1">
+                                                <span class="d-block label-mt-2">4</span>
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio mr-2">
+                                            <input [checked]="posMessagingPriority == 5" name="priority" type="radio"
+                                                class="custom-control-input" id="Sunday1" formControlName="priority"
+                                                value="5">
+                                            <label class="custom-control-label" for="Sunday1">
+                                                <span class="d-block label-mt-2">5</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="d-flex flex-wrap">
+                                        <div class="custom-control custom-radio mr-2">
+                                            <label>
+                                                <input type="radio" [checked]="posMessagingPriority == 1 " formControlName="priority" value=1>1 &nbsp; (Warning)
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio mr-2">
+                                            <label>
+                                                <input type="radio" [checked]="posMessagingPriority == 2"  formControlName="priority" value=2>2
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio mr-2">
+                                            <label>
+                                                <input type="radio" [checked]="posMessagingPriority == 3 " formControlName="priority" value=3>3
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio mr-2">
+                                            <label>
+                                                <input type="radio" [checked]="posMessagingPriority == 4 " formControlName="priority" value=4>4
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-radio mr-2">
+                                            <label>
+                                                <input type="radio" [checked]="posMessagingPriority == 5 "  formControlName="priority" value=5>5
+                                            </label>
+                                        </div>
+                                    </div>  -->
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="group-from">
+                                    <h5 class="title">Date Range</h5>
+                                    <div class="form-row">
+                                        <div class="col-md-6 ">
+                                            <div class="form-row align-items-center mb-0">
+                                                <label class="col-md-4 mb-0">Start Date<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="col-md-8 ">
+                                                    <div class="ctm-calendar">
+                                                        <input onkeydown="return false" type="text" class="form-control"
+                                                            (click)="change(1)" bsDatepicker
+                                                            (bsValueChange)="onDateEditChange($event)"
+                                                            formControlName="dateFrom" [bsConfig]="datepickerConfig"
+                                                            [ngClass]="{ 'is-invalid': submitted1 && f1.dateFrom.errors }" />
+                                                        <div *ngIf="f1.dateFrom.errors" class="invalid-feedback">
+                                                            <div *ngIf="f1.dateFrom.errors.required"> Start Date is
+                                                                required</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <div class="form-row align-items-center mb-0">
+                                                <label class="col-md-4 mb-0">End Date<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="col-md-8 ">
+                                                    <div class="ctm-calendar">
+                                                        <input onkeydown="return false" type="text" class="form-control"
+                                                            bsDatepicker [minDate]="lastEditEndDate"
+                                                            formControlName="dateTo" [bsConfig]="datepickerConfig"
+                                                            [ngClass]="{ 'is-invalid': submitted1 && f1.dateTo.errors }" />
+                                                        <div *ngIf="f1.dateTo.errors" class="invalid-feedback">
+                                                            <div *ngIf="f1.dateTo.errors.required"> End Date is required
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ng-container *ngIf="!hideEditDayParts">
+                                    <div class="group-from">
+
+                                        <h5 class="title">Day Parts</h5>
+                                        <table class="table day-parts-table table-bordered mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <th rowspan="2" class="am-txt">AM</th>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[0] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio1"
+                                                                (click)="setDay($event, 'part1')"><label
+                                                                for="radio1">00-01</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[1] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio2"
+                                                                (click)="setDay($event, 'part2')"><label
+                                                                for="radio2">01-02</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[2] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio3"
+                                                                (click)="setDay($event, 'part3')"><label
+                                                                for="radio3">02-03</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[3] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio4"
+                                                                (click)="setDay($event, 'part4')"><label
+                                                                for="radio4">03-04</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[4] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio5"
+                                                                (click)="setDay($event, 'part5')"><label
+                                                                for="radio5">04-05</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[5] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio6"
+                                                                (click)="setDay($event, 'part6')"><label
+                                                                for="radio6">05-06</label></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[6] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio7"
+                                                                (click)="setDay($event, 'part7')"><label
+                                                                for="radio7">06-07</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[7] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio8"
+                                                                (click)="setDay($event, 'part8')"><label
+                                                                for="radio8">07-08</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[8] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio9"
+                                                                (click)="setDay($event, 'part9')"><label
+                                                                for="radio9">08-09</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[9] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio10"
+                                                                (click)="setDay($event, 'part10')"><label
+                                                                for="radio10">09-10</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[10] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio11"
+                                                                (click)="setDay($event, 'part11')"><label
+                                                                for="radio11">10-11</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[11] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio12"
+                                                                (click)="setDay($event, 'part12')"><label
+                                                                for="radio12">11-12</label></div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="pm-select">
+                                                    <th rowspan="2" class="pm-txt">PM</th>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[12] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio14"
+                                                                (click)="setDay($event, 'part13')"><label
+                                                                for="radio14">12-13</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[13] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio15"
+                                                                (click)="setDay($event, 'part14')"><label
+                                                                for="radio15">13-14</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[14] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio16"
+                                                                (click)="setDay($event, 'part15')"><label
+                                                                for="radio16">14-15</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[15] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio17"
+                                                                (click)="setDay($event, 'part16')"><label
+                                                                for="radio17">15-16</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[16] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio18"
+                                                                (click)="setDay($event, 'part17')"><label
+                                                                for="radio18">16-17</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[17] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio19"
+                                                                (click)="setDay($event, 'part18')"><label
+                                                                for="radio19">17-18</label></div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="pm-select">
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[18] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio20"
+                                                                (click)="setDay($event, 'part19')"><label
+                                                                for="radio20">18-19</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[19] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio21"
+                                                                (click)="setDay($event, 'part20')"><label
+                                                                for="radio21">19-20</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[20] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio22"
+                                                                (click)="setDay($event, 'part21')"><label
+                                                                for="radio22">20-21</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[21] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio23"
+                                                                (click)="setDay($event, 'part22')"><label
+                                                                for="radio23">21-22</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[22] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio24"
+                                                                (click)="setDay($event, 'part23')"><label
+                                                                for="radio24">22-23</label></div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="day-radio"><input
+                                                                [checked]="weekAvailability[23] == 'Y'" type="checkbox"
+                                                                name="day-table" id="radio25"
+                                                                (click)="setDay($event, 'part24')"><label
+                                                                for="radio25">23-24</label></div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </ng-container>
+                                <div class="group-from pt-0 mb-0">
+                                    <div class="apn-navTab">
+                                        <ul class="nav nav-pills mb-2" id="pills-tab1" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="pills-message-tab1" data-toggle="pill"
+                                                    href="#pills-message1" role="tab" aria-controls="pills-message1"
+                                                    aria-selected="true">Message<span class="text-danger">*</span></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="pills-image-tab1" data-toggle="pill"
+                                                    href="#pills-image1" role="tab" aria-controls="pills-image1"
+                                                    aria-selected="false">Image</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="pills-tabContent1">
+                                            <div class="tab-pane fade show active" id="pills-message1" role="tabpanel"
+                                                aria-labelledby="pills-message-tab1">
+                                                <div class="form-group mb-0">
+                                                    <textarea class="form-control" formControlName="posMessage"
+                                                        [ngClass]="{ 'is-invalid': submitted1 && f1.posMessage.errors }"
+                                                        style="height: 80px;"></textarea>
+                                                    <div *ngIf="f1.posMessage.errors" class="invalid-feedback">
+                                                        <div *ngIf="f1.posMessage.errors.required"> Message is required
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-image1" role="tabpanel"
+                                                aria-labelledby="pills-image-tab1">
+
+                                                <div class="form-group">
+                                                    <label for="" class="fontSize-11 mb-0 primaryColor"
+                                                        style="color:#5145cd;"> An image will take precedence over the
+                                                        message</label>
+                                                    <div class="form-row align-items-center form-group">
+                                                        <div class="col-6">
+                                                            <input #input type="file" id="fileUpdateInputId"
+                                                                class="form-control"
+                                                                [ngClass]="{ 'is-invalid': imageError}"
+                                                                (change)="fileChangeEvent($event)" style="display:none">
+                                                            <button type="button" (click)="input.click()"
+                                                                class="btn btn-grey  btn-block input-btn">Choose
+                                                                File</button>
+                                                            <!-- <input type="file" id="fileUpdateInputId" class="form-control"  [ngClass]="{ 'is-invalid': imageError}" (change)="fileChangeEvent($event)" /> -->
+                                                            <div class="invalid-feedback ">
+                                                                <div *ngIf="imageError">{{imageError}}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <button type="button" (click)="closedImageTab()"
+                                                                class="btn d-block w-100 btn-blue input-btn"><i
+                                                                    class="fa fa-close"></i></button>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <ng-container *ngIf="(imageChangedEvent) || (croppedImage)">
+                                                                <img [src]="croppedImage" />
+                                                                <div *ngIf="imageChangedEvent && croppedImage "
+                                                                    class="text-center">
+                                                                    <label class="mt-2 mb-0">Preview</label>
+                                                                </div>
+                                                            </ng-container>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ng-container *ngIf="imageChangedEvent">
+                                                                <image-cropper [imageChangedEvent]="imageChangedEvent"
+                                                                [maintainAspectRatio]="true" [aspectRatio]="4 / 3"
+                                                                format="png" (imageCropped)="imageCropped($event)"
+                                                                (imageLoaded)="imageLoaded()"
+                                                                (loadImageFailed)="loadImageFailed()"></image-cropper>
+                                                            <div *ngIf="imageChangedEvent && !imageError"
+                                                                class="text-center">
+                                                                <label class="mt-2 mb-0 ">Orignal</label>
+                                                            </div>
+                                                            </ng-container>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="group-from">
+                                    <div class="row">
+                                            <div class="col-md-6">
+                                                <img [src]="croppedImage" />
+                                                <div *ngIf="imageChangedEvent && croppedImage " class="text-center">
+                                                    <label class="mt-2 mb-0">Preview</label>
+                                                </div>
+                                           </div>
+                                        <div class="col-md-6">
+                                            <image-cropper
+                                              [imageChangedEvent]="imageChangedEvent"
+                                              [maintainAspectRatio]="true"
+                                              [aspectRatio]="4 / 3"
+                                              format="png"
+                                              (imageCropped)="imageCropped($event)"
+                                              (imageLoaded)="imageLoaded()"
+                                              
+                                              (loadImageFailed)="loadImageFailed()"
+                                            ></image-cropper>
+                                            <div *ngIf="imageChangedEvent && !imageError" class="text-center">
+                                                <label class="mt-2 mb-0 ">Orignal</label>
+                                              </div>
+                                          </div>
+                                         
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button class="btn btn-blue  mr-2">Update</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup bd-example-modal-xl posPopup-size" id="searchProductModal" tabindex="-1" role="dialog"
+    aria-labelledby="searchProductModal" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="ProductSearchForm">
+                        <div class="title-wrap mb-2">
+                            <h4 class="title">Product Lookup</h4>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-6 col-xl-6">
+                                <div class="form-row align-items-center">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <input type="number" [min]="0" placeholder="Number" class="form-control"
+                                                formControlName="number"
+                                                (keyup)="productInputSearchChange('number'); enterKeyboard($event)">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Description"
+                                                formControlName="desc"
+                                                (keyup)="productInputSearchChange('desc') ; enterKeyboard($event)">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <button type="button" id="wildCardSearch" (click)="searchByProductDetails()"
+                                                class="btn btn-blue input-btn btn-block">Wildcard Search</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    formControlName="status" id="customControlStatus"
+                                                    [checked]="searchProductByStatus"
+                                                    (change)="searchProductByStatus(saveUserNameCheckBox.checked)"
+                                                    #saveUserNameCheckBox>
+                                                <label class="custom-control-label mb-0" for="customControlStatus">Only
+                                                    Active</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6">
+                                <div class="form-row align-items-center">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-grey input-btn btn-block">Product
+                                                Details</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <div class="d-flex">
+                                                <select class="form-control" formControlName="outletId"
+                                                    (change)="changeOutlet($event)">
+                                                    <option [ngValue]="null" disabled selected hidden>Select Outlet
+                                                    </option>
+                                                    <option [value]="outlet.id" *ngFor="let outlet of Outletdata">
+                                                        {{outlet.desc + " " + outlet.code }}</option>
+                                                </select>
+                                                <button type="button" class="btn ml-2 btn-grey input-btn"
+                                                    (click)="clearField()">Clear</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="table-scroll searchProductModal-table">
+                            <div class="table-responsive">
+                                <table class="table ctm-table" id="Product-DetailsList"> -->
+                            <div >
+                                <div>
+                                    <table id="Product-DetailsList" class="table ctm-table table-responsive h-340">
+                                    <thead>
+                                        <tr>
+                                            <th>Select</th>
+                                            <th>Status</th>
+                                            <th>Number</th>
+                                            <th>Description</th>
+                                            <th>Comm</th>
+                                            <th>Commodity</th>
+                                            <th>Dep</th>
+                                            <th>Department</th>
+                                            <th>Cat</th>
+                                            <th>Category</th>
+                                            <th>Group</th>
+                                            <th>Group</th>
+                                            <th>Supp</th>
+                                            <th>Supplier</th>
+                                            <th>Type</th>
+                                            <th>Tax</th>
+                                            <th>Ctn Qty</th>
+                                            <th>Sell Unit Qty</th>
+                                            <th>Parent</th>
+                                            <th>Pos Des</th>
+                                            <th>Date Added </th>
+                                            <th>Date Changed</th>
+                                            <th>Date Deleted</th>
+                                            <th>Info</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let product of searchProducts">
+                                            <td>
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" name="product" (click)="setProductObj(product)"
+                                                        class="custom-control-input" id="product_{{product.id}}">
+                                                    <label class="custom-control-label"
+                                                        for="product_{{product.id}}"></label>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="status-check" [ngClass]="{
+                                                'status-true': product.status,
+                                                'status-false': !product.status
+                                                }"></span>
+                                            </td>
+                                            <td>{{product.number}}</td>
+                                            <td>{{product.desc}}</td>
+                                            <td>{{product.commodityCode}}</td>
+                                            <td>{{product.commodity}}</td>
+                                            <td>{{product.departmentCode}}</td>
+                                            <td>{{product.department}}</td>
+                                            <td>{{product.categoryCode}}</td>
+                                            <td>{{product.category}}</td>
+                                            <td>{{product.groupCode}}</td>
+                                            <td>{{product.group}}</td>
+                                            <td>{{product.supplierCode}}</td>
+                                            <td>{{product.supplier}}</td>
+                                            <td>{{product.type}}</td>
+                                            <td>{{product.tax}}</td>
+                                            <td>{{product.cartonQty}}</td>
+                                            <td>{{product.unitQty}}</td>
+                                            <td>{{product.parent}}</td>
+                                            <td>{{product.posDesc}}</td>
+                                            <td>{{product.createdAt | customdatetimeformat }}</td>
+                                            <td>{{product.updatedAt | customdatetimeformat}}</td>
+                                            <td>{{product.deletedAt | customdatetimeformat}}</td>
+                                            <td>{{product.info}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-blue mr-2" (click)="selectProduct()">Select</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup bd-example-modal-xl posPopup-size" id="searchPromotionModal" tabindex="-1"
+    role="dialog" aria-labelledby="searchProductModal" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <div class="title-wrap mb-2">
+                        <h4 class="title">Select Item For Id-Promotion</h4>
+                    </div>
+                    <table class="table ctm-table" id="promotions-table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Select</th>
+                                <th>Status </th>
+                                <th>Promo Code </th>
+                                <th>Promotion Description </th>
+                                <th>Promo Type </th>
+                                <th>Group </th>
+                                <th>Start </th>
+                                <th>End </th>
+                                <th>Out Zone </th>
+                                <th>Mon </th>
+                                <th>Tue </th>
+                                <th>Wed </th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                                <th>Sun</th>
+                                <th>Report Group </th>
+                                <th>Promo Source </th>
+                                <th class="text-center">Date Created </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let promotion of promotions">
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" (click)="setPromotionObj(promotion)" name="promotion"
+                                                class="custom-control-input" id="promotion_{{promotion.id}}">
+                                            <label class="custom-control-label"
+                                                for="promotion_{{promotion.id}}"></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{ promotion.status && promotion.status=== true?"Active":"Inactive"  }}
+                                    </td>
+                                    <td>
+                                        {{ promotion?.code }}
+                                    </td>
+                                    <td>{{ promotion?.desc }}</td>
+                                    <td>{{ promotion?.promotionType }}</td>
+                                    <td>{{ promotion?.rptGroup }}</td>
+                                    <td>{{ promotion?.start | customdatetimeformat }}</td>
+                                    <td>{{ promotion?.end | customdatetimeformat}}</td>
+                                    <td>{{ promotion?.zone }}</td>
+                                    <td>
+                                        {{
+                                      promotion.availibility && promotion.availibility.length
+                                        ? promotion.availibility[1]
+                                        : "N"
+                                    }}
+                                    </td>
+                                    <td>
+                                        {{
+                                      promotion.availibility && promotion.availibility.length
+                                        ? promotion.availibility[2]
+                                        : "N"
+                                    }}
+                                    </td>
+                                    <td>
+                                        {{
+                                      promotion.availibility && promotion.availibility.length
+                                        ? promotion.availibility[3]
+                                        : "N"
+                                    }}
+                                    </td>
+                                    <td>
+                                        {{
+                                      promotion.availibility ? promotion.availibility[4] : "N"
+                                    }}
+                                    </td>
+                                    <td>
+                                        {{
+                                      promotion.availibility && promotion.availibility.length
+                                        ? promotion.availibility[5]
+                                        : "N"
+                                    }}
+                                    </td>
+                                    <td>
+                                        {{
+                                      promotion.availibility && promotion.availibility.length
+                                        ? promotion.availibility[6]
+                                        : "N"
+                                    }}
+                                    </td>
+                                    <td>
+                                        {{
+                                      promotion.availibility && promotion.availibility.length
+                                        ? promotion.availibility[0]
+                                        : "N"
+                                    }}
+                                    </td>
+                                    <td>{{ promotion?.rptGroup }}</td>
+                                    <td>{{ promotion?.source }}</td>
+                                    <td class="text-center">{{promotion?.createdAt | customdatetimeformat}}</td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                    <div class="btn-wrap text-right">
+                        <button type="button" class="btn btn-blue mr-2" (click)="selectPromotion()">Select</button>
+                        <button type="button" class="btn btn-grey" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup bd-example-modal-xl posPopup-size" id="searchCompetitionModal" tabindex="-1"
+    role="dialog" aria-labelledby="searchProductModal" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <div class="title-wrap mb-2">
+                        <h4 class="title">Select Item For Id-Competition</h4>
+                    </div>
+                    <table class="table ctm-table" id="competition-table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Select</th>
+                                <th>Comp </th>
+                                <th>Name </th>
+                                <th>Status</th>
+                                <th>Comp Type </th>
+                                <th>Start </th>
+                                <th>End </th>
+                                <th>Loyalty Factor </th>
+                                <th>Complimentary Discount </th>
+                                <th>Reset Cycle </th>
+                                <th>Trigger Type </th>
+                                <th>Trigger</th>
+                                <th>Trigger Count </th>
+                                <th>Reward Type </th>
+                                <th>Reward </th>
+                                <th>Reward Count </th>
+                                <th>Redemption exp </th>
+                                <th>Force Print</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="competitions?.length">
+                                <tr *ngFor="let competition of competitions">
+                                    <td class="text-center">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" (click)="setCompetitionObj(competition)"
+                                                name="competition" class="custom-control-input"
+                                                id="competition_{{competition.id}}">
+                                            <label class="custom-control-label"
+                                                for="competition_{{competition.id}}"></label>
+                                        </div>
+                                    </td>
+                                    <td>{{competition.code}}</td>
+                                    <td>{{competition.desc}}</td>
+                                    <td>{{competition.status==true ? 'Active' : 'Inactive'}}</td>
+                                    <td>{{competition.competitionTypeDesc}}</td>
+                                    <td>{{competition.start | customdatetimeformat}}</td>
+                                    <td>{{competition.end | customdatetimeformat }}</td>
+
+                                    <td>{{competition.loyaltyFactor}}</td>
+                                    <td>{{competition.complDiscount}}</td>
+                                    <td>{{competition.resetCycleDesc}}</td>
+                                    <td>{{competition.triggerTypeDesc}}</td>
+                                    <td>{{competition.activationPoints}}</td>
+
+                                    <td>1</td>
+                                    <td>{{competition.rewardTypeDesc}}</td>
+                                    <td>{{competition.discount}}</td>
+
+                                    <td>1</td>
+
+                                    <td>{{competition.rewardExpiration ? competition.rewardExpiration : '0'}}</td>
+                                    <td>{{competition.forcePrint == true ? '1' : '0'}}</td>
+                                </tr>
+                            </ng-container>
+
+                        </tbody>
+                    </table>
+                    <div class="btn-wrap text-right mt-10">
+                        <button type="button" class="btn btn-blue mr-2" (click)="selectCompetition()">Select</button>
+                        <button type="button" class="btn btn-grey" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup bd-example-modal-xl" id="searchCommodityModal" tabindex="-1" role="dialog"
+    aria-labelledby="searchProductModal" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <div class="title-wrap mb-2">
+                        <h4 class="title">Select Item For Id-Commodity</h4>
+                    </div>
+                    <table class="table ctm-table" id="commodities-table" width="100%">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Select</th>
+                                <th>Status </th>
+                                <th>Code </th>
+                                <th>Description </th>
+                                <th>Cover Days </th>
+                                <th class="text-center"> Map Dept </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let commodity of commodities">
+                                <td class="text-center">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" (click)="setCommodityObj(commodity)" name="commodity"
+                                            class="custom-control-input" id="commodity_{{commodity.id}}">
+                                        <label class="custom-control-label" for="commodity_{{commodity.id}}"></label>
+                                    </div>
+                                </td>
+                                <td>{{commodity.status==true ? 'Active' : 'Inactive'}}</td>
+                                <td>{{commodity.code.length > 10? commodity.code.substring(0,10)+"..." :commodity.code}}
+                                </td>
+                                <td>{{commodity.desc.length > 30? commodity.desc.substring(0,30)+"..." :commodity.desc}}
+                                </td>
+                                <td>{{commodity.coverDays}}</td>
+                                <td class="text-center">{{commodity.departmentId}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <div class="btn-wrap text-right mt-10">
+                        <button type="button" class="btn btn-blue mr-2" (click)="selectCommodity()">Select</button>
+                        <button type="button" class="btn btn-grey" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup" id="popMessagingSearch" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form name="searchForm" id="searchForm">
+                        <div class="title-wrap mb-2">
+                            <h4 class="title"> Search Filter </h4>
+                        </div>
+                        <div class="form-group mb-0">
+                            <label> Wildcard Search</label>
+                            <input type="text" id="popMessaging_Search_filter" class="form-control" #searchValue>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button class="btn btn-blue mr-2" (click)="getPopMessagingData(searchValue)">Ok</button>
+                            <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="modal fade thm-popup bd-example-modal-xl" id="searchCommodityModal" tabindex="-1" role="dialog" aria-labelledby="searchProductModal" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">               
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                     <div class="title-wrap mb-2">
+                        <h4 class="title">Select Item For Id-Commodity</h4>
+                     </div>
+                     <table class="table ctm-table" id="commodities-table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Select</th>
+                                <th>Status </th>
+                                <th>Code </th>
+                                <th>Description </th>
+                                <th>Cover Days </th>
+                                <th class="text-center"> Map Dept </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="commodities?.length">
+                                <tr *ngFor="let commodity of commodities"> 
+                                    <td class="text-center">     
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" (click)="setCommodityObj(commodity)"  name="commodity"  class="custom-control-input" id="commodity_{{commodity.id}}"> 
+                                           <label class="custom-control-label" for="commodity_{{commodity.id}}"></label>
+                                        </div> 
+                                    </td>
+                                    <td>{{commodity.status==true ? 'Active' : 'Inactive'}}</td>
+                                       <td >{{commodity.code.length > 10? commodity.code.substring(0,10)+"..." :commodity.code}}</td>
+                                       <td >{{commodity.desc.length > 30? commodity.desc.substring(0,30)+"..." :commodity.desc}}</td>
+                                       <td >{{commodity.coverDays}}</td>
+                                       <td class="text-center">{{commodity.departmentId}}</td>
+                                </tr>  
+                            </ng-container>
+                                                     
+                        </tbody>
+                    </table>
+                     <div class="btn-wrap text-right mt-10">          
+                        <button  type="button" class="btn btn-blue mr-2" (click)="selectCommodity()">Select</button>
+                        <button type="button" class="btn btn-grey"  data-dismiss="modal">Close</button>
+                     </div>
+                </div>                    
+            </div>
+        </div>
+    </div>
+</div>  -->

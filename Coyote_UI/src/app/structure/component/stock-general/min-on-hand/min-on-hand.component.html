@@ -1,0 +1,159 @@
+<!-- <div class="mainContent-innner">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">Set Min on Hand Qty</h4>
+            <div class="probtn-wrap d-flex text-right">
+                <button class="btn btn-blue" data-toggle="modal" data-target="#onHand" (click)="clickedOnHand()">on Hand</button>
+            </div>
+        </div>
+     <div class="bg-box mt-15">
+            
+     </div>
+</div> -->
+<div class="modal fade bd-example-modal-md thm-popup" id="onHand" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="SetMinOnHandForm" (ngSubmit)="submitSetMinOnHandForm()">
+                        <div class="title-wrap mb-2">
+                            <h4 class="title">Update Minimum On Hand</h4>
+                        </div>
+                        <div class="pb-2">
+                            <h5 class="title mb-0">Host: {{loginUserData?.dataSource}}</h5>
+                        </div>
+                        <div class="group-from">
+                            <h5 class="title">Outlet</h5>
+                            <div class="form-row form-group  mb-0 align-items-center">
+                                <div class="col-2">
+                                    <label for="" class="mb-0">Outlet</label>
+                                </div>
+                                <div class="col-10">
+                                    <div class="form-row align-items-center">
+                                        <div class="col-9"> 
+                                            <ng-select
+                                            [items]="outletList"
+                                            bindLabel="desc"
+                                            bindValue="id"
+                                            formControlName="outletId"
+                                            [virtualScroll]="false"
+                                            [clearable]="false"
+                                            [clearOnBackspace]="false"
+                                            [searchable]="true"
+                                            [multiple]="false"
+                                            [ngClass]="{ 'is-invalid': submitted && f.outletId.errors }"
+                                          >
+                                            <ng-template
+                                              ng-option-tmp
+                                              let-item="item"
+                                              let-item$="item$"
+                                              let-index="index"
+                                            >
+                                              <div class="form-row">
+                                                <span
+                                                  class="col-9 zone-overflow"
+                                                  title="{{ item.desc }}"
+                                                >
+                                                  {{ item.desc }}
+                                                </span>
+                                              </div>
+                                            </ng-template>
+                                            </ng-select> 
+                                            <!-- <select  class="form-control" name="outletId" formControlName="outletId" [ngClass]="{ 'is-invalid': submitted && f.outletId.errors }" >
+                                                <option [ngValue]="outlet.id" *ngFor="let outlet of outletList">{{outlet.desc}}</option>
+                                            </select> -->
+                                            <div *ngIf="f.outletId.errors" class="invalid-feedback">
+                                                <div *ngIf="f.outletId.errors.required"> Outlet is required</div>
+                                            </div> 
+                                        </div>
+                                        <div class="col-3">
+                                            <button type="button" class="btn btn-grey input-btn btn-block" (click)="clearOutlet()">Clear</button>
+                                        </div>
+                                    </div>                                        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row form-group align-items-center">
+                            <div class="col-3">
+                                <label for="" class="mb-0">Days History</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="number" class="form-control" name="daysHist" formControlName="daysHist"  [ngClass]="{ 'is-invalid': submitted && f.daysHist.errors }" >  
+                                <div *ngIf="f.daysHist.errors" class="invalid-feedback">
+                                    <div *ngIf="f.daysHist.errors.required"> Days History is required</div>
+                                </div>                                      
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" id="Promo" class="custom-control-input"  name="excludePromo" formControlName="excludePromo"   checked>
+                                <label for="Promo" class="custom-control-label mb-0">
+                                   <span class="d-block label-mt-2">Exclude Promo Sales when calcing Avg Day Usage</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-row form-group align-items-center">
+                            <div class="col-3">
+                                <label for="" class="mb-0">Only Dept No</label>
+                            </div>
+                            <div class="col-9">
+                                <div class="form-row align-items-center">
+                                    <div class="col-9">
+                                        <ng-select
+                                            [items]="departmentList"
+                                            bindLabel="desc"
+                                            bindValue="id"
+                                            formControlName="departmentId"
+                                            [virtualScroll]="false"
+                                            [clearable]="false"
+                                            [clearOnBackspace]="false"
+                                            [searchable]="true"
+                                            [multiple]="false"
+                                            [ngClass]="{ 'is-invalid': submitted && f.departmentId.errors }"
+                                          >
+                                            <ng-template
+                                              ng-option-tmp
+                                              let-item="item"
+                                              let-item$="item$"
+                                              let-index="index"
+                                            >
+                                              <div class="form-row">
+                                                <span
+                                                  class="col-9 zone-overflow"
+                                                  title="{{ item.desc }}"
+                                                >
+                                                  {{ item.desc }}&nbsp;&nbsp;({{item.code}})
+                                                </span>
+                                              </div>
+                                            </ng-template>
+                                            </ng-select> 
+                                        <!-- <select class="form-control" name="departmentId" formControlName="departmentId" [ngClass]="{ 'is-invalid': submitted && f.departmentId.errors }" >
+                                            <option [ngValue]="department.id" *ngFor="let department of departmentList">{{department.desc}}&nbsp;({{department.code}})</option>
+                                        </select> -->
+                                        <div *ngIf="f.departmentId.errors" class="invalid-feedback">
+                                            <div *ngIf="f.departmentId.errors.required"> Only Dept No is required</div>
+                                        </div> 
+                                    </div>
+                                    <div class="col-3">
+                                        <button type="button" class="btn btn-grey input-btn btn-block"  (click)="clearDepartment()">Clear</button>
+                                    </div>
+                                </div>                                        
+                            </div>
+                        </div>
+                        <div class="form-group mb-0 ">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" id="overwrite" class="custom-control-input" name="leaveExisting" formControlName="leaveExisting"  checked>
+                                <label for="overwrite" class="custom-control-label mb-0">
+                                   <span class="d-block label-mt-2">Do not overwrite Existing Min OnHand If it exists</span>
+                                </label>
+                            </div>
+                        </div>      
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="submit"  class="btn btn-blue mr-2">Apply</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>                    
+            </div>
+        </div>
+    </div>
+</div>

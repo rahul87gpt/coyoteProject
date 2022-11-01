@@ -1,0 +1,97 @@
+<div class="mainContent-innner">
+   <div class="stpUsers-wrap">
+      <div class="d-flex align-items-center">
+         <h4 class="title flex-grow-1 mb-0">User Activity</h4>
+         <div class="probtn-wrap text-right">
+            <!-- <a class="btn btn-blue with-icon mr-2" ><i class="icon fa fa-plus-circle"></i>View</a> -->
+            <button class="btn with-icon mr-2"><i class="icon fa fa-print"></i> Print</button>
+            <button class="btn with-icon mr-2" (click)="exportData()"><i class="icon fa fa-file-excel-o"></i>
+               Export</button>
+            <button class="btn btn-blue with-icon " data-toggle="modal" data-target="#userActivitySearch" (click)="openUserActivitySearchFilter()"><i
+                  class="icon fa fa-file-excel-o"></i>Filter</button>
+         </div>
+      </div>
+
+      <div class="userActivity-wrap bg-box mt-15">
+         <div class="userActivity-wrap all-w">
+            <div class="table-responsive">
+               <table class="table ctm-table " id="userActivity-table">
+                  <thead>
+                     <tr>
+                        <th>User</th>
+                        <th>User Name </th>
+                        <th>Outlet</th>
+                        <th>Product </th>
+                        <th>Activity</th>
+                        <th>Description
+                        </th>
+                        <th>Date </th>
+                        <th>Timestamp</th>
+                        <th>AccessGroup
+                        </th>
+                        <th>Version</th>
+                        <th class="text-center">Action</th>
+                        <!-- <th></th> -->
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr *ngFor="let user of userActivityList">
+                        <td><a (click)="viewUserActivity(user.productId)">
+                              {{user.userName}}
+                           </a></td>
+                        <td> {{user.userFullName}}</td>
+                        <td>{{user.storeIds}}</td>
+                        <td>{{user.productNumber}}</td>
+                        <td>{{user.activity}}</td>
+                        <td>{{user.module}}</td>
+                        <td><span style="display: none;"> {{ConvertDateToMiliSeconds(user?.actionAt)}}
+                           </span>{{user?.actionAt | customdatetimeformat}}</td>
+                        <td><span style="display: none;"> {{ConvertDateToMiliSeconds(user?.actionAt)}}
+                           </span>{{user?.actionAt | dateTimeFormate}}</td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-center">
+                           <div class="tbHover-btnGroup">
+                              <a tooltip="View" placement="left" (click)="viewUserActivity(user.productId)"
+                                 class="tbHover-btn btn-blue trash-btn"><i class="fa fa-eye"></i></a>
+
+                           </div>
+                        </td>
+                        <!-- <td>
+                           <select class="form-control">
+                            <option *ngFor="let store of user">{{store.storeIds}}</option> 
+                           </select>
+                        </td> -->
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade thm-popup" id="userActivitySearch" tabindex="-1" role="dialog"
+   aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-body popup-box-width">
+            <div class="popup-box">
+               <form name="searchForm" id="searchForm">
+                  <div class="title-wrap mb-2">
+                     <h4 class="title"> Search Filter </h4>
+                  </div>
+                  <div class="form-group mb-0">
+                     <label>Wildcard Search</label>
+                     <input type="text" id="userActivity_Search_filter" appUppercase class="form-control" #searchValue>
+                  </div>
+                  <div class="btn-wrap text-right mt-10">
+                     <button class="btn btn-blue mr-2" (click)="serachUserActivity(searchValue)"
+                        [disabled]="checkifSaveEnabled()">Ok</button>
+                     <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

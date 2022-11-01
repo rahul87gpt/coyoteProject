@@ -1,0 +1,88 @@
+<div class="modal fade bd-example-modal-md thm-popup" id="hostProcessing" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="title mb-0 w-100"><span class="title-left">Coyote Host Process</span><span
+                        class="title-right"><a data-dismiss="modal" class=""><i class="fa fa-close"></i></a></span>
+                </h4>
+            </div>
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form>
+                        <div class="title-wrap mb-1">
+                            <h4 class="title mb-0">Sandbox</h4>
+                        </div>
+                        <div class="group-from">
+
+                            <div class="form-group">
+                                <div class="row align-items-center">
+                                    <div class="col-md-3">
+                                        <select class="form-control">
+                                            <option value="WEEKLY">WEEKLY</option>
+                                            <option value="INITIAL LOAD">INITIAL LOAD</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="d-flex align-items-center justify-content-center"><input
+                                                type="checkbox">&nbsp;Assume all
+                                            products HoldGP%</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="d-flex align-items-center">
+                                            <label>Week No:</label>
+                                            <input type="text" class="form-control" value="{{weekNumber}}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="group-from hostprocessing-table mb-2">
+                            <div class="form-group">
+                                <label class="d-flex align-items-center"><input type="checkbox"
+                                        (click)="selectItem($event.target.checked)">&nbsp;CNQ - CAMPBELLS -
+                                    CASH & CARRY</label>
+                                <label class="d-flex align-items-center"><input type="checkbox">&nbsp;CNQ - CAMPBELLS -
+                                    CASH & CARRY</label>
+                                <label class="d-flex align-items-center"><input type="checkbox">&nbsp;CNQ - CAMPBELLS -
+                                    CASH & CARRY</label>
+                                <label class="d-flex align-items-center"><input type="checkbox">&nbsp;CNQ - CAMPBELLS -
+                                    CASH & CARRY</label>
+                                <label class="d-flex align-items-center"><input type="checkbox">&nbsp;CNQ - CAMPBELLS -
+                                    CASH & CARRY</label>
+                                <label class="d-flex align-items-center"><input type="checkbox">&nbsp;CNQ - CAMPBELLS -
+                                    CASH & CARRY</label>
+                                <label class="d-flex align-items-center"><input type="checkbox">&nbsp;CNQ - CAMPBELLS -
+                                    CASH & CARRY</label>
+                                <label class="d-flex align-items-center"><input type="checkbox">&nbsp;CNQ - CAMPBELLS -
+                                    CASH & CARRY</label>
+                                <label class="d-flex align-items-center"><input type="checkbox">&nbsp;CNQ - CAMPBELLS -
+                                    CASH & CARRY</label>
+                                <label class="d-flex align-items-center"><input type="checkbox">&nbsp;CNQ - CAMPBELLS -
+                                    CASH & CARRY</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 ml-auto">
+                                <p class="time-text">Start-Time:</p>
+                                <p class="time-text">End-Time:</p>
+                            </div>
+                        </div>
+
+                        <div class="btn-wrap mt-2 pt-2">
+
+                            <span class="float-right">
+                                <ng-container *ngIf="itemSelected">
+                                    <button class="btn btn-blue mr-2">Process</button>
+                                </ng-container>
+                                <a data-dismiss="modal" class="btn btn-grey">Exit</a>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

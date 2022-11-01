@@ -1,0 +1,94 @@
+<div class="mainContent-innner">
+    <div class="addMaster-section">
+
+        <div class="action-topbar d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">Add Warehouse <span class="bdms"><a href="#">Accounts</a> | <a href="#">Code</a> | <span class="current">Add Warehouse</span></span></h4>
+            <div class="probtn-wrap text-right">
+                <!-- <button class="btn btn-blue with-icon mr-2"><i class="icon fa fa-floppy-o"></i> Save</button>
+                <button class="btn with-icon mr-2" [routerLink]="['/warehouses']">Cancel</button> -->
+            </div>
+        </div>
+
+        <div class="addMaster-wrap mt-4">
+            <div class="popup-box">
+                
+                <form [formGroup]="warehouseForm" (ngSubmit)="onSubmit()">
+                    
+                    <div class="title-wrap mb-1">
+                        <h4 class="title">Add Warehouse</h4>
+                    </div>
+                    
+                    <div class="form-group form-row align-items-center">
+                        <label class="col-md-3 mb-0">Code <span class="text-danger">*</span></label>
+                        <div class="col-md-9">
+                            <input [readonly]="formCode" (keypress)="omit_specialChar($event)" type="text" class="form-control" formControlName="code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }" >
+                            <div *ngIf="f.code.errors" class="invalid-feedback">
+                                <div *ngIf="f.code.errors.required"> Code is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group form-row align-items-center">
+                        <label class="col-md-3 mb-0">Description <span class="text-danger">*</span></label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" formControlName="desc" [ngClass]="{ 'is-invalid': submitted && f.desc.errors }" >
+                            <div *ngIf="f.desc.errors" class="invalid-feedback">
+                                <div *ngIf="f.desc.errors.required"> Description is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group form-row align-items-center">
+                        <label class="col-md-3 mb-0">Host Format <span class="text-danger">*</span></label>
+                        <div class="col-md-9">
+                            <select class="form-control mr-10 h-30" name="hostFormatId" 
+								[ngClass]="{ 'is-invalid': submitted && f.hostFormatId.errors }"
+								formControlName="hostFormatId">
+								<option [ngValue]="hostFormat.id" *ngFor="let hostFormat of hostFormats">
+									{{ hostFormat.name }}
+								</option>
+							</select>
+							<div *ngIf="f.hostFormatId.errors" class="invalid-feedback">
+                                <div *ngIf="f.hostFormatId.errors.required"> It is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group form-row align-items-center">
+                        <label class="col-md-3 mb-0">Suppliers <span class="text-danger">*</span></label>
+                        <div class="col-md-9">
+                            <select class="form-control mr-10 h-30" name="supplierId" 
+								[ngClass]="{ 'is-invalid': submitted && f.supplierId.errors }"
+								formControlName="supplierId">
+									<option [ngValue]="supplier.id" *ngFor="let supplier of suppliers">
+										{{ supplier.code + ' ' + supplier.desc }}
+									</option>
+							</select>
+							<div *ngIf="f.supplierId.errors" class="invalid-feedback">
+                                <div *ngIf="f.supplierId.errors.required"> Supplier is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group form-row align-items-center">
+                        <label class="col-md-3 mb-0">Status <span class="text-danger">*</span></label>
+                        <div class="col-md-9">
+                            <select class="form-control mr-10 h-30" formControlName="status">
+                                <option value="true">Active</option>
+                                <option value="false">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-wrap text-right mt-10">
+                        <button class="btn btn-blue mr-2">{{buttonText}}</button>
+                        <button class="btn btn-grey" [routerLink]="['/warehouses']">Cancel</button>
+                    </div>
+                    
+                </form>
+                
+            </div>
+        </div>
+        <!-- /.UserStoreGroup-wrap -->
+    </div>
+</div>

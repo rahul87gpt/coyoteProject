@@ -1,0 +1,64 @@
+   /* You can add global styles to this file, and also import other style files */
+@import "assets/css/font-awesome.min.css";
+@import "assets/css/custom-grid.css";
+@import "assets/css/custom-style.css";
+@import "assets/css/responsive.css";
+@import "~angular-notifier/styles";
+// @import "assets/css/style-default.css";
+ table.ctm-table.dataTable.UserStoreGroup-table tbody tr:last-child{
+   border-bottom: none;
+}
+
+.ctm-input{
+   .multiselect-dropdown {
+     .dropdown-btn{
+        border-color: #eff2f7 !important;
+        background-image: url('assets/images/select-arrow-icon.png')!important;
+        background-repeat: no-repeat;
+        background-size: 19px;
+        background-position: right center;
+     }
+     .dropdown-down,
+     .dropdown-up{
+        border: none!important;
+     }
+   }
+  }
+  .ctm-input label{
+     z-index: 1;
+  }
+  .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+   font-size: 12px;
+   padding: 6px 10px;
+   text-transform: capitalize;
+  }
+ table.ctm-table.dataTable {
+    tr{
+       td,
+       th{
+         border-bottom: 1px solid #eff2f7;
+      }
+      &:last-child{
+         border-bottom: none;
+      }
+    }
+ }
+ .dt-buttons.btn-group{
+   display: none !important;
+}
+
+/* Append by VS, remmove spin from input number tag in Add Product screen */
+input[type="number"] {
+   -moz-appearance: textfield;
+}
+// input[type="number"]::-webkit-inner-spin-button, 
+// input[type="number"]::-webkit-outer-spin-button { 
+//    -webkit-appearance: none; 
+//    margin: 0; 
+// }
+
+/*************** ng-value labe special css start *********/
+.ng-value-label {font-size: 11px;}
+/*************** ng-value labe special css end *********/
+
+

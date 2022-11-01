@@ -1,0 +1,182 @@
+<div class="mainContent-innner">
+    <div class="addmasterList-section">
+       <div class="d-flex align-items-center">
+         <h4 class="title flex-grow-1 mb-0">Master List Items</h4>
+          <!-- <h4 class="title flex-grow-1 mb-0">Masters <span class="bdms"><a href="#">Accounts</a> | <a href="#">Code</a> | <span class="current">Masters</span></span></h4> -->
+          <div class="probtn-wrap text-right">
+             <a class="btn btn-blue with-icon mr-2" (click)="clickedAdd()" ><i class="icon fa fa-plus-circle"></i> Add</a>
+             <button class="btn with-icon mr-2"><i class="icon fa fa-print"></i> Print</button>
+             <button class="btn with-icon" (click)="exportMasterListItemData()"><i class="icon fa fa-file-excel-o"></i> Export</button>
+          </div>
+       </div>
+
+       <div class="addmasterList-wrap bg-box mt-15">           
+         <div class="row mb-10">
+            <div class="col-md-5">
+               <div class="form-row align-items-center">
+                  <label class="col-5 mb-0">Filter Master Item List</label>
+                  <div class="col-7">
+                  <select class="form-control" (change)="setMaterItemCode($event)" [(ngModel)]="masterItemCode.itemCode" #itemCode="ngModel" name="itemCode">
+                     <option *ngFor="let listItems of masterList" [value]="listItems.code">{{listItems.name}}</option>
+                  </select>
+                  </div>
+               </div>
+            </div>
+         </div>
+             <div class="table-responsive ctm-data-table">
+                <div class="table-responsive ">
+             <table class="table ctm-table addmasterList-table" id="masterList-table">
+                <thead>
+                   <!-- <tr>
+                     <th class="text-center">Status <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                      <th class="text-center">Code <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                      <th class="text-center">Name/ Description <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                      <th class="text-center">Action</th>
+                   </tr> -->
+
+                   <tr>
+                     <ng-container *ngFor="let column of masterListColumns">
+                        <th class="text-center">{{column}}</th>
+                     </ng-container>
+                   </tr>
+
+                </thead>
+                <tbody>
+                   <tr *ngFor="let masterListItem of masterListItems">
+                     <td class="text-center">
+                        <span class="status-check" [ngClass]="masterListItem.status ? 'status-true' : 'status-false'"></span>
+                     </td>
+                      <td class="text-center">{{masterListItem.code.length > 10 ? masterListItem.name.substring(0,10)+"..." : masterListItem.code}}</td>
+                      <td class="text-center">{{masterListItem.name.length > 30 ? masterListItem.name.substring(0,30)+"..." : masterListItem.name}}</td>                      
+                       <!-- <ng-container *ngIf="!hideButtons"> -->
+                        <td class="text-center">
+                           <div class="tbHover-btnGroup text-center">
+                              <button tooltip="Change" placement="left" class="tbHover-btn trash-btn" (click)="getMasterListItemById(postCode,masterListItem.id)"><i class="fa fa-pencil"></i></button>
+                              <button tooltip="Delete" placement="left" class="tbHover-btn trash-btn" (click)="deleteMasterListItem(postCode, masterListItem.id)"><i class="fa fa-trash"></i></button>
+                           </div>
+                        </td>
+                     <!-- </ng-container> -->
+                   </tr>
+                </tbody>
+             </table>
+             <span *ngIf="!masterListItems?.length">No record found in this list!</span> 
+          </div>
+       </div>
+    </div>
+ </div>
+
+ <div class="modal fade thm-popup bd-example-modal-md" id="addModal" tabindex="-1" role="dialog" aria-labelledby="SearchFilter" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+		<div class="modal-content">               
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+               <form [formGroup]="masterListItemAddForm" (ngSubmit)="SubmitmasterListItemAddForm()">
+                  <div class="addMaster-section">
+                     <div class="addMaster-wrap">
+                        <div class="popup-box">
+                              <div class="title-wrap mb-1">
+                                 <h4 class="title">Add</h4>
+                              </div>
+                              <div class="form-group">
+                                 <label>Select Master Item List <span class="text-danger">*</span></label>
+                                 <select class="form-control" formControlName="listId" (change)="setMaterItemName($event)" [ngClass]="{ 'is-invalid': submitted && f.listId.errors }">
+                                    <option *ngFor="let listItems of masterList" [value]="listItems.id">{{listItems.name}}</option>
+                                 </select>
+                                 <div *ngIf="f.listId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.listId.errors.required">Please select one of the option</div>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label>Code <span class="text-danger">*</span></label>
+                                 <input  type="text" class="form-control" formControlName="code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
+                                 <div *ngIf="f.code.errors" class="invalid-feedback">
+                                    <div *ngIf="f.code.errors.maxlength"> Code Should be maximum 30 characters </div>
+                                    <div *ngIf="f.code.errors.required">Code is required</div>
+                                    <div *ngIf="f.code.errors.pattern">Space is not allowed</div>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label>Name/ Description <span class="text-danger">*</span></label>
+                                 <input type="text" class="form-control" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                                 <div *ngIf="f.name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.name.errors.maxlength"> Name Should be maximum 80 characters </div>
+                                    <div *ngIf="f.name.errors.required">Name is required</div>
+                                 </div>
+                              </div>
+                              <div class="form-group mb-0">
+                                 <label>Status <span class="text-danger">*</span></label>
+                                 <select class="form-control" formControlName="status">
+                                    <option value="true">Active</option>
+                                    <option value="false">Inactive</option>
+                                 </select>
+                              </div>
+                              <div class="btn-wrap text-right mt-10">
+                                 <button class="btn btn-blue mr-2"> Save</button>
+                                 <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                              </div>
+                        </div>
+                     </div>
+                  </div>
+               </form>
+				</div>                    
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade thm-popup bd-example-modal-md" id="editModal" tabindex="-1" role="dialog" aria-labelledby="SearchFilter" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+		<div class="modal-content">               
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+               <form [formGroup]="masterListItemEditForm" #savemasterListItemEditForm="ngForm"  (ngSubmit)="SubmitmasterListItemEditForm()">
+                  <div class="addMaster-section">
+                     <div class="addMaster-wrap">
+                        <div class="popup-box">
+                              <div class="title-wrap mb-1">
+                                 <h4 class="title">Update</h4>
+                              </div>
+                              <div class="form-group">
+                                 <label>Select Master Item List <span class="text-danger">*</span></label>
+                                 <select class="form-control" formControlName="listId" (change)="setMaterItemName($event)" [ngClass]="{ 'is-invalid': editsubmitted && f1.listId.errors }">
+                                    <option *ngFor="let listItems of masterList" [value]="listItems.id">{{listItems.name}}</option>
+                                 </select>
+                                 <div *ngIf="f1.listId.errors" class="invalid-feedback">
+                                    <div *ngIf="f1.listId.errors.required">Please select one of the option</div>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label>Code <span class="text-danger">*</span></label>
+                                 <input [readonly]="codeStatus" type="text" class="form-control" formControlName="code" [ngClass]="{ 'is-invalid': editsubmitted && f1.code.errors }">
+                                 <div *ngIf="f1.code.errors" class="invalid-feedback">
+                                    <div *ngIf="f1.code.errors.required">Code is required</div>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label>Name/ Description <span class="text-danger">*</span></label>
+                                 <input type="text" class="form-control" formControlName="name" [ngClass]="{ 'is-invalid': editsubmitted && f1.name.errors }">
+                                 <div *ngIf="f1.name.errors" class="invalid-feedback">
+                                    <div *ngIf="f1.name.errors.maxlength"> Name Should be maximum 80 characters </div>
+                                    <div *ngIf="f1.name.errors.required">Name is required</div>
+                                 </div>
+                              </div>
+                              <div class="form-group mb-0">
+                                 <label>Status <span class="text-danger">*</span></label>
+                                 <select class="form-control" formControlName="status">
+                                    <option value="true">Active</option>
+                                    <option value="false">Inactive</option>
+                                 </select>
+                              </div>
+                              <div class="btn-wrap text-right mt-10">
+                                 <button class="btn btn-blue mr-2"> Save</button>
+                                 <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                              </div>
+                        </div>
+                     </div>
+                  </div>
+               </form>
+				</div>                    
+			</div>
+		</div>
+	</div>
+</div>

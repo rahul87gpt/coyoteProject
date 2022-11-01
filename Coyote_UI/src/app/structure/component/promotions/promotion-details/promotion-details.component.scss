@@ -1,0 +1,47 @@
+.title-btn {
+    color: #000;
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    float: left;
+    margin-left: 0px;
+    width: 100%;
+    text-align: left;
+}
+
+    .max-btn a{
+        font-size: 11px;
+        float: left;
+        margin: 0 !important;
+    }
+// / Chrome, Safari, Edge, Opera /
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+// / Firefox /
+input[type=number] {
+-moz-appearance: textfield;
+}
+
+.red {
+    border: 1px solid red;
+}
+.promo-header .col-md-3{
+    min-width: 111px;
+}
+.promo-header .col-md-9 {
+    max-width: calc(100% - 111px);
+}
+.promo-header .col-md-9 select.mix-w{
+    font-size: 10px;
+    padding:0 5px;
+}
+.date-rangeW .col-md-4{
+    min-width: 70px;
+}
+.date-rangeW .col-md-8 {
+    max-width: calc(100% - 70px);
+}

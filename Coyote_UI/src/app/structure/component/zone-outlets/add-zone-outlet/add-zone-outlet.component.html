@@ -1,0 +1,120 @@
+<div class="mainContent-innner">
+    <div class="zoneOutlets-section">
+        <!-- <input type="text" (input)="onSearchChange($event.target.value)"> -->
+        <form [formGroup]="zoneForm" (ngSubmit)="onSubmit()">
+            <div class="d-flex align-items-center">
+                <h4 class="title flex-grow-1 mb-0">Add Zone Outlet</h4>
+                <div class="probtn-wrap text-right">
+                    <button class="btn btn-blue mr-2">{{zoneId ? "Update":"Save"}}</button>
+                    <button class="btn" [routerLink]="['/zone-outlets']">Cancel</button>
+                </div>
+            </div>
+            <div class="zoneOutlets-wrap bg-box mt-15">
+                <div class="zoneOutlets-form">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group form-group form-row align-items-center">
+                                <label class="col-md-4 mb-0">Zone <span class="text-danger">*</span></label>
+                                <div class="col-md-8">
+                                    <select class="form-control mr-10 h-30" name="zoneId" [ngClass]="{ 'is-invalid': submitted && f.zoneId.errors }" formControlName="zoneId" (change)="selectZone()">
+                                        <option *ngFor="let zone of zones" [ngValue]="zone.id || zone.zoneId">
+                                            {{ zone.name || zone.zoneName }}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="f.zoneId.errors" class="invalid-feedback">
+                                        <div *ngIf="f.zoneId.errors.required">Zone is required</div>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="zoneOutlets-checklist border">
+                        <div class="row">
+                            <ng-container *ngFor="let store of storeList">
+                                <div class="ctmCheckbox-wrap">
+                                    <div class="custom-control custom-checkbox">
+                                        <ng-container *ngIf="store.isSelected">
+                                            {{setUnsetStoreIds(store.storeId, 'exiting')}}
+                                        </ng-container>
+                                        <input  [checked]="store.isSelected" type="checkbox" class="custom-control-input" 
+                                            id="{{store.id || store.storeId}}"
+                                            (click)="setUnsetStoreIds((store.id || store.storeId), 'updated', $event);"
+                                        >
+                                        <label class="custom-control-label" for="{{store.id || store.storeId}}"> {{store.desc || store.storeName}} {{" " + store ? store.code || store.storeCode : '' }}</label>
+                                    </div>
+                                </div>
+                            </ng-container>                            
+                        </div>
+                        <!-- <div class="form-row form-group mb-0">
+                            <div class="col-lg-3">
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mb-0"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mb-0"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mb-0"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mb-0"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mbs-5"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                                <div class="custom-control custom-checkbox mb-0"><input type="checkbox" class="custom-control-input" id="5"><label class="custom-control-label mb-0" for="5">ENOGGERA</label></div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

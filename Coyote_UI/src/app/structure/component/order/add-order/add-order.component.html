@@ -1,0 +1,1331 @@
+<ng-container *ngIf="pdfData else orderFormPage">
+    <div class="bg-box">
+        <div class="text-right mb-2">
+            <button type="button" class="btn btn-blue" (click)="reportClose()">Close</button>
+        </div>
+        <ngx-extended-pdf-viewer [src]="pdfData" [height]="'90vh'" [zoom]="'page-width'" [useBrowserLocale]="true"
+            [textLayer]="true" [showHandToolButton]="true"></ngx-extended-pdf-viewer>
+    </div>
+</ng-container>
+<ng-template #orderFormPage>
+    <div class="mainContent-innner">
+        <form [formGroup]="orderForm" (ngSubmit)="submitOrderForm()">
+            <div class="Order-section">
+                <div class="">
+                    <div class="probtn-wrap text-right">
+                        <a class="btn btn-blue mr-2" (click)="openProductModal()"><i class="icon fa fa-plus-circle"></i>
+                            Add</a>
+                        <!--<a class="btn mr-2" data-toggle="modal" data-target="#dateCoverDaysModal" (click) = "getCoverDays()" ><i class="icon fa fa-calculator"></i> Recalc</a> -->
+                        <ng-container *ngIf="(creationTypeCode == 'OPTIMAL')">
+                            <input placeholder="%Uplift" type="number" class="custom_input mr-2"
+                                formControlName="upliftOrder">
+                            <a class="btn mr-2" data-toggle="modal" (click)="getCoverDays()"><i
+                                    class="icon fa fa-calculator"></i> Recalc</a>
+                        </ng-container>
+                        <a class="btn mr-2"><i class="icon fa fa-file-pdf-o"></i> PDE Load</a>
+                        <a class="btn mr-2" (click)="openTabletLoad()"><i class="icon fa fa-tablet"></i>
+                            Tablet Load</a> <!-- data-toggle="modal" data-target="#tabletLoad"-->
+                        <a class="btn mr-2" (click)="refreshData('yes')"><i class="icon fa fa-tablet"></i> Refresh</a>
+
+                        
+                        <button class="btn btn-blue mr-2"><i class="icon fa fa-flag"></i> Finish</button>
+                        <!-- <a class="btn mr-2" data-toggle="modal" data-target="#postOrder"><i
+                                class="icon fa fa-id-card-o"></i> Post</a>-->
+                        <ng-container *ngIf="(typeCode != statusCode)">
+                            <a class="btn mr-2" data-toggle="modal" (click)="validatePostOrder()"><i
+                                    class="icon fa fa-id-card-o"></i> Post</a>
+                        </ng-container>
+                        <a class="btn mr-2" data-toggle="modal" data-target="#printOrder"><i
+                                class="icon fa fa-print"></i> Print</a>
+                        <!--<ng-container *ngIf="(orderType_id == 20940)">-->
+                        <ng-container *ngIf="(typeCode == 'ORDER')">
+                            <a class="btn mr-2" (click)="sendOrder()"><i class="icon fa fa-exchange"></i> Send Order</a>
+                        </ng-container>
+
+                        <!-- <a class="btn mr-2" data-toggle="modal" data-target="#sendOrder" (click)="sendOrder()"><i class="icon fa fa-exchange"></i> Send Order</a> -->
+                        <!--<ng-container *ngIf="(creationTypeCode == 'OPTIMAL')">
+                            <div class="col-md-7">
+                                <input  placeholder="Uplift Order by %" type="number" class="form-control" formControlName="upliftOrder">
+                            </div>
+                           
+                        </ng-container>
+                        -->
+                        <a class="btn btn-blue" (click)="goToOrders()">Cancel</a>
+                    </div>
+                </div>
+                <div class="Order-wrap">
+                    <div class="bg-box mt-15">
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <h4 class="title">Order Entry Invoice</h4>
+                            </div>
+                            <div class="col-6 text-right">
+                                <!-- <h4 class="title text-uppercase">Order</h4> -->
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-lg-3">
+                                <!--<div class="group-from" *ngIf="(orderType_id == 20941) else OutletSupplier">-->
+                                <!-- <div class="group-from" *ngIf="(typeCode == 'TRANSFER') else OutletSupplier">
+                                    <h5 class="title"> Supplier Outlet</h5>
+                                    <div class="form-group form-row align-items-center custom-ng-select">
+                                        <label class="label col-md-4 mb-0">Supplier <span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-md-8">
+
+                                            <ng-select [items]="Outletdata"
+                                                [ngClass]="{ 'is-invalid': submitted && f.storeIdAsSupplier.errors }"
+                                                bindLabel="storeDetail" bindValue="id" (change)="getOutlet($event)" [virtualScroll]="true"
+                                                placeholder="Select Outlet" formControlName="storeIdAsSupplier"
+                                                [clearable]="false">
+                                            </ng-select>
+                                            <div *ngIf="f.storeIdAsSupplier.errors" class="invalid-feedback">
+                                                <div *ngIf="f.storeIdAsSupplier.errors.required"> Supplier is required
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-0 form-row align-items-center custom-ng-select">
+                                        <label class="label col-md-4 mb-0">Outlet <span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-md-8">
+                                            <ng-select [items]="Outletdata"
+                                                [ngClass]="{ 'is-invalid': submitted && f.outletId.errors }"
+                                                bindLabel="storeDetail" bindValue="id"  [virtualScroll]="true"
+                                                placeholder="Select Outlet" formControlName="outletId"
+                                                [clearable]="false">
+                                            </ng-select>
+                                            <div *ngIf="f.outletId.errors" class="invalid-feedback">
+                                                <div *ngIf="f.outletId.errors.required"> Outlet is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  -->
+                                <!--  NOTE >>>>>>>  Here some you might get some confusion that fromcontoldname is opposite of lable and validation message. We done this to handle/compatible backend implmentaion-->
+                                <!-- <div class="group-from" *ngIf="(typeCode == 'TRANSFER') else OutletSupplier"> -->
+                                <div class="group-from" *ngIf="(typeCode == 'TRANSFER' && statusCode == 'NEW') else TransferOutletSupplier">
+                                    <h5 class="title"> Supplier Outlet</h5>
+                                    <div class="form-group form-row align-items-center custom-ng-select">
+                                        <label class="label col-md-4 mb-0">Supplier <span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-md-8">
+
+                                            <ng-select [items]="Outletdata"
+                                                [ngClass]="{ 'is-invalid': submitted && f.outletId.errors }"
+                                                bindLabel="storeDetail" bindValue="id" (change)="getOutlet($event)" [virtualScroll]="true"
+                                                placeholder="Select Outlet" formControlName="outletId"
+                                                [clearable]="false">
+                                            </ng-select>
+                                            <div *ngIf="f.outletId.errors" class="invalid-feedback">
+                                                <div *ngIf="f.outletId.errors.required"> Supplier is required
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-0 form-row align-items-center custom-ng-select">
+                                        <label class="label col-md-4 mb-0">Outlet <span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-md-8">
+                                            <ng-select [items]="Outletdata"
+                                                [ngClass]="{ 'is-invalid': submitted && f.storeIdAsSupplier.errors }"
+                                                bindLabel="storeDetail" bindValue="id"  [virtualScroll]="true"
+                                                placeholder="Select Outlet" formControlName="storeIdAsSupplier"
+                                                [clearable]="false">
+                                            </ng-select>
+                                            <div *ngIf="f.storeIdAsSupplier.errors" class="invalid-feedback">
+                                                <div *ngIf="f.storeIdAsSupplier.errors.required"> Outlet is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+
+                                <ng-template #TransferOutletSupplier>
+                                <div class="group-from" *ngIf="(creationTypeCode == 'TRANSFER' && typeCode == 'INVOICE' && statusCode == 'ORDER') else OutletSupplier">
+                                    <h5 class="title"> Outlet Supplier</h5>
+                                    <div class="form-group form-row align-items-center custom-ng-select">
+                                        <label class="label col-md-4 mb-0">Outlet <span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-md-8">
+
+                                            <ng-select [items]="Outletdata"
+                                                [ngClass]="{ 'is-invalid': submitted && f.outletId.errors }"
+                                                bindLabel="storeDetail" bindValue="id" (change)="getOutlet($event)" [virtualScroll]="true"
+                                                placeholder="Select Outlet" formControlName="outletId"
+                                                [clearable]="false">
+                                            </ng-select>
+                                            <div *ngIf="f.outletId.errors" class="invalid-feedback">
+                                                <div *ngIf="f.outletId.errors.required"> Outlet is required
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-0 form-row align-items-center custom-ng-select">
+                                        <label class="label col-md-4 mb-0">Supplier <span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-md-8">
+                                            <ng-select [items]="Outletdata"
+                                                [ngClass]="{ 'is-invalid': submitted && f.storeIdAsSupplier.errors }"
+                                                bindLabel="storeDetail" bindValue="id"  [virtualScroll]="true"
+                                                placeholder="Select Outlet" formControlName="storeIdAsSupplier"
+                                                [clearable]="false">
+                                            </ng-select>
+                                            <div *ngIf="f.storeIdAsSupplier.errors" class="invalid-feedback">
+                                                <div *ngIf="f.storeIdAsSupplier.errors.required"> Supplier is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                               </ng-template>
+
+                                <ng-template #OutletSupplier>
+                                    <div class="group-from">
+                                        <h5 class="title">Outlet Supplier</h5>
+                                        <div class="form-group form-row align-items-center custom-ng-select">
+                                            <label class="label col-md-4 mb-0">Outlet <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-md-8">
+
+                                                <ng-select [items]="Outletdata"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.outletId.errors }"
+                                                    bindLabel="storeDetail" bindValue="id" (change)="getOutlet($event)"
+                                                    [virtualScroll]="true" placeholder="Select Outlet"
+                                                    formControlName="outletId" [clearable]="false">
+                                                </ng-select>
+                                                <div *ngIf="f.outletId.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.outletId.errors.required"> Outlet is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-0 form-row align-items-center custom-ng-select">
+                                            <label class="label col-md-4 mb-0">Supplier <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-md-8">
+
+                                                <ng-select [items]="supplierData"
+                                                    (change)="changeProductsSupplierItem($event)"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.supplierId.errors }"
+                                                    bindLabel="desc" bindValue="id" [virtualScroll]="true"
+                                                    placeholder="Select Supplier" formControlName="supplierId"
+                                                    [clearable]="false">
+                                                </ng-select>
+                                                <div *ngIf="f.supplierId.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.supplierId.errors.required"> Supplier is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="group-from">
+                                    <h5 class="title">Document</h5>
+                                    <div class="form-group form-row align-items-center custom-ng-select">
+                                        <label class="label col-md-4 mb-0">Type <span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-md-8">
+                                            <!-- <select class="form-control" formControlName="typeId" [ngClass]="{ 'is-invalid': submitted && f.typeId.errors }" (change)="getOrderType($event)">
+                                            <option [value]="type.id" *ngFor="let type of orderTypes">{{type.name}}</option>
+                                        </select> -->
+                                            <ng-select [items]="orderTypes" (change)="getOrderType($event)"
+                                                [ngClass]="{ 'is-invalid': submitted && f.typeId.errors }"
+                                                bindLabel="name" bindValue="code" [virtualScroll]="true"
+                                                placeholder="Select Type" formControlName="typeId" [clearable]="false">
+                                            </ng-select>
+                                            <div *ngIf="f.typeId.errors" class="invalid-feedback">
+                                                <div *ngIf="f.typeId.errors.required"> Order Type is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-row align-items-center mb-0">
+                                        <label class="label col-md-4 mb-0">Status <span
+                                                class="text-danger">*</span></label>
+                                        <div class="col-md-8">
+                                            <input type="text" readonly="true" class="form-control"
+                                                (dblclick)="statusOnClick()" value="{{statusCode}}">
+                                            <!-- <select class="form-control" formControlName="statusId" [ngClass]="{ 'is-invalid': submitted && f.statusId.errors }">
+                                            <option [value]="status.id" *ngFor="let status of orderStatus">{{status.name}}</option>
+                                        </select> -->
+                                            <div *ngIf="f.statusId.errors" class="invalid-feedback">
+                                                <div *ngIf="f.statusId.errors.required"> Status is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="group-from">
+                                    <h5 class="title">Order</h5>
+                                    <div class="form-group form-row align-items-center">
+                                        <label class="label col-md-4 mb-0">Number</label>
+                                        <div class="col-md-8">
+                                            <input [readonly]="orderStatus" type="text" class="form-control"
+                                                formControlName="orderNo">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-0 form-row align-items-center">
+                                        <label class="label col-md-4 mb-0">Date</label>
+                                        <div class="col-md-8">
+                                            <input type="text" [readonly]="true" class="form-control"
+                                                formControlName="createdDate"
+                                                [ngClass]="{ 'is-invalid': submitted && f.createdDate.errors }">
+                                            <div *ngIf="f.createdDate.errors" class="invalid-feedback">
+                                                <div *ngIf="f.createdDate.errors.required"> Date is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="group-from mb-0">
+                                    <!-- <h5 class="title">Order Type</h5> -->
+                                    <div class="form-group form-row align-items-center">
+                                        <label class="label col-md-6 mb-0">Order Type </label>
+                                        <!-- <ng-container *ngIf="order_id"> -->
+                                        <div class="col-md-6">
+                                            <input type="text" [readonly]="true" class="form-control"
+                                            value="{{creationTypeCode}}">
+                                        </div>
+                                        <!-- </ng-container> -->
+                                        <!-- <ng-container  *ngIf="!order_id">
+                                        <select class="form-control" formControlName="creationTypeId">
+                                            <option [value]="creationType.id" *ngFor="let creationType of orderCreationTypes">{{creationType.name}}</option>
+                                        </select>   
+                                    </ng-container> -->
+                                        <!-- <input type="text" class="form-control"  formControlName="creationTypeId" > -->
+                                    </div>
+                                    <div class="form-group mb-0 form-row align-items-center">
+                                        <label class="label col-md-6 mb-0">Reference Number</label>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" appUppercase formControlName="reference">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-12 mt-2">
+                                    <div class="group-from mb-0">
+                                        <h5 class="title">Reference Number</h5>
+                                        <div class="form-group mb-0">
+                                            <input type="text" class="form-control" formControlName="reference">
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-box mt-15">
+                        <div class="Order-table-wrap all-w">
+                            <div class="table-responsive ctm-data-table filter-fixed">
+                                <table class="table ctm-table" id="orderDetailList">
+                                    <thead>
+                                        <tr>
+                                            <th>Line No &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>Product &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>Supplier Item &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>Description &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>Inv Buy &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                             <th>AvgDailySales &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                        class="fa fa-long-arrow-down"></i></th>   
+                                            <th>PromoAvgDailySale &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                             class="fa fa-long-arrow-down"></i></th>                 
+
+                                            <th>Min on Hnad &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                        class="fa fa-long-arrow-down"></i>
+                                            </th>  
+                                            
+                                            <th>Promo Units &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>On Hand &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>On Order &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>Carton Qty &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>Carton Cost &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>Cartons &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                        class="fa fa-long-arrow-down"></i></th>
+                                            <th>Units&nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                        class="fa fa-long-arrow-down"></i></th>
+                                            <th>GST&nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                        class="fa fa-long-arrow-down"></i></th>
+                                            <th>Line Total &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                        class="fa fa-long-arrow-down"></i></th>        
+                                            <!--<ng-container *ngIf="refreshData_code">
+                                            <th>Avg Weekly Sales</th>
+                                            </ng-container>
+                                            -->
+                                            <th>OrderType &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <!-- <th>NonPromoAvgDaily &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th> -->
+                                            
+                                           
+                                            
+                                            <th>NormalCoverDays &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>CoverDaysUsed &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>MinReorderQty &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>Perishable &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>NonPromoSales56Days &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>PromoSales56Days &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>BuyPromoCode &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>BuyPromoEndDate &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>BuyPromoDisc &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>SalePromoCode &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>SalePromoEndDate &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                            <th>NewProduct &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                           
+                                            <th>Action &nbsp;<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                                    class="fa fa-long-arrow-down"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of orderProducts; index as i">
+                                            <td><a data-toggle="modal" data-target="#ProductModal" (click)="getProductById(data, i)">
+                                                {{data.lineNo}}
+                                            </a></td>
+                                            <td>{{data.number}}</td>
+                                            <td>{{data.supplierProductItem}}</td>
+                                            <td>{{data.desc}}</td>
+                                            <td><input [disabled]="true" type="checkbox" checked></td>
+                                            <td>{{data.nonPromoAvgDaily > 0 ? (data.nonPromoAvgDaily | number : '1.2-2') : ''}}</td>
+                                            
+                                            <td>{{data.promoAvgDaily ? (data.promoAvgDaily | number : '1.2-2') : ''}}</td>
+                                            <td>{{data.nonPromoMinOnHand ? data.nonPromoMinOnHand : 0}}</td>
+                                            <td>{{data.promoMinOnHand}}</td>
+                                            <!--<td>{{data.qtyOnHand ? data.qtyOnHand : 0}}</td>-->
+                                            <td>{{data.onHand ? data.onHand : 0}}</td>
+                                            <td>{{data.onOrder}}</td>
+                                            <td>{{data.cartonQty}}</td>
+                                            <td>{{data.cartonCost | currency:'USD'}}</td>
+                                            <td>{{data.cartons}}</td>
+                                            <td>{{data.units}}</td>
+                                            <td>{{data.taxCode ? data.taxCode == 'GST'? '*':'':'' }}</td>
+                                            <!--<td>$ {{getLineTotal(data.cartonCost, data.cartons) | number: '0.2-3' }}</td>-->
+                                            <td> {{ getLineTotal(data.cartonCost, data.cartons, data.units,
+                                                data.cartonQty) | currency:'USD' }}</td>
+                                            <!--<ng-container *ngIf="refreshData_code">
+                                                <td>{{data.nonPromoAvgDaily ? data.nonPromoAvgDaily : 0}}</td>
+                                            </ng-container>
+                                        -->
+                                            <!-- <td>NA</td>
+                                        <td>NA</td> -->
+                                            <td>{{data.orderTypeCode ? data.orderTypeName : 0}}</td>
+                                            <!-- <td>{{data.nonPromoAvgDaily ? data.nonPromoAvgDaily : 0}}</td> -->
+                                            
+                                            <!--<td>{{data.minOnHand ? data.minOnHand : 0}}</td>-->
+                                           
+                                           
+                                            <td>{{data.normalCoverDays ? data.normalCoverDays : ''}}</td>
+                                            <td>{{data.coverDaysUsed ? data.coverDaysUsed : ''}}</td>
+                                            <td>{{data.minReorderQty ? data.minReorderQty : ''}}</td>
+                                            <td>{{data.perishable ? 1 : 0}}</td>
+                                            <td>{{data.nonPromoSales56Days ? data.nonPromoSales56Days : ''}}</td>
+                                            <td>{{data.promoSales56Days ? data.promoSales56Days : ''}}</td>
+                                            <td>{{data.buyPromoCode ? data.buyPromoCode : ''}}</td>
+                                            <td>{{data.buyPromoEndDate ? data.buyPromoEndDate : ''}}</td>
+                                            <td>{{data.buyPromoDisc ? data.buyPromoDisc : ''}}</td>
+                                            <td>{{data.salePromoCode ? data.salePromoCode : ''}}</td>
+                                            <td>{{data.salePromoEndDate ? data.salePromoEndDate : ''}}</td>
+                                            <td>{{data.newProduct ? 1 : 0}}</td>
+                                            
+                                            <td>
+                                                <div class="moreOption">
+                                                    <div class="tbHover-btnGroup">
+                                                        <a class="tbHover-btn trash-btn" data-toggle="modal"
+                                                            data-target="#ProductModal"
+                                                            (click)="getProductById(data, i)"><i
+                                                                class="fa fa-pencil"></i></a>
+                                                        <a class="tbHover-btn trash-btn"
+                                                            (click)="deleteOrderDetailsById(data)"><i
+                                                                class="fa fa-trash"></i></a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-box mt-15">
+                        <div class="form-row">
+                            <div class="col-lg-3">
+                                <div class="group-from mb-0">
+                                    <ul class="Total_list">
+                                        <li>Total Cartons <span>{{totalCartons}}</span></li>
+                                        <li>Total Units <span>{{totalUnits}}</span></li>
+                                        <li>Total Lines <span>{{orderProducts?.length}}</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-from">
+                                    <h5 class="title">Delivery Docket</h5>
+                                    <div class="form-group form-row align-items-center">
+                                        <label class="label col-md-5 mb-0">Number</label>
+                                        <div class="col-md-7">
+                                            <input [readonly]="deliveryDocketFieldStatus" type="text"
+                                                class="form-control" formControlName="deliveryNo">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-0 form-row align-items-center">
+                                        <label class="label col-md-5 mb-0">Date</label>
+                                        <div class="col-md-7">
+                                            <div class="ctm-calendar">
+                                                <!--<input *ngIf="!deliveryDocketFieldStatus"
+                                                    [readonly]="deliveryDocketFieldStatus" bsDatepicker type="text"
+                                                    class="form-control" formControlName="deliveryDate"
+                                                    [bsConfig]="{ showWeekNumbers:false }">
+
+                                                    <input *ngIf="!deliveryDocketFieldStatus"
+                                                    [readonly]="deliveryDocketFieldStatus" id="deliveryDate" bsDatepicker type="text"
+                                                    class="form-control" formControlName="deliveryDate"
+                                                    [bsConfig]="datepickerConfig"  [minDate]="minDeliveryDate">
+                                                -->
+
+                                                <input [readonly]="deliveryDocketFieldStatus" id="deliveryDate"
+                                                    bsDatepicker type="text" class="form-control"
+                                                    formControlName="deliveryDate" [bsConfig]="datepickerConfig"
+                                                    [minDate]="minDeliveryDate">
+
+
+
+                                                <!--<input *ngIf="deliveryDocketFieldStatus"
+                                                    [readonly]="deliveryDocketFieldStatus" type="text" class="form-control">
+                                                -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group-from mb-0">
+                                    <h5 class="title">Supplier Invoice</h5>
+                                    <div class="form-group form-row align-items-center">
+                                        <label class="label col-md-5 mb-0">Number</label>
+                                        <div class="col-md-7">
+                                            <input [readonly]="supplierInvoiceFieldStatus" type="text"
+                                                class="form-control" formControlName="invoiceNo">
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-row align-items-center">
+                                        <label class="label col-md-5 mb-0">Date</label>
+                                        <div class="col-md-7">
+                                            <div class="ctm-calendar">
+                                                <!--<input *ngIf="!supplierInvoiceFieldStatus"
+                                                    [readonly]="supplierInvoiceFieldStatus" bsDatepicker type="text"
+                                                    class="form-control" formControlName="invoiceDate"
+                                                    [bsConfig]="{ showWeekNumbers:false }" >
+                                                -->
+
+                                                <input [readonly]="supplierInvoiceFieldStatus" bsDatepicker type="text"
+                                                    class="form-control" formControlName="invoiceDate"
+                                                    [bsConfig]="datepickerConfig" [minDate]="minInvoiceDate">
+
+                                                <!-- <input *ngIf="supplierInvoiceFieldStatus"
+                                                    [readonly]="supplierInvoiceFieldStatus" type="text"
+                                                    class="form-control">
+                                                    -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-0 form-row align-items-center">
+                                        <label class="label col-md-5 mb-0">Total Amount</label>
+                                        <div class="col-md-7">
+                                            <div class="dollar-symbol-icon">
+                                                <input [readonly]="supplierInvoiceFieldStatus" type="text"
+                                                    class="form-control" formControlName="invoiceTotal">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="group-from mb-0">
+                                    <div class="form-group form-row align-items-center">
+                                        <label class="label col-md-5 mb-0">Subtotal</label>
+                                        <div class="col-md-7">
+                                            <!-- <div class="dollar-symbol-icon"> -->
+                                                <input id="subTotal" currencyMask  [options]="{ align: 'left', thousands: ','}" [readonly]="true" type="text" class="form-control"
+                                                    formControlName="subTotal">
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-row align-items-center">
+                                        <label class="label col-md-5 mb-0">Less Discount</label>
+                                        <div class="col-md-7">
+                                            <div class="dollar-symbol-icon">
+                                                <input [readonly]="supplierInvoiceFieldStatus"
+                                                    (keyup)="calculateTotalCost()" type="number"
+                                                    class="form-control required-entry" formControlName="subTotalDisc">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-row align-items-center">
+                                        <label class="label col-md-5 mb-0">Less Subsidy</label>
+                                        <div class="col-md-7">
+                                            <div class="dollar-symbol-icon">
+                                                <input id="subTotalSubsidy" [readonly]="supplierInvoiceFieldStatus"
+                                                    (keyup)="calculateTotalCost()" type="number"
+                                                    class="form-control required-entry"
+                                                    formControlName="subTotalSubsidy">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-row align-items-center">
+                                        <label class="label col-md-5 mb-0">Plus Admin</label>
+                                        <div class="col-md-7">
+                                            <div class="dollar-symbol-icon">
+                                                <input id="subTotalAdmin" [readonly]="supplierInvoiceFieldStatus"
+                                                    type="number" (keyup)="calculateTotalCost()"
+                                                    class="form-control required-entry" formControlName="subTotalAdmin">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-row align-items-center">
+                                        <label class="label col-md-5 mb-0">Plus Freight</label>
+                                        <div class="col-md-7">
+                                            <div class="dollar-symbol-icon">
+                                                <input id="subTotalFreight" [readonly]="supplierInvoiceFieldStatus"
+                                                    type="number" (keyup)="calculateTotalCost()"
+                                                    class="form-control required-entry"
+                                                    formControlName="subTotalFreight">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-row align-items-center">
+                                        <label class="label col-md-5 mb-0">Plus Gst</label>
+                                        <div class="col-md-7">
+                                            <div class="dollar-symbol-icon">
+                                                <!--<input id="gstAmt" [readonly]="supplierInvoiceFieldStatus"
+                                                    type="number" (keyup)="calculateTotalCost($event.target.value)"
+                                                    class="form-control required-entry" formControlName="gstAmt">
+                                                -->
+                                                    <input id="gstAmt" [readonly]="supplierInvoiceFieldStatus"
+                                                    type="number" (keyup)="calculateTotalCost()"
+                                                    class="form-control required-entry" formControlName="gstAmt">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-0 form-row align-items-center">
+                                        <label class="label col-md-5 mb-0">Total</label>
+                                        <div class="col-md-7">
+                                            <!-- <div class="dollar-symbol-icon"> -->
+                                                <input [readonly]="true" type="text" class="form-control" currencyMask  [options]="{ align: 'left', thousands: ','}"
+                                                    formControlName="total">
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<div class="modal fade thm-popup" id="ProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="orderProductForm">
+                        <div class="title-wrap mb-2">
+                            <h4 class="title">Line Item</h4>
+                        </div>
+                        <div class="group-from">
+                            <div class="form-row">
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <label>Suppler Item</label>
+                                        <input type="text" class="form-control" formControlName="supplierProductItem">
+                                    </div>
+                                </div>
+                                <div class="col-7">
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Min On Hand</label>
+                                                <input [readonly]="true" type="text" class="form-control"
+                                                    formControlName="minOnHand">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Promo Units</label>
+                                                <input [readonly]="true" type="text" class="form-control"
+                                                    formControlName="promoMinOnHand">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Product</label>
+                                        <div class="form-row">
+                                            <div class="col-5">
+                                                <div class="form-group mb-0">
+                                                    <!-- <input type="number" id="product" [readonly]="proFormStatus"
+                                                        class="form-control" formControlName="number"
+                                                        [ngClass]="{ 'is-invalid': submitted2 && f1.number.errors }"
+                                                    >-->
+                                                    <input type="number" id="product" [readonly]="proFormStatus"
+                                                        class="form-control" formControlName="number">
+                                                    <!--<div *ngIf="f1.number.errors" class="invalid-feedback">
+                                                        <div *ngIf="f1.number.errors.required"> Product number is
+                                                            required</div>
+                                                    </div>
+                                                    -->
+                                                </div>
+                                            </div>
+                                            <div class="col-2 text-right">
+                                                <button #searchProductBtn *ngIf="!proFormStatus" type="button"
+                                                    class="btn btn-grey btn-block input-btn"
+                                                    (click)="searchProduct(0)">Search</button>
+                                            </div>
+                                            <div class="col-5">
+                                                <a type="button" class="btn btn-grey btn-block input-btn"
+                                                    (click)="changeProductDetails(1)">Product Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input [readonly]="true" type="text" class="form-control" formControlName="desc">
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Carton Qty</label>
+                                        <input [readonly]="true" type="text" class="form-control"
+                                            formControlName="cartonQty">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Carton Cost</label>
+                                        <input [readonly]="true" type="text" class="form-control"
+                                            formControlName="cartonCost">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Carton</label>
+                                        <input [readonly]="true" type="text" class="form-control"
+                                            formControlName="cartons">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Units</label>
+                                        <input (blur)="getLineTotalandUnits()" type="number" class="form-control"
+                                            formControlName="units"
+                                            [ngClass]="{ 'is-invalid': submitted2 && f1.units.errors }" min="0"
+                                            max="100" onkeyup="if(this.value<0){this.value= this.value * -1}">
+                                        <div *ngIf="f1.units.errors" class="invalid-feedback">
+                                            <div *ngIf="f1.units.errors.required"> Unit number is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Total Units</label>
+                                        <input [readonly]="true" type="text" class="form-control"
+                                            formControlName="totalUnits">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Line Total</label>
+                                        <input [readonly]="true" type="text" class="form-control"
+                                            formControlName="lineTotal">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="group-from mb-0">
+                                <h5 class="title">Product Info</h5>
+                                <div class="form-row form-group align-items-end mb-0">
+                                    <div class="col-3">
+                                        <a type="button" class="btn btn-grey btn-block input-btn"
+                                            (click)="refreshLineItem()">Refresh</a>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="form-row">
+                                            <div class="col-4">
+                                                <div class="form-group mb-0">
+                                                    <label class="mb-0">AvgWeeklySales</label>
+                                                    <input [readonly]="true" type="text" class="form-control"
+                                                        formControlName="promoSales56Days">
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group mb-0">
+                                                    <label class="mb-0">On Hand</label>
+                                                    <input [readonly]="true" type="text" class="form-control"
+                                                        formControlName="qtyOnHand">
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group mb-0">
+                                                    <label class="mb-0">On Order</label>
+                                                    <input [readonly]="true" type="text" class="form-control"
+                                                        formControlName="onOrder">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <a data-toggle="modal" data-target="#searchProductModal" class="dn openProductList"></a>
+                            <button class="btn btn-blue mr-2" (click)="pushProducts()" [hidden]="is_Invocing" ><i
+                                    class="icon fa fa-pencil-square-o"></i> {{ selectedId > 0 ? "Update" : "Add"
+                            }}</button>
+                            <button #closebutton type="button" class="btn btn-grey" data-dismiss="modal"
+                                (click)="resetLineItems()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade thm-popup bd-example-modal-xl" id="searchProductModal" tabindex="-1" role="dialog"
+    aria-labelledby="searchProductModal" aria-hidden="true" data-backdrop="static">
+    <form [formGroup]="orderProdSearchForm">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-body popup-box-width">
+                    <div class="popup-box">
+                        <div class="title-wrap mb-2">
+                            <h4 class="title">Product Lookup</h4>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-6 col-xl-6">
+                                <div class="form-row align-items-center">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <input type="number" [min]="0" placeholder="Number" class="form-control"
+                                                formControlName="number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Description" class="form-control"
+                                                formControlName="desc">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <button type="button" (click)="searchByProductDetails()"
+                                                class="btn btn-blue input-btn btn-block">Wildcard Search</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    formControlName="status" id="customControlStatus">
+                                                <label class="custom-control-label mb-0" for="customControlStatus">Only
+                                                    Active</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6">
+                                <div class="form-row align-items-center">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-grey input-btn btn-block"
+                                                (click)="changeProductDetails(2)">Product Details</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <div class="row clearfix">
+                                                <div class="col-md-7">
+                                                    <ng-select [items]="Outletdata" bindLabel="storeDetail"
+                                                        bindValue="id" [virtualScroll]="true" [multiple]="false"
+                                                        [clearable]="false" [clearOnBackspace]="false"
+                                                        [clearSearchOnAdd]="true" placeholder="Select Store"
+                                                        formControlName="outletId"
+                                                        [ngClass]="{ 'is-invalid': submitted && f.outletId.errors }">
+                                                        <ng-template ng-option-tmp let-item="item" let-item$="item$"
+                                                            let-index="index">
+                                                            <div class="form-row">
+                                                                <span class="col-9 zone-overflow"
+                                                                    title="{{ item?.desc }}">
+                                                                    {{ item?.desc }}
+                                                                </span>
+                                                                <div class="col-3" title="{{ item?.code }}">
+                                                                    {{ item.code }}
+                                                                </div>
+                                                            </div>
+                                                        </ng-template>
+                                                    </ng-select>
+                                                </div>
+                                                <!-- <select class="form-control" formControlName="outletId"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.outletId.errors }">
+                                                    <option [ngValue]="null" disabled selected hidden>Select Outlet
+                                                    </option>
+                                                    <option [value]="outlet.id" *ngFor="let outlet of Outletdata">
+                                                        {{outlet.desc + " " + outlet.code }}</option>
+                                                </select> -->
+                                                <div class="col-md-3 pl-0">
+                                                    <button type="button" class="btn  btn-grey input-btn"
+                                                        (click)="resetProdSearchListForm()">Clear</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="table-scroll all-w">
+                            <div class="table-responsive ctm-data-table">
+                                <table class="table ctm-table" id="product_list_table">
+                                    <thead>
+                                        <tr>
+                                            <th>Select</th>
+                                            <th>Status</th>
+                                            <th>Number</th>
+                                            <th>Description</th>
+                                            <th>Comm</th>
+                                            <th>Commodity</th>
+                                            <th>Dep</th>
+                                            <th>Department</th>
+                                            <th>Cat </th>
+                                            <th>Category </th>
+                                            <th>Group</th>
+                                            <th>Group </th>
+                                            <th>Supp</th>
+                                            <th>Supplier </th>
+                                            <th>Replicate</th>
+                                            <th>Type</th>
+                                            <th>Tax </th>
+                                            <th>Ctn Qty </th>
+                                            <th>Sell Unit Qty </th>
+                                            <th>Parent</th>
+                                            <th>Pos Des </th>
+                                            <th>Date Added </th>
+                                            <th>Date Changed </th>
+                                            <th>Date Deleted</th>
+                                            <th>Info</th>
+                                        </tr>
+                                        <!-- <tr>
+                                            <th>Select</th>
+                                            <th>Number</th>
+                                            <th>Description</th>
+                                            <th>Comm</th>
+                                            <th>Commodity</th>
+                                            <th>Department</th>
+                                            <th>Category</th>
+                                            <th>Group</th>
+                                        </tr> -->
+                                    </thead>
+                                    <tbody>
+                                        <ng-container *ngFor="let product of searchProducts; let i = index">
+                                            <tr>
+                                                <td>
+                                                    <input [checked]="i == 0" type="radio"
+                                                        (change)="setProductObj(product)" name="product"
+                                                        [disabled]="!product.status">
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="status-check" [ngClass]="{
+                                                        'status-true': product.status,
+                                                        'status-false': !product.status
+                                                      }"></span>
+                                                </td>
+                                                <td>{{product?.number}}</td>
+                                                <td>{{product?.desc}}</td>
+                                                <td>{{product?.commodityCode}}</td>
+                                                <td>{{product?.commodity}}</td>
+                                                <td>{{product?.departmentCode}}</td>
+                                                <td>{{product?.department}}</td>
+                                                <td>{{product?.categoryCode}}</td>
+                                                <td>{{product?.category}}</td>
+                                                <td>{{product?.groupCode}}</td>
+                                                <td>{{product?.group}}</td>
+                                                <td>{{product?.supplierCode}}</td>
+                                                <td>{{product?.supplier}}</td>
+                                                <td>{{product?.replicate}}</td>
+                                                <td>{{product?.type}}</td>
+                                                <td>{{product?.tax}}</td>
+                                                <td>{{product?.cartonQty}}</td>
+                                                <td>{{product?.unitQty}}</td>
+                                                <td>{{product?.parent}}</td>
+                                                <td>{{product?.posDesc}}</td>
+                                                <td>{{product?.createdAt | customdatetimeformat }}</td>
+                                                <td>{{product?.updatedAt | customdatetimeformat}}</td>
+                                                <td>{{product?.deletedAt | customdatetimeformat}}</td>
+                                                <td>{{product.info}}</td>
+                                            </tr>
+                                        </ng-container>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-blue mr-2" data-dismiss="modal">Select</button>
+                            <button #prodSearchTerm type="button" class="btn btn-grey"
+                                data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade thm-popup bd-example-modal-xl" id="tabletLoad" tabindex="-1" role="dialog"
+    aria-labelledby="tabletLoadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form>
+                        <div class="title-wrap mb-2">
+                            <h4 class="title">Stock Adjustment Tablet Import</h4>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table ctm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>Import Batch</th>
+                                        <th>Last Import</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="radio" name="importBatch"></td>
+                                        <td>26/08/2018 7:26:22 AM</td>
+                                        <td>26/08/2018 7:26:22 AM</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="importBatch"></td>
+                                        <td>08/08/2018 10:26:22 AM</td>
+                                        <td>08/08/2018 10:26:22 AM</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-grey mr-2">
+                                <i class="icon fa fa-file-excel-o"></i> Import
+                            </button>
+                            <button type="button" class="btn btn-grey mr-2">
+                                <i class="icon fa fa-refresh"></i> Refresh
+                            </button>
+                            <button type="button" class="btn btn-grey mr-2">
+                                <i class="icon fa fa-trash"></i> Delete
+                            </button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-md thm-popup" id="sendOrder" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form>
+                        <div class="title-wrap mb-1">
+                            <h4 class="title">Confirm</h4>
+                        </div>
+                        <div class="mt-15 pop-img">
+                            <h5 class="title d-flex mb-0 align-items-center"><img src="assets/images/info-img.svg"
+                                    class="mr-2"> Mark "Offline" Order as sent?</h5>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-success mr-2" (click)="sendOffline('Yes')">Yes</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">No</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-md thm-popup" id="printOrder" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form>
+                        <div class="title-wrap mb-1">
+                            <h4 class="title">Confirm</h4>
+                        </div>
+                        <div class="mt-15 pop-img">
+                            <h5 class="title d-flex mb-0 align-items-center"><img src="assets/images/info-img.svg"
+                                    class="mr-2">Display the "Normal" Report rather than the "Auto Order" report</h5>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-success mr-2"
+                                (click)="getOrderPrint('Normal')">Yes</button>
+                            <button type="button" class="btn btn-grey" (click)="getOrderPrint('Auto')">No</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-md thm-popup" id="postOrder" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form>
+                        <div class="title-wrap mb-1">
+                            <h4 class="title">Confirm</h4>
+                        </div>
+                        <div class="mt-15 pop-img">
+                            <h4 class="title d-flex mb-0 align-items-center"><img src="assets/images/question-img.svg"
+                                    class="mr-2"> Post ORDER now to {{todayDate}}</h4>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-success mr-2" (click)="postOrder()">Yes</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">No</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-md thm-popup" id="changeStatus" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form>
+                        <div class="title-wrap mb-1">
+                            <h4 class="title">Confirm</h4>
+                        </div>
+                        <div class="mt-15 pop-img">
+                            <h4 class="title d-flex mb-0 align-items-center"><img src="assets/images/question-img.svg"
+                                    class="mr-2"> Change order status back to NEW to allow Mods?</h4>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-success mr-2" (click)="changeStatus()">Yes</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">No</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup bd-example-modal-xl" id="tabletloadModal" tabindex="-1" role="dialog"
+    aria-labelledby="tabletloadModal" aria-hidden="true" data-backdrop="static">
+    <form [formGroup]="orderProdSearchForm">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-body popup-box-width">
+                    <div class="popup-box">
+                        <div class="title-wrap mb-2">
+                            <h4 class="title">Order Tablet Import</h4>
+                        </div>
+                        <div class="table-scroll">
+                            <div class="table-responsive">
+                                <table class="table ctm-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Order Batch</th>
+                                            <th>Last Report</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let tablets of tabletLoadData;let i as index">
+                                            <td>{{tablets.orderBatch | date: 'MM/dd/yyyy'}}</td>
+                                            <td>{{tablets.lastImport | date: 'MM/dd/yyyy'}} </td>
+                                            <!-- <td class="text-center"><button type="button" class="btn btn-danger">Detete</button></td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-blue mr-2">Refresh</button>
+                            <button type="button" class="btn btn-blue mr-2">Import</button>
+                            <button type="button" class="btn btn-blue mr-2" data-dismiss="modal">Delete</button>
+                            <button #prodSearchTerm type="button" class="btn btn-grey"
+                                data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!--
+<div class="modal fade thm-popup bd-example-modal-xl" id="dateCoverDaysModal" tabindex="-1" role="dialog"
+    aria-labelledby="dateCoverDaysModal" aria-hidden="true" data-backdrop="static">
+    <form [formGroup]="CoverDaysForm">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-body popup-box-width">
+                    <div class="popup-box">
+                        <div class="title-wrap mb-2">
+                            <h4 class="title">Sales Date Range</h4>
+                        </div>
+                        <div class="table-scroll">
+                            <div class="table-responsive">
+                                <table class="table ctm-table">
+                                    <thead></thead>
+                                    <tbody>
+                                        <tr>
+                                           <label for="startDate">Start date:</label>
+                                            <input type="date" id="saleStartDate" formControlName= "saleStartDate" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+                                            <label for="endDate">End date:</label>
+                                            <input type="date" id="saleEndDate" formControlName = "saleEndDate" name="trip-end" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+                                        </tr>
+                                        <tr>
+                                            <label for="salesCoverDays">Cover Days:</label>
+                                            <input type="number" id= "salesCoverDays"  formControlName="salesCoverDays">
+                                        </tr>   
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-blue mr-2">Refresh</button>
+                            <button type="button" class="btn btn-blue mr-2">Import</button>
+                            <button type="button" class="btn btn-blue mr-2" data-dismiss="modal">Delete</button>
+                            <button #prodSearchTerm type="button" class="btn btn-grey" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+-->
+
+<div class="modal fade bd-example-modal-md thm-popup" id="dateCoverDaysModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="CoverDaysForm" (ngSubmit)="submitCoverDaysForm()">
+                        <div class="title-wrap mb-1">
+                            <h4 class="title">Sales Date Range</h4>
+                        </div>
+
+                        <h5 class="title">Recalculate the order based on cover days and sales date for
+                            the selected range:</h5>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label class="mb-0" for="startDate">Start date:<span
+                                        class="text-danger">*</span></label>
+
+                                <div class="ctm-calendar">
+                                    <input type="text" class="form-control" bsDatepicker [bsConfig]="datepickerConfig"
+                                        bsDatepicker [maxDate]="lastStartDate" formControlName="saleStartDate"
+                                        [ngClass]="{
+                                        'is-invalid': submitted && f3.saleStartDate.errors
+                                    }" />
+
+                                    <div *ngIf="f3.saleStartDate.errors" class="invalid-feedback">
+                                        <div *ngIf="f3.saleStartDate.errors.required">
+                                            Start date is required
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label class="mb-0" for="endDate">End date:<span class="text-danger">*</span></label>
+
+                                <div class="ctm-calendar">
+                                    <input type="text" class="form-control" bsDatepicker [bsConfig]="datepickerConfig"
+                                        bsDatepicker (bsValueChange)="lastEndDateDateChange($event)"
+                                        [maxDate]="lastEndDate" formControlName="saleEndDate" [ngClass]="{
+                                'is-invalid': submitted && f3.saleEndDate.errors
+                              }" />
+                                    <div *ngIf="f3.saleEndDate.errors" class="invalid-feedback">
+                                        <div *ngIf="f3.saleEndDate.errors.required">
+                                            End date is required
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="mb-0" for="salesCoverDays">Cover Days:<span
+                                        class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="salesCoverDays"
+                                    formControlName="salesCoverDays" [ngClass]="{
+                                'is-invalid': submitted && f3.salesCoverDays.errors
+                              }">
+                                <div *ngIf="f3.saleEndDate.errors" class="invalid-feedback">
+                                    <div *ngIf="f3.saleEndDate.errors.required">
+                                        Cover days is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix justify-content-end btn-wrap mt-4">
+                            <div class="col-md-2">
+                                <!-- <button type="button" class="btn btn-success w-100"  >Ok</button> -->
+                                <button type="submit" class="btn btn-success w-100">Ok</button>
+                            </div>
+                            <div class="col-md-2 pl-0">
+                                <button type="button" class="btn btn-grey w-100" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

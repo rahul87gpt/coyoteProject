@@ -1,0 +1,189 @@
+<div class="mainContent-innner">
+  <div class="stocktake-section">
+    <div class="d-flex align-items-center">
+      <h4 class="title flex-grow-1 mb-0">StockTake Entry</h4>
+      <div class="probtn-wrap d-flex text-right">
+        <button
+          class="btn btn-blue with-icon mr-2"
+          data-toggle="modal"
+          data-target="#SelectOutlet"
+        >
+          <i class="icon fa fa-plus-circle"></i> Add
+        </button>
+        <button class="btn with-icon mr-2">
+          <i class="icon fa fa-print"></i> Print
+        </button>
+        <button class="btn with-icon mr-2" (click)="exportStockTakeEntryData()">
+          <i class="icon fa fa-file-excel-o"></i> Export
+        </button>
+        <button class="btn with-icon" data-toggle="modal" data-target="#StockTakeEntrySearch" (click)="openStockTakeEntrySearchFilter()">
+          <i class="icon fa fa-filter" ></i> Filter
+       </button>
+      </div>
+    </div>
+    <!-- /.action-topbar -->
+    <div class="stocktake-wrap bg-box mt-15">
+      <div class="stocktake-table-wrap">
+        <div class="table-responsive ctm-data-table">
+          <table class="table ctm-table" id="stocktake-entry-table">
+            <thead>
+              <tr>
+                <th>Outlet <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                <th>Description <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                <th>Total ( $ ) <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let stocktakeEntry of stockTakeEntries">
+                <td [routerLink]="['./update/' + stocktakeEntry.id]"><a>{{ stocktakeEntry.outletCode }}</a></td>
+                <td [routerLink]="['./update/' + stocktakeEntry.id]">{{ stocktakeEntry.desc }}</td>
+                <td [routerLink]="['./update/' + stocktakeEntry.id]">{{ stocktakeEntry.total  | currency:'USD' }}</td>
+                <td class="text-center">
+                    <div class="tbHover-btnGroup">
+                        <button tooltip="Change" placement="left" 
+                          class="tbHover-btn trash-btn"
+                          [routerLink]="['./update/' + stocktakeEntry.id]"
+                        >
+                          <i class="fa fa-pencil"></i>
+                        </button>
+                        <button tooltip="Delete" placement="right" 
+                          class="tbHover-btn trash-btn"
+                          (click)="deleteStockTakeEntry(stocktakeEntry.id)"
+                        >
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade thm-popup" id="SelectOutlet" role="dialog" aria-labelledby="SelectOutletModalLabel" aria-hidden="true" data-backdrop="static">  
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body popup-box-width">
+          <div class="popup-box">
+            <form [formGroup]="outletForm"> 
+              <div class="title-wrap mb-2">
+                <h4 class="title">Select Outlet</h4>
+              </div>
+              <div class="form-group">
+                <label>Outlet</label>
+                <!-- <select class="form-control" (change)="selectOutlet($event)" formControlName="outletId" [ngClass]="{ 'is-invalid': submitted && f.outletId.errors }"> 
+                  <option [value]="store.id" *ngFor="let store of stores">{{store.desc + " " + store.code }}</option>
+                </select> -->
+                <ng-select [items]="stores" bindLabel="desc" bindValue="id" [virtualScroll]="true" [multiple]="false"
+                [clearable]="false" [clearOnBackspace]="false" [clearSearchOnAdd]="true" 
+                formControlName="outletId" (change)="selectOutlet($event)"
+                [ngClass]="{ 'is-invalid': submitted && f.outletId.errors }">
+
+                
+                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                  <div class="form-row">
+                    <span class="col-9 zone-overflow" title="{{ item?.desc }}">
+                      {{ item?.desc }}
+                    </span>
+                    <div class="col-3" title="{{ item?.code }}">
+                      {{ item.code }}
+                    </div>
+                  </div>
+                </ng-template>
+                </ng-select>
+                <div *ngIf="f.outletId.errors" class="invalid-feedback">
+                    <div *ngIf="f.outletId.errors.required"> Outlet is required</div>
+                </div>
+              </div>
+              <div class="btn-wrap text-right mt-10">
+                <button type="button" class="btn btn-success mr-2"
+                   (click)="selectOutletForStockTake()"> Yes </button>
+                <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="resetOutletForm()">No</button>
+              </div> 
+            </form>           
+          </div>
+        </div>
+      </div>
+    </div>  
+</div>
+
+<div
+  class="modal fade thm-popup"
+  id="openStockTakeEntryForm"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>   
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-body popup-box-width">
+      <div class="popup-box">
+        <form [formGroup]="outletDetailsForm">
+          <div class="title-wrap mb-2">
+            <h4 class="title">Stocktake Entry</h4>
+          </div>
+          <div class="form-group">
+            <label>Outlet</label>
+            <input
+              [readonly]="true"
+              type="text"
+              class="form-control"
+              value="{{storeObj.code}}"
+              formControlName="outletCode"
+            />
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <input
+              [readonly]="true"
+              type="text"
+              class="form-control"
+              value="{{storeObj.desc}}"
+              formControlName="outletDes"
+            />
+          </div>
+          <div class="btn-wrap text-right mt-10">
+            <button
+              type="button"
+              class="btn btn-success mr-2"
+              (click)="addOutletForStockTake(storeObj)"
+            >
+              Add
+            </button>
+            <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="resetOutletForm()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal fade thm-popup" id="StockTakeEntrySearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form name = "searchForm" id = "searchForm">
+						<div class="title-wrap mb-2">
+							<h4 class="title"> Search Filter</h4>
+						</div>
+						<div class="form-group mb-0">
+							<label>Wildcard Search</label>
+							<input type="text"  id="StockTakeEntry_Search_filter" class="form-control" #searchValue>
+						</div>
+						<div class="btn-wrap text-right mt-10">
+							<button class="btn btn-blue mr-2" (click)="StockTakeEntrySearch(searchValue)" >Ok</button>
+							<button class="btn btn-grey"   data-dismiss="modal" >Cancel</button>
+						</div>
+					</form>	
+				</div>					
+			</div>
+		</div>
+	</div>
+</div> 

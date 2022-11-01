@@ -1,0 +1,17 @@
+.zone-overflow{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.opendropdown.dropdown-menu {
+    display: block;
+    width: 100%;
+    height: 160px;
+    overflow-y: scroll;
+    padding: 0;
+    margin: 0;
+    border-radius: 0px;
+  }
+  .closedropdown.dropdown-menu{
+   display: none !important;
+  }

@@ -1,0 +1,117 @@
+.report-form-group .overflow-h{
+    height: 380px;
+    overflow: auto;
+    .exclude-list {
+        .submenu{
+           height: 190px; 
+        }
+    }
+    .reportDay_list{
+        background-color: #ffffff;
+        padding: 8px;
+    }
+}
+
+.modal-content{
+    box-shadow:0 2px 10px 0 #00000029;
+    border-color:#00000033;
+}
+
+.browse-btn{
+    height: 25px;
+    font-size: 11px;
+    padding: 0px 10px;
+    line-height: initial;
+    width: 100%;
+}
+.dialog-w2{
+   width: 320px;
+}
+.flag-table table{
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    margin:0;
+    max-height: 200px;
+    overflow: auto;
+}
+.flag-table table td{
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    padding: 5px;
+    background-color: #fff;
+}
+.flag-nav a.nav-link {
+    padding: 5px 10px;
+    margin-top: 10px;
+    border-radius: 5px 5px 0 0;
+    color: #666;
+}
+.flag-nav {
+    border-bottom: 1px solid #ccc;
+    padding: 0;
+}
+.flag-content{
+    border: 1px solid #ccc;
+    border-top:0 none;
+}
+.check-right .custom-control.custom-checkbox {
+    padding-right: 20px;
+    padding-left: 0;
+}
+.check-right input{
+    right:0;
+    left:inherit;
+}
+.check-right .custom-control-label::before,.check-right .custom-control-label::after {
+     right: -1.5rem;
+     left:inherit;
+     top: 8px;
+}
+.host_w{
+    width: 800px;
+    max-width: 800px;
+}
+.multiple-check{
+    background-color: #fff;
+    width: 100%;
+    min-height: 300px;
+    max-height: 300px;
+    overflow: auto;
+}
+.mt-27{
+    margin-top: 27px;
+}
+.nav-tabs .nav-item.show .nav-link, 
+.nav-tabs .nav-link.active {
+    color: #495057;
+    background-color: transparent;
+    border-color: #ccc #ccc #e2ebff;
+}
+.report-form-group.report-form-select{
+    overflow: inherit;
+}
+@media (min-width: 992px){
+// .modal-lg, .modal-xl {
+//     max-width: 872px;
+// }
+
+.Out-btn{
+    height: 23px;
+}
+
+} 
+
+.reportDay_list ul li {
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+// .code-Height{
+//     height:402px;  
+// }
+//
+
+.disable{
+    pointer-events:none;
+}

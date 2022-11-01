@@ -1,0 +1,167 @@
+<div class="mainContent-innner">
+    <div class="promo-mixmatch-section">
+        <div class="d-flex align-items-center">
+           <h4 class="title flex-grow-1 mb-0">Competitions</h4>
+           <div class="probtn-wrap d-flex text-right">
+            <button type="button" class="btn btn-blue with-icon mr-2" [routerLink]="['./add-competition']"><i class="icon fa fa-plus-circle"></i> Add</button>
+            <button type="button" class="btn with-icon mr-2" ><i class="icon fa fa-print"></i> Print</button>
+            <button type="button" class="btn with-icon mr-2" (click)="exportCompetitionsData()"><i class="icon fa fa-file-excel-o"></i> Export</button>
+            <button class="btn with-icon mr-2" data-toggle="modal" data-target="#competitionSearch" (click)="openCompetitionSearchFilter()">
+                <i class="icon fa fa-filter" ></i> Filter
+              </button>
+           </div>
+        </div>
+        <!-- /.action-topbar -->
+        <div class="promo-mixmatch-wrap">
+            <div class="promo-mixmatch-table-wrap bg-box mt-15 all-w">
+                <div class="table-responsive ctm-data-table">
+                    <table class="table ctm-table " id="competition-table">
+                        <thead>
+                        <tr>
+                            <th>Status
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Comp
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Name
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Status
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Comp Type
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Start
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>End
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Loyalty Factor
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Complimentary 
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Reset Cycle
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Trigger Type
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Trigger
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Trigger Count
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Reward Type
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Reward
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Reward Count
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Redemption exp
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th>Force Print
+                                    <i class="ml-1 fa fa-long-arrow-up"></i>
+                                    <i class="fa fa-long-arrow-down"></i>
+                            </th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let competition of competitions"> 
+                                <td>     
+                                    <!-- <span class="status-check" [ngClass]="{ 'status-true': competition.status, 'status-false': !competition.status }"></span>  -->
+                                    <!-- <div class="status-icons">
+                                        <img *ngIf="competition.status" tooltip="Active" src="assets/images/status-true.svg" alt="">
+                                        <img *ngIf="!competition.status" tooltip="Inactive" src="assets/images/status-false.svg" alt="">
+                                    </div>  -->
+                                    <span class="status-check"[ngClass]="competition.status ? 'status-true' : 'status-false'"
+                                    ></span>
+                                    <div style="display: none;">{{competition.status ? 'Active' : 'Inactive'}} </div>
+                                </td>
+                                <td><a (click)="changeCompetitionDetails(competition.id)">{{competition.code}}</a></td>
+                                <td (click)="changeCompetitionDetails(competition.id)">{{competition.desc}}</td>
+                                <td (click)="changeCompetitionDetails(competition.id)">{{competition.status==true ? 'Active' : 'Inactive'}}</td>
+                                <td (click)="changeCompetitionDetails(competition.id)">{{competition.competitionTypeDesc}}({{competition.competitionTypeCode}})</td>
+                                <td (click)="changeCompetitionDetails(competition.id)"><span style="display: none;"> {{ConvertDateToMiliSeconds(competition?.start)}} </span>{{competition?.start | customdatetimeformat}}</td>
+                                <td (click)="changeCompetitionDetails(competition.id)"><span style="display: none;"> {{ConvertDateToMiliSeconds(competition?.end)}} </span>{{competition?.end | customdatetimeformat}}</td>
+                                <td (click)="changeCompetitionDetails(competition.id)">{{competition.loyaltyFactor}}</td>
+                                <td (click)="changeCompetitionDetails(competition.id)">{{competition.complDiscount}}</td>
+                                <td (click)="changeCompetitionDetails(competition.id)">{{competition.resetCycleDesc}}({{competition.resetCycleCode}})</td>
+                                <td (click)="changeCompetitionDetails(competition.id)">{{competition.triggerTypeDesc}} ({{competition.triggerTypeCode}})</td>
+                                <td (click)="changeCompetitionDetails(competition.id)">{{competition.activationPoints}}</td>
+                                <td (click)="changeCompetitionDetails(competition.id)">{{competition?.triggerCount}}</td>
+                                <td (click)="changeCompetitionDetails(competition.id)">{{competition.rewardTypeDesc}}</td>
+                                <td (click)="changeCompetitionDetails(competition.id)">{{competition.discount}}</td>
+                                <!-- <td>{{competition.Reward Count}}</td> -->
+                                <td (click)="changeCompetitionDetails(competition.id)">{{competition?.rewardCount}}</td>
+                                <!-- <td>{{competition.Redemption exp}}</td> -->
+                                <td (click)="changeCompetitionDetails(competition.id)">{{competition.rewardExpiration ? competition.rewardExpiration : '0'}}</td>
+                                <td (click)="changeCompetitionDetails(competition.id)">{{competition.forcePrint == true ? '1' : '0'}}</td>
+                                <td class="text-center">
+                                    <div class="moreOption">
+                                       
+                                        <div class="tbHover-btnGroup">
+                                            <button class="tbHover-btn trash-btn" (click)="changeCompetitionDetails(competition.id)"><i class="fa fa-pencil"></i></button>
+                                            <button class="tbHover-btn trash-btn" (click)="deleteCompetition(competition.id)"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>                           
+                        </tbody>
+                    </table>
+                </div>
+             
+            </div>
+        </div>
+     </div>
+  </div>
+  <div class="modal fade thm-popup" id="competitionSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form name = "searchForm" id = "searchForm">
+						<div class="title-wrap mb-2">
+							<h4 class="title">Search Filter</h4>
+						</div>
+						<div class="form-group mb-0">
+							<label> Wildcard Search</label>
+							<input type="text" appUppercase id="competitionSearch_filter" class="form-control" #searchValue>
+						</div>
+						<div class="btn-wrap text-right mt-10">
+							<button class="btn btn-blue mr-2" (click)="competitionSearch(searchValue)" >Ok</button>
+							<button class="btn btn-grey"   data-dismiss="modal" >Cancel</button>
+						</div>
+					</form>	
+				</div>					
+			</div>
+		</div>
+	</div>
+</div>

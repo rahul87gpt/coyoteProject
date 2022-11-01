@@ -1,0 +1,131 @@
+<div class="mainContent-innner">
+   <div class="stpUsers-wrap">
+      <div class="d-flex align-items-center">
+         <h4 class="title flex-grow-1 mb-0">Users</h4>
+         <div class="probtn-wrap text-right">
+            <a class="btn btn-blue with-icon mr-2" [routerLink]="['./new-user']"
+               routerLinkActive="router-link-active"><i class="icon fa fa-plus-circle"></i> Add</a>
+            <!-- <button class="btn with-icon mr-2"><img class="icon" src="assets/images/trash-btn-icon.svg" alt="Icon"> Delete</button> -->
+            <button class="btn with-icon mr-2"><i class="icon fa fa-print"></i> Print</button>
+            <!-- <button class="btn with-icon mr-2"><img class="icon" src="assets/images/filter-icon.svg" alt="Icon"> filter</button> -->
+            <button class="btn with-icon mr-2" (click)="exportUsersData()"><i class="icon fa fa-file-excel-o"></i>
+               Export</button>
+            <button class="btn btn-blue with-icon" data-toggle="modal" data-target="#UsersSearch" (click)="openUsersSearchFilter()">
+               <i class="icon fa fa-filter"></i> Filter
+            </button>
+         </div>
+      </div>
+      <div class="stpUsers bg-box mt-15">
+         <div class="UserRolesGrid-wrap all-w">
+            <div class="table-responsive">
+               <table class="table ctm-table userlist-table" id="user-table">
+                  <thead>
+                     <tr>
+                        <th>Status </th>
+                        <th>User Name </th>
+                        <th>Surname </th>
+                        <th>First name</th>
+                        <th>Gender </th>
+                        <th>Outlet </th>
+                        <th>Zone </th>
+                        <th>Access </th>
+                        <!-- <th>Access Group</th> -->
+                        <th>Last Login
+                        </th>
+                        <th>Promo Prefix</th>
+                        <th>KeyPad Prefix</th>
+                        <th class="no-sort">Action</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr *ngFor="let user of userList">
+                        <td>
+                           <!-- <span class="status-check" tooltip="{{user.status == true ? 'Active User' : 'Inactive User'}}" [ngClass]="{ 'status-true': user.status, 'status-false': !user.status }"></span> -->
+                           <div class="status-icons">
+                              <img *ngIf="user?.status" src="assets/images/status-true.svg" alt="">
+                              <img *ngIf="!user?.status" src="assets/images/status-false.svg" alt="">
+                           </div>
+
+                           <!-- <span class="status-check" [ngClass]="user.status ? 'status-true' : 'status-false'"></span> -->
+                           <div style="display: none;">{{user.status ? 'Active' : 'Inactive'}} </div>
+
+                        </td>
+                        <td [routerLink]="['./update-user', user.id]">
+                           <a>{{user.userName}}</a>
+                        </td>
+                        <td>{{user.lastName}}</td>
+                        <td>{{user.firstName}}</td>
+
+
+                        <td>{{user.gender}}</td>
+                        <td>
+                           <!-- <select>
+                              <ng-container *ngIf="user?.storeList?.length ">
+                                 <ng-container *ngFor="let userData of user?.storeList">
+                                    <option>{{userData?.code}}</option>
+                                 </ng-container>
+                              </ng-container>
+                              <ng-template #noLength>
+                                 <option selected disabled>No Data Available</option>
+                              </ng-template>
+                           </select> -->
+                           <!-- <ul class="custom-dropdown-hover">
+                              <li>
+                                 <ul class="sub-drop">
+                                    <li>123</li>
+                                    <li>254</li>
+                                    <li>452</li>
+                                    <li>14564</li>
+                                 </ul>
+                              </li>
+                           </ul> -->
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <!-- <td>REDMAP</td> -->
+                        <td><span style="display: none;">
+                              {{ConvertDateToMiliSeconds(user?.lastLogin )}}
+                           </span>{{user?.lastLogin  | dateTimeFormate}}</td>
+                        <!-- <td [routerLink]="['./update-user', user.id]">{{user.lastLogin | dateTimeFormate }}</td> -->
+                        <td>{{user.promoPrefix}}</td>
+                        <td>{{user.keypadPrefix}}</td>
+                        <td class="no-sort">
+                           <div class="tbHover-btnGroup">
+                              <a tooltip="Change" placement="left" class="tbHover-btn trash-btn"
+                                 [routerLink]="['./update-user', user.id]"><i class="fa fa-pencil"></i></a>
+                              <a tooltip="Delete" placement="right" class="tbHover-btn trash-btn"
+                                 (click)="deleteUser(user.id)"><i class="fa fa-trash"></i></a>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade thm-popup" id="UsersSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+   aria-hidden="true" data-backdrop="static">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-body popup-box-width">
+            <div class="popup-box">
+               <form name="searchForm" id="searchForm">
+                  <div class="title-wrap mb-2">
+                     <h4 class="title"> Search Filter</h4>
+                  </div>
+                  <div class="form-group mb-0">
+                     <label> Wildcard Search</label>
+                     <input type="text" appUppercase id="Users_Search_filter" class="form-control" #searchValue>
+                  </div>
+                  <div class="btn-wrap text-right mt-10">
+                     <button class="btn btn-blue mr-2" (click)="UsersSearch(searchValue)">Ok</button>
+                     <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,118 @@
+<div class="mainContent-innner">
+  <div class="Chaisher-section">
+    <div class="d-flex align-items-center">
+      <h4 class="title flex-grow-1 mb-0">Cashiers</h4>
+      <div class="probtn-wrap text-right">
+        <button class="btn btn-blue with-icon mr-2" [routerLink]="['/cashiers/add']"
+          routerLinkActive="router-link-active">
+          <i class="icon fa fa-plus-circle"></i> Add
+        </button>
+        <button class="btn with-icon mr-2">
+          <i class="icon fa fa-print"></i> Print
+        </button>
+        <button class="btn with-icon mr-2" (click)="exportCashierData()">
+          <i class="icon fa fa-file-excel-o"></i> Export
+        </button>
+        <button class="btn btn-blue with-icon" data-toggle="modal" data-target="#cashierSearch" (click)="opencashierSearchFilter()">
+          <i class="icon fa fa-filter"></i> Filter
+        </button>
+      </div>
+    </div>
+    <!-- /.action-topbar -->
+    <div class="Chaisher-wrap bg-box mt-15">
+      <div class="Chaisher-table-wrap all-w">
+        <div class="table-responsive">
+          <table class="table ctm-table" id="cashier-table">
+            <thead>
+              <tr>
+                <th>Status </th>
+                <th>Number </th>
+                <th>Surname </th>
+                <th>First Name </th>
+                <!-- <th>Status </th> -->
+                <th>Gender </th>
+                <th>Cashier Type </th>
+                <th>Store Group </th>
+                <!-- <th>Store</th> -->
+                <th>Store </th>
+                <th>Outlet </th>
+                <th>Till </th>
+                <th>Zone </th>
+                <th>Access Level </th>
+                <th>Fuel User </th>
+                <th class="no-sort">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cashier of cashierList">
+                <td>
+                  <div class="status-icons">
+                    <img *ngIf="cashier.status" src="assets/images/status-true.svg" alt="">
+                    <img *ngIf="!cashier.status" src="assets/images/status-false.svg" alt="">
+                  </div>
+                  <span hidden>
+                    {{ cashier.status ? "Active" : "In-Active" }}
+                  </span>
+                </td>
+                <td><a [routerLink]="['/cashiers/update', cashier.id]">{{ cashier.number }}</a></td>
+                <td>{{ cashier.surname }}</td>
+                <td>{{ cashier.firstName }}</td>
+                <!-- <td>
+                  {{ cashier.status && cashier.status=== true?"Active":"Inactive"  }}</td> -->
+
+                <td>{{ cashier.gender }}</td>
+                <td>{{ cashier.typeName }}</td>
+                <td>{{ cashier.storeGroup }}</td>
+                <!-- <td  [routerLink]="['/cashiers/update', cashier.id]"></td> -->
+                <td>{{ cashier.outletName }}</td>
+                <td>{{ cashier.store }}</td>
+                <td>{{ cashier.tillName }}</td>
+                <td>
+                  {{cashier.zoneDesc && cashier.zoneDesc === null ? '' : cashier.zoneDesc  }}</td>
+                <!-- <td  [routerLink]="['/cashiers/update', cashier.id]">{{cashier.zoneDesc && cashier.zoneDesc === null ? '': cashier.zoneDesc + " " + cashier.zoneCode && cashier.zoneCode === null ? '': cashier.zoneCode }}</td> -->
+                <td>{{ cashier.accessLevel }}</td>
+                <td>{{ cashier.fuelUser }}</td>
+                <td class="no-sort">
+                  <div class="tbHover-btnGroup">
+                    <button tooltip="Change" placement="left" class="tbHover-btn trash-btn"
+                      [routerLink]="['/cashiers/update', cashier.id]" routerLinkActive="router-link-active">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                    <button tooltip="Delete" placement="left" class="tbHover-btn trash-btn"
+                      (click)="deleteCashier(cashier.id)">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade thm-popup" id="cashierSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form name="searchForm" id="searchForm">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Cashier Search</h4>
+            </div>
+            <div class="form-group mb-0">
+              <label> Wildcard Search</label>
+              <input type="text" id="cashier_Search_filter" appUppercase class="form-control" #searchValue>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2" (click)="serchCashier(searchValue)">Ok</button>
+              <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,166 @@
+<div class="mainContent-innner">
+  <div class="suppliers-section">
+    <div class="d-flex align-items-center">
+      <h4 class="title flex-grow-1 mb-0">Suppliers</h4>
+      <div class="probtn-wrap text-right">
+        <a
+          class="btn btn-blue with-icon mr-2"
+          [routerLink]="['/suppliers/add-supplier']"
+          ><i class="icon fa fa-plus-circle"></i> Add</a
+        >
+        <!-- <button class="btn with-icon mr-2"><i class="icon fa fa-pencil-square-o"></i> Change</button> -->
+        <button class="btn with-icon mr-2">
+          <i class="icon fa fa-print"></i> Print
+        </button>
+        <button class="btn with-icon mr-2" (click)="exportSuppliersData()">
+          <i class="icon fa fa-file-excel-o"></i> Export
+        </button>
+        <button
+          class="btn btn-blue with-icon"
+          data-toggle="modal"
+          data-target="#suppliersSearch"
+          (click)="openSuppliersSearchFilter()"
+        >
+          <i class="icon fa fa-filter"></i> Filter
+        </button>
+      </div>
+    </div>
+    <div class="suppliers-wrap bg-box mt-15 all-w">
+      <div class="table-responsive">
+        <table class="table ctm-table" id="supplier-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Description</th>
+              <th>Address 1</th>
+              <th>Address 2</th>
+              <th>Address 3</th>
+              <th>Address 4</th>
+              <th>Phone Number</th>
+              <th>Email</th>
+              <th>Updated Cost</th>
+              <th>Promo Supplier</th>
+              <th>ABN</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let supplier of supplierData">
+              <td [routerLink]="['/suppliers/add-supplier/' + supplier.id]">
+                <a>{{ supplier.code }}</a>
+              </td>
+              <td>
+                {{
+                  supplier.desc?.length > 30
+                    ? supplier.desc.substring(0, 30) + "..."
+                    : supplier.desc
+                }}
+              </td>
+              <td>
+                {{
+                  supplier.address1?.length > 30
+                    ? supplier.address1.substring(0, 30) + "..."
+                    : supplier.address1
+                }}
+              </td>
+              <td>
+                {{
+                  supplier.address2?.length > 30
+                    ? supplier.address2.substring(0, 30) + "..."
+                    : supplier.address2
+                }}
+              </td>
+              <td>
+                {{
+                  supplier.address3?.length > 30
+                    ? supplier.address3.substring(0, 30) + "..."
+                    : supplier.address3
+                }}
+              </td>
+              <td>
+                {{
+                  supplier.address4?.length > 30
+                    ? supplier.address4.substring(0, 30) + "..."
+                    : supplier.address4
+                }}
+              </td>
+              <td>{{ supplier.phone }}</td>
+              <td>{{ supplier.email }}</td>
+              <td>{{ supplier.updateCost }}</td>
+              <td>{{ supplier.promoCode }}</td>
+              <td>{{ supplier.abn }}</td>
+              <td class="text-center">
+                <div class="tbHover-btnGroup">
+                  <a
+                    tooltip="Change"
+                    placement="left"
+                    class="tbHover-btn trash-btn"
+                    [routerLink]="['/suppliers/add-supplier/' + supplier.id]"
+                    ><i class="fa fa-pencil"></i
+                  ></a>
+                  <a
+                    tooltip="Delete"
+                    placement="left"
+                    class="tbHover-btn trash-btn"
+                    (click)="deleteSupplier(supplier.id)"
+                    ><i class="fa fa-trash"></i
+                  ></a>
+                </div>
+                <!-- <div class="tbHover-btnGroup">
+                  <button
+                    class="tbHover-btn trash-btn"
+                    [routerLink]="['/suppliers/add-supplier/' + supplier.id]"
+                  >
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                  <button
+                    class="tbHover-btn trash-btn"
+                    (click)="deleteSupplier(supplier.id)"
+                  >
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade thm-popup"
+  id="suppliersSearch"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-backdrop="static"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form name="searchForm" id="searchForm">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Search Filter</h4>
+            </div>
+            <div class="form-group mb-0">
+              <label> Wildcard Search</label>
+              <input type="text" id="suppliers_Search_Filter" appUppercase class="form-control" #searchValue />
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button
+                class="btn btn-blue mr-2"
+                (click)="suppliersSearch(searchValue)"
+              >
+                Ok
+              </button>
+              <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

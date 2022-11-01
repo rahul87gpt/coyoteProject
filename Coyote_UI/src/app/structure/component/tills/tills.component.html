@@ -1,0 +1,466 @@
+<div class="mainContent-innner">
+  <div class="Tills-section">
+    <div class="d-flex align-items-center">
+      <h4 class="title flex-grow-1 mb-0">Tills</h4>
+      <div class="probtn-wrap d-flex text-right">
+        <button class="btn btn-blue with-icon mr-2" (click)="clickAdd()" data-toggle="modal" data-target="#AddModal">
+          <i class="icon fa fa-plus-circle"></i> Add
+        </button>
+        <button class="btn with-icon mr-2" (click)="printData()">
+          <i class="icon fa fa-print"></i> Print
+        </button>
+        <button class="btn with-icon mr-2" (click)="exportTillsData()">
+          <i class="icon fa fa-file-excel-o"></i> Export
+        </button>
+        <button class="btn btn-blue with-icon" data-toggle="modal" data-target="#tillsSearch" (click)="openTillsSearchFilter()">
+          <i class="icon fa fa-filter"></i> Filter
+        </button>
+      </div>
+    </div>
+    <!-- /.action-topbar -->
+    <div class="Tills-wrap">
+      <div class="Tills-table-wrap bg-box mt-15 all-w">
+        <div class="table-responsive ctm-data-table">
+          <table class="table ctm-table" id="till-table">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th style="min-width: 90px;">Till Number
+                  <span  class="sortingIcon" >
+                    <i (click)="shortData('accend',1)" class="ml-1 fa fa-long-arrow-up"
+                    [ngClass]=" (short_icon_class_accend == true && thIndex == 1 )  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 1)  ? 'decend' : ''" (click)="shortData('decend',1)" class="fa fa-long-arrow-down"></i>
+                 </span>
+                  <span class="column_id float-right" (click)="openTillFilter('TillNumber')" ><i class="fa fa-filter"></i></span>
+                </th>
+                <!-- <th>
+              
+                  <span  class="sortingIcon" >
+                   <i (click)="shortData('accend',1)" class="ml-1 fa fa-long-arrow-up"
+                   [ngClass]=" (short_icon_class_accend == true && thIndex == 1 )  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 1)  ? 'decend' : ''" (click)="shortData('decend',1)" class="fa fa-long-arrow-down"></i>
+                </span>
+               </th> -->
+                <th>Description
+                  <span  class="sortingIcon" >
+                    <i (click)="shortData('accend',2)" class="ml-1 fa fa-long-arrow-up"
+                    [ngClass]=" (short_icon_class_accend == true && thIndex == 2)  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 2)  ? 'decend' : ''" (click)="shortData('decend',2)" class="fa fa-long-arrow-down"></i>
+                 </span>
+                  <span class="column_id float-right" (click)="openTillFilter('Description')" ><i class="fa fa-filter"></i></span>
+                </th>
+                <!-- <th>
+              
+                  <span  class="sortingIcon" >
+                   <i (click)="shortData('accend',3)" class="ml-1 fa fa-long-arrow-up"
+                   [ngClass]=" (short_icon_class_accend == true && thIndex == 3)  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 3)  ? 'decend' : ''" (click)="shortData('decend',3)" class="fa fa-long-arrow-down"></i>
+                </span>
+               </th> -->
+                <th style="min-width: 60px;">Outlet
+                  <span  class="sortingIcon" >
+                    <i (click)="shortData('accend',3)" class="ml-1 fa fa-long-arrow-up"
+                    [ngClass]=" (short_icon_class_accend == true && thIndex == 3 )  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 3)  ? 'decend' : ''" (click)="shortData('decend',3)" class="fa fa-long-arrow-down"></i>
+                 </span>
+                  <span class="column_id float-right" (click)="openTillFilter('Outlet')" ><i class="fa fa-filter"></i></span>
+                </th>
+                <!-- <th>
+              
+                  <span  class="sortingIcon" >
+                   <i (click)="shortData('accend',5)" class="ml-1 fa fa-long-arrow-up"
+                   [ngClass]=" (short_icon_class_accend == true && thIndex == 5 )  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 5)  ? 'decend' : ''" (click)="shortData('decend',5)" class="fa fa-long-arrow-down"></i>
+                </span>
+               </th> -->
+                <th style="min-width: 70px;">Till Type
+                  <span  class="sortingIcon" >
+                    <i (click)="shortData('accend',4)" class="ml-1 fa fa-long-arrow-up"
+                    [ngClass]=" (short_icon_class_accend == true && thIndex == 4 )  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 4)  ? 'decend' : ''" (click)="shortData('decend',4)" class="fa fa-long-arrow-down"></i>
+                 </span>
+                  <span class="column_id float-right" (click)="openTillFilter('TillType')" ><i class="fa fa-filter"></i></span>
+                </th>
+                <!-- <th>
+              
+                  <span  class="sortingIcon" >
+                   <i (click)="shortData('accend',7)" class="ml-1 fa fa-long-arrow-up"
+                   [ngClass]=" (short_icon_class_accend == true && thIndex == 7 )  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 7)  ? 'decend' : ''" (click)="shortData('decend',7)" class="fa fa-long-arrow-down"></i>
+                </span>
+               </th> -->
+                <th style="min-width: 120px;">Serial Number
+                  <span  class="sortingIcon" >
+                    <i (click)="shortData('accend',5)" class="ml-1 fa fa-long-arrow-up"
+                    [ngClass]=" (short_icon_class_accend == true && thIndex == 5 )  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 5)  ? 'decend' : ''" (click)="shortData('decend',5)" class="fa fa-long-arrow-down"></i>
+                 </span>
+                  <span class="column_id float-right" (click)="openTillFilter('SerialNumber')" ><i class="fa fa-filter"></i></span>
+                </th>
+                <!-- <th>
+              
+                  <span  class="sortingIcon" >
+                   <i (click)="shortData('accend',9)" class="ml-1 fa fa-long-arrow-up"
+                   [ngClass]=" (short_icon_class_accend == true && thIndex == 9 )  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 9)  ? 'decend' : ''" (click)="shortData('decend',9)" class="fa fa-long-arrow-down"></i>
+                </span>
+               </th> -->
+                <th>Keypad
+                  <span  class="sortingIcon" >
+                    <i (click)="shortData('accend',6)" class="ml-1 fa fa-long-arrow-up"
+                    [ngClass]=" (short_icon_class_accend == true && thIndex == 6 )  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 6)  ? 'decend' : ''" (click)="shortData('decend',6)" class="fa fa-long-arrow-down"></i>
+                 </span>
+                  <span class="column_id float-right" (click)="openTillFilter('Keypad')" ><i class="fa fa-filter"></i></span>
+                </th>
+                <!-- <th>
+              
+                  <span  class="sortingIcon" >
+                   <i (click)="shortData('accend',11)" class="ml-1 fa fa-long-arrow-up"
+                   [ngClass]=" (short_icon_class_accend == true && thIndex == 11 )  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 11)  ? 'decend' : ''" (click)="shortData('decend',11)" class="fa fa-long-arrow-down"></i>
+                </span>
+               </th> -->
+                <th class="text-center">Action </th>
+              </tr>
+            </thead>
+            <tbody (click)="removeSeachFiterDisplay()">
+              <tr *ngFor="let till of tillList">
+                <td>
+                  <!-- <span class="status-check status-{{till.status}}"></span>  -->
+                  <div class="status-icons">
+                    <img *ngIf="till?.status" src="assets/images/status-true.svg" alt="" />
+                    <img *ngIf="!till?.status" src="assets/images/status-false.svg" alt="" />
+                    <span hidden>
+                      {{ till?.status ? "Active" : "In-Active" }}
+                    </span>
+                  </div>
+                </td>
+                <td data-toggle="modal" data-target="#AddModal" (click)="getTillById(till.id)" class="blue-text">
+                  <!-- <a > -->
+                    {{
+                      till.code.length > 10
+                        ? till.code.substring(0, 10) + "..."
+                        : till?.code
+                    }}
+                  <!-- </a> -->
+                </td>
+                <!-- <td></td> -->
+                
+                <td>
+                  {{
+                    till.desc.length > 30
+                      ? till.desc.substring(0, 30) + "..."
+                      : till?.desc
+                  }}
+                </td>
+                <!-- <td></td> -->
+                <td >{{ till.outletCode }}</td>
+                <!-- <td></td> -->
+                <td>{{ till.typeName }}</td>
+                <!-- <td></td> -->
+                <td>{{ till.serialNo }}</td>
+                <!-- <td></td> -->
+                <td>{{ till.keypadCode }}</td>
+                <!-- <td></td> -->
+                <td class="text-center">
+                  <div class="tbHover-btnGroup">
+                    <button tooltip="Change" placement="left" class="tbHover-btn trash-btn" data-toggle="modal"
+                      data-target="#AddModal" (click)="getTillById(till.id)">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                    <button tooltip="Delete" placement="left" class="tbHover-btn trash-btn"
+                      (click)="deleteTill(till.id)">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+                <!-- <td class="text-center">
+                                    <div class="tbHover-btnGroup">
+                                        <button tooltip="Change" class="tbHover-btn trash-btn" data-toggle="modal" data-target="#EditModal" (click)="getTillById(till.id)"><i class="fa fa-pencil" ></i></button>
+                                        <button tooltip="Delete"  class="tbHover-btn trash-btn" (click)="deleteTill(till.id)"><i class="fa fa-trash"></i></button>
+                                    </div>
+                               </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- /.pricingApnSearch-wrap -->
+  </div>
+  <!-- /.pricingApnSearch-section -->
+</div>
+
+<!-- Modal -->
+<div class="modal fade thm-popup" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form [formGroup]="tillForm" (ngSubmit)="sumitTillForm()">
+            <div class="group-from">
+              <h5 class="title">
+                {{ selectedId > 0 ? "Update" : "Add" }} Till
+              </h5>
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Code <span class="text-danger">*</span></label>
+                    <input type="number" [readonly]="codeStatus" class="form-control" formControlName="code"
+                      [ngClass]="{ 'is-invalid': submitted && f.code.errors }" />
+                    <div *ngIf="f.code.errors" class="invalid-feedback">
+                      <div *ngIf="f.code.errors.maxlength">
+                        Code Should be maximum 15 characters
+                      </div>
+                      <div *ngIf="f.code.errors.required">Code is required</div>
+                      <div *ngIf="f.code.errors.pattern">
+                        Space is not allowed
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Status <span class="text-danger"> *</span></label>
+                    <select class="form-control" formControlName="status"
+                      [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                      <option *ngFor="let status of statusArray" [value]="status.code">
+                        {{ status.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="f.status.errors" class="invalid-feedback">
+                      <div *ngIf="f.status.errors.required">
+                        status is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label>Description <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="desc" appUppercase  placeholder=""
+                  [ngClass]="{ 'is-invalid': submitted && f.desc.errors }" />
+                <div *ngIf="f.desc.errors" class="invalid-feedback">
+                  <div *ngIf="f.desc.errors.maxlength">
+                    Description Should be maximum 50 characters
+                  </div>
+                  <div *ngIf="f.desc.errors.required">
+                    Description is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Till Type <span class="text-danger">*</span></label>
+                    <select class="form-control" formControlName="typeId"
+                      [ngClass]="{ 'is-invalid': submitted && f.typeId.errors }">
+                      <option *ngFor="let type of typeList" value="{{ type.id }}">
+                        {{ type.name }}
+                      </option>
+                    </select>
+                    <div *ngIf="f.typeId.errors" class="invalid-feedback">
+                      <div *ngIf="f.typeId.errors.required">
+                        Till Type is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-0">
+                    <label>Serial No </label>
+                    <input type="number" class="form-control" formControlName="serialNo" placeholder="" [ngClass]="{
+                        'is-invalid': submitted && f.serialNo.errors
+                      }" />
+                    <div *ngIf="f.serialNo.errors" class="invalid-feedback">
+                      <div *ngIf="f.serialNo.errors.maxlength">
+                        Serial No Should be maximum 15 characters
+                      </div>
+                      <!-- <div *ngIf="f.serialNo.errors.required"> Serial No is required</div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="group-from">
+              <h5 class="title">Outlet <span class="text-danger">*</span></h5>
+              <div class="form-group mb-0">
+                <ng-select [items]="storeList" bindLabel="desc" bindValue="id" formControlName="outletId"
+                  [virtualScroll]="true" [clearable]="false" [clearOnBackspace]="false" [searchable]="true"
+                  [multiple]="false" [ngClass]="{ 'is-invalid': submitted && f.outletId.errors }">
+                  <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <div class="form-row">
+                      <span class="col-9 zone-overflow" title="{{ item.desc }}">
+                        {{ item.desc }}
+                      </span>
+                      <div class="col-3 zone-overflow" title="{{ item.code }}">
+                        {{ item.code }}
+                      </div>
+                    </div>
+                  </ng-template>
+                </ng-select>
+                <div *ngIf="f.outletId.errors" class="invalid-feedback">
+                  <div *ngIf="f.outletId.errors.required">
+                    Outlet is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="group-from mb-0">
+              <h5 class="title">Keypad <span class="text-danger">*</span></h5>
+              <div class="form-group mb-0">
+                <ng-select [items]="keypadList" bindLabel="desc" bindValue="id" formControlName="keypadId"
+                  [virtualScroll]="true" [clearable]="false" [clearOnBackspace]="false" [searchable]="true"
+                  [multiple]="false" [ngClass]="{ 'is-invalid': submitted && f.keypadId.errors }">
+                  <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <div class="form-row">
+                      <span class="col-8 zone-overflow" title="{{ item.desc }}">
+                        {{ item.desc }}
+                      </span>
+                      <div class="col-4 zone-overflow" title="{{ item.code }}">
+                        {{ item.code }}
+                      </div>
+                    </div>
+                  </ng-template>
+                </ng-select>
+                <!-- <select
+                  class="form-control"
+                  formControlName="keypadId"
+                  [ngClass]="{ 'is-invalid': submitted && f.keypadId.errors }"
+                >
+                  <option
+                    *ngFor="let keypad of keypadList"
+                    value="{{ keypad.id }}"
+                  >
+                    {{ keypad.desc }}
+                  </option>
+                </select> -->
+                <div *ngIf="f.keypadId.errors" class="invalid-feedback">
+                  <div *ngIf="f.keypadId.errors.required">
+                    Keypad is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button type="submit" class="btn btn-blue mr-2" [disabled]="disableButton">Save</button>
+              <a class="btn btn-grey" data-dismiss="modal">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="modal fade thm-popup" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="EditTillForm" (ngSubmit)="updateTill()" >
+                        <div class="group-from">
+                            <h5 class="title">
+                                Update Till
+                                </h5>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Code <span class="text-danger">*</span></label>
+                                        <input type="text" [readonly]="codeStatus" class="form-control" formControlName="code" [ngClass]="{ 'is-invalid': submitted1 && f1.code.errors }" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Status <span class="text-danger"> *</span></label>
+                                        <select class="form-control" formControlName="status" [ngClass]="{ 'is-invalid': submitted1 && f1.status.errors }" >
+                                            <option *ngFor="let status of statusArray" [value]="status.code">{{status.name}}</option>
+                                        </select>                                                
+                                        <div *ngIf="f1.status.errors" class="invalid-feedback">
+                                            <div *ngIf="f1.status.errors.required"> status is required</div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Description <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" formControlName="desc" placeholder=""[ngClass]="{ 'is-invalid': submitted1 && f1.desc.errors }" >
+                                <div *ngIf="f1.desc.errors" class="invalid-feedback">
+                                    <div *ngIf="f1.desc.errors.maxlength"> Description Should be maximum 50 characters </div>
+                                    <div *ngIf="f1.desc.errors.required"> Description is required</div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Till Type <span class="text-danger">*</span></label>
+                                        <select class="form-control" formControlName="typeId" [ngClass]="{ 'is-invalid': submitted1 && f1.typeId.errors }">
+                                            <option *ngFor="let type of typeList" value="{{type.id}}">{{type.name}}</option>
+                                        </select>                                                
+                                        <div *ngIf="f1.typeId
+                                        .errors" class="invalid-feedback">
+                                            <div *ngIf="f1.typeId.errors.required"> Till Type is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-0">
+                                        <label>Serial No </label>
+                                        <input type="text" class="form-control" formControlName="serialNo" placeholder="" [ngClass]="{ 'is-invalid': submitted1 && f1.serialNo.errors }" >
+                                        <div *ngIf="f1.serialNo.errors" class="invalid-feedback">
+                                            <div *ngIf="f1.serialNo.errors.maxlength"> Serial No Should be maximum 15 characters </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-from">
+                            <h5 class="title">Outlet <span class="text-danger">*</span></h5>
+                            <div class="form-group mb-0">
+                                <select class="form-control" formControlName="outletId" [ngClass]="{ 'is-invalid': submitted1 && f.outletId.errors }" >
+                                    <option *ngFor="let outlet of storeList" value="{{outlet.id}}">{{outlet.storeDetail}}</option>
+                                </select>
+                                <div *ngIf="f1.outletId.errors" class="invalid-feedback">
+                                    <div *ngIf="f1.outletId.errors.required"> Outlet is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-from mb-0">
+                            <h5 class="title">Keypad <span class="text-danger">*</span></h5>
+                            <div class="form-group mb-0">
+                                <select class="form-control" formControlName="keypadId" [ngClass]="{ 'is-invalid': submitted1 && f1.keypadId.errors }">
+                                    <option *ngFor="let keypad of keypadList" value="{{keypad.id}}">{{keypad.desc}}</option>
+                                </select>
+                                <div *ngIf="f1.keypadId.errors" class="invalid-feedback">
+                                    <div *ngIf="f1.keypadId.errors.required"> Keypad is required</div>
+                                </div>
+                            </div> 
+                        </div>                                        
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="submit" class="btn btn-blue mr-2"> Save</button>
+                            <a  class="btn btn-grey" data-dismiss="modal">Cancel</a>
+                        </div>
+                    </form>
+                </div>                    
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="modal fade thm-popup" id="tillsSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form name="searchForm" id="searchForm">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Search Filter</h4>
+            </div>
+            <div class="form-group mb-0">
+              <label> Wildcard Search</label>
+              <input type="text" id="tills_Search_Filter" appUppercase class="form-control" #searchValue />
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2" (click)="tillsSearch(searchValue)">
+                Ok
+              </button>
+              <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

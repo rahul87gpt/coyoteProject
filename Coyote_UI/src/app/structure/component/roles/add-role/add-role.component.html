@@ -1,0 +1,184 @@
+<div class="mainContent-innner">
+    <form [formGroup]="roleDetailsForm" (ngSubmit)="createOrUpdateRole(updateRole?.id)">
+    <div class="stpUsers-wrap">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">  {{ updateRole?.id ? "Update Role" : " New Role" }}</h4>
+            <div class="probtn-wrap text-right">
+                <button class="btn btn-blue mr-2">Submit</button>
+                <button class="btn" [routerLink]="['/roles']">Cancel</button>
+            </div>
+        </div>
+        <div class="usNewRole-wrap bg-box mt-15">
+			<div class="group-from mb-0">
+				<h5 class="title">User Details</h5>
+				<div class="form-row">
+					<div class="col-md-3">
+						<div class="form-group mb-0">
+							<label>Name <span class="text-danger">*</span></label>
+							<input type="text" class="form-control"  name="name" id="name" formControlName="name" 
+								placeholder="" [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+							>
+							<div
+								*ngIf="(submitted && roleDetailsForm.controls['name'].errors) ||
+								(f.name.invalid && (f.name.untouched || f.name.dirty))"
+								class="invalid-feedback" >
+								<div *ngIf="f.name.errors.required" class="alert error-alert">
+								Name is required
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group mb-0">
+							<label>Role Code <span class="text-danger">*</span></label>
+							<input type="text" [readonly]="codeStatus"  name="code" id="code" formControlName="code" class="form-control" 
+								placeholder="" [ngClass]="{ 'is-invalid': submitted && f.code.errors }"
+							>
+							<div
+								*ngIf="(submitted && roleDetailsForm.controls['code'].errors) ||
+								(f.code.invalid && (f.code.untouched || f.code.dirty))"
+								class="invalid-feedback" >
+								<div *ngIf="f.code.errors.required" class="alert error-alert">
+								Code is required
+								</div>
+								<div *ngIf="f.code.errors.pattern" class="alert error-alert">
+									Space is not allowed
+									</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group mb-0">
+							<label> Role Type <span class="text-danger">*</span></label>
+							<input type="text" class="form-control" placeholder=""  name="type" id="type" 
+								formControlName="type" [ngClass]="{ 'is-invalid': submitted && f.type.errors }"
+							>
+							<div
+								*ngIf="(submitted && roleDetailsForm.controls['type'].errors) ||
+								(f.type.invalid && (f.type.untouched || f.type.dirty))"
+								class="invalid-feedback" >
+								<div *ngIf="f.type.errors.required" class="alert error-alert">
+								Type is required
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group mb-0">
+							<label>Status <span class="text-danger">*</span></label>
+							<select
+								class="form-control"
+								name="status"
+								formControlName="status"
+								id="status"
+								>
+								<option [ngValue]="true">Active</option>
+								<option [ngValue]="false">Inactive</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>			
+		</div>
+		<div class="bg-box mt-15">
+			<div class="row align-items-center">
+				<div class="col-md-6">
+					<h5 class="title mb-0">
+						{{ updateRole?.id ? "Edit Permissions" : " Create Permissions" }}
+					</h5>
+				</div>
+				<div class="col-md-6 text-right">
+					<div class="custom-control form-group mb-0 custom-checkbox">
+						<input type="checkbox" class="custom-control-input" (change)="changeAllPermissionCheck($event)" id="customControlppAll"
+							[checked]="isAdminPermission ? true:''"
+						>
+						<label class="custom-control-label mb-0" for="customControlppAll">All Permission</label>
+					</div>
+				</div>
+			</div>
+			<div class="table-responsive mt-10">
+				<table class="table ctm-table usNewRole-table">
+					<thead>
+						<tr>
+							<th>PERMISSIONS</th>
+							<th>CREATE</th>
+							<th>READ</th>
+							<th>UPDATE</th>
+							<th>DELETE</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let permissions of permissionArr; let i=index" class="inner-check-table">
+							<td class="text-capitalize">{{permissions.split(".")[0]}}</td>
+							<td>
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" id="{{permissions}}.post" name="{{permissions.split('.')[0]}}.post" class="custom-control-input" 
+										(change)="changePermissionCheck($event)" [checked]="isAdminPermission ? 'true':''"
+									>
+									<label class="custom-control-label" for="{{permissions}}.post"></label>
+								</div>
+							</td>
+							<td>
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" id="{{permissions}}.get" name="{{permissions.split('.')[0]}}.get" class="custom-control-input" 
+										(change)="changePermissionCheck($event)" [checked]="isAdminPermission ? 'true':''"
+									>
+									<label class="custom-control-label" for="{{permissions}}.get"></label>
+								</div>
+							</td>
+							<td>
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" id="{{permissions}}.put" name="{{permissions.split('.')[0]}}.put" class="custom-control-input" 
+										(change)="changePermissionCheck($event)" [checked]="isAdminPermission ? 'true':''"
+									>
+									<label class="custom-control-label" for="{{permissions}}.put"></label>
+								</div>
+							</td>
+							<td>
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" id="{{permissions}}.delete" name="{{permissions.split('.')[0]}}.delete" class="custom-control-input" 
+										(change)="changePermissionCheck($event)" [checked]="isAdminPermission ? 'true':''"
+									>
+									<label class="custom-control-label" for="{{permissions}}.delete"></label>
+								</div>
+							</td>
+						</tr>
+					
+						<!--
+						<ng-template #createRoleTemplate>
+							<tr *ngFor="let permissions of permissionArr" class="inner-check-table">
+								<td class="text-capitalize">{{permissions}}</td>
+								<td>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" id="checkbox-{{permissions=='*'?'All':permissions.replace(' ', '_')}}-post" name="{{permissions.replace(' ', '_')}}.post" class="custom-control-input" (change)="changePermissionCheck($event)">
+										<label class="custom-control-label" for="checkbox-{{permissions=='*'?'All':permissions.replace(' ', '_')}}-post"></label>
+									</div>
+								</td>
+								<td>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="checkbox-{{permissions=='*'?'All':permissions.replace(' ', '_')}}-get" name="{{permissions.replace(' ', '_')}}.get" (change)="changePermissionCheck($event)">
+										<label class="custom-control-label" for="checkbox-{{permissions=='*'?'All':permissions.replace(' ', '_')}}-get"></label>
+									</div>
+								</td>
+								<td>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="checkbox-{{permissions=='*'?'All':permissions.replace(' ', '_')}}-put" name="{{permissions.replace(' ', '_')}}.put" (change)="changePermissionCheck($event)">
+										<label class="custom-control-label" for="checkbox-{{permissions=='*'?'All':permissions.replace(' ', '_')}}-put"></label>
+									</div>
+								</td>
+								<td>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="checkbox-{{permissions=='*'?'All':permissions.replace(' ', '_')}}-delete" name="{{permissions.replace(' ', '_')}}.delete" (change)="changePermissionCheck($event)">
+										<label class="custom-control-label" for="checkbox-{{permissions=='*'?'All':permissions.replace(' ', '_')}}-delete"></label>
+									</div>
+								</td>
+							</tr>
+						</ng-template>
+						-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+    </div>
+    </form>
+</div>

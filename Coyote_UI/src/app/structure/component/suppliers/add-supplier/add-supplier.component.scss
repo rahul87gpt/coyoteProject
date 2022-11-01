@@ -1,0 +1,26 @@
+.update-cost{
+
+    .col-md-4{
+        max-width: 116px !important;
+    }
+    .col-md-8{
+        min-width:calc( 100% - 116px) !important;
+    }
+}
+.supp-code{
+.col-md-3{
+    max-width: 100px !important;
+}
+.col-md-9{
+    min-width:calc( 100% - 100px) !important;
+}
+
+}
+.abn-w{
+    .col-3{
+        max-width: 45px !important;
+    }
+    .col-md-9{
+        min-width:calc( 100% - 45px) !important;
+    }
+}

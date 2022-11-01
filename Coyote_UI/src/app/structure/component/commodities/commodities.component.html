@@ -1,0 +1,485 @@
+<div class="mainContent-innner">
+  <div class="commodityList-section">
+    <div class="d-flex align-items-center">
+      <h4 class="title flex-grow-1 mb-0">Commodities</h4>
+      <div class="probtn-wrap text-right">
+        <a class="btn btn-blue with-icon mr-2" data-toggle="modal" data-target="#commoditiesModal"
+          (click)="resetForm()"><i class="icon fa fa-plus-circle"></i> Add</a>
+        <button class="btn with-icon mr-2">
+          <i class="icon fa fa-print"></i> Print
+        </button>
+        <button class="btn with-icon mr-2" (click)="exportCommoditiesData()">
+          <i class="icon fa fa-file-excel-o"></i> Export
+        </button>
+        <button class="btn btn-blue with-icon" data-toggle="modal" data-target="#commoditiesSearch" (click)="openCommoditiesSearchFilter()">
+          <i class="icon fa fa-filter"></i> Filter
+        </button>
+      </div>
+    </div>
+    <div class="Commodity-wrap bg-box mt-15">
+      <div class="Commodity-table-wrap all-w">
+        <div class="table-responsive">
+          <table class="table ctm-table" id="commodities-table">
+            <thead>
+              <tr>
+                <th>Code
+                  <span class="column_id float-right"   id="filter-sect" (click)="openFilter('Code')"><i class="fa fa-filter"></i></span> 
+                </th>
+                <th>
+                   <span  class="sortingIcon" >
+                    <i (click)="shortData('accend',0)" class="ml-1 fa fa-long-arrow-up"
+                     [ngClass]=" (short_icon_class_accend == true && thIndex == 0)  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 0)  ? 'decend' : ''" (click)="shortData('decend',0)" class="fa fa-long-arrow-down"></i>
+                 </span>
+                </th>
+                <th>Description
+                   <span class="column_id float-right"   id="filter-sect" (click)="openFilter('Description')"><i class="fa fa-filter"></i></span> 
+                </th>
+                <th>
+                   <span  class="sortingIcon" >
+                    <i (click)="shortData('accend',2)" class="ml-1 fa fa-long-arrow-up"
+                     [ngClass]=" (short_icon_class_accend == true && thIndex == 2)  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 2)  ? 'decend' : ''" (click)="shortData('decend',2)" class="fa fa-long-arrow-down"></i>
+                 </span>
+                </th>
+                <th>Map Dept 
+                  <span class="column_id float-right"   id="filter-sect" (click)="openFilter('MapDept')"><i class="fa fa-filter"></i></span> 
+                </th>
+                <th>
+                   <span  class="sortingIcon" >
+                    <i (click)="shortData('accend',4)" class="ml-1 fa fa-long-arrow-up"
+                     [ngClass]=" (short_icon_class_accend == true && thIndex == 4)  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 4)  ? 'decend' : ''" (click)="shortData('decend',4)" class="fa fa-long-arrow-down"></i>
+                 </span>
+                </th>
+                <th>Cover Days 
+                  <span class="column_id float-right"   id="filter-sect" (click)="openFilter('CoverDays')"><i class="fa fa-filter"></i></span> 
+                </th>
+                <th>
+                  <span  class="sortingIcon" >
+                    <i (click)="shortData('accend',6)" class="ml-1 fa fa-long-arrow-up"
+                     [ngClass]=" (short_icon_class_accend == true && thIndex == 6)  ? 'accend' : ''" ></i><i  [ngClass]="(short_icon_class_decend == true && thIndex == 6)  ? 'decend' : ''" (click)="shortData('decend',6)" class="fa fa-long-arrow-down"></i>
+                 </span>
+                </th>
+                <th class="no-sort">Action</th>
+              </tr>
+            </thead>
+            <tbody (click)="removeSeachFiterDisplay()">
+              <tr *ngFor="let comodity of comodotiesData">
+                <!-- <td>
+                  <div class="status-icons">
+                    <img
+                      *ngIf="comodity?.status"
+                      src="assets/images/status-true.svg"
+                      alt=""
+                    />
+                    <img
+                      *ngIf="!comodity?.status"
+                      src="assets/images/status-false.svg"
+                      alt=""
+                    />
+                    <span hidden>
+                      {{ comodity?.status ? "Active" : "In-Active" }}
+                    </span>
+                  </div>
+                </td> -->
+                <td class ="blue-text" data-toggle="modal" data-target="#commoditiesEditModal" (click)="getCommodityById(comodity.id)">
+                  <!-- <a> -->
+                    {{
+                      comodity.code.length > 10
+                        ? comodity.code.substring(0, 10) + "..."
+                        : comodity.code
+                    }}
+                  <!-- </a> -->
+                </td>
+                <td></td>
+                <td data-toggle="tooltip" data-placement="top" title="{{comodity.desc}}">
+                  {{
+                    comodity.desc.length > 30
+                      ? comodity.desc.substring(0, 30) + "..."
+                      : comodity.desc
+                  }}
+                </td>
+                <td></td>
+                <td class="pl-2">
+                  <!-- <span > -->
+                    {{ comodity.departmentCode }}
+                  <!-- </span> -->
+                </td>
+                <td></td>
+                <td>
+                  {{ comodity.coverDays }}
+                </td>
+                <td></td>
+                <td class="no-sort">
+                  <div class="tbHover-btnGroup">
+                    <div class="tbHover-btnGroup">
+                      <button tooltip="Change" placement="left" class="tbHover-btn trash-btn" data-toggle="modal"
+                        data-target="#commoditiesEditModal" (click)="getCommodityById(comodity.id)">
+                        <i class="fa fa-pencil"></i>
+                      </button>
+                      <button tooltip="Delete" placement="right" class="tbHover-btn trash-btn"
+                        (click)="deleteComodity(comodity.id)">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
+                    <!-- <button class="tbHover-btn trash-btn" data-toggle="modal" data-target="#commoditiesEditModal" (click)="getCommodityById(comodity.id)" ><i class="fa fa-pencil"></i></button>
+                        <button class="tbHover-btn trash-btn" (click)="deleteComodity(comodity.id)"><i class="fa fa-trash"></i></button> -->
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade thm-popup" id="commoditiesModal" tabindex="-1" role="dialog" aria-labelledby="storeGroupModal"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form [formGroup]="comodityDetailsForm" (ngSubmit)="AddCommodities()">
+            <div class="addCmmditis-wrap">
+              <div class="addCmmditis-form popup-box">
+                <div class="title-wrap mb-2">
+                  <h4 class="title">Add Commodities</h4>
+                </div>
+                <div class="form-group">
+                  <div class="form-row align-items-center">
+                    <label class="label col-md-5 mb-0">Code <span class="text-danger">*</span></label>
+                    <div class="col-md-7">
+                      <input type="number" class="form-control" formControlName="code"
+                        [ngClass]="{ 'is-invalid': submitted && f.code.errors }" />
+                      <div *ngIf="f.code.errors" class="invalid-feedback">
+                        <div *ngIf="f.code.errors.maxlength">
+                          Code be maximum 30 characters
+                        </div>
+                        <div *ngIf="f.code.errors.required">
+                          Code is required
+                        </div>
+                        <div *ngIf="f.code.errors.pattern">
+                          Space is not allowed
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-row align-items-center">
+                    <label class="label col-md-5 mb-0">Description <span class="text-danger">*</span></label>
+                    <div class="col-md-7">
+                      <input type="text" class="form-control" formControlName="desc" appUppercase
+                        [ngClass]="{ 'is-invalid': submitted && f.desc.errors }" />
+                      <div *ngIf="f.desc.errors" class="invalid-feedback">
+                        <div *ngIf="f.desc.errors.maxlength">
+                          Description be maximum 80 characters
+                        </div>
+                        <div *ngIf="f.desc.errors.required">
+                          Description is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-row align-items-center">
+                    <label class="label col-md-5 mb-0">Map Dept<span class="text-danger">*</span></label>
+                    <div class="col-md-7">
+                      <ng-select [items]="mapData" bindLabel="descCode" bindValue="id" formControlName="departmentId"
+                        [virtualScroll]="true" [clearable]="false" [clearOnBackspace]="false" [searchable]="true"
+                        [multiple]="false" [ngClass]="{
+                          'is-invalid': submitted && f.departmentId.errors
+                        }">
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                          <div class="form-row">
+                            <span class="col-9 zone-overflow" title="{{ item.name }}">
+                              {{ item.desc }}
+                            </span>
+                            <div class="col-3">
+                              {{ item.code }}
+                            </div>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                      <!-- <select
+                        class="form-control"
+                        formControlName="departmentId"
+                        [ngClass]="{
+                          'is-invalid': submitted && f.departmentId.errors
+                        }"
+                      >
+                        <option
+                          [ngValue]="mapDept.id"
+                          *ngFor="let mapDept of mapData"
+                        >
+                          {{ mapDept.desc }}&nbsp;&nbsp;&nbsp;&nbsp;{{
+                            mapDept.code
+                          }}
+                        </option>
+                      </select> -->
+                      <div *ngIf="f.departmentId.errors" class="invalid-feedback">
+                        <div *ngIf="f.departmentId.errors.required">
+                          Map Dept is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-row align-items-center">
+                    <label class="label col-md-5 mb-0">Cover Days </label>
+                    <div class="col-md-7">
+                      <input type="number" class="form-control" formControlName="coverDays" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-4">
+                  <!-- <div class="form-row align-items-center">
+                                    <label class="label col-md-5 mb-0">Commodity Deleted </label>
+                                    <div class="col-md-7">
+                                       <select
+                                          class="form-control"
+                                          name="'isDeleted'"
+                                          formControlName="isDeleted"
+                                          id="isDeleted"
+                                       >
+                                       <option [ngValue]="true">Deleted</option>       
+                                       <option [ngValue]="false">Not Deleted</option>
+                                       </select>
+                                    </div>
+                                 </div>                                  -->
+                </div>
+                <div class="group-from mb-0">
+                  <h5 class="title">Default GP%</h5>
+                  <div class="form-row">
+                    <div class="col-md-3">
+                      <div class="form-group mb-0">
+                        <label>Level 1</label>
+                        <input type="number" class="form-control" formControlName="gpPcntLevel1" min="0" max="100"
+                          onkeyup="if(this.value<0){this.value= this.value * -1}" />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group mb-0">
+                        <label>Level 2</label>
+                        <input type="number" class="form-control" formControlName="gpPcntLevel2" min="0" max="100"
+                          onkeyup="if(this.value<0){this.value= this.value * -1}" />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group mb-0">
+                        <label>Level 3</label>
+                        <input type="number" class="form-control" formControlName="gpPcntLevel3" min="0" max="100"
+                          onkeyup="if(this.value<0){this.value= this.value * -1}" />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group mb-0">
+                        <label>Level 4</label>
+                        <input type="number" class="form-control" formControlName="gpPcntLevel4" min="0" max="100"
+                          onkeyup="if(this.value<0){this.value= this.value * -1}" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-wrap text-right mt-10">
+                  <button type="submit" class="btn btn-blue mr-2">Save</button>
+                  <a class="btn btn-grey" data-dismiss="modal">Cancel</a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade thm-popup" id="commoditiesEditModal" tabindex="-1" role="dialog"
+  aria-labelledby="storeGroupModal" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form [formGroup]="comodityEditDetailsForm" (ngSubmit)="updateCommodities()">
+            <div class="addCmmditis-wrap">
+              <div class="addCmmditis-form popup-box">
+                <div class="title-wrap mb-2">
+                  <h4 class="title">Update Commodities</h4>
+                </div>
+                <div class="form-group">
+                  <div class="form-row align-items-center">
+                    <label class="label col-md-5 mb-0">Code <span class="text-danger">*</span></label>
+                    <div class="col-md-7">
+                      <input [readonly]="codeStatus" type="number" class="form-control" formControlName="code"
+                        [ngClass]="{
+                          'is-invalid':
+                            submittedcommoditiesEditModal && f1.code.errors
+                        }" />
+                      <div *ngIf="f1.code.errors" class="invalid-feedback">
+                        <div *ngIf="f1.code.errors.required">
+                          Code is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-row align-items-center">
+                    <label class="label col-md-5 mb-0">Description <span class="text-danger">*</span></label>
+                    <div class="col-md-7">
+                      <input type="text" class="form-control" appUppercase formControlName="desc" [ngClass]="{
+                          'is-invalid':
+                            submittedcommoditiesEditModal && f1.desc.errors
+                        }" />
+                      <div *ngIf="f1.desc.errors" class="invalid-feedback">
+                        <div *ngIf="f1.desc.errors.maxlength">
+                          Description be maximum 80 characters
+                        </div>
+                        <div *ngIf="f1.desc.errors.required">
+                          Description is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-row align-items-center">
+                    <label class="label col-md-5 mb-0">Map Dept<span class="text-danger">*</span></label>
+                    <div class="col-md-7">
+                      <ng-select [items]="mapData" bindLabel="descCode" bindValue="id" formControlName="departmentId"
+                        [virtualScroll]="true" [clearable]="false" [clearOnBackspace]="false" [searchable]="true"
+                        [multiple]="false" [ngClass]="{
+                        'is-invalid': submitted && f.departmentId.errors
+                      }">
+                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                          <div class="form-row">
+                            <span class="col-9 zone-overflow" title="{{ item.name }}">
+                              {{ item.desc }}
+                            </span>
+                            <div class="col-3">
+                              {{ item.code }}
+                            </div>
+                          </div>
+                        </ng-template>
+                      </ng-select>
+                      <!-- <select
+                        class="form-control"
+                        formControlName="departmentId"
+                        [ngClass]="{
+                          'is-invalid':
+                            submittedcommoditiesEditModal &&
+                            f1.departmentId.errors
+                        }"
+                      >
+                        <option
+                          [ngValue]="mapDept.id"
+                          *ngFor="let mapDept of mapData"
+                        >
+                          {{ mapDept.desc }}&nbsp;&nbsp;&nbsp;&nbsp;{{
+                            mapDept.code
+                          }}
+                        </option>
+                      </select> -->
+                      <div *ngIf="f1.departmentId.errors" class="invalid-feedback">
+                        <div *ngIf="f1.departmentId.errors.required">
+                          Map Dept is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-row align-items-center">
+                    <label class="label col-md-5 mb-0">Cover Days</label>
+                    <div class="col-md-7">
+                      <input type="number" class="form-control" formControlName="coverDays" />
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-4">
+                  <!-- <div class="form-row align-items-center">
+                                    <label class="label col-md-5 mb-0">Commodity Deleted </label>
+                                    <div class="col-md-7">
+                                       <select
+                                          class="form-control"
+                                          name="'isDeleted'"
+                                          formControlName="isDeleted"
+                                          id="isDeleted"
+                                       >
+                                       <option [ngValue]="true">Deleted</option>       
+                                       <option [ngValue]="false">Not Deleted</option>
+                                       </select>
+                                    </div>
+                                 </div>                                  -->
+                </div>
+                <div class="group-from mb-0">
+                  <h5 class="title">Default GP%</h5>
+                  <div class="form-row">
+                    <div class="col-md-3">
+                      <div class="form-group mb-0">
+                        <label>Level 1</label>
+                        <input type="number" class="form-control" formControlName="gpPcntLevel1" min="0" max="100"
+                          onkeyup="if(this.value<0){this.value= this.value * -1}" />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group mb-0">
+                        <label>Level 2</label>
+                        <input type="number" class="form-control" formControlName="gpPcntLevel2" min="0" max="100"
+                          onkeyup="if(this.value<0){this.value= this.value * -1}" />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group mb-0">
+                        <label>Level 3</label>
+                        <input type="number" class="form-control" formControlName="gpPcntLevel3" min="0" max="100"
+                          onkeyup="if(this.value<0){this.value= this.value * -1}" />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group mb-0">
+                        <label>Level 4</label>
+                        <input type="number" class="form-control" formControlName="gpPcntLevel4" min="0" max="100"
+                          onkeyup="if(this.value<0){this.value= this.value * -1}" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-wrap text-right mt-10">
+                  <button type="submit" class="btn btn-blue mr-2">Save</button>
+                  <a class="btn btn-grey" data-dismiss="modal">Cancel</a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade thm-popup" id="commoditiesSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form name="searchForm" id="searchForm">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Search Filter</h4>
+            </div>
+            <div class="form-group mb-0">
+              <label> Wildcard Search</label>
+              <input type="text" id="commodities_Search_Filter" appUppercase class="form-control" #searchValue />
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2" (click)="commoditiesSearch(searchValue)">
+                Ok
+              </button>
+              <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

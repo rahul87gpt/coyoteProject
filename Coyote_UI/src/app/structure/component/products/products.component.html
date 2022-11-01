@@ -1,0 +1,162 @@
+<div class="mainContent-innner">
+	<div class="pricingProMstr-section">		
+		<div class="d-flex align-items-center">
+			<h4 class="title flex-grow-1 mb-0">
+				{{routingDetails?.module || 'Active Product'}} <span id="totalRecordId">{{(recordObj.total_api_records > 0) ? recordObj.total_api_records : ''}}</span>
+				<h5 class="title flex-grow-1 mb-0" *ngIf="(recordObj.total_api_records > 0) && searchObj.search_key">
+					<b>{{"Search Result For '" + (searchObj.search_key | uppercase) + "'"}}</b>
+				</h5>
+			</h4>
+			<div *ngIf="isTopOptionShow" class="probtn-wrap text-right">
+				<a class="btn btn-blue with-icon mr-2" (click)="addOrUpdateOrDeleteOrCloneProduct(null, 'ADD')">
+					<i class="icon fa fa-plus-circle"></i> Add</a>
+				<button class="btn with-icon mr-2" (click)="inprogressFunction()"><i class="icon fa fa-print"></i> Print</button>
+				<button class="btn with-icon mr-2" (click)="exportProductData()"><i class="icon fa fa-file-excel-o"></i> Export</button>
+				<button class="btn with-icon" data-toggle="modal" data-target="#SearchFilter" (click)="searchFunction()" ><i class="icon fa fa-filter"></i> Filter</button>
+				<span *ngIf="searchValue.value" title="{{ searchValue.value }}" class="label label-info active-no">{{ searchValue.value }}</span>
+			</div>
+		</div>
+		<div class="product-wrap bg-box mt-15">
+			<div class="table-responsive ctm-data-table">
+				<table class="table ctm-table" id="product-table" >
+					<thead>
+						<ng-container *ngIf="productData.length || recordObj.is_api_called">
+							<tr>
+								<th class="text-center">Status
+										<i class="ml-1 fa fa-long-arrow-up"></i>
+										<i class="fa fa-long-arrow-down"></i>
+								</th>
+								<ng-container *ngFor="let column of columns">
+									<th>{{column}} 	
+										<ng-container *ngIf="column != 'Action'">
+											<i class="ml-1 fa fa-long-arrow-up"></i>
+											<i class="fa fa-long-arrow-down"></i>
+										</ng-container>
+										
+									</th>
+								</ng-container>
+							</tr>
+						</ng-container>
+					</thead>
+					<tbody>
+						<ng-container *ngIf="productData.length">
+							<ng-container *ngFor="let product of productData">
+								<tr [ngClass]="{'red-all-text': product.deletedAt ? true : false}">
+									<td>
+										<!-- <span style="display: none">{{ product.status }}</span> -->
+										<span class="status-check"[ngClass]="product.status ? 'status-true' : 'status-false'"
+										></span>
+										<div style="display: none;">{{product.status ? 'Active' : 'Deactive'}} </div>
+									</td>
+
+									<td>
+										<a (click)="addOrUpdateOrDeleteOrCloneProduct(product, 'UPDATE')">
+											{{product.number}}
+										</a>
+									</td>
+									<!--
+									<td>
+										{{product.status ? statusArray[0].status : statusArray[1].status}}
+									</td>
+									-->
+									<td title="{{product.desc}}">{{product.desc}}</td>
+									<td title="{{product.commodityCode}}">{{product.commodityCode}}</td>
+									<td title="{{product.commodity}}">{{product.commodity}}</td>
+									<td title="{{product.departmentCode}}">{{product.departmentCode}}</td>
+									<td title="{{product.department}}">{{product.department}}</td>
+									<td title="{{product.categoryCode}}">{{product.categoryCode}}</td>
+									<td title="{{product.category}}">{{product.category}}</td>
+									<td title="{{product.groupCode}}">{{product.groupCode}}</td>
+									<td title="{{product.group}}">{{product.group}}</td>
+
+									<td title="{{product.supplierCode}}">{{product.supplierCode}}</td>
+									<td title="{{product.supplier}}">{{product.supplier}}</td>
+									<td title="{{product.replicate}}">{{product.replicate}}</td>
+									<td title="{{product.type}}">{{product.type}}</td>
+									<td title="{{product.tax}}">{{product.tax}}</td>
+									<td title="{{product.cartonQty}}">{{product.cartonQty}}</td>
+									<td title="{{product.unitQty}}">{{product.unitQty}}</td>
+									<td title="{{product.parent}}">{{product.parent}}</td>
+									<td title="{{product.posDesc}}">{{product.posDesc}}</td>
+
+									<td title="{{product.createdAt | customdatetimeformat}}"><span style="display: none">{{convertDateToMiliSeconds(product.createdAt)}}</span>{{product.createdAt | customdatetimeformat}}</td>
+									<td title="{{product.updatedAt | customdatetimeformat}}"><span style="display: none">{{convertDateToMiliSeconds(product.updatedAt)}}</span>{{product.updatedAt | customdatetimeformat}}</td>
+									<td title="{{product.deletedAt | customdatetimeformat}}"><span style="display: none">{{convertDateToMiliSeconds(product.deletedAt)}}</span>{{product.deletedAt | customdatetimeformat}}</td>
+									<td title="{{product.hostNumber3}}">{{product.hostNumber}}</td>
+									<td title="{{product.hostNumber2}}">{{product.hostNumber2}}</td>
+									<td title="{{product.hostNumber3}}">{{product.hostNumber3}}</td>
+				<!-- timestamp -->  <td title="{{product.updatedAt | dateTimeFormate}}">
+										<span style="display: none">{{convertDateToMiliSeconds(product.updatedAt)}}</span>
+										{{product.updatedAt | dateTimeFormate}}
+									</td>
+									<td title="{{product.scaleInd ? 'Yes' : 'No'}}">{{product.scaleInd ? 'Yes' : 'No'}}</td>
+									<td title="{{product.slowMovingInd ? 'Yes' : 'No'}}">{{product.slowMovingInd ? 'Yes' : 'No'}}</td>
+									<td title="{{product.varietyInd ? 'Yes' : 'No'}}">{{product.varietyInd ? 'Yes' : 'No'}}</td>
+									<td title="{{product.info}}" class="text-center">{{product.info}}</td>
+									<td title="{{product.nationalRange + '   ' + product.nationalRangeCode}}">{{product.nationalRange + '   ' + product.nationalRangeCode}}</td>
+
+									<td title="{{product.accessOutlets}}">{{product.accessOutletsCSV}}</td>
+									<td title="{{product.tareWeight}}">{{product.tareWeight}}</td>
+									
+									<td>
+										<div class="tbHover-btnGroup">
+											<button tooltip="Clone" placement="left" class="tbHover-btn trash-btn" (click)="addOrUpdateOrDeleteOrCloneProduct(product, 'CLONE')"><i class="fa fa-clone"></i></button>
+											<button tooltip="Change" placement="left" class="tbHover-btn trash-btn" (click)="addOrUpdateOrDeleteOrCloneProduct(product, 'UPDATE')"><i class="fa fa-pencil-square-o"></i></button>
+											<button tooltip="Delete" placement="left" class="tbHover-btn trash-btn" (click)="addOrUpdateOrDeleteOrCloneProduct(product, 'DELETE')"><i class="fa fa-trash"></i></button>
+										</div>
+									</td>
+								</tr>
+							</ng-container>
+						</ng-container>
+					</tbody>
+				</table>				
+				<!-- <span class="d-block text-center" *ngIf="!productData?.length">No record available!</span> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade thm-popup" id="SearchFilter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered dialog-w" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form name = "searchForm" id = "searchForm">
+						<div class="title-wrap mb-2">
+							<h4 class="title">Search Filter</h4>
+						</div>
+						<div class="group-from mb-0 mx-5">
+						<div class="form-group">
+							<label> Number or Description  Wildcard :</label>
+							<!-- <input type="text" class="form-control col-md-10" placeholder="Search Product" 
+							onkeypress='return (event.charCode > 96 && event.charCode < 123) || 
+							(event.charCode > 64 && event.charCode < 91) || 
+							(event.charCode >= 48 && event.charCode <= 57) || 
+							event.charCode <= 31' 
+							#searchValue/> -->
+							<input type="text" appUppercase id="product_search_Filter" class="form-control col-md-10" placeholder="Search Product" #searchValue/>
+						</div>
+						<div class="form-group mb-0">
+							<div class="custom-control custom-radio custom-radio">
+								<input #departmentCode class="custom-control-input" type="radio" id="departmentRadioBtn" name="codeValue"/>
+								<label for="departmentRadioBtn" class="custom-control-label mb-0"><span class="label-mt- d-block">Search on Department Code</span></label>
+							</div>
+							<div class="custom-control custom-radio custom-radio">
+								<input #replicateCode class="custom-control-input" type="radio" id="replicateRadioBtn" name="codeValue"/>
+								<label for="replicateRadioBtn" class="custom-control-label mb-0"><span class="label-mt d-block">Search on Replicate Code</span></label>
+							</div>
+						</div>
+					</div>
+						<div class="btn-wrap text-right mt-10">
+							<button class="btn btn-blue mr-2" (click)="getProduct(searchValue, replicateCode.checked, departmentCode.checked)">Ok</button>
+							<button class="btn btn-grey" (click)="cancelPopup()">Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

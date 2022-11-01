@@ -1,0 +1,663 @@
+<div class="mainContent-innner">
+  <div class="addSupplier-section">
+    <div class="d-flex align-items-center">
+      <h4 class="title flex-grow-1 mb-0">
+        {{ supplier_id ? "Update Supplier" : " Add Supplier" }}
+      </h4>
+      <div class="probtn-wrap text-right">
+        <ng-container *ngIf="supplier_id">
+          <button class="btn with-icon mr-2" (click)="showSupplireItems()">
+            <i class="icon fa fa-list"></i> Show Supplier Items
+          </button>
+        </ng-container>
+        <button
+          class="btn btn-blue with-icon mr-2"
+          (click)="submitSuppliersForm()"
+        >
+          {{ supplier_id ? "Update " : " Save" }}
+        </button>
+        <button class="btn" [routerLink]="['/suppliers']">Cancel</button>
+      </div>
+    </div>
+    <form [formGroup]="suppliersForm">
+      <div class="addSupplier-wrap">
+        <div class="addSupplier-form bg-box mt-15">
+          <div class="row">
+            <div class="col-lg-6 supp-code">
+              <div class="group-from mt-0">
+                <div class="form-row align-items-center form-group">
+                  <label class="label col-md-3 mb-0">Supplier Code <span class="text-danger">*</span></label>
+                  <div class="col-md-9">
+                    <div class="form-group form-row align-items-center">
+                     
+                      <div class="col-md-5">
+                        <input
+                          [readonly]="formStatus"
+                          type="text"
+                          class="form-control"
+                          name="code"
+                          id="code"
+                          appUppercase
+                          formControlName="code"
+                          [ngClass]="{
+                            'is-invalid': submitted && f.code.errors
+                          }"
+                        />
+                        <div *ngIf="f.code.errors" class="invalid-feedback">
+                          <div *ngIf="f.code.errors.maxlength">
+                            Supplier Code be maximum 30 characters
+                          </div>
+                          <div *ngIf="f.code.errors.required">
+                            Code is required
+                          </div>
+                          <div *ngIf="f.code.errors.pattern">
+                            Space is not allowed
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-7">
+                        <div class="form-group form-row align-items-cente abn-w">
+                          <label class="label col-3 mb-0 text-right">ABN </label>
+                          <div class="col-md-9">
+                            <input
+                            appUppercase
+                              type="text"
+                              class="form-control"
+                              name="abn"
+                              id="abn"
+                              formControlName="abn"
+                              [ngClass]="{
+                                'is-invalid': submitted && f.abn.errors
+                              }"
+                            />
+                            <div *ngIf="f.abn.errors" class="invalid-feedback">
+                              <div *ngIf="f.abn.errors.maxlength">
+                                ABN be maximum 15 characters
+                              </div>
+                              <div *ngIf="f.abn.errors.required">
+                                ABN is required
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                 
+                  <div class="col-12">
+                    <div class="form-group mb-0 form-row align-items-center">
+                      <label class="label col-md-3 mb-0"
+                        >Supplier Name <span class="text-danger">*</span></label
+                      >
+                      <div class="col-md-9">
+                        <input
+                        appUppercase
+                          type="text"
+                          class="form-control"
+                          name="desc"
+                          id=""
+                          formControlName="desc"
+                          [ngClass]="{
+                            'is-invalid': submitted && f.desc.errors
+                          }"
+                        />
+                        <div *ngIf="f.desc.errors" class="invalid-feedback">
+                          <div *ngIf="f.desc.errors.maxlength">
+                            Supplier Name be maximum 15 characters
+                          </div>
+                          <div *ngIf="f.desc.errors.required">
+                            Supplier Name is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="group-from mt-0">
+                <div class="form-group form-row align-items-center">
+                  <label class="label col-md-3 mb-0"
+                    >Address 1 <span class="text-danger"></span
+                  ></label>
+                  <div class="col-md-9">
+                    <input
+                    appUppercase
+                      type="text"
+                      class="form-control"
+                      name="address1"
+                      id="address1"
+                      formControlName="address1"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.address1.errors
+                      }"
+                    />
+                    <div *ngIf="f.address1.errors" class="invalid-feedback">
+                      <div *ngIf="f.address1.errors.maxlength">
+                        Address 1 be maximum 80 characters
+                      </div>
+                      <div *ngIf="f.address1.errors.required">
+                        Address1 is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group form-row align-items-center">
+                  <label class="label col-md-3 mb-0">Address 2</label>
+                  <div class="col-md-9">
+                    <input
+                    appUppercase
+                      type="text"
+                      class="form-control"
+                      name="address2"
+                      id="address2"
+                      formControlName="address2"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.address2.errors
+                      }"
+                    />
+                    <div *ngIf="f.address2.errors" class="invalid-feedback">
+                      <div *ngIf="f.address2.errors.maxlength">
+                        Address 2 be maximum 80 characters
+                      </div>
+                      <div *ngIf="f.address2.errors.required">
+                        Address2 is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group form-row align-items-center">
+                  <label class="label col-md-3 mb-0">Address 3</label>
+                  <div class="col-md-9">
+                    <input
+                    appUppercase
+                      type="text"
+                      class="form-control"
+                      name="address3"
+                      id="address3"
+                      formControlName="address3"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.address3.errors
+                      }"
+                    />
+                    <div *ngIf="f.address3.errors" class="invalid-feedback">
+                      <div *ngIf="f.address3.errors.maxlength">
+                        Address 3 be maximum 80 characters
+                      </div>
+                      <div *ngIf="f.address3.errors.required">
+                        Address3 is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group form-row align-items-center">
+                  <label class="label col-md-3 mb-0">Address 4</label>
+                  <div class="col-md-9">
+                    <input
+                    appUppercase
+                      type="text"
+                      class="form-control"
+                      name="address4"
+                      id="address2"
+                      formControlName="address4"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.address4.errors
+                      }"
+                    />
+                    <div *ngIf="f.address4.errors" class="invalid-feedback">
+                      <div *ngIf="f.address4.errors.maxlength">
+                        Address 2 be maximum 80 characters
+                      </div>
+                      <!-- <div *ngIf="f.address4.errors.required">
+                        Address2 is required
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-0 form-row align-items-center">
+                  <!-- <label class="label col-md-3 mb-0">Desc <span class="text-danger">*</span></label> -->
+                  <div class="col-md-9">
+                    <!-- <input
+                      type="text"
+                      class="form-control"
+                      name="desc"
+                      id="desc"
+                      formControlName="desc"
+                      [ngClass]="{ 'is-invalid': submitted && f.desc.errors }"
+                    />
+                    <div *ngIf="f.desc.errors" class="invalid-feedback">
+                      <div *ngIf="f.desc.errors.maxlength"> Desc  be maximum 80 characters </div>
+                      <div *ngIf="f.desc.errors.required">
+                        Desc is required
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              <div class="group-from mt-0 mb-0">
+                <div class="form-row align-items-center form-group">
+                    <label class="label col-md-3 mb-0">Phone </label>
+                  <div class="col-md-9">
+                     
+                    <div class="form-group form-row align-items-center">
+                      
+                      <div class="col-md-5">
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="phone"
+                          id="phone"
+                          formControlName="phone"
+                          appUppercase
+                          [ngClass]="{
+                            'is-invalid': submitted && f.phone.errors
+                          }"
+                        />
+                        <div *ngIf="f.phone.errors" class="invalid-feedback">
+                          <div *ngIf="f.phone.errors.maxlength">
+                            Phone be maximum 20 characters
+                          </div>
+                          <div *ngIf="f.phone.errors.pattern">
+                            Enter Valid Phone
+                          </div>
+                        </div>
+                        <!-- <div *ngIf="f.phone.errors" class="invalid-feedback">
+                          <div *ngIf="f.phone.errors.required">
+                            Phone is required
+                          </div>
+                          <div *ngIf="f.phone.errors.pattern">
+                            Enter valid Phone
+                          </div>
+                        </div> -->
+                      </div>
+                      <div class="col-7">
+                          <div class="form-group form-row align-items-center abn-w">
+                            <label class="label col-3 mb-0 text-right">Fax</label>
+                            <div class="col-md-9">
+                              <input
+                              appUppercase
+                                type="text"
+                                class="form-control"
+                                name="fax"
+                                id="fax"
+                                formControlName="fax"
+                                [ngClass]="{
+                                  'is-invalid': submitted && f.fax.errors
+                                }"
+                              />
+                              <div *ngIf="f.fax.errors" class="invalid-feedback">
+                                <div *ngIf="f.fax.errors.maxlength">
+                                  Fax be maximum 20 characters
+                                </div>
+                                <div *ngIf="f.fax.errors.required">
+                                  Fax is required
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+               
+                  <div class="col-12">
+                    <div class="form-group form-row align-items-center">
+                      <label class="label col-md-3 mb-0">Contact </label>
+                      <div class="col-md-9">
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="contact"
+                        />
+                        <!-- <div *ngIf="f.contact.errors" class="invalid-feedback">
+                          <div *ngIf="f.contact.errors.pattern">
+                           Enter Valid Contact
+                          </div>
+                        </div>  -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group mb-0 form-row align-items-center">
+                      <label class="label col-md-3 mb-0"
+                        >Email <span class="text-danger"></span
+                      ></label>
+                      <div class="col-md-9">
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="email"
+                          id="email"
+                          formControlName="email"
+                          [ngClass]="{
+                            'is-invalid': submitted && f.email.errors
+                          }"
+                        />
+                        <div *ngIf="f.email.errors" class="invalid-feedback">
+                          <div *ngIf="f.email.errors.maxlength">
+                            Email be maximum 30 characters
+                          </div>
+                          <div *ngIf="f.email.errors.pattern">
+                            Enter Valid Email
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 update-cost">
+              <div class="group-from mt-0 mb-0">
+                <div class="form-group form-row align-items-start">
+                  <label class="label col-md-4 mb-0"
+                    >Update Costs <span class="text-danger"></span
+                  ></label>
+                  <div class="col-md-8">
+                    <select class="form-control" formControlName="updateCost">
+                      <option value="Yes">YES</option>
+                      <option value="No">NO</option>
+                    </select>
+                    <!-- <input
+                      type="text"
+                      class="form-control"
+                      name="updateCost"
+                      id="updateCost"
+                      maxLength="3"
+                      formControlName="updateCost"
+                     
+                    /> -->
+                    <!-- <div *ngIf="f.updateCost.errors" class="invalid-feedback">
+                      <div *ngIf="f.updateCost.errors.required">
+                        UpdateCost is required
+                      </div>
+                    </div> -->
+                    <label for="" class="mb-0 fontSize-11"
+                      >(Update Product Cost when Posting an Invoice)</label
+                    >
+                    <!-- <div class="d-flex align-items-center InputSelct">
+                      <a
+                        href="javascript:void(0);"
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title=""
+                        data-original-title="(Update Product Cost when Posting an Invoice)"
+                      >
+                        <i class="fa fa-question-circle-o"></i
+                      ></a>
+                    </div> -->
+                  </div>
+                </div>
+                <div class="form-group form-row align-items-start">
+                  <label class="label col-md-4 mb-0"
+                    >Promo Supplier <span class="text-danger"></span
+                  ></label>
+                  <div class="col-md-8">
+                    <input
+                    appUppercase
+                      type="text"
+                      class="form-control"
+                      name="PromoSupplier"
+                      id="PromoSupplier"
+                      formControlName="PromoSupplier"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.PromoSupplier.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="f.PromoSupplier.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.PromoSupplier.errors.maxlength">
+                        Promo Supplier be maximum 30 characters
+                      </div>
+                      <div *ngIf="f.PromoSupplier.errors.required">
+                        Promo Supplier is required
+                      </div>
+                    </div>
+                    <label for="" class="mb-0 fontSize-11"
+                      >(Alternate Supplier Code for Promo Batches)</label
+                    >
+                    <!-- <div class="d-flex align-items-center InputSelct">
+                      
+                      <a
+                        href="javascript:void(0);"
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title=""
+                        data-original-title="(Alternate Supplier Code for Promo Batches)"
+                      >
+                        <i class="fa fa-question-circle-o"></i
+                      ></a>
+                    </div> -->
+                  </div>
+                </div>
+                <div class="form-group form-row align-items-center">
+                  <label class="label col-md-4 mb-0">Cost Zones</label>
+                  <div class="col-md-8 rebate-form">
+                    <ng-select
+                      [items]="costZoneData"
+                      bindLabel="code"
+                      bindValue="code"
+                      formControlName="costZone"
+                      [virtualScroll]="false"
+                      [clearable]="false"
+                      [clearOnBackspace]="false"
+                      [searchable]="true"
+                      [multiple]="false"
+                      (change)="changeCostZone($event)"
+                    >
+                      <ng-template
+                        ng-option-tmp
+                        let-item="item"
+                        let-item$="item$"
+                        let-index="index"
+                      >
+                        <div class="form-row">
+                          <span
+                            class="col-9 zone-overflow"
+                            title="{{ item.desc }}"
+                          >
+                            {{ item.code }}
+                          </span>
+                        </div>
+                      </ng-template>
+                    </ng-select>
+                    <label for="" class="mb-0 fontSize-11">{{
+                      costZoneName
+                    }}</label>
+                    <!-- <select
+                        class="form-control"
+                        name="costZone"
+                        id="costZone"
+                        formControlName="costZone"
+                      >
+                        <option [value]="costZone.name" *ngFor="let costZone of costZoneData">{{costZone.code}}</option>
+                       
+                      </select> -->
+                    <!-- <label for="" class="mb-0 fontSize-11">99</label> -->
+                  </div>
+                </div>
+                <div class="form-group form-row align-items-center">
+                  <label class="label col-md-4 mb-0"
+                    >GST Free Item <span class="text-danger"></span
+                  ></label>
+                  <div class="col-md-8 col-xxl-8">
+                    <input
+                    appUppercase
+                      type="text"
+                      class="form-control"
+                      name="gstFreeItemCode"
+                      id="gstFreeItemCode"
+                      formControlName="gstFreeItemCode"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.gstFreeItemCode.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="f.gstFreeItemCode.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.gstFreeItemCode.errors.maxlength">
+                        GST Free Item be maximum 30 characters
+                      </div>
+                      <div *ngIf="f.gstFreeItemCode.errors.required">
+                        GST Free Item is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group form-row align-items-center">
+                  <label class="label col-md-4 mb-0"
+                    >GST Free Item Desc <span class="text-danger"></span
+                  ></label>
+                  <div class="col-md-8">
+                    <input
+                    appUppercase
+                      type="text"
+                      class="form-control"
+                      name="gstFreeItemDesc"
+                      id="gstFreeItemDesc"
+                      formControlName="gstFreeItemDesc"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.gstFreeItemDesc.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="f.gstFreeItemDesc.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.gstFreeItemDesc.errors.maxlength">
+                        GST Free Item Desc be maximum 80 characters
+                      </div>
+                      <div *ngIf="f.gstFreeItemDesc.errors.required">
+                        GST Free Item Desc
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group form-row align-items-center">
+                  <label class="label col-md-4 mb-0"
+                    >GST Ind Item <span class="text-danger"></span
+                  ></label>
+                  <div class="col-md-8">
+                    <input
+                    appUppercase
+                      type="text"
+                      class="form-control"
+                      name="gstInclItemCode"
+                      id="gstInclItemCode"
+                      formControlName="gstInclItemCode"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.gstInclItemCode.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="f.gstInclItemCode.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.gstInclItemCode.errors.maxlength">
+                        GST Ind Item be maximum 30 characters
+                      </div>
+                      <div *ngIf="f.gstInclItemCode.errors.required">
+                        GST Ind Item is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group form-row align-items-center">
+                  <label class="label col-md-4 mb-0"
+                    >GST Item Desc <span class="text-danger"></span
+                  ></label>
+                  <div class="col-md-8">
+                    <input
+                    appUppercase
+                      type="text"
+                      class="form-control"
+                      name="gstInclItemDesc"
+                      id="gstInclItemDesc"
+                      formControlName="gstInclItemDesc"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.gstInclItemDesc.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="f.gstInclItemDesc.errors"
+                      class="invalid-feedback"
+                    >
+                      <div *ngIf="f.gstInclItemDesc.errors.maxlength">
+                        GST Item Desc be maximum 80 characters
+                      </div>
+                      <div *ngIf="f.gstInclItemDesc.errors.required">
+                        GST Item Desc is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group form-row align-items-center mb-0">
+                  <label class="label col-md-4 mb-0"
+                    >Xero Supp Name <span class="text-danger"></span
+                  ></label>
+                  <div class="col-md-8">
+                    <input
+                    appUppercase
+                      type="text"
+                      class="form-control"
+                      name="xeroName"
+                      id="xeroName"
+                      formControlName="xeroName"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.xeroName.errors
+                      }"
+                    />
+                    <div *ngIf="f.xeroName.errors" class="invalid-feedback">
+                      <div *ngIf="f.xeroName.errors.maxlength">
+                        Xero Supp Name be maximum 50 characters
+                      </div>
+                      <div *ngIf="f.xeroName.errors.required">
+                        Xero Supp Name is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-container *ngIf="supplier_id">
+            <div class="mt-10 all-w">
+              <div class="table-responsive inner-responsive">
+                <table
+                  class="table ctm-table supplierItems-table"
+                  id="supplierItems-table"
+                >
+                  <thead>
+                    <tr>
+                      <th>Suppliers Item</th>
+                      <th>Description</th>
+                      <th>Product</th>
+                      <th>Carton Cost</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngIf="clickedSuppilerProduct">
+                      <tr *ngFor="let product of supplierProducts">
+                        <td>
+                          <a>{{ product.supplierItem }}</a>
+                        </td>
+                        <td>{{ product.desc }}</td>
+                        <td>{{ product.productNumber }}</td>
+                        <td>
+                          <span class="pl-2">{{ product.cartonCost }}</span>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </form>
+    <!-- /.productForm -->
+  </div>
+</div>

@@ -1,0 +1,177 @@
+<div class="mainContent-innner">
+    <div class="Keypads-section">
+    <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0"> Stock Optimal </h4>
+        <div class="probtn-wrap d-flex text-right">
+            <!-- <button type="button" data-toggle="modal" data-target="#FilterModal" class="btn btn-blue mr-2"><i class="icon fa fa-filter"></i> Search Optimal Order History</button> -->
+            <!-- <button type="button" class="btn mr-2"><i class="icon fa fa-print"></i> Print</button> -->
+            <button type="button" class="btn mr-2" (click)="exportData()"><i class="icon fa fa-file-excel-o"></i> Export</button>
+        </div>
+    </div>
+    <!-- /.action-topbar -->
+    <div class="outlets-wrap">                        
+        <div class="bg-box mt-15">
+            <div class="table-responsive">
+                <table class="table ctm-table" id="Optimal-table">
+                    <thead>
+                    <tr>
+                        <th>Outlet</th>
+                        <th>Order No</th>
+                        <th>Supplier</th>
+                        <th>Supplier Name</th>
+                        <th>Order Date</th>
+                        <th>Order Type</th>
+                        <th>Order Status</th>
+                        <th>Line Num</th>
+                        <th>Product</th>
+                        <th>Produc Desc</th>
+                        <th>Inv Buy</th>
+                        <th>Promo Buy</th>
+                        <th>Normal Buy</th>
+                        <th>Nomal Cover Days</th>
+                        <th>Cover Days Used</th>
+                        <th>Min Reorder Qty</th>
+                        <th>Non Promo Sales Rate Daily</th>
+                        <th>Promo Sales Rate Daily</th>
+                        <th>MinOnHand</th> 
+                        <th>Promo Units</th> 
+                        <th>OnHand</th>
+                        <th>On Order</th>
+                        <th>Carton Qty</th>
+                        <th>Cartons</th>
+                        <th>Units</th>
+                        <th>Trading Cover Days</th>
+                        <th>Normal Carton Cost</th>
+                        <th>Final Carton CostUsed</th>
+                        <th>Line Total</th>
+                        <th>Sale Promo Code</th>
+                        <th>Sale Promo End Date</th>
+                        <th>Buy Promo Code</th>
+                        <th>Buy Promo Disc</th>
+                        <th>Buy Promo End Date</th>
+                        <th>Check Supplier</th>
+                        <th>Cheaper Supplier</th>
+                        <th>Perishable</th>
+                        <th>Non Promo Sales 56Days</th>
+                        <th>Promo Sales 56Days</th>
+                        <!-- <th class="text-center">Action</th> -->
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let optimalOrder of OptimalOrderHistoryData">
+                            <td>{{optimalOrder.outlet}}</td>
+                            <td>{{optimalOrder.orderNo}}</td>
+                            <td>{{optimalOrder.supplier}}</td>
+                            <td>{{optimalOrder.supplierName}}</td>
+                            <td>{{optimalOrder.orderDate | dateTimeFormate }}</td>
+                            <td>{{optimalOrder.orderType}}</td>
+                            <td>{{optimalOrder.orderStatus}}</td>
+                            <td>{{optimalOrder.lineNum}}</td>
+                            <td>{{optimalOrder.product}}</td>
+                            <td>{{optimalOrder.producDesc}}</td>
+                            <td>{{optimalOrder.invBuy }}</td>
+                            <!-- <td>{{optimalOrder.invBuy | titlecase}}</td> -->
+                            <td>{{optimalOrder.promoBuy}}</td>
+                            <td>{{optimalOrder.normalBuy}}</td>
+                            <td>{{optimalOrder.nomalCoverDays}}</td>
+                            <td>{{optimalOrder.coverDaysUsed}}</td>
+                            <td>{{optimalOrder.minReorderQty}}</td>
+                            <td>{{optimalOrder.nonPromoSalesRateDaily}}</td>
+                            <td>{{optimalOrder.promoSalesRateDaily}}</td>
+                            <td>{{optimalOrder.minOnHand}}</td> 
+                            <td>{{optimalOrder.promoUnits}}</td> 
+                            <td>{{optimalOrder.onHand}}</td>
+                            <td>{{optimalOrder.onOrder}}</td>
+                            <td>{{optimalOrder.cartonQty}}</td>
+                            <td>{{optimalOrder.cartons}}</td>
+                            <td>{{optimalOrder.units}}</td>
+                            <td>{{optimalOrder.tradingCoverDays}}</td>
+                            <td>{{optimalOrder.normalCartonCost}}</td>
+                            <td>{{optimalOrder.finalCartonCostUsed}}</td>
+                            <td>{{optimalOrder.lineTotal}}</td>
+                            <td>{{optimalOrder.salePromoCode}}</td>
+                            <td>{{optimalOrder.salePromoEndDate }}</td>
+                            <td>{{optimalOrder.buyPromoCode}}</td>
+                            <td>{{optimalOrder.buyPromoDisc}}</td>
+                            <td>{{optimalOrder.buyPromoEndDate | dateTimeFormate }}</td>
+                            <td>{{optimalOrder.checkSupplier}}</td>
+                            <td>{{optimalOrder.cheaperSupplier}}</td>
+                            <td>{{optimalOrder.perishable}}</td>
+                            <td>{{optimalOrder.nonPromoSales56Days}}</td>
+                            <td>{{optimalOrder.promoSales56Days}}</td>
+                            <!-- <td>
+                                <div class="tbHover-btnGroup">
+                                    <button class="tbHover-btn trash-btn"><i class="fa fa-pencil"></i></button>
+                                    <button class="tbHover-btn trash-btn"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </td> -->
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-md thm-popup" id="FilterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    
+        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-body popup-box-width">
+                    <form [formGroup]="optimalOrderHistoryForm">
+                        <div class="popup-box">                       
+                            <div class="title-wrap mb-1">
+                                <h4 class="title">Search Optimal Order History</h4>
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-0">Outlets <span class="text-danger">*</span></label>
+                                <ng-select [items]="stores"
+                                        bindLabel="storeDetail"
+                                        bindValue="code"
+                                        [virtualScroll]="true"
+                                        
+                                        placeholder="Select Store"
+                                        formControlName="storeId"
+                                        [ngClass]="{ 'is-invalid': submitted && f.storeId.errors }"
+                                    >
+                                </ng-select>
+                                <div *ngIf="f.storeId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.storeId.errors.required">
+                                        Outlet selection is required
+                                    </div>
+                                </div>
+                                
+                            </div>  
+                            <div class="form-group">
+                                <label class="mb-0">Order No</label>
+                                <input type="number" class="form-control" formControlName="orderNumber" [ngClass]="{ 'is-invalid': submitted && f.orderNumber.errors }">
+                                <div *ngIf="f.orderDate.errors" class="invalid-feedback">
+                                    <div *ngIf="f.orderDate.errors.required">
+                                        Order No is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-0">
+                                <label class="mb-0">Order Date <span class="text-danger">*</span></label>
+                                <div class="ctm-calendar">
+                                    <input type="text" class="form-control" formControlName="orderDate" bsDatepicker [bsConfig]="datepickerConfig"
+                                    [maxDate]="maxDate" #dp="bsDatepicker" [ngClass]="{ 'is-invalid': submitted && f.orderDate.errors }">
+                                    <div *ngIf="f.orderDate.errors" class="invalid-feedback">
+                                        <div *ngIf="f.orderDate.errors.required">
+                                            Order date is required
+                                        </div>
+                                    </div>
+                                </div>                                
+                            </div> 
+                            <div class="btn-wrap text-right mt-10">
+                                <button type="button" class="btn btn-success mr-2" (click)="searchOptimalOrderHistory()">Yes</button>
+                                <button type="button" class="btn btn-grey" data-dismiss="modal" (click)="resetForm()">No</button>
+                            </div>                        
+                        </div>  
+                    </form>                  
+                </div>
+            </div>
+        </div>    
+</div>

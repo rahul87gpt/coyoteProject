@@ -1,0 +1,140 @@
+<header id="header" class="header-wrap">
+  <div class="container-fluid">
+    <div class="navbar-wrap">
+      <div>
+        <a href="javascript:void(0);" id="sbLeftOpen" class="sbLeftoggle">
+          <i class="fa fa-reorder"></i>
+        </a>
+      </div>
+      <!-- /.header-logo -->
+      <nav class="main-navbar w-100">
+        <div class="main-menu-wrap">
+          <ul class="main-menu">
+            <ng-container *ngFor="let header of moduleList.header_list">
+              <ng-container
+               
+              >
+              <!-- *ngIf="
+              this.permissionSet.indexOf('*') > -1 ||
+              checkPermission(header)
+            " -->
+                <li
+                  class="menu-item"
+                  [ngClass]="{
+                    active: activeModule.toLowerCase() === header.toLowerCase()
+                  }"
+                >
+                  <ng-container *ngIf="header !== 'BI'">
+                    <a href="JavaScript:void(0);" (click)="moduleSelection(header)">
+                      <span class="menu-icon"><img src="assets/images/{{header.replace(' ', '') | lowercase}}-menu.svg"/></span>{{ header }}
+                    </a>
+                  </ng-container>
+                  <ng-container *ngIf="header === 'BI'">
+                    <a href="JavaScript:void(0);" (click)="moduleSelection(header)" target="_blank" href="http://ws01.coyotepos.com.au:8080/">
+                      <span class="menu-icon"><img src="assets/images/{{header.replace(' ', '') | lowercase}}-menu.svg"/></span>{{ header }}
+                    </a>
+                  </ng-container>
+                </li>
+              </ng-container>
+            </ng-container>
+            <!-- <li class="menu-item">
+              <a href="JavaScript:void(0);" (click)="logoutUser()">
+                <span class="menu-icon">
+                  <img src="assets/images/logout-menu.svg" />
+                </span>
+                Logout
+              </a>
+            </li> -->
+            <li class="menu-item dropdown user-dropdown">
+              <a
+                href="JavaScript:void(0);"
+                class="dropdown-toggle pr-0"
+                role="button"
+                id="dropdownMenuLink"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span class="menu-icon"><img src="{{userImage}}"/></span>
+                {{ loginUserData?.firstName }}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    data-toggle="modal"
+                    data-target="#UserModal"
+                    href="JavaScript:void(0);"
+                    >Switch Role</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    (click)="logoutUser()"
+                    href="JavaScript:void(0);"
+                    >Logout</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <!-- breadcrumbs -->
+    <!-- <app-bread-crumbs></app-bread-crumbs> -->
+  </div>
+</header>
+
+<!-- Modal -->
+<div
+  class="modal fade bd-example-modal-md thm-popup"
+  id="UserModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <form [formGroup]="userRoleSwitchForm">
+          <div class="popup-box">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Switch Your Role</h4>
+            </div>
+            <div class="form-group mb-0">
+              <select
+                class="form-control"
+                formControlName="roleId"
+                [ngClass]="{ 'is-invalid': submitted && f.roleId.errors }"
+              >
+                <option *ngFor="let role of userRoles" [value]="role.id">{{
+                  role.name
+                }}</option>
+              </select>
+              <div *ngIf="f.roleId.errors" class="invalid-feedback">
+                <div *ngIf="f.roleId.errors.required">
+                  Please select one of the option
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button
+                type="button"
+                class="btn btn-blue mr-2"
+                (click)="switchRole()"
+              >
+                Ok
+              </button>
+              <a type="button" class="btn btn-grey" data-dismiss="modal"
+                >Cancel</a
+              >
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

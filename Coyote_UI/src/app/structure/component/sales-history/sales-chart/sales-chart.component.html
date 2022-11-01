@@ -1,0 +1,1388 @@
+<div class="mainContent-innner">
+  <h4 class="title flex-grow-1 mb-0 float-left">{{ headingByText }}</h4>
+  <div class="float-right">
+    <button class="btn mr-2 mt-0" title="Print" (click)="exportChart('print')"
+      [disabled]="ChartDataSet.length > 0 ? false : true"><i class="icon fa fa-print"></i> Print</button>
+    <button class="btn mr-2 mt-0" title="Export" (click)="exportChart('png')"
+      [disabled]="ChartDataSet.length > 0 ? false : true">
+      <i class="icon fa fa-file-excel-o"></i> Export
+    </button>
+  </div>
+  <div class="clear"></div>
+  <div class="Stock-section">
+    <div class="d-flex align-items-center outlet-res">
+
+      <div class="probtn-wrap probtn-wrapSelect d-flex text-right mt-2">
+        <h6 class="data-title flex-grow-1 mb-0 text-left mr-2">Data Label :</h6>
+        <!-- == dropdown based fillter start form here == -->
+        <ng-container *ngIf="salesReportCode == 'outlet'">
+          <button class="btn mr-2" (click)="fromButton = true;selectDropDown('', 'department');">Outlet</button>
+          <div class="form-group text-left custom-ng-select mb-0 mr-2" id="outletDrop2">
+            <ng-select [items]="outletList" bindLabel="OUTL_DESC" bindValue="OUTL_OUTLET" [virtualScroll]="false"
+              placeholder="Select Outlet" [(ngModel)]="outletSelectedId"
+              (change)="fromButton=false;selectDropDown($event, 'department')" (clear)="clearDropdown()">
+            </ng-select>
+          </div>
+
+          <button class="btn mr-2" *ngIf="dropData.outId"
+            (click)="fromButton=true;selectDropDown({OUTL_OUTLET: dropData.outId}, 'department')">Department</button>
+
+          <div class="form-group text-left custom-ng-select mb-0 mr-2">
+            <ng-select [items]="departmentList" bindLabel="DEP_DESC" bindValue="DEP_ID" [virtualScroll]="false"
+              placeholder="Select Department" [(ngModel)]="deptSelectedId" [clearable]="false"
+              (change)="fromButton=false;selectDropDown($event, 'product')">
+            </ng-select>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="salesReportCode == 'department'">
+          <button class="btn mr-2" (click)="fromButton = true;selectDropDown('', 'commodity')">Department</button>
+          <div class="form-group text-left custom-ng-select mb-0 mr-2" id="outletDrop2">
+            <ng-select [items]="departmentList" bindLabel="DEP_DESC" bindValue="DEP_ID" [virtualScroll]="false"
+              placeholder="Select Department" [(ngModel)]="deptSelectedId"
+              (change)="fromButton = false;selectDropDown($event, 'commodity')" (clear)="clearDropdown()">
+            </ng-select>
+          </div>
+
+          <button class="btn mr-2" *ngIf="dropData.deptId"
+            (click)="fromButton = true;selectDropDown({DEP_ID : dropData.deptId}, 'commodity')">Commodity</button>
+
+          <div class="form-group text-left custom-ng-select mb-0 mr-2">
+            <ng-select [items]="commodityList" bindLabel="COM_DESC" bindValue="COM_ID" [virtualScroll]="false"
+              [clearable]="false" placeholder="Select Commodity" [(ngModel)]="comSelectedId"
+              (change)="fromButton = false;selectDropDown($event, 'product')">
+            </ng-select>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="salesReportCode == 'commodity'">
+          <button class="btn mr-2" (click)="fromButton = true;selectDropDown('', 'department')">Commodity</button>
+          <div class="form-group text-left custom-ng-select mb-0 mr-2" id="outletDrop2">
+            <ng-select [items]="commodityList" bindLabel="COM_DESC" bindValue="COM_ID" [virtualScroll]="false"
+              placeholder="Select Commodity" [(ngModel)]="comSelectedId"
+              (change)="fromButton = false;selectDropDown($event, 'department')" (clear)="clearDropdown()">
+            </ng-select>
+          </div>
+
+          <button class="btn mr-2" *ngIf="dropData.comId"
+            (click)="fromButton = true;selectDropDown({COM_ID: dropData.comId}, 'department')">Department</button>
+
+          <div class="form-group text-left custom-ng-select mb-0 mr-2">
+            <ng-select [items]="departmentList" bindLabel="DEP_DESC" bindValue="DEP_ID" [virtualScroll]="false"
+              placeholder="Select Department" [(ngModel)]="deptSelectedId" [clearable]="false"
+              (change)="fromButton = false;selectDropDown($event, 'product')">
+            </ng-select>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="salesReportCode == 'category'">
+          <button class="btn mr-2" (click)="fromButton = true;selectDropDown('', 'department')">Category</button>
+          <div class="form-group text-left custom-ng-select mb-0 mr-2" id="outletDrop2">
+            <ng-select [items]="categoryList" bindLabel="CAT_DESC" bindValue="CAT_ID" [virtualScroll]="false"
+              placeholder="Select Category" [(ngModel)]="catSelectedId"
+              (change)="fromButton = false;selectDropDown($event, 'department')" (clear)="clearDropdown()">
+            </ng-select>
+          </div>
+
+          <button class="btn mr-2" *ngIf="dropData.catId"
+            (click)="fromButton = true;selectDropDown({CAT_ID: dropData.catId}, 'department')">Department</button>
+
+          <div class="form-group text-left custom-ng-select mb-0 mr-2">
+            <ng-select [items]="departmentList" bindLabel="DEP_DESC" bindValue="DEP_ID" [virtualScroll]="false"
+              placeholder="Select Department" [(ngModel)]="deptSelectedId" [clearable]="false"
+              (change)="fromButton = false;selectDropDown($event, 'product')">
+            </ng-select>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="salesReportCode == 'group'">
+          <button class="btn mr-2" (click)="fromButton = true;selectDropDown('', 'department')">Group</button>
+          <div class="form-group text-left custom-ng-select mb-0 mr-2" id="outletDrop2">
+            <ng-select [items]="groupList" bindLabel="GRP_DESC" bindValue="GRP_ID" [virtualScroll]="false"
+              placeholder="Select Group" [(ngModel)]="groupSelectedId"
+              (change)="fromButton = false;selectDropDown($event, 'department')" (clear)="clearDropdown()">
+            </ng-select>
+          </div>
+
+          <button class="btn mr-2" *ngIf="dropData.grpId"
+            (click)="fromButton = true;selectDropDown({GRP_ID: dropData.grpId}, 'department')">Department</button>
+
+          <div class="form-group text-left custom-ng-select mb-0 mr-2">
+            <ng-select [items]="departmentList" bindLabel="DEP_DESC" bindValue="DEP_ID" [virtualScroll]="false"
+              placeholder="Select Department" [(ngModel)]="deptSelectedId" [clearable]="false"
+              (change)="fromButton = false;selectDropDown($event, 'product')">
+            </ng-select>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="salesReportCode == 'supplier'">
+          <button class="btn mr-2" (click)="fromButton = true;selectDropDown('', 'department')">Supplier</button>
+
+          <div class="form-group text-left custom-ng-select mb-0 mr-2" id="outletDrop2">
+            <ng-select [items]="supplierList" bindLabel="SUP_DESC" bindValue="SUP_ID" [virtualScroll]="false"
+              placeholder="Select Supplier" [(ngModel)]="supplierSelectedId"
+              (change)="fromButton = false;selectDropDown($event, 'department')" (clear)="clearDropdown()">
+            </ng-select>
+          </div>
+
+          <button class="btn mr-2" *ngIf="dropData.suppId"
+            (click)="fromButton = true;selectDropDown({SUP_ID: dropData.suppId}, 'department')">Department</button>
+
+          <div class="form-group text-left custom-ng-select mb-0 mr-2">
+            <ng-select [items]="departmentList" bindLabel="DEP_DESC" bindValue="DEP_ID" [virtualScroll]="false"
+              placeholder="Select Department" [(ngModel)]="deptSelectedId" [clearable]="false"
+              (change)="fromButton = false;selectDropDown($event, 'product')">
+            </ng-select>
+          </div>
+        </ng-container>
+
+        <button class="btn mr-2" *ngIf="salesReportCode == 'department' && dropData.comId"
+          (click)="selectDropDown({COM_ID: dropData.comId}, 'product')">Product</button>
+
+        <button class="btn mr-2" *ngIf="salesReportCode == 'outlet' && dropData.deptId"
+          (click)="selectDropDown({DEP_ID: dropData.deptId}, 'product')">Product</button>
+
+        <button class="btn mr-2" *ngIf="salesReportCode == 'commodity' && dropData.deptId"
+          (click)="selectDropDown({DEP_ID: dropData.deptId}, 'product')">Product</button>
+
+
+        <button class="btn mr-2" *ngIf="salesReportCode == 'category' && dropData.deptId"
+          (click)="selectDropDown({DEP_ID: dropData.deptId}, 'product')">Product</button>
+
+
+        <button class="btn mr-2" *ngIf="salesReportCode == 'group' && dropData.deptId"
+          (click)="selectDropDown({DEP_ID: dropData.deptId}, 'product')">Product</button>
+
+        <button class="btn mr-2" *ngIf="salesReportCode == 'supplier' && dropData.deptId"
+          (click)="selectDropDown({DEP_ID: dropData.deptId}, 'product')">Product</button>
+
+        <!-- <button
+          type="button"
+          data-toggle="modal"
+          data-target="#reportFilter"
+          class="btn btn-blue with-icon mr-2"
+        >
+          <i class="icon fa fa-file"></i> Filters
+        </button> -->
+
+      </div>
+      <!-- == dropdown based fillter end == -->
+
+      <div class="form-group probtn-wrap-select mt-2 ml-3 mb-0">
+        <div class="dropdown select-dropdown">
+          <button class="btn btn-block select-btn active" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{ setDefaultChart ? setDefaultChart : "Select" }}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <ng-container *ngFor="let chart of chartList; let i = index">
+              <a class="dropdown-item" [ngClass]="{'active': selectedChart == chart}" (click)="selectChart(chart)"
+                href="javascript:void(0);">{{ chart }}</a>
+            </ng-container>
+            <!-- <a class="dropdown-item" (click)="selectChart('Area Diagram')" href="javascript:void(0);">Area Diagram</a>
+                              <a class="dropdown-item" (click)="selectChart('Bar Diagram')"   href="javascript:void(0);">Bar Diagram</a>
+                              <a class="dropdown-item" (click)="selectChart('Column Diagram')"  href="javascript:void(0);">Column Diagram</a>
+                              <a class="dropdown-item" (click)="selectChart('Line Diagram')"  href="javascript:void(0);">Line Diagram</a>
+                              <a class="dropdown-item" (click)="selectChart('Pie Diagram')"  href="javascript:void(0);">Pie Diagram</a>
+                              <a class="dropdown-item" (click)="selectChart('Stacked Area Diagram')"  href="javascript:void(0);">Stacked Area Diagram</a>
+                              <a class="dropdown-item" (click)="selectChart('Stacked Bar Diagram')"  href="javascript:void(0);">Stacked Bar Diagram</a>
+                              <a class="dropdown-item" (click)="selectChart('Stacked Column Diagram')"  href="javascript:void(0);">Stacked Column Diagram</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-box mt-15 vh-100 text-center">
+      <div id="chartDiv" style="width: 100%; height: 500px"></div>
+      <!-- <iframe [src]='safeURL' frameborder="0" allowfullscreen width="100%" height="100%"></iframe> -->
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg thm-popup" id="reportFilter" tabindex="-1" role="dialog"
+  aria-labelledby="reportFilterModalLabel" aria-hidden="true">
+  <form [formGroup]="salesReportForm">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body popup-box-width">
+          <div class="popup-box">
+            <div class="title-wrap mb-1">
+              <div class="form-row align-items-center">
+                <div class="col-10">
+                  <h4 class="title mb-0">{{ headingByText }}</h4>
+                </div>
+                <div class="col-2 text-right">
+                  <button type="button" class="btn btn-grey btn-grey-refresh" (click)="refreshBtnClicked()">
+                    <i class="icon fa fa-refresh"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-lg-6 col-xl-6">
+
+                <!-- DATE RANGE -->
+                <div class="group-from">
+                  <h5 class="title">
+                    Date Range <span class="text-danger">*</span>
+                  </h5>
+                  <div class="form-row align-items-center">
+                    <div class="col-5">
+                      <div class="form-group mb-0">
+                        <div class="ctm-calendar">
+                          <!-- {{f?.startDate?.value }}{{ customdatetimeformat}} -->
+                          <!--                               [value]="f?.startDate?.value | customdatetimeformat" -->
+
+                          <!-- {{f?.startDate?.value}} -->
+                          <input type="text" onkeydown="return false" class="form-control"
+                            (bsValueChange)="onDateChange($event, 'startDate', true); specDateChange($event, f?.endDate?.value);"
+                            bsDatepicker [bsValue]="startDateBsValue" [bsConfig]="datepickerConfig" [maxDate]="maxDate"
+                            [ngClass]="{
+                                'is-invalid': submitted && f.startDate.errors
+                              }" />
+                          <!-- formControlName="startDate" -->
+                          <!-- #dp="bsDatepicker" -->
+                          <div *ngIf="f.startDate.errors" class="invalid-feedback">
+                            <div>
+                              Start date is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="form-group mb-0 text-center">
+                        <label for="" class="mb-0">To</label>
+                      </div>
+                    </div>
+                    <div class="col-5">
+                      <div class="form-group mb-0">
+                        <div class="ctm-calendar">
+                          <!-- [value]="f?.endDate?.value | customdatetimeformat" -->
+                          <input type="text" onkeydown="return false" class="form-control" bsDatepicker
+                            [bsValue]="endDateBsValue" [minDate]="lastEndDate || f?.startDate?.value"
+                            [bsConfig]="datepickerConfig"
+                            (bsValueChange)="onDateChange($event, 'endDate'); specDateChange(f?.startDate?.value, $event);"
+                            [maxDate]="maxDate" [ngClass]="{
+                                'is-invalid': submitted && f.endDate.errors
+                              }" />
+                          <div *ngIf="f.endDate.errors" class="invalid-feedback">
+                            <div>
+                              End date is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <!-- PRODUCT RANGE -->
+                <div class="group-from" *ngIf="true">
+                  <h5 class="title">Product Number Range</h5>
+                  <div class="form-row align-items-center">
+                    <div class="col-5">
+                      <div class="form-group mb-0">
+                        <input type="number" class="form-control" placeholder="" formControlName="productStartId"
+                          [ngClass]="{
+                            'is-invalid': submitted && f.productStartId.errors
+                          }" />
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="form-group mb-0 text-center">
+                        <label for="" class="mb-0">To</label>
+                      </div>
+                    </div>
+                    <div class="col-5">
+                      <div class="form-group mb-0">
+                        <input type="number" class="form-control" placeholder="" formControlName="productEndId"
+                          [ngClass]="{
+                            'is-invalid': submitted && f.productEndId.errors
+                          }" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- REPLICATE FILTER -->
+                <div class="group-from" *ngIf="false">
+                  <h5 class="title">Replicate Filter</h5>
+                  <div class="form-row form-group align-items-center mb-0">
+                    <div class="col-6">
+                      <div class="custom-control custom-checkbox">
+                        <label class="custom-control-label mb-0">Replicate Code</label>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-row align-items-center">
+                        <div class="col-3">
+                          <label class="label mb-0">&nbsp;</label>
+                        </div>
+                        <div class="col-9">
+                          <input formControlName="replicateCode" type="text" class="form-control" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- PROMOTION FILTER -->
+                <div class="group-from" *ngIf="true">
+                  <h5 class="title">Promotion Filter</h5>
+                  <div class="form-row form-group align-items-center mb-0">
+                    <div class="col-5">
+                      <div class="custom-control custom-checkbox">
+                        <input formControlName="isPromoSale" type="checkbox" class="custom-control-input" id="Sales" />
+                        <label class="custom-control-label mb-0" for="Sales">Only Promo Sales</label>
+                      </div>
+                    </div>
+                    <div class="col-2 text-right">
+                      <label class="label mb-0">Promo</label>
+                    </div>
+                    <div class="col-5">
+                      <input formControlName="promoCode" appUppercase type="text" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Summary Report Options -->
+                <div class="group-from" *ngIf="false">
+                  <h5 class="title">Summary Report Options</h5>
+                  <div class="d-flex flex-wrap form-group mb-0">
+                    <div class="custom-control custom-radio mr-2">
+                      <input type="radio" class="custom-control-input" id="Summary" name="summaryOption"
+                        (change)="setSummaryOption('summary')" />
+                      <label class="custom-control-label mb-0" for="Summary">Summary</label>
+                    </div>
+                    <div class="custom-control custom-radio mr-2">
+                      <input type="radio" class="custom-control-input" id="Dril" name="summaryOption"
+                        (change)="setSummaryOption('drilldown')" />
+                      <label class="custom-control-label mb-0" for="Dril">Drill Down</label>
+                    </div>
+                    <div class="custom-control custom-radio mr-2">
+                      <input type="radio" class="custom-control-input" id="Chart" name="summaryOption"
+                        (change)="setSummaryOption('chart')" />
+                      <label class="custom-control-label mb-0" for="Chart">Chart</label>
+                    </div>
+                    <div class="custom-control custom-radio mr-2">
+                      <input type="radio" class="custom-control-input" id="Continuous" name="summaryOption"
+                        (change)="setSummaryOption('continuous')" />
+                      <label class="custom-control-label mb-0" for="Continuous">Continuous</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Alternate Sort Order -->
+                <div class="group-from" *ngIf="false">
+                  <h5 class="title">Alternate Sort Order</h5>
+                  <div class="d-flex flex-wrap form-group mb-0">
+                    <div class="custom-control custom-radio mr-2">
+                      <input type="radio" class="custom-control-input" id="Quantity" name="altSortOrder"
+                        (change)="setAlternateSortOrder('quantity')" />
+                      <label class="custom-control-label mb-0" for="Quantity">Quantity</label>
+                    </div>
+                    <div class="custom-control custom-radio mr-2">
+                      <input type="radio" class="custom-control-input" id="Amount" name="altSortOrder"
+                        (change)="setAlternateSortOrder('amount')" />
+                      <label class="custom-control-label mb-0" for="Amount">$Amount</label>
+                    </div>
+                    <div class="custom-control custom-radio mr-2">
+                      <input type="radio" class="custom-control-input" id="GP" name="altSortOrder"
+                        (change)="setAlternateSortOrder('GP')" />
+                      <label class="custom-control-label mb-0" for="GP">GP%</label>
+                    </div>
+                    <div class="custom-control custom-radio mr-2">
+                      <input type="radio" class="custom-control-input" id="Margin" name="altSortOrder"
+                        (change)="setAlternateSortOrder('margin')" />
+                      <label class="custom-control-label mb-0" for="Margin">$Margin</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Shrinkage -->
+                <div class="group-from" *ngIf="false">
+                  <h5 class="title">Shrinkage</h5>
+                  <div class="d-flex flex-wrap form-group mb-0">
+                    <div class="custom-control custom-checkbox mr-2">
+                      <input type="checkbox" class="custom-control-input" id="Variance" (click)="
+                          setShrinkage('Variance', $event.target.checked)
+                        " />
+                      <label class="custom-control-label mb-0" for="Variance">Variance</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mr-2">
+                      <input type="checkbox" class="custom-control-input" id="Wastage"
+                        (click)="setShrinkage('Wastage', $event.target.checked)" />
+                      <label class="custom-control-label mb-0" for="Wastage">Wastage</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mr-2">
+                      <input type="checkbox" class="custom-control-input" id="Merge"
+                        (click)="setShrinkage('Merge', $event.target.checked)" />
+                      <label class="custom-control-label mb-0" for="Merge">Merge</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Nil Transactions Interval -->
+                <div class="group-from mb-0" *ngIf="false">
+                  <h5 class="title">Nil Transactions Interval</h5>
+                  <div class="form-row align-items-center">
+                    <div class="col-12">
+                      <div class="form-group mb-0">
+                        <input type="number" class="form-control" formControlName="nilTransactionInterval" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Set Items with Negative on Hand to Zero -->
+                <div class="group-from" *ngIf="false">
+                  <h5 class="title"></h5>
+                  <div class="form-row form-group align-items-center mb-0">
+                    <div class="col-12">
+                      <div class="custom-control custom-checkbox">
+                        <input formControlName="isNegativeOnHandZero" type="checkbox" class="custom-control-input"
+                          id="stockOnHand" />
+                        <label class="custom-control-label mb-0" for="stockOnHand">Set Items with Negative on Hand to
+                          Zero</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Cashiers Selection -->
+                <div class="group-from mb-0" *ngIf="false">
+                  <h5 class="title">Cashier Selection</h5>
+                  <div class="form-row align-items-center">
+                    <div class="col-12">
+                      <div class="form-group mb-0">
+                        <ng-select [items]="dropdownObj.cashiers" bindLabel="firstName" bindValue="id"
+                          [virtualScroll]="false" placeholder="Select Cashier" formControlName="cashierId"
+                          [searchFn]="customSearchFn"
+                          (search)="searchBtnAction($event,reporterObj.dropdownField.cashiers)"
+                          (change)="setSelection($event)">
+
+                          <!-- Search on code / lastname / surname -->
+                          <ng-template ng-option-tmp let-item="item" let-search="searchTerm" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <span title="{{ item.firstName }}&nbsp;&nbsp;{{item.surname}}">
+                                  {{ item.firstName }}&nbsp;&nbsp;{{item.surname}}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.number }}
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">
+                                {{ item.firstName }}&nbsp;&nbsp;{{item.surname}}
+                              </span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Till Selection -->
+                <div class="group-from mb-0" *ngIf="true">
+                  <h5 class="title">Till Selection</h5>
+                  <div class="form-row align-items-center">
+                    <div class="col-12">
+                      <div class="form-group mb-0">
+                        <ng-select [items]="dropdownObj.tills" bindLabel="desc" bindValue="id" [virtualScroll]="false"
+                          placeholder="Select Till" formControlName="tillId" (search)="
+                            searchBtnAction(
+                              $event,
+                              reporterObj.dropdownField.tills
+                            )
+                          " (change)="setSelection($event)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <span title="{{ item?.desc }}">
+                                  {{ item?.desc }}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                                item.desc
+                              }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Include Rebates -->
+                <div class="" *ngIf="false">
+                  <div class="custom-control form-group custom-checkbox mb-0">
+                    <input type="checkbox" class="custom-control-input" id="rebets" formControlName="isRebates" />
+                    <label class="custom-control-label mb-0" for="rebets">Include Rebates</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-xl-6">
+                <div class="group-from">
+                  <h5 class="title">Codes</h5>
+                  <div class="">
+                    <div class="accordion OutletRestList" id="accordionExample">
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Stores</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.stores" bindLabel="storeDetail" bindValue="id"
+                          [virtualScroll]="false" [multiple]="true" [clearSearchOnAdd]="true" [closeOnSelect]="false"
+                          placeholder="Select Store" formControlName="storeIds"
+                          (search)="searchBtnAction($event, reporterObj.dropdownField.stores)"
+                          (change)="setDropdownSelection(reporterObj.dropdownField.stores, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.stores, reporterObj.dropdownField.storeIds,
+                          true)" (add)="addOrRemoveItem($event, reporterObj.dropdownField.stores, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.stores, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.stores, 'clear_all', 
+														reporterObj.dropdownField.storeIds)">
+
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.stores[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.desc }}">
+                                  {{ item?.desc }} {{selectAll(reporterObj.dropdownField.stores, item)}}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add button on top of the select and perform operations -->
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                  addOrRemoveItem(
+                                    null,
+                                    reporterObj.dropdownField.stores,
+                                    reporterObj?.button_text?.stores,
+                                    reporterObj.dropdownField.storeIds
+                                  )
+                                " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.stores }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                                item.storeDetail
+                              }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div>
+                      
+                      
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Days of Week</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.days" bindLabel="name" bindValue="code" [virtualScroll]="false"
+                          [clearSearchOnAdd]="true" [closeOnSelect]="false" [multiple]="true" placeholder="Days of Week"
+                          formControlName="days" (change)="setDropdownSelection(reporterObj.dropdownField.days, $event)"
+                          (open)="getAndSetFilterData(reporterObj.dropdownField.days, reporterObj.dropdownField.daysId,
+                          true)" (add)="addOrRemoveItem($event, reporterObj.dropdownField.days, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.days, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.days, 'clear_all', 
+                            reporterObj.dropdownField.daysId)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ item?.name }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.days[item?.code] ? true : false" />&nbsp;
+                                <span title="{{ item?.name }}">
+                                  {{ item?.name }} {{selectAll(reporterObj.dropdownField.days, item)}}
+                                </span>
+
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add button on top of the select and perform operations -->
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                      addOrRemoveItem(
+                                        null,
+                                        reporterObj.dropdownField.days,
+                                        reporterObj?.button_text?.days,
+                                        reporterObj.dropdownField.daysId
+                                      )
+                                    " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.days }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                                item.name
+                              }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div>    
+                     
+
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Zones</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.zones" bindLabel="name" bindValue="id" [virtualScroll]="false"
+                          [multiple]="true" [clearSearchOnAdd]="true" [closeOnSelect]="false" placeholder="Select Zone"
+                          formControlName="zoneIds" (search)="searchBtnAction($event,reporterObj.dropdownField.zones)"
+                          (change)="setDropdownSelection(reporterObj.dropdownField.zones, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.zones, reporterObj.dropdownField.zoneIds,
+                          true)" (add)="addOrRemoveItem($event, reporterObj.dropdownField.zones, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.zones, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.zones, 'clear_all', 
+                            reporterObj.dropdownField.zoneIds)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.zones[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.name }}">
+                                  {{ item?.name }} {{selectAll(reporterObj.dropdownField.zones, item)}}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add button on top of the select and perform operations -->
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                              
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                      addOrRemoveItem(
+                                        null,
+                                        reporterObj.dropdownField.zones,
+                                        reporterObj?.button_text?.zones,
+                                        reporterObj.dropdownField.zoneIds
+                                      )
+                                    " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.zones }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                                item.name
+                              }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div>    
+                    
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Departments</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.departments" bindLabel="desc" bindValue="id"
+                          [clearSearchOnAdd]="true" [closeOnSelect]="false" [virtualScroll]="false" [multiple]="true"
+                          placeholder="Select Department" formControlName="departmentIds" (search)="
+                            searchBtnAction(
+                              $event,
+                              reporterObj.dropdownField.departments
+                            )
+                          " (change)="setDropdownSelection(reporterObj.dropdownField.departments, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.departments, 
+                          reporterObj.dropdownField.departmentIds, true)"
+                          (add)="addOrRemoveItem($event, reporterObj.dropdownField.departments, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.departments, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.departments, 'clear_all', 
+                            reporterObj.dropdownField.departmentIds)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.departments[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.desc }}">
+                                  {{ item?.desc }} {{selectAll(reporterObj.dropdownField.departments, item)}}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add button on top of the select and perform operations -->
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                      addOrRemoveItem(
+                                        null,
+                                        reporterObj.dropdownField.departments,
+                                        reporterObj?.button_text?.departments,
+                                        reporterObj.dropdownField.departmentIds
+                                      )
+                                    " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.departments }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                                item.desc
+                              }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div>  
+
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Commodities</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.commodities" bindLabel="desc" bindValue="id"
+                          [clearSearchOnAdd]="true" [closeOnSelect]="false" [virtualScroll]="false" [multiple]="true"
+                          placeholder="Select Commodity" formControlName="commodityIds"
+                          (search)="searchBtnAction($event,reporterObj.dropdownField.commodities)"
+                          (change)="setDropdownSelection(reporterObj.dropdownField.commodities, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.commodities, 
+														reporterObj.dropdownField.commodityIds, true)"
+                          (add)="addOrRemoveItem($event, reporterObj.dropdownField.commodities, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.commodities, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.commodities, 'clear_all', 
+														reporterObj.dropdownField.commodityIds)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.commodities[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.desc }}">
+                                  {{ item?.desc }} {{selectAll(reporterObj.dropdownField.commodities, item)}}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add button on top of the select and perform operations -->
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                    addOrRemoveItem(
+                                      null,
+                                      reporterObj.dropdownField.commodities,
+                                      reporterObj?.button_text?.commodities,
+                                      reporterObj.dropdownField.commodityIds
+                                    )
+                                  " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.commodities }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                                item.desc
+                              }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div>  
+
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Categories</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.categories" bindLabel="name" bindValue="id"
+                          [clearSearchOnAdd]="true" [closeOnSelect]="false" [virtualScroll]="false" [multiple]="true"
+                          placeholder="Select Category" formControlName="categoryIds" (search)="
+                            searchBtnAction(
+                              $event,
+                              reporterObj.dropdownField.categories
+                            )
+                          " (change)="setDropdownSelection(reporterObj.dropdownField.categories, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.categories, 
+                          reporterObj.dropdownField.categoryIds, true)"
+                          (add)="addOrRemoveItem($event, reporterObj.dropdownField.categories, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.categories, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.categories, 'clear_all', 
+                            reporterObj.dropdownField.categoryIds)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.categories[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.name }}">
+                                  {{ item?.name }} {{selectAll(reporterObj.dropdownField.categories, item)}}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add button on top of the select and perform operations -->
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                             
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                  addOrRemoveItem(
+                                    null,
+                                    reporterObj.dropdownField.categories,
+                                    reporterObj?.button_text?.categories,
+                                    reporterObj.dropdownField.categoryIds
+                                  )
+                                " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.categories }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                                item.name
+                              }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div>
+                      
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Groups</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.groups" bindLabel="name" bindValue="id"
+                          [clearSearchOnAdd]="true" [closeOnSelect]="false" [virtualScroll]="false" [multiple]="true"
+                          placeholder="Select Group" formControlName="groupIds" (search)="
+                            searchBtnAction(
+                              $event,
+                              reporterObj.dropdownField.groups
+                            )
+                          " (change)="setDropdownSelection(reporterObj.dropdownField.groups, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.groups, 
+														reporterObj.dropdownField.groupIds, true)"
+                          (add)="addOrRemoveItem($event, reporterObj.dropdownField.groups, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.groups, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.groups, 'clear_all', 
+														reporterObj.dropdownField.groupIds)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.groups[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.name }}">
+                                  {{ item?.name }} {{selectAll(reporterObj.dropdownField.groups, item)}}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add button on top of the select and perform operations -->
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                             
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                    addOrRemoveItem(
+                                      null,
+                                      reporterObj.dropdownField.groups,
+                                      reporterObj?.button_text?.groups,
+                                      reporterObj.dropdownField.groupIds
+                                    )
+                                  " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.groups }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                                item.name
+                              }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div> 
+
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Suppliers</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.suppliers" bindLabel="desc" bindValue="id"
+                          [clearSearchOnAdd]="true" [closeOnSelect]="false" [virtualScroll]="false" [multiple]="true"
+                          placeholder="Select Supplier" formControlName="supplierIds" (search)="
+                            searchBtnAction(
+                              $event,
+                              reporterObj.dropdownField.suppliers
+                            )
+                          " (change)="setDropdownSelection(reporterObj.dropdownField.suppliers, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.suppliers, 
+														reporterObj.dropdownField.supplierIds, true)"
+                          (add)="addOrRemoveItem($event, reporterObj.dropdownField.suppliers, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.suppliers, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.suppliers, 'clear_all', 
+														reporterObj.dropdownField.supplierIds)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.suppliers[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.desc }}">
+                                  {{ item?.desc }} {{
+                                    selectAll(reporterObj.dropdownField.suppliers, item)
+                                  }}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+                          <!-- Add button on top of the select and perform operations -->
+                          <ng-template ng-header-tmp>
+                            <div class="form-row align-items-center form-group mb-0">
+                             
+                              <div class="col-12 text-right">
+                                <button (click)="
+                                    addOrRemoveItem(
+                                      null,
+                                      reporterObj.dropdownField.suppliers,
+                                      reporterObj?.button_text?.suppliers,
+                                      reporterObj.dropdownField.supplierIds
+                                    )
+                                  " class="btn btn-blue input-btn btn-grey">
+                                  {{ reporterObj?.button_text?.suppliers }}
+                                </button>
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                                item.desc
+                              }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div> 
+                      
+                      
+                      <div class="form-group form-row">
+                        <label class="label col-md-3 mb-0">Manufacturers</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.manufacturers" bindLabel="name" bindValue="id"
+                          [virtualScroll]="true" [clearSearchOnAdd]="true" [closeOnSelect]="false" [multiple]="true"
+                          placeholder="Select Manufacturer" formControlName="manufacturerIds"
+                          (search)="searchBtnAction($event,reporterObj.dropdownField.manufacturers)"
+                          (change)="setDropdownSelection(reporterObj.dropdownField.manufacturers, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.manufacturers, 
+                          reporterObj.dropdownField.manufacturerIds, true)"
+                          (add)="addOrRemoveItem($event, reporterObj.dropdownField.manufacturers, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.manufacturers, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.manufacturers, 'clear_all', 
+                            reporterObj.dropdownField.manufacturerIds)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-9 zone-overflow">
+                                <input id="item-{{ index }}" type="checkbox"
+                                  [checked]="reporterObj?.remove_index_map?.manufacturers[item.id] ? true : false" />&nbsp;
+                                <span title="{{ item?.name }}">
+                                  {{ item?.name }} {{selectAll(reporterObj.dropdownField.manufacturers, item)}}
+                                </span>
+                              </div>
+                              <div class="col-3">
+                                {{ item?.code }}
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <!-- Add more tag with count -->
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{
+                                item.name
+                              }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div> 
+                      
+                      
+                      <div class="form-group form-row" *ngIf="false">
+                        <label class="label col-md-3 mb-0">Members</label>
+                        <div class="col-md-9 mb-0">
+                          <ng-select [items]="dropdownObj.members" bindLabel="memB_NAME" bindValue="memB_NUMBER"
+                          [virtualScroll]="false" [clearSearchOnAdd]="true" [closeOnSelect]="false" [multiple]="true"
+                          placeholder="Select Member" formControlName="memberIds"
+                          (change)="setDropdownSelection(reporterObj.dropdownField.members, $event)" (open)="getAndSetFilterData(reporterObj.dropdownField.members, 
+														reporterObj.dropdownField.memberIds, true)"
+                          (add)="addOrRemoveItem($event, reporterObj.dropdownField.members, 'add')"
+                          (remove)="addOrRemoveItem($event, reporterObj.dropdownField.members, 'remove')" (clear)="addOrRemoveItem($event, reporterObj.dropdownField.members, 'clear_all', 
+														reporterObj.dropdownField.memberIds)"
+                          (search)="searchBtnAction($event, reporterObj.dropdownField.members)">
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <div class="col-12 zone-overflow">
+                                <div class="form-row align-items-center">
+                                  <input id="item-{{ index }}" type="checkbox"
+                                    [checked]="reporterObj?.remove_index_map?.members[item.memB_NUMBER] ? true : false" />
+                                  <ng-container *ngIf="item?.memB_NAME">
+                                    <span class="col title-text px-15" title="{{ item?.memB_NAME }}">
+                                      {{ item?.memB_NAME }}
+                                    </span>
+                                  </ng-container>
+                                  <span class="col px-15 pr-50" [ngClass]="item?.memB_NAME ? 'text-right' : ''"
+                                    title="{{ item?.memB_NUMBER }}">
+                                    {{ item?.memB_NUMBER }} {{selectAll(reporterObj.dropdownField.members, item)}}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-template>
+
+                          <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                            <div class="ng-value" *ngFor="let item of items | slice: 0:2">
+                              <span class="ng-value-label">{{item?.memB_NUMBER}}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </div>
+                            <div class="ng-value" *ngIf="items.length > 2">
+                              <span class="ng-value-label">{{ items.length - 2 }} more...</span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                        </div>
+                      </div> 
+                    </div>
+                  </div>
+                </div>
+
+                <!-- All Selections -->
+                <div class="group-from">
+                  <h5 class="title">Selections</h5>
+                  <div class="Day_list">
+                    <ng-container *ngIf="salesReportCode != 'stockOnHand'">
+                      <div *ngIf="f?.startDate?.value">
+                        <h4>Date Range</h4>
+                        <ul>
+                          <li>
+                            {{ f?.startDate?.value | date: "dd/MM/yyyy" }} to
+                            {{ f?.endDate?.value | date: "dd/MM/yyyy" }}
+                          </li>
+                        </ul>
+                      </div>
+                    </ng-container>
+
+                    <div class="mt-1" *ngIf="f?.isPromoSale?.value">
+                      <h4>Promotion</h4>
+                      <ul>
+                        <li>Only Promo Sales</li>
+                      </ul>
+                    </div>
+                    <div class="mt-1" *ngIf="f?.productStartId?.value">
+                      <h4>Product Range</h4>
+                      <ul>
+                        <li>
+                          {{ f?.productStartId?.value }} to
+                          {{ f?.productEndId?.value }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <ng-container *ngIf="salesReportCode != 'noSales'">
+                      <div class="mt-1" *ngIf="shrinkageObj?.variance || shrinkageObj?.wastage || shrinkageObj?.merge">
+                        <h4>Shrinkage Filters</h4>
+                        <ul>
+                          <li>{{ shrinkageObj?.variance ? 'Variance' : null }}</li>
+                          <li>{{ shrinkageObj?.wastage ? 'Wastage' : null }}</li>
+                          <li>{{ shrinkageObj?.merge ? 'Merge' : null }}</li>
+                        </ul>
+                      </div>
+                    </ng-container>
+
+                    <div class="mt-1" *ngIf="summaryOptionType">
+                      <h4>Summary Report Options</h4>
+                      <ul>
+                        <li>{{ summaryOptionType.split('=')[0] | uppercase }}</li>
+                      </ul>
+                    </div>
+
+                    <ng-container *ngIf="salesReportCode != 'noSales'">
+                      <div class="mt-1" *ngIf="sortOrderType">
+                        <h4>Sort Order</h4>
+                        <ul>
+                          <li>{{ sortOrderType | uppercase }}</li>
+                        </ul>
+                      </div>
+                    </ng-container>
+
+                    <div class="mt-1" *ngIf="f?.promoCode?.value">
+                      <h4>Promo Code</h4>
+                      <ul>
+                        <li>
+                          Only Items in Promo Code: {{ f?.promoCode?.value }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.stores">
+                      <h4>Outlets</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.stores?.length !== selectedValues?.stores?.length); else allStoreSelected">
+                          <li *ngFor="let store of selectedValues.stores">
+                            {{ store.code }} &nbsp;-&nbsp;{{ store.desc }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allStoreSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.zones">
+                      <h4>Zones</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.zones?.length !== selectedValues?.zones?.length); else allZonesSelected">
+                          <li *ngFor="let zone of selectedValues.zones">
+                            {{ zone.code }} &nbsp;-&nbsp;{{ zone.name }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allZonesSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues?.days?.length">
+                      <h4>Days</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.days?.length !== selectedValues?.days?.length); else allDaysSelected">
+                          <li *ngFor="let week of selectedValues.days">
+                            {{ week.name }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allDaysSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.departments">
+                      <h4>Departments</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.departments?.length !== selectedValues?.departments?.length); else allDeptSelected">
+                          <li *ngFor="let deprt of selectedValues.departments">
+                            {{ deprt.code }} &nbsp;-&nbsp;{{ deprt.desc }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allDeptSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.commodities">
+                      <h4>Commodities</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.commodities?.length !== selectedValues?.commodities?.length); else allCommSelected">
+                          <li *ngFor="let commodity of selectedValues.commodities">
+                            {{ commodity.code }} &nbsp;-&nbsp;{{ commodity.desc }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allCommSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.categories">
+                      <h4>Categories</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.categories?.length !== selectedValues?.categories?.length); else allCateSelected">
+                          <li *ngFor="let category of selectedValues.categories">
+                            {{ category.code }} &nbsp;-&nbsp;{{ category.fullName }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allCateSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.groups">
+                      <h4>Groups</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.groups?.length !== selectedValues?.groups?.length); else allGrpSelected">
+                          <li *ngFor="let group of selectedValues.groups">
+                            {{ group.code }} &nbsp;-&nbsp;{{ group.fullName }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allGrpSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.suppliers">
+                      <h4>Suppliers</h4>
+                      <ul>
+                        <ng-container
+                          *ngIf="(dropdownObj.suppliers?.length !== selectedValues?.suppliers?.length); else allSuppSelected">
+                          <li *ngFor="let group of selectedValues.suppliers">
+                            {{ group.code }} &nbsp;-&nbsp;{{ group.desc }}
+                          </li>
+                        </ng-container>
+                        <ng-template #allSuppSelected>
+                          <li>All Values Has Been Selected</li>
+                        </ng-template>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.manufacturers">
+                      <h4>Manufacturer</h4>
+                      <ul>
+                        <li *ngFor="let manuf of selectedValues.manufacturers">
+                          {{ manuf.code }} &nbsp;-&nbsp;{{ manuf.name }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <ng-container *ngIf="salesReportCode == 'nilTransaction'">
+                      <div class="mt-1" *ngIf="f?.nilTransactionInterval?.value">
+                        <h4>Nil Transaction Interval</h4>
+                        <ul>
+                          <li>Interval: {{f?.nilTransactionInterval?.value}}</li>
+                        </ul>
+                      </div>
+                    </ng-container>
+
+                    <div class="mt-1" *ngIf="selectedValues?.members?.length">
+                      <h4>Member</h4>
+                      <ul>
+                        <li *ngFor="let memf of selectedValues.members">
+                          {{ memf.memB_NUMBER }}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mt-1" *ngIf="selectedValues.tills">
+                      <h4>Till</h4>
+                      <ul>
+                        <li>{{ selectedValues.tills }}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="" *ngIf="false
+                  ">
+                  <div class="custom-control form-group custom-checkbox mb-0">
+                    <input type="checkbox" class="custom-control-input" id="Member" formControlName="isMember" />
+                    <label class="custom-control-label mb-0" for="Member">Only Member Sales</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="btn-wrap text-right mt-10">
+                  <a class="btn btn-grey mr-2" (click)="resetForm();clearDropdown()">Clear Selections</a>
+                  <button class="btn btn-blue mr-2" (click)="getSalesReport();clearDropdown()">Ok</button>
+                  <a class="btn btn-grey" data-dismiss="modal"
+                    (click)="getSalesReport(true);clearDropdown();isCancelApi()">Cancel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

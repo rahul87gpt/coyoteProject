@@ -1,0 +1,44 @@
+.modal-content{
+    box-shadow:0 2px 10px 0 #00000029;
+    border-color:#00000033;
+  }
+  #hostProcessing {
+      .modal-dialog {
+          max-width: 600px;
+      }
+      .modal-header {
+          padding: 10px;
+          background-color: #fff;
+          h4.title {
+              display: flex;
+            color: #000;
+            font-weight: 400;
+              .title-left {
+                  flex: 0 0 60%;
+                  max-width: 60% ;
+                  text-align: right;
+              }
+              .title-right {
+                flex: 0 0 40%;
+                max-width: 40%;
+                a {
+                    float:right;
+                    i {
+                        color:#808080b8;
+                    }
+                }
+            }
+          }
+      }
+  }
+  .hostprocessing-table {
+      max-height: 250px;
+      overflow-y: auto;
+      background-color: #fff;
+      
+  }
+  
+  .time-text {
+      font-size: 11px;
+      margin-bottom:0;
+  }

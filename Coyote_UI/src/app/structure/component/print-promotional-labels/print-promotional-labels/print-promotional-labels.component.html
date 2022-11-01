@@ -1,0 +1,303 @@
+<div class="mainContent-innner" *ngIf="!pdfData">
+	<div class="print-promotion-section">
+		<div class="d-flex align-items-center">
+			<h4 class="title flex-grow-1 mb-0">Print Promotion Labels</h4>
+			<div class="probtn-wrap d-flex text-right">
+				<button type="button" class="btn mr-2" data-toggle="modal" data-target="#SearchFilter">
+					<i class="icon fa fa-filter"></i> Filter
+				</button>
+				<!-- <button type="button" class="btn" data-toggle="modal" data-target="#promotionLabel">
+					Print Promotion Labels
+				</button> -->
+			</div>
+		</div>
+		<!-- /.action-topbar -->
+		<div class="print-promotion-wrap">
+			<div class="custom-control ml-2 custom-checkbox active-custom">
+				<input
+				type="checkbox"
+				class="custom-control-input"
+				id="printPromotionCheckBox"
+				(click)="changeEvent($event.target.checked)"
+			  />
+			  <label
+				class="custom-control-label mb-0 show-only"
+				for="printPromotionCheckBox"
+			  >
+				Show Only Active Print Promotion Labels
+			  </label>
+			  </div>
+			<!-- <div class="print-promotion-table-wrap bg-box mt-15">
+				<div class="table-responsive ctm-data-table"> -->
+			<div class="print-promotion-table-wrap bg-box mt-15 all-w">
+				<div class="table-responsive inner-responsive">
+					<table class="table ctm-table" id="print-promotion-table">
+						<thead>
+							<tr>
+								<th class="text-center">Status</th>
+								<ng-container *ngFor="let column of columns">
+									<th class="text-center">{{column}}<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+								</ng-container>
+								<th class="text-center">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let promotion of printPromotion">
+								<td class="text-center">
+									<div class="status-icons">
+										<img *ngIf="promotion.status" src="assets/images/status-true.svg" alt="">
+										<img *ngIf="!promotion.status" src="assets/images/status-false.svg" alt="">
+									</div>
+								</td>
+								<td class="text-center">
+									<a data-target="#promotionLabel" (click)="updateAndPrintPromotionalLabel(promotion)">
+										{{promotion.code}}
+									</a>
+								</td>
+								<td class="text-center">{{ promotion.desc }}</td>
+								<td class="text-center">
+									{{promotion.status == true ? 'Active ' : 'Inactive '}}
+								</td>
+								<td class="text-center">{{ promotion.promotionType }}</td>
+								<td class="text-center">{{ promotion.group }}</td>
+								<td class="text-center"><span style="display: none">{{convertDateToMiliSeconds(promotion.start)}}</span>{{ promotion.start | customdatetimeformat }}</td>
+								<td class="text-center"><span style="display: none">{{convertDateToMiliSeconds(promotion.end)}}</span>{{ promotion.end | customdatetimeformat }}</td>
+								<td class="text-center">{{ promotion.zone }}</td>
+								<td class="text-center">{{ promotion?.availibility?.split('')[0] }}</td>
+								<td class="text-center">{{ promotion?.availibility?.split('')[1] }}</td>
+								<td class="text-center">{{ promotion?.availibility?.split('')[2] }}</td>
+								<td class="text-center">{{ promotion?.availibility?.split('')[3] }}</td>
+								<td class="text-center">{{ promotion?.availibility?.split('')[4] }}</td>
+								<td class="text-center">{{ promotion?.availibility?.split('')[5] }}</td>
+								<td class="text-center">{{ promotion?.availibility?.split('')[6] }}</td>
+								<td class="text-center">{{ promotion.rptGroup }}</td>
+								<td class="text-center">{{ promotion.source }}</td>
+								<td class="text-center"><span style="display: none">{{convertDateToMiliSeconds(promotion.createdAt)}}</span>{{ promotion.createdAt | customdatetimeformat }}</td>
+								<td class="text-center">
+									<div class="tbHover-btnGroup">
+										<button tooltip="Print" class="tbHover-btn fa fa-print" data-toggle="modal"
+											data-target="#promotionLabel" 
+											(click)="updateAndPrintPromotionalLabel(promotion)" placement="left" ></button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.pricingApnSearch-section -->
+</div>
+
+<div class="modal fade thm-popup" id="promotionLabel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form [formGroup]="printPromoForm">
+						<div class="title-wrap mb-2">
+							<h4 class="title">Print Promotion Label</h4>
+						</div>
+						<!-- <div class="form-group">
+							<label>Outlet</label>
+							<select class="form-control" formControlName="storeId"
+								[ngClass]="{'is-invalid': submitted && f?.storeId?.errors}"
+							(change)="changeStore(store.value)" #store>
+                                <option [value]="store.id" *ngFor="let store of storeData">
+                                    {{store.desc}}
+                                </option>
+							</select>
+							<div *ngIf="f?.storeId?.errors" class="invalid-feedback">
+								<div *ngIf="f?.storeId?.errors?.required">
+									Outlet is required
+								</div>
+							</div>
+						</div> -->
+						<div class="form-group mb-1 form-row align-items-center*
+                        ">
+                          <label class="col-md-12 mb-1"
+                            >Outlet</label
+                          >
+                          <div class="col-md-12 range-drop mb-1">
+                            <ng-select
+                              [items]="storeData"                              
+                              bindLabel="desc"
+                              bindValue="id"
+                              [multiple]="false"
+                              [virtualScroll]="true"
+                              [clearable]="false"                              
+                              placeholder="Select Outlet"
+							  formControlName="storeId"
+							  (change)="changeStore($event)" #store
+							  [ngClass]="{'is-invalid': submitted && f?.storeId?.errors}"
+                            >
+                              <!-- It hold value on the basis of filter -->
+                            
+                              <ng-template
+                                ng-option-tmp
+                                let-item="item"
+                                let-item$="item$"
+                                let-index="index" 
+                              >
+                                <div class="form-row">
+                                  <span class="col-9 zone-overflow text-left">
+                                    {{ item?.desc }}
+                                  </span>
+                                  <div class="col-3 text-right" title="{{ item?.name }}">
+                                    {{ item?.code }}
+                                  </div>
+                                </div>    
+                              </ng-template>
+                            </ng-select>
+						  </div>
+						  <div *ngIf="f?.storeId?.errors" class="invalid-feedback">
+							<div *ngIf="f?.storeId?.errors?.required">
+								Outlet is required
+							</div>
+						</div>
+                        </div>
+						<div class="form-group mb-0 form-row align-items-center*
+                        ">
+                          <label class="col-md-12 mb-1"
+                            >Label Type</label
+                          >
+                          <div class="col-md-12 range-drop mb-1">
+                            <ng-select
+                              [items]="labelType"                              
+                              bindLabel="desc"
+                              bindValue="code"
+                              [multiple]="false"
+                              [virtualScroll]="true"
+                              [clearable]="false"                              
+                              placeholder="Select Label Type"
+                              formControlName="defaultLabelId"
+                            >
+                              <!-- It hold value on the basis of filter -->
+                            
+                              <ng-template
+                                ng-option-tmp
+                                let-item="item"
+                                let-item$="item$"
+                                let-index="index" 
+                              >
+                                <div class="form-row">
+                                  <span class="col-9 zone-overflow text-left">
+                                    {{ item?.desc }}
+                                  </span>
+                                  <div class="col-3 text-right" title="{{ item?.name }}">
+                                    {{ item?.code }}
+                                  </div>
+                                </div>    
+                              </ng-template>
+                            </ng-select>
+                          </div>
+                        </div>
+						<div class="form-row">
+							<!-- <div class="col-md-6">
+								<div class="form-group">
+									<label>Label Type</label>
+									<select class="form-control" formControlName="defaultLabelId">
+                                        <option [ngValue]="label.code" *ngFor="let label of labelType">
+											{{label.name}}
+										</option>
+									</select>
+								</div>
+							</div> -->
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Price Levels</label>
+									<select class="form-control" formControlName="priceLevel">
+                                        <option [ngValue]="price" *ngFor="let price of printPromoObj.price_level">
+                                            {{price}}
+                                        </option>
+                                    </select>
+								</div>
+							</div>
+						</div>
+						<div class="form-group mb-0">
+							<label id="seletionNameId" >Selections</label>
+							<textarea name="seletionNameId" id="seletionNameId" rows="3"class="form-control" readonly>Promotion: &nbsp;{{ f?.code?.value }}&nbsp;&nbsp;{{ f?.desc?.value }}</textarea>
+						</div>
+						<div class="btn-wrap text-right mt-10">
+							<button type="button" class="btn btn-blue mr-2" (click)="updateAndPrintPromotionalLabel(null, 'submitted')">
+								ok
+							</button>
+							<button type="button" class="btn btn-grey " data-dismiss="modal">
+								Cancel
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade thm-popup" id="SearchFilter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form name = "searchForm" id = "searchForm">
+						<div class="title-wrap mb-2">
+							<h4 class="title">Search Filter</h4>
+						</div>
+						<div class="form-group mb-0">
+							<label> Wildcard Search</label>
+							<input type="text"  id="myID" appUppercase class="form-control" #searchValue>
+						</div>
+						<div class="btn-wrap text-right mt-10">
+							<button class="btn btn-blue mr-2" (click)="getPrintPromotionData(searchValue)" >Ok</button>
+							<button class="btn btn-grey"   data-dismiss="modal" >Cancel</button>
+						</div>
+					</form>	
+				</div>					
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <div class="modal fade thm-popup" id="SearchFilter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form>
+						<div class="title-wrap mb-2">
+							<h4 class="title">Search Filter</h4>
+						</div>
+						<div class="form-group mb-0">
+							<label>Description Wildcard</label>
+							<textarea name="" id="" rows="2" class="form-control"></textarea>
+						</div>
+						<div class="btn-wrap text-right mt-10">
+							<button type="button" class="btn btn-blue mr-2">
+								ok
+							</button>
+							<button type="button" class="btn btn-grey" data-dismiss="modal">
+								Cancel
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+<ng-container *ngIf="pdfData">
+    <div class="bg-box">    
+        <div class="text-right mb-2">
+            <button type="button" class="btn btn-blue" (click)="updateAndPrintPromotionalLabel(null, 'close')">Close</button>
+        </div>
+        <ngx-extended-pdf-viewer
+            [src]="pdfData"
+            [height]="'90vh'"
+            [useBrowserLocale]="true"
+            [textLayer]="true"
+            [showHandToolButton]="true"
+        ></ngx-extended-pdf-viewer>
+    </div>
+</ng-container>
+

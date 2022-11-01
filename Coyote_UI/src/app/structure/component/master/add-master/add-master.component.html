@@ -1,0 +1,53 @@
+<div class="mainContent-innner pt-2">
+    <div class="addMaster-section">
+       <div class="action-topbar d-flex align-items-center">
+          <h4 class="title flex-grow-1 mb-0">Add Master <span class="bdms"><a href="#">Accounts</a> | <a href="#">Code</a> | <span class="current">Add Master</span></span></h4>
+          <div class="probtn-wrap text-right">
+             <button class="btn btn-blue with-icon mr-2"><i class="icon fa fa-floppy-o"></i> Save</button>
+             <button class="btn mr-2" [routerLink]="['/master']"><span class="icon cancel-icon">X</span> Cancel</button>
+          </div>
+       </div>
+       <div class="addMaster-wrap">
+          <div class="addMaster-form popup-box fixed-center">
+             <form>
+                <div class="title-wrap">
+                   <h4 class="title">Add Master</h4>
+                </div>
+                <div class="form-group form-row align-items-center">
+                   <label class="col-md-3 mb-0">Code</label>
+                   <div class="col-md-9">
+                      <input type="text" class="form-control">
+                   </div>
+                </div>
+                <div class="form-group form-row align-items-center">
+                   <label class="col-md-3 mb-0">Description</label>
+                   <div class="col-md-9">
+                      <input type="text" class="form-control">
+                   </div>
+                </div>
+                <div class="form-group form-row align-items-center">
+                   <label class="col-md-3 mb-0">Status</label>
+                   <div class="col-md-9">
+                      <select class="form-control">
+                         <option>Option</option>
+                         <option>Option</option>
+                         <option>Option</option>
+                      </select>
+                   </div>
+                </div>
+                <div class="form-group form-row align-items-center">
+                   <label class="col-md-3 mb-0">Cover Days</label>
+                   <div class="col-md-9">
+                      <input type="text" class="form-control">
+                   </div>
+                </div>
+                <div class="btn-wrap text-right btns-top-space">
+                   <button class="btn width-80 btn-right-space btn-blue">Add</button>
+                   <button class="btn width-80" [routerLink]="['/master']">Cancel</button>
+                </div>
+             </form>
+          </div>
+       </div>
+       <!-- /.UserStoreGroup-wrap -->
+    </div>
+ </div>

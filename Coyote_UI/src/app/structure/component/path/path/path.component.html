@@ -1,0 +1,160 @@
+<div class="mainContent-innner">
+    <div class="Keypads-section">
+    <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">Paths</h4>
+        <div class="probtn-wrap d-flex text-right">
+            <button type="button" data-toggle="modal" data-target="#AddPaths" class="btn btn-blue mr-2" (click)="clickedAddButton()"><i class="icon fa fa-plus-circle"></i> Add</button>
+            <button type="button" class="btn mr-2"><i class="icon fa fa-print"></i> Print</button>
+            <button type="button" class="btn mr-2" (click)="exportPathData()"><i class="icon fa fa-file-excel-o"></i> Export</button>
+            <button type="button" data-toggle="modal" data-target="#pathSearch" class="btn" (click)="openPathSearchFilter()"><i class="icon fa fa-filter"></i> filter</button>
+        </div>
+    </div>
+    <!-- /.action-topbar -->
+    <div class="outlets-wrap">                        
+        <div class="bg-box mt-15">
+            <div class="table-responsive">
+                <table class="table ctm-table" id="path-table" *ngIf="pathList?.length">
+                    <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Description</th>
+                        <th>Outlet</th>
+                        <th>Path</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let path of pathList">
+                            <td><a data-toggle="modal" data-target="#AddPaths" (click)="getpathById(path.id)">{{path.pathTypeName}}</a></td>
+                            <td>{{path.description}}</td>     
+                            <td>{{path.outletCode}}</td>    
+                            <td>{{path.path.length > 10? path.path.substring(0,30)+"..." :path.path}}</td>                                   
+                            <td>
+                                <div class="text-center">
+                                    <div class="tbHover-btnGroup">
+                                        <button tooltip="Change" placement="left" class="tbHover-btn trash-btn" data-toggle="modal" data-target="#AddPaths" (click)="getpathById(path.id)"><i class="fa fa-pencil"></i></button>
+                                        <button tooltip="Delete" placement="right" class="tbHover-btn trash-btn"  (click)="deletePath(path.id)"><i class="fa fa-trash"></i></button>
+                                     </div>
+                                    <!-- <div class="tbHover-btnGroup">
+                                        <button class="tbHover-btn trash-btn" data-toggle="modal" data-target="#AddPaths" (click)="getpathById(path.id)"><i class="fa fa-pencil"></i></button>
+                                        <button class="tbHover-btn trash-btn" (click)="deletePath(path.id)"><i class="fa fa-trash"></i></button>
+                                    </div>   -->
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-md thm-popup" id="AddPaths" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="pathForm">
+                        <div class="title-wrap mb-2">
+                            <h4 class="title">{{path_id ? "Update":"Add"}} Path</h4>
+                        </div>
+                        <div class="form-group"> 
+                            <label for="" class="mb-0">Path Type<span class="text-danger">*</span></label>
+                            <ng-container *ngIf="!path_id">
+                              <select formControlName="pathType" class="form-control" 
+                              [ngClass]="{ 'is-invalid': submitted && f.pathType.errors }" >
+                              <option [value]="type.id" *ngFor="let type of pathType">{{type.name}}</option>
+                            </select>
+                              <div *ngIf="f.pathType.errors" class="invalid-feedback">
+                                <div *ngIf="f.pathType.errors.required"> Path Type is required</div>
+                              </div>
+                            </ng-container>
+
+                            <ng-container *ngIf="path_id">
+                                <select formControlName="pathType" class="form-control" 
+                                [ngClass]="{ 'is-invalid': submitted && f.pathType.errors }"  disabled>
+                                <option [value]="type.id" *ngFor="let type of pathType">{{type.name}}</option>
+                                </select>
+                                <div *ngIf="f.pathType.errors" class="invalid-feedback">
+                                  <div *ngIf="f.pathType.errors.required"> Path Type is required</div>
+                                </div>
+                            </ng-container>
+                            
+                        </div>  
+                        <div class="form-group"> 
+                            <label for="" class="mb-0">Outlet</label>
+                            <ng-container *ngIf="!path_id">
+                                <select  formControlName="outletID" class="form-control">
+                                    <option [value]="outlet.id" *ngFor="let outlet of outletData">
+                                     {{outlet.desc}}
+                                    </option>
+                                </select>
+                            </ng-container>
+
+                            <ng-container *ngIf="path_id">
+                                <select  formControlName="outletID" class="form-control"  disabled>
+                                    <option [value]="outlet.id" *ngFor="let outlet of outletData">
+                                     {{outlet.desc}}
+                                    </option>
+                                </select>   
+                            </ng-container>
+                        </div>  
+                        <div class="form-group"> 
+                            <label for="" class="mb-0">Path Desc<span class="text-danger">*</span></label>
+                            <input formControlName="description" type="text" class="form-control" appUppercase 
+                            [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+                            <div *ngIf="f.description.errors" class="invalid-feedback">
+                             <div *ngIf="f.description.errors.required"> Path Desc is required</div>
+                            </div>
+                        </div>  
+                        <div class="form-group mb-0"> 
+                            <label for="" class="mb-0">Path<span class="text-danger">*</span></label>
+                            <div class="form-row align-items-center">
+                                <div class="col-10">
+                                    <input   value="{{ fileName }}" type="text" class="form-control" [readonly]="true"
+                                     [ngClass]="{ 'is-invalid': submitted && f.path.errors }" >
+                                     <div *ngIf="f.path.errors" class="invalid-feedback">
+                                      <div *ngIf="f.path.errors.required"> Path  is required</div>
+                                     </div>
+                                </div>
+                                <div class="col-2">
+                                    <input #input type="file" (change)="importFile($event)" style="display:none">
+                                    <button type="button" (click)="input.click()" class="btn btn-grey  btn-block input-btn"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>                            
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-blue mr-2" (click)="submitPathForm()">Save</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>                    
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade thm-popup" id="pathSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form name = "searchForm" id = "searchForm">
+						<div class="title-wrap mb-2">
+							<h4 class="title"> Search Filter </h4>
+						</div>
+						<div class="form-group mb-0">
+							<label> Wildcard Search</label>
+							<input type="text"  id="path_Search_filter" appUppercase class="form-control" #searchValue>
+						</div>
+						<div class="btn-wrap text-right mt-10">
+							<button class="btn btn-blue mr-2" (click)="searchPath(searchValue)" >Ok</button>
+							<button class="btn btn-grey"   data-dismiss="modal" >Cancel</button>
+						</div>
+					</form>	
+				</div>					
+			</div>
+		</div>
+	</div>
+</div>

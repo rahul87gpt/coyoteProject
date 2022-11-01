@@ -1,0 +1,313 @@
+<div class="mainContent-innner pt-2">
+    <div class="salesOutlet-section d-flex">
+       <div class="pro-sidemenu">
+          <h4 class="title">Product</h4>
+          <div class="card-grey p-0">
+             <ul class="ps-list list-none ">
+                <li class="active"><a href="#">Details</a></li>
+                <li><a href="#">Zone Pricing</a></li>
+                <li><a href="#">Promostions</a></li>
+                <li><a href="#">Suppliers Products</a></li>
+                <li><a href="#">Transaction History</a></li>
+                <li><a href="#">Purchase History</a></li>
+                <li><a href="#">Weekly Sales history</a></li>
+                <li><a href="#">Changes Log</a></li>
+                <li><a href="#">Stock Movement</a></li>
+                <li><a href="#">Child Products</a></li>
+             </ul>
+          </div>
+       </div>
+       <!-- /.sidemenu -->
+       <div class="productDetails-wrap">
+          <div class="action-topbar">
+             <div class="probtn-wrap text-right">
+                <button class="btn btn-blue with-icon mr-2"><i class="icon fa fa-floppy-o"></i> Save</button>
+                <button class="btn mr-2" [routerLink]="['/outlets']">Save & Close</button>
+                <button class="btn mr-2" [routerLink]="['/outlets']"><span class="icon cancel-icon">X</span> Cancel</button>
+             </div>
+          </div>
+          <!-- /.action-topbar -->
+          <div class="salesOutlet-wrap">
+             <h4 class="title">Outlet</h4>
+             <div class="form-row">
+                <div class="col-md-6">
+                   <div class="card-grey height-full">
+                      <h5 class="title mt-1">Normal Price</h5>
+                      <div class="form-group form-row align-items-center">
+                         <label class="label col-md-5 mb-0 col-xxl-3">Number</label>
+                         <div class="col-md-7 col-xxl-9">
+                            <div class="form-row">
+                               <div class="col-md-7 col-xxl-3">
+                                  <label>Price 1</label>
+                                  <input type="text" class="form-control" value="$2.50">
+                               </div>
+                               <div class="col-md-6 col-xxl-3">
+                                  <label>Price 2</label>
+                                  <input type="text" class="form-control" value="$2.80">
+                               </div>
+                               <div class="col-md-6 col-xxl-3">
+                                  <label>Price 3</label>
+                                  <input type="text" class="form-control" value="$1.90">
+                               </div>
+                               <div class="col-md-6 col-xxl-3">
+                                  <label>Price 4</label>
+                                  <input type="text" class="form-control" value="$2.30">
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="form-group form-row align-items-center">
+                         <label class="label col-md-5 mb-0 col-xxl-3">GP%</label>
+                         <div class="col-md-7 col-xxl-9">
+                            <div class="form-row">
+                               <div class="col-md-7 col-xxl-3">
+                                  <input type="text" class="form-control" value="$2.50">
+                               </div>
+                               <div class="col-md-6 col-xxl-3">
+                                  <input type="text" class="form-control" value="0.0">
+                               </div>
+                               <div class="col-md-6 col-xxl-3">
+                                  <input type="text" class="form-control" value="71.7">
+                               </div>
+                               <div class="col-md-6 col-xxl-3">
+                                  <input type="text" class="form-control" value="0.0">
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="form-group form-row align-items-center">
+                         <label class="label col-md-5 mb-0 col-xxl-3">Open Price</label>
+                         <div class="col-md-6 col-xxl-2">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="customControl4854">
+                              <label class="custom-control-label" for="customControl4854"></label>
+                            </div>
+                         </div>
+                         <label class="label col-md-5 mb-0 col-xxl-3">Open Price</label>
+                         <div class="col-md-6 col-xxl-4">
+                            <select class="form-control">
+                               <option>HoldGP%</option>
+                               <option>HoldGP% 2</option>
+                               <option>HoldGP% 3</option>
+                            </select>
+                         </div>
+                      </div>
+                      <hr>
+                      <h5 class="title mt-1">Active Promo</h5>
+                      <div class="form-group form-row align-items-center">
+                         <label class="label col-md-5 mb-0 col-xxl-3">Number</label>
+                         <div class="col-md-7 col-xxl-9">
+                            <div class="form-row">
+                               <div class="col-md-7 col-xxl-3">
+                                  <label>Price 1</label>
+                                  <input type="text" class="form-control" value="$2.50">
+                               </div>
+                               <div class="col-md-6 col-xxl-3">
+                                  <label>Price 2</label>
+                                  <input type="text" class="form-control" value="$2.80">
+                               </div>
+                               <div class="col-md-6 col-xxl-3">
+                                  <label>Special Price</label>
+                                  <input type="text" class="form-control" value="$1.90">
+                               </div>
+                               <div class="col-md-6 col-xxl-3">
+                                  <label>Special Ctn Cost</label>
+                                  <input type="text" class="form-control" value="$2.30">
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="form-group form-row align-items-center">
+                         <label class="label col-md-5 mb-0 col-xxl-3">GP%</label>
+                         <div class="col-md-7 col-xxl-9">
+                            <div class="form-row">
+                               <div class="col-md-7 col-xxl-3">
+                                  <input type="text" class="form-control" value="$2.50">
+                               </div>
+                               <div class="col-md-6 col-xxl-3">
+                                  <input type="text" class="form-control" value="0.0">
+                               </div>
+                               <div class="col-md-6 col-xxl-3">
+                                  <input type="text" class="form-control" value="71.7">
+                               </div>
+                               <div class="col-md-6 col-xxl-3">
+                                  <input type="text" class="form-control" value="0.0">
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="form-group form-row align-items-center">
+                         <label class="label col-md-5 mb-0 col-xxl-3">Offers</label>
+                         <div class="col-md-7 col-xxl-9">
+                            <div class="form-row">
+                               <div class="col-md-7 col-xxl-3">
+                                  <input type="text" class="form-control" value="Max-Matchs">
+                               </div>
+                               <div class="col-md-6 col-xxl-3">
+                                  <input type="text" class="form-control" value="Offers">
+                               </div>
+                               <div class="col-md-6 col-xxl-3">
+                                  <input type="text" class="form-control" value="Max-Matchs">
+                               </div>
+                               <div class="col-md-6 col-xxl-3">
+                                  <input type="text" class="form-control" value="Offers">
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="form-group form-row align-items-center">
+                         <label class="label col-md-5 mb-0 col-xxl-3">MemOff</label>
+                         <div class="col-md-7 col-xxl-9">
+                            <div class="form-row">
+                               <div class="col-md-7 col-xxl-3">
+                                  <input type="text" class="form-control" value="MemOff">
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                      <hr>
+                      <div class="form-row">
+                         <div class="col-xxl-6 form-group">
+                            <div class="row align-items-center">
+                               <label class="label col-md-5 col-xxl-7 mb-0">Maximum Retail Price</label>
+                               <div class="col-md-7 col-xxl-5">
+                                  <input type="text" class="form-control" value="">
+                               </div>   
+                            </div>
+                         </div>
+                         <div class="col-xxl-6 form-group">
+                            <div class="row align-items-center">
+                               <label class="label col-md-5 col-xxl-8 mb-0">Maximum Retail Price GP%</label>
+                               <div class="col-md-7 col-xxl-4">
+                                  <input type="text" class="form-control" value="">
+                               </div>   
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div class="col-md-6">
+                   <div class="card-grey height-full">
+                      <h5 class="title mt-1">Costs</h5>
+                      <div class="form-row">
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Item Cost</label>
+                            <input type="text" class="form-control" value="$0.94">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Carton Cost</label>
+                            <input type="text" class="form-control" value="$22.54">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Promo Code</label>
+                            <input type="text" class="form-control" value="CSDC0225-04">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Promo Cost</label>
+                            <input type="text" class="form-control" value="$20.41">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Terms Rebate</label>
+                            <input type="text" class="form-control" value="$0.00">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Host Ctn Cost</label>
+                            <input type="text" class="form-control" value="$3332.89">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Promo can Rebate</label>
+                            <input type="text" class="form-control" value="$0.94">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Avg Ctn Cost</label>
+                            <input type="text" class="form-control" value="$22.54">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Final Cost</label>
+                            <input type="text" class="form-control" value="$22.54">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Default Subplier</label>
+                            <input type="text" class="form-control" value="COKE">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Select items</label>
+                            <select class="form-control">
+                               <option>COCA COLA - Z1 - Metro</option>
+                               <option>Option 2</option>
+                               <option>Option 3</option>
+                               <option>Option 4</option>
+                            </select>
+                         </div>
+                      </div>
+                      <hr class="mt-1">
+                      <h5 class="title mt-1">Label</h5>
+                      <div class="form-row">
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>No of Labels</label>
+                            <input type="text" class="form-control" value="1">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Short Label</label>
+                            <select class="form-control">
+                               <option>Yes</option>
+                               <option>No</option>
+                            </select>
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Label Change</label>
+                            <input type="text" class="form-control" value="CSDC0225-04">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Deli Scale Plu</label>
+                            <input type="text" class="form-control" value="$20.41">
+                         </div>
+                      </div>
+                      <hr class="mt-1">
+                      <h5 class="title mt-1">Stock Units</h5>
+                      <div class="form-row">
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Units on Hand</label>
+                            <input type="text" class="form-control" value="1">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Min Stock Lev</label>
+                            <select class="form-control">
+                               <option>Yes</option>
+                               <option>No</option>
+                            </select>
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Shelf Capacity</label>
+                            <input type="text" class="form-control" value="CSDC0225-04">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>Min Reorder</label>
+                            <input type="text" class="form-control" value="$20.41">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <label>No. of Facings</label>
+                            <input type="text" class="form-control" value="$20.41">
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <div class="custom-control custom-checkbox mt-4 pt-2">
+                              <input type="checkbox" class="custom-control-input" id="customControlSkip">
+                              <label class="custom-control-label" for="customControlSkip">Skip Recorder</label>
+                            </div>
+                         </div>
+                         <div class="col-md-3 col-xxl-3 form-group">
+                            <div class="custom-control custom-checkbox mt-4 pt-2">
+                              <input type="checkbox" class="custom-control-input" id="customControlFIFO">
+                              <label class="custom-control-label" for="customControlFIFO">FIFO Stock</label>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                   <!-- /.card-grey -->
+                </div>
+             </div>
+          </div>
+       </div>
+       <!-- /.productForm -->
+    </div>
+ </div>

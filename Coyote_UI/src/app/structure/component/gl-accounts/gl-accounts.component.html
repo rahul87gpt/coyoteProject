@@ -1,0 +1,351 @@
+<div class="mainContent-innner">
+  <div class="gl-accounts-section">
+    <div class="d-flex align-items-center">
+      <h4 class="title flex-grow-1 mb-0">GL Accounts</h4>
+      <div class="probtn-wrap d-flex text-right">
+        <!-- <button class="btn btn-blue with-icon mr-2" (click)="setForm()" data-toggle="modal" data-target="#selectOutlet"><i class="icon fa fa-search"></i> Filter by Outlet</button> -->
+        <button class="btn btn-blue with-icon mr-2" (click)="setForm()" data-toggle="modal" data-target="#glAddModal">
+          <i class="icon fa fa-plus-circle"></i> Add
+        </button>
+        <button class="btn with-icon mr-2">
+          <i class="icon fa fa-print"></i> Print
+        </button>
+        <button class="btn with-icon mr-2" (click)="exportGLAccountsData()">
+          <i class="icon fa fa-file-excel-o"></i> Export
+        </button>
+        <button class="btn btn-blue with-icon" data-toggle="modal" data-target="#GLAccountsSearch" (click)="openGLAccountsSearchFilter()">
+          <i class="icon fa fa-filter"></i> Filter
+        </button>
+      </div>
+    </div>
+    <div class="gl-accounts-wrap">
+      <div class="gl-accounts-table-wrap bg-box mt-15">
+        <div class="table-responsive all-w">
+          <div class="table-responsive ctm-data-table">
+            <table class="table ctm-table" id="GLAccounts-table" *ngIf="glAccounts?.length">
+              <thead>
+                <tr>
+                  <th>
+                    Outlet <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th>
+                    Supplier <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th>
+                    GL Account <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th>
+                    Desc <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th>
+                    Account Type <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th>
+                    Accounting System <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th>
+                    Company <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                  </th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let glaccount of glAccounts">
+                  <td data-toggle="modal" data-target="#glAddModal" (click)="getGlAccountById(glaccount.id)">
+                    <a>{{ glaccount.storeCode }}</a>
+                  </td>
+                  <td>
+                    {{ glaccount.supplierCode }}
+                  </td>
+                  <td>
+                    {{ glaccount.accountNumber }}
+                  </td>
+                  <td>
+                    {{ glaccount.desc }}
+                  </td>
+                  <td>
+                    {{ glaccount.typeName }}
+                  </td>
+                  <td>
+                    {{ glaccount.accountSystem }}
+                  </td>
+                  <td>
+                    {{
+                      glaccount.company && glaccount.company > 0
+                        ? glaccount.company
+                        : ""
+                    }}
+                  </td>
+                  <td class="text-center">
+                    <div class="tbHover-btnGroup">
+                      <a tooltip="Change" placement="left" class="tbHover-btn trash-btn" data-toggle="modal"
+                        data-target="#glAddModal" (click)="getGlAccountById(glaccount.id)"><i
+                          class="fa fa-pencil"></i></a>
+                      <a tooltip="Delete" placement="right" class="tbHover-btn trash-btn" (click)="
+                          deleteGlAccountForm(glaccount.id, glaccount.storeId)
+                        "><i class="fa fa-trash"></i></a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <span *ngIf="!glAccounts?.length" class="gl_account_no_record">No records!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade thm-popup" id="glAddModal" tabindex="-1" role="dialog" aria-labelledby="glAddModalLabel"
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body popup-box-width">
+          <form [formGroup]="glAccountForm">
+            <div class="popup-box">
+              <div class="title-wrap mb-1">
+                <h4 class="title">GL Account</h4>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Accounting System
+                      <span class="text-danger">*</span></label>
+                    <ng-select [items]="accountSystemIds" bindLabel="name" bindValue="id"
+                      formControlName="accountSystemId" [virtualScroll]="false" [clearable]="false"
+                      [clearOnBackspace]="false" [searchable]="true" [multiple]="false" [ngClass]="{
+                        'is-invalid':
+                          submittedGlForm && f2.accountSystemId.errors
+                      }">
+                      <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <div class="form-row">
+                          <span class="col-9 zone-overflow" title="{{ item.name }}">
+                            {{ item.name }}
+                          </span>
+                        </div>
+                      </ng-template>
+                    </ng-select>
+                    <!-- <select formControlName="accountSystemId" class="form-control" [ngClass]="{ 'is-invalid': submittedGlForm && f2.accountSystemId.errors }">
+                                            <option *ngFor="let accountSystem of accountSystemIds" [value]="accountSystem.id">{{accountSystem.name}}</option>
+                                        </select> -->
+                    <div *ngIf="f2.accountSystemId.errors" class="invalid-feedback">
+                      <div *ngIf="f2.accountSystemId.errors.required">
+                        Account system is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Outlet <span class="text-danger">*</span></label>
+                    <ng-select [items]="stores" bindLabel="desc" bindValue="id" formControlName="storeId"
+                      [virtualScroll]="false" [clearable]="false" [clearOnBackspace]="false" [searchable]="true"
+                      [multiple]="false" [ngClass]="{
+                        'is-invalid': submittedGlForm && f2.storeId.errors
+                      }">
+                      <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <div class="form-row">
+                          <span class="col-9 zone-overflow" title="{{ item.desc }}">
+                            {{ item.desc }}
+                          </span>
+                        </div>
+                      </ng-template>
+                    </ng-select>
+                    <!-- <select formControlName="storeId" class="form-control" [ngClass]="{ 'is-invalid': submittedGlForm && f2.storeId.errors }">
+                                            <option *ngFor="let store of stores" [value]="store.id">{{store.desc}}{{store.code}}</option>
+                                        </select> -->
+                    <div *ngIf="f2.storeId.errors" class="invalid-feedback">
+                      <div *ngIf="f2.storeId.errors.required">
+                        Store is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Account Type <span class="text-danger">*</span></label>
+                    <ng-select [items]="masterListAccountType" bindLabel="name" bindValue="id" formControlName="typeId"
+                      [virtualScroll]="false" [clearable]="false" [clearOnBackspace]="false" [searchable]="true"
+                      [multiple]="false" [ngClass]="{
+                        'is-invalid': submittedGlForm && f2.typeId.errors
+                      }">
+                      <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <div class="form-row">
+                          <span class="col-9 zone-overflow" title="{{ item.name }}">
+                            {{ item.name }}
+                          </span>
+                        </div>
+                      </ng-template>
+                    </ng-select>
+                    <!-- <select formControlName="typeId" class="form-control" [ngClass]="{ 'is-invalid': submittedGlForm && f2.typeId.errors }">
+                                            <option *ngFor="let accountType of masterListAccountType" [value]="accountType.id">{{accountType.name}}</option>
+                                        </select> -->
+                    <div *ngIf="f2.typeId.errors" class="invalid-feedback">
+                      <div *ngIf="f2.typeId.errors.required">
+                        Account Type is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Supplier <span class="text-danger">*</span></label>
+                    <ng-select [items]="suppliers" bindLabel="descCode" bindValue="id" formControlName="supplierId"
+                      [virtualScroll]="false" [clearable]="false" [clearOnBackspace]="false" [searchable]="true"
+                      [multiple]="false" [ngClass]="{
+                        'is-invalid': submittedGlForm && f2.supplierId.errors
+                      }">
+                      <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <div class="form-row">
+                          <span class="col-9 zone-overflow" title="{{ item.desc }}">
+                            {{ item.desc }}
+                          </span>
+                          <div class="col-3">({{ item.code }})</div>
+                        </div>
+                      </ng-template>
+                    </ng-select>
+                    <!-- <select formControlName="supplierId" class="form-control" [ngClass]="{ 'is-invalid': submittedGlForm && f2.supplierId.errors }">
+                                            <option *ngFor="let supplier of suppliers" [value]="supplier.id">{{supplier.desc}}</option>
+                                        </select> -->
+                    <div *ngIf="f2.supplierId.errors" class="invalid-feedback">
+                      <div *ngIf="f2.supplierId.errors.required">
+                        Supplier is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Account Desc <span class="text-danger">*</span></label>
+                    <input type="text" formControlName="desc" class="form-control" [ngClass]="{
+                        'is-invalid': submittedGlForm && f2.desc.errors
+                      }" />
+                    <div *ngIf="f2.desc.errors" class="invalid-feedback">
+                      <div *ngIf="f2.desc.errors.maxlength">
+                        Account Desc Should be maximum 40 characters
+                      </div>
+                      <div *ngIf="f2.desc.errors.required">
+                        Account Desc is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>GL Account </label>
+                    <input type="text" formControlName="accountNumber" class="form-control" [ngClass]="{
+                        'is-invalid': submittedGlForm && f2.accountNumber.errors
+                      }" />
+                    <div *ngIf="f2.accountNumber.errors" class="invalid-feedback">
+                      <div *ngIf="f2.accountNumber.errors.maxlength">
+                        GL Account Should be maximum 15 characters
+                      </div>
+                      <div *ngIf="f2.accountNumber.errors.required">
+                        GL Account is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-group mb-0">
+                    <label>Outlet Number</label>
+                    <input type="number" class="form-control" [readonly]="FieldStatus" />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-0">
+                    <label>Company</label>
+                    <input type="number" [min]="0" (keypress)="maxlenght($event.target.value)" formControlName="company"
+                      [min]="0" class="form-control" />
+                    <!-- <div *ngIf="f2.company.errors" class="invalid-feedback">
+                      <div *ngIf="f2.company.errors.required">
+                        Company is required
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              <div class="btn-wrap text-right mt-10">
+                <button type="button" class="btn btn-blue mr-2" (click)="saveGlAccount()">
+                  Save
+                </button>
+                <a class="btn btn-grey" data-dismiss="modal"> Cancel</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade thm-popup" id="selectOutlet" tabindex="-1" role="dialog" aria-labelledby="selectOutlet"
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body popup-box-width">
+          <form [formGroup]="outletSearchForm">
+            <div class="popup-box">
+              <div class="title-wrap mb-1">
+                <h4 class="title">Select Outlet</h4>
+              </div>
+              <div class="form-group">
+                <label>Outlet <span class="text-danger">*</span></label>
+                <select type="number" formControlName="number" class="form-control" (change)="selectedStore($event)"
+                  [ngClass]="{ 'is-invalid': submitted && f.number.errors }">
+                  <option *ngFor="let store of stores" [value]="store.id">
+                    {{ store.desc }}
+                  </option>
+                </select>
+                <div *ngIf="f.number.errors" class="invalid-feedback">
+                  <div *ngIf="f.number.errors.required">
+                    Store selection is required
+                  </div>
+                </div>
+              </div>
+              <div class="btn-wrap text-right mt-10">
+                <button type="button" class="btn btn-success mr-2" (click)="doSearch()">
+                  Yes
+                </button>
+                <a type="button" class="btn btn-grey" data-dismiss="modal" (click)="getAllGlAccounts()">No</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade thm-popup" id="GLAccountsSearch" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body popup-box-width">
+          <div class="popup-box">
+            <form name="searchForm" id="searchForm">
+              <div class="title-wrap mb-2">
+                <h4 class="title">Search Filter</h4>
+              </div>
+              <div class="form-group mb-0">
+                <label>Wildcard Search</label>
+                <input type="text" appUppercase id="GLAccounts_Search_filter" class="form-control" #searchValue />
+              </div>
+              <div class="btn-wrap text-right mt-10">
+                <button class="btn btn-blue mr-2" (click)="GLAccountsSearch(searchValue)">
+                  Ok
+                </button>
+                <button class="btn btn-grey" data-dismiss="modal">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1090 @@
+<div class="mainContent-innner">
+  <div class="stocktake-section">
+    <div class="d-flex align-items-center">
+      <h4 class="title flex-grow-1 mb-0">Stocktake Entry</h4>
+      <div class="probtn-wrap d-flex text-right">
+        <a
+          (click)="setForm()"
+          type="button"
+          class="btn btn-blue mr-2"
+          data-toggle="modal"
+          data-target="#StocktakeItem"
+        >
+          <i class="icon fa fa-plus-circle"></i>
+          Add
+        </a>
+        <button type="button" class="btn mr-2">
+          <i class="icon fa fa-print"></i> Print
+        </button>
+        <!-- <button type="button" class="btn mr-2">
+          <i class="icon fa fa-file-pdf-o"></i> PDE Load
+        </button> -->
+        <button
+          type="button"
+          data-toggle="modal"
+          data-target="#tabletloadModal"
+          (click)="getTabletLoadList()"
+          class="btn mr-2"
+        >
+          <i class="icon fa fa-mobile"></i> Tablet Load
+        </button>
+        <!-- <a class="btn mr-2"  (click)="refreshData()"><i class="icon fa fa-tablet"></i> Refresh</a> -->
+        <button
+          type="button"
+          class="btn mr-2"
+          data-target="#refreshConfirmBox"
+          data-toggle="modal"
+        >
+          <i class="icon fa fa-tablet"></i> Refresh
+        </button>
+        <button type="button" class="btn mr-2" (click)="submitStocktakeEntry()">
+          <i class="icon fa fa-flag"></i> Finish
+        </button>
+        <button type="button" (click)="openModel()" class="btn mr-2">
+          <i class="icon fa fa-inbox"></i> Load Product Range
+        </button>
+        <a class="btn with-icon" (click)="goBack()">Cancel</a>
+      </div>
+    </div>
+    <!-- /.action-topbar -->
+    <div class="stocktake-wrap">
+      <form [formGroup]="stockTakeForm">
+        <div class="stocktake-table-wrap">
+          <div class="bg-box mt-15">
+            <div class="form-row">
+              <div class="col-lg-6 col-xl-6">
+                <div class="group-from mb-0">
+                  <h5 class="title">Stocktake Batch</h5>
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-4 mb-0">Outlet No</label>
+                    <div class="col-md-8">
+                      <input
+                        [readonly]="true"
+                        type="text"
+                        class="form-control"
+                        formControlName="outletCode"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-4 mb-0"
+                      >Outlet Description</label
+                    >
+                    <div class="col-md-8">
+                      <input
+                        [readonly]="true"
+                        type="text"
+                        class="form-control"
+                        formControlName="desc"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group mb-0 form-row align-items-center">
+                    <label class="label col-md-4 mb-0">Post to Date</label>
+                    <div class="col-md-8">
+                      <div class="ctm-calendar">
+
+                        <input
+                              type="text"
+                              class="form-control"
+                              bsDatepicker
+                              [bsConfig]="datepickerConfig"
+                              formControlName="postToDate"
+                            />
+
+                        <!-- <input
+                          type="text"
+                          class="form-control"
+                          formControlName="postToDate"
+                          bsDatepicker
+                          value="{{ dateValue }}"
+                          [bsConfig]="datepickerConfig"
+                        /> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5 col-xl-5">
+                <div class="group-from mb-0">
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-4 mb-0">Count Total</label>
+                    <div class="col-md-8">
+                      <div class="dollar-symbol-icon">
+                        <input
+                          [readonly]="true"
+                          type="number"
+                          class="form-control"
+                          formControlName="total"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-0 form-row align-items-center">
+                    <label class="col-md-4 mb-0">Confirm Total</label>
+                    <div class="col-md-8">
+                      <div class="dollar-symbol-icon">
+                        <input
+                          type="number"
+                          class="form-control"
+                          formControlName="confirmTotal"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-box mt-15">
+            <div class="form-row" *ngIf="false">
+              <div class="col-lg-12">
+                <div class="progress">
+                  <div
+                    class="progress-bar progress-bar-striped"
+                    role="progressbar"
+                    style="width: 10%"
+                    aria-valuenow="10"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+                <div class="form-group mb-0 text-center mt-2">
+                  <label for="" class="mb-0 d-block">Loading...</label>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive mt-15">
+              <div class="Order-table-wrap all-w">
+                <div class="table-responsive ctm-data-table filter-fixed">
+                 <table class="table ctm-table" id="addProduct-entry-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Description</th>
+                    <th>Units OnHand</th>
+                    <th>Unit Cost</th>
+                    <th>Var Units</th>
+                    <th>Var Cost </th>
+                    <th>Units Count</th>
+                    <th>Item Count</th>
+                    <th>Line Total </th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let product of stockProducts; index as i">
+                    <td><a>{{ product.number }}</a></td>
+                    <td>{{ product.desc }}</td>
+                    <td>{{ product.onHandUnits }}</td>
+                    <td>{{ product.itemCost | currency: 'USD' }}</td>
+                    <td>{{ varianceUnit(product) }}</td>
+                    <td>{{ varienceCost(product ) | currency: 'USD'}}</td>
+                    <td>{{ product.itemCount }}</td>
+                    <td>{{ product.itemCount }}</td>
+                    <td>{{ product.lineTotal | currency: 'USD'}}</td>
+                    <!-- <td>{{ getFormatedNumber(product.lineTotal) | currency: 'USD'}}</td> -->
+                    <td>
+                      <div class="moreOption">
+                        <div class="tbHover-btnGroup">
+                          <a
+                            class="tbHover-btn trash-btn"
+                            data-toggle="modal"
+                            data-target="#StocktakeItem"
+                            (click)="getProductById(product, i)"
+                            ><i class="fa fa-pencil"></i
+                          ></a>
+                          <a
+                            class="tbHover-btn trash-btn"
+                            (click)="deleteDetailsById(product)"
+                            ><i class="fa fa-trash"></i
+                          ></a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                 </table>
+                 </div>
+              </div>   
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- /.pricingApnSearch-wrap -->
+  </div>
+  <!-- /.pricingApnSearch-section -->
+</div>
+
+<div
+  class="modal thm-popup fade"
+  id="StocktakeItem"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-backdrop="static"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form [formGroup]="stockTakeDetailsForm"  (keydown.enter)="$event.preventDefault()">
+            <div class="title-wrap">
+              <h4 class="title">Stocktake Item</h4>
+            </div>
+            <div class="group-from mb-0">
+              <h5 class="title">Line Details</h5>
+              <div class="form-group">
+                <label>Product</label>
+                <div class="form-row align-items-center">
+                  <div class="col-5">
+                    <input
+                      type="number"
+                      class="form-control"
+                      (keyup.enter)="onEnter()"
+                      formControlName="number"
+                      [ngClass]="{
+                        'is-invalid': submitted2 && f1.number.errors
+                      }"
+                    />
+                    <div *ngIf="f1.number.errors" class="invalid-feedback">
+                      <div *ngIf="f1.number.errors.required">
+                        Product number is required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <button
+                      #searchProductBtn
+                      *ngIf="!proFormStatus"
+                      type="button"
+                      class="btn btn-grey btn-block input-btn"
+                      (click)="searchProduct()"
+                    >
+                      Search
+                    </button>
+                  </div>
+                  <div class="col-4">
+                    <button
+                      type="button"
+                      class="btn btn-grey btn-block input-btn"
+                      (click)="changeProductDetails(1)"
+                    >
+                      Product Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <div class="d-flex align-items-center">
+                  <input
+                    [readonly]="true"
+                    type="text"
+                    class="form-control"
+                    formControlName="desc"
+                  />
+                </div>
+              </div>
+              <div class="form-row align-items-center">
+                <div class="col-6">
+                  <div class="form-group">
+                    <label>Item Count</label>
+                    <input
+                      (keyup)="calculateTotalCost()"
+                      type="number"
+                      class="form-control"
+                      formControlName="itemCount"
+                    />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label>Units On Hand</label>
+                    <input
+                      [readonly]="true"
+                      type="number"
+                      class="form-control"
+                      formControlName="onHandUnits"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-row align-items-center">
+                <div class="col-6">
+                  <div class="form-group">
+                    <label>Unit Count</label>
+                    <input
+                      [readonly]="true"
+                      type="number"
+                      class="form-control"
+                      formControlName="quantity"
+                    />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label>Variance Units</label>
+                    <input
+                      [readonly]="true"
+                      type="number"
+                      class="form-control"
+                      formControlName="varUnits"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-row align-items-center">
+                <div class="col-6">
+                  <div class="form-group mb-0">
+                    <label>Unit Cost</label>
+                    <div class="dollar-symbol-icon">
+                      <input
+                        [readonly]="true"
+                        type="number"
+                        class="form-control"
+                        formControlName="itemCost"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group mb-0">
+                    <label>Line Total</label>
+                    <div class="dollar-symbol-icon">
+                      <input
+                        [readonly]="true"
+                        type="number"
+                        class="form-control"
+                        formControlName="lineTotal"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <a
+                data-toggle="modal"
+                data-target="#searchProductModal"
+                class="dn openProductList"
+              ></a>
+
+              <button
+                #addbutton
+                class="btn btn-blue mr-2"
+                (click)="pushProducts()"
+              >
+                <i class="icon fa fa-pencil-square-o"></i> Add
+              </button>
+              <button
+                #closebutton
+                type="button"
+                class="btn btn-grey"
+                data-dismiss="modal"
+                (click)="resetLineItems()"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade thm-popup bd-example-modal-xl"
+  id="searchProductModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="searchProductModal"
+  aria-hidden="true"
+  data-backdrop="static"
+>
+  <form [formGroup]="stockTakeProdSearchForm">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-body popup-box-width">
+          <div class="popup-box">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Product Lookup</h4>
+            </div>
+            <div class="form-row">
+              <div class="col-lg-6 col-xl-6">
+                <div class="form-row align-items-center">
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <input
+                        type="number" 
+                        [min]="0" 
+                        placeholder="Number"
+                        class="form-control"
+                        formControlName="number"
+                        (keyup)="productInputSearchChange('number')"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        placeholder="Description"
+                        class="form-control"
+                        formControlName="desc"
+                        (keyup)="productInputSearchChange('desc')"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <button
+                        type="button"
+                        (click)="searchByProductDetails()"
+                        class="btn btn-blue input-btn btn-block"
+                      >
+                        Wildcard Search
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <div class="custom-control custom-checkbox">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          formControlName="status"
+                          id="customControlStatus"
+                        />
+                        <label
+                          class="custom-control-label mb-0"
+                          for="customControlStatus"
+                          >Only Active</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xl-6">
+                <div class="form-row align-items-center">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <button
+                        type="button"
+                        class="btn btn-grey input-btn btn-block"
+                        (click)="changeProductDetails(2)"
+                      >
+                        Product Details
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <div class="d-flex">
+                        <select class="form-control" formControlName="outletId">
+                          <option [ngValue]="null" disabled selected hidden>Select Outlet</option>
+                          <option
+                            [value]="outlet.id"
+                            *ngFor="let outlet of Outletdata"
+                          >
+                            {{ outlet.desc + " " + outlet.code }}
+                          </option>
+                        </select>
+                        <button
+                          type="button"
+                          class="btn ml-2 btn-grey input-btn"
+                          (click)="resetProdSearchListForm()"
+                        >
+                          Clear
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="table-scroll">
+              <div class="table-responsive">
+                <table class="table ctm-table">
+                  <thead>
+                    <tr>
+                      <th colspan="2">Select</th>
+                      <th>Number</th>
+                      <th>Description</th>
+                      <th>Comm</th>
+                      <th>Commodity</th>
+                      <th>Department</th>
+                      <th>Category</th>
+                      <th>Group</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let product of searchProducts; let i = index">
+                      <td>
+                        <div class="custom-control custom-radio">
+                          <input
+                            type="radio"
+                            (click)="setProductObj(product)"
+                            name="product"
+                            class="custom-control-input"
+                            id="product_{{ product.id }}"
+                          />
+                          <label
+                            class="custom-control-label"
+                            for="product_{{ product.id }}"
+                          ></label>
+                        </div>
+                      </td>
+                      <td class="text-center">
+                        <span class="status-check"></span>
+                      </td>
+                      <td>{{ product.number }}</td>
+                      <td>{{ product.desc }}</td>
+                      <td>{{ product.commodityId }}</td>
+                      <td>{{ product.commodity }}</td>
+                      <td>{{ product.department }}</td>
+                      <td>{{ product.category }}</td>
+                      <td>{{ product.group }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button
+                [disabled]="isDisabled"
+                type="button"
+                class="btn btn-blue mr-2"
+                data-dismiss="modal"
+              >
+                Select
+              </button>
+              <button
+                #prodSearchTerm
+                type="button"
+                class="btn btn-grey"
+                data-dismiss="modal"
+                (click)="resetLineItems()"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div
+  class="modal fade thm-popup bd-example-modal-xl"
+  id="tabletloadModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="tabletloadModal"
+  aria-hidden="true"
+  data-backdrop="static"
+>
+  <form>
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-body popup-box-width">
+          <div class="popup-box">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Stocktake Tablet Import</h4>
+            </div>
+            <div class="table-scroll">
+              <div class="table-responsive">
+                <table class="table ctm-table">
+                  <thead>
+                    <tr>
+                      <th>Order Batch</th>
+                      <th>Last Report</th>
+
+                      <!-- <th class="text-center">Action</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let tablets of tabletLoadData; let i; as: index"
+                    >
+                      <td>{{ tablets.printBatch | dateTimeFormate }}</td>
+                      <td>{{ tablets.lastImport | dateTimeFormate }}</td>
+                      <!-- <td class="text-center"><button type="button" class="btn btn-danger">Detete</button></td> -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button type="button" class="btn btn-blue mr-2">Refresh</button>
+              <button type="button" class="btn btn-blue mr-2">Import</button>
+              <button
+                type="button"
+                class="btn btn-blue mr-2"
+                data-dismiss="modal"
+              >
+                Delete
+              </button>
+              <button
+                #prodSearchTerm
+                type="button"
+                class="btn btn-grey"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div
+  class="modal fade bd-example-modal-md thm-popup"
+  id="refreshConfirmBox"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-backdrop="static"
+>
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form>
+            <div class="title-wrap mb-1">
+              <h4 class="title">Confirm</h4>
+            </div>
+            <div class="mt-15 pop-img">
+              <h5 class="title d-flex mb-0 align-items-center">
+                <img src="assets/images/info-img.svg" class="mr-2" />Check Stock
+                OnHand levels and refresh variances now
+              </h5>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button
+                type="button"
+                class="btn btn-success mr-2"
+                (click)="refreshData()"
+              >
+                Yes
+              </button>
+              <button type="button" class="btn btn-grey" data-dismiss="modal">
+                No
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ------load product range model-----  -->
+
+<div
+  class="modal fade bd-example-modal-lg thm-popup"
+  id="reportFilter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="reportFilterModalLabel"
+  aria-hidden="true"
+  data-backdrop="static"
+>
+  <form [formGroup]="salesReportForm" (ngSubmit)="getStockSheetHistory()">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body popup-box-width">
+          <div class="popup-box">
+            <div class="title-wrap mb-1">
+              <h4 class="title">Load Stocktake Product</h4>
+            </div>
+            <div class="form-row">
+              <div class="col-lg-6 col-xl-6">
+                <!-- PRODUCT RANGE -->
+                <div class="group-from">
+                  <h5 class="title">Product Number Range</h5>
+                  <div class="form-row align-items-center">
+                    <div class="col-5">
+                      <div class="form-group mb-0">
+                        <input
+                          type="number"
+                          min="0"
+                          class="form-control"
+                          placeholder=""
+                          formControlName="productStartId"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="form-group mb-0 text-center">
+                        <label for="" class="mb-0">To</label>
+                      </div>
+                    </div>
+                    <div class="col-5">
+                      <div class="form-group mb-0">
+                        <input
+                          type="number"
+                          min="0"
+                          class="form-control"
+                          placeholder=""
+                          formControlName="ProductEndId"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Till Selection -->
+                <div class="group-from mb-0">
+                  <h5 class="title">Till Selection</h5>
+                  <div class="form-row align-items-center">
+                    <div class="col-12">
+                      <div class="form-group mb-0">
+                        <ng-select
+                          [items]="dropdownObj.tills"
+                          bindLabel="desc"
+                          bindValue="id"
+                          [virtualScroll]="true"
+                          placeholder="Select Till"
+                          formControlName="tillId"
+                          (change)="setSelection($event)"
+                        >
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-xl-6">
+                <div class="group-from">
+                  <h5 class="title">Codes</h5>
+                  <div class="">
+                    <div class="accordion OutletRestList" id="accordionExample">
+                      <div class="mb-2">
+                        <ng-select
+                          [items]="dropdownObj.stores"
+                          bindLabel="storeDetail"
+                          bindValue="id"
+                          [virtualScroll]="true"
+                          [multiple]="true"
+                          placeholder="Select Store"
+                          formControlName="storeIds"
+                          (change)="setDropdownSelection('store', $event)"
+                        >
+                        </ng-select>
+                      </div>
+                      <div class="mb-2">
+                        <ng-select
+                          [items]="dropdownObj.zones"
+                          bindLabel="name"
+                          bindValue="id"
+                          [virtualScroll]="true"
+                          [multiple]="true"
+                          placeholder="Select Zone"
+                          formControlName="zoneIds"
+                          (change)="setDropdownSelection('zone', $event)"
+                        >
+                        </ng-select>
+                      </div>
+                      <div class="mb-2">
+                        <ng-select
+                          [items]="dropdownObj.days"
+                          bindLabel="name"
+                          bindValue="code"
+                          [virtualScroll]="true"
+                          [multiple]="true"
+                          placeholder="Select Days"
+                          formControlName="days"
+                          (change)="setDropdownSelection('days', $event)"
+                        >
+                        </ng-select>
+                      </div>
+                      <div class="mb-2">
+                        <ng-select
+                          [items]="dropdownObj.departments"
+                          bindLabel="desc"
+                          bindValue="id"
+                          [virtualScroll]="true"
+                          [multiple]="true"
+                          placeholder="Select Department"
+                          formControlName="departmentIds"
+                          (change)="setDropdownSelection('department', $event)"
+                        >
+                        </ng-select>
+                      </div>
+                      <div class="mb-2">
+                        <ng-select
+                          [items]="dropdownObj.commodities"
+                          bindLabel="desc"
+                          bindValue="id"
+                          [virtualScroll]="true"
+                          [multiple]="true"
+                          placeholder="Select Commodity"
+                          formControlName="commodityIds"
+                          (change)="setDropdownSelection('commodity', $event)"
+                        >
+                        </ng-select>
+                      </div>
+                      <div class="mb-2">
+                        <ng-select
+                          [items]="dropdownObj.categories"
+                          bindLabel="name"
+                          bindValue="id"
+                          [virtualScroll]="true"
+                          [multiple]="true"
+                          placeholder="Select Category"
+                          formControlName="categoryIds"
+                          (change)="setDropdownSelection('category', $event)"
+                        >
+                        </ng-select>
+                      </div>
+                      <div class="mb-2">
+                        <ng-select
+                          [items]="dropdownObj.groups"
+                          bindLabel="name"
+                          bindValue="id"
+                          [virtualScroll]="true"
+                          [multiple]="true"
+                          placeholder="Select Group"
+                          formControlName="groupIds"
+                          (change)="setDropdownSelection('group', $event)"
+                        >
+                        </ng-select>
+                      </div>
+                      <div class="mb-2">
+                        <ng-select
+                          [items]="dropdownObj.suppliers"
+                          bindLabel="desc"
+                          bindValue="id"
+                          [virtualScroll]="true"
+                          [multiple]="true"
+                          placeholder="Select Supplier"
+                          formControlName="supplierIds"
+                          (change)="setDropdownSelection('supplier', $event)"
+                        >
+                        </ng-select>
+                      </div>
+                      <div class="mb-2">
+                        <ng-select
+                          [items]="dropdownObj.manufacturers"
+                          bindLabel="name"
+                          bindValue="id"
+                          [virtualScroll]="true"
+                          [multiple]="true"
+                          placeholder="Select Manufacturer"
+                          formControlName="manufacturerIds"
+                          (change)="
+                            setDropdownSelection('manufacturer', $event)
+                          "
+                        >
+                        </ng-select>
+                      </div>
+                      <div class="mb-0">
+                        <ng-select
+                          [items]="dropdownObj.members"
+                          bindLabel="memB_NAME"
+                          bindValue="memB_NUMBER"
+                          [virtualScroll]="true"
+                          [multiple]="true"
+                          placeholder="Select Member"
+                          formControlName="memberIds"
+                          (change)="setDropdownSelection('members', $event)"
+                        >
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- All Selections -->
+                <div class="group-from">
+                  <h5 class="title">Selections</h5>
+                  <div class="Day_list">
+                    <div *ngIf="salesf?.startDate?.value">
+                      <h4>Date Range</h4>
+                      <ul>
+                        <li>
+                          {{ salesf?.startDate?.value | customdatetimeformat }}
+                          to
+                          {{ salesf?.endDate?.value | customdatetimeformat }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div *ngIf="salesf?.orderInvoiceStartDate?.value">
+                      <h4>Invoice Date Range</h4>
+                      <ul>
+                        <li>
+                          {{
+                            salesf?.orderInvoiceStartDate?.value
+                              | customdatetimeformat
+                          }}
+                          to
+                          {{
+                            salesf?.orderInvoiceEndDate?.value
+                              | customdatetimeformat
+                          }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="salesf?.isPromoSale?.value">
+                      <h4>Promotion</h4>
+                      <ul>
+                        <li>Only Promo Sales</li>
+                      </ul>
+                    </div>
+                    <div class="mt-1" *ngIf="salesf?.productStartId?.value">
+                      <h4>Product Range</h4>
+                      <ul>
+                        <li>
+                          {{ salesf?.productStartId?.value }} to
+                          {{ salesf?.ProductEndId?.value }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <!-- <div class="mt-1" *ngIf="summaryOptionType">
+                                          <h4>Summary Report Options</h4>
+                                          <ul>
+                                              <li>{{summaryOptionType | uppercase}}</li>
+                                          </ul>
+                                      </div> -->
+
+                    <!-- <div class="mt-1" *ngIf="sortOrderType">
+                                          <h4>Sort Order</h4>
+                                          <ul>
+                                              <li>{{sortOrderType | uppercase}}</li>
+                                          </ul>
+                                      </div> -->
+
+                    <!-- <div class="mt-1" *ngIf="salesf?.promoCode?.value">
+                                          <h4>Promo Code</h4>
+                                          <ul>
+                                              <li>Only Items in Promo Code: {{salesf?.promoCode?.value}}</li>
+                                          </ul>
+                                      </div>  -->
+
+                    <div class="mt-1" *ngIf="selectedValues.store">
+                      <h4>Outlets</h4>
+                      <ul>
+                        <li *ngFor="let store of selectedValues.store">
+                          {{ store.storeDetail }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.zone">
+                      <h4>Zones</h4>
+                      <ul>
+                        <li *ngFor="let zone of selectedValues.zone">
+                          {{ zone.name }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.days">
+                      <h4>Days</h4>
+                      <ul>
+                        <li *ngFor="let week of selectedValues.days">
+                          {{ week.name }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.department">
+                      <h4>Departments</h4>
+                      <ul>
+                        <li *ngFor="let deprt of selectedValues.department">
+                          {{ deprt.desc }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.commodity">
+                      <h4>Commodities</h4>
+                      <ul>
+                        <li *ngFor="let commodity of selectedValues.commodity">
+                          {{ commodity.desc }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.category">
+                      <h4>Categories</h4>
+                      <ul>
+                        <li *ngFor="let category of selectedValues.category">
+                          {{ category.name }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.group">
+                      <h4>Groups</h4>
+                      <ul>
+                        <li *ngFor="let group of selectedValues.group">
+                          {{ group.name }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.supplier">
+                      <h4>Suppliers</h4>
+                      <ul>
+                        <li *ngFor="let supplier of selectedValues.supplier">
+                          {{ supplier.desc }}
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="mt-1" *ngIf="selectedValues.manufacturer">
+                      <h4>Manufacturer</h4>
+                      <ul>
+                        <li *ngFor="let manuf of selectedValues.manufacturer">
+                          {{ manuf.name }}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mt-1" *ngIf="selectedValues.members">
+                      <h4>Member</h4>
+                      <ul>
+                        <li *ngFor="let memf of selectedValues.members">
+                          {{ memf.memB_NUMBER }}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="mt-1" *ngIf="selectedValues.till">
+                      <h4>Till</h4>
+                      <ul>
+                        <li>{{ selectedValues.till }}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="btn-wrap text-right mt-10">
+                  <a class="btn btn-grey mr-2" (click)="resetForm()"
+                    >Clear Selections</a
+                  >
+                  <button class="btn btn-blue mr-2">Ok</button>
+                  <a class="btn btn-grey" data-dismiss="modal">Cancel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,303 @@
+<div class="mainContent-innner">
+  <div class="UserStoreGroup-section">
+    <div class="d-flex align-items-center">
+      <h4 class="title flex-grow-1 mb-0">Stores</h4>
+      <!-- <h4 class="title flex-grow-1 mb-0">Stores <span class="bdms"><a href="javascript:void(0)">Accounts</a> | <a href="javascript:void(0)">Entry Setup</a> | <span class="current">Stores</span></span></h4> -->
+      <div class="probtn-wrap text-right">
+        <a
+          class="btn btn-blue with-icon mr-2"
+          [routerLink]="['./create-store']"
+          routerLinkActive="router-link-active"
+          ><i class="icon fa fa-plus-circle"></i> Add</a
+        >
+        <button class="btn with-icon mr-2">
+          <i class="icon fa fa-print"></i> Print
+        </button>
+        <button class="btn with-icon mr-2" (click)="exportData()">
+          <i class="icon fa fa-file-excel-o"></i> Export
+        </button>
+        <button
+          class="btn with-icon"
+          data-toggle="modal"
+          data-target="#storeSearch"
+          (click)="openStoreSearchFilter()"
+        >
+          <i class="icon fa fa-filter"></i> Filter
+        </button>
+      </div>
+    </div>
+    <div class="UserStoreGroup-wrap bg-box mt-15">
+      <div class="table-responsive ctm-data-table">
+        <table class="table ctm-table" id="store-table">
+          <thead>
+            <tr>
+              <th>
+                Status <i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Code<i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Store Description <i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+
+              <th>
+                Warehouse<i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Cost Zone<i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Price Zone<i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Label Type<i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+
+              <th>
+                Store Group <i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+
+              <th>
+                Address 1 <i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Address 2 <i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Address 3 <i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Post Code <i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Abn<i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Selling<i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Stock<i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Update Cost Option<i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Price From Outlet<i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Price From Level<i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Budget Growth <i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <!-- <th>
+                Fax <i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th> -->
+
+              <!-- <th>
+                Statement Address 1 <i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Statement Address 2 <i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Statement Address 3 <i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Statement Post Code <i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th>
+              <th>
+                Statement Phone<i class="ml-1 fa fa-long-arrow-up"></i
+                ><i class="fa fa-long-arrow-down"></i>
+              </th> -->
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let store of stores">
+              <td>
+                <!-- <span class="status-check" [ngClass]="{ 'status-true': store.status, 'status-false': !store.status }"></span>  -->
+                <div class="status-icons">
+                  <img
+                    *ngIf="store.status"
+                    src="assets/images/status-true.svg"
+                    alt=""
+                  />
+                  <img
+                    *ngIf="!store.status"
+                    src="assets/images/status-false.svg"
+                    alt=""
+                  /> 
+                  <span hidden> {{store.status ? "Active" : "In-Active" }}</span>
+                </div>
+              </td>
+              <!-- <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]">{{store.code.length > 10? store.code.substring(0,10)+"..." :store.code}}</td>
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]">{{store.desc.length > 30? store.desc.substring(0,30)+"..." :store.desc}}</td>
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]">{{store.groupName}}</td>
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]">{{store.address1}}</td>
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]">{{store.address2}}</td>
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]">{{store.address3}}</td>
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]">{{store.postCode}}</td>
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]">{{store.phoneNumber}}</td>
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]">{{store.fax}}</td>
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]">{{store.abn}}</td>
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]"></td>
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]"></td>
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]"></td>
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]"></td>
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]"></td>
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]"></td>
+                    <td class="text-center">
+                    <td [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]">{{store.address3}}</td> -->
+              <td [routerLink]="['./update-store', store.id]">
+                <a>{{
+                  store.code.length > 10
+                    ? store.code.substring(0, 10) + "..."
+                    : store.code
+                }}</a>
+              </td>
+              <td>
+                {{
+                  store.desc.length > 30
+                    ? store.desc.substring(0, 30) + "..."
+                    : store.desc
+                }}
+              </td>
+
+              <td><span class="pl-2">{{ store.warehouseCode }}</span></td>
+              <td>{{ store.costZoneCode }}</td>
+              <td>{{ store.priceZoneCode }}</td>
+              <td>{{ store.labelTypeShelfCode }}</td>
+              <td><span class="pl-2">{{ store.groupCode }}</span></td>
+              <!-- <td>{{ store.groupCode }}</td> -->
+              <td>{{ store.address1 }}</td>
+              <td>{{ store.address2 }}</td>
+              <td>{{ store.address3 }}</td>
+              <td>{{ store.postCode }}</td>
+              <td>{{ store.abn }}</td>
+              <td>
+                {{
+                  store.sellingInd && store.sellingInd === true ? "Yes" : "No"
+                }}
+              </td>
+              <td>
+                {{ store.stockInd && store.stockInd === true ? "Yes" : "No" }}
+              </td>
+              <td> {{ store.costInd && store.costInd === true ? "Yes" : "No" }}</td>
+              
+              <td><span class="pl-2">{{ store.outletPriceFromOutletId }}</span></td>
+              <td><span class="pl-2">{{ store.priceFromLevel }}</span></td>
+              <td><span class="pl-2">{{ store.budgetGrowthFact }}</span></td>
+              <!-- <td>{{ store.fax }}</td> -->
+
+              <!-- <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td> -->
+              <td class="text-center">
+                <div class="tbHover-btnGroup">
+                  <!-- <a tooltip="Change" placement="left" class="tbHover-btn trash-btn" [routerLink]="['./update-store', EncrDecr.set(keyValue, store.id)]"><i class="fa fa-pencil"></i></a> -->
+                  <a
+                    tooltip="Change"
+                    placement="left"
+                    class="tbHover-btn trash-btn"
+                    [routerLink]="['./update-store', store.id]"
+                    ><i class="fa fa-pencil"></i
+                  ></a>
+                  <a
+                    tooltip="Delete"
+                    placement="left"
+                    class="tbHover-btn trash-btn"
+                    (click)="deleteStore(store.id)"
+                    ><i class="fa fa-trash"></i
+                  ></a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /.UserStoreGroup-wrap -->
+  </div>
+  <!-- <div class="Stock-section">
+      <div class="bg-box mt-15 vh-100">
+        <div
+          *ngIf=""
+          class="text-right mb-2"
+          style="text-align: center"
+        >
+          <button type="button" class="btn btn-blue">Close</button>
+        </div>
+          [src]="pdfData"
+          [height]="'90vh'"
+          [useBrowserLocale]="true"
+          [textLayer]="true"
+          [showHandToolButton]="true"
+        >
+        </ngx-extended-pdf-viewer>
+      </div>
+    </div> -->
+</div>
+<div
+  class="modal fade thm-popup"
+  id="storeSearch"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-backdrop="static"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form name="searchForm" id="searchForm">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Search Filter</h4>
+            </div>
+            <div class="form-group mb-0">
+              <label> Wildcard Search</label>
+              <input type="text" id="store_Search_filter" appUppercase class="form-control" #searchValue />
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button
+                class="btn btn-blue mr-2"
+                (click)="storeSearch(searchValue)"
+              >
+                Ok
+              </button>
+              <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

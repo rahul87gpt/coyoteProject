@@ -1,0 +1,424 @@
+<div class="mainContent-innner">
+  <div class="addmasterList-section">
+    <div class="d-flex align-items-center">
+      <h4 class="title flex-grow-1 mb-0">{{masterlistText}}</h4>
+      <!-- <ng-container *ngIf="itemCode === 'NATIONALRANGE'">
+        <h4 class="title flex-grow-1 mb-0">National Range</h4>
+      </ng-container>
+      <ng-container *ngIf="itemCode === 'GLACCOUNT_TYPE'">
+        <h4 class="title flex-grow-1 mb-0">GL Account Types</h4>
+      </ng-container>
+      <ng-container *ngIf="itemCode === 'CATEGORY'">
+        <h4 class="title flex-grow-1 mb-0">Category</h4>
+      </ng-container>
+      <ng-container *ngIf="itemCode === 'GROUP'">
+        <h4 class="title flex-grow-1 mb-0">Groups</h4>
+      </ng-container>
+      <ng-container *ngIf="itemCode === 'OUTLET_FIFO'">
+        <h4 class="title flex-grow-1 mb-0">FiFO Outlet Departments</h4>
+      </ng-container>
+      <ng-container *ngIf="itemCode === 'SUBRANGE'">
+        <h4 class="title flex-grow-1 mb-0">Sub Range</h4>
+      </ng-container>
+      <ng-container *ngIf="itemCode === 'MANUFACTURER'">
+        <h4 class="title flex-grow-1 mb-0">Manufacturer</h4>
+      </ng-container>
+      <ng-container *ngIf="itemCode === 'ADJUSTCODE'">
+        <h4 class="title flex-grow-1 mb-0">Stock Adjustment Code</h4>
+      </ng-container>
+      <ng-container *ngIf="itemCode === 'CASHIERTYPE'">
+        <h4 class="title flex-grow-1 mb-0">Cashier Types</h4>
+      </ng-container>
+      <ng-container *ngIf="itemCode === 'ZONE'">
+        <h4 class="title flex-grow-1 mb-0">Zone Codes</h4>
+      </ng-container> -->
+      <div class="probtn-wrap text-right">
+        <a class="btn btn-blue with-icon mr-2" (click)="addCode()"><i class="icon fa fa-plus-circle"></i> Add</a>
+        <button class="btn with-icon mr-2">
+          <i class="icon fa fa-print"></i> Print
+        </button>
+        <button class="btn with-icon mr-2" (click)="exportData()">
+          <i class="icon fa fa-file-excel-o"></i> Export
+        </button>
+        <button class="btn btn-blue with-icon" data-toggle="modal" data-target="#masterListTableSearch" (click)="openMasterListTableSearchFilter()">
+          <i class="icon fa fa-filter"></i> Filter
+        </button>
+      </div>
+    </div>
+    <div class="addmasterList-wrap bg-box mt-15 all-w">
+
+
+      <div class="table-responsive">
+        <table class="table ctm-table" id="masterlist-Table">
+          <thead>
+            <tr>
+              <th [ngClass]="
+                    itemCode === 'NATIONALRANGE' ? 'status-hide' : 'no-show'
+                  ">
+                Status
+              </th>
+              
+              <th class="no-show">
+                <ng-container *ngIf="itemCode === 'NATIONALRANGE'">
+                  Range Number
+                  <span class="column_id float-right" (click)="openFilter('RangeNumber')" ><i class="fa fa-filter"></i></span>
+                </ng-container>
+
+                <ng-container *ngIf="itemCode !== 'NATIONALRANGE'">
+                  Code
+                  <span class="column_id float-right" (click)="openFilter('Code')" ><i class="fa fa-filter"></i></span>
+                </ng-container>
+
+                 
+              </th>
+              <th>
+                <span  class="sortingIcon" >
+                  <i (click)="shortData('accend')" class="ml-1 fa fa-long-arrow-up"
+                   [ngClass]="short_icon_class === 'accend' ? 'accend' : ''" ></i><i  [ngClass]="short_icon_class === 'decend' ? 'decend' : ''" (click)="shortData('decend')" class="fa fa-long-arrow-down"></i>
+                 </span>
+
+              </th>
+
+              <th>
+                <ng-container *ngIf="itemCode === 'NATIONALRANGE'">
+                  NR Desc
+                  <span class="column_id float-right" (click)="openFilter('NRDesc')" ><i class="fa fa-filter"></i></span>
+                </ng-container>
+
+                <ng-container *ngIf="itemCode !== 'NATIONALRANGE'">
+                  <ng-container *ngIf="itemCode === 'GLACCOUNT_TYPE'">
+                    GLAT Desc
+                    <span class="column_id float-right" (click)="openFilter('GLATDesc')" ><i class="fa fa-filter"></i></span>
+                  </ng-container>
+                  <ng-container *ngIf="itemCode !== 'GLACCOUNT_TYPE'">
+                    Description
+                    <span class="column_id float-right" (click)="openFilter('Description')" ><i class="fa fa-filter"></i></span>
+                  
+                  </ng-container>
+                </ng-container>
+              </th>
+              <th>
+                <span  class="sortingIcon" >
+                  <i (click)="shortData('accend')" class="ml-1 fa fa-long-arrow-up"
+                   [ngClass]="short_icon_class === 'accend' ? 'accend' : ''" ></i><i  [ngClass]="short_icon_class === 'decend' ? 'decend' : ''" (click)="shortData('decend')" class="fa fa-long-arrow-down"></i>
+                 </span>
+
+                
+              </th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody (click)="removeSeachFiterDisplay()">
+            <tr *ngFor="let masterListItem of masterListItems">
+              <td class="no-show">
+                <div class="status-icons">
+                  <img *ngIf="masterListItem.status" src="assets/images/status-true.svg" alt="" />
+                  <img *ngIf="!masterListItem.status" src="assets/images/status-false.svg" alt="" />
+                  <span hidden>
+                    {{ masterListItem?.status ? "Active" : "In-Active" }}
+                  </span>
+                </div>
+              </td>
+              <td class="blue-text" (click)="getMasterListItemById(itemCode, masterListItem)">
+                <!-- <a> -->
+                  {{
+                      masterListItem.code.length > 10
+                        ? masterListItem?.code?.substring(0, 10) + "..."
+                        : masterListItem.code
+                    }}
+                <!-- </a> -->
+              </td>
+              <td></td>
+              <td (click)="getMasterListItemById(itemCode, masterListItem)" [ngClass]="{'blue-text': itemCode == masterListCodes.GLACCOUNT_TYPE ? true : false}">
+                <!-- <span > -->
+                  {{
+                      masterListItem.name.length > 30
+                        ? masterListItem?.name?.substring(0, 30) + "..."
+                        : masterListItem.name
+                    }}
+                <!-- </span> -->
+              </td>
+              <td></td>
+              <td class="text-center">
+                <div class="tbHover-btnGroup">
+                  <button tooltip="Change" placement="left" class="tbHover-btn trash-btn"
+                    (click)="getMasterListItemById(itemCode, masterListItem)">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                  <button tooltip="Delete" placement="right" class="tbHover-btn trash-btn" (click)="
+                        deleteMasterListItem(itemCode, masterListItem.id)
+                      ">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade thm-popup" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <form [formGroup]="masterListModuleForm">
+          <div class="addMaster-section">
+            <div class="addMaster-wrap">
+              <div class="popup-box">
+                <div class="title-wrap mb-1" [ngSwitch]="itemCode">
+                  <ng-container *ngSwitchCase="'NATIONALRANGE'">
+                    <h4 class="title">
+                      {{
+                        masterListModuleId
+                          ? "Update National Range"
+                          : "Add National Range"
+                      }}
+                    </h4>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'GLACCOUNT_TYPE'">
+                    <h4 class="title">
+                      {{
+                        masterListModuleId
+                          ? "Update GL Account Type"
+                          : "Add GL Account Type"
+                      }}
+                    </h4>
+                  </ng-container>
+                  <ng-container  *ngSwitchCase="'CATEGORY'">
+                    <h4 class="title">
+                      {{
+                        masterListModuleId ? "Update Category" : "Add Category"
+                      }}
+                    </h4>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'GROUP'">
+                    <h4 class="title">
+                      {{ masterListModuleId ? "Update Group" : "Add Group" }}
+                    </h4>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'OUTLET_FIFO'">
+                    <h4 class="title">
+                      {{
+                        masterListModuleId
+                          ? "Update FiFO Outlet Department"
+                          : "Add FiFO Outlet Department"
+                      }}
+                    </h4>
+                  </ng-container>
+                  <ng-container  *ngSwitchCase="'SUBRANGE'">
+                    <h4 class="title">
+                      {{
+                        masterListModuleId
+                          ? "Update Sub Range"
+                          : "Add Sub Range"
+                      }}
+                    </h4>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'MANUFACTURER'">
+                    <h4 class="title">
+                      {{
+                        masterListModuleId
+                          ? "Update Manufacturer"
+                          : "Add Manufacturer"
+                      }}
+                    </h4>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'ADJUSTCODE'">
+                    <h4 class="title">
+                      {{
+                        masterListModuleId
+                          ? "Update Stock Adjustment Code"
+                          : "Add Stock Adjustment Code"
+                      }}
+                    </h4>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'CASHIERTYPE'">
+                    <h4 class="title">
+                      {{
+                        masterListModuleId
+                          ? "Update Cashier Type"
+                          : "Add Cashier Type"
+                      }}
+                    </h4>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'ZONE'">
+                    <h4 class="title">
+                      {{
+                        masterListModuleId
+                          ? "Update Zone Code"
+                          : "Add Zone Code"
+                      }}
+                    </h4>
+                  </ng-container>
+                </div>
+                <div class="form-group">
+                  <ng-template [ngIf]="itemCode == masterListCodes.NATIONALRANGE" [ngIfElse]="restCodes">
+                    <label>Range Number <span class="text-danger">*</span></label>
+                  </ng-template>
+
+                  <ng-template #restCodes>
+                    <label>Code <span class="text-danger">*</span></label>
+                  </ng-template>
+
+
+                  <input
+                    [type]="((itemCode == masterListCodes.NATIONALRANGE) || (itemCode == masterListCodes.GROUP) || (itemCode == masterListCodes.SUBRANGE) || (itemCode == masterListCodes.CATEGORY)) ? 'number' : 'text'"
+                    class="form-control" formControlName="code" [readonly]="codeStatus" appUppercase
+                    [ngClass]="{ 'is-invalid': submitted && f.code.errors }" />
+
+                  <!-- <ng-container
+                    *ngIf="
+                      itemCode == 'MANUFACTURER' ||
+                      'ADJUSTCODE' ||
+                      'GLACCOUNT_TYPE'
+                    "
+                  >
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="code"
+                      [readonly]="codeStatus"
+                      [ngClass]="{ 'is-invalid': submitted && f.code.errors }"
+                    />
+                  </ng-container> -->
+
+                  <div *ngIf="f.code.errors" class="invalid-feedback">
+                    <div *ngIf="f.code.errors.maxlength">
+                      Code Should be maximum 30 characters
+                    </div>
+                    <div *ngIf="f.code.errors.required">Code is required</div>
+                    <div *ngIf="f.code.errors.pattern">
+                      Space is not allowed
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <ng-container *ngIf="itemCode === 'NATIONALRANGE'">
+                    <label>Range Description
+                      <span class="text-danger">*</span></label>
+                  </ng-container>
+
+                  <ng-container *ngIf="itemCode !== 'NATIONALRANGE'">
+                    <label>
+                      Description <span class="text-danger">*</span></label>
+                  </ng-container>
+
+                  <input type="text" class="form-control" formControlName="name"
+                  appUppercase
+                    [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+
+                  <div *ngIf="f.name.errors" class="invalid-feedback">
+                    <div *ngIf="f.name.errors.maxlength">
+                      Description Should be maximum 80 characters
+                    </div>
+                    <div *ngIf="f.name.errors.required">
+                      Description is required
+                    </div>
+                  </div>
+                </div>
+
+                <ng-container *ngIf="itemCode !== 'NATIONALRANGE'">
+                  <div class="form-group mb-0">
+                    <label>Status <span class="text-danger">*</span></label>
+                    <select class="form-control" formControlName="status">
+                      <option value="true">Active</option>
+                      <option value="false">Inactive</option>
+                    </select>
+                  </div>
+                </ng-container>
+
+                <div class="btn-wrap text-right mt-10">
+                  <button class="btn btn-blue mr-2" [disabled]="button_disabled" (click)="onSubmitMasterListModuleForm()">
+                    Save
+                  </button>
+                  <button class="btn btn-grey" data-dismiss="modal">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade thm-popup" id="glAccountTypeModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <form [formGroup]="glAccountTypeForm" >
+          <div class="addMaster-section">
+            <div class="addMaster-wrap">
+              <div class="popup-box">
+                <div class="title-wrap mb-1">
+                  <h4 class="title">
+                    {{
+                      masterListModuleId
+                        ? "Update GL Account Type"
+                        : "Add GL Account Type"
+                    }}
+                  </h4>
+                </div>
+                <div class="form-group">
+                  <label>Account Type <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" formControlName="name" 
+                    [ngClass]="{ 'is-invalid': submitted1 && f1.name.errors }" />
+                  <div *ngIf="f1.name.errors" class="invalid-feedback">
+                    <div *ngIf="f1.name.errors.maxlength">
+                      Account Type be maximum 30 characters
+                    </div>
+                    <div *ngIf="f1.name.errors.required">
+                      Account Type is required
+                    </div>
+                  </div>
+                </div>
+                <div class="btn-wrap text-right mt-10">
+                  <button class="btn btn-blue mr-2"  [disabled]="button_disabled" (click)="onSubmitglAccountTypeForm()">Save</button>
+                  <button class="btn btn-grey" data-dismiss="modal">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade thm-popup" id="masterListTableSearch" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form name="searchForm" id="searchForm">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Search Filter</h4>
+            </div>
+            <div class="form-group mb-0">
+              <label> Wildcard Search</label>
+              <input type="text" id="masterListTable_Search_filter" class="form-control" appUppercase #searchValue />
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button class="btn btn-blue mr-2" (click)="masterListTableSearch(searchValue)"
+                [disabled]="checkifSaveEnabled()">
+                Ok
+              </button>
+              <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

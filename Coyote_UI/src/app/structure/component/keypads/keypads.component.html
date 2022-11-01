@@ -1,0 +1,1580 @@
+<div class="mainContent-innner">
+  <div class="Keypads-section">
+    <div class="d-flex align-items-center">
+      <h4 class="title flex-grow-1 mb-0">Keypads</h4>
+      <div class="probtn-wrap d-flex text-right">
+        <button
+          class="btn btn-blue with-icon mr-2"
+          data-toggle="modal"
+          data-target="#AddModal"
+        >
+          <i class="icon fa fa-plus-circle"></i> Add
+        </button>
+        <button class="btn with-icon mr-2" (click)="printData()">
+          <i class="icon fa fa-print"></i> Print
+        </button>
+        <button class="btn with-icon mr-2" (click)="exportKeyboardData()">
+          <i class="icon fa fa-file-excel-o"></i> Export
+        </button>
+        <button class="btn" data-toggle="modal" data-target="#keypadsSearch" (click)="openKeypadsSearchFilter()">
+          <i class="icon fa fa-filter"></i> Filter
+        </button>
+      </div>
+    </div>
+    <!-- /.action-topbar -->
+    <div class="Keypads-wrap">
+      <div class="Keypads-table-wrap bg-box mt-15">
+        <div class="table-responsive ctm-data-table">
+          <table class="table ctm-table" id="keypad-table">
+            <thead>
+              <tr>
+                <th>Status<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                <th>Code<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                <th>Description<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                <th>Outlet<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i></th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let keypad of keypadList">
+                <td class="text-center">
+                  <!-- <span class="status-check" [ngClass]="{ 'status-true': keypad.status, 'status-false': !keypad.status }"></span> -->
+                  <div class="status-icons">
+                    <img
+                      *ngIf="keypad.status"
+                      src="assets/images/status-true.svg"
+                      alt=""
+                    />
+                    <img
+                      *ngIf="!keypad.status"
+                      src="assets/images/status-false.svg"
+                      alt=""
+                    />
+                    <span hidden> {{keypad.status ? 'Active' : 'In-Active'}} </span>
+                  </div>
+                </td>
+                <!-- <td data-toggle="modal" data-target="#EditModal" (click)="getKeypadById(keypad.id)">{{keypad.code.length > 10? keypad.code.substring(0,10)+"..." :keypad.code}}</td>
+                           <td data-toggle="modal" data-target="#EditModal" (click)="getKeypadById(keypad.id)">{{keypad.desc.length > 30? keypad.desc.substring(0,30)+"..." :keypad.desc}}</td>
+                           <td data-toggle="modal" data-target="#EditModal" (click)="getKeypadById(keypad.id)">{{keypad.outletName}}</td> -->
+                <td>
+                  <!-- <a
+                    data-toggle="modal"
+                    data-target="#EditModal"
+                    (click)="getKeypadById(keypad.id)"
+                  > -->
+                  <a
+                    data-toggle="modal"
+                    data-target="#EditModal"
+                    (click)="getKeypadDesign(keypad.id)"
+                  >
+                    {{
+                      keypad.code.length > 30
+                        ? keypad.code.substring(0, 10) + "..."
+                        : keypad.code
+                    }}
+                  </a>
+                </td>
+                <!-- <td data-toggle="modal" data-target="#EditModal" (click)="getKeypadById(keypad)">{{keypad.code.length > 10? keypad.code.substring(0,10)+"..." :keypad.code}}</td> -->
+                <td>
+                  {{
+                    keypad.desc.length > 30
+                      ? keypad.desc.substring(0, 30) + "..."
+                      : keypad.desc
+                  }}
+                </td>
+                <td>{{ keypad.outletCode + '  -  ' + keypad.outletName }}</td>
+                <td>
+                  <div class="tbHover-btnGroup">
+                    <!-- <button
+                      tooltip="Change"
+                      placement="left"
+                      class="tbHover-btn trash-btn"
+                      data-toggle="modal"
+                      data-target="#EditModal"
+                      (click)="getKeypadById(keypad.id)"
+                    > -->
+                    <button
+                      tooltip="Change"
+                      placement="left"
+                      class="tbHover-btn trash-btn"
+                      data-toggle="modal"
+                      data-target="#EditModal"
+                      (click)="getKeypadDesign(keypad.id)"
+                    >
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                    <button
+                      tooltip="Delete"
+                      placement="right"
+                      class="tbHover-btn trash-btn"
+                      (click)="deleteKeypad(keypad)"
+                    >
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- /.pricingApnSearch-wrap -->
+  </div>
+  <!-- /.pricingApnSearch-section -->
+
+  <div
+    class="modal fade thm-popup addKeypadInput"
+    id="AddModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+    data-backdrop="static"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body popup-box-width">
+          <div class="popup-box">
+            <form [formGroup]="keypadForm">
+              <div class="title-wrap mb-0">
+                <h4 class="title">Keypads</h4>
+              </div>
+              <div class="form-group">
+                <label>Code <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="code"
+                  ngModel
+                  maxlength="30"
+                  appUppercase
+                  [ngClass]="{ 'is-invalid': submitted && f.code.errors }"
+                />
+                <div *ngIf="f.code.errors" class="invalid-feedback">
+                  <div *ngIf="f.code.errors.required">Code is required</div>
+                  <div *ngIf="f.code.errors.pattern">Space is not allowed</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Description <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="desc"
+                  ngModel
+                  maxlength="30"
+                  appUppercase
+                  [ngClass]="{ 'is-invalid': submitted && f.desc.errors }"
+                />
+                <div *ngIf="f.desc.errors" class="invalid-feedback">
+                  <div *ngIf="f.desc.errors.required">
+                    Description is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-group mb-0">
+                    <label>Outlet <span class="text-danger">*</span></label>
+                    <!-- <select
+                      class="form-control"
+                      formControlName="outletId"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.outletId.errors
+                      }"
+                    > -->
+                      <!-- <option
+                        *ngFor="let item of storeList"
+                        [ngValue]="item.id"
+                      >
+                        {{ item.desc }}
+                      </option>
+                    </select>
+                    <div *ngIf="f.outletId.errors" class="invalid-feedback">
+                      <div *ngIf="f.outletId.errors.required">
+                        Outlet is required
+                      </div>
+                    </div> -->
+                    <!-- <input type="text" class="form-control" formControlName="outletId" placeholder="0"> -->
+                  
+                    <ng-select
+                      class="form-control ngselect"
+                      [items]="storeList"
+                      bindLabel="desc"
+                      bindValue="id"
+                      [multiple]="false"
+                      [clearable]="false"
+                      placeholder="Select Store"
+                      formControlName="outletId"
+                      [ngClass]="{ 'is-invalid': submitted && f.outletId.errors}"
+                    >
+                      <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <div class="form-row">
+                          <span class="col-9 zone-overflow" title="{{ item?.desc }}">
+                            {{ item?.desc }}
+                          </span>
+                          <div class="col-3" title="{{ item?.code }}">
+                            {{ item?.code }}
+                          </div>
+                        </div>
+                      </ng-template>
+                    </ng-select>
+                    <div *ngIf="f.outletId.errors" class="invalid-feedback">
+                      <div *ngIf="f.outletId.errors.required">
+                        Outlet is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-0">
+                    <label>Status <span class="text-danger">*</span></label>
+                    <!-- <ng-select
+                      class="form-control"
+                      formControlName="status"
+                      [ngClass]="{ 'is-invalid': submitted && f.status.errors }"
+                      [items]="statusArray"
+                      [multiple]="false"
+                      [clearable]="false"
+                      placeholder="Select Status"
+                      formControlName="status"
+                    >
+                    </ng-select> -->
+                    <select
+                      class="form-control"
+                      formControlName="status"
+                      [ngClass]="{ 'is-invalid': submitted && f.status.errors }"
+                    >
+                      <option value="status" disabled selected>Status</option>
+                      <option value="true">Active</option>
+                      <option value="false">In-Active</option>
+                    </select>
+                    <div *ngIf="f.status.errors" class="invalid-feedback">
+                      <div *ngIf="f.status.errors.required">
+                        Status is required
+                      </div>
+                    </div>
+                    <!-- <input type="text" class="form-control" placeholder=""> -->
+                  </div>
+                </div>
+              </div>
+              <div class="form-group copyKeySelect">
+                <label>Copy Keypad</label>
+                <ng-select
+                  class="form-control"
+                  [items]="keypadList"
+                  bindLabel="code"
+                  bindValue="id"
+                  [multiple]="false"
+                  [clearable]="false"
+                  placeholder="Select Keypad"
+                  formControlName="keypadCopyId"
+                >
+                  <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <div class="form-row">
+                      <span class="col-8   zone-overflow" title="{{ item?.desc }}">
+                        {{ item?.desc }}
+                      </span>
+                      <div class="col-3" title="{{ item?.code }}">
+                        {{ item?.code }}
+                      </div>
+                    </div>
+                  </ng-template>
+                </ng-select>
+              </div>
+              <div class="btn-wrap text-right mt-10">
+                <!-- <button
+                  type="submit"
+                  class="btn btn-blue mr-2"
+                  data-toggle="modal"
+                  data-target="#addFilterModal"
+                > -->
+                <button
+                  type="submit"
+                  class="btn btn-blue mr-2"
+                  (click)="createKeypad()"
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-grey"
+                  data-dismiss="modal"
+                  (click)="cancel()"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Update Keypad Modal -->
+  <div
+    class="modal fade thm-popup"
+    id="EditModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+    data-backdrop="static"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body popup-box-width">
+          <div class="popup-box">
+            <form [formGroup]="keypadForm" autocomplete="off">
+              <div class="title-wrap mb-0">
+                <h4 class="title">Keypads 112<span class="text-danger">*</span></h4>
+              </div>
+              <div class="form-group">
+                <label>Code</label>
+                <input
+                  [readonly]="true"
+                  type="text"
+                  class="form-control"
+                  maxlength="30"
+                  formControlName="code"
+                  [ngClass]="{ 'is-invalid': submitted && f.code.errors }"
+                />
+                <div *ngIf="f.code.errors" class="invalid-feedback">
+                  <div *ngIf="f.code.errors.required">Code is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Description <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="desc"
+                  ngModel
+                  appUppercase
+                  maxlength="30"
+                  [ngClass]="{ 'is-invalid': submitted && f.desc.errors }"
+                />
+                <div *ngIf="f.desc.errors" class="invalid-feedback">
+                  <div *ngIf="f.desc.errors.required">
+                    Description is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-group mb-0">
+                    <label>Outlet <span class="text-danger">*</span></label>
+                    <select
+                      class="form-control"
+                      formControlName="outletId"
+                      [ngClass]="{
+                        'is-invalid': submitted && f.outletId.errors
+                      }"
+                    >
+                      <option
+                        *ngFor="let item of storeList"
+                        value="{{ item.id }}"
+                      >
+                        {{ item.desc }}
+                      </option>
+                    </select>
+                    <div *ngIf="f.outletId.errors" class="invalid-feedback">
+                      <div *ngIf="f.outletId.errors.required">
+                        Outlet is required
+                      </div>
+                    </div>
+                    <!-- <input type="text" class="form-control" formControlName="outletId" placeholder="0"> -->
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-0">
+                    <label>Status <span class="text-danger">*</span></label>
+                    <select
+                      class="form-control"
+                      formControlName="status"
+                      [ngClass]="{ 'is-invalid': submitted && f.status.errors }"
+                    >
+                      <option value="" selected>Select</option>
+                      <option [ngValue]="true">Active</option>
+                      <option [ngValue]="false">In-Active</option>
+                    </select>
+                    <div *ngIf="f.status.errors" class="invalid-feedback">
+                      <div *ngIf="f.status.errors.required">
+                        Status is required
+                      </div>
+                    </div>
+                    <!-- <input type="text" class="form-control" placeholder=""> -->
+                  </div>
+                </div>
+                <!-- <div class="col-md-6">
+                               <div class="form-group">
+                                   <label>Copy Keypad</label>
+                                
+                                   <input type="text" class="form-control" placeholder="">
+                               </div>
+                           </div> -->
+              </div>
+              <div class="btn-wrap text-right mt-10">
+                <button
+                  type="button"
+                  class="btn btn-blue mr-2"
+                  data-toggle="modal"
+                  data-target="#editFilterModal"
+                  (click)="initilizeFirstButton('Level 1', 0)"
+                  [disabled]="true"
+                  id="updateBtn"
+                >
+                  Update
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-grey"
+                  data-dismiss="modal"
+                  (click)="cancel()"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Button Model -->
+<div
+  class="modal fade thm-popup bd-example-modal-xl"
+  id="editFilterModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-backdrop="static"
+>
+  <div class="modal-dialog modal-dialog-centered modal-xl keypad-w" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <form [formGroup]="keypadForm" autocomplete="off"  (keydown.enter)="$event.preventDefault()" >
+          <div class="popup-box">
+            <div class="title-wrap mb-0">
+              <h4 class="title">Keypad {{f?.code?.value | uppercase}} &nbsp;{{f?.desc?.value | uppercase}}</h4>
+              <!-- <span>{{visitedColorBtnObj | json}}</span> -->
+            </div>
+            <!-- <div class="text-right">
+              <h4 class="title" style="text-align: center">
+                {{ KeypadDesignData }}
+              </h4>
+            </div> -->
+            <div class="form-row keypad-inner-body">
+              <div class="col-lg-8 keypad-tabs">
+                <div class="group-from mb-0 p-0 pt-0">
+                  <div class="list-btns-wrap">
+                    <div class="list-btns">
+                      <ng-container *ngFor="let button of buttonObj; let btnIndex=index">
+                        <div class="list-box" style="overflow: 'inherit'"  *ngIf="button?.id">
+                          <!-- <button
+                            id="{{f?.level?.value + '_' + btnIndex}}"
+                            type="button"
+                            class="btn-list"
+                            [ngClass]="((button.id == (selectedButton+1))) ? 'visited-color' : ''"
+                            (click)="addButton('keypadBtn', button.id)"
+                            [ngStyle]="{
+                              background: visitedColorBtnObj[f?.level?.value + '_' + btnIndex] ? ('linear-gradient(#81858d, ' + button?.color + ')') : button?.color,
+                              width: button?.width,
+                              height: button?.height,
+                              visibility: button?.visibility || 'visible'
+                            } "
+                          > -->
+                          <button
+                            id="{{f?.level?.value + '_' + btnIndex}}"
+                            type="button"
+                            class="btn-list"
+                            (click)="addButton('keypadBtn', button.id)"
+                            [ngStyle]="{
+                              background: (visitedColorBtnObj[f?.level?.value + '_' + btnIndex] || (button.id == (selectedButton+1))) ? 
+                                ('linear-gradient(#81858d, ' + button?.color + ')') : button?.color,
+                              width: button?.width,
+                              height: button?.height,
+                              visibility: button?.visibility || 'visible'
+                            } "
+                          >
+                          <!-- <button
+                            id="{{f?.level?.value + '_' + btnIndex}}"
+                            type="button"
+                            class="btn-list"
+                            [ngClass]="((button.id == (selectedButton+1)) && (button?.color == '#97c6f9')) ? 'visited-color' : ''"
+                            (click)="addButton('keypadBtn', button.id)"
+                            [ngStyle]="{
+                              background: button?.color,
+                              width: button?.width,
+                              height: button?.height,
+                              visibility: button?.visibility || 'visible'
+                            }"
+                          > -->
+                            <span title="{{ button?.text }}">{{ 
+                              (button?.selected_button_type?.toLowerCase() == 'product') ? (button?.text + ' $' + (button?.product_value || '0.00')) : button?.text 
+                            }}</span>
+                          </button>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 keypad-func">
+                <h4 class="keypad-title">{{f?.desc?.value | uppercase}}</h4>
+                <div class="group-from">
+                  <h5 class="title">Button</h5>
+                  <div class="form-group form-row align-items-center">
+                    <label class="label col-md-3 mb-0">Button Type</label>
+                    <div class="col-md-9 p-relative">
+                      <!-- <select class="form-control"
+                        (change)="addButton('button_type', $event.target.value)"
+                        formControlName="selected_button_type"
+                      > -->
+                      <div class="selected-text" (click)="addButton('button_type', f?.selected_button_type?.value, true)">{{f?.selected_button_type?.value}}</div>
+                      <!-- <ng-select
+                        [items]="buttonType"
+                        class="form-control"
+                        bindLabel="name"
+                        bindValue="name"
+                        [virtualScroll]="false"
+                        [clearable]="false"
+                        [clearOnBackspace]="false"
+                        [clearSearchOnAdd]="true"
+                        [searchable]="true"
+                        [multiple]="false"
+                        (change)="addButton('button_type', $event)"
+                        formControlName="selected_button_type"
+                      ></ng-select> -->
+                      <select class="form-control"
+                        (change)="addButton('button_type', $event.target.value)"
+                        formControlName="selected_button_type"
+                      >
+                        <ng-container *ngFor="let type of buttonType">
+                          <ng-container>{{mappingButtonType(type)}}</ng-container>
+                          <option [value]="type.name">{{ type.name }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- For Product Type Button Selection -->
+                  <ng-container
+                    *ngIf="
+                      buttonObj[
+                        selectedButton
+                      ]?.selected_button_type?.toLowerCase() === 'product' ||
+                      buttonObj[selectedButton]?.selected_button_type
+                        ?.toLowerCase()
+                        ?.replace(' ', '_') === 'category_lookup'
+                    "
+                  >
+                    <div class="form-row mb-0 form-group align-items-center">
+                      <label class="col-md-3 mb-0">
+                        {{buttonObj[selectedButton]?.selected_button_type?.toLowerCase() == 'product' ? 'Product' : 'Category'}} No<sup>*</sup>
+                      </label>
+                      <div class="col-md-9">
+                        <div class="form-row align-items-center KeypadSearch-w">
+                          <div class="col-md-10">
+                            <!-- <input #productCode 
+                              type="text" 
+                              class="form-control"
+                              [value]="buttonObj[selectedButton]?.product_id || 
+                                buttonObj[selectedButton]?.category_id || 0"
+                              (keyup)="inputValueChange($event.target.value)"
+                            > -->
+                            <input
+                              #productCode
+                              type="text"
+                              class="form-control"
+                              [value]="buttonObj[selectedButton]?.product_number || buttonObj[selectedButton]?.category_code || 0"
+                              (keydown.enter)="inputValueChange(productCode.value)"
+                            />
+                            <!-- TODO :: Design is remaining -->
+                            <!-- <div
+                              *ngIf="productCode.value == 0"
+                              class="alert alert-danger"
+                            >
+                              Product Number is required
+                            </div> -->
+                          </div>
+                          <div class="col-md-2">
+                            <button
+                              type="button"
+                              class="btn input-btn btn-block btn-blue btn-grey"
+                              (click)="inputValueChange(productCode.value)"
+                            >
+                              <i class="fa fa-search"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <ng-container
+                        *ngIf="
+                          buttonObj[
+                            selectedButton
+                          ]?.selected_button_type?.toLowerCase() === 'product'
+                        "
+                      >
+                        <span>{{ buttonObj[selectedButton]?.prod_desc }}</span>
+                      </ng-container>
+                      <ng-container
+                        *ngIf="
+                          buttonObj[selectedButton]?.selected_button_type
+                            ?.toLowerCase()
+                            ?.replace(' ', '_') === 'category_lookup'
+                        "
+                      >
+                        <span>{{ buttonObj[selectedButton]?.cat_desc }}</span>
+                      </ng-container>
+                    </div>
+                  </ng-container>
+
+                  <!-- For Level Type Button Selection -->
+                  <ng-container *ngIf="buttonObj[selectedButton]?.selected_button_type?.toLowerCase() === 'level'">
+                    <div class="form-group form-row align-items-center">
+                      <label class="col-md-3 mb-0">Keypad Level</label>
+                      <div class="col-md-9 addKeypadInput">
+                        <!-- <select class="form-control" (change)="subDropdownSelection('level', $event.target.value)"
+                          formControlName="selected_level_button_value"
+                        >						
+                          <option [selected]="'Select Level'" [disabled]="'Select Level'">
+                            Select Level
+                          </option>
+
+                          <ng-container *ngFor="let level of keypadObj.levels">                            
+                            <ng-container *ngIf="buttonObj[selectedButton]?.level_type == level">
+                              <option selected>{{buttonObj[selectedButton]?.level_type }}</option>
+                            </ng-container>
+                            <ng-container *ngIf="buttonObj[selectedButton]?.level_type != level">
+                              <option>{{level_mapping[level] || level }}</option>
+                            </ng-container>
+                          </ng-container>
+                        </select> -->
+
+                        <ng-select
+                          [items]="keypadObj.levels"
+                          class="form-control"
+                          [virtualScroll]="true"
+                          [multiple]="false"
+                          [clearable]="false"
+                          [clearOnBackspace]="false"
+                          [clearSearchOnAdd]="true"
+                          [closeOnSelect]="true"
+                          formControlName="selected_level_button_value_UI"
+                          placeholder="Select Level"
+                          (change)="subDropdownSelection('level', $event)"
+                        >
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <span class="col-10 zone-overflow" title="{{ level_mapping[item] || item }}">
+                                {{ level_mapping[item] || item }}
+                              </span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+
+                      </div>
+                    </div>
+                  </ng-container>
+
+                  <!-- For Price Level Change Type Button Selection -->
+                  <ng-container
+                    *ngIf="
+                      buttonObj[selectedButton]?.selected_button_type
+                        ?.toLowerCase()
+                        ?.replace(' ', '_')
+                        ?.includes('price_level')
+                    "
+                  >
+                    <div class="form-group form-row align-items-center">
+                      <label class="col-md-3 mb-0">Price Level</label>
+                      <div class="col-md-9 addKeypadInput">
+                        <!-- <select class="form-control"
+                          (change)="subDropdownSelection(buttonObj[selectedButton]?.selected_button_type,
+                            $event.target.value)"
+                          (ngModel)="(buttonObj[selectedButton].text)"
+                          [ngModelOptions]="{ standalone: true }"
+                        >
+                          <option [selected]="'Select Price Level'" [disabled]="'Select Price Level'">
+                            Select Price Level
+                          </option>
+                          <ng-container *ngFor="let price_level of keypadObj.price_level; let priceLevelIndex = index">
+                            <option>{{ price_level }}</option>
+                          </ng-container>
+                        </select> -->
+
+                        <ng-select
+                          [items]="keypadObj.price_level"
+                          class="form-control"
+                          [virtualScroll]="true"
+                          [multiple]="false"
+                          [clearable]="false"
+                          [searchable]="false"
+                          [clearOnBackspace]="false"
+                          [clearSearchOnAdd]="true"
+                          [closeOnSelect]="true"
+                          formControlName="selected_price_level_button"
+                          placeholder="Select Price Level"
+                          (change)="subDropdownSelection(buttonObj[selectedButton]?.selected_button_type, $event)"
+                        >
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <span class="col-5 zone-overflow" title="{{ item }}">
+                                {{ item }}
+                              </span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+                      </div>
+                    </div>
+                  </ng-container>
+
+                  <!-- For Sale Discount Type Button Selection -->
+                  <ng-container
+                    *ngIf="
+                      buttonObj[selectedButton]?.selected_button_type
+                        ?.toLowerCase()
+                        ?.replace(' ', '_')
+                        ?.includes('sale_discount')
+                    "
+                  >
+                    <div class="form-row mb-0 form-group align-items-center">
+                      <label class="col-md-3 mb-0">Percentage</label>
+                      <div class="col-md-9">
+                        <div class="form-row align-items-center">
+                          <div class="col-md-10">
+                            <input
+                              #saleDiscountPercentage
+                              type="text"
+                              class="form-control"
+                              [value]="
+                                buttonObj[selectedButton]?.salesDiscountPerc ||
+                                0
+                              "
+                              [(ngModel)]="
+                                buttonObj[selectedButton].salesDiscountPerc
+                              "
+                              [ngModelOptions]="{ standalone: true }"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+
+                <div class="group-from">
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-3 mb-0">Caption</label>
+                    <div class="col-md-9">
+                      <input
+                        type="text"
+                        class="form-control"
+                        maxlength="40"
+                        [value]="buttonObj[selectedButton || 0]?.text || ''"
+                        (input)="addButton('caption', $event.target.value)"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-3 mb-0">Colour</label>
+                    <div class="col-md-9">
+                      <!-- 
+                          <input type="color" style="padding: 0 3px;" class="form-control" 
+                              [value]="inputColor" (change)="colorChange($event)"
+                          >
+                      -->
+                      <input
+                        class="form-control"
+                        #keypadColorPicker
+                        readonly
+                        [style.background]="'linear-gradient(#81858d, ' + colorList[0].value + ')'"
+                        [(colorPicker)]="colorList[0].value"
+                        [cpOKButton]="true"
+                        [cpOKButtonText]="'Ok'"
+                        [cpCancelButton]="true"
+                        [cpSaveClickOutside]="false"
+                        [cpDisableInput]="true"
+                        [cpAlphaChannel]="'disabled'"
+                        [cpOutputFormat]="'hex'"
+                        [cpAddColorButton]="true"
+                        (colorPickerClose)="updateColor($event, colorList[0].value)"
+                        [cpPosition]="'bottom'"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-3 mb-0">Size</label>
+                    <div class="col-md-9">
+                      <select
+                        class="form-control"
+                        (change)="selectedSize($event.target.value)"
+                        formControlName="selected_size"
+                      >
+                        <!-- <option [selected]="'NORMAL SIZE'" [disabled]="'NORMAL SIZE'">NORMAL SIZE</option> -->
+                        <!-- <option value="" disabled selected>Select Size</option> -->
+                        <ng-container *ngFor="let size of sizes">
+                          <option>{{ size }}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-3 mb-0">Cashier</label>
+                    <div class="col-md-9 addKeypadInput">
+                      <!-- <select
+                        class="form-control"
+                        (change)="selectCashier($event.target.value)"
+                        formControlName="cashier_level" -->
+                      
+                        <!-- <option [selected]="'Select Cashier'" [disabled]="'Select Cashier'">
+                          Select Cashier
+                        </option>
+                        <ng-container
+                          *ngFor="let level of this.keypadObj.cashier_levels"
+                        >
+                          <option>{{ level }}</option>
+                        </ng-container> -->
+                      <!-- </select> -->
+
+                      <ng-select
+                          [items]="keypadObj.cashier_levels"
+                          class="form-control ngselect"
+                          [virtualScroll]="true"
+                          [multiple]="false"
+                          [clearable]="false"
+                          [clearSearchOnAdd]="true"
+                          [closeOnSelect]="true" 
+                          formControlName="cashier_level"
+                          placeholder="Select Cashier"
+                          (change)="selectCashier($event)"
+                        >
+                          <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="form-row">
+                              <span class="col-5 zone-overflow" title="{{ item }}">
+                                {{ item }}
+                              </span>
+                            </div>
+                          </ng-template>
+                        </ng-select>
+
+
+                    </div>
+                  </div>
+                  <div class="form-group mb-0 form-row align-items-center">
+                    <label class="col-md-3 mb-0">Password</label>
+                    <div class="col-md-9 p-relative">
+                      <!-- <input type="password" class="form-control" /> -->
+                      <input
+                        [type]="fieldTextType ? 'text' : 'password'"
+                        class="form-control pass-input"
+                        maxlength="4"
+                        autocomplete="one-time-code"
+                        [value]="buttonObj[selectedButton]?.password"
+                        (input)="changePassord('password', $event.target.value)"
+                      />
+                      <div class="input-group-append pass-show">
+                        <span class="input-group-text">
+                          <i
+                            class="fa"
+                            [ngClass]="{
+                              'fa-eye-slash': !fieldTextType,
+                              'fa-eye': fieldTextType
+                            }"
+                            (click)="toggleFieldTextType()"
+                          ></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="group-from mb-0">
+                  <h5 class="title">Levels</h5>
+                  <div class="keyLable-control">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [value]="level_mapping[f?.level?.value] || f?.level?.value"
+                      (input)="level_change($event.target.value, f?.level?.value, level_mapping[f?.level?.value])"
+                      (blur)="levelBlurInsertValue()"
+                    />
+                    <!-- <label>{{level_mapping[f?.level?.value] || f?.level?.value}}</label> -->
+                  </div>
+
+                  <div class="keyLable-list">
+                    <div *ngFor="let level of keypadObj.levels; let levelIndex = index">
+                      <button id="{{level}}" type="text" (click)="selectDropdownValue('level', level, levelIndex)"
+                        [ngClass]="{active: clickIndexObj.button == levelIndex}"
+                      >
+                        {{ level_mapping[level] || level }}
+                      </button>
+                    </div>
+                  </div>
+                  <!-- <select
+                    class="form-control"
+                    (click)="selectDropdownValue('level', $event.target.value)"
+                    formControlName="level"
+                  >
+                    <ng-container *ngFor="let level of keypadObj.levels">
+                      <option [value]="level">
+                        {{ level_mapping[level] || level }}
+                      </option>
+                    </ng-container>
+                  </select> -->
+                  <!-- <ng-container *ngIf="keypadObj.levels.length > 0">
+                    <ng-select
+                      [items]="keypadObj.levels"
+                      [(ngModel)]="test_check"
+                      bindLabel="test_check"
+                      [isOpen]="true"
+                      [clearable]="false"
+                      [searchable]="false"
+                      formControlName="level"
+                      (change)="selectDropdownValue('level', $event)"
+                    >
+                      <ng-template
+                        ng-option-tmp
+                        let-item="item"
+                        let-item$="item$"
+                        let-index="index"
+                        ><span>{{ level_mapping[item] || item }}</span>
+                      </ng-template>
+                    </ng-select>
+                  </ng-container> -->
+                </div>
+              </div>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button
+                type="button"
+                class="btn btn-grey mr-2"
+                (click)="showInvisibleButton()"
+              >
+                {{ invisibleBtnText ? "Show" : "Hide" }} Invisible Buttons
+              </button>
+              <button
+                type="button"
+                class="btn btn-blue mr-2"
+                (click)="submitOrCancelKeypad('sumbit')"
+              >
+                Ok
+              </button>
+              <button
+                type="button"
+                class="btn btn-grey"
+                data-dismiss="modal"
+                (click)="submitOrCancelKeypad('cancel')"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Search Product List -->
+<div
+  class="modal fade thm-popup bd-example-modal-xl modal-back dTable-height"
+  id="searchProductModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="searchProductModal"
+  aria-hidden="true"
+  data-backdrop="static"
+  data-keyboard="false"
+>
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <form [formGroup]="keypadForm">
+          <div class="title-wrap mb-2">
+            <h4 class="title">Product Lookup</h4>
+          </div>
+          <div class="popup-box">
+            <div class="form-row">
+              <div class="col-lg-6 col-xl-6">
+                <div class="form-row align-items-center">
+                  <div class="col-md-2">
+                    <!-- <div class="form-group">
+						<input
+						type="text"
+						class="form-control"
+						formControlName="number"
+						(keyup)="productInputSearchChange('number')"
+						[ngClass]="{
+						'is-invalid': submittedSearchProd && f2.number.errors
+						}"
+						/>
+						<div *ngIf="f2.number.errors" class="invalid-feedback">
+							<div *ngIf="f2.number.errors.required">
+								Number is required
+							</div>
+						</div>
+					</div> -->
+                    <div class="form-group">
+                      <input #productNumberInput type="text" formControlName="productNo" (keyup)="productDescInput.value=null" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <!-- <div class="form-group">
+						<input
+						type="text"
+						class="form-control"
+						formControlName="desc"
+						(keyup)="productInputSearchChange('desc')"
+						[ngClass]="{
+						'is-invalid': submittedSearchProd && f2.desc.errors
+						}"
+						/>
+						<div *ngIf="f2.desc.errors" class="invalid-feedback">
+							<div *ngIf="f2.desc.errors.required">
+								Description is required
+							</div>
+						</div>
+					</div> -->
+                    <div class="form-group">
+                      <input #productDescInput type="text" formControlName="productDescription" (keyup)="productNumberInput.value=null" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <button
+                        type="button"
+                        (click)="searchProductWithOrWithoutText(productCheckBox.checked,productDescInput.value,
+                          productNumberInput.value)"
+                        class="btn btn-grey input-btn btn-block"
+                      >
+                        Wildcard Search
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <div class="custom-control custom-checkbox">
+                        <input
+                          #productCheckBox
+                          type="checkbox"
+                          class="custom-control-input"
+                          id="customControlStatus"
+                          [checked]="buttonObj[selectedButton] ? buttonObj[selectedButton].product_number : true"
+                          (click)="(productDescInput.value.length !== 0) ? searchProductWithOrWithoutText($event.target.checked,
+                            productDescInput.value, productNumberInput.value) : ''"
+                        />
+                        <label
+                          class="custom-control-label mb-0"
+                          for="customControlStatus"
+                        >
+                          Only Active
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xl-6">
+                <div class="form-row align-items-center">
+                  <div class="col-md-3">
+                    <!-- <div class="form-group">
+						<button
+							type="button"
+							class="btn btn-grey input-btn btn-block"
+							(click)="changeProductDetails(2)"
+							>
+						Product Details
+						</button>
+					</div> -->
+                    <div class="form-group">
+                      <button
+                        type="button"
+                        class="btn btn-grey input-btn btn-block"
+                        (click)="productUpdate()"
+                      >
+                        Product Details
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <div class="d-flex">
+                        <select
+                          class="form-control"
+                          formControlName="product_store_id"
+                        >
+                          <option value="" disabled selected>
+                            Select Store
+                          </option>
+                          <ng-container *ngFor="let store of storeList">
+                            <option [ngValue]="store.id">
+                              {{ store.desc + " " + store.code }}
+                            </option>
+                          </ng-container>
+                        </select>
+                        <button
+                          type="button"
+                          class="btn btn-grey input-btn ml-2"
+                          (click)="clearSelection()"
+                        >
+                          Clear
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="table-scroll"> -->
+            <div class="keypadProductTable-wrap">
+              <div class="table-responsive">
+                <table class="table ctm-table active-link" id="keypadProductTable">
+                  <thead>
+                    <tr>
+                      <ng-container *ngFor="let column of productColumns">
+                        <th>{{ column }}</th>
+                      </ng-container>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- <tr
+                      *ngFor="let product of keypadObj?.product; let productIndex=index"
+                      [ngClass]="{
+                        active:
+                          buttonObj[selectedButton]?.product_id ===
+                          product.number
+                      }"
+					> -->
+                    <ng-container *ngIf="keypadObj?.product?.length">
+                      <tr
+                        *ngFor="
+                          let product of keypadObj?.product;
+                          let productIndex = index
+                        "
+                        [ngClass]="{
+                          active:
+                            clickIndexObj.product_table_row == productIndex
+                        }"
+                      >
+                        <td>
+                          <span
+                            class="status-check"
+                            [ngClass]="{
+                              'status-true': product.status,
+                              'status-false': !product.status
+                            }"
+                          ></span>
+                        </td>
+                        <td>
+                          <a (click)="productUpdate(product)">
+                            {{ product?.number }}
+                          </a>
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.desc }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.commodityCode }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.commodity }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.departmentCode }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.department }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.categoryCode }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.category }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.groupCode }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.group }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.supplierCode }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.supplier }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.replicate }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.type }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.tax }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.cartonQty }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.unitQty }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.posDesc }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.createdAt }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.updatedAt }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.deleted }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_product',
+                              product,
+                              productIndex
+                            )
+                          "
+                        >
+                          {{ product?.info }}
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="btn-wrap text-right mt-0 border-0">
+              <button
+                type="button"
+                class="btn btn-blue mr-2"
+                (click)="selectProductOrClosePopup('submit_product')"
+              >
+                Select
+              </button>
+              <button
+                type="button"
+                class="btn btn-grey"
+                (click)="selectProductOrClosePopup('close_popup')"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Category List -->
+<div
+  class="modal fade thm-popup bd-example-modal-lg"
+  id="searchCategoryModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="searchCategoryModal"
+  aria-hidden="true"
+  data-backdrop="static"
+  data-keyboard="false"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <form [formGroup]="keypadForm">
+          <div class="popup-box">
+            <div class="title-wrap">
+              <h4 class="title">Category</h4>
+            </div>
+            <div class="table-responsive">
+              <div class="table-rescroll">
+                <table class="table ctm-table" id="keypadCategoryTable">
+                  <thead>
+                    <tr>
+                      <th>Description</th>
+                      <th>Numeric</th>
+                      <th>Alpha</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngIf="keypadObj?.category?.length">
+                      <tr
+                        *ngFor="
+                          let category of keypadObj?.category;
+                          let categoryIndex = index
+                        "
+                        [ngClass]="{active: clickIndexObj.category_table_row == categoryIndex}"
+                      >
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_category',
+                              category,
+                              categoryIndex
+                            )
+                          "
+                          title="{{ category?.fullName }}"
+                        >
+                          {{ category?.fullName }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_category',
+                              category,
+                              categoryIndex
+                            )
+                          "
+                          title="{{ category?.num1 }}"
+                        >
+                          {{ category?.num1 || category?.code }}
+                        </td>
+                        <td
+                          (click)="
+                            selectProductOrClosePopup(
+                              'select_category',
+                              category,
+                              categoryIndex
+                            )
+                          "
+                          title="{{ category?.col1 }}"
+                        >
+                          {{ category?.col1 || category?.code }}
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button
+                type="button"
+                class="btn btn-blue mr-2"
+                (click)="selectProductOrClosePopup('submit_category')"
+              >
+                Ok
+              </button>
+              <button
+                type="button"
+                class="btn btn-grey"
+                (click)="selectProductOrClosePopup('close_popup')"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade thm-popup"
+  id="keypadsSearch"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  data-backdrop="static"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-box-width">
+        <div class="popup-box">
+          <form name="searchForm" id="searchForm">
+            <div class="title-wrap mb-2">
+              <h4 class="title">Search Filter</h4>
+            </div>
+            <div class="form-group mb-0">
+              <label> Wildcard Search</label>
+              <input type="text" id="keypads_Search_filter" class="form-control" appUppercase #searchValue />
+            </div>
+            <div class="btn-wrap text-right mt-10">
+              <button
+                class="btn btn-blue mr-2"
+                (click)="keypadsSearch(searchValue)"
+              >
+                Ok
+              </button>
+              <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

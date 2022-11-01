@@ -1,0 +1,44 @@
+
+// / Chrome, Safari, Edge, Opera /
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+// / Firefox /
+input[type=number] {
+-moz-appearance: textfield;
+}
+.zoneOutlets-checklist.mt-0 {
+    max-height: 138px;
+    min-height: 140px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.small-btn {
+    padding: 0px 6px;
+    font-size: 12px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.min-height-5{
+    min-height: 150px;
+}
+.popup-box-rebates{
+    max-width: 550px;
+    min-width: 550px;
+}
+.popup-box-rebates .popup-box-width{
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+}
+.thm-popup .btn-wrap {
+    padding-top: 15px;
+    border-top: 1px solid #ccc;
+    margin: 0;
+    padding: 12px 12px;
+}

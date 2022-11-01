@@ -1,0 +1,23 @@
+// select:focus{
+//     border-color: blue;
+// }
+
+.auto-select select{
+    border: 1px solid #2727a994 !important;
+}
+.auto-select select{
+    outline: blue !important;
+}
+.text-blue {
+    background-color: #00FFFF;
+}
+.text-yellow {
+    background-color: #FFFF00;
+}
+.text-green {
+    background-color: #00FF00;
+}
+
+// #outlet_product_history_table_list_filter:focus{
+//     color: blueviolet;
+// }

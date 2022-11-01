@@ -1,0 +1,135 @@
+<div class="mainContent-innner" *ngIf="!pdfData">
+    <div class="Tills-section">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">
+                Print Changed Labels
+            </h4>
+        </div>
+
+        <!-- /.action-topbar -->
+        <div class="Tills-wrap bg-box">
+            <div class="Tills-table-wrap">
+                <div class="table-responsive ctm-data-table">
+                    <table class="table ctm-table" id="print-changed-labels">
+                        <thead>
+                            <tr>
+                                <th>Outlet <i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>Outlet Name <i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i></th>
+                                <th>Lables Changes Awaiting Print</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let printlabel of printChangedLabels">
+                                <td>
+                                    <a data-toggle="modal" data-target="#addModal"
+                                        (click)="updateAndPrintLabel(printlabel)">
+                                        {{printlabel.storeCode}}
+                                    </a>
+                                </td>
+                                <td>{{printlabel.storeDesc}}</td>
+                                <td>{{printlabel.labelQty}}</td>
+                                <td>
+                                    <div class="tbHover-btnGroup">
+                                        <button tooltip="Print" class="tbHover-btn fa fa-pencil" data-toggle="modal"
+                                            placement="left" data-target="#addModal"
+                                            (click)="updateAndPrintLabel(printlabel)"></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade thm-popup bd-example-modal-md" id="addModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="printChangedForm">
+                        <div class="title-wrap mb-1">
+                            <h4 class="title">Print Changed Labels</h4>
+                        </div>
+                        <div class="form-group">
+                            <label>Outlet</label>
+                            <select class="form-control" formControlName="storeId" disabled>
+                                <option [value]="store.id" *ngFor="let store of storeData">
+                                    {{store.desc}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-0 form-row align-items-center*
+                        ">
+                            <label class="col-md-12 mb-1">Label Type</label>
+                            <div class="col-md-12 range-drop mb-1 printTypeLabel">
+                                <ng-select [items]="labelType" bindLabel="desc" bindValue="code" [multiple]="false"
+                                    [virtualScroll]="true" [clearable]="false" placeholder="Select Label Type"
+                                    formControlName="defaultLabelId">
+                                    <!-- It hold value on the basis of filter -->
+
+                                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                        <div class="form-row">
+                                            <span class="col-9 zone-overflow text-left" title="{{ item?.desc }}">
+                                                {{ item?.desc }}
+                                            </span>
+                                            <div class="col-3 " title="{{ item?.code }}">
+                                                {{ item?.code }}
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label>Label Type</label>
+                            <select class="form-control" formControlName="defaultLabelId">
+                                <option [ngValue]="label.code" *ngFor="let label of labelType">{{label.desc}}</option>
+                            </select>
+                        </div> -->
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Price Levels</label>
+                                    <select class="form-control" formControlName="priceLevel">
+                                        <option [ngValue]="price" *ngFor="let price of printChangeObj.price_level">
+                                            {{price}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Selections</label>
+                            <textarea name="" id="" rows="2" class="form-control"
+                                readonly>Print Labels for Product Changes</textarea>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-blue mr-2"
+                                (click)="updateAndPrintLabel(null, 'submitted')">Ok</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-container *ngIf="pdfData">
+    <div class="bg-box">
+        <div class="text-right mb-2">
+            <button type="button" class="btn btn-blue" (click)="updateAndPrintLabel(null, 'close')">Close</button>
+        </div>
+        <ngx-extended-pdf-viewer [src]="pdfData" [height]="'90vh'" [zoom]="'page-width'" [useBrowserLocale]="true"
+            [textLayer]="true" [showHandToolButton]="true"></ngx-extended-pdf-viewer>
+    </div>
+</ng-container>

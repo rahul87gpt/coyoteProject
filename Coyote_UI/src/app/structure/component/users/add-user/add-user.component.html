@@ -1,0 +1,524 @@
+<div class="mainContent-innner">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="stpUsers-wrap">
+      <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">{{user_Id? "Update User ":" Add User "}}</h4>
+        <div class="probtn-wrap text-right">
+          <button class="btn btn-blue mr-2">Save</button>
+          <a class="btn" (click)="clickedCancel()">Cancel</a>
+        </div>
+      </div>
+      <div class="stpUsers bg-box mt-15">
+        <div class="row">
+          <div class="col-lg-6 col-xl-6">
+            <div class="group-from">
+              <h5 class="title">User Details</h5>
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-6 mb-0">First Name <span class="text-danger">*</span></label>
+                    <div class="col-md-6">
+                      <input type="text" appUppercase class="form-control" formControlName="firstName" [ngClass]="{
+                          'is-invalid': submitted && f.firstName.errors
+                        }" />
+                      <div *ngIf="f.firstName.errors" class="invalid-feedback">
+                        <div *ngIf="f.firstName.errors.required">
+                          First name is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-6 mb-0">Middle Name</label>
+                    <div class="col-md-6">
+                      <input type="text" appUppercase formControlName="middleName" class="form-control"
+                        [ngClass]="{'is-invalid': submitted && f.middleName.errors}" />
+                      <div *ngIf="f.middleName.errors" class="invalid-feedback">
+                        <div *ngIf="f.middleName.errors.required">
+                          Middle is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-6 mb-0">Last Name <span class="text-danger">*</span></label>
+                    <div class="col-md-6">
+                      <input type="text" appUppercase class="form-control" formControlName="lastName"
+                        [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                      <div *ngIf="f.lastName.errors" class="invalid-feedback">
+                        <div *ngIf="f.lastName.errors.required">
+                          Last name is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-6 mb-0">Gender</label>
+                    <div class="col-md-6">
+                      <select class="form-control" formControlName="gender"
+                        [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                      </select>
+                      <div *ngIf="f.gender.errors" class="invalid-feedback">
+                        <div *ngIf="f.gender.errors.required">
+                          Gender is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-3 mb-0">Address 1</label>
+                    <div class="col-md-9">
+                      <input type="text" appUppercase class="form-control" formControlName="address1"
+                        [ngClass]="{ 'is-invalid': submitted && f.address1.errors }" />
+                      <div *ngIf="f.address1.errors" class="invalid-feedback">
+                        <div *ngIf="f.address1.errors.required">
+                          Address 1 is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-3 mb-0">Address 2</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" appUppercase formControlName="address2" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-3 mb-0">Address 3</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" appUppercase formControlName="address3" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-6 mb-0">Post Code <span class="text-danger">*</span></label>
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" formControlName="postCode"
+                        [ngClass]="{ 'is-invalid': submitted && f.postCode.errors }" />
+                      <div *ngIf="f.postCode.errors" class="invalid-feedback">
+                        <div *ngIf="f.postCode.errors.maxlength">Post Code be maximum 4 characters </div>
+                        <div *ngIf="f.postCode.errors.required">
+                          Post code is required
+                        </div>
+
+                        <div *ngIf="f.postCode.errors.pattern">
+                          Please enter valid post code
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-6 mb-0">Phone</label>
+                    <div class="col-md-6">
+                      <input type="text" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }"
+                        class="form-control" formControlName="phoneNo" />
+                      <div *ngIf="f.phoneNo.errors" class="invalid-feedback">
+                        <div *ngIf="f.phoneNo.errors.required">Phone is required</div>
+                        <div *ngIf="f.phoneNo.errors.pattern">Enter valid Phone</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-6 mb-0">Mobile</label>
+                    <div class="col-md-6">
+                      <input type="text" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" formControlName="mobileNo" />
+                      <div *ngIf="f.mobileNo.errors" class="invalid-feedback">
+                        <div *ngIf="f.mobileNo.errors.pattern">
+                          Enter Valid Mobile
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-6 mb-0">Date of Birth <span class="text-danger">*</span></label>
+                    <div class="col-md-6">
+                      <div class="ctm-calendar">
+                        <input type="text" onkeydown="return false" class="form-control" bsDatepicker
+                          [maxDate]="maxDate" formControlName="dateOfBirth"
+                          [ngClass]="{ 'is-invalid': submitted && f.dateOfBirth.errors }" [bsConfig]="datepickerConfig">
+                        <!-- <input
+                        onkeydown="return false"
+                        type="text"
+                        class="form-control"
+                        bsDatepicker
+                        [maxDate]="maxDate"
+                        formControlName="dateOfBirth"
+                        [bsConfig]="datepickerConfig"
+                        [ngClass]="{ 'is-invalid': submitted && f.dateFrom.errors }"
+                     /> -->
+                        <div *ngIf="f.dateOfBirth.errors" class="invalid-feedback">
+                          <div *ngIf="f.dateOfBirth.errors.pattern">
+                            Enter Date of Birth
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-3 mb-0">Email <span class="text-danger">*</span></label>
+                    <div class="col-md-9">
+                      <input [readonly]="isReadonly" type="email" class="form-control" formControlName="email"
+                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" autocomplete="off" />
+                      <div *ngIf="f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.pattern">Enter valid email</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group form-row align-items-center">
+                    <label class="col-md-3 mb-0">Password <span class="text-danger">*</span></label>
+                    <div class="col-md-9 password-input">
+                      
+                      <input [type]="isShowUserPassword ? 'text' : 'password'" class="form-control" formControlName="password"
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" autocomplete="off" />
+                        <span class="input-icon in-icon" (click)="showUserPassword()"><i [ngClass]="isShowUserPassword ?  'fa fa-eye-slash' : 'fa fa-eye' " ></i>
+                       </span>
+                      <div *ngIf="f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.minlength">Password Should be minimum 8 characters </div>
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                        <div *ngIf="f.password.errors.pattern">Must contain atleast 1 Capital letter, 1 number, 1
+                          special character and minimum 8 character in length</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-row align-items-center">
+                    <div class="col-md-6">
+                      <div class="form-group form-row align-items-center">
+                        <label class="col-md-6 mb-0">Username <span class="text-danger">*</span></label>
+                        <div class="col-md-6">
+                          <input [readonly]="isReadonly" type="text" class="form-control" formControlName="userName"
+                            [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" autocomplete="off" />
+                          <div *ngIf="f.userName.errors" class="invalid-feedback">
+                            <div *ngIf="f.userName.errors.required">Username is required</div>
+                            <div *ngIf="f.userName.errors.pattern">Enter valid Username</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group form-row align-items-center">
+                        <label class="col-md-6 mb-0">Status <span class="text-danger">*</span></label>
+                        <div class="col-md-6">
+                          <select class="form-control" formControlName="status">
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="custom-control form-group mb-0 custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customControl01"
+                      formControlName="addUnlockProduct" />
+                    <label class="custom-control-label mb-0" for="customControl01">Add Unlocked Products</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="group-from mb-0  custom-ng-select">
+              <h5 class="title">Outlet Restrictions</h5>
+              <div class="form-group form-row align-items-center">
+                <label class="col-md-3 mb-0">Outlet</label>
+                <div class="col-md-9">
+                  <ng-select [items]="stores" bindLabel="desc" bindValue="id" [virtualScroll]="true" [multiple]="true"
+                    placeholder="Select Outlet" formControlName="storeIdList">
+                  </ng-select>
+
+                </div>
+              </div>
+              <div class="form-group mb-0 form-row align-items-start">
+                <label class="col-md-3 mb-0">Zone</label>
+                <div class="col-md-9">
+                  <ng-select [items]="masterListZoneItems" bindLabel="name" bindValue="id" [virtualScroll]="true"
+                    [multiple]="true" placeholder="Select Zone" formControlName="zoneIdList">
+                  </ng-select>
+                  <!-- <ng-select [items]="masterListZoneItems"
+                      bindLabel="name"
+                      bindValue="id"
+                      [virtualScroll]="true"
+                      [multiple]="true"
+                      placeholder="Select Zone"
+                      formControlName="zoneIdList"
+                      >
+                  </ng-select> -->
+                  <!-- <div class="form-row align-items-start">
+                        <div class="col-md-9">                    
+                          
+                        </div>
+                        <div class="col-md-3">
+                          <button class="btn btn-block btn-grey input-btn">Clear</button>
+                        </div>
+                      </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xl-6">
+            <div class="group-from">
+              <h5 class="title">Photo Id</h5>
+
+              <div class="image-cropper-custom">
+                <div class="form-group">
+                  <div class="col-md-4">
+                    <input #input type="file" id="fileInputId" class="form-control"
+                      [ngClass]="{ 'is-invalid': imageError}" (change)="fileChangeEvent($event)" style="display:none">
+                    <button type="button" (click)="input.click()" class="btn btn-blue  btn-block input-btn"><i
+                        class="icon fa fa-plus-circle"></i> Choose File</button>
+                    <!-- <input type="file" class="form-control"  [ngClass]="{ 'is-invalid': imageError}" (change)="fileChangeEvent($event)" /> -->
+                    <div class="invalid-feedback">
+                      <div *ngIf="imageError">{{imageError}}</div>
+                    </div>
+                  </div>
+                  <!-- <input type="file" class="form-control"  [ngClass]="{ 'is-invalid': imageError}" (change)="fileChangeEvent($event)" />
+                  <div class="invalid-feedback">
+                      <div *ngIf="imageError">{{imageError}}</div>
+                      </div> -->
+                </div>
+                <div *ngIf="!isImageEditing" class="form-row form-group">
+                  <div class="col cropped-image">
+
+                    <img [src]="croppedImage" />
+
+                    <div *ngIf="imageChangedEvent && croppedImage " class="text-center">
+                      <label class="mt-2 mb-0">Preview</label>
+                    </div>
+                  </div>
+                  <div class="col orignal-image">
+                    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                      [aspectRatio]="4 / 3" format="png" (imageCropped)="imageCropped($event)"
+                      (imageLoaded)="imageLoaded()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+                    <div *ngIf="imageChangedEvent && !imageError" class="text-center">
+                      <label class="mt-2 mb-0 ">Orignal</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="isImageEditing" class="form-row form-group">
+                  <div class="col-md-6">
+                    <img class="mx-auto" [src]="croppedImage" />
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="group-from mb-0">
+              <h5 class="title">Only Access Codes with Prefix</h5>
+              <div class="form-group form-row align-items-center">
+                <label class="col-md-4 mb-0">Promos</label>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" appUppercase formControlName="promoPrefix" />
+                </div>
+              </div>
+              <div class="form-group form-row mb-0 align-items-center">
+                <label class="col-md-4 mb-0">Keyboards</label>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" appUppercase formControlName="keypadPrefix" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-box mt-15">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <h5 class="title">User Roles</h5>
+          </div>
+          <div class="col-md-6 text-right">
+            <div class="form-row form-group align-items-center role-noData">
+              <label class="col-md-3 mb-0">User Role <span class="text-danger">*</span></label>
+              <div class="col-md-9 selectFontsize">
+                <ng-multiselect-dropdown [placeholder]="'select'" [data]="allRoles" [(ngModel)]="selectedRole"
+                  formControlName="roles" [settings]="dropdownSettings"
+                  [ngClass]="{ 'is-invalid': submitted && f.roles.errors }">
+                </ng-multiselect-dropdown>
+
+                <div *ngIf="f.roles.errors" class="invalid-feedback">
+                  <div *ngIf="f.roles.errors.required">
+                    Roles selection is required
+                  </div>
+                </div>
+                <!-- <ng-select [items]="allRoles"
+                      bindLabel="name"
+                      bindValue="id "
+                      [virtualScroll]="true"
+                      [multiple]="true"
+                      [(ngModel)]="selectedRole"
+                      placeholder="Select "
+                      formControlName="roles"
+                      >
+                  </ng-select> -->
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table ctm-table usNewRole-table">
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Default</th>
+                <!-- <th>READ</th>
+                        <th>UPDATE</th>
+                        <th>DELETE</th>
+                        <th>ACTION</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <ng-option></ng-option>
+              <tr *ngFor="let item of selectedRole; let i = index">
+                <td>{{ item.name }}</td>
+                <td>
+                  <!-- <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" formControlName="isDefaultRole" name="isDefault" value="{{item.id}}" id="customControl1102{{i}}">
+                                <label class="custom-control-label" for="customControl1102{{i}}"></label>
+                            </div> -->
+                  <!-- <input type="radio" name="isDefault" value="{{item.id}}" id="customControl1102{{i}}"> -->
+                  <div class="custom-control custom-switch our-custom-switch">
+                    <input type="radio" formControlName="defaultRoleId" class="custom-control-input"
+                      value="{{ item.id }}" id="customControl1102{{ i }}" />
+                    <label class="custom-control-label" for="customControl1102{{ i }}"></label>
+                  </div>
+                </td>
+                <!-- <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customControl1202">
+                                <label class="custom-control-label" for="customControl1202"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customControl1302">
+                                <label class="custom-control-label" for="customControl1302"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customControl1402">
+                                <label class="custom-control-label" for="customControl1402"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="moreOption">
+                                <img class="icon" src="assets/images/moreOption-btn-icn.svg" alt="More Icon">
+                                <div class="tbHover-btnGroup">
+                                <button class="tbHover-btn trash-btn"><i class="fa fa-pencil-square-o"></i></button>
+                                <button class="tbHover-btn trash-btn"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </td> -->
+              </tr>
+              <!-- <tr>
+                        <td>Account</td>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customControl1102">
+                                <label class="custom-control-label" for="customControl1102"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customControl1202">
+                                <label class="custom-control-label" for="customControl1202"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customControl1302">
+                                <label class="custom-control-label" for="customControl1302"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customControl1402">
+                                <label class="custom-control-label" for="customControl1402"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="moreOption">
+                                <img class="icon" src="assets/images/moreOption-btn-icn.svg" alt="More Icon">
+                                <div class="tbHover-btnGroup">
+                                <button class="tbHover-btn trash-btn"><i class="fa fa-pencil-square-o"></i></button>
+                                <button class="tbHover-btn trash-btn"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Account</td>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customControl1102">
+                                <label class="custom-control-label" for="customControl1102"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customControl1202">
+                                <label class="custom-control-label" for="customControl1202"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customControl1302">
+                                <label class="custom-control-label" for="customControl1302"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customControl1402">
+                                <label class="custom-control-label" for="customControl1402"></label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="moreOption">
+                                <img class="icon" src="assets/images/moreOption-btn-icn.svg" alt="More Icon">
+                                <div class="tbHover-btnGroup">
+                                <button class="tbHover-btn trash-btn"><i class="fa fa-pencil-square-o"></i></button>
+                                <button class="tbHover-btn trash-btn"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr> -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

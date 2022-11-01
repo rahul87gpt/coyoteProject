@@ -1,0 +1,70 @@
+<div class="mainContent-innner">
+    <div class="pricingApnSearch-section">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">External Stocktake File</h4>
+            <!-- <div *ngIf="isTopOptionShow" class="probtn-wrap d-flex text-right">  -->
+                <!-- <button class="btn btn-blue with-icon mr-2" data-target="#ouletProductSearch" data-toggle="modal"><i class="icon fa fa-filter"></i>Search Outlet Products</button>                       -->
+                <!-- <button class="btn with-icon mr-2" (click)="inprogressFunction()"><i class="icon fa fa-print"></i> Print</button>
+                <button class="btn with-icon" (click)="inprogressFunction()"><i class="icon fa fa-file-excel-o"></i> Export</button>        -->
+            <!-- </div> -->
+        </div>
+		<div class="cmdtyList-table-wrap bg-box mt-15">
+		
+		</div>
+    </div>
+</div>
+
+
+<div class="modal fade thm-popup" id="oulet_Search" tabindex="-1" role="dialog" aria-labelledby="ouletProductSearch" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<!-- (keydown.enter)="keyDownFunction($event)" -->
+				<form [formGroup]="outletForm"  (keydown.enter)="keyDownFunction($event)" >
+				<div class="popup-box">
+					<div class="title-wrap mb-2">
+						<h4 class="title">Search By Outlet</h4>
+					</div>
+					<div class="form-group mb-0">
+						<ng-select [items]="storeData" bindLabel="desc" bindValue="id" [virtualScroll]="true" [multiple]="false"
+						[clearable]="false" [clearOnBackspace]="false" [clearSearchOnAdd]="true" placeholder="Select Store"
+						[ngClass]="{ 'is-invalid': submitted && f.outletId.errors }" (change)="selectedOulet($event)"  formControlName="outletId">
+		
+						<!-- It hold value on the basis of filter -->
+						<ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+						  <div class="form-row">
+							<span class="col-9 zone-overflow" title="{{ item?.desc }}">
+							  {{ item?.desc }}
+							</span>
+							<div class="col-3" title="{{ item?.code }}">
+							  {{ item.code }}
+							</div>
+						  </div>
+						</ng-template>
+					  </ng-select>
+					  <div *ngIf="f.outletId.errors" class="invalid-feedback">
+						<div *ngIf="f.outletId.errors.required">
+						  Please select outlet
+						</div>
+					  </div>
+						<!-- <select [(ngModel)]="storeOutletId" name="selectedValue" #selectedValue class="form-control" >
+							<option *ngFor="let store of storeData" [value]="store.id">
+								{{store.desc + "  " + store.code}}
+							</option>
+						</select> -->
+					</div>
+					<div class="btn-wrap text-right mt-10">
+						<button type="button" [disabled]= "fetchingData" class="btn btn-blue mr-2" (click)="getOutletProduct()">
+							Ok
+						</button>  
+						<button type="submit" style="display:none">hidden submit</button>
+						<button class="btn btn-grey" (click)="cancelPopup()">
+							Cancel
+						</button>
+					</div>
+				</div>	
+			</form>			
+			</div>
+		</div>
+	</div>
+</div>

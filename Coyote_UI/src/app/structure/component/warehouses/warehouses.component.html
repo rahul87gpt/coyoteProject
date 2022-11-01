@@ -1,0 +1,346 @@
+<div class="mainContent-innner">
+    <div class="warehouses-section">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">Warehouses</h4>
+            <div class="probtn-wrap text-right">
+                <a class="btn btn-blue mr-2" data-toggle="modal" data-target="#warehouseModal" (click)="clickedAdd()"><i
+                        class="icon fa fa-plus-circle"></i> Add</a>
+                <!-- <button class="btn mr-2"><i class="icon fa fa-floppy-o"></i> Save</button>
+                <button class="btn mr-2"><i class="icon fa fa-pencil-square-o"></i> Change</button> -->
+                <button class="btn mr-2"><i class="icon fa fa-print"></i> Print</button>
+                <button class="btn mr-2" (click)="exportWareHouseData()"><i class="icon fa fa-file-excel-o"></i>
+                    Export</button>
+                <button class="btn btn-blue with-icon" data-toggle="modal" data-target="#WarehousesSearch" (click)="openWarehousesSearchFilter()">
+                    <i class="icon fa fa-filter"></i> Filter
+                </button>
+            </div>
+        </div>
+        <div class="warehouses-wrap bg-box mt-15 all-w">
+            <div class="table-responsive ">
+                <table datatable class="table ctm-table" id="warehouse-table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Status
+                            </th>
+                            <th>Code </th>
+                            <th>Description </th>
+                            <th>Host Format </th>
+                            <th>Supplier
+                            </th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <ng-container *ngFor="let warehouse of warehousesList">
+                            <tr>
+                                <td class="text-center">
+                                    <div class="status-icons">
+                                        <img *ngIf="warehouse.status" src="assets/images/status-true.svg" alt="">
+                                        <img *ngIf="!warehouse.status" src="assets/images/status-false.svg" alt="">
+                                        <span hidden>
+                                            {{ warehouse.status ? "Active" : "In-Active" }}
+                                        </span>
+                                    </div>
+                                </td>
+                                <td data-toggle="modal" data-target="#warehouseEditModal"
+                                    (click)="getWarehousebyId(warehouse.id)">
+                                    <a>{{warehouse.code.length > 10? warehouse.code.substring(0,10)+"..." :warehouse.code}}</a>
+                                </td>
+                                <td data-toggle="modal" data-target="#warehouseEditModal"
+                                    (click)="getWarehousebyId(warehouse.id)">
+                                    {{warehouse.desc.length > 30? warehouse.desc.substring(0,30)+"..." :warehouse.desc}}
+                                </td>
+                                <td data-toggle="modal" data-target="#warehouseEditModal"
+                                    (click)="getWarehousebyId(warehouse.id)">{{warehouse.hostFormatName}}</td>
+                                <td data-toggle="modal" data-target="#warehouseEditModal"
+                                    (click)="getWarehousebyId(warehouse.id)">{{warehouse.supplierCode}}</td>
+                                <td class="text-center">
+                                    <div class="tbHover-btnGroup">
+                                        <button tooltip="Change" placement="left" class="tbHover-btn trash-btn"
+                                            data-toggle="modal" data-target="#warehouseEditModal"
+                                            (click)="getWarehousebyId(warehouse.id)"><i
+                                                class="fa fa-pencil"></i></button>
+                                        <button tooltip="Delete" placement="right" class="tbHover-btn trash-btn"
+                                            (click)="deleteWarehouse(warehouse.id)"><i class="fa fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup" id="warehouseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="warehouseForm" (ngSubmit)=" addWarehouse()">
+
+                        <div class="title-wrap mb-1">
+
+                            <h4 class="title">Add Warehouse</h4>
+
+                        </div>
+
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Code <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <input type="number" min="0" class="form-control" formControlName="code"
+                                    [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
+                                <div *ngIf="f.code.errors" class="invalid-feedback">
+                                    <div *ngIf="f.code.errors.maxlength"> Code Should be maximum 15 characters </div>
+                                    <div *ngIf="f.code.errors.required"> Code is required</div>
+                                    <div *ngIf="f.code.errors.pattern">Space is not allowed</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Description <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" formControlName="desc" appUppercase
+                                    [ngClass]="{ 'is-invalid': submitted && f.desc.errors }">
+                                <div *ngIf="f.desc.errors" class="invalid-feedback">
+                                    <div *ngIf="f.desc.errors.maxlength"> Description Should be maximum 50 characters
+                                    </div>
+                                    <div *ngIf="f.desc.errors.required"> Description is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Host Format <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <ng-select [items]="hostFormats" bindLabel="name" bindValue="id"
+                                    formControlName="hostFormatId" [virtualScroll]="false" [clearable]="false"
+                                    [clearOnBackspace]="false" [searchable]="true" [multiple]="false"
+                                    [ngClass]="{ 'is-invalid': submitted && f.hostFormatId.errors }">
+                                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                      <div class="form-row">
+                                          <span class="col-12 zone-overflow" title="{{ item.name }}">
+                                               {{ item.name}}
+                                          </span>
+                                      </div>
+                                    </ng-template>
+                                </ng-select>
+                                <!-- <select class="form-control mr-10 h-30" name="hostFormatId"
+                                    [ngClass]="{ 'is-invalid': submitted && f.hostFormatId.errors }"
+                                    formControlName="hostFormatId">
+                                    <option [ngValue]="hostFormat.id" *ngFor="let hostFormat of hostFormats">
+                                        {{ hostFormat.name }}
+                                    </option>
+                                </select> -->
+                                <div *ngIf="f.hostFormatId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.hostFormatId.errors.required"> Host Format is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Suppliers <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <ng-select [items]="suppliers" bindLabel="desc" bindValue="id"
+                                    formControlName="supplierId" [virtualScroll]="false" [clearable]="false"
+                                    [clearOnBackspace]="false" [searchable]="true" [multiple]="false"
+                                    [ngClass]="{ 'is-invalid': submitted && f.supplierId.errors }">
+                                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                                        <div class="form-row">
+                                            <span class="col-8 zone-overflow" title="{{ item.desc }}">
+                                                {{ item.desc}}
+                                            </span>
+                                            <div class="col-4 zone-overflow" title="{{ item.code }}">
+                                                {{item.code}}
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </ng-select>
+                                <!-- <select class="form-control mr-10 h-30" name="supplierId"
+                                    [ngClass]="{ 'is-invalid': submitted && f.supplierId.errors }"
+                                    formControlName="supplierId">
+                                    <option [ngValue]="supplier.id" *ngFor="let supplier of suppliers">
+                                        {{ supplier.code + ' ' + supplier.desc }}
+                                    </option>
+                                </select> -->
+                                <div *ngIf="f.supplierId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.supplierId.errors.required"> Supplier is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Status <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <ng-select [items]="statusArray" bindLabel="name" bindValue="value"
+                                formControlName="status" [virtualScroll]="false" [clearable]="false"
+                                [clearOnBackspace]="false" [searchable]="true" [multiple]="false">
+                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <div class="form-row">
+                                        <span class="col-12">
+                                            {{ item.name}}
+                                        </span>
+                                    </div>
+                                </ng-template>
+                                </ng-select>
+                                <!-- <select class="form-control mr-10 h-30" formControlName="status">
+                                    <option value="true">Active</option>
+                                    <option value="false">Inactive</option>
+                                </select> -->
+                            </div>
+                        </div>
+
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="submit" class="btn btn-blue mr-2">{{buttonText}}</button>
+                            <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup" id="warehouseEditModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="warehouseEditForm" (ngSubmit)=" upDateWarehouse()">
+
+                        <div class="title-wrap mb-1">
+                            <h4 class="title">Update Warehouse</h4>
+                        </div>
+
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Code <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <input [readonly]="formCode" type="number" class="form-control" formControlName="code"
+                                    [ngClass]="{ 'is-invalid': submitted1 && f1.code.errors }">
+                                <div *ngIf="f1.code.errors" class="invalid-feedback">
+                                    <div *ngIf="f1.code.errors.required"> Code is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Description <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" formControlName="desc" appUppercase
+                                    [ngClass]="{ 'is-invalid': submitted1 && f1.desc.errors }">
+                                <div *ngIf="f1.desc.errors" class="invalid-feedback">
+                                    <div *ngIf="f1.desc.errors.required"> Description is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Host Format <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <ng-select [items]="hostFormats" bindLabel="name" bindValue="id"
+                                    formControlName="hostFormatId" [virtualScroll]="false" [clearable]="false"
+                                    [clearOnBackspace]="false" [searchable]="true" [multiple]="false"
+                                    [ngClass]="{ 'is-invalid': submitted && f.hostFormatId.errors }">
+                                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                      <div class="form-row">
+                                          <span class="col-12 zone-overflow" title="{{ item.name }}">
+                                               {{ item.name}}
+                                          </span>
+                                      </div>
+                                    </ng-template>
+                                </ng-select>
+                                <div *ngIf="f1.hostFormatId.errors" class="invalid-feedback">
+                                    <div *ngIf="f1.hostFormatId.errors.required"> Host Format is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Suppliers <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <ng-select [items]="suppliers" bindLabel="desc" bindValue="id"
+                                    formControlName="supplierId" [virtualScroll]="false" [clearable]="false"
+                                    [clearOnBackspace]="false" [searchable]="true" [multiple]="false"
+                                    [ngClass]="{ 'is-invalid': submitted && f.supplierId.errors }">
+                                    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+
+                                        <div class="form-row">
+                                            <span class="col-8 zone-overflow" title="{{ item.desc }}">
+                                                {{ item.desc}}
+                                            </span>
+                                            <div class="col-4" title="{{ item.code }}">
+                                                {{item.code}}
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </ng-select>
+                                <!-- <select class="form-control mr-10 h-30" name="supplierId"
+                                    [ngClass]="{ 'is-invalid': submitted1 && f1.supplierId.errors }"
+                                    formControlName="supplierId">
+                                    <option [ngValue]="supplier.id" *ngFor="let supplier of suppliers">
+                                        {{ supplier.code + ' ' + supplier.desc }}
+                                    </option>
+                                </select> -->
+                                <div *ngIf="f1.supplierId.errors" class="invalid-feedback">
+                                    <div *ngIf="f1.supplierId.errors.required"> Supplier is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-row align-items-center">
+                            <label class="col-md-3 mb-0">Status <span class="text-danger">*</span></label>
+                            <div class="col-md-9">
+                                <ng-select [items]="statusArray" bindLabel="name" bindValue="value"
+                                formControlName="status" [virtualScroll]="false" [clearable]="false"
+                                [clearOnBackspace]="false" [searchable]="true" [multiple]="false">
+                                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                    <div class="form-row">
+                                        <span class="col-12">
+                                            {{ item.name}}
+                                        </span>
+                                    </div>
+                                </ng-template>
+                                </ng-select>
+                            </div>
+                        </div>
+
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="submit" class="btn btn-blue mr-2">{{buttonText}}</button>
+                            <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup" id="WarehousesSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form name="searchForm" id="searchForm">
+                        <div class="title-wrap mb-2">
+                            <h4 class="title">Search Filter</h4>
+                        </div>
+                        <div class="form-group mb-0">
+                            <label> Wildcard Search</label>
+                            <input type="text" appUppercase id="Warehouses_Search_filter" class="form-control" #searchValue>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button class="btn btn-blue mr-2" (click)="WarehousesSearch(searchValue)">Ok</button>
+                            <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

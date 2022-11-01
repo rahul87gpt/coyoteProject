@@ -1,0 +1,624 @@
+<div class="mainContent-innner">
+    <div class="d-flex align-items-center">
+        <h4 class="title flex-grow-1 mb-0">User Card View {{totalCount}}</h4>
+        <div class="probtn-wrap d-flex text-right">
+            <button class="btn btn-blue mr-2" (click)="addCardView()"><i class="icon fa fa-plus-circle"></i>
+                Add</button>
+            <button class="btn mr-2"><i class="icon fa fa-print"></i> Print</button>
+            <button class="btn mr-2" (click)="exportUserCard()"><i class="icon fa fa-file-excel-o"></i> Export</button>
+            <button class="btn btn-blue" data-toggle="modal" data-target="#userCardViewSearch" (click)="openuserCardViewSearchFilter()"><i
+                    class="icon fa fa-filter"></i>
+                Filter</button>
+        </div>
+    </div>
+    <div class="bg-box mt-15">
+        <div class="form-row">
+            <div class="col-lg-3 col-md-6" *ngFor="let user of userList " (click)="updateCardView(user.id)">
+                <div class="table-responsive">
+                    <table class="table ctm-table mb-2">
+                        <thead>
+                            <tr>
+                                <th>Number :</th>
+                                <th>{{user.id}}</th>
+                                <th class="text-right">
+                                    <div class="tbHover-btnGroup">
+                                        <a tooltip="Change" placement="bottom" class="tbHover-btn trash-btn"
+                                            (click)="updateCardView(user.id)"><i class="fa fa-pencil"></i></a>
+                                        <a tooltip="Delete" placement="bottom" class="tbHover-btn trash-btn"
+                                            (click)="deleteUserCard(user.id)"><i class="fa fa-trash"></i></a>
+                                    </div>
+                                    <!-- <div class="tbHover-btnGroup">
+                                        <button type="button" class="tbHover-btn trash-btn"
+                                            (click)="updateCardView(user.id)"><i
+                                                class="fa fa-pencil-square-o"></i></button>
+                                        <button type="button" class="tbHover-btn trash-btn"
+                                            (click)="deleteUserCard(user.id)"><i class="fa fa-trash"></i></button>
+                                    </div> -->
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>First Name :</td>
+                                <td colspan="2">{{user.firstName}}</td>
+                            </tr>
+                            <tr>
+                                <td>Surname :</td>
+                                <td colspan="2">{{user.lastName}}</td>
+                            </tr>
+                            <tr>
+                                <td>Address1 :</td>
+                                <td colspan="2">{{user.address1}}</td>
+                            </tr>
+                            <tr>
+                                <td>Address2 :</td>
+                                <td colspan="2">{{user.address2}}</td>
+                            </tr>
+                            <tr>
+                                <td>Address3 :</td>
+                                <td colspan="2">{{user.address3}}</td>
+                            </tr>
+                            <tr>
+                                <td>PostCode :</td>
+                                <td colspan="2">{{user.postCode}}</td>
+                            </tr>
+                            <tr>
+                                <td>Phone :</td>
+                                <td colspan="2">{{user.phoneNo}}</td>
+                            </tr>
+                            <tr>
+                                <td>Mobile :</td>
+                                <td colspan="2">{{user.mobileNo}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="userCard bg-box mt-15" style="display: none;">
+        <div class="userCard-wrap all-w">
+            <div class="table-responsive">
+                <table class="table ctm-table " id="userCard-table">
+                    <thead>
+                        <tr>
+                            <th>Number </th>
+                            <th>First Name </th>
+                            <th>Surname </th>
+                            <th>Address1</th>
+                            <th>Address2 </th>
+                            <th>Address3 </th>
+                            <th>PostCode </th>
+                            <th>Phone </th>
+                            <th>Mobile </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of userList">
+                            <td>{{user?.id}}</td>
+                            <td>{{user?.firstName}}</td>
+                            <td>{{user?.lastName}}</td>
+                            <td>{{user?.address1}}</td>
+                            <td>{{user?.address2}}</td>
+                            <td>{{user?.address3}}</td>
+                            <td>{{user?.postCode}}</td>
+                            <td>{{user?.phoneNo}}</td>
+                            <td>{{user?.mobileNo}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade thm-popup" id="userCardViewSearch" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body popup-box-width">
+                    <div class="popup-box">
+                        <form name="searchForm" id="searchForm">
+                            <div class="title-wrap mb-2">
+                                <h4 class="title"> Search Filter </h4>
+                            </div>
+                            <div class="form-group mb-0">
+                                <label> Wildcard Search</label>
+                                <input type="text" id="userCardView_Search_filter" class="form-control" #searchValue>
+                            </div>
+                            <div class="btn-wrap text-right mt-10">
+                                <button class="btn btn-blue mr-2" (click)="searchUserCard(searchValue)">Ok</button>
+                                <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="modal fade bd-example-modal-xl thm-popup" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form   >
+                        <div class="title-wrap mb-2">
+                            <h4 class="title">User</h4>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-6 col-xl-6">
+                                <div class="group-from">
+                                    <h5 class="title">User Details</h5>
+                                    <div class="form-row">
+                                        <div class="col-md-6 ">
+                                        <div class="form-group form-row align-items-center">
+                                            <label class=" col-md-4  mb-0">Number</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" >
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                        <div class="form-group form-row align-items-center">
+                                            <label class=" col-md-4  mb-0">Status</label>
+                                            <div class="col-md-8">
+                                                <select class="form-control" disabled="">
+                                                    <option>Active</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <div class="form-group form-row align-items-center">
+                                            <label class=" col-md-4  mb-0">First Name</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" placeholder="" value="">
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <div class="form-group form-row align-items-center">
+                                                <label class=" col-md-4  mb-0">Gender</label>
+                                                <div class="col-md-8">
+                                                    <select class="form-control" disabled="">
+                                                    <option></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 ">
+                                            <div class="form-group form-row align-items-center">
+                                            <label class=" col-md-2  mb-0">Surname</label>
+                                            <div class="col-md-10 ">
+                                                <input type="text" class="form-control" placeholder="" value="">
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 ">
+                                            <div class="form-group form-row align-items-center">
+                                            <label class=" col-md-2  mb-0">Address 1</label>
+                                            <div class="col-md-10 ">
+                                                <input type="text" class="form-control" placeholder="" value="">
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 ">
+                                            <div class="form-group form-row align-items-center">
+                                            <label class=" col-md-2  mb-0">Address 2</label>
+                                            <div class="col-md-10 ">
+                                                <input type="text" class="form-control" placeholder="" value="">
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <div class="form-group form-row align-items-center">
+                                            <label class=" col-md-4  mb-0">Address 3</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" placeholder="" value="">
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <div class="form-group form-row align-items-center">
+                                            <label class=" col-md-4  mb-0">Post Code</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" placeholder="" value="">
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <div class="form-group form-row align-items-center">
+                                            <label class=" col-md-4  mb-0">Phone</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" placeholder="" value="">
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <div class="form-group form-row align-items-center">
+                                            <label class=" col-md-4  mb-0">Mobile</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" placeholder="" value="">
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <div class="form-group form-row align-items-center">
+                                            <label class=" col-md-4  mb-0">Email</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" placeholder="" value="">
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <div class="form-group form-row align-items-center">
+                                                <label class=" col-md-4  mb-0">User Type</label>
+                                                <div class="col-md-8">
+                                                    <select class="form-control">
+                                                        <option></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 ">
+                                            <div class="form-group form-row align-items-center">
+                                                <label class=" col-md-2  mb-0">Password</label>
+                                                <div class="col-md-10 ">
+                                                    <input type="password" class="form-control" placeholder="" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 ">
+                                            <div class="form-group mb-0">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="Quantity">
+                                                    <label class="custom-control-label" for="Quantity"><span class="d-block label-mt-2"> Add Unlocked Products</span></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group-from mb-0">
+                                    <h5 class="title">Outlet Restrictions</h5>
+                                    <div class="form-row">
+                                        <div class="col-md-12 ">
+                                            <div class="form-group form-row align-items-center">
+                                                <label class=" col-md-2  mb-0">Outlet</label>
+                                                <div class="col-md-10 ">
+                                                <select class="form-control">
+                                                    <option></option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 ">
+                                            <div class="form-group mb-0 form-row align-items-center">
+                                                <label class=" col-md-2  mb-0">Zone</label>
+                                                <div class="col-md-10 ">
+                                                    <div class="d-flex align-items-center">
+                                                        <select class="form-control">
+                                                            <option></option>
+                                                        </select>
+                                                        <button type="button" class="btn ml-2 input-btn btn-grey btn-blue">Clear</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6">
+                                <div class="group-from mb-0">
+                                    <h5 class="title">Photo ID</h5>
+                                    <div class="PhotoIDWrap">
+                                        <input type="file" id="imagePath">
+                                        <label for="imagePath">
+                                            <div class="photoId">
+                                                <img class="img-resize" src="assets/images/user-img.png" height="400">
+                                                <span class="edit-icon">
+                                                    <i class="fa fa-pencil"></i>
+                                                </span>
+                                            </div>
+                                        </label>                                               
+                                    </div>
+                                </div>
+                                <div class="group-from">
+                                    <h5 class="title">Program Access</h5>
+                                    <div class="form-group mb-0">
+                                        <select class="form-control" disabled="">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="group-from">
+                                    <h5 class="title">Access Group</h5>
+                                    <div class="form-group mb-0">
+                                        <select class="form-control" disabled="">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="group-from">
+                                    <h5 class="title">Only Access Codes with Prefix</h5>
+                                    <div class="form-row">
+                                        <div class="col-md-6 ">
+                                            <div class="form-group mb-0 form-row align-items-center">
+                                                <label class=" col-md-4  mb-0">Promos</label>
+                                                <div class="col-md-8">
+                                                <input type="text" class="form-control" placeholder="" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <div class="form-group mb-0 form-row align-items-center">
+                                                <label class=" col-md-4  mb-0">Keypads</label>
+                                                <div class="col-md-8">
+                                                <input type="text" class="form-control" placeholder="" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                        
+                                <div class="group-from mb-0">
+                                    <h5 class="title">Last Login</h5>
+                                    <div class="form-group mb-0">
+                                        <input type="text" class="form-control" placeholder="" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>        
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-blue mr-2">Add</button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>                    
+            </div>
+        </div>
+    </div>
+</div> -->
+    <!-- <div class="modal fade bd-example-modal-xl thm-popup" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-body popup-box-width">
+                    <div class="popup-box">
+                        <form [formGroup]="userCardForm"  >
+                            <div class="title-wrap mb-2">
+                                <h4 class="title">User</h4>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-lg-6 col-xl-6">
+                                    <div class="group-from">
+                                        <h5 class="title">User Details</h5>
+                                        <div class="form-row">
+                                            <div class="col-md-6 ">
+                                            <div class="form-group form-row align-items-center">
+                                                <label class=" col-md-4  mb-0">Number</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" >
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                            <div class="form-group form-row align-items-center">
+                                                <label class=" col-md-4  mb-0">Status</label>
+                                                <div class="col-md-8">
+                                                    <select class="form-control" formControlName="status">
+                                                        <option value="true">Active</option>
+                                                        <option value="false">Inactive</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="form-group form-row align-items-center">
+                                                <label class=" col-md-4  mb-0">First Name</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" formControlName="firstName">
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="form-group form-row align-items-center">
+                                                    <label class=" col-md-4  mb-0">Gender</label>
+                                                    <div class="col-md-8">
+                                                        <select class="form-control" formControlName="gender">
+                                                            <option>Male</option>
+                                                            <option>Female</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="form-group form-row align-items-center">
+                                                <label class=" col-md-2  mb-0">Surname</label>
+                                                <div class="col-md-10 ">
+                                                    <input type="text" class="form-control" formControlName="lastName">
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="form-group form-row align-items-center">
+                                                <label class=" col-md-2  mb-0">Address 1</label>
+                                                <div class="col-md-10 ">
+                                                    <input type="text" class="form-control" formControlName="address1">
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="form-group form-row align-items-center">
+                                                <label class=" col-md-2  mb-0">Address 2</label>
+                                                <div class="col-md-10 ">
+                                                    <input type="text" class="form-control" formControlName="address2">
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="form-group form-row align-items-center">
+                                                <label class=" col-md-4  mb-0">Address 3</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" formControlName="address3">
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="form-group form-row align-items-center">
+                                                <label class=" col-md-4  mb-0">Post Code</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" formControlName="postCode">
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="form-group form-row align-items-center">
+                                                <label class=" col-md-4  mb-0">Phone</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" formControlName="phoneNo">
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="form-group form-row align-items-center">
+                                                <label class=" col-md-4  mb-0">Mobile</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" formControlName="mobileNo">
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="form-group form-row align-items-center">
+                                                <label class=" col-md-4  mb-0">Email</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" formControlName="email">
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="form-group form-row align-items-center">
+                                                    <label class=" col-md-4  mb-0">User Type</label>
+                                                    <div class="col-md-8">
+                                                        <select class="form-control" formControlName="type">
+                                                            <option></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="form-group form-row align-items-center">
+                                                    <label class=" col-md-2  mb-0">Password</label>
+                                                    <div class="col-md-10 ">
+                                                        <input type="password" class="form-control" formControlName="password">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="form-group mb-0">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="Quantity">
+                                                        <label class="custom-control-label" for="Quantity"><span class="d-block label-mt-2"> Add Unlocked Products</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="group-from mb-0">
+                                        <h5 class="title">Outlet Restrictions</h5>
+                                        <div class="form-row">
+                                            <div class="col-md-12 ">
+                                                <div class="form-group form-row align-items-center">
+                                                    <label class=" col-md-2  mb-0">Outlet</label>
+                                                    <div class="col-md-10 ">
+                                                    <select class="form-control" formControlName="storeIdList">
+                                                        <option></option>
+                                                    </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="form-group mb-0 form-row align-items-center">
+                                                    <label class=" col-md-2  mb-0">Zone</label>
+                                                    <div class="col-md-10 ">
+                                                        <div class="d-flex align-items-center">
+                                                            <select class="form-control" formControlName="zoneIdList">
+                                                                <option></option>
+                                                            </select>
+                                                            <button type="button" class="btn ml-2 input-btn btn-grey btn-blue">Clear</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-6">
+                                    <div class="group-from mb-0">
+                                        <h5 class="title">Photo ID</h5>
+                                        <div class="PhotoIDWrap">
+                                            <input type="file" id="imagePath">
+                                            <label for="imagePath">
+                                                <div class="photoId">
+                                                    <img class="img-resize" [src]="croppedImage" height="400">
+                                                    <span class="edit-icon">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </span>
+                                                </div>
+                                            </label>                                               
+                                        </div>
+                                    </div>
+                                    <div class="group-from">
+                                        <h5 class="title">Program Access</h5>
+                                        <div class="form-group mb-0">
+                                            <select class="form-control" disabled="">
+                                                <option></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="group-from">
+                                        <h5 class="title">Access Group</h5>
+                                        <div class="form-group mb-0">
+                                            <select class="form-control" disabled="">
+                                                <option></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="group-from">
+                                        <h5 class="title">Only Access Codes with Prefix</h5>
+                                        <div class="form-row">
+                                            <div class="col-md-6 ">
+                                                <div class="form-group mb-0 form-row align-items-center">
+                                                    <label class=" col-md-4  mb-0">Promos</label>
+                                                    <div class="col-md-8">
+                                                    <input type="text" class="form-control" formControlName="promoPrefix">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <div class="form-group mb-0 form-row align-items-center">
+                                                    <label class=" col-md-4  mb-0">Keypads</label>
+                                                    <div class="col-md-8">
+                                                    <input type="text" class="form-control" formControlName="keypadPrefix">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                        
+                                    <div class="group-from mb-0">
+                                        <h5 class="title">Last Login</h5>
+                                        <div class="form-group mb-0">
+                                            <input type="text" class="form-control" formControlName="lastLogin">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>        
+                            <div class="btn-wrap text-right mt-10">
+                                <button type="button" class="btn btn-blue mr-2">Change</button>
+                                <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+</div> -->

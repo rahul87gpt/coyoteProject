@@ -1,0 +1,204 @@
+<div class="mainContent-innner">
+    <div class="pricingApnSearch-section">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">Outlet Products </h4>
+            
+			<h4 class="title mb-0 pr-4">{{selectOulet_Desc}}
+				<span id="totalRecordId">{{(recordObj.total_api_records > 0) ? recordObj.total_api_records : ''}}</span>
+			</h4>
+			
+			<div *ngIf="isTopOptionShow" class="probtn-wrap d-flex text-right"> 
+                <!-- <button class="btn btn-blue with-icon mr-2" data-toggle="modal" (click)="navigationResponseCheck()"><i class="icon fa fa-filter"></i>Search Outlet Products</button>                       -->
+                <button class="btn with-icon mr-2" (click)="inprogressFunction()"><i class="icon fa fa-print"></i> Print</button>
+				<button class="btn with-icon mr-2" (click)="exportOutletProductData()"><i class="icon fa fa-file-excel-o"></i> Export</button> 
+				<button class="btn with-icon mr-2" data-toggle="modal" data-target="#productSearch" (click)="outletFilterProductSearch()">
+					<i class="icon fa fa-filter" ></i> Filter
+				  </button>      
+            </div>
+        </div>
+		<div class="cmdtyList-table-wrap bg-box mt-15 all-w">
+			<div class="table-responsive ctm-data-table">
+				<table class="table ctm-table" id="outletProductTable">
+					<!-- <ng-container *ngIf="outletProductData.length"> -->
+						<thead>
+							<tr>
+								<ng-container *ngFor="let column of columns">
+									<th>{{ column }}
+											<i class="ml-1 fa fa-long-arrow-up"></i>
+											<i class="fa fa-long-arrow-down"></i>
+									</th>
+								</ng-container>
+							</tr>
+						</thead>
+					<ng-container *ngIf="outletProductData.length">	
+						<tbody>
+							<tr *ngFor="let outletProduct of outletProductData; index as i">
+								<!-- <td class="text-center"> <span style="display: none">{{ outletProduct.status }}</span> -->
+								<td class="text-center"> <span style="display: none">{{ outletProduct.status ? 'Active' : 'In-Active'}}</span>
+									<span class="status-check" [ngClass]="outletProduct.status ? 'status-true' : 'status-false'"
+									></span>
+								</td>
+								<td>
+									<a (click)="updateOrDeleteOutletProduct(outletProduct, 'UPDATE')">
+										{{outletProduct.productNumber}}
+									</a>
+								</td>
+								
+								<td>{{outletProduct.productDesc}}</td>
+								<td>{{outletProduct.storeCode}}</td>
+								
+								<td>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="customControl{{ i }}"
+											[checked]="outletProduct.status" disabled
+										/>
+										<label class="custom-control-label mb-0" for="customControl{{ i }}">
+											{{ outletProduct.status ? 'Active' : 'In-Active'}}
+										</label>
+									</div>
+								</td>
+								
+								<td class="text-blue">
+									{{ outletProduct.normalPrice1 == null ? '' : outletProduct.normalPrice1 == 0 ?  '' :  '$' +  (outletProduct.normalPrice1 | number : '1.2-2')}}
+									<!-- ${{ (outletProduct.normalPrice1 | number : '1.2-2')}} -->
+								</td>
+								<td>{{outletProduct.gp || 0}}</td>
+								<td  class="text-blue">
+									{{ outletProduct.normalPrice2 == null ? '' : outletProduct.normalPrice2 == 0 ? '' : '$' +  (outletProduct.normalPrice2 | number : '1.2-2') }}
+									<!-- ${{(outletProduct.normalPrice2 | number : '1.2-2') || 0}} -->
+								</td>
+								<td  class="text-blue">
+									{{ outletProduct.normalPrice3 == null ? '' : outletProduct.normalPrice3 == 0 ? '' : '$' +  (outletProduct.normalPrice3 | number : '1.2-2')}}
+									<!-- {{ outletProduct.normalPrice3 == null ? '' : outletProduct.normalPrice3 > 0 ?   '$' +  (outletProduct.normalPrice3 | number : '1.2-2') : ''}} -->
+								</td>
+								<td  class="text-blue">
+									{{ outletProduct.normalPrice4 == null ? '' : outletProduct.normalPrice4 == 0 ? '' : '$' +  (outletProduct.normalPrice4 | number : '1.2-2') }}
+									<!-- ${{(outletProduct.normalPrice4 | number : '1.2-2') || 0}} -->
+								</td>
+								<td class="text-yellow">{{outletProduct.qtyOnHand}}</td>
+								<td >{{outletProduct.cartonQty}}</td>
+								<td class="text-green">${{(outletProduct.cartonCost | number : '1.2-2') || 0}}</td>
+								<td>{{outletProduct.unitQty}}</td>
+								<td>{{outletProduct.holdNorm}}</td>
+								<td>{{outletProduct.replicate}}</td>
+								<td>{{outletProduct.cartonCostInv}}</td>
+								<!-- <td>{{outletProduct.InvCtnCost || outletProduct.invCtnCost || 0}}</td> -->
+								<td>{{outletProduct.cartonCostHost}}</td>
+								<td>{{outletProduct.minReorderQty || 0}}</td>
+								<td>{{outletProduct.minOnHand}}</td>
+								<td>{{outletProduct.type}}</td>
+								<td>{{outletProduct.taxCode}}</td>
+								<td>{{outletProduct.parent}}</td>
+								<td  title="{{outletProduct.departmentDesc + ' - ' + outletProduct.departmentCode}}">{{outletProduct.departmentDesc + '   ' + outletProduct.departmentCode}}</td>
+								<td title="{{outletProduct.commodityDesc + '   ' + outletProduct.commodityCode}}">{{outletProduct.commodityDesc + '   ' + outletProduct.commodityCode}}</td>
+								<td title="{{outletProduct.groupDesc + '   ' + outletProduct.groupCode}}">{{outletProduct.groupDesc + '   ' + outletProduct.groupCode}}</td>
+								<td title="{{outletProduct.supplierDesc + '   ' + outletProduct.supplierCode}}">{{outletProduct.supplierDesc + '   ' + outletProduct.supplierCode}}</td>
+								<td title="{{outletProduct.supplierDesc}}">{{outletProduct.supplierDesc}}</td>
+								<td title="{{outletProduct.categoryDesc + '   ' + outletProduct.categoryCode}}">{{outletProduct.categoryDesc + '   ' + outletProduct.categoryCode}}</td>
+								<td>{{outletProduct.changeLabelInd ? 'Y' : 'N'}}</td>
+								<td><span style="display: none">{{convertDateToMiliSeconds(outletProduct.changeLabelPrinted)}}</span>{{outletProduct.changeLabelPrinted | dateTimeFormate}}</td>
+								<td>{{outletProduct.buyPromoCode}}</td>
+								<td>
+									{{ outletProduct.promoCartonCost == null ? '' : outletProduct.promoCartonCost == 0 ?  '$0.00' :  '$' +  (outletProduct.promoCartonCost | number : '1.2-2')}}
+									<!-- {{outletProduct.promoCartonCost}} -->
+
+								</td>
+								<td>{{outletProduct.sellPromoCode}}</td>
+								<td>
+									{{ outletProduct.promoPrice1 == null ? '' : outletProduct.promoPrice1 == 0 ?  '$0.00' :  '$' +  (outletProduct.normalPrice1 | number : '1.2-2')}}
+									<!-- {{outletProduct.promoPrice1}} -->
+								</td>
+								<td>
+									{{ outletProduct.specCartonCost == null ? '' : outletProduct.specCartonCost == 0 ?  '$0.00' :  '$' +  (outletProduct.specCartonCost | number : '1.2-2')}}
+									<!-- {{outletProduct.specCartonCost}} -->
+								</td>
+								<td>{{outletProduct.specFrom | customdatetimeformat }}</td>
+								<td>{{outletProduct.specTo | customdatetimeformat }}</td>
+								<td>{{outletProduct.mixMatch1PromoCode}}</td>
+								<td>{{outletProduct.mixMatch2PromoCode}}</td>
+								<td>{{outletProduct.offer1PromoCode}}</td>
+								<td>{{outletProduct.offer2PromoCode}}</td>
+								<td>{{outletProduct.offer3PromoCode}}</td>
+								<td>{{outletProduct.offer4PromoCode}}</td>
+								<td>{{outletProduct.shortLabelInd ? "Yes" : "No"}}</td>
+								<td>{{outletProduct.csd }}</td>
+								<td>{{outletProduct.igd }}</td>
+								<td>{{outletProduct.spar }}</td>
+								<td>{{outletProduct.scalePlu || 0}}</td>
+								<td><span style="display: none">{{convertDateToMiliSeconds(outletProduct.updatedAt)}}</span>{{outletProduct.updatedAt | dateTimeFormate}}</td>
+								<td>
+									<div class="tbHover-btnGroup">
+										<button tooltip="Change" class="tbHover-btn trash-btn" (click)="updateOrDeleteOutletProduct(outletProduct, 'UPDATE')">
+											<i class="fa fa-pencil"></i>
+										</button>
+										<!-- <button tooltip="Delete" class="tbHover-btn trash-btn"><i class="fa fa-trash"></i></button> -->
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</ng-container>	
+				</table>
+				<!-- <span *ngIf="!outletProductData.length">No Record Exits</span> -->
+			</div>
+		</div>
+    </div>
+</div>
+
+<!-- 
+<div *ngIf="isSearchPopupOpen" class="modal fade thm-popup" id="ouletProductSearch" tabindex="-1" role="dialog" aria-labelledby="ouletProductSearch" aria-hidden="true">
+-->
+<div class="modal fade thm-popup" id="ouletProductSearch" tabindex="-1" role="dialog" aria-labelledby="ouletProductSearch" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<form (keydown.enter)="keyDownFunction($event)" >
+				<div class="popup-box">
+					<div class="title-wrap mb-2">
+						<h4 class="title">Search By Outlet</h4>
+					</div>
+					<div class="form-group mb-0 auto-select">
+						<select [(ngModel)]="storeOutletId" (change)="selectOuletProductOutlet($event)"  name="selectedValue" #selectedValue class="form-control" autofocus>
+							<option value="" disabled selected hidden>select Outlet</option>
+							<option *ngFor="let store of storeData" [value]="store.id">
+								{{store.desc + "  " + store.code}}
+							</option>
+						</select>
+					</div>
+					<div class="btn-wrap text-right mt-10">
+						<button type="button" class="btn btn-blue mr-2" (click)="getOutletProduct(selectedValue)">
+							Ok
+						</button>  
+						<button type="submit" style="display:none">hidden submit</button>
+						<button class="btn btn-grey" (click)="cancelPopup()">
+							Cancel
+						</button>
+					</div>
+				</div>	
+			</form>			
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade thm-popup" id="productSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body popup-box-width">
+				<div class="popup-box">
+					<form name = "searchForm" id = "searchForm">
+						<div class="title-wrap mb-2">
+							<h4 class="title">Search Filter</h4>
+						</div>
+						<div class="form-group mb-0">
+							<label> Number or Description Wildcard :</label>
+							<input type="text" appUppercase placeholder="Number or Description" id="outlet_product_history_table_list_filter" class="form-control" #searchValue>
+						</div>
+						<div class="btn-wrap text-right mt-10">
+							<button class="btn btn-blue mr-2" (click)="outletProductSearch(searchValue)" >Ok</button>
+							<button class="btn btn-grey"   (click)="cancelOutletProductSearchFilter()" >Cancel</button>
+						</div>
+					</form>	
+				</div>					
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,55 @@
+<div class="mainContent-innner pt-2">
+    <form [formGroup]="masterListModuleForm" (ngSubmit)="onSubmit()">
+       <div class="addMaster-section">
+          <div class="action-topbar d-flex align-items-center">
+             <h4 class="title flex-grow-1 mb-0">Add Master <span class="bdms"><a href="#">Accounts</a> | <a href="#">Code</a> | <span class="current">Add Master</span></span></h4>
+             <div class="probtn-wrap text-right">
+                <!-- <button class="btn btn-blue with-icon mr-2"><i class="icon fa fa-floppy-o"></i> Save</button>
+                <button class="btn mr-2" [routerLink]="['/master-list-items']"><span class="icon cancel-icon">X</span> Cancel</button> -->
+             </div>
+          </div>
+          <div class="addMaster-wrap">
+             <div class="popup-box">
+                   <div class="title-wrap mb-1">
+                      <h4 class="title">{{addUpdateText}} {{getName(listItemCode) | titlecase}}</h4>
+                   </div>
+                   <!-- <div class="form-group">
+                      <label>Select Master Item List <span class="text-danger">*</span></label>
+                      <select class="form-control" formControlName="listId" (change)="setMaterItemName($event)" [ngClass]="{ 'is-invalid': submitted && f.listId.errors }">
+                         <option *ngFor="let listItems of masterList" [value]="listItems.id">{{listItems.name}}</option>
+                      </select>
+                      <div *ngIf="f.listId.errors" class="invalid-feedback">
+                         <div *ngIf="f.listId.errors.required">Please select one of the option</div>
+                      </div>
+                   </div> -->
+                   <div class="form-group">
+                      <label>Code <span class="text-danger">*</span></label>
+                      <input [readonly]="codeStatus" type="text" class="form-control" formControlName="code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
+                      <div *ngIf="f.code.errors" class="invalid-feedback">
+                         <div *ngIf="f.code.errors.required">Code is required</div>
+                      </div>
+                   </div>
+                   <div class="form-group">
+                      <label>Name <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                      <div *ngIf="f.name.errors" class="invalid-feedback">
+                         <div *ngIf="f.name.errors.required">Name is required</div>
+                      </div>
+                   </div>
+                   <div class="form-group mb-0">
+                      <label>Status <span class="text-danger">*</span></label>
+                      <select class="form-control" formControlName="status">
+                         <option value="true">Active</option>
+                         <option value="false">Inactive</option>
+                      </select>
+                   </div>
+                   <div class="btn-wrap text-right mt-10">
+                      <button class="btn btn-blue mr-2"> Save</button>
+                      <button class="btn btn-grey" [routerLink]="['/master-list-module/' + listItemCode]">Cancel</button>
+                   </div>
+             </div>
+          </div>
+       </div>
+    </form>
+  </div>
+ 

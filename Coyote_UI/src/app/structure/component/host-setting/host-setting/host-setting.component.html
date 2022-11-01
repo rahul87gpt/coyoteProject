@@ -1,0 +1,326 @@
+<div class="mainContent-innner">
+    <div class="Keypads-section">
+        <div class="d-flex align-items-center">
+            <h4 class="title flex-grow-1 mb-0">Host Settings</h4>
+            <div class="probtn-wrap d-flex text-right">
+                <button type="button" data-toggle="modal" data-target="#HostSettings" class="btn btn-blue mr-2"
+                    (click)="clickedAddButton()"><i class="icon fa fa-plus-circle"></i> Add</button>
+                <button type="button" class="btn mr-2"><i class="icon fa fa-print"></i> Print</button>
+                <button type="button" class="btn mr-2" (click)="exportHostSettingData()"><i
+                        class="icon fa fa-file-excel-o"></i> Export</button>
+                <button type="button" data-toggle="modal" data-target="#hostSettingSearch" class="btn btn-blue" (click)="openHostSettingSearchFilter()"><i
+                        class="icon fa fa-filter"></i> filter</button>
+            </div>
+        </div>
+        <!-- /.action-topbar -->
+        <div class="hostSetting-wrap bg-box mt-15">
+            <div class="hostSetting-table-wrap all-w">
+                <div class="table-responsive ctm-data-table">
+                    <table class="table ctm-table" id="hostSetting-table">
+                        <thead>
+                            <tr>
+                                <th>Host<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>Desc<i class="ml-1 fa fa-long-arrow-up"></i><i class="fa fa-long-arrow-down"></i>
+                                </th>
+                                <th>Warehouse<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i></th>
+                                <th>Initial Load File<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i></th>
+                                <th>Weekly File<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i></th>
+                                <th>File Path<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i></th>
+                                <th>Number Factor<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i></th>
+                                <th>Supplier<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i></th>
+                                <th>Host Format<i class="ml-1 fa fa-long-arrow-up"></i><i
+                                        class="fa fa-long-arrow-down"></i></th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let host of hostSettingList">
+                                <td><a data-toggle="modal" data-target="#HostSettings"
+                                        (click)="gethostSettingById(host.id)">{{host.code}}</a></td>
+                                <td>{{host.description}}</td>
+                                <td>{{host.wareHouse}}</td>
+                                <td>{{host.initialLoadFileWeekly}}</td>
+                                <td>{{host.weeklyFile}}</td>
+                                <td>
+                                    <!-- {{host.filePath.length > 20 ? host.filePath.substring(0,20)+"..." :host.filePath}} --> 
+                                    <span data-toggle="tooltip" data-placement="top" title="{{host?.filePath}}">
+                                        {{host.filePath.length > 20 ? host.filePath.substring(0,20)+"..." :host.filePath}}
+                                        
+                                    </span>
+                                  
+                                </td>
+                                <td>{{host.numberFactor}}</td>
+                                <td>{{host.supplier}}</td>
+                                <td>{{host.hostFormatCode}}</td>
+                                <td class="text-center">
+                                    <div class="tbHover-btnGroup">
+                                        <a tooltip="Change" placement="left" class="tbHover-btn trash-btn"
+                                            data-toggle="modal" data-target="#HostSettings"
+                                            (click)="gethostSettingById(host.id)"><i class="fa fa-pencil"></i></a>
+                                        <a tooltip="Delete" placement="left" class="tbHover-btn trash-btn"
+                                            (click)="deleteHostSetting(host.id)"><i class="fa fa-trash"></i></a>
+                                    </div>
+                                    <!-- <div class="tbHover-btnGroup">
+                                        <button class="tbHover-btn trash-btn" data-toggle="modal"
+                                            data-target="#HostSettings" (click)="gethostSettingById(host.id)"><i
+                                                class="fa fa-pencil"></i></button>
+                                        <button class="tbHover-btn trash-btn" (click)="deleteHostSetting(host.id)"><i
+                                                class="fa fa-trash"></i></button>
+                                    </div> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="outlets-wrap">                        
+            <div class="bg-box mt-15">
+                <div class="table-responsive">
+                  
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+<div class="modal fade bd-example-modal-md thm-popup" id="HostSettings" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form [formGroup]="hostSettingForm">
+                        <div class="title-wrap mb-1">
+                            <h4 class="title">Host Settings</h4>
+                        </div>
+                        <div class="group-from">
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Host Code<span class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" formControlName="code" [readonly]="codeStatus" appUppercase
+                                        class="form-control" [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
+                                    <div *ngIf="f.code.errors" class="invalid-feedback">
+                                        <div *ngIf="f.code.errors.required"> Host Code is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Host Code Desc<span class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" formControlName="description" class="form-control" appUppercase
+                                        [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+                                    <div *ngIf="f.description.errors" class="invalid-feedback">
+                                        <div *ngIf="f.description.errors.required"> Host Code Desc is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Initial Load File<span
+                                            class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" formControlName="initialLoadFileWeekly" appUppercase class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.initialLoadFileWeekly.errors }">
+                                    <div *ngIf="f.initialLoadFileWeekly.errors" class="invalid-feedback">
+                                        <div *ngIf="f.initialLoadFileWeekly.errors.required"> Initial Load File is
+                                            required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Weekly File<span class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" formControlName="weeklyFile" class="form-control" appUppercase
+                                        [ngClass]="{ 'is-invalid': submitted && f.weeklyFile.errors }">
+                                    <div *ngIf="f.weeklyFile.errors" class="invalid-feedback">
+                                        <div *ngIf="f.weeklyFile.errors.required"> Weekly File is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">File Path<span class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-9">
+                                    <ng-select [items]="hostSettingObj.path" bindLabel="path" bindValue="id"
+                                        formControlName="filePathID" [virtualScroll]="true" [clearable]="false"
+                                        [clearOnBackspace]="false" [multiple]="false" [searchable]="true"
+                                        [ngClass]="{ 'is-invalid': submitted && f.filePathID.errors }">
+                                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                            <div class="form-row">
+                                                <span class="col-8 zone-overflow" title="{{ item.path }}">
+                                                    {{item.path}}
+                                                </span>
+                                                <div class="col-4" title="{{ item.pathTypeName }}">
+                                                    {{item.pathTypeName}}
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </ng-select>
+
+                                    <!-- <select formControlName="filePathID" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.filePathID.errors }">
+                                        <option [value]="path.id" *ngFor="let path of hostSettingObj.path">
+                                            {{path.path.length > 10? path.path.substring(0,30)+"..." :path.path}}&nbsp;&nbsp;&nbsp;{{path.pathTypeName}}
+                                        </option>
+                                    </select> -->
+                                    <div *ngIf="f.filePathID.errors" class="invalid-feedback">
+                                        <div *ngIf="f.filePathID.errors.required">File Path is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Number Factor<span class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" [readonly]="true" formControlName="numberFactor"
+                                        class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.numberFactor.errors }">
+                                    <div *ngIf="f.numberFactor.errors" class="invalid-feedback">
+                                        <div *ngIf="f.numberFactor.errors.required"> Number Factor is required</div>
+                                    </div>
+                                    <label for="" class="mb-0 fontSize-11" style="color:#5145cd;">(Factor to add to
+                                        product Number when creating new item, Set in System Controls)</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Order Supplier</label>
+                                </div>
+                                <div class="col-9">
+                                    <ng-select [items]="hostSettingObj.supplier" bindLabel="desc" bindValue="id"
+                                        formControlName="supplierID" [virtualScroll]="true" [clearable]="false"
+                                        [clearOnBackspace]="false" [multiple]="false" [searchable]="true">
+                                        <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                            <div class="form-row">
+                                                <span class="col-9 zone-overflow" title="{{ item.desc }}">
+                                                    {{item.desc}}
+                                                </span>
+                                                <div class="col-3" title="{{ item.code }}">
+                                                    {{item.code}}
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </ng-select>
+                                    <!-- <select formControlName="supplierID" class="form-control">
+                                        <option [value]="supplier.id" *ngFor="let supplier of hostSettingObj.supplier">
+                                            {{supplier.desc}}&nbsp;&nbsp;&nbsp;{{supplier.code}}</option>
+                                    </select> -->
+                                    <div *ngIf="f.supplierID.errors" class="invalid-feedback">
+                                        <div *ngIf="f.supplierID.errors.required"> Order Supplier is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Host Warehouse<span class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-9">
+                                    <select formControlName="wareHouseID" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.wareHouseID.errors }"
+                                        (change)="selectedWareHouse($event)">
+                                        <option [value]="warehouse.id"
+                                            *ngFor="let warehouse of hostSettingObj.warehouse">
+                                            {{warehouse.supplierName}}&nbsp;&nbsp;&nbsp;{{warehouse.code}}</option>
+                                    </select>
+                                    <div *ngIf="f.wareHouseID.errors" class="invalid-feedback">
+                                        <div *ngIf="f.wareHouseID.errors.required"> Host Warehouse is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Host Format<span class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-9">
+                                    <select formControlName="hostFormatId" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.hostFormatId.errors }" disabled>
+                                        <option [value]="hostFormate.id"
+                                            *ngFor="let hostFormate of hostSettingObj.host_formate">
+                                            {{hostFormate.fullName}}</option>
+                                    </select>
+                                    <!-- <input type="text" formControlName="hostFormat" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.hostFormat.errors }"> -->
+                                    <div *ngIf="f.hostFormatId.errors" class="invalid-feedback">
+                                        <div *ngIf="f.hostFormatId.errors.required"> Host Format is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Buy Promo Prefix<span
+                                            class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" formControlName="buyPromoPrefix" class="form-control" appUppercase
+                                        [ngClass]="{ 'is-invalid': submitted && f.buyPromoPrefix.errors }">
+                                    <div *ngIf="f.buyPromoPrefix.errors" class="invalid-feedback">
+                                        <div *ngIf="f.buyPromoPrefix.errors.required"> Buy Promo Prefix is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-0 form-row align-items-center">
+                                <div class="col-3">
+                                    <label for="" class="mb-0">Sel Promo Prefix<span
+                                            class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="text" formControlName="sellPromoPrefix" class="form-control" appUppercase
+                                        [ngClass]="{ 'is-invalid': submitted && f.sellPromoPrefix.errors }">
+                                    <div *ngIf="f.sellPromoPrefix.errors" class="invalid-feedback">
+                                        <div *ngIf="f.sellPromoPrefix.errors.required"> Sel Promo Prefix is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button type="button" class="btn btn-blue mr-2"
+                                (click)="submitHostSettingForm()">{{host_id > 0 ? "Update":"Add"}} </button>
+                            <button type="button" class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade thm-popup" id="hostSettingSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body popup-box-width">
+                <div class="popup-box">
+                    <form name="searchForm" id="searchForm">
+                        <div class="title-wrap mb-2">
+                            <h4 class="title"> Search Filter </h4>
+                        </div>
+                        <div class="form-group mb-0">
+                            <label> Wildcard Search</label>
+                            <input type="text"appUppercase id="hostSetting_Search_filter" class="form-control" #searchValue>
+                        </div>
+                        <div class="btn-wrap text-right mt-10">
+                            <button class="btn btn-blue mr-2" (click)="searchHostSetting(searchValue)">Ok</button>
+                            <button class="btn btn-grey" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
